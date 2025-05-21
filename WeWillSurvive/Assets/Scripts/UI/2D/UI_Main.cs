@@ -19,7 +19,7 @@ namespace WeWillSurvive
             UI_Background ui = null;
             if (GameManager.Instance.SceneUI is not UI_Background)
             {
-                Debug.LogError("UI_Main 2D Scene에서 열리지 않음");
+                Debug.LogError("[UI_Main] 2D Scene에서 열리지 않음");
                 return;
             }
 

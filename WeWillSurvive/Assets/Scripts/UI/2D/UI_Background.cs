@@ -41,6 +41,8 @@ namespace WeWillSurvive
 
             _leftButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx - 1)));
             _rightButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx + 1)));
+
+            gameObject.AddComponent<PlayerManager>();
         }
 
         void SetBackground(ERoom roomName)
