@@ -4,6 +4,18 @@ public static class Define
 {
     public enum ERoom
     {
-        Lead, Cook, Main, DrK, Bell, MaxCount
+        Lead,
+        Cook,
+        Main,
+        DrK,
+        Bell,
+        MaxCount
+    }
+
+    public enum EItem
+    {
+        Water,
+        Food,
+        MaxCount
     }
 }

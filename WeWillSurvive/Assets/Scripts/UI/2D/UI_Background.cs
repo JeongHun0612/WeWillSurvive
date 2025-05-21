@@ -54,13 +54,7 @@ namespace WeWillSurvive
             _rightButton.interactable = _currentRoomIdx < (int)ERoom.MaxCount - 1;
 
             // Popup UI 초기화
-            while (true)
-            {
-                if (GameManager.Instance.PopUIStack.Count == 0) break;
-                UI_Popup ui = GameManager.Instance.PopUIStack.Pop();
-                if (ui != null)
-                    Destroy(ui.gameObject);
-            }
+            GameManager.Instance.CloseAllPopupUI();
 
             // 배경에 맞는 Popup UI
             string popUIName = string.Empty;
