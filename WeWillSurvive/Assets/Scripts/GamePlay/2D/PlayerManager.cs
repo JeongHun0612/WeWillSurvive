@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.SceneManagement;
+using WeWillSurvive.Core;
 using static Define;
 
 namespace WeWillSurvive
 {
-    class PlayerInfo
+    public class PlayerInfo
     {
         public EPlayerStatus Status { get; private set; }
         public float Hunger { get; private set; }
@@ -25,12 +27,15 @@ namespace WeWillSurvive
     /// <summary>
     /// 플레이어 상태 관리
     /// </summary>
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : MonoSceneSingleton<PlayerManager>
     {
-        PlayerInfo[] PlayerInfos;
+        public PlayerInfo[] PlayerInfos;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
+            // 데이터 초기화
             PlayerInfos = new PlayerInfo[(int)EPlayer.MaxCount];
             for (int i = 0; i < PlayerInfos.Length; i++)
                 PlayerInfos[i] = new PlayerInfo();

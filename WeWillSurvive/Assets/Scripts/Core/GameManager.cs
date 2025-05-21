@@ -8,6 +8,14 @@ namespace WeWillSurvive.Core
 {
     public class GameManager : MonoSingleton<GameManager>
     {
+        private void Start()
+        {
+            ServiceLocator.AutoRegisterServices();
+
+            if (SceneManager.GetActiveScene().name == "2D")
+                ServiceLocator.Get<ResourceService>().LoadAsset("UI_Background").ContinueWith(prefab => Instantiate(prefab)).Forget();
+        }
+
         #region UI
         public UI_Scene SceneUI;
         public Stack<UI_Popup> PopUIStack = new Stack<UI_Popup>();
@@ -58,13 +66,5 @@ namespace WeWillSurvive.Core
         }
 
         #endregion
-
-        private void Start()
-        {
-            ServiceLocator.AutoRegisterServices();
-
-            if (SceneManager.GetActiveScene().name == "2D")
-                ServiceLocator.Get<ResourceService>().LoadAsset("UI_Background").ContinueWith(prefab => Instantiate(prefab)).Forget();
-        }
     }
 }

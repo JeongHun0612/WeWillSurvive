@@ -13,6 +13,7 @@ namespace WeWillSurvive
     {
         [Header("UI")]
         [SerializeField] Image _backgroundImage;
+        [SerializeField] Image _lightOffImage;
         [SerializeField] Button _leftButton;
         [SerializeField] Button _rightButton;
         [SerializeField] Sprite[] _backgroundSprites;
@@ -41,33 +42,6 @@ namespace WeWillSurvive
 
             _leftButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx - 1)));
             _rightButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx + 1)));
-
-            gameObject.AddComponent<PlayerManager>();
-        }
-
-        void SetBackground(ERoom roomName)
-        {
-            // 배경 이미지 변경
-            _currentRoomIdx = (int)roomName;
-            _backgroundImage.sprite = _backgroundSprites[_currentRoomIdx];
-
-            // 버튼 조건 체크
-            _leftButton.interactable = _currentRoomIdx > 0;
-            _rightButton.interactable = _currentRoomIdx < (int)ERoom.MaxCount - 1;
-
-            // Popup UI 초기화
-            GameManager.Instance.CloseAllPopupUI();
-
-            // 배경에 맞는 Popup UI
-            string popUIName = string.Empty;
-            switch (roomName)
-            {
-                case ERoom.Main:
-                    popUIName = "UI_Main";
-                    break;
-            }
-            if (!string.IsNullOrEmpty(popUIName))
-                ServiceLocator.Get<ResourceService>().LoadAsset(popUIName).ContinueWith(prefab => Instantiate(prefab)).Forget();
         }
 
         public void ChangeBackground(ERoom roomName)
@@ -89,6 +63,59 @@ namespace WeWillSurvive
                     _wipe.transform.DOLocalMoveX((SCREEN_WIDTH + 50f) * sign, _changeDuration)
                         .OnComplete(() => _changingBackground = false);
                 });
+        }
+
+        public void LightOff()
+        {
+            _lightOffImage.enabled = true;
+        }
+
+        private void SetBackground(ERoom roomName)
+        {
+            // 배경 이미지 변경
+            _currentRoomIdx = (int)roomName;
+            _backgroundImage.sprite = _backgroundSprites[_currentRoomIdx];
+
+            // 버튼 조건 체크
+            _leftButton.interactable = _currentRoomIdx > 0;
+            _rightButton.interactable = _currentRoomIdx < (int)ERoom.MaxCount - 1;
+
+            // Popup UI 초기화
+            GameManager.Instance.CloseAllPopupUI();
+
+            if (roomName == ERoom.Main)     // 메인 로비인 경우
+            {
+                // 방 불 항상 켜짐
+                _lightOffImage.enabled = false;
+
+                // Popup UI
+                ServiceLocator.Get<ResourceService>().LoadAsset("UI_Main").ContinueWith(prefab => Instantiate(prefab)).Forget();
+            }
+            else                            // 메인 로비 아닌 경우
+            {
+                EPlayer player = EPlayer.MaxCount;
+                switch (roomName)
+                {
+                    case ERoom.Lead:
+                        player = EPlayer.Lead; break;
+                    case ERoom.Cook:
+                        player = EPlayer.Cook; break;
+                    case ERoom.Bell:
+                        player = EPlayer.Bell; break;
+                    case ERoom.DrK:
+                        player = EPlayer.DrK; break;
+                }
+
+                // 우주 기지 내 존재하지 않으면 방 불 꺼짐
+                _lightOffImage.enabled = PlayerManager.Instance.PlayerInfos[(int)player].Status == EPlayerStatus.None;
+
+                // Popup UI
+                ServiceLocator.Get<ResourceService>().LoadAsset("UI_Room").ContinueWith(prefab =>
+                {
+                    GameObject go = Instantiate(prefab);
+                    go.GetComponent<UI_Room>().SetupRoomUI(player);
+                }).Forget();
+            }
         }
     }
 }

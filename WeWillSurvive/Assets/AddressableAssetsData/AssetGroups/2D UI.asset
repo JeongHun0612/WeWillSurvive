@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: 2D UI
   m_GUID: 5b06733335bfb5247a6131c7c39a2ef5
   m_SerializeEntries:
+  - m_GUID: 253d5b6c462e02a4d84647765ad77d26
+    m_Address: UI_Room
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5da234b65a6db434cb59dbb512d24863
     m_Address: UI_Wipe
     m_ReadOnly: 0
