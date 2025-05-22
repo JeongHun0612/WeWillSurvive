@@ -103,10 +103,10 @@ namespace WeWillSurvive
                         player = ECharacter.Lead; break;
                     case ERoom.Cook:
                         player = ECharacter.Cook; break;
-                    case ERoom.Bell:
-                        player = ECharacter.Bell; break;
                     case ERoom.DrK:
                         player = ECharacter.DrK; break;
+                    case ERoom.Bell:
+                        player = ECharacter.Bell; break;
                 }
 
                 // 우주 기지 내 존재하지 않으면 방 불 꺼짐

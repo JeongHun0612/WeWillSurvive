@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.SceneManagement;
@@ -8,15 +9,17 @@ namespace WeWillSurvive
 {
     public class CharacterInfo
     {
+        public string Name { get; private set; }
         public ECharacterStatus Status { get; private set; }
         public float Hunger { get; private set; }
         public float Thirst { get; private set; }
 
-        public CharacterInfo()
+        public CharacterInfo(string name)
         {
             Status = ECharacterStatus.Normal;
             Hunger = 100f;
             Thirst = 100f;
+            Name = name;
         }
 
         public void SetStatus(ECharacterStatus status) => Status = status;
@@ -38,7 +41,10 @@ namespace WeWillSurvive
             // 데이터 초기화
             CharacterInfos = new CharacterInfo[(int)ECharacter.MaxCount];
             for (int i = 0; i < CharacterInfos.Length; i++)
-                CharacterInfos[i] = new CharacterInfo();
+                CharacterInfos[i] = new CharacterInfo(Enum.GetName(typeof(ECharacter), i));
+
+            // Test
+            //CharacterInfos[(int)ECharacter.Bell].SetStatus(ECharacterStatus.None);
         }
 
         public void SetCharacterStatus(ECharacter player, ECharacterStatus status)

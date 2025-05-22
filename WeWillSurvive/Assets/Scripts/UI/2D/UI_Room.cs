@@ -39,14 +39,13 @@ namespace WeWillSurvive
 
             ECharacterStatus status = _player.Status;
 
-            // 우주 기지 내 존재하지 않으면 방 불 꺼짐
+            // 우주 기지 내 존재하지 않는 경우
             if (status == ECharacterStatus.None)
-                ui.LightOff();
-
-            // 정상 상태 아니면 빔 프로젝터 비활성화
-            if (status != ECharacterStatus.Normal)
             {
                 // TODO: 빔 프로젝터 비활성화
+
+                // 캐릭터 비활성화
+                gameObject.GetComponentInChildren<ShowStatus>().gameObject.SetActive(false);
             }
         }
     }
