@@ -19,5 +19,10 @@ namespace WeWillSurvive
 
             GameManager.Instance.PopUIStack.Push(this);
         }
+
+        public void ClosePopupUI()
+        {
+            GameManager.Instance.ClosePopupUI();
+        }
     }
 }

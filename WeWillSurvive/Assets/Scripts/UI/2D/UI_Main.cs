@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
@@ -7,10 +8,7 @@ namespace WeWillSurvive
 {
     public class UI_Main : UI_Popup
     {
-        [SerializeField] Button _leadButton;
-        [SerializeField] Button _cookButton;
-        [SerializeField] Button _bellButton;
-        [SerializeField] Button _drKButton;
+        [SerializeField] Button _roomMonitorButton;
 
         UI_Background ui;
 
@@ -24,12 +22,11 @@ namespace WeWillSurvive
                 Debug.LogError("[UI_Main] 2D Scene에서 열리지 않았음");
                 return;
             }
-
             ui = GameManager.Instance.SceneUI as UI_Background;
-            _leadButton.onClick.AddListener(() => ui.ChangeBackground(ERoom.Lead));
-            _cookButton.onClick.AddListener(() => ui.ChangeBackground(ERoom.Cook));
-            _bellButton.onClick.AddListener(() => ui.ChangeBackground(ERoom.Bell));
-            _drKButton.onClick.AddListener(() => ui.ChangeBackground(ERoom.DrK));
+
+            // 
+            _roomMonitorButton.onClick.AddListener(() =>
+                ServiceLocator.Get<ResourceService>().LoadAsset("UI_RoomMonitor").ContinueWith(prefab => Instantiate(prefab)).Forget());
 
             // TODO: 아이템 배치
             float cnt = GameManager.Instance.GetItemCount(EItem.Water);
