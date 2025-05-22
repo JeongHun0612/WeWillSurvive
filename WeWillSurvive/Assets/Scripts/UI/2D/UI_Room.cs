@@ -9,8 +9,6 @@ namespace WeWillSurvive
 {
     public class UI_Room : UI_Popup
     {
-        [SerializeField] TextMeshProUGUI _ownerText;
-
         UI_Background ui;
         CharacterInfo _player = null;
         int _owner = -1;
@@ -38,9 +36,6 @@ namespace WeWillSurvive
             }
 
             if (_player == null) return;
-
-            // Test
-            _ownerText.text = Enum.GetName(typeof(ECharacter), owner);
 
             ECharacterStatus status = _player.Status;
 

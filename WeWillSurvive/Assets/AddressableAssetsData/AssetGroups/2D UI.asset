@@ -15,8 +15,13 @@ MonoBehaviour:
   m_GroupName: 2D UI
   m_GUID: 5b06733335bfb5247a6131c7c39a2ef5
   m_SerializeEntries:
+  - m_GUID: 08c91a03ee8270c40a17608032faf64a
+    m_Address: UI_CookRoom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 253d5b6c462e02a4d84647765ad77d26
-    m_Address: UI_Room
+    m_Address: UI_LeadRoom
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -30,8 +35,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d0978f6fdcca22449498218a57ba3c0
+    m_Address: UI_BellRoom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7e0b65b1a1fc43d4ba53a0c8ec7c4503
     m_Address: UI_Main
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9c99d202f9f1cd4eb14769017bcac6d
+    m_Address: UI_DrKRoom
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

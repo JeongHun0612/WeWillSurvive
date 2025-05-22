@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
@@ -112,7 +113,8 @@ namespace WeWillSurvive
                 _lightOffImage.enabled = CharacterManager.Instance.CharacterInfos[(int)player].Status == ECharacterStatus.None;
 
                 // Popup UI
-                ServiceLocator.Get<ResourceService>().LoadAsset("UI_Room").ContinueWith(prefab =>
+                string name = Enum.GetName(typeof(ECharacter), player);
+                ServiceLocator.Get<ResourceService>().LoadAsset($"UI_{name}Room").ContinueWith(prefab =>
                 {
                     GameObject go = Instantiate(prefab);
                     go.GetComponent<UI_Room>().SetupRoomUI(player);
