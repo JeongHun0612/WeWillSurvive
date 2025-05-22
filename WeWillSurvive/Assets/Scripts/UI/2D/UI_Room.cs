@@ -9,8 +9,11 @@ namespace WeWillSurvive
 {
     public class UI_Room : UI_Popup
     {
+        // TODO: 사기 + 상태별로 게임 오브젝트 만들어서 배열에 저장
+        [SerializeField] GameObject _character;
+
         UI_Background ui;
-        CharacterInfo _player = null;
+        CharacterInfo _characterInfo = null;
         int _owner = -1;
 
         protected override void Init()
@@ -29,23 +32,26 @@ namespace WeWillSurvive
         // 방 세팅
         public void SetupRoomUI(ECharacter owner = ECharacter.MaxCount)
         {
-            if (_player == null && owner != ECharacter.MaxCount)
+            if (_characterInfo == null && owner != ECharacter.MaxCount)
             {
                 _owner = (int)owner;
-                _player = CharacterManager.Instance.CharacterInfos[_owner];
+                _characterInfo = CharacterManager.Instance.CharacterInfos[_owner];
             }
 
-            if (_player == null) return;
+            if (_characterInfo == null || _character == null)
+            {
+                Debug.LogError($"[{gameObject.name}] Character 찾을 수 없음");
+                return;
+            }
 
-            ECharacterStatus status = _player.Status;
-
-            // 우주 기지 내 존재하지 않는 경우
-            if (status == ECharacterStatus.None)
+            ECharacterStatus status = _characterInfo.Status;
+            // 우주 기지 내 존재하지 않거나 죽은 경우
+            if (status == ECharacterStatus.None || status == ECharacterStatus.Dead)
             {
                 // TODO: 빔 프로젝터 비활성화
 
                 // 캐릭터 비활성화
-                gameObject.GetComponentInChildren<ShowStatus>().gameObject.SetActive(false);
+                _character.SetActive(false);
             }
         }
     }

@@ -14,8 +14,10 @@ public static class Define
     public enum ECharacterStatus
     {
         Normal,     // Á¤»ó
-        Disease,
-        None        // ³ª°¨, Á×À½
+        Sick,       // ¾ÆÇÄ
+        Panic,      // °øÆ÷
+        Dead,       // Á×À½
+        None        // ³ª°¨
     }
 
     public enum ERoom

@@ -109,8 +109,9 @@ namespace WeWillSurvive
                         player = ECharacter.Bell; break;
                 }
 
-                // 우주 기지 내 존재하지 않으면 방 불 꺼짐
-                _lightOffImage.enabled = CharacterManager.Instance.CharacterInfos[(int)player].Status == ECharacterStatus.None;
+                // 우주 기지 내 존재하지 않거나 죽으면 방 불 꺼짐
+                ECharacterStatus status = CharacterManager.Instance.CharacterInfos[(int)player].Status;
+                _lightOffImage.enabled = status == ECharacterStatus.None || status == ECharacterStatus.Dead;
 
                 // Popup UI
                 string name = Enum.GetName(typeof(ECharacter), player);
