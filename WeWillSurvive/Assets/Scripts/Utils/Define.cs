@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class Define
 {
-    public enum EPlayer
+    public enum ECharacter
     {
         Lead,
         Cook,
@@ -11,7 +11,7 @@ public static class Define
         MaxCount
     }
 
-    public enum EPlayerStatus
+    public enum ECharacterStatus
     {
         Normal,     // Á¤»ó
         Disease,

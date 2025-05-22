@@ -23,9 +23,15 @@ namespace WeWillSurvive.Core
         // Popup UI 초기화
         public void CloseAllPopupUI()
         {
+            ClosePopupUIs(remain: 0);
+        }
+
+        /// <param name="remain"> 끄지 않고 남겨둘 Popup UI 개수 </param>
+        public void ClosePopupUIs(int remain)
+        {
             while (true)
             {
-                if (PopUIStack.Count == 0) break;
+                if (PopUIStack.Count <= remain) break;
                 UI_Popup ui = PopUIStack.Pop();
                 if (ui != null)
                     Destroy(ui.gameObject);

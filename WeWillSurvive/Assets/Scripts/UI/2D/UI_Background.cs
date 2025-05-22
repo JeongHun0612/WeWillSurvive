@@ -23,7 +23,7 @@ namespace WeWillSurvive
         [Header("변수")]
         [SerializeField] float _changeDuration = 0.5f;
 
-        // 임시
+        // TEMP
         const float SCREEN_WIDTH = 1920f;
 
         int _currentRoomIdx;
@@ -40,6 +40,8 @@ namespace WeWillSurvive
                 _wipe = go.transform.GetChild(0).gameObject;
             }).Forget();
 
+            // 배경 클릭하면 Popup UI 닫음 (UI_Main/UI_Room은 남겨놓음)
+            _backgroundImage.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ClosePopupUIs(1));
             _leftButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx - 1)));
             _rightButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx + 1)));
         }
@@ -93,21 +95,21 @@ namespace WeWillSurvive
             }
             else                            // 메인 로비 아닌 경우
             {
-                EPlayer player = EPlayer.MaxCount;
+                ECharacter player = ECharacter.MaxCount;
                 switch (roomName)
                 {
                     case ERoom.Lead:
-                        player = EPlayer.Lead; break;
+                        player = ECharacter.Lead; break;
                     case ERoom.Cook:
-                        player = EPlayer.Cook; break;
+                        player = ECharacter.Cook; break;
                     case ERoom.Bell:
-                        player = EPlayer.Bell; break;
+                        player = ECharacter.Bell; break;
                     case ERoom.DrK:
-                        player = EPlayer.DrK; break;
+                        player = ECharacter.DrK; break;
                 }
 
                 // 우주 기지 내 존재하지 않으면 방 불 꺼짐
-                _lightOffImage.enabled = PlayerManager.Instance.PlayerInfos[(int)player].Status == EPlayerStatus.None;
+                _lightOffImage.enabled = CharacterManager.Instance.CharacterInfos[(int)player].Status == ECharacterStatus.None;
 
                 // Popup UI
                 ServiceLocator.Get<ResourceService>().LoadAsset("UI_Room").ContinueWith(prefab =>

@@ -12,7 +12,7 @@ namespace WeWillSurvive
         [SerializeField] TextMeshProUGUI _ownerText;
 
         UI_Background ui;
-        PlayerInfo _player = null;
+        CharacterInfo _player = null;
         int _owner = -1;
 
         protected override void Init()
@@ -29,27 +29,27 @@ namespace WeWillSurvive
         }
 
         // 방 세팅
-        public void SetupRoomUI(EPlayer owner = EPlayer.MaxCount)
+        public void SetupRoomUI(ECharacter owner = ECharacter.MaxCount)
         {
-            if (_player == null && owner != EPlayer.MaxCount)
+            if (_player == null && owner != ECharacter.MaxCount)
             {
                 _owner = (int)owner;
-                _player = PlayerManager.Instance.PlayerInfos[_owner];
+                _player = CharacterManager.Instance.CharacterInfos[_owner];
             }
 
             if (_player == null) return;
 
             // Test
-            _ownerText.text = Enum.GetName(typeof(EPlayer), owner);
+            _ownerText.text = Enum.GetName(typeof(ECharacter), owner);
 
-            EPlayerStatus status = _player.Status;
+            ECharacterStatus status = _player.Status;
 
             // 우주 기지 내 존재하지 않으면 방 불 꺼짐
-            if (status == EPlayerStatus.None)
+            if (status == ECharacterStatus.None)
                 ui.LightOff();
 
             // 정상 상태 아니면 빔 프로젝터 비활성화
-            if (status != EPlayerStatus.Normal)
+            if (status != ECharacterStatus.Normal)
             {
                 // TODO: 빔 프로젝터 비활성화
             }
