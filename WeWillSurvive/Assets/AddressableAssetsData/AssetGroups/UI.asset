@@ -15,13 +15,38 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 66fe4bcea3ce838468c230e3b9d48fe7
   m_SerializeEntries:
-  - m_GUID: c4cf616c4cdd86c40b9cb799b2cc5fd7
-    m_Address: Assets/Prefabs/UI/Popup/UI_Main.prefab
+  - m_GUID: 2885a077c284806449fe1b321ef8ecb2
+    m_Address: UI_Room
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3058f23e8b4cbda4c82938f0ea39894b
+    m_Address: UI_StatePanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a950e283cbdba24287f0265638529d4
+    m_Address: UI_RoomMonitor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5da234b65a6db434cb59dbb512d24863
+    m_Address: UI_Black
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e0b65b1a1fc43d4ba53a0c8ec7c4503
+    m_Address: UI_Main
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc70620c4161b614abaf0ea443f64d38
-    m_Address: Assets/Prefabs/UI/Scene/UI_Background.prefab
+    m_Address: UI_Background
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ffe0d04b6491ea84ba928958fdecbed2
+    m_Address: UI_Character
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

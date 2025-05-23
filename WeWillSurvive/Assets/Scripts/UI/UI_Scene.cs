@@ -5,25 +5,14 @@ namespace WeWillSurvive.UI
 {
     public class UI_Scene : UI_Base
     {
-        private void Awake()
+        public override void Initialize()
         {
-            Init();
-        }
-
-        protected virtual void Init()
-        {
-            // Scene UI 초기화
-            UI_Scene sceneUI = GameManager.Instance.SceneUI;
-            if (sceneUI != null)
-            {
-                Destroy(sceneUI.gameObject);
-                sceneUI = null;
-            }
-            GameManager.Instance.SceneUI = this;
+            base.Initialize();
 
             // Canvas 설정
             Canvas canvas = GetComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.overrideSorting = true;
             canvas.sortingOrder = 0;
         }
     }

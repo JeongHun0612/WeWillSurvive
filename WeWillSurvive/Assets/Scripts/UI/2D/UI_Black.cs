@@ -4,10 +4,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using WeWillSurvive.UI;
 
 namespace WeWillSurvive
 {
-    public class UI_Black : MonoBehaviour
+    public class UI_Black : UI_Base
     {
         GameObject _black;
         [SerializeField] float _wipeDuration = 0.5f;

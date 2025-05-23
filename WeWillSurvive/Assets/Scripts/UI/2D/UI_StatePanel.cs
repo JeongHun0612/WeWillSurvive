@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using WeWillSurvive.UI;
 using UnityEngine;
 
 namespace WeWillSurvive
@@ -7,22 +8,21 @@ namespace WeWillSurvive
     public class UI_StatePanel : UI_Popup
     {
         [SerializeField] private Transform _state;
-        [SerializeField] private GameObject _stateText;
 
-        protected override void Init()
+        public override void Initialize()
         {
-            base.Init();
+            base.Initialize();
         }
 
         public void SetPanel(Define.ECharacter owner)
         {
             CharacterInfo info = CharacterManager.Instance.CharacterInfos[(int)owner];
 
+            int idx = 0;
             foreach (Define.ECharacterState state in info.State)
             {
-                GameObject stateText = Instantiate(_stateText, _state);
-                stateText.SetActive(true);
-                stateText.GetComponent<TextMeshProUGUI>().text = Enum.GetName(typeof(Define.ECharacterState), state);
+                _state.GetChild(idx++).GetComponent<TextMeshProUGUI>().text
+                    = Enum.GetName(typeof(Define.ECharacterState), state);
             }
         }
     }

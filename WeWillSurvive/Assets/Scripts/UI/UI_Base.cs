@@ -5,6 +5,11 @@ namespace WeWillSurvive.UI
 {
     public class UI_Base : MonoBehaviour
     {
+        private void Start()
+        {
+            Initialize();
+        }
+
         public virtual void Show()
         {
             gameObject.SetActive(true);

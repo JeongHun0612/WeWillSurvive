@@ -12,35 +12,40 @@ namespace WeWillSurvive
     public class UI_Room : UI_Popup
     {
         // TODO: 사기 + 상태별로 게임 오브젝트 만들어서 배열에 저장
-        [SerializeField] GameObject _character;
+        [SerializeField] GameObject[] _characters;
 
         UI_Background ui;
         CharacterInfo _characterInfo = null;
         int _owner = -1;
 
-        protected override void Init()
+        public override void Initialize()
         {
-            base.Init();
+            base.Initialize();
 
-            ui = null;
-            if (GameManager.Instance.SceneUI is not UI_Background)
+            ui =  UIManager.Instance.GetCurrentScene<UI_Background>();
+            if (ui == null)
             {
-                Debug.LogError("[UI_Room] 2D Scene에서 열리지 않았음");
+                Debug.LogError($"[{name}] 2D Scene에서 열리지 않았음");
                 return;
             }
-            ui = GameManager.Instance.SceneUI as UI_Background;
         }
 
         // 방 세팅
         public void SetupRoomUI(ECharacter owner = ECharacter.MaxCount)
         {
+            foreach (var c in _characters)
+                c.SetActive(false);
+
             if (_characterInfo == null && owner != ECharacter.MaxCount)
             {
                 _owner = (int)owner;
                 _characterInfo = CharacterManager.Instance.CharacterInfos[_owner];
             }
 
-            if (_characterInfo == null || _character == null)
+            GameObject character = _characters[(int)owner];
+            character.SetActive(true);
+
+            if (_characterInfo == null || character == null)
             {
                 Debug.LogError($"[{gameObject.name}] Character 찾을 수 없음");
                 return;
@@ -53,7 +58,7 @@ namespace WeWillSurvive
                 // TODO: 빔 프로젝터 비활성화
 
                 // 캐릭터 비활성화
-                _character.SetActive(false);
+                character.SetActive(false);
             }
         }
     }

@@ -24,13 +24,13 @@ namespace WeWillSurvive
         int _currentRoomIdx;
         bool _changingBackground;
 
-        protected override void Init()
+        public override void Initialize()
         {
-            base.Init();
+            base.Initialize();
             SetBackground(ERoom.Main);
 
             // 배경 클릭하면 Popup UI 닫음 (UI_Main/UI_Room은 남겨놓음)
-            _backgroundImage.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ClosePopupUIs(1));
+            _backgroundImage.GetComponent<Button>().onClick.AddListener(() => UIManager.Instance.ClosePopups(remain: 1));
             _leftButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx - 1)));
             _rightButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx + 1)));
         }
@@ -44,7 +44,7 @@ namespace WeWillSurvive
             _changingBackground = true;
 
             // Wipe
-            GameManager.Instance.BlackUI.Wipe(right: (int)roomName < _currentRoomIdx, 
+            UIManager.Instance.BlackUI.Wipe(right: (int)roomName < _currentRoomIdx, 
                 coverAction: () => SetBackground(roomName), finishAction: () => _changingBackground = false);
         }
 
@@ -64,7 +64,7 @@ namespace WeWillSurvive
             _rightButton.interactable = _currentRoomIdx < (int)ERoom.MaxCount - 1;
 
             // Popup UI 초기화
-            GameManager.Instance.CloseAllPopupUI();
+            UIManager.Instance.CloseAllPopups();
 
             if (roomName == ERoom.Main)     // 메인 로비인 경우
             {
@@ -72,7 +72,7 @@ namespace WeWillSurvive
                 _lightOffImage.enabled = false;
 
                 // Popup UI
-                ServiceLocator.Get<ResourceService>().LoadAsset("UI_Main").ContinueWith(prefab => Instantiate(prefab)).Forget();
+                UIManager.Instance.ShowPopup<UI_Main>();
             }
             else                            // 메인 로비 아닌 경우
             {
@@ -95,11 +95,7 @@ namespace WeWillSurvive
 
                 // Popup UI
                 string name = Enum.GetName(typeof(ECharacter), player);
-                ServiceLocator.Get<ResourceService>().LoadAsset($"UI_{name}Room").ContinueWith(prefab =>
-                {
-                    GameObject go = Instantiate(prefab);
-                    go.GetComponent<UI_Room>().SetupRoomUI(player);
-                }).Forget();
+                UIManager.Instance.ShowPopup<UI_Room>().SetupRoomUI(player);
             }
         }
     }

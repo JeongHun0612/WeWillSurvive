@@ -7,24 +7,20 @@ namespace WeWillSurvive.UI
     {
         public bool RememberInHistory = true;
 
-        private void Awake()
+        public override void Initialize()
         {
-            Init();
-        }
+            base.Initialize();
 
-        protected virtual void Init()
-        {
             // Canvas ¼³Á¤
             Canvas canvas = GetComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvas.sortingOrder = 10 + GameManager.Instance.PopUIStack.Count;
-
-            GameManager.Instance.PopUIStack.Push(this);
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = 10 + UIManager.Instance.PopupHistoryCount;
         }
 
         public void ClosePopupUI()
         {
-            GameManager.Instance.ClosePopupUI();
+            UIManager.Instance.CloseCurrentPopup();
         }
     }
 }

@@ -19,47 +19,12 @@ namespace WeWillSurvive.Core
 
             if (SceneManager.GetActiveScene().name == "2D")
             {
-                ServiceLocator.Get<ResourceService>().LoadAsset("UI_Background").ContinueWith(prefab => Instantiate(prefab)).Forget();
-                //UIManager.Instance.ShowScene<UI_Background>();
+                UIManager.Instance.ShowScene<UI_Background>();
             }
 
             // Temp
             Day = 1;
         }
-
-        #region UI
-        public UI_Black BlackUI = null;
-        public UI_Scene SceneUI;
-        public Stack<UI_Popup> PopUIStack = new Stack<UI_Popup>();
-
-        // Popup UI �ʱ�ȭ
-        public void CloseAllPopupUI()
-        {
-            ClosePopupUIs(remain: 0);
-        }
-
-        /// <param name="remain"> ���� �ʰ� ���ܵ� Popup UI ���� </param>
-        public void ClosePopupUIs(int remain)
-        {
-            while (true)
-            {
-                if (PopUIStack.Count <= remain) break;
-                UI_Popup ui = PopUIStack.Pop();
-                if (ui != null)
-                    Destroy(ui.gameObject);
-            }
-        }
-
-        // ���� ���� �ִ� Popup UI �ݱ�
-        public void ClosePopupUI()
-        {
-            if (PopUIStack.Count == 0) return;
-            UI_Popup ui = PopUIStack.Pop();
-            if (ui != null)
-                Destroy(ui.gameObject);
-        }
-        #endregion
-
         #region Item
         float[] _itemCount = new float[(int)EItem.MaxCount];
 

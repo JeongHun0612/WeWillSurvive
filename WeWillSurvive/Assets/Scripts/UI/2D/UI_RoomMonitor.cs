@@ -15,17 +15,16 @@ namespace WeWillSurvive
 
         UI_Background ui;
 
-        protected override void Init()
+        public override void Initialize()
         {
-            base.Init();
+            base.Initialize();
 
-            ui = null;
-            if (GameManager.Instance.SceneUI is not UI_Background)
+            ui = UIManager.Instance.GetCurrentScene<UI_Background>();
+            if (ui == null)
             {
-                Debug.LogError("[UI_RoomMonitor] 2D Scene에서 열리지 않았음");
+                Debug.LogError($"[{name}] 2D Scene에서 열리지 않았음");
                 return;
             }
-            ui = GameManager.Instance.SceneUI as UI_Background;
 
             // 우주 기지 내 존재하지 않거나 죽으면 방 불 꺼짐 + 클릭 못함
             CharacterInfo[] infos = CharacterManager.Instance.CharacterInfos;

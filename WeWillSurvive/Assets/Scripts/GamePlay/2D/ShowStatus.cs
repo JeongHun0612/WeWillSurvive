@@ -9,8 +9,8 @@ namespace WeWillSurvive
 {
     public class ShowStatus : MonoBehaviour
     {
-        [SerializeField] ECharacter _characterType = ECharacter.MaxCount;
-        [SerializeField] Vector2 _statusPanelPosition = Vector2.zero;
+        [SerializeField] private ECharacter _characterType = ECharacter.MaxCount;
+        [SerializeField] private Vector2 _statusPanelPosition = Vector2.zero;
 
         private void Awake()
         {
@@ -32,13 +32,10 @@ namespace WeWillSurvive
 
         public void ShowStatusPanel()
         {
-            ServiceLocator.Get<ResourceService>().LoadAsset("UI_StatePanel").ContinueWith(prefab =>
-            {
-                GameManager.Instance.ClosePopupUIs(remain: 1);
-                GameObject go = Instantiate(prefab);
-                go.transform.GetChild(0).localPosition = _statusPanelPosition;
-                go.GetComponent<UI_StatePanel>().SetPanel(_characterType);
-            }).Forget();
+            UIManager.Instance.ClosePopups(remain: 1);
+            UI_StatePanel ui = UIManager.Instance.ShowPopup<UI_StatePanel>();
+            ui.transform.GetChild(0).localPosition = _statusPanelPosition;
+            ui.SetPanel(_characterType);
         }
     }
 }
