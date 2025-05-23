@@ -20,14 +20,6 @@ namespace WeWillSurvive
         [SerializeField] Button _rightButton;
         [SerializeField] Sprite[] _backgroundSprites;
 
-        GameObject _wipe = null;
-
-        [Header("변수")]
-        [SerializeField] float _changeDuration = 0.5f;
-
-        // TEMP
-        const float SCREEN_WIDTH = 1920f;
-
         int _currentRoomIdx;
         bool _changingBackground;
 
@@ -35,12 +27,6 @@ namespace WeWillSurvive
         {
             base.Init();
             SetBackground(ERoom.Main);
-
-            ServiceLocator.Get<ResourceService>().LoadAsset("UI_Wipe").ContinueWith(prefab =>
-            {
-                GameObject go = Instantiate(prefab);
-                _wipe = go.transform.GetChild(0).gameObject;
-            }).Forget();
 
             // 배경 클릭하면 Popup UI 닫음 (UI_Main/UI_Room은 남겨놓음)
             _backgroundImage.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ClosePopupUIs(1));
@@ -54,19 +40,11 @@ namespace WeWillSurvive
             if (_changingBackground)
                 return;
 
-            int sign = (int)roomName < _currentRoomIdx ? 1 : -1;
-            _wipe.transform.localPosition = new Vector3(-(SCREEN_WIDTH + 50f) * sign, 0f, 0f);
             _changingBackground = true;
 
-            // Wipe Animation
-            _wipe.transform.DOKill();
-            _wipe.transform.DOLocalMoveX(0f, _changeDuration)
-                .OnComplete(() =>
-                {
-                    SetBackground(roomName);
-                    _wipe.transform.DOLocalMoveX((SCREEN_WIDTH + 50f) * sign, _changeDuration)
-                        .OnComplete(() => _changingBackground = false);
-                });
+            // Wipe
+            GameManager.Instance.BlackUI.Wipe(right: (int)roomName < _currentRoomIdx, 
+                coverAction: () => SetBackground(roomName), finishAction: () => _changingBackground = false);
         }
 
         public void LightOff()

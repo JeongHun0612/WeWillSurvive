@@ -688,7 +688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomMonitorButton: {fileID: 2744086864018402203}
-  _nextDayButton: {fileID: 0}
+  _nextDayButton: {fileID: 6100197463389445627}
+  _dayText: {fileID: 1399074549178817493}
 --- !u!1 &8814852908978558763
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,10 +8,18 @@ namespace WeWillSurvive.Core
 {
     public class GameManager : MonoSingleton<GameManager>
     {
+        public int Day;
+        public UI_Black BlackUI = null;
+
         private void Start()
         {
             ServiceLocator.AutoRegisterServices();
 
+            ServiceLocator.Get<ResourceService>().LoadAsset("UI_Black").ContinueWith(prefab => { BlackUI = Instantiate(prefab).GetComponent<UI_Black>(); }).Forget();
+            
+            // Temp
+            Day = 1;
+            
             if (SceneManager.GetActiveScene().name == "2D")
                 ServiceLocator.Get<ResourceService>().LoadAsset("UI_Background").ContinueWith(prefab => Instantiate(prefab)).Forget();
         }

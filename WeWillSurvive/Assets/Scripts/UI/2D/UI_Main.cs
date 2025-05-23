@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
@@ -8,8 +9,9 @@ namespace WeWillSurvive
 {
     public class UI_Main : UI_Popup
     {
-        [SerializeField] Button _roomMonitorButton;
-        [SerializeField] Button _nextDayButton;
+        [SerializeField] private Button _roomMonitorButton;
+        [SerializeField] private Button _nextDayButton;
+        [SerializeField] private TextMeshProUGUI _dayText;
 
         // TODO: 사기 + 상태별로 플레이어 이미지 배열에 넣어서 저장
         // _characterImages[ECharacter.MaxCount][6? 7?]
@@ -32,6 +34,31 @@ namespace WeWillSurvive
             _roomMonitorButton.onClick.AddListener(() =>
                 ServiceLocator.Get<ResourceService>().LoadAsset("UI_RoomMonitor").ContinueWith(prefab => Instantiate(prefab)).Forget());
 
+            // Next Day
+            _nextDayButton.onClick.AddListener(() => GameManager.Instance.BlackUI.FadeIO(() => NextDay()));
+
+            UpdateUI();
+        }
+
+        private void NextDay()
+        {
+            // Day + 1
+            GameManager.Instance.Day += 1;
+
+            UpdateUI();
+        }
+
+        private void UpdateUI()
+        {
+            // Popup UI 초기화
+            GameManager.Instance.ClosePopupUIs(remain: 1);
+
+            _dayText.text = "Day " + GameManager.Instance.Day;
+
+            // 캐릭터 정보 업데이트
+            CharacterManager.Instance.UpdateCharacterInfos();
+
+            // 캐릭터 이미지 업데이트
             CharacterInfo[] infos = CharacterManager.Instance.CharacterInfos;
             foreach (CharacterInfo info in infos)
             {
