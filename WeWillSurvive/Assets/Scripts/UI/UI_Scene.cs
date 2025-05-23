@@ -1,9 +1,9 @@
 using UnityEngine;
 using WeWillSurvive.Core;
 
-namespace WeWillSurvive
+namespace WeWillSurvive.UI
 {
-    public class UI_Scene : MonoBehaviour
+    public class UI_Scene : UI_Base
     {
         private void Awake()
         {

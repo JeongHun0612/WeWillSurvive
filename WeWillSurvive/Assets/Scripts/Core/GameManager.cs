@@ -2,15 +2,18 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using WeWillSurvive.UI;
 using static Define;
 
 namespace WeWillSurvive.Core
 {
     public class GameManager : MonoSingleton<GameManager>
     {
-        private void Start()
+        private async void Start()
         {
             ServiceLocator.AutoRegisterServices();
+
+            await UIManager.Instance.InitializeAsync();
 
             if (SceneManager.GetActiveScene().name == "2D")
                 ServiceLocator.Get<ResourceService>().LoadAsset("UI_Background").ContinueWith(prefab => Instantiate(prefab)).Forget();

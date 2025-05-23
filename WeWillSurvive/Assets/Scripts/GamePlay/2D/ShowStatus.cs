@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 using WeWillSurvive.Core;
+using WeWillSurvive.UI;
 using static Define;
 
 namespace WeWillSurvive
