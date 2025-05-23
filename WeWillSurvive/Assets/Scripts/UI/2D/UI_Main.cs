@@ -9,6 +9,7 @@ namespace WeWillSurvive
     public class UI_Main : UI_Popup
     {
         [SerializeField] Button _roomMonitorButton;
+        [SerializeField] Button _nextDayButton;
 
         // TODO: 사기 + 상태별로 플레이어 이미지 배열에 넣어서 저장
         // _characterImages[ECharacter.MaxCount][6? 7?]
@@ -35,7 +36,7 @@ namespace WeWillSurvive
             foreach (CharacterInfo info in infos)
             {
                 // 우주 기지 내 존재하지 않으면 캐릭터 비활성화
-                if (info.Status == ECharacterStatus.None)
+                if (info.State[0] == ECharacterState.None)
                 {
                     Transform t = transform.Find($"Characters/{info.Name}");
                     if (t != null)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,9 +45,9 @@ namespace WeWillSurvive
                 return;
             }
 
-            ECharacterStatus status = _characterInfo.Status;
+            List<ECharacterState> state = _characterInfo.State;
             // 우주 기지 내 존재하지 않거나 죽은 경우
-            if (status == ECharacterStatus.None || status == ECharacterStatus.Dead)
+            if (state[0] == ECharacterState.None || state[0] == ECharacterState.Dead)
             {
                 // TODO: 빔 프로젝터 비활성화
 

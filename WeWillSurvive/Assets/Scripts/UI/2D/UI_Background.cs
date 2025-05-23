@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
@@ -110,8 +111,8 @@ namespace WeWillSurvive
                 }
 
                 // 우주 기지 내 존재하지 않거나 죽으면 방 불 꺼짐
-                ECharacterStatus status = CharacterManager.Instance.CharacterInfos[(int)player].Status;
-                _lightOffImage.enabled = status == ECharacterStatus.None || status == ECharacterStatus.Dead;
+                List<ECharacterState> state = CharacterManager.Instance.CharacterInfos[(int)player].State;
+                _lightOffImage.enabled = state[0] == ECharacterState.None || state[0] == ECharacterState.Dead;
 
                 // Popup UI
                 string name = Enum.GetName(typeof(ECharacter), player);
