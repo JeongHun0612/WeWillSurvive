@@ -16,7 +16,10 @@ namespace WeWillSurvive.Core
             await UIManager.Instance.InitializeAsync();
 
             if (SceneManager.GetActiveScene().name == "2D")
+            {
                 ServiceLocator.Get<ResourceService>().LoadAsset("UI_Background").ContinueWith(prefab => Instantiate(prefab)).Forget();
+                //UIManager.Instance.ShowScene<UI_Background>();
+            }
         }
 
         #region UI
