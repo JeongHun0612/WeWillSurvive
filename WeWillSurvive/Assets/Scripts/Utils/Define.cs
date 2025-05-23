@@ -55,8 +55,15 @@ public static class Define
 
     public enum EItem
     {
-        Water,
         Food,
+        SpecialFood,    // 특별실
+        Water,
+        MedicKit,
+        SuperMedicKit,  // 의료 만능 키트
+        NiceSpacesuit,  // 고급 우주복
+        Radio,          // 예비 통신 장비
+        LaserGun,       // 총
+        BoardGame,
         MaxCount
     }
 }

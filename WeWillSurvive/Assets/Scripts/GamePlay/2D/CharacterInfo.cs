@@ -13,9 +13,9 @@ namespace WeWillSurvive
         public float Health => _status[(int)ECharacterStatus.Health];
         public bool Hurt => _status[(int)ECharacterStatus.Health] < _maxStatus[(int)ECharacterStatus.Health];
 
-        float _maxHunger => _maxStatus[(int)ECharacterStatus.Hunger];
-        float _maxThirst => _maxStatus[(int)ECharacterStatus.Thirst];
-        float _maxHealth => _maxStatus[(int)ECharacterStatus.Health];
+        public float MaxHunger => _maxStatus[(int)ECharacterStatus.Hunger];
+        public float MaxThirst => _maxStatus[(int)ECharacterStatus.Thirst];
+        public float MaxHealth => _maxStatus[(int)ECharacterStatus.Health];
 
         private float[] _status;
         private float[] _maxStatus;
@@ -55,30 +55,30 @@ namespace WeWillSurvive
             State.Clear();
 
             // 1. 아픔 (다침 -> 병듦)
-            if (Health < _maxHealth)
+            if (Health < MaxHealth)
             {
                 // TODO: 병듦 조건 정하기
-                if (Health < _maxHealth * 0.5f)
+                if (Health < MaxHealth * 0.5f)
                     AddState(ECharacterState.Sick);
                 else
                     AddState(ECharacterState.Hurt);
             }
 
             // 2. 갈증 (갈증 -> 수분고갈)
-            if (Thirst < _maxThirst * 0.7f)
+            if (Thirst < MaxThirst * 0.7f)
             {
                 // TODO: 수분고갈 조건 정하기
-                if (Thirst < _maxThirst * 0.3f)
+                if (Thirst < MaxThirst * 0.3f)
                     AddState(ECharacterState.Dehydrate);
                 else
                     AddState(ECharacterState.Thirsty);
             }
 
             // 3. 허기 (허기짐 -> 영양결핍)
-            if (Hunger < _maxHunger * 0.7f)
+            if (Hunger < MaxHunger * 0.7f)
             {
                 // TODO: 영양결핍 조건 정하기
-                if (Hunger < _maxHunger * 0.3f)
+                if (Hunger < MaxHunger * 0.3f)
                     AddState(ECharacterState.Starve);
                 else
                     AddState(ECharacterState.Hungry);
