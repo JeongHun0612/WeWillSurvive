@@ -1,34 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.EnhancedTouch;
-using UnityEngine.SceneManagement;
 using WeWillSurvive.Core;
 using static Define;
 
 namespace WeWillSurvive
 {
-    public class CharacterInfo
-    {
-        public string Name { get; private set; }
-        public ECharacterStatus Status { get; private set; }
-        public float Hunger { get; private set; }
-        public float Thirst { get; private set; }
-
-        public CharacterInfo(string name)
-        {
-            Status = ECharacterStatus.Normal;
-            Hunger = 100f;
-            Thirst = 100f;
-            Name = name;
-        }
-
-        public void SetStatus(ECharacterStatus status) => Status = status;
-        public void SetHunger(float value) => Hunger = Mathf.Clamp(value, 0f, 100f);
-        public void SetThirst(float value) => Thirst = Mathf.Clamp(value, 0f, 100f);
-    }
-
     /// <summary>
-    /// 플레이어 상태 관리
+    /// 플레이어 정보 관리
     /// </summary>
     public class CharacterManager : MonoSceneSingleton<CharacterManager>
     {
@@ -41,37 +20,28 @@ namespace WeWillSurvive
             // 데이터 초기화
             CharacterInfos = new CharacterInfo[(int)ECharacter.MaxCount];
             for (int i = 0; i < CharacterInfos.Length; i++)
-                CharacterInfos[i] = new CharacterInfo(Enum.GetName(typeof(ECharacter), i));
+                CharacterInfos[i] = new CharacterInfo(Enum.GetName(typeof(ECharacter), i), 100f, 100f, 100f);
 
             // Test
-            //CharacterInfos[(int)ECharacter.Bell].SetStatus(ECharacterStatus.None);
+            //CharacterInfos[(int)ECharacter.Bell].SetState(ECharacterState.None);
         }
 
-        public void SetCharacterStatus(ECharacter player, ECharacterStatus status)
+        // Day 넘어갈 때, 캐릭터 정보 업데이트
+        public void UpdateCharacterInfos()
         {
-            CharacterInfos[(int)player].SetStatus(status);
-        }
-        public ECharacterStatus GetCharacterStatus(ECharacter player)
-        {
-            return CharacterInfos[(int)player].Status;
-        }
+            foreach (CharacterInfo info in CharacterInfos)
+            {
+                // 허기, 목마름 낮아짐
+                info.SubStatus(ECharacterStatus.Hunger, 10f);
+                info.SubStatus(ECharacterStatus.Thirst, 10f);
 
-        public void SetCharacterHunger(ECharacter player, float hunger)
-        {
-            CharacterInfos[(int)player].SetHunger(hunger);
-        }
-        public float GetCharacterHunger(ECharacter player)
-        {
-            return CharacterInfos[(int)player].Hunger;
-        }
+                // 부상당했으면 건강 낮아짐
+                // * 부상당하자마자 또 낮아져서 두배로 낮아지는 문제 있을 수 있음
+                if (info.Hurt)
+                    info.SubStatus(ECharacterStatus.Health, 10f);
 
-        public void SetCharacterThirst(ECharacter player, float thirsty)
-        {
-            CharacterInfos[(int)player].SetThirst(thirsty);
-        }
-        public float GetCharacterThirst(ECharacter player)
-        {
-            return CharacterInfos[(int)player].Thirst;
+                info.UpdateState();
+            }
         }
     }
 }

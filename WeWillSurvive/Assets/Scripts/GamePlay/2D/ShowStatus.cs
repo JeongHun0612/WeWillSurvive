@@ -31,12 +31,12 @@ namespace WeWillSurvive
 
         public void ShowStatusPanel()
         {
-            ServiceLocator.Get<ResourceService>().LoadAsset("UI_StatusPanel").ContinueWith(prefab =>
+            ServiceLocator.Get<ResourceService>().LoadAsset("UI_StatePanel").ContinueWith(prefab =>
             {
                 GameManager.Instance.ClosePopupUIs(remain: 1);
                 GameObject go = Instantiate(prefab);
                 go.transform.GetChild(0).localPosition = _statusPanelPosition;
-                go.AddComponent<UI_Popup>();
+                go.GetComponent<UI_StatePanel>().SetPanel(_characterType);
             }).Forget();
         }
     }
