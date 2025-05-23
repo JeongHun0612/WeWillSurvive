@@ -1,10 +1,12 @@
 using UnityEngine;
 using WeWillSurvive.Core;
 
-namespace WeWillSurvive
+namespace WeWillSurvive.UI
 {
-    public class UI_Popup : MonoBehaviour
+    public class UI_Popup : UI_Base
     {
+        public bool RememberInHistory = true;
+
         private void Awake()
         {
             Init();

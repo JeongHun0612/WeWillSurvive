@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using WeWillSurvive.UI;
 using static Define;
 
 namespace WeWillSurvive.Core
@@ -10,17 +11,20 @@ namespace WeWillSurvive.Core
     {
         public int Day;
 
-        private void Start()
+        private async void Start()
         {
             ServiceLocator.AutoRegisterServices();
 
-            ServiceLocator.Get<ResourceService>().LoadAsset("UI_Black").ContinueWith(prefab => { BlackUI = Instantiate(prefab).GetComponent<UI_Black>(); }).Forget();
+            await UIManager.Instance.InitializeAsync();
+
+            if (SceneManager.GetActiveScene().name == "2D")
+            {
+                ServiceLocator.Get<ResourceService>().LoadAsset("UI_Background").ContinueWith(prefab => Instantiate(prefab)).Forget();
+                //UIManager.Instance.ShowScene<UI_Background>();
+            }
 
             // Temp
             Day = 1;
-
-            if (SceneManager.GetActiveScene().name == "2D")
-                ServiceLocator.Get<ResourceService>().LoadAsset("UI_Background").ContinueWith(prefab => Instantiate(prefab)).Forget();
         }
 
         #region UI
@@ -28,13 +32,13 @@ namespace WeWillSurvive.Core
         public UI_Scene SceneUI;
         public Stack<UI_Popup> PopUIStack = new Stack<UI_Popup>();
 
-        // Popup UI ÃÊ±âÈ­
+        // Popup UI ï¿½Ê±ï¿½È­
         public void CloseAllPopupUI()
         {
             ClosePopupUIs(remain: 0);
         }
 
-        /// <param name="remain"> ²ôÁö ¾Ê°í ³²°ÜµÑ Popup UI °³¼ö </param>
+        /// <param name="remain"> ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½Üµï¿½ Popup UI ï¿½ï¿½ï¿½ï¿½ </param>
         public void ClosePopupUIs(int remain)
         {
             while (true)
@@ -46,7 +50,7 @@ namespace WeWillSurvive.Core
             }
         }
 
-        // Á¦ÀÏ À§¿¡ ÀÖ´Â Popup UI ´Ý±â
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ Popup UI ï¿½Ý±ï¿½
         public void ClosePopupUI()
         {
             if (PopUIStack.Count == 0) return;
@@ -65,8 +69,8 @@ namespace WeWillSurvive.Core
         }
 
         /// <summary>
-        /// ¾î¶² ¾ÆÀÌÅÛÀ» ´©±¸¿¡°Ô ¾ó¸¶³ª »ç¿ëÇÒ °ÍÀÎÁö
-        /// »ç¿ë ´ë»óÀÌ Á¤ÇØÁ® ÀÖ´Â °æ¿ì
+        /// ï¿½î¶² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ó¸¶³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        /// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
         /// </summary>
         public void UseItem(EItem type, ECharacter target, float count)
         {
@@ -97,7 +101,7 @@ namespace WeWillSurvive.Core
         }
 
         /// <summary>
-        /// ¸ðµÎ¿¡°Ô »ç¿ëÇÏ°Å³ª ÀÌº¥Æ®·Î »ç¿ëÇÏ´Â °æ¿ì
+        /// ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°Å³ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
         /// </summary>
         public void UseItem(EItem type, float count)
         {
@@ -106,7 +110,7 @@ namespace WeWillSurvive.Core
 
             _itemCount[(int)type] = remain - count;
 
-            // TODO: ¸ðµÎ¿¡°Ô »ç¿ëÇÏ´Â °æ¿ì
+            // TODO: ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
             switch (type)
             {
                 case EItem.SpecialFood:
@@ -115,10 +119,10 @@ namespace WeWillSurvive.Core
                     break;
             }
 
-            // ÀÌº¥Æ®¿¡¼­ »ç¿ëÇÏ´Â °æ¿ì - ÀÌº¥Æ® ÇÔ¼ö¿¡¼­ Ã³¸®
+            // ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ - ï¿½Ìºï¿½Æ® ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
         }
 
-        // ÆÄ¹Ö ½Ã½ºÅÛ¿¡¼­ Ãâ±¸¿¡ ³Ö¾úÀ» ¶§ / ÀÌº¥Æ®·Î ¾ÆÀÌÅÛ ¾ò¾úÀ» ¶§ 
+        // ï¿½Ä¹ï¿½ ï¿½Ã½ï¿½ï¿½Û¿ï¿½ï¿½ï¿½ ï¿½â±¸ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½ / ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
         public void GetItem(EItem type, float count)
         {
             _itemCount[(int)type] += count;

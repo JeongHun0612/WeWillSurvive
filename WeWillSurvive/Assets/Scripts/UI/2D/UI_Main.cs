@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
+using WeWillSurvive.UI;
 using static Define;
 
 namespace WeWillSurvive

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  m_GroupName: UI
+  m_GUID: 66fe4bcea3ce838468c230e3b9d48fe7
+  m_SerializeEntries:
+  - m_GUID: c4cf616c4cdd86c40b9cb799b2cc5fd7
+    m_Address: Assets/Prefabs/UI/Popup/UI_Main.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc70620c4161b614abaf0ea443f64d38
+    m_Address: Assets/Prefabs/UI/Scene/UI_Background.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f7b3b476672664a47ab9721e6106ada6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 357b25dbfcee23647a252875180a57c5, type: 2}
+    - {fileID: 11400000, guid: 68a3bde8c24b2a941a9b4ef70be6faf5, type: 2}
