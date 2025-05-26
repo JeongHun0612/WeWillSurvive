@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -52,43 +52,37 @@ namespace WeWillSurvive.UI
                 string path = _path + "Popup";
                 if (Directory.Exists(path))
                 {
-                    string[] files = Directory.GetFiles(path);
-                    int idx = 0;
-                    _popupPrefabPaths = new string[files.Length / 2];
+                    string[] prefabFiles = Directory.GetFiles(path, "*.prefab");
+                    _popupPrefabPaths = new string[prefabFiles.Length];
 
-                    for (int i = 0; i < files.Length; i++)
+                    for (int i = 0; i < _popupPrefabPaths.Length; i++)
                     {
-                        string extension = Path.GetExtension(files[i]);
-                        if (extension != ".prefab") continue;
-
-                        string fileName = Path.GetFileNameWithoutExtension(files[i]);
-                        _popupPrefabPaths[idx++] = fileName;
+                        string fileName = Path.GetFileNameWithoutExtension(prefabFiles[i]);
+                        _popupPrefabPaths[i] = fileName;
                     }
                 }
                 else
                 {
-                    Debug.LogWarning("Æú´õ¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù: " + path);
+                    Debug.LogWarning("í´ë”ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤: " + path);
                 }
+            }
 
-                path = _path + "Scene";
+            { 
+                string path = _path + "Scene";
                 if (Directory.Exists(path))
                 {
-                    string[] files = Directory.GetFiles(path);
-                    int idx = 0;
-                    _scenePrefabPaths = new string[files.Length / 2];
+                    string[] prefabFiles = Directory.GetFiles(path, "*.prefab");
+                    _scenePrefabPaths = new string[prefabFiles.Length];
 
-                    for (int i = 0; i < files.Length; i++)
+                    for (int i = 0; i < _scenePrefabPaths.Length; i++)
                     {
-                        string extension = Path.GetExtension(files[i]);
-                        if (extension != ".prefab") continue;
-
-                        string fileName = Path.GetFileNameWithoutExtension(files[i]);
-                        _scenePrefabPaths[idx++] = fileName;
+                        string fileName = Path.GetFileNameWithoutExtension(prefabFiles[i]);
+                        _scenePrefabPaths[i] = fileName;
                     }
                 }
                 else
                 {
-                    Debug.LogWarning("Æú´õ¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù: " + path);
+                    Debug.LogWarning("í´ë”ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤: " + path);
                 }
             }
 
