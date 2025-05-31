@@ -51,7 +51,7 @@ namespace WeWillSurvive
                 var slot = new Slot
                 {
                     slotObject = obj,
-                    image = obj.GetComponentInChildren<Image>(),
+                    image = obj.transform.Find("Image").GetComponent<Image>(),
                     text = obj.GetComponentInChildren<TextMeshProUGUI>(),
                     data = null,
                     amount = 0
@@ -78,7 +78,7 @@ namespace WeWillSurvive
                 if (slot.data == def && slot.amount < def.amountLimit)
                 {
                     slot.amount++;
-                    if (slot.amount > 1) slot.text.text = slot.amount.ToString();
+                    slot.text.text = slot.amount.ToString();
                     return true;
                 }
             }

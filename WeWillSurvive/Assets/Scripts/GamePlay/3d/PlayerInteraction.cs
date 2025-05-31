@@ -9,7 +9,7 @@ namespace WeWillSurvive
         public Camera playercamera;
 
         public LayerMask interactableLayerMask; // Interactable 레이어 지정
-        public float interactRange = 3f; // 상호작용 최대 거리
+        public float interactRange = 2f; // 상호작용 최대 거리
 
         private bool isFirstPerson = true;
 
