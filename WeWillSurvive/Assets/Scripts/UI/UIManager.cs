@@ -93,7 +93,7 @@ namespace WeWillSurvive.UI
             {
                 try
                 {
-                    var asset = await ResourceService.LoadAsset(path);
+                    var asset = await ResourceService.LoadAssetAsync<GameObject>(path);
                     asset.SetActive(false);
 
                     UI_Scene prefab = asset.GetComponent<UI_Scene>();
@@ -136,7 +136,7 @@ namespace WeWillSurvive.UI
             {
                 try
                 {
-                    var asset = await ResourceService.LoadAsset(path);
+                    var asset = await ResourceService.LoadAssetAsync<GameObject>(path);
                     asset.SetActive(false);
 
                     UI_Popup prefab = asset.GetComponent<UI_Popup>();
@@ -177,7 +177,7 @@ namespace WeWillSurvive.UI
 
             try
             {
-                var asset = await ResourceService.LoadAsset("UI_Black");
+                var asset = await ResourceService.LoadAssetAsync<GameObject>("UI_Black");
                 BlackUI = Instantiate(asset.GetComponent<UI_Black>(), transform);
                 await BlackUI.InitializeAsync();
             }

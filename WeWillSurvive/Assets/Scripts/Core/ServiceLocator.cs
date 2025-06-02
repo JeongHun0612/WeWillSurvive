@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace WeWillSurvive.Core
 {
     public interface IService
     {
-        void Initialize();
+        public UniTask InitializeAsync();
     }
 
     public class ServiceLocator
@@ -16,7 +17,7 @@ namespace WeWillSurvive.Core
         private static Dictionary<Type, object> _services = new Dictionary<Type, object>();
         private static bool _initialized;
 
-        public static void AutoRegisterServices()
+        public async static UniTask AutoRegisterServices()
         {
             if (_initialized)
             {
@@ -45,7 +46,7 @@ namespace WeWillSurvive.Core
                         }
                     }
 
-                    ((IService)serviceInstance).Initialize();
+                    await((IService)serviceInstance).InitializeAsync();
 
                     Debug.Log($"Auto-registered service: {serviceType.Name}");
                 }
