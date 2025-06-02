@@ -13,7 +13,18 @@ MonoBehaviour:
   m_Name: Bell
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 3
+  <ItemType>k__BackingField: 102
   <Name>k__BackingField: Bell
-  <MaxHealth>k__BackingField: 100
   <MaxHunger>k__BackingField: 100
   <MaxThirst>k__BackingField: 100
+  <MaxHealth>k__BackingField: 100
+  _normal: {fileID: 0}
+  _high: {fileID: 0}
+  _low: {fileID: 0}
+  _injured: {fileID: 0}
+  _scared: {fileID: 0}
+  _mad: {fileID: 0}
+  _injuredMad: {fileID: 0}
+  _injuredScared: {fileID: 0}
+  _scaredMad: {fileID: 0}
+  _injuredScaredMad: {fileID: 0}

@@ -14,7 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
   m_GUID: 81d2f0beb4717ca459907aab63efa538
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 433a21ba6912f3f45bbc6a090af10c41
+    m_Address: Bell
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d04fc0dcdbeb004c9ebaa846f3388e6
+    m_Address: ItemEffectData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a066ab5fc7eb3db48be8fc9c08e17e09
+    m_Address: Cook
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba8ad1521dbd3a34881b3a9b18697bab
+    m_Address: Lead
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d08706eb11aa30843b63666ec8c7e24a
+    m_Address: DrK
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f7b3b476672664a47ab9721e6106ada6, type: 2}
   m_SchemaSet:

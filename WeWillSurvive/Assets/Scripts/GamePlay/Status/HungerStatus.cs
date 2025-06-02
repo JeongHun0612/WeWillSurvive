@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Status
@@ -11,34 +12,39 @@ namespace WeWillSurvive.Status
     public class HungerStatus : IStatus
     {
         // 레벨별 상태 매핑
-        private static readonly Dictionary<EHungerLevel, Define.ECharacterState> _hungerStateMap = new()
+        private static readonly Dictionary<EHungerLevel, EState> _hungerStateMap = new()
         {
-            [EHungerLevel.Hungry] = Define.ECharacterState.Hungry,
-            [EHungerLevel.Starve] = Define.ECharacterState.Starve
+            [EHungerLevel.Hungry] = EState.Hungry,
+            [EHungerLevel.Starve] = EState.Starve
         };
 
-        // 상태별 전이 기준일
+        // 상태별 전이 기준값
         private static readonly Dictionary<EHungerLevel, int> _hungerThresholds = new()
         {
-            [EHungerLevel.Normal] = 2,
-            [EHungerLevel.Hungry] = 2,
-            [EHungerLevel.Starve] = 2,
+            [EHungerLevel.Normal] = 60,
+            [EHungerLevel.Hungry] = 30,
+            [EHungerLevel.Starve] = 0,
         };
 
-
         public EStatusType StatusType => EStatusType.Hunger;
-        public int DaysInState { get; private set; } = 0;
+        public float MaxValue { get; private set; } = 0f;
+        public float CurrentValue { get; private set; } = 0f;
+        public float DecreasePerDay { get; private set; } = 10f;
 
         private EHungerLevel _level = EHungerLevel.Normal;
 
+        public HungerStatus(float value)
+        {
+            MaxValue = value;
+            CurrentValue = value;
+        }
+
         public void OnNewDay(CharacterBase owner)
         {
-            DaysInState++;
+            CurrentValue = Mathf.Max(0f, CurrentValue - DecreasePerDay);
 
-            if (_hungerThresholds.TryGetValue(_level, out var threshold) && DaysInState >= threshold)
+            if (_hungerThresholds.TryGetValue(_level, out var threshold) && CurrentValue <= threshold)
             {
-                DaysInState = 0;
-
                 if (_level == EHungerLevel.Starve)
                 {
                     owner.OnDead();
@@ -46,34 +52,17 @@ namespace WeWillSurvive.Status
                 }
 
                 _level++;
+            }
 
-                if (_hungerStateMap.TryGetValue(_level, out var state))
-                {
-                    owner.AddState(state);
-                }
+            if (_hungerStateMap.TryGetValue(_level, out var state))
+            {
+                owner.State.AddState(state);
             }
         }
 
-        public void ApplyRecovery()
+        public void ApplyRecovery(float value)
         {
-
-        }
-
-        public void ApplyAllRecovery()
-        {
-            _level = EHungerLevel.Normal;
-            DaysInState = 0;
-        }
-
-        public string GetStatusDescription()
-        {
-            return _level switch
-            {
-                EHungerLevel.Normal => "정상",
-                EHungerLevel.Hungry => "허기짐",
-                EHungerLevel.Starve => "영양 결핍",
-                _ => string.Empty,
-            };
+            CurrentValue = Mathf.Min(MaxValue, CurrentValue + value);
         }
     }
 }

@@ -12,33 +12,39 @@ namespace WeWillSurvive.Status
     public class ThirstStatus : IStatus
     {
         // 레벨별 상태 매핑
-        private static readonly Dictionary<EThirstLevel, Define.ECharacterState> _thirstyStateMap = new()
+        private static readonly Dictionary<EThirstLevel, EState> _thirstyStateMap = new()
         {
-            [EThirstLevel.Thirsty] = Define.ECharacterState.Thirsty,
-            [EThirstLevel.Dehydrate] = Define.ECharacterState.Dehydrate
+            [EThirstLevel.Thirsty] = EState.Thirsty,
+            [EThirstLevel.Dehydrate] = EState.Dehydrate
         };
 
-        // 상태별 전이 기준일
-        private static readonly Dictionary<EThirstLevel, int> _thirstThresholds = new()
+        // 상태별 전이 기준값
+        private static readonly Dictionary<EThirstLevel, float> _thirstThresholds = new()
         {
-            [EThirstLevel.Normal] = 2,
-            [EThirstLevel.Thirsty] = 2,
-            [EThirstLevel.Dehydrate] = 2,
+            [EThirstLevel.Normal] = 60,
+            [EThirstLevel.Thirsty] = 30,
+            [EThirstLevel.Dehydrate] = 0,
         };
 
         public EStatusType StatusType => EStatusType.Thirst;
-        public int DaysInState { get; private set; } = 0;
+        public float MaxValue { get; private set; } = 0f;
+        public float CurrentValue { get; private set; } = 0f;
+        public float DecreasePerDay { get; private set; } = 10f;
 
         private EThirstLevel _level = EThirstLevel.Normal;
 
+        public ThirstStatus(float value)
+        {
+            MaxValue = value;
+            CurrentValue = value;
+        }
+
         public void OnNewDay(CharacterBase owner)
         {
-            DaysInState++;
+            CurrentValue = Mathf.Max(0f, CurrentValue - DecreasePerDay);
 
-            if (_thirstThresholds.TryGetValue(_level, out var threshold) && DaysInState >= threshold)
+            if (_thirstThresholds.TryGetValue(_level, out var threshold) && CurrentValue <= threshold)
             {
-                DaysInState = 0;
-
                 if (_level == EThirstLevel.Dehydrate)
                 {
                     owner.OnDead();
@@ -46,34 +52,17 @@ namespace WeWillSurvive.Status
                 }
 
                 _level++;
+            }
 
-                if (_thirstyStateMap.TryGetValue(_level, out var state))
-                {
-                    owner.AddState(state);
-                }
+            if (_thirstyStateMap.TryGetValue(_level, out var state))
+            {
+                owner.State.AddState(state);
             }
         }
 
-        public void ApplyRecovery()
+        public void ApplyRecovery(float value)
         {
-            if (_level > EThirstLevel.Normal)
-            {
-                _level--;
-            }
-
-            DaysInState = 0;
+            CurrentValue = Mathf.Min(MaxValue, CurrentValue + value);
         }
-
-        public string GetStatusDescription()
-        {
-            return _level switch
-            {
-                EThirstLevel.Normal => "정상",
-                EThirstLevel.Thirsty => "갈증",
-                EThirstLevel.Dehydrate => "수분 고갈",
-                _ => string.Empty,
-            };
-        }
-
     }
 }

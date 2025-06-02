@@ -4,35 +4,38 @@ using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Status
 {
-    public enum EAnxiousLevel
+    public enum EInjuredLevel
     {
-        Anxious, Panic
+        Injured, Sick
     }
 
-    public class AnxiousStatus : IStatus
+    public class InjuryStatus : IStatus
     {
         // 레벨별 상태 매핑
-        private static readonly Dictionary<EAnxiousLevel, EState> _anxiousStateMap = new()
+        private static readonly Dictionary<EInjuredLevel, EState> _injuryStateMap = new()
         {
-            [EAnxiousLevel.Anxious] = EState.Anxious,
-            [EAnxiousLevel.Panic] = EState.Panic
+            [EInjuredLevel.Injured] = EState.Injured,
+            [EInjuredLevel.Sick] = EState.Sick
         };
 
         // 상태별 전이 기준값
-        private static readonly Dictionary<EAnxiousLevel, int> _anxiousThresholds = new()
+        private static readonly Dictionary<EInjuredLevel, int> _injuryThresholds = new()
         {
-            [EAnxiousLevel.Anxious] = 30,
-            [EAnxiousLevel.Panic] = 0,
+            [EInjuredLevel.Injured] = 50,
+            [EInjuredLevel.Sick] = 0,
         };
 
-        public EStatusType StatusType => EStatusType.Anxious;
+        public EStatusType StatusType => EStatusType.Injury;
+
         public float MaxValue { get; private set; } = 0f;
+
         public float CurrentValue { get; private set; } = 0f;
+
         public float DecreasePerDay { get; private set; } = 10f;
 
-        private EAnxiousLevel _level = EAnxiousLevel.Anxious;
+        private EInjuredLevel _level = EInjuredLevel.Injured;
 
-        public AnxiousStatus(float value)
+        public InjuryStatus(float value)
         {
             MaxValue = value;
             CurrentValue = value;
@@ -42,9 +45,9 @@ namespace WeWillSurvive.Status
         {
             CurrentValue = Mathf.Max(0f, CurrentValue - DecreasePerDay);
 
-            if (_anxiousThresholds.TryGetValue(_level, out var threshold) && CurrentValue <= threshold)
+            if (_injuryThresholds.TryGetValue(_level, out var threshold) && CurrentValue <= threshold)
             {
-                if (_level == EAnxiousLevel.Panic)
+                if (_level == EInjuredLevel.Sick)
                 {
                     owner.OnDead();
                     return;
@@ -53,7 +56,7 @@ namespace WeWillSurvive.Status
                 _level++;
             }
 
-            if (_anxiousStateMap.TryGetValue(_level, out var state))
+            if (_injuryStateMap.TryGetValue(_level, out var state))
             {
                 owner.State.AddState(state);
             }

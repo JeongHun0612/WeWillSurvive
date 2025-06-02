@@ -7,17 +7,18 @@ namespace WeWillSurvive.Status
     {
         Hunger,
         Thirst,
-        Hurt,
+        Injury,
         Anxious
     }
 
     public interface IStatus
     {
         public EStatusType StatusType { get; }
-        public int DaysInState { get; }
+        public float MaxValue { get; }
+        public float CurrentValue { get; }
+        public float DecreasePerDay { get; }
 
         public void OnNewDay(CharacterBase owner);
-        public void ApplyRecovery();
-        public string GetStatusDescription();
+        public void ApplyRecovery(float value);
     }
 }

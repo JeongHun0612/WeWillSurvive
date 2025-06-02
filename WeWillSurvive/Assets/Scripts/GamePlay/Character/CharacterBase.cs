@@ -2,64 +2,80 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Status;
-using static Define;
 
 namespace WeWillSurvive.Character
 {
-    public enum ECharacterType
+    public enum EMorale
     {
-        Lead,
-        Cook,
-        DrK,
-        Bell
+        VeryLow,
+        Low,
+        Normal,
+        High,
+        VeryHigh
     }
 
     public class CharacterBase
     {
-        // public CharacterData Data { get; private set; }
+        public CharacterData Data { get; private set; }
+        public CharacterState State { get; private set; }
         public CharacterStatus Status { get; private set; }
-        public List<ECharacterState> State { get; private set; }
-        public ECharacterMorale MoraleType { get; private set; }
         public string Name { get; private set; }
+        public EMorale Moreale { get; private set; }
+        public bool IsExploring { get; private set; }
         public bool IsDead { get; private set; }
 
-        public CharacterBase(ECharacterType type, ECharacterMorale moreale = ECharacterMorale.Normal)
+        public event Action<EState> OnStateChangedEvent;
+
+        public void Initialize(CharacterData data)
         {
+            Data = data;
+            State = new CharacterState();
             Status = new CharacterStatus(this);
-            Name = Enum.GetName(typeof(ECharacterType), type);
-            MoraleType = moreale;
+
+            Name = data.Name;
+            Moreale = EMorale.Normal;
+            IsExploring = false;
+            IsDead = false;
         }
 
-        public virtual void Initialize(CharacterData data, ECharacterMorale moreale = ECharacterMorale.Normal)
+        public void ResetData()
         {
-            //Data = data;
-            Status = new CharacterStatus(this);
-            MoraleType = moreale;
+            State.SetState(EState.Normal);
+            Status.ResetStatus();
+            Moreale = EMorale.Normal;
+            IsExploring = false;
+            IsDead = false;
         }
 
-        public virtual void OnDayPassed()
+        public void OnNewDay()
         {
             if (IsDead) return;
 
-            State.Clear();
+            State.SetState(EState.Normal);
 
-            Status.OnDayPassed();
+            Status.OnNewDay();
 
-            if (IsDead)
+            if (!IsExploring)
             {
-                AddState(ECharacterState.Dead);
-                return;
+                OnStateChangedEvent?.Invoke(State.CurrentState);
             }
         }
 
-        public void AddState(ECharacterState state) => State.Add(state);
+        public void SetMoreale(EMorale morale)
+        {
+            Debug.Log($"[{Name}] morale is {morale}");
+            Moreale = morale;
+        }
 
         public void OnDead()
         {
             if (IsDead) return;
 
-            Debug.Log($"[{Name}] is Dead");
+            Debug.Log($"[{Name}] is Daed!");
             IsDead = true;
+
+            State.SetState(EState.Dead);
+            OnStateChangedEvent?.Invoke(State.CurrentState);
         }
     }
 }

@@ -11,12 +11,17 @@ namespace WeWillSurvive.Status
         public CharacterStatus(CharacterBase owner)
         {
             _owner = owner;
-
-            AddStatus(new HungerStatus());
-            AddStatus(new ThirstStatus());
         }
 
-        public void OnDayPassed()
+        public void ResetStatus()
+        {
+            _statuses.Clear();
+
+            AddStatus(new HungerStatus(_owner.Data.MaxHunger));
+            AddStatus(new ThirstStatus(_owner.Data.MaxThirst));
+        }
+
+        public void OnNewDay()
         {
             foreach (var status in _statuses.Values)
             {
