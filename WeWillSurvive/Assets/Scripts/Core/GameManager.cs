@@ -13,8 +13,7 @@ namespace WeWillSurvive.Core
 
         private async void Start()
         {
-            ServiceLocator.AutoRegisterServices();
-
+            await ServiceLocator.AutoRegisterServices();
             await UIManager.Instance.InitializeAsync();
 
             if (SceneManager.GetActiveScene().name == "2D")
@@ -25,6 +24,7 @@ namespace WeWillSurvive.Core
             // Temp
             Day = 1;
         }
+
         #region Item
         float[] _itemCount = new float[(int)EItem.MaxCount];
 
@@ -92,7 +92,6 @@ namespace WeWillSurvive.Core
         {
             _itemCount[(int)type] += count;
         }
-
         #endregion
     }
 }

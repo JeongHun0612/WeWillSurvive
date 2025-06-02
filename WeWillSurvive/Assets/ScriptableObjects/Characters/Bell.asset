@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580d94716f0b81d4f852c346d5b5817d, type: 3}
+  m_Name: Bell
+  m_EditorClassIdentifier: 
+  <Type>k__BackingField: 3
+  <ItemType>k__BackingField: 102
+  <Name>k__BackingField: Bell
+  <MaxHunger>k__BackingField: 100
+  <MaxThirst>k__BackingField: 100
+  <MaxHealth>k__BackingField: 100
+  _normal: {fileID: 0}
+  _high: {fileID: 0}
+  _low: {fileID: 0}
+  _injured: {fileID: 0}
+  _scared: {fileID: 0}
+  _mad: {fileID: 0}
+  _injuredMad: {fileID: 0}
+  _injuredScared: {fileID: 0}
+  _scaredMad: {fileID: 0}
+  _injuredScaredMad: {fileID: 0}

@@ -30,6 +30,7 @@ public static class Define
         Sick,       // 병듦
         Anxiety,    // 불안함
         Panic,      // 공포
+        Mad,        // 미침
         Dead,       // 사망
         None        // 나감
     }

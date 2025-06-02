@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 
@@ -7,8 +8,9 @@ namespace WeWillSurvive.Core
     {
         private Dictionary<Type, List<Delegate>> _eventDictionary = new Dictionary<Type, List<Delegate>>();
 
-        public void Initialize()
+        public UniTask InitializeAsync()
         {
+            return UniTask.CompletedTask;
         }
 
         public void Subscribe<T>(Action<T> callback) where T : struct

@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -6,34 +6,40 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace WeWillSurvive.Core
 {
-    public class ResourceService : IService
+    public class ResourceManager : IService
     {
-        private Dictionary<string, GameObject> _loadedAssets = new Dictionary<string, GameObject>();
+        private Dictionary<string, Object> _loadedAssets = new Dictionary<string, Object>();
 
-        public void Initialize()
+        public UniTask InitializeAsync()
         {
+            return UniTask.CompletedTask;
         }
 
-        public async UniTask<GameObject> LoadAsset(string key)
+        public async UniTask<T> LoadAssetAsync<T>(string key = default) where T : Object
         {
-            if (_loadedAssets.ContainsKey(key))
+            if (string.IsNullOrEmpty(key))
             {
-                Debug.Log($"ÀÌ¹Ì ·ÎµåµÈ ¸®¼Ò½º: {key}");
-                return _loadedAssets[key];
+                key = typeof(T).Name;
             }
 
-            AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(key);
+            if (_loadedAssets.TryGetValue(key, out var chaced) && chaced is T typed)
+            {
+                Debug.Log($"ì´ë¯¸ ë¡œë“œëœ ë¦¬ì†ŒìŠ¤: {key}");
+                return typed;
+            }
+
+            AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(key);
             await handle.Task;
 
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 _loadedAssets[key] = handle.Result;
-                Debug.Log($"·Îµå ¼º°ø: {key}");
+                Debug.Log($"ë¡œë“œ ì„±ê³µ: {key}");
                 return handle.Result;
             }
             else
             {
-                Debug.LogError($"·Îµå ½ÇÆĞ: {key}");
+                Debug.LogError($"ë¡œë“œ ì‹¤íŒ¨: {key}");
             }
 
             return null;
@@ -45,7 +51,7 @@ namespace WeWillSurvive.Core
             {
                 Addressables.Release(_loadedAssets[key]);
                 _loadedAssets.Remove(key);
-                Debug.Log($"¾ğ·Îµå ¿Ï·á: {key}");
+                Debug.Log($"ì–¸ë¡œë“œ ì™„ë£Œ: {key}");
             }
         }
 
