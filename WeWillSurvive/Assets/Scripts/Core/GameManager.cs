@@ -25,9 +25,6 @@ namespace WeWillSurvive.Core
             Day = 1;
         }
 
-
-
-
         #region Item
         float[] _itemCount = new float[(int)EItem.MaxCount];
 
@@ -95,7 +92,6 @@ namespace WeWillSurvive.Core
         {
             _itemCount[(int)type] += count;
         }
-
         #endregion
     }
 }

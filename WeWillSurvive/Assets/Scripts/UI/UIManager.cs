@@ -32,8 +32,8 @@ namespace WeWillSurvive.UI
         private float _initializationProgress = 0f;
         public float InitializationProgress => _initializationProgress;
 
-        private ResourceService _resourceSerivce;
-        public ResourceService ResourceService => _resourceSerivce ??= ServiceLocator.Get<ResourceService>();
+        private ResourceManager _resourceManager;
+        public ResourceManager ResourceManager => _resourceManager ??= ServiceLocator.Get<ResourceManager>();
 
         public UI_Black BlackUI;
 
@@ -93,7 +93,7 @@ namespace WeWillSurvive.UI
             {
                 try
                 {
-                    var asset = await ResourceService.LoadAssetAsync<GameObject>(path);
+                    var asset = await ResourceManager.LoadAssetAsync<GameObject>(path);
                     asset.SetActive(false);
 
                     UI_Scene prefab = asset.GetComponent<UI_Scene>();
@@ -136,7 +136,7 @@ namespace WeWillSurvive.UI
             {
                 try
                 {
-                    var asset = await ResourceService.LoadAssetAsync<GameObject>(path);
+                    var asset = await ResourceManager.LoadAssetAsync<GameObject>(path);
                     asset.SetActive(false);
 
                     UI_Popup prefab = asset.GetComponent<UI_Popup>();
@@ -177,7 +177,7 @@ namespace WeWillSurvive.UI
 
             try
             {
-                var asset = await ResourceService.LoadAssetAsync<GameObject>("UI_Black");
+                var asset = await ResourceManager.LoadAssetAsync<GameObject>("UI_Black");
                 BlackUI = Instantiate(asset.GetComponent<UI_Black>(), transform);
                 await BlackUI.InitializeAsync();
             }

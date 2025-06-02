@@ -6,7 +6,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace WeWillSurvive.Core
 {
-    public class ResourceService : IService
+    public class ResourceManager : IService
     {
         private Dictionary<string, Object> _loadedAssets = new Dictionary<string, Object>();
 
@@ -15,8 +15,13 @@ namespace WeWillSurvive.Core
             return UniTask.CompletedTask;
         }
 
-        public async UniTask<T> LoadAssetAsync<T>(string key) where T : Object
+        public async UniTask<T> LoadAssetAsync<T>(string key = default) where T : Object
         {
+            if (string.IsNullOrEmpty(key))
+            {
+                key = typeof(T).Name;
+            }
+
             if (_loadedAssets.TryGetValue(key, out var chaced) && chaced is T typed)
             {
                 Debug.Log($"이미 로드된 리소스: {key}");
