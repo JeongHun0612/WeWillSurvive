@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using WeWillSurvive.Item;
-using static Define;
+using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Character
 {
@@ -8,7 +8,7 @@ namespace WeWillSurvive.Character
     public class CharacterData : ScriptableObject
     {
         [field: SerializeField] public ECharacter Type { get; private set; }
-        [field: SerializeField] public Item.EItem ItemType { get; private set; }
+        [field: SerializeField] public EItem ItemType { get; private set; }
         [field: SerializeField] public string Name { get; private set; }
 
         [Header("## Character Status")]
@@ -21,7 +21,7 @@ namespace WeWillSurvive.Character
         [SerializeField] private Sprite _high;
         [SerializeField] private Sprite _low;
 
-        [Header("## Status Sprites")]
+        [Header("## Status Sprites (Main)")]
         [Tooltip("다친 상태")]
         [SerializeField] private Sprite _injured;
         [Tooltip("공포 상태")]
@@ -37,11 +37,11 @@ namespace WeWillSurvive.Character
         [Tooltip("다침 + 공포 + 미침 상태")]
         [SerializeField] private Sprite _injuredScaredMad;
 
-        public Sprite GetSprite(ECharacterState state, ECharacterMorale morale)
+        public Sprite GetMainSprite(EState state, EMorale morale)
         {
-            var isHurt = ECharacterState.Hurt | ECharacterState.Sick;
-            var isAnxiety = ECharacterState.Anxiety | ECharacterState.Panic;
-            var isMad = ECharacterState.Mad;
+            var isHurt = EState.Injured | EState.Sick;
+            var isAnxiety = EState.Anxious | EState.Panic;
+            var isMad = EState.Mad;
 
             // 다침 + 공포 + 미침
             if ((state & isHurt) != 0 &&
@@ -75,11 +75,11 @@ namespace WeWillSurvive.Character
             // 사기 기반 표정
             return morale switch
             {
-                ECharacterMorale.VeryLow => _low,
-                ECharacterMorale.Low => _low,
-                ECharacterMorale.Normal => _normal,
-                ECharacterMorale.High => _high,
-                ECharacterMorale.VeryHigh => _high,
+                EMorale.VeryLow => _low,
+                EMorale.Low => _low,
+                EMorale.Normal => _normal,
+                EMorale.High => _high,
+                EMorale.VeryHigh => _high,
                 _ => null
             };
         }

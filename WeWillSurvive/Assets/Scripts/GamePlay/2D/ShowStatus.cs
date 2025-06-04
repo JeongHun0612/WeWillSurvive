@@ -5,6 +5,7 @@ using WeWillSurvive.Core;
 using WeWillSurvive.UI;
 using WeWillSurvive.Character;
 using static Define;
+using UnityEngine.UI;
 
 namespace WeWillSurvive
 {
@@ -23,7 +24,8 @@ namespace WeWillSurvive
             }
 
             // 클릭 가능 범위 Image와 맞추기
-            GetComponent<RectTransform>().sizeDelta = transform.Find("CharacterImage").GetComponent<RectTransform>().sizeDelta;
+            Image image = transform.Find("CharacterImage").GetComponent<Image>();
+            image.raycastPadding = image.sprite.border;
         }
 
         public void ShowStatusPanel()

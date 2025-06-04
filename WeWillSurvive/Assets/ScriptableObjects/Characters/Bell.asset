@@ -18,13 +18,13 @@ MonoBehaviour:
   <MaxHunger>k__BackingField: 100
   <MaxThirst>k__BackingField: 100
   <MaxHealth>k__BackingField: 100
-  _normal: {fileID: 0}
+  _normal: {fileID: 21300000, guid: 0c8bed76b026e274cbe91e90691d1077, type: 3}
   _high: {fileID: 0}
   _low: {fileID: 0}
-  _injured: {fileID: 0}
-  _scared: {fileID: 0}
-  _mad: {fileID: 0}
-  _injuredMad: {fileID: 0}
-  _injuredScared: {fileID: 0}
-  _scaredMad: {fileID: 0}
-  _injuredScaredMad: {fileID: 0}
+  _injured: {fileID: 21300000, guid: 5d4468178dea350488409dba50ec9d84, type: 3}
+  _scared: {fileID: 21300000, guid: cd19f4f0cf52bc84f89b6c4a26645c64, type: 3}
+  _mad: {fileID: 21300000, guid: fc167b0b0ade921428e3948c1582234d, type: 3}
+  _injuredMad: {fileID: 21300000, guid: 2ec926b31be1acf4c893c91bbb9c0a8e, type: 3}
+  _injuredScared: {fileID: 21300000, guid: a14bd32fe8eca5d4caccec9ed8f5adcf, type: 3}
+  _scaredMad: {fileID: 21300000, guid: 40d5cc0b8d4d7ba499023414be2b5f72, type: 3}
+  _injuredScaredMad: {fileID: 21300000, guid: 9eb4cd7826a260247b8c3e9a85765afb, type: 3}

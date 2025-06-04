@@ -60,14 +60,14 @@ namespace WeWillSurvive
             // 캐릭터 이미지 업데이트
             foreach (CharacterBase character in characterManager.GetAllCharacters())
             {
+                Transform t = transform.Find($"Characters/{character.Name}");
+                if (t == null || !t.gameObject.activeSelf) continue;
+
                 // 우주 기지 내 존재하지 않으면 캐릭터 비활성화
                 if (character.State.HasState(EState.Exploring))
-                {
-                    Transform t = transform.Find($"Characters/{character.Name}");
-                    if (t != null)
-                        t.gameObject.SetActive(false);
-                }
-                // TODO: 상태에 따라 스프라이트 변경
+                    t.gameObject.SetActive(false);
+                else
+                    t.GetChild(0).GetComponent<Image>().sprite = character.MainSprite;
             }
 
             // TODO: 아이템 배치
