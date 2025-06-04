@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.UI;
+using WeWillSurvive.Item;
 using static Define;
 
 namespace WeWillSurvive
@@ -70,7 +71,7 @@ namespace WeWillSurvive
             }
 
             // TODO: 아이템 배치
-            float cnt = GameManager.Instance.GetItemCount(EItem.Water);
+            float cnt = ServiceLocator.Get<ItemManager>().GetItemCount(EItem.Water);
             // 물 개수 만큼 배치
         }
     }

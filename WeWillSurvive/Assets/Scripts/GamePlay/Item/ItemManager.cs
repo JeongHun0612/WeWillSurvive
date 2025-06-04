@@ -14,13 +14,15 @@ namespace WeWillSurvive.Item
         Water,
         MedicKit,
         SuperMedicKit,
+        RepairKit,
+        SuperRepairKit,
         NiceSpacesuit,
         Radio,
         LaserGun,
         BoardGame,
 
         // Character
-        Laed = 100,
+        Lead = 100,
         Cook,
         Bell,
         DrK,
@@ -47,7 +49,7 @@ namespace WeWillSurvive.Item
             } 
 
             // Temp
-            AddItem(EItem.Laed);
+            AddItem(EItem.Lead);
             AddItem(EItem.Cook);
             AddItem(EItem.DrK);
             AddItem(EItem.Bell);
