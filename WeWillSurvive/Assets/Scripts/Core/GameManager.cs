@@ -58,14 +58,19 @@ namespace WeWillSurvive.Core
             ServiceLocator.Get<CharacterManager>().UpdateCharacterStatus();
 
             // Temp
-            ECharacter exploreCharacter = ECharacter.Lead;
-            ServiceLocator.Get<CharacterManager>().GetCharacter(exploreCharacter).State.AddState(EState.Exploring);
+            string explorerName = "없음";
+            if (Day == 2)
+            {
+                ECharacter exploreCharacter = ECharacter.Lead;
+                ServiceLocator.Get<CharacterManager>().GetCharacter(exploreCharacter).State.AddState(EState.Exploring);
+                explorerName = Enum.GetName(typeof(ECharacter), exploreCharacter);
+            }
 
             // 3. 이벤트?
             // 이벤트 별로 함수 만들어서 호출
 
             // Day + 1
-            Debug.Log($"[Day {Day}]\n사용한 아이템: {s} / 나간 사람: {Enum.GetName(typeof(ECharacter), exploreCharacter)}");
+            Debug.Log($"[Day {Day}]\n사용한 아이템: {s} / 나간 사람: {Enum.GetName(typeof(ECharacter), explorerName)}");
             Day += 1;
         }
     }
