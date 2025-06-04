@@ -21,17 +21,21 @@ namespace WeWillSurvive.Character
         Dead = 1 << 10,         // 사망
     }
 
-    public class CharacterState : MonoBehaviour
+    public class CharacterState
     {
         public EState CurrentState { get; private set; }
 
         public void SetState(EState state)
         {
+            if (CurrentState == EState.Dead) return;
+
             CurrentState = state;
         }
 
         public void AddState(EState status)
         {
+            if (CurrentState == EState.Dead) return;
+
             CurrentState |= status;
         }
 
@@ -45,10 +49,10 @@ namespace WeWillSurvive.Character
             return CurrentState.HasFlag(status);
         }
 
-        public string FormatStateString()
+        public List<string> FormatStateString()
         {
             if (CurrentState == EState.Normal)
-                return GetStateText(CurrentState);
+                return new List<string>() { GetStateText(CurrentState) };
 
             var descriptions = new List<string>();
 
@@ -59,7 +63,7 @@ namespace WeWillSurvive.Character
                 descriptions.Add(GetStateText(state));
             }
 
-            return string.Join("\n", descriptions);
+            return descriptions;
         }
 
         private string GetStateText(EState state)

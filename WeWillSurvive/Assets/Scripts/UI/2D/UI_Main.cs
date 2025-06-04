@@ -1,10 +1,11 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.UI;
 using static Define;
@@ -17,7 +18,7 @@ namespace WeWillSurvive
         [SerializeField] private Button _nextDayButton;
         [SerializeField] private TextMeshProUGUI _dayText;
 
-        // TODO: »ç±â + »óÅÂº°·Î ÇÃ·¹ÀÌ¾î ÀÌ¹ÌÁö ¹è¿­¿¡ ³Ö¾î¼­ ÀúÀå
+        // TODO: ì‚¬ê¸° + ìƒíƒœë³„ë¡œ í”Œë ˆì´ì–´ ì´ë¯¸ì§€ ë°°ì—´ì— ë„£ì–´ì„œ ì €ì¥
         // _characterImages[ECharacter.MaxCount][6? 7?]
 
         UI_Background ui;
@@ -29,7 +30,7 @@ namespace WeWillSurvive
             ui = UIManager.Instance.GetCurrentScene<UI_Background>();
             if (ui == null)
             {
-                Debug.LogError($"[{name}] 2D Scene¿¡¼­ ¿­¸®Áö ¾Ê¾ÒÀ½");
+                Debug.LogError($"[{name}] 2D Sceneì—ì„œ ì—´ë¦¬ì§€ ì•Šì•˜ìŒ");
                 return;
             }
 
@@ -37,97 +38,40 @@ namespace WeWillSurvive
             _roomMonitorButton.onClick.AddListener(() => UIManager.Instance.ShowPopup<UI_RoomMonitor>());
 
             // Next Day
-            _nextDayButton.onClick.AddListener(() => UIManager.Instance.BlackUI.FadeIO(() => NextDay()));
-
-            UpdateUI();
-        }
-
-        private void NextDay()
-        {
-            // ºö ÇÁ·ÎÁ§ÅÍ¿¡¼­ ¹ŞÀ» Á¤º¸
-            // 1. »ç¿ëÇÑ ¾ÆÀÌÅÛ
-            // Key¿¡°Ô Value¸¸Å­ »ç¿ë (»ç¿ë ´ë»óÀ» Æ¯Á¤ÇÏ´Â ¾ÆÀÌÅÛÀÌ ¾Æ´Ï¸é ¾Æ¹«°Å³ª ³ÖÀ¸¸é µÊ)
-            Dictionary<ECharacter, float>[] UseItems = new Dictionary<ECharacter, float>[(int)EItem.MaxCount];
-            for (int i = 0; i < (int)EItem.MaxCount; i++)
-                UseItems[i] = new Dictionary<ECharacter, float>();
-
-
-            // ³²Àº ¾ÆÀÌÅÛ °³¼ö È®ÀÎ
-            for (int i = 0; i < (int)EItem.MaxCount; i++)
+            _nextDayButton.onClick.AddListener(() => UIManager.Instance.BlackUI.FadeIO(() =>
             {
-                float useCount = 0;
-                foreach (float cnt in UseItems[i].Values) useCount += cnt;
-                if (useCount == 0) continue;
-
-                float remainCount = GameManager.Instance.GetItemCount((EItem)i);
-                if (remainCount < useCount)
-                {
-                    Debug.LogError("³²Àº ¾ÆÀÌÅÛº¸´Ù »ç¿ëÇÑ ¾ÆÀÌÅÛÀÌ ¸¹À½ - UI Ç¥±â ¿À·ù");
-                    return;
-                }
-            }
-
-            // ¾ÆÀÌÅÛ »ç¿ë
-            string s = "";
-            for (int i = 0; i < (int)EItem.MaxCount; i++)
-            {
-                float useCount = 0;
-                foreach (KeyValuePair<ECharacter, float> useItem in UseItems[i])
-                {
-                    GameManager.Instance.UseItem((EItem)i, useItem.Key, useItem.Value);
-                    useCount += useItem.Value;
-                }
-
-                // Debug
-                if (useCount > 0)
-                    s += $"{Enum.GetName(typeof(EItem), i)} {useCount}°³, ";
-            }
-            if (s == "") s = "¾øÀ½";
-            Debug.Log($"[Day {GameManager.Instance.Day}] »ç¿ëÇÑ ¾ÆÀÌÅÛ: " + s);
-
-            // 2. Å½»ç º¸³¾ Ä³¸¯ÅÍ (¿©·¯ ¸í º¸³»´Â °æ¿ì ÀÖÀ¸¸é ¼öÁ¤)
-            ECharacter exploreCharacter = ECharacter.MaxCount;
-            if (exploreCharacter != ECharacter.MaxCount)
-            {
-                CharacterManager.Instance.CharacterInfos[(int)exploreCharacter].SetState(ECharacterState.None);
-            }
-
-            // 3. ÀÌº¥Æ®?
-            // ÀÌº¥Æ® º°·Î ÇÔ¼ö ¸¸µé¾î¼­ È£Ãâ
-
-            // Day + 1
-            GameManager.Instance.Day += 1;
+                GameManager.Instance.NewDay();
+                UpdateUI();
+            }));
 
             UpdateUI();
         }
 
         private void UpdateUI()
         {
-            // Popup UI ÃÊ±âÈ­
+            // Popup UI ì´ˆê¸°í™”
             UIManager.Instance.ClosePopups(remain: 1);
 
             _dayText.text = "Day " + GameManager.Instance.Day;
 
-            // Ä³¸¯ÅÍ Á¤º¸ ¾÷µ¥ÀÌÆ®
-            CharacterManager.Instance.UpdateCharacterInfos();
+            CharacterManager characterManager = ServiceLocator.Get<CharacterManager>();
 
-            // Ä³¸¯ÅÍ ÀÌ¹ÌÁö ¾÷µ¥ÀÌÆ®
-            CharacterInfo[] infos = CharacterManager.Instance.CharacterInfos;
-            foreach (CharacterInfo info in infos)
+            // ìºë¦­í„° ì´ë¯¸ì§€ ì—…ë°ì´íŠ¸
+            foreach (CharacterBase character in characterManager.GetAllCharacters())
             {
-                // ¿ìÁÖ ±âÁö ³» Á¸ÀçÇÏÁö ¾ÊÀ¸¸é Ä³¸¯ÅÍ ºñÈ°¼ºÈ­
-                if (info.State[0] == ECharacterState.None)
+                // ìš°ì£¼ ê¸°ì§€ ë‚´ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ ìºë¦­í„° ë¹„í™œì„±í™”
+                if (character.State.HasState(EState.Exploring))
                 {
-                    Transform t = transform.Find($"Characters/{info.Name}");
+                    Transform t = transform.Find($"Characters/{character.Name}");
                     if (t != null)
                         t.gameObject.SetActive(false);
                 }
-                // TODO: »óÅÂ¿¡ µû¶ó ½ºÇÁ¶óÀÌÆ® º¯°æ
+                // TODO: ìƒíƒœì— ë”°ë¼ ìŠ¤í”„ë¼ì´íŠ¸ ë³€ê²½
             }
 
-            // TODO: ¾ÆÀÌÅÛ ¹èÄ¡
+            // TODO: ì•„ì´í…œ ë°°ì¹˜
             float cnt = GameManager.Instance.GetItemCount(EItem.Water);
-            // ¹° °³¼ö ¸¸Å­ ¹èÄ¡
+            // ë¬¼ ê°œìˆ˜ ë§Œí¼ ë°°ì¹˜
         }
     }
 }

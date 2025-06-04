@@ -20,7 +20,7 @@ namespace WeWillSurvive.Character
         public CharacterState State { get; private set; }
         public CharacterStatus Status { get; private set; }
         public string Name { get; private set; }
-        public EMorale Moreale { get; private set; }
+        public EMorale Morale { get; private set; }
         public bool IsExploring { get; private set; }
         public bool IsDead { get; private set; }
 
@@ -33,7 +33,7 @@ namespace WeWillSurvive.Character
             Status = new CharacterStatus(this);
 
             Name = data.Name;
-            Moreale = EMorale.Normal;
+            Morale = EMorale.Normal;
             IsExploring = false;
             IsDead = false;
         }
@@ -42,7 +42,7 @@ namespace WeWillSurvive.Character
         {
             State.SetState(EState.Normal);
             Status.ResetStatus();
-            Moreale = EMorale.Normal;
+            Morale = EMorale.Normal;
             IsExploring = false;
             IsDead = false;
         }
@@ -61,17 +61,17 @@ namespace WeWillSurvive.Character
             }
         }
 
-        public void SetMoreale(EMorale morale)
+        public void SetMorale(EMorale morale)
         {
             Debug.Log($"[{Name}] morale is {morale}");
-            Moreale = morale;
+            Morale = morale;
         }
 
         public void OnDead()
         {
             if (IsDead) return;
 
-            Debug.Log($"[{Name}] is Daed!");
+            Debug.Log($"[{Name}] is Dead!");
             IsDead = true;
 
             State.SetState(EState.Dead);

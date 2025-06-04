@@ -1,63 +1,52 @@
-using System;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+ï»¿using UnityEngine;
+using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.UI;
-using static Define;
 
 namespace WeWillSurvive
 {
     public class UI_Room : UI_Popup
     {
-        // TODO: »ç±â + »óÅÂº°·Î °ÔÀÓ ¿ÀºêÁ§Æ® ¸¸µé¾î¼­ ¹è¿­¿¡ ÀúÀå
+        // TODO: ì‚¬ê¸° + ìƒíƒœë³„ë¡œ ê²Œì„ ì˜¤ë¸Œì íŠ¸ ë§Œë“¤ì–´ì„œ ë°°ì—´ì— ì €ì¥
         [SerializeField] GameObject[] _characters;
 
-        UI_Background ui;
-        CharacterInfo _characterInfo = null;
-        int _owner = -1;
+        UI_Background _ui;
 
         public override void Initialize()
         {
             base.Initialize();
 
-            ui =  UIManager.Instance.GetCurrentScene<UI_Background>();
-            if (ui == null)
+            _ui =  UIManager.Instance.GetCurrentScene<UI_Background>();
+            if (_ui == null)
             {
-                Debug.LogError($"[{name}] 2D Scene¿¡¼­ ¿­¸®Áö ¾Ê¾ÒÀ½");
+                Debug.LogError($"[{name}] 2D Sceneì—ì„œ ì—´ë¦¬ì§€ ì•Šì•˜ìŒ");
                 return;
             }
         }
 
-        // ¹æ ¼¼ÆÃ
-        public void SetupRoomUI(ECharacter owner = ECharacter.MaxCount)
+        // ë°© ì„¸íŒ…
+        public void SetupRoomUI(ECharacter owner)
         {
             foreach (var c in _characters)
                 c.SetActive(false);
 
-            if (_characterInfo == null && owner != ECharacter.MaxCount)
-            {
-                _owner = (int)owner;
-                _characterInfo = CharacterManager.Instance.CharacterInfos[_owner];
-            }
+            CharacterBase characterInfo = ServiceLocator.Get<CharacterManager>().GetCharacter(owner);
 
             GameObject character = _characters[(int)owner];
             character.SetActive(true);
 
-            if (_characterInfo == null || character == null)
+            if (characterInfo == null || character == null)
             {
-                Debug.LogError($"[{gameObject.name}] Character Ã£À» ¼ö ¾øÀ½");
+                Debug.LogError($"[{gameObject.name}] Character ì°¾ì„ ìˆ˜ ì—†ìŒ");
                 return;
             }
 
-            List<ECharacterState> state = _characterInfo.State;
-            // ¿ìÁÖ ±âÁö ³» Á¸ÀçÇÏÁö ¾Ê°Å³ª Á×Àº °æ¿ì
-            if (state[0] == ECharacterState.None || state[0] == ECharacterState.Dead)
+            // ìš°ì£¼ ê¸°ì§€ ë‚´ ì¡´ì¬í•˜ì§€ ì•Šê±°ë‚˜ ì£½ì€ ê²½ìš°
+            if (characterInfo.State.HasState(EState.Exploring) || characterInfo.State.HasState(EState.Dead))
             {
-                // TODO: ºö ÇÁ·ÎÁ§ÅÍ ºñÈ°¼ºÈ­
+                // TODO: ë¹” í”„ë¡œì í„° ë¹„í™œì„±í™”
 
-                // Ä³¸¯ÅÍ ºñÈ°¼ºÈ­
+                // ìºë¦­í„° ë¹„í™œì„±í™”
                 character.SetActive(false);
             }
         }

@@ -1,32 +1,28 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 using WeWillSurvive.Core;
 using WeWillSurvive.UI;
+using WeWillSurvive.Character;
 using static Define;
 
 namespace WeWillSurvive
 {
     public class ShowStatus : MonoBehaviour
     {
-        [SerializeField] private ECharacter _characterType = ECharacter.MaxCount;
+        [SerializeField] private ECharacter _characterType;
         [SerializeField] private Vector2 _statusPanelPosition = Vector2.zero;
 
         private void Awake()
         {
-            // ÀÌ¸§ Á¦´ë·Î ¼³Á¤µÅÀÖÀ¸¸é ParseÇØ¼­ »ç¿ë
-            ECharacter type;
-            if (Enum.TryParse(gameObject.name, true, out type))
-                _characterType = type;
-
-            // ÀÌ¸§ + enum ¸ğµÎ Àß¸øµÇ¾îÀÖÀ¸¸é ¿À·ù
-            if (_characterType == ECharacter.MaxCount)
+            // ì´ë¦„ ì œëŒ€ë¡œ ì„¤ì •ë¼ìˆìœ¼ë©´ Parseí•´ì„œ ì‚¬ìš©
+            if (!Enum.TryParse(gameObject.name, true, out _characterType))
             {
-                Debug.LogError($"[{gameObject.name}] Àß¸øµÈ ÀÌ¸§");
+                Debug.LogError($"[{gameObject.name}] ì˜ëª»ëœ ì´ë¦„");
                 return;
             }
 
-            // Å¬¸¯ °¡´É ¹üÀ§ Image¿Í ¸ÂÃß±â
+            // í´ë¦­ ê°€ëŠ¥ ë²”ìœ„ Imageì™€ ë§ì¶”ê¸°
             GetComponent<RectTransform>().sizeDelta = transform.Find("CharacterImage").GetComponent<RectTransform>().sizeDelta;
         }
 

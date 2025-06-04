@@ -1,16 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public static class Define
 {
-    public enum ECharacter
-    {
-        Lead,
-        Cook,
-        DrK,
-        Bell,
-        MaxCount
-    }
-
     public enum ECharacterStatus
     {
         Hunger,
@@ -21,27 +12,27 @@ public static class Define
 
     public enum ECharacterState
     {
-        Normal,     // Á¤»ó
-        Hungry,     // Çã±âÁü
-        Starve,     // ¿µ¾ç °áÇÌ (±¾À½)
-        Thirsty,    // °¥Áõ
-        Dehydrate,  // ¼öºĞ °í°¥ (Å»¼ö)
-        Hurt,       // ´ÙÄ§
-        Sick,       // º´µê
-        Anxiety,    // ºÒ¾ÈÇÔ
-        Panic,      // °øÆ÷
-        Mad,        // ¹ÌÄ§
-        Dead,       // »ç¸Á
-        None        // ³ª°¨
+        Normal,     // ì •ìƒ
+        Hungry,     // í—ˆê¸°ì§
+        Starve,     // ì˜ì–‘ ê²°í• (êµ¶ìŒ)
+        Thirsty,    // ê°ˆì¦
+        Dehydrate,  // ìˆ˜ë¶„ ê³ ê°ˆ (íƒˆìˆ˜)
+        Hurt,       // ë‹¤ì¹¨
+        Sick,       // ë³‘ë“¦
+        Anxiety,    // ë¶ˆì•ˆí•¨
+        Panic,      // ê³µí¬
+        Mad,        // ë¯¸ì¹¨
+        Dead,       // ì‚¬ë§
+        None        // ë‚˜ê°
     }
 
     public enum ECharacterMorale
     {
-        VeryLow,     // ¸Å¿ì ³·À½
+        VeryLow,     // ë§¤ìš° ë‚®ìŒ
         Low,
         Normal,
         High,
-        VeryHigh     // ¸Å¿ì ³ôÀ½
+        VeryHigh     // ë§¤ìš° ë†’ìŒ
     }
 
     public enum ERoom
@@ -57,13 +48,13 @@ public static class Define
     public enum EItem
     {
         Food,
-        SpecialFood,    // Æ¯º°½Ç
+        SpecialFood,    // íŠ¹ë³„ì‹¤
         Water,
         MedicKit,
-        SuperMedicKit,  // ÀÇ·á ¸¸´É Å°Æ®
-        NiceSpacesuit,  // °í±Ş ¿ìÁÖº¹
-        Radio,          // ¿¹ºñ Åë½Å Àåºñ
-        LaserGun,       // ÃÑ
+        SuperMedicKit,  // ì˜ë£Œ ë§ŒëŠ¥ í‚¤íŠ¸
+        NiceSpacesuit,  // ê³ ê¸‰ ìš°ì£¼ë³µ
+        Radio,          // ì˜ˆë¹„ í†µì‹  ì¥ë¹„
+        LaserGun,       // ì´
         BoardGame,
         MaxCount
     }

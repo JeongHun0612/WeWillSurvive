@@ -1,5 +1,8 @@
+ï»¿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.UI;
 using static Define;
@@ -22,31 +25,28 @@ namespace WeWillSurvive
             ui = UIManager.Instance.GetCurrentScene<UI_Background>();
             if (ui == null)
             {
-                Debug.LogError($"[{name}] 2D Scene¿¡¼­ ¿­¸®Áö ¾Ê¾ÒÀ½");
+                Debug.LogError($"[{name}] 2D Sceneì—ì„œ ì—´ë¦¬ì§€ ì•Šì•˜ìŒ");
                 return;
             }
 
-            // ¿ìÁÖ ±âÁö ³» Á¸ÀçÇÏÁö ¾Ê°Å³ª Á×À¸¸é ¹æ ºÒ ²¨Áü + Å¬¸¯ ¸øÇÔ
-            CharacterInfo[] infos = CharacterManager.Instance.CharacterInfos;
-            if (infos[(int)ECharacter.Lead].State[0] == ECharacterState.None || infos[(int)ECharacter.Lead].State[0] == ECharacterState.Dead)
-                _leadButton.GetComponent<Image>().color = new Color32(100, 100, 100, 255);
-            else
-                _leadButton.onClick.AddListener(() => ui.ChangeBackground(ERoom.Lead));
+            Button[] buttons = new Button[4];
+            buttons[(int)ECharacter.Lead] = _leadButton;
+            buttons[(int)ECharacter.Cook] = _cookButton;
+            buttons[(int)ECharacter.Bell] = _bellButton;
+            buttons[(int)ECharacter.DrK] = _drKButton;
 
-            if (infos[(int)ECharacter.Cook].State[0] == ECharacterState.None || infos[(int)ECharacter.Cook].State[0] == ECharacterState.Dead)
-                _cookButton.GetComponent<Image>().color = new Color32(100, 100, 100, 255);
-            else
-                _cookButton.onClick.AddListener(() => ui.ChangeBackground(ERoom.Cook));
-
-            if (infos[(int)ECharacter.DrK].State[0] == ECharacterState.None || infos[(int)ECharacter.DrK].State[0] == ECharacterState.Dead)
-                _drKButton.GetComponent<Image>().color = new Color32(100, 100, 100, 255);
-            else
-                _drKButton.onClick.AddListener(() => ui.ChangeBackground(ERoom.DrK));
-
-            if (infos[(int)ECharacter.Bell].State[0] == ECharacterState.None || infos[(int)ECharacter.Bell].State[0] == ECharacterState.Dead)
-                _bellButton.GetComponent<Image>().color = new Color32(100, 100, 100, 255);
-            else
-                _bellButton.onClick.AddListener(() => ui.ChangeBackground(ERoom.Bell));
+            // ìš°ì£¼ ê¸°ì§€ ë‚´ ì¡´ì¬í•˜ì§€ ì•Šê±°ë‚˜ ì£½ìœ¼ë©´ ë°© ë¶ˆ êº¼ì§ + í´ë¦­ ëª»í•¨
+            foreach (CharacterBase character in ServiceLocator.Get<CharacterManager>().GetAllCharacters())
+            {
+                if (character.State.HasState(EState.Exploring) || character.State.HasState(EState.Dead))
+                    buttons[(int)character.Data.Type].GetComponent<Image>().color = new Color32(100, 100, 100, 255);
+                else
+                {
+                    string roomName = Enum.GetName(typeof(ECharacter), character.Data.Type);
+                    Enum.TryParse(roomName, out ERoom room);
+                    buttons[(int)character.Data.Type].onClick.AddListener(() => ui.ChangeBackground(room));
+                }
+            }
         }
     }
 }

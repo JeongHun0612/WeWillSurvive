@@ -11,6 +11,8 @@ namespace WeWillSurvive.Status
         public CharacterStatus(CharacterBase owner)
         {
             _owner = owner;
+
+            ResetStatus();
         }
 
         public void ResetStatus()

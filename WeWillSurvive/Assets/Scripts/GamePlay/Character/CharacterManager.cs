@@ -13,7 +13,7 @@ namespace WeWillSurvive.Character
         Lead,
         Cook,
         DrK,
-        Bell,
+        Bell
     }
 
     public class CharacterManager : IService
@@ -79,7 +79,7 @@ namespace WeWillSurvive.Character
                 {
                     if (character.IsDead) continue;
 
-                    character.SetMoreale(morale);
+                    character.SetMorale(morale);
                 }
             }
             else
@@ -96,6 +96,9 @@ namespace WeWillSurvive.Character
 
                 character.OnNewDay();
             }
+
+            // Test
+            //GetCharacter(ECharacter.Bell).State.SetState(EState.Exploring);
         }
 
         public int AliveCharacterCount()

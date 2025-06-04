@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
 using WeWillSurvive.UI;
+using WeWillSurvive.Character;
 using static Define;
 
 namespace WeWillSurvive
@@ -29,7 +30,7 @@ namespace WeWillSurvive
             base.Initialize();
             SetBackground(ERoom.Main);
 
-            // ¹è°æ Å¬¸¯ÇÏ¸é Popup UI ´İÀ½ (UI_Main/UI_RoomÀº ³²°Ü³õÀ½)
+            // ë°°ê²½ í´ë¦­í•˜ë©´ Popup UI ë‹«ìŒ (UI_Main/UI_Roomì€ ë‚¨ê²¨ë†“ìŒ)
             _backgroundImage.GetComponent<Button>().onClick.AddListener(() => UIManager.Instance.ClosePopups(remain: 1));
             _leftButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx - 1)));
             _rightButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx + 1)));
@@ -37,7 +38,7 @@ namespace WeWillSurvive
 
         public void ChangeBackground(ERoom roomName)
         {
-            // º¯°æ ÁßÀÌ¸é Ãë¼Ò
+            // ë³€ê²½ ì¤‘ì´ë©´ ì·¨ì†Œ
             if (_changingBackground)
                 return;
 
@@ -55,28 +56,28 @@ namespace WeWillSurvive
 
         private void SetBackground(ERoom roomName)
         {
-            // ¹è°æ ÀÌ¹ÌÁö º¯°æ
+            // ë°°ê²½ ì´ë¯¸ì§€ ë³€ê²½
             _currentRoomIdx = (int)roomName;
             _backgroundImage.sprite = _backgroundSprites[_currentRoomIdx];
 
-            // ¹öÆ° Á¶°Ç Ã¼Å©
+            // ë²„íŠ¼ ì¡°ê±´ ì²´í¬
             _leftButton.interactable = _currentRoomIdx > 0;
             _rightButton.interactable = _currentRoomIdx < (int)ERoom.MaxCount - 1;
 
-            // Popup UI ÃÊ±âÈ­
+            // Popup UI ì´ˆê¸°í™”
             UIManager.Instance.CloseAllPopups();
 
-            if (roomName == ERoom.Main)     // ¸ŞÀÎ ·ÎºñÀÎ °æ¿ì
+            if (roomName == ERoom.Main)     // ë©”ì¸ ë¡œë¹„ì¸ ê²½ìš°
             {
-                // ¹æ ºÒ Ç×»ó ÄÑÁü
+                // ë°© ë¶ˆ í•­ìƒ ì¼œì§
                 _lightOffImage.enabled = false;
 
                 // Popup UI
                 UIManager.Instance.ShowPopup<UI_Main>();
             }
-            else                            // ¸ŞÀÎ ·Îºñ ¾Æ´Ñ °æ¿ì
+            else                            // ë©”ì¸ ë¡œë¹„ ì•„ë‹Œ ê²½ìš°
             {
-                ECharacter player = ECharacter.MaxCount;
+                ECharacter player;
                 switch (roomName)
                 {
                     case ERoom.Lead:
@@ -87,11 +88,13 @@ namespace WeWillSurvive
                         player = ECharacter.DrK; break;
                     case ERoom.Bell:
                         player = ECharacter.Bell; break;
+                    default:
+                        return;
                 }
 
-                // ¿ìÁÖ ±âÁö ³» Á¸ÀçÇÏÁö ¾Ê°Å³ª Á×À¸¸é ¹æ ºÒ ²¨Áü
-                List<ECharacterState> state = CharacterManager.Instance.CharacterInfos[(int)player].State;
-                _lightOffImage.enabled = state[0] == ECharacterState.None || state[0] == ECharacterState.Dead;
+                // ìš°ì£¼ ê¸°ì§€ ë‚´ ì¡´ì¬í•˜ì§€ ì•Šê±°ë‚˜ ì£½ìœ¼ë©´ ë°© ë¶ˆ êº¼ì§
+                CharacterState state = ServiceLocator.Get<CharacterManager>().GetCharacter(player)?.State;
+                _lightOffImage.enabled = state.HasState(EState.Exploring) || state.HasState(EState.Dead);
 
                 // Popup UI
                 string name = Enum.GetName(typeof(ECharacter), player);

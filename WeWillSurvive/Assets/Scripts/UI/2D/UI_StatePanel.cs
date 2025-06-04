@@ -1,7 +1,10 @@
 using System;
 using TMPro;
 using WeWillSurvive.UI;
+using WeWillSurvive.Character;
 using UnityEngine;
+using WeWillSurvive.Core;
+using System.Collections.Generic;
 
 namespace WeWillSurvive
 {
@@ -14,16 +17,13 @@ namespace WeWillSurvive
             base.Initialize();
         }
 
-        public void SetPanel(Define.ECharacter owner)
+        public void SetPanel(ECharacter owner)
         {
-            CharacterInfo info = CharacterManager.Instance.CharacterInfos[(int)owner];
+            List<string> descriptions = ServiceLocator.Get<CharacterManager>().GetCharacter(owner)?.State.FormatStateString();
 
             int idx = 0;
-            foreach (Define.ECharacterState state in info.State)
-            {
-                _state.GetChild(idx++).GetComponent<TextMeshProUGUI>().text
-                    = Enum.GetName(typeof(Define.ECharacterState), state);
-            }
+            foreach (string description in descriptions)
+                _state.GetChild(idx++).GetComponent<TextMeshProUGUI>().text = description;
         }
     }
 }
