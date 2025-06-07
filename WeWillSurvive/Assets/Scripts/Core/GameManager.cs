@@ -14,6 +14,9 @@ namespace WeWillSurvive.Core
     {
         public int Day;
 
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+
         private async void Start()
         {
             await ServiceLocator.AutoRegisterServices();
@@ -42,8 +45,8 @@ namespace WeWillSurvive.Core
                 float usedCount = 0;
                 foreach (KeyValuePair<ECharacter, float> usedCharacter in usedItem.Value)
                 {
-                    CharacterBase character = ServiceLocator.Get<CharacterManager>().GetCharacter(usedCharacter.Key);
-                    ServiceLocator.Get<ItemManager>().UsedItem(character, usedItem.Key, usedCharacter.Value);
+                    CharacterBase character = CharacterManager.GetCharacter(usedCharacter.Key);
+                    ItemManager.UsedItem(character, usedItem.Key, usedCharacter.Value);
                     usedCount += usedCharacter.Value;
                 }
 
@@ -55,14 +58,14 @@ namespace WeWillSurvive.Core
 
             // 2. 탐사 보낼 캐릭터 (여러 명 보내는 경우 있으면 수정)
             // 캐릭터 정보 업데이트
-            ServiceLocator.Get<CharacterManager>().UpdateCharacterStatus();
+            CharacterManager.UpdateCharacterStatus();
 
             // Temp
             string explorerName = "없음";
             if (Day == 2)
             {
                 ECharacter exploreCharacter = ECharacter.Lead;
-                ServiceLocator.Get<CharacterManager>().GetCharacter(exploreCharacter).State.AddState(EState.Exploring);
+                CharacterManager.GetCharacter(exploreCharacter).State.AddState(EState.Exploring);
                 explorerName = Enum.GetName(typeof(ECharacter), exploreCharacter);
             }
 
