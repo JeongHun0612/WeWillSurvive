@@ -141,7 +141,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bell
+      name: Dr.K
       rect:
         serializedVersion: 2
         x: 868
@@ -163,7 +163,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dr.K
+      name: Bell
       rect:
         serializedVersion: 2
         x: 1223
@@ -198,10 +198,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bell: -363976681
+      Bell: 1586804176
       Characters_0: 461703438
       Cook: -1914594826
-      Dr.K: 1586804176
+      Dr.K: -363976681
       Lead: 1945599776
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

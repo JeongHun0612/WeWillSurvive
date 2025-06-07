@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
@@ -16,35 +17,48 @@ namespace WeWillSurvive
         [SerializeField] Button _bellButton;
         [SerializeField] Button _drKButton;
 
-        UI_Background ui;
+        private UI_Background _ui;
+        private Button[] _buttons = new Button[4];
 
         public override void Initialize()
         {
             base.Initialize();
 
-            ui = UIManager.Instance.GetCurrentScene<UI_Background>();
-            if (ui == null)
+            _ui = UIManager.Instance.GetCurrentScene<UI_Background>();
+            if (_ui == null)
             {
                 Debug.LogError($"[{name}] 2D Scene에서 열리지 않았음");
                 return;
             }
 
-            Button[] buttons = new Button[4];
-            buttons[(int)ECharacter.Lead] = _leadButton;
-            buttons[(int)ECharacter.Cook] = _cookButton;
-            buttons[(int)ECharacter.Bell] = _bellButton;
-            buttons[(int)ECharacter.DrK] = _drKButton;
+            _buttons[(int)ECharacter.Lead] = _leadButton;
+            _buttons[(int)ECharacter.Cook] = _cookButton;
+            _buttons[(int)ECharacter.Bell] = _bellButton;
+            _buttons[(int)ECharacter.DrK] = _drKButton;
+
+            foreach (CharacterBase character in ServiceLocator.Get<CharacterManager>().GetAllCharacters())
+            {
+                string roomName = Enum.GetName(typeof(ECharacter), character.Data.Type);
+                Enum.TryParse(roomName, out ERoom room);
+                _buttons[(int)character.Data.Type].onClick.AddListener(() => _ui.ChangeBackground(room));
+            }
+        }
+
+        public override void OnShow()
+        {
+            base.OnShow();
 
             // 우주 기지 내 존재하지 않거나 죽으면 방 불 꺼짐 + 클릭 못함
             foreach (CharacterBase character in ServiceLocator.Get<CharacterManager>().GetAllCharacters())
             {
                 if (character.State.HasState(EState.Exploring) || character.State.HasState(EState.Dead))
-                    buttons[(int)character.Data.Type].GetComponent<Image>().color = new Color32(100, 100, 100, 255);
+                {
+                    _buttons[(int)character.Data.Type].GetComponent<Image>().color = new Color32(100, 100, 100, 255);
+                    _buttons[(int)character.Data.Type].interactable = false;
+                }
                 else
                 {
-                    string roomName = Enum.GetName(typeof(ECharacter), character.Data.Type);
-                    Enum.TryParse(roomName, out ERoom room);
-                    buttons[(int)character.Data.Type].onClick.AddListener(() => ui.ChangeBackground(room));
+                    _buttons[(int)character.Data.Type].interactable = true;
                 }
             }
         }

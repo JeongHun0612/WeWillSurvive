@@ -19,8 +19,9 @@ namespace WeWillSurvive
         [SerializeField] private Button _nextDayButton;
         [SerializeField] private TextMeshProUGUI _dayText;
 
-        // TODO: 사기 + 상태별로 플레이어 이미지 배열에 넣어서 저장
-        // _characterImages[ECharacter.MaxCount][6? 7?]
+        [Header ("Items")]
+        [SerializeField] private Transform _foods;
+        [SerializeField] private Transform _waters;
 
         UI_Background ui;
 
@@ -48,6 +49,13 @@ namespace WeWillSurvive
             UpdateUI();
         }
 
+        public override void OnShow()
+        {
+            base.OnShow();
+
+            UpdateUI();
+        }
+
         private void UpdateUI()
         {
             // Popup UI 초기화
@@ -71,8 +79,15 @@ namespace WeWillSurvive
             }
 
             // TODO: 아이템 배치
-            float cnt = ServiceLocator.Get<ItemManager>().GetItemCount(EItem.Water);
-            // 물 개수 만큼 배치
+            float cnt;
+
+            cnt = MathF.Ceiling(ServiceLocator.Get<ItemManager>().GetItemCount(EItem.Water));
+            for (int i = _waters.childCount - 1; i >= 0; i--)
+                _waters.GetChild(i).gameObject.SetActive((cnt--) > 0);
+
+            cnt = MathF.Ceiling(ServiceLocator.Get<ItemManager>().GetItemCount(EItem.Food));
+            for (int i = _foods.childCount - 1; i >= 0; i--)
+                _foods.GetChild(i).gameObject.SetActive((cnt--) > 0);
         }
     }
 }

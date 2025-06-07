@@ -70,7 +70,7 @@ namespace WeWillSurvive.Core
             // 이벤트 별로 함수 만들어서 호출
 
             // Day + 1
-            Debug.Log($"[Day {Day}]\n사용한 아이템: {s} / 나간 사람: {Enum.GetName(typeof(ECharacter), explorerName)}");
+            Debug.Log($"[Day {Day}]\n사용한 아이템: {s} / 나간 사람: {explorerName}");
             Day += 1;
         }
     }

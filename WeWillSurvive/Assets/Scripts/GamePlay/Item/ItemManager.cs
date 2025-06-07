@@ -46,7 +46,7 @@ namespace WeWillSurvive.Item
                 {
                     _itemEffects.Add(itemEffect.Item, itemEffect);
                 }
-            } 
+            }
 
             // Temp
             AddItem(EItem.Lead);

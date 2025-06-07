@@ -22,7 +22,7 @@ namespace WeWillSurvive
                 Debug.LogError($"[{name}] 2D Scene에서 열리지 않았음");
                 return;
             }
-        }
+        }        
 
         // 방 세팅
         public void SetupRoomUI(ECharacter owner)

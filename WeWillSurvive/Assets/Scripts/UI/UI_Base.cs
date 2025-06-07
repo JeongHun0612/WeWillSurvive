@@ -5,14 +5,19 @@ namespace WeWillSurvive.UI
 {
     public class UI_Base : MonoBehaviour
     {
+        protected bool _initialized = false;
+
         private void Start()
         {
+            if (_initialized) return;
             Initialize();
         }
 
         public virtual void Show()
         {
             gameObject.SetActive(true);
+
+            if (!_initialized) Initialize();
             OnShow();
         }
 
@@ -30,7 +35,8 @@ namespace WeWillSurvive.UI
         {
         }
 
-        public virtual void Initialize() { }
+        public virtual void Initialize() { _initialized = true; }
+
         public virtual async UniTask InitializeAsync() { await UniTask.Yield(); }
     }
 }
