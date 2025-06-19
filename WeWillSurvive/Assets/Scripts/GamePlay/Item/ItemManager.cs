@@ -56,6 +56,8 @@ namespace WeWillSurvive.Item
 
             AddItem(EItem.Food, 4f);
             AddItem(EItem.Water, 3f);
+            AddItem(EItem.BoardGame, 1);
+            AddItem(EItem.LaserGun, 1);
         }
 
         public void Dipose()
@@ -87,7 +89,7 @@ namespace WeWillSurvive.Item
         {
             if (Items.TryGetValue(item, out var remain))
             {
-                if (remain - usedCount > 0)
+                if (remain - usedCount < 0)
                 {
                     Debug.Log("남은 Item 갯수를 초과하였습니다.");
                     return;
