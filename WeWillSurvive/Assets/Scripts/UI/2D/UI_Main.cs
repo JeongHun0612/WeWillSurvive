@@ -29,18 +29,13 @@ namespace WeWillSurvive
         [SerializeField] private Transform _spacesuit;
         [SerializeField] private Transform _radio;
 
-        [Header("Debugs")]
-        [SerializeField] private Button _getFoodButton;
-        [SerializeField] private Button _useFoodButton;
-        [SerializeField] private Button _getSpecialFoodButton;
-        [SerializeField] private Button _getWaterButton;
-        [SerializeField] private Button _useWaterButton;
-
         private UI_Background ui;
         private ItemManager _itemManager;
 
         private Sprite[] _foodSprites;
         private Sprite[] _waterSprites;
+        private Sprite[] _repairKitSprites;
+        private Sprite[] _medicKitSprites;
 
         public override void Initialize()
         {
@@ -64,7 +59,6 @@ namespace WeWillSurvive
             }));
 
             _itemManager = ServiceLocator.Get<ItemManager>();
-            InitializeDebugButtons();
             UpdateUI();
         }
 
@@ -81,6 +75,13 @@ namespace WeWillSurvive
             _waterSprites[1] = await resource.LoadAssetAsync<Sprite>("water2");
             _waterSprites[2] = await resource.LoadAssetAsync<Sprite>("water3");
 
+            _repairKitSprites = new Sprite[2];
+            _repairKitSprites[0] = await resource.LoadAssetAsync<Sprite>("repair_kit");
+            _repairKitSprites[1] = await resource.LoadAssetAsync<Sprite>("special_repair_kit");
+
+            _medicKitSprites = new Sprite[2];
+            _medicKitSprites[0] = await resource.LoadAssetAsync<Sprite>("medical_kit");
+            _medicKitSprites[1] = await resource.LoadAssetAsync<Sprite>("special_medical_kit");
         }
 
         public override void OnShow()
@@ -90,33 +91,16 @@ namespace WeWillSurvive
             UpdateUI();
         }
 
-        private void InitializeDebugButtons()
+        public void UseItemDebug(int type)
         {
-            _getFoodButton.onClick.AddListener(() =>
-            {
-                _itemManager.AddItem(EItem.Food);
-                UpdateUI();
-            });
-            _useFoodButton.onClick.AddListener(() =>
-            {
-                _itemManager.UsedItem(ServiceLocator.Get<CharacterManager>().Characters[ECharacter.Bell], EItem.Food, 0.25f);
-                UpdateUI();
-            });
-            _getSpecialFoodButton.onClick.AddListener(() =>
-            {
-                _itemManager.AddItem(EItem.SpecialFood);
-                UpdateUI();
-            });
-            _getWaterButton.onClick.AddListener(() =>
-            {
-                _itemManager.AddItem(EItem.Water);
-                UpdateUI();
-            });
-            _useWaterButton.onClick.AddListener(() =>
-            {
-                _itemManager.UsedItem(ServiceLocator.Get<CharacterManager>().Characters[ECharacter.Bell], EItem.Water, 0.25f);
-                UpdateUI();
-            });
+            _itemManager.UsedItem(ServiceLocator.Get<CharacterManager>().Characters[ECharacter.Bell], (EItem)type, 0.25f);
+            UpdateUI();
+        }
+
+        public void GetItemDebug(int type)
+        {
+            _itemManager.AddItem((EItem)type);
+            UpdateUI();
         }
 
         private void UpdateUI()
@@ -147,8 +131,31 @@ namespace WeWillSurvive
 
             _boardGame.gameObject.SetActive(_itemManager.GetItemCount(EItem.BoardGame) > 0);
             _gun.gameObject.SetActive(_itemManager.GetItemCount(EItem.LaserGun) > 0);
-            _repairKit.gameObject.SetActive(_itemManager.GetItemCount(EItem.RepairKit) > 0);
-            _medicKit.gameObject.SetActive(_itemManager.GetItemCount(EItem.MedicKit) > 0);
+
+            _repairKit.gameObject.SetActive(false);
+            if (_itemManager.GetItemCount(EItem.SuperRepairKit) > 0)
+            {
+                _repairKit.gameObject.SetActive(true);
+                _repairKit.GetComponent<Image>().sprite = _repairKitSprites[1];
+            }
+            else if (_itemManager.GetItemCount(EItem.RepairKit) > 0)
+            {
+                _repairKit.gameObject.SetActive(true);
+                _repairKit.GetComponent<Image>().sprite = _repairKitSprites[0];
+            }
+
+            _medicKit.gameObject.SetActive(false);
+            if (_itemManager.GetItemCount(EItem.SuperMedicKit) > 0)
+            {
+                _medicKit.gameObject.SetActive(true);
+                _medicKit.GetComponent<Image>().sprite = _medicKitSprites[1];
+            }
+            else if (_itemManager.GetItemCount(EItem.MedicKit) > 0)
+            {
+                _medicKit.gameObject.SetActive(true);
+                _medicKit.GetComponent<Image>().sprite = _medicKitSprites[0];
+            }
+
             _radio.gameObject.SetActive(_itemManager.GetItemCount(EItem.Radio) > 0);
             _spacesuit.gameObject.SetActive(_itemManager.GetItemCount(EItem.NiceSpacesuit) > 0);
         }

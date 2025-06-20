@@ -18,12 +18,17 @@ namespace WeWillSurvive
         [SerializeField] private GameObject _stateContent;
 
         private const int MAX_STATE = 5;
+        private ItemManager _itemManager;
+        private CharacterManager _characterManager;
 
         public override void Initialize()
         {
             base.Initialize();
             for (int i = 0; i < MAX_STATE; i++)
                 Instantiate(_stateContent, _state);
+
+            _itemManager = ServiceLocator.Get<ItemManager>();
+            _characterManager = ServiceLocator.Get<CharacterManager>();
         }
 
         public void SetPanel(EItem item)
@@ -43,17 +48,12 @@ namespace WeWillSurvive
                     {
                         if (Enum.TryParse(item.ToString(), out ECharacter character))
                         {
-                            List<string> descriptions = ServiceLocator.Get<CharacterManager>().GetCharacter(character)?.State.FormatStateString();
+                            List<string> descriptions = _characterManager.GetCharacter(character)?.State.FormatStateString();
 
                             int idx = 0;
                             for (int i = 0; i < MAX_STATE; i++)
                             {
-                                GameObject go = _state.GetChild(idx++).gameObject;
-                                go.SetActive(true);
-                                if (i < descriptions.Count)
-                                    go.GetComponent<TextMeshProUGUI>().text = descriptions[i];
-                                else
-                                    go.GetComponent<TextMeshProUGUI>().text = string.Empty;
+                                SetChildPanel(idx++, i < descriptions.Count ? descriptions[i] : string.Empty);
                             }
                         }
                     }
@@ -61,21 +61,34 @@ namespace WeWillSurvive
                 case EItem.Food:
                 case EItem.Water:
                     {
-                        float cnt = ServiceLocator.Get<ItemManager>().GetItemCount(item);
-                        GameObject go = _state.GetChild(0).gameObject;
-                        go.SetActive(true);
-                        go.GetComponent<TextMeshProUGUI>().text = $"{item.ToString()}: {cnt}";
+                        float cnt = _itemManager.GetItemCount(item);
+                        SetChildPanel(0, $"{item}: {cnt}");
+                    }
+                    break;
+                case EItem.MedicKit:
+                case EItem.RepairKit:
+                    {
+                        int idx = 0;
+                        float cnt = _itemManager.GetItemCount(item);
+                        if (cnt > 0) SetChildPanel(idx++, $"{item}");
+
+                        cnt = _itemManager.GetItemCount(item + 1);
+                        if (cnt > 0) SetChildPanel(idx, $"{item + 1}");
                     }
                     break;
                 default:
                     {
-                        float cnt = ServiceLocator.Get<ItemManager>().GetItemCount(item);
-                        GameObject go = _state.GetChild(0).gameObject;
-                        go.SetActive(true);
-                        go.GetComponent<TextMeshProUGUI>().text = $"{item.ToString()}";
+                        SetChildPanel(0, $"{item}");
                     }
                     break;
             }
+        }
+
+        private void SetChildPanel(int index, string text)
+        {
+            GameObject go = _state.GetChild(index).gameObject;
+            go.SetActive(true);
+            go.GetComponent<TextMeshProUGUI>().text = text;
         }
     }
 }
