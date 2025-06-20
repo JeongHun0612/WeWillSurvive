@@ -34,30 +34,47 @@ namespace WeWillSurvive
             for (int i = 0; i < MAX_STATE; i++)
                 _state.GetChild(i).gameObject.SetActive(false);
 
-            if ((int)item >= 100)
+            switch (item)
             {
-                if (Enum.TryParse(item.ToString(), out ECharacter character))
-                {
-                    List<string> descriptions = ServiceLocator.Get<CharacterManager>().GetCharacter(character)?.State.FormatStateString();
-
-                    int idx = 0;
-                    for (int i = 0; i < MAX_STATE; i++)
+                case EItem.Lead:
+                case EItem.Cook:
+                case EItem.Bell:
+                case EItem.DrK:
                     {
-                        GameObject go = _state.GetChild(idx++).gameObject;
-                        go.SetActive(true);
-                        if (i < descriptions.Count)
-                            go.GetComponent<TextMeshProUGUI>().text = descriptions[i];
-                        else
-                            go.GetComponent<TextMeshProUGUI>().text = string.Empty;
+                        if (Enum.TryParse(item.ToString(), out ECharacter character))
+                        {
+                            List<string> descriptions = ServiceLocator.Get<CharacterManager>().GetCharacter(character)?.State.FormatStateString();
+
+                            int idx = 0;
+                            for (int i = 0; i < MAX_STATE; i++)
+                            {
+                                GameObject go = _state.GetChild(idx++).gameObject;
+                                go.SetActive(true);
+                                if (i < descriptions.Count)
+                                    go.GetComponent<TextMeshProUGUI>().text = descriptions[i];
+                                else
+                                    go.GetComponent<TextMeshProUGUI>().text = string.Empty;
+                            }
+                        }
                     }
-                }
-            }
-            else
-            {
-                float cnt = ServiceLocator.Get<ItemManager>().GetItemCount(item);
-                GameObject go = _state.GetChild(0).gameObject;
-                go.SetActive(true);
-                go.GetComponent<TextMeshProUGUI>().text = $"{item.ToString()}: {cnt}";
+                    break;
+                case EItem.Food:
+                case EItem.Water:
+                    {
+                        float cnt = ServiceLocator.Get<ItemManager>().GetItemCount(item);
+                        GameObject go = _state.GetChild(0).gameObject;
+                        go.SetActive(true);
+                        go.GetComponent<TextMeshProUGUI>().text = $"{item.ToString()}: {cnt}";
+                    }
+                    break;
+                default:
+                    {
+                        float cnt = ServiceLocator.Get<ItemManager>().GetItemCount(item);
+                        GameObject go = _state.GetChild(0).gameObject;
+                        go.SetActive(true);
+                        go.GetComponent<TextMeshProUGUI>().text = $"{item.ToString()}";
+                    }
+                    break;
             }
         }
     }

@@ -58,6 +58,10 @@ namespace WeWillSurvive.Item
             AddItem(EItem.Water, 3f);
             AddItem(EItem.BoardGame, 1);
             AddItem(EItem.LaserGun, 1);
+            AddItem(EItem.MedicKit, 1);
+            AddItem(EItem.RepairKit, 1);
+            AddItem(EItem.NiceSpacesuit, 1);
+            AddItem(EItem.Radio, 1);
         }
 
         public void Dipose()

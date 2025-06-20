@@ -24,6 +24,10 @@ namespace WeWillSurvive
         [SerializeField] private Transform _waters;
         [SerializeField] private Transform _boardGame;
         [SerializeField] private Transform _gun;
+        [SerializeField] private Transform _repairKit;
+        [SerializeField] private Transform _medicKit;
+        [SerializeField] private Transform _spacesuit;
+        [SerializeField] private Transform _radio;
 
         [Header("Debugs")]
         [SerializeField] private Button _getFoodButton;
@@ -143,6 +147,10 @@ namespace WeWillSurvive
 
             _boardGame.gameObject.SetActive(_itemManager.GetItemCount(EItem.BoardGame) > 0);
             _gun.gameObject.SetActive(_itemManager.GetItemCount(EItem.LaserGun) > 0);
+            _repairKit.gameObject.SetActive(_itemManager.GetItemCount(EItem.RepairKit) > 0);
+            _medicKit.gameObject.SetActive(_itemManager.GetItemCount(EItem.MedicKit) > 0);
+            _radio.gameObject.SetActive(_itemManager.GetItemCount(EItem.Radio) > 0);
+            _spacesuit.gameObject.SetActive(_itemManager.GetItemCount(EItem.NiceSpacesuit) > 0);
         }
 
         private void UpdateFoodUI()
