@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using System.Linq;
 
 namespace WeWillSurvive
 {
@@ -137,5 +138,81 @@ namespace WeWillSurvive
 
             return false;
         }
+
+        public int GetAvailableAddAmount(int itemId)
+        {
+            if (itemId < 0 || itemId >= itemDefinitions.Count)
+            {
+                Debug.LogWarning($"Item ID {itemId} is out of range.");
+                return 0;
+            }
+
+            var def = itemDefinitions[itemId];
+            int maxAmount = def.amountLimit;
+
+            foreach (var slot in slots)
+            {
+                if (slot.data == def && slot.amount < maxAmount)
+                {
+                    return maxAmount - slot.amount;
+                }
+            }
+
+            foreach (var slot in slots)
+            {
+                if (slot.data == null)
+                {
+                    return maxAmount;
+                }
+            }
+            return 0;
+        }
+
+        public List<int> returnItem()
+        {
+            int[] itemCounts = new int[itemDefinitions.Count];
+
+            foreach (var slot in slots)
+            {
+                if (slot.data is ItemDefinition def)
+                {
+                    int index = itemDefinitions.IndexOf(def);
+                    if (index >= 0)
+                        itemCounts[index] += slot.amount;
+                }
+            }
+
+            return itemCounts.ToList();
+        }
+
+        public List<int> returnCrew()
+        {
+            int[] crewReturned = new int[crewDefinitions.Count];
+
+            foreach (var slot in slots)
+            {
+                if (slot.data is CrewDefinition def)
+                {
+                    int index = crewDefinitions.IndexOf(def);
+                    if (index >= 0)
+                        crewReturned[index] = 1;
+                }
+            }
+
+            return crewReturned.ToList();
+        }
+
+
+        public void flushAll()
+        {
+            foreach (var slot in slots)
+            {
+                slot.data = null;
+                slot.amount = 0;
+                slot.image.sprite = null;
+                slot.text.text = "";
+            }
+        }
+
     }
 }

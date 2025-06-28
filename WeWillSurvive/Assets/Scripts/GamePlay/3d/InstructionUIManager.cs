@@ -27,6 +27,7 @@ namespace WeWillSurvive
             switch (type)
             {
                 case InteractibleType.Item:
+                case InteractibleType.Storage:
                     currentUI = itemUI;
                     break;
                 case InteractibleType.NPC:
