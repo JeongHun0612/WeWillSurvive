@@ -10,6 +10,7 @@ namespace WeWillSurvive
 
         public LayerMask interactableLayerMask; // Interactable 레이어 지정
         public float interactRange = 2f; // 상호작용 최대 거리
+        private float holdTimer = 0f;
 
         private bool isFirstPerson = true;
 
@@ -39,9 +40,26 @@ namespace WeWillSurvive
 
             DetectInteractible();
 
-            if (canInteract && Input.GetKeyDown(KeyCode.E))
+            if (canInteract)
             {
-                currentInteractible?.Interact();
+
+                if (Input.GetKey(KeyCode.Space) && currentInteractible.interactibleType == InteractibleType.Putout)
+                {
+                    holdTimer += Time.deltaTime;
+                    if (holdTimer >= 0.4f)
+                    {
+                        currentInteractible?.Escape();
+                    }
+                }
+                else
+                {
+                    holdTimer = 0f;
+                }
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    currentInteractible?.Interact();
+                }
             }
         }
 
@@ -61,7 +79,6 @@ namespace WeWillSurvive
                 Debug.DrawRay(ray.origin, ray.direction * interactRange, Color.red, 1f);
                 if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactableLayerMask))
                 {
-                    Debug.Log("Raycast hit: " + hit.collider.name);
                     var interactible = hit.collider.GetComponent<Interactible>();
                     if (interactible != null)
                     {

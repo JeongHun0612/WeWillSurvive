@@ -6,32 +6,32 @@ namespace WeWillSurvive
     {
         None,
         Item,
+        Storage,
         NPC,
         Putout
     }
 
     public class Interactible : MonoBehaviour
     {
-        [SerializeField] private SlotMaster inventory;
+        public SlotMaster inventory;
+        public storage storageScript;
+        public collectionResult resultAdd;
         public InteractibleType interactibleType;
         public int interactableValue;
 
         public virtual void ShowInteractionUI()
         {
-            Debug.Log($"{gameObject.name} is selected");
             InstructionUIManager.Instance.ShowUI(transform, interactibleType);
         }
 
         public virtual void HideInteractionUI()
         {
-            Debug.Log($"{gameObject.name} interaction UI hidden");
             InstructionUIManager.Instance.HideAll();
         }
         public virtual void Interact()
         {
             if (interactibleType == InteractibleType.Item)
             {
-                Debug.Log($"Item{interactableValue} 획득");
                 if (inventory.AddItem(interactableValue))
                 {
                     Destroy(gameObject);
@@ -40,12 +40,35 @@ namespace WeWillSurvive
 
             if (interactibleType == InteractibleType.NPC)
             {
-                Debug.Log($"Crew{interactableValue} 구출");
                 if (inventory.AddCrew(interactableValue))
                 {
                     Destroy(gameObject);
                 }
             }
+
+            if (interactibleType == InteractibleType.Storage)
+            {
+                int itemID = storageScript.GetItemID();
+                int repeatGet = storageScript.GetStorageAmount();
+                int possibleAdd = inventory.GetAvailableAddAmount(itemID);
+                if (repeatGet > possibleAdd) repeatGet = possibleAdd;
+
+                storageScript.decrease(repeatGet);
+                for (int i = 0; i < repeatGet; i++) inventory.AddItem(itemID);
+            }
+
+            if (interactibleType == InteractibleType.Putout)
+            {
+                resultAdd.Add(inventory.returnItem(), inventory.returnCrew());
+                inventory.flushAll();
+            }
+        }
+
+        public void Escape()
+        {
+            resultAdd.Add(inventory.returnItem(), inventory.returnCrew());
+            inventory.flushAll();
+            resultAdd.Escape();
         }
     }
 }
