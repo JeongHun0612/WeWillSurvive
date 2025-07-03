@@ -2,6 +2,14 @@
 
 namespace WeWillSurvive
 {
+    public enum EPanelType
+    {
+        Log,
+        Ration,
+        Expedition,
+        MainEvent
+    }
+
     public class PagePanel : MonoBehaviour
     {
         public EPanelType PanelType { get; protected set; }
