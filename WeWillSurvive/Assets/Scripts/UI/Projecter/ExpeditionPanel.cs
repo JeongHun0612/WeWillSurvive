@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace WeWillSurvive
 {
@@ -13,7 +13,7 @@ namespace WeWillSurvive
         {
             StartPageIndex = startPageIndex;
 
-            // TODO ÇÃ·¹ÀÌ¾î Áß ´©±º°¡°¡ Å½ÇèÀ» ³ª°¡ÀÖ´Â °æ¿ì
+            // TODO í”Œë ˆì´ì–´ ì¤‘ ëˆ„êµ°ê°€ê°€ íƒí—˜ì„ ë‚˜ê°€ìˆëŠ” ê²½ìš°
 
             bool isExpedition = false;
 

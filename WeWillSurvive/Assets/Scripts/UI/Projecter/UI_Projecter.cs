@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -36,7 +36,7 @@ namespace WeWillSurvive
 
         public async override UniTask InitializeAsync()
         {
-            // PagePanel ÃÊ±âÈ­
+            // PagePanel ì´ˆê¸°í™”
             foreach (var pagePanel in _pagePanels)
             {
                 pagePanel.Initialize();
@@ -51,7 +51,7 @@ namespace WeWillSurvive
                 }
             }
 
-            // PanelMoveButton ÃÊ±âÈ­
+            // PanelMoveButton ì´ˆê¸°í™”
             foreach (var panelMoveButton in _panelMoveButtons)
             {
                 panelMoveButton.Initialize(OnClickMovePanel);
@@ -66,10 +66,10 @@ namespace WeWillSurvive
                 }
             }
 
-            // NewDay ÀÌº¥Æ® µî·Ï
+            // NewDay ì´ë²¤íŠ¸ ë“±ë¡
             EventBus.Subscribe<NewDayEvent>(OnNewDayEvent);
 
-            // Page ÃÊ±âÈ­ ¹× ÇÒ´ç
+            // Page ì´ˆê¸°í™” ë° í• ë‹¹
             InitializePagePanels();
 
             await UniTask.Yield();
@@ -78,8 +78,6 @@ namespace WeWillSurvive
         public override void OnShow()
         {
             base.OnShow();
-
-            Debug.Log("CurrentPageIndex : " + _currentPageIndex);
 
             ShowCurrentPage(_currentPageIndex);
         }
@@ -100,7 +98,7 @@ namespace WeWillSurvive
                 pagePanel.InitializePage(_totalPageCount);
                 pagePanel.Hide();
 
-                // ÇØ´ç ÆäÀÌÁö°¡ Á¸ÀçÇÏÁö ¾Ê´Â °æ¿ì
+                // í•´ë‹¹ í˜ì´ì§€ê°€ ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ìš°
                 if (pagePanel.PageCount == 0)
                 {
                     if (_panelMoveButtonDicts.TryGetValue(pagePanel.PanelType, out var panelMoveButton))
@@ -121,7 +119,7 @@ namespace WeWillSurvive
         {
             if (targetPageIndex < 0 || targetPageIndex >= _totalPageCount)
             {
-                Debug.LogWarning($"ÆäÀÌÁö ¹üÀ§ ¿¡·¯ - TargetIndex : {targetPageIndex} | Range {0} - {_totalPageCount - 1}");
+                Debug.LogWarning($"í˜ì´ì§€ ë²”ìœ„ ì—ëŸ¬ - TargetIndex : {targetPageIndex} | Range {0} - {_totalPageCount - 1}");
                 return;
             }
 
@@ -162,7 +160,7 @@ namespace WeWillSurvive
 
             if (!_panelMoveButtonDicts.TryGetValue(_currentPanel.PanelType, out var panelMoveButton))
             {
-                Debug.LogError($"{_currentPanel.PanelType} TypeÀÇ PanelMoveButtonÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+                Debug.LogError($"{_currentPanel.PanelType} Typeì˜ PanelMoveButtonì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
                 return;
             }
 
@@ -181,7 +179,7 @@ namespace WeWillSurvive
         {
             if (!_pagePanelDicts.TryGetValue(panelType, out var pagePanel))
             {
-                Debug.LogError($"{panelType} TypeÀÇ PanelÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+                Debug.LogError($"{panelType} Typeì˜ Panelì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
                 return;
             }
 
