@@ -16,6 +16,7 @@ namespace WeWillSurvive.Core
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private EventBus EventBus => ServiceLocator.Get<EventBus>();
 
         private async void Start()
         {
@@ -75,6 +76,10 @@ namespace WeWillSurvive.Core
             // Day + 1
             Debug.Log($"[Day {Day}]\n사용한 아이템: {s} / 나간 사람: {explorerName}");
             Day += 1;
+
+
+            // EventBus를 통해 새로운 날이 시작됐음을 알림
+            EventBus.Publish(new NewDayEvent() { CurrentDay = Day });
         }
     }
 }

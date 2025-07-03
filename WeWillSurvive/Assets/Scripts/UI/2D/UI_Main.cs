@@ -17,6 +17,7 @@ namespace WeWillSurvive
     {
         [SerializeField] private Button _roomMonitorButton;
         [SerializeField] private Button _nextDayButton;
+        [SerializeField] private Button _projecterButton;
         [SerializeField] private TextMeshProUGUI _dayText;
 
         [Header("Items")]
@@ -50,6 +51,9 @@ namespace WeWillSurvive
 
             // Room Monitor
             _roomMonitorButton.onClick.AddListener(() => UIManager.Instance.ShowPopup<UI_RoomMonitor>());
+
+            // Projecter
+            _projecterButton.onClick.AddListener(() => UIManager.Instance.ShowPopup<UI_Projecter>());
 
             // Next Day
             _nextDayButton.onClick.AddListener(() => UIManager.Instance.BlackUI.FadeIO(() =>
