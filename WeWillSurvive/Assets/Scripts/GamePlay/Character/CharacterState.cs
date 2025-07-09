@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 namespace WeWillSurvive.Character
@@ -7,18 +8,30 @@ namespace WeWillSurvive.Character
     [Flags]
     public enum EState
     {
-        Normal = 0,             // 정상
-        Hungry = 1 << 0,        // 허기짐
-        Starve = 1 << 1,        // 영양 결핍 (굶음)
-        Thirsty = 1 << 2,       // 갈증
-        Dehydrate = 1 << 3,     // 수분 고갈 (탈수)
-        Injured = 1 << 4,       // 다침
-        Sick = 1 << 5,          // 병듦
-        Anxious = 1 << 6,       // 불안함
-        Panic = 1 << 7,         // 공포
-        Mad = 1 << 8,           // 미침
-        Exploring = 1 << 9,     // 나감
-        Dead = 1 << 10,         // 사망
+        [Description("정상")]
+        Normal = 0,
+        [Description("허기짐")]
+        Hungry = 1 << 0,
+        [Description("영양 결핍 (굶음)")]
+        Starve = 1 << 1,
+        [Description("갈증")]
+        Thirsty = 1 << 2,
+        [Description("수분 고갈 (탈수)")]
+        Dehydrate = 1 << 3,
+        [Description("다침")]
+        Injured = 1 << 4,
+        [Description("병듦")]
+        Sick = 1 << 5,
+        [Description("불안함")]
+        Anxious = 1 << 6,
+        [Description("공포")]
+        Panic = 1 << 7,
+        [Description("미침")]
+        Mad = 1 << 8,
+        [Description("탐사")]
+        Exploring = 1 << 9,
+        [Description("사망")]
+        Dead = 1 << 10,
     }
 
     public class CharacterState
