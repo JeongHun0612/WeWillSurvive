@@ -13,25 +13,33 @@ MonoBehaviour:
   m_Name: MainEventData
   m_EditorClassIdentifier: 
   eventId: testevent_01
-  title: TestTitle
+  title: "\uD14C\uC2A4\uD2B8 \uC774\uBCA4\uD2B8"
   descriptions:
-  - 
+  - "\uD14C\uC2A4\uD2B8 \uC774\uBCA4\uD2B8 \uBCF8\uBB38 \uB0B4\uC6A9"
   triggerConditions:
-  - conditionType: 7
-    targetId: BoardGame
-    parameter: Hunger
-    value: 1
+  - conditionType: 0
+    targetId: Cook
+    parameter: 
+    value: 
   eventType: 0
   choices:
-  - choiceId: Yes
+  - choiceId: O
     results:
     - conditions: []
-      resultText: "O \uC120\uD0DD \uC2DC \uACB0\uACFC \uD14D\uC2A4\uD2B8"
-      effects: []
-      probability: 0.5
+      resultText: "O\uB97C \uC120\uD0DD\uD588\uC744 \uB54C \uACB0\uACFC"
+      effects:
+      - effectType: 0
+        targetId: Food
+        parameter: 
+        value: 2
+      probability: 1
+  - choiceId: X
+    results:
     - conditions: []
-      resultText: 
-      effects: []
-      probability: 0
-  - choiceId: No
-    results: []
+      resultText: "X\uB97C \uC120\uD0DD\uD588\uC744 \uB54C \uACB0\uACFC"
+      effects:
+      - effectType: 0
+        targetId: Water
+        parameter: 
+        value: 3
+      probability: 1

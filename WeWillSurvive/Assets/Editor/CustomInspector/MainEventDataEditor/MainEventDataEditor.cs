@@ -205,6 +205,7 @@ namespace WeWillSurvive
                 if (GUI.Button(buttonRect, content, style))
                 {
                     selectedChoiceIndex = i;
+                    GUI.FocusControl(null);
                 }
             }
             EditorGUILayout.EndHorizontal();

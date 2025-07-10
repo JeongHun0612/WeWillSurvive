@@ -6,10 +6,19 @@ namespace WeWillSurvive.MainEvent
 {
     public enum EMainEventType
     {
+        [Description("\"O\" 또는 \"X\" 를 선택하는 이벤트")]
         YesOrNo,            // "O" 또는 "X" 를 선택하는 이벤트
+
+        [Description("특정 아이템을 사용하는 이벤트")]
         UseItems,           // 특정 아이템을 사용하는 이벤트
+
+        [Description("특정 대원을 탐사를 보내는 이벤트")]
         SendSomeone,        // 특정 대원을 탐사를 보내는 이벤트
-        ChooseSomeon,       // 특정 대원을 선택하는 이벤트
+
+        [Description("특정 대원을 선택하는 이벤트")]
+        ChooseSomeone,      // 특정 대원을 선택하는 이벤트
+
+        [Description("교환 이벤트")]
         Trade               // 교환 이벤트
     }
 
@@ -50,14 +59,9 @@ namespace WeWillSurvive.MainEvent
     {
         AddItem,
         RemoveItem,
-        ChangeStatus,
-        InflictInjury,
-        InflictSickness,
-        Death,
-        ChangeSanity,
-        AdvanceEnding,
-        AddFlag,
-        RemoveFlag
+
+        IncreaseStatus,
+        DecreaseStatus,
     }
 
     [CreateAssetMenu(fileName = "MainEventData", menuName = "Scriptable Objects/MainEventData")]
@@ -92,15 +96,23 @@ namespace WeWillSurvive.MainEvent
     [System.Serializable]
     public class EventResult
     {
-        public List<Condition> conditions;         // 해당 결과가 발생할 조건
+        public List<Condition> conditions;      // 해당 결과가 발생할 조건
 
         [TextArea(3, 10)]
-        public string resultText;                  // 결과 텍스트
+        public string resultText;               // 결과 텍스트
 
-        public List<EventEffect> effects;          // 결과 보상
+        public List<EventEffect> effects;       // 결과 보상
 
         [Range(0, 1)] 
-        public float probability;                  // 발생 확률 (총합 1.0 안 넘게)
+        public float probability;               // 발생 확률 (총합 1.0 안 넘게)
+
+        public EventResult()
+        {
+            conditions = new();
+            resultText = string.Empty;
+            effects = new();
+            probability = 1.0f;
+        }
     }
 
     [System.Serializable]
