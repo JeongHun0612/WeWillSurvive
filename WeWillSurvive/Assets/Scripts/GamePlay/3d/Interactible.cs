@@ -68,7 +68,7 @@ namespace WeWillSurvive
         {
             resultAdd.Add(inventory.returnItem(), inventory.returnCrew());
             inventory.flushAll();
-            resultAdd.Escape();
+            resultAdd.EndGame();
         }
     }
 }
