@@ -6,6 +6,7 @@ namespace WeWillSurvive
 {
     public class collectionResult : MonoBehaviour
     {
+        public timerUI timer;
         public List<int> items = Enumerable.Repeat(0, 2).ToList(); // [0, 0]
         public List<int> crew = Enumerable.Repeat(0, 4).ToList();  // [0, 0, 0, 0]
 
@@ -23,9 +24,11 @@ namespace WeWillSurvive
         }
 
 
-        public void Escape()
+        public void EndGame()
         {
-            Debug.Log("!!!!!!!!!!!!!!!!!!!!!!you have escaped!!!!!!!!!!!!!!");
+            //send info
+            //+
+            timer.EndGame();
         }
     }
 }

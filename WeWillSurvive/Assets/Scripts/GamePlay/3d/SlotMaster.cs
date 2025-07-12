@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 using TMPro;
 using System.Linq;
 
@@ -42,8 +43,12 @@ namespace WeWillSurvive
 
         [Header("슬롯 UI 오브젝트들")]
         [SerializeField] private List<GameObject> slotObjects;
-
         private List<Slot> slots = new List<Slot>();
+
+        [Header("슬롯이 찼을시 경고ui")]
+        [SerializeField] private GameObject warningUI;
+        [SerializeField] private GameObject interactionUI;
+        private Coroutine warningCoroutine;
 
         private void Start()
         {
@@ -97,6 +102,8 @@ namespace WeWillSurvive
                 }
             }
 
+            // 슬롯에 들어갈 곳이 없음
+            ShowWarningForSeconds();
             return false;
         }
 
@@ -136,6 +143,7 @@ namespace WeWillSurvive
                 }
             }
 
+            ShowWarningForSeconds();
             return false;
         }
 
@@ -165,6 +173,7 @@ namespace WeWillSurvive
                     return maxAmount;
                 }
             }
+            ShowWarningForSeconds();
             return 0;
         }
 
@@ -212,6 +221,25 @@ namespace WeWillSurvive
                 slot.image.sprite = null;
                 slot.text.text = "";
             }
+        }
+
+        private void ShowWarningForSeconds(float duration = 1.5f)
+        {
+            if (warningUI == null) return;
+
+            if (warningCoroutine != null)
+                StopCoroutine(warningCoroutine);
+
+            warningCoroutine = StartCoroutine(ShowWarningCoroutine(duration));
+        }
+
+        private IEnumerator ShowWarningCoroutine(float duration)
+        {
+            warningUI.SetActive(true);
+            interactionUI.SetActive(false);
+            yield return new WaitForSeconds(duration);
+            warningUI.SetActive(false);
+            interactionUI.SetActive(true);
         }
 
     }
