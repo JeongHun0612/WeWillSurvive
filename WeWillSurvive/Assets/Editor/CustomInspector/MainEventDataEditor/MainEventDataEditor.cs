@@ -220,6 +220,9 @@ namespace WeWillSurvive
             DrawAddRemoveButtonUI(resultsProp, ref selectedResultIndex, InitializeEventResultProperty);
             EditorGUILayout.EndHorizontal();
 
+            if (resultsProp.arraySize == 0)
+                EditorGUILayout.HelpBox("결과를 추가해주세요.", MessageType.Info);
+
             // 탭 버튼 영역
             EditorGUILayout.BeginHorizontal();
             for (int i = 0; i < resultsProp.arraySize; i++)

@@ -56,12 +56,12 @@ namespace WeWillSurvive.Item
 
             AddItem(EItem.Food, 4f);
             AddItem(EItem.Water, 3f);
-            AddItem(EItem.BoardGame, 1);
-            AddItem(EItem.LaserGun, 1);
+            AddItem(EItem.BoardGame);
+            AddItem(EItem.LaserGun);
             //AddItem(EItem.MedicKit, 1);
-            AddItem(EItem.RepairKit, 1);
-            AddItem(EItem.NiceSpacesuit, 1);
-            AddItem(EItem.Radio, 1);
+            AddItem(EItem.RepairKit);
+            AddItem(EItem.NiceSpacesuit);
+            AddItem(EItem.Radio);
         }
 
         public void Dipose()
@@ -119,6 +119,17 @@ namespace WeWillSurvive.Item
                 Debug.LogWarning($"Item [{item}] not found.");
                 return;
             }
+        }
+
+        public void UpdateItemCount(EItem item, float updateCount)
+        {
+            if (!Items.ContainsKey(item))
+            {
+                Debug.LogWarning($"Item [{item}] not found.");
+                return;
+            }
+
+            Items[item] += updateCount;
         }
 
         public bool HasItem(EItem item)

@@ -9,7 +9,7 @@ namespace WeWillSurvive
             PanelType = EPanelType.Log;
         }
 
-        public override void InitializePage(int startPageIndex)
+        public override void RefreshPage(int startPageIndex)
         {
             StartPageIndex = startPageIndex;
 
