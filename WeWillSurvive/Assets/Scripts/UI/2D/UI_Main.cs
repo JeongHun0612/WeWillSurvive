@@ -37,6 +37,7 @@ namespace WeWillSurvive
         private Sprite[] _waterSprites;
         private Sprite[] _repairKitSprites;
         private Sprite[] _medicKitSprites;
+        private EventBus EventBus => ServiceLocator.Get<EventBus>();
 
         public override void Initialize()
         {
@@ -56,11 +57,9 @@ namespace WeWillSurvive
             _projecterButton.onClick.AddListener(() => UIManager.Instance.ShowPopup<UI_Projecter>());
 
             // Next Day
-            _nextDayButton.onClick.AddListener(() => UIManager.Instance.BlackUI.FadeIO(() =>
-            {
-                GameManager.Instance.NewDay();
-                UpdateUI();
-            }));
+            _nextDayButton.onClick.AddListener(() => GameManager.Instance.StartNextDay());
+
+            EventBus.Subscribe<NewDayEvent>(OnNewDayEvent);
 
             _itemManager = ServiceLocator.Get<ItemManager>();
             UpdateUI();
@@ -109,9 +108,6 @@ namespace WeWillSurvive
 
         private void UpdateUI()
         {
-            // Popup UI 초기화
-            UIManager.Instance.ClosePopups(remain: 1);
-
             _dayText.text = "Day " + GameManager.Instance.Day;
 
             CharacterManager characterManager = ServiceLocator.Get<CharacterManager>();
@@ -254,6 +250,11 @@ namespace WeWillSurvive
             {
                 _waters.GetChild(i).gameObject.SetActive((count--) > 0);
             }
+        }
+
+        private void OnNewDayEvent(NewDayEvent context)
+        {
+            UpdateUI();
         }
     }
 }

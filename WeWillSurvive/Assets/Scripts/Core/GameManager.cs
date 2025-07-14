@@ -25,11 +25,40 @@ namespace WeWillSurvive.Core
 
             if (SceneManager.GetActiveScene().name == "2D")
             {
-                UIManager.Instance.ShowScene<UI_Background>();
+                OnStartSurvive();
+            }
+        }
+
+        public void OnStartSurvive()
+        {
+            Day = 1;
+
+            CharacterManager.SettingCharacter();
+
+            UIManager.Instance.ShowScene<UI_Background>();
+        }
+
+        public void StartNextDay()
+        {
+            UIManager.Instance.PadeUI.StartPadeSequence(OnNewDay);
+        }
+
+        private void OnNewDay()
+        {
+            if (CharacterManager.AliveCharacterCount() == 0)
+            {
+                Debug.Log("Game End");
+                return;
             }
 
-            // Temp
-            Day = 1;
+            UIManager.Instance.ClosePopups(remain: 1);
+
+            // TOOD 엔딩 분기 확인
+
+            Day++;
+
+            CharacterManager.UpdateCharacterStatus();
+            EventBus.Publish(new NewDayEvent() { CurrentDay = Day });
         }
 
         public void NewDay()

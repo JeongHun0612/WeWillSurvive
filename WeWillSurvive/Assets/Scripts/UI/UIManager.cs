@@ -35,7 +35,8 @@ namespace WeWillSurvive.UI
         private ResourceManager _resourceManager;
         public ResourceManager ResourceManager => _resourceManager ??= ServiceLocator.Get<ResourceManager>();
 
-        public UI_Black BlackUI;
+        public UI_Black BlackUI { get; private set; }
+        public UI_Pade PadeUI { get; private set; }
 
         public async UniTask InitializeAsync(IProgress<float> progress = null)
         {
@@ -175,6 +176,7 @@ namespace WeWillSurvive.UI
                 await UniTask.Yield();
             }
 
+            // BlackUI Instantiate
             try
             {
                 var asset = await ResourceManager.LoadAssetAsync<GameObject>("UI_Black");
@@ -184,6 +186,19 @@ namespace WeWillSurvive.UI
             catch (Exception ex)
             {
                 Debug.LogError($"Error loading blackUI prefab: {ex.Message}");
+            }
+
+            // PadeUI Instantiate
+            try
+            {
+                var asset = await ResourceManager.LoadAssetAsync<GameObject>("UI_Pade");
+                PadeUI = Instantiate(asset.GetComponent<UI_Pade>(), transform);
+                await PadeUI.InitializeAsync();
+                PadeUI.Hide();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Error loading padeUI prefab: {ex.Message}");
             }
 
             _isInitialized = true;
