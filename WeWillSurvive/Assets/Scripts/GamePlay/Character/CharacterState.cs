@@ -59,7 +59,7 @@ namespace WeWillSurvive.Character
 
         public bool HasState(EState status)
         {
-            return CurrentState.HasFlag(status);
+            return (CurrentState & status) != 0;
         }
 
         public List<string> FormatStateString()

@@ -23,11 +23,7 @@ namespace WeWillSurvive
         [SerializeField] private Button _prevButton;
         [SerializeField] private Button _nextButton;
 
-        private Dictionary<EPanelType, PagePanel> _pagePanelDicts = new();
-        private Dictionary<EPanelType, PanelMoveButton> _panelMoveButtonDicts = new();
-
         private PagePanel _currentPanel;
-        private PanelMoveButton _selectedPanelMoveButton;
 
         private int _totalPageCount;
         private int _currentPageIndex;
@@ -40,30 +36,12 @@ namespace WeWillSurvive
             foreach (var pagePanel in _pagePanels)
             {
                 pagePanel.Initialize();
-
-                if (!_pagePanelDicts.ContainsKey(pagePanel.PanelType))
-                {
-                    _pagePanelDicts.Add(pagePanel.PanelType, pagePanel);
-                }
-                else
-                {
-                    _pagePanelDicts[pagePanel.PanelType] = pagePanel;
-                }
             }
 
             // PanelMoveButton 초기화
             foreach (var panelMoveButton in _panelMoveButtons)
             {
                 panelMoveButton.Initialize(OnClickMovePanel);
-
-                if (!_panelMoveButtonDicts.ContainsKey(panelMoveButton.PanelType))
-                {
-                    _panelMoveButtonDicts.Add(panelMoveButton.PanelType, panelMoveButton);
-                }
-                else
-                {
-                    _panelMoveButtonDicts[panelMoveButton.PanelType] = panelMoveButton;
-                }
             }
 
             // NewDay 이벤트 등록
@@ -89,23 +67,22 @@ namespace WeWillSurvive
             _totalPageCount = 0;
             _currentPageIndex = 0;
             _currentPanel = null;
-            _selectedPanelMoveButton = null;
 
             _dayText.text = $"Day {GameManager.Instance.Day}";
 
-            foreach (var pagePanel in _pagePanelDicts.Values)
+            foreach (var pagePanel in _pagePanels)
             {
-                pagePanel.InitializePage(_totalPageCount);
+                pagePanel.RefreshPage(_totalPageCount);
                 pagePanel.Hide();
 
                 // 해당 페이지가 존재하지 않는 경우
                 if (pagePanel.PageCount == 0)
                 {
-                    if (_panelMoveButtonDicts.TryGetValue(pagePanel.PanelType, out var panelMoveButton))
+                    var panelMoveButton = GetPanelMoveButton(pagePanel.PanelType);
+                    if (panelMoveButton != null)
                     {
                         panelMoveButton.Disabled();
                     }
-
                     continue;
                 }
 
@@ -115,15 +92,31 @@ namespace WeWillSurvive
             gameObject.SetActive(false);
         }
 
+        private void ApplyResultPanels()
+        {
+            foreach (var pagePanel in _pagePanels)
+            {
+                pagePanel.ApplyResult();
+            }
+        }
+
         private void ShowCurrentPage(int targetPageIndex)
         {
-            if (targetPageIndex < 0 || targetPageIndex >= _totalPageCount)
+            if (targetPageIndex < 0 || targetPageIndex > _totalPageCount)
             {
                 Debug.LogWarning($"페이지 범위 에러 - TargetIndex : {targetPageIndex} | Range {0} - {_totalPageCount - 1}");
                 return;
             }
 
-            foreach (var pagePanel in _pagePanelDicts.Values)
+            // 마지막 페이지에서는 다음 날짜로 이동
+            if (targetPageIndex == _totalPageCount)
+            {
+                ApplyResultPanels();
+                GameManager.Instance.StartNextDay();
+                return;
+            }
+
+            foreach (var pagePanel in _pagePanels)
             {
                 if (!pagePanel.HasPage(targetPageIndex))
                     continue;
@@ -135,7 +128,6 @@ namespace WeWillSurvive
 
                 int localIndex = targetPageIndex - pagePanel.StartPageIndex;
                 _currentPanel.ShowPage(localIndex);
-
                 break;
             }
 
@@ -145,46 +137,44 @@ namespace WeWillSurvive
             UpdatePanelMoveButton();
         }
 
-
-
         private void UpdateMoveButton()
         {
             _prevButton.interactable = _currentPageIndex > 0;
-            _nextButton.interactable = _currentPageIndex < _totalPageCount - 1;
+            //_nextButton.interactable = _currentPageIndex < _totalPageCount - 1;
         }
 
         private void UpdatePanelMoveButton()
         {
-            if (_currentPanel == null)
-                return;
-
-            if (!_panelMoveButtonDicts.TryGetValue(_currentPanel.PanelType, out var panelMoveButton))
+            foreach (var panelMoveButton in _panelMoveButtons)
             {
-                Debug.LogError($"{_currentPanel.PanelType} Type의 PanelMoveButton이 존재하지 않습니다.");
-                return;
+                panelMoveButton.OnSelected(panelMoveButton.PanelType == _currentPanel.PanelType);
+            }
+        }
+
+        private PanelMoveButton GetPanelMoveButton(EPanelType panelType)
+        {
+            foreach (var panelMoveButton in _panelMoveButtons)
+            {
+                if (panelMoveButton.PanelType == panelType)
+                    return panelMoveButton;
             }
 
-            if (panelMoveButton == _selectedPanelMoveButton)
-                return;
-
-            _selectedPanelMoveButton?.OnSelected(false);
-            panelMoveButton.OnSelected(true);
-
-            _selectedPanelMoveButton = panelMoveButton;
+            return null;
         }
 
         public void OnClickPrevPage() => ShowCurrentPage(_currentPageIndex - 1);
         public void OnClickNextPage() => ShowCurrentPage(_currentPageIndex + 1);
         public void OnClickMovePanel(EPanelType panelType)
         {
-            if (!_pagePanelDicts.TryGetValue(panelType, out var pagePanel))
+            foreach (var pagePanel in _pagePanels)
             {
-                Debug.LogError($"{panelType} Type의 Panel이 존재하지 않습니다.");
-                return;
+                if (pagePanel.PanelType == panelType)
+                {
+                    _currentPageIndex = pagePanel.StartPageIndex;
+                    ShowCurrentPage(_currentPageIndex);
+                    break;
+                }
             }
-
-            _currentPageIndex = pagePanel.StartPageIndex;
-            ShowCurrentPage(_currentPageIndex);
         }
 
         private void OnNewDayEvent(NewDayEvent context)
