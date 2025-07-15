@@ -1,5 +1,5 @@
+ï»¿using Cysharp.Threading.Tasks;
 using UnityEngine;
-using WeWillSurvive.Core;
 
 namespace WeWillSurvive.UI
 {
@@ -7,15 +7,38 @@ namespace WeWillSurvive.UI
     {
         public bool RememberInHistory = true;
 
+        private Canvas _canvas;
+
         public override void Initialize()
         {
             base.Initialize();
 
-            // Canvas ¼³Á¤
-            Canvas canvas = GetComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvas.overrideSorting = true;
-            canvas.sortingOrder = 10 + UIManager.Instance.PopupHistoryCount;
+            // Canvas ì„¤ì •
+            _canvas = GetComponent<Canvas>();
+            if (_canvas == null)
+            {
+                Debug.LogError($"{name} Canvas Component is Null");
+                return;
+            }
+
+            _canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            _canvas.overrideSorting = true;
+        }
+
+        public override void OnShow()
+        {
+            SetCanvasOrder();
+        }
+
+        private void SetCanvasOrder()
+        {
+            if (_canvas == null)
+            {
+                Debug.LogError($"Canvas is Null");
+                return;
+            }
+
+            _canvas.sortingOrder = 10 + UIManager.Instance.PopupHistoryCount;
         }
 
         public void ClosePopupUI()

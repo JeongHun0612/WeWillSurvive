@@ -16,7 +16,6 @@ namespace WeWillSurvive.UI
         public virtual void Show()
         {
             gameObject.SetActive(true);
-
             if (!_initialized) Initialize();
             OnShow();
         }
