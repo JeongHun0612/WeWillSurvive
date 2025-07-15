@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
@@ -145,6 +146,13 @@ namespace WeWillSurvive.Item
             }
 
             return 0.0f;
+        }
+
+        public float GetSupportItemsCount()
+        {
+            return Items
+                .Where(kvp => kvp.Key != EItem.Water && kvp.Key != EItem.Food)
+                .Sum(kvp => kvp.Value);
         }
     }
 }

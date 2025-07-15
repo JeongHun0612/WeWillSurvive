@@ -10,13 +10,14 @@ namespace WeWillSurvive
         MainEvent
     }
 
-    public class PagePanel : MonoBehaviour
+    public abstract class PagePanel : MonoBehaviour
     {
         public EPanelType PanelType { get; protected set; }
         public int PageCount { get; protected set; }
         public int StartPageIndex { get; protected set; }
 
-        public virtual void Initialize() { }
+        public abstract void Initialize();
+
         public virtual void RefreshPage(int startPageIndex) { StartPageIndex = startPageIndex; }
         public virtual void ShowPage(int localIndex) { gameObject.SetActive(true); }
         public virtual void ApplyResult() { }
