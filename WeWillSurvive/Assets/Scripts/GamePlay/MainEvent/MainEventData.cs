@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace WeWillSurvive.MainEvent
 {
+    #region Enum
     public enum EMainEventType
     {
         [Description("\"O\" 또는 \"X\" 를 선택하는 이벤트")]
@@ -55,14 +56,49 @@ namespace WeWillSurvive.MainEvent
         DayCountUpper,
     }
 
+    public enum EChoiceType
+    {
+        // O, X 아이콘
+        //[InspectorName("...")]
+        [Description("Yes")] Yes = 0,
+        [Description("No")] No,
+
+        // 캐릭터 아이콘
+        [Description("Lead")] Lead = 100,
+        [Description("Cook")] Cook,
+        [Description("Bell")] Bell,
+        [Description("DrK")] DrK,
+
+        // 아이템 아이콘
+        [Description("식량")] Food = 200,
+        [Description("특별식량")] SpecialFood,
+        [Description("물")] Water,
+        [Description("구급키트")] MedicKit,
+        [Description("특별구급키트")] SuperMedicKit,
+        [Description("수리키트")] RepairKit,
+        [Description("특별수리키트")] SuperRepairKit,
+        [Description("우주복")] NiceSpacesuit,
+        [Description("라디오")] Radio,
+        [Description("레이져건")] LaserGun,
+        [Description("보드게임")] BoardGame,
+        [Description("통신장비")] CommDevice,
+
+        // 기타
+        [Description("아무것도 선택하지 않음")] Noting = 300,
+        [Description("누군가를 보냄")] Sendsomeone,
+
+        None,
+    }
+
     public enum EEffectType
     {
-        AddItem,
-        RemoveItem,
+        [Description("아이템 획득")] AddItem,
+        [Description("아이템 삭제")] RemoveItem,
 
-        IncreaseStatus,
-        DecreaseStatus,
+        [Description("스테이터스 증가")] IncreaseStatus,
+        [Description("스테이터스 감소")] DecreaseStatus,
     }
+    #endregion
 
     [CreateAssetMenu(fileName = "MainEventData", menuName = "Scriptable Objects/MainEventData")]
     public class MainEventData : ScriptableObject
@@ -71,9 +107,10 @@ namespace WeWillSurvive.MainEvent
         public string title;                                                                // 엔딩 로그에 남길 타이틀
 
         [TextArea(3, 10)]
-        public List<string> descriptions = new List<string>();                              // 랜덤 출력용 텍스트(이벤트 본문)
-        public List<Condition> triggerConditions = new List<Condition>();                   // 이벤트 발생 조건
+        public List<string> descriptions = new();                                           // 랜덤 출력용 텍스트(이벤트 본문)
+        public List<Condition> triggerConditions = new();                                   // 이벤트 발생 조건
         public EMainEventType eventType;                                                    // 이벤트 타입 (YesOrNo, UseItem, ChooseSomeone 등)
+        public List<Texture2D> iconTextures;                                                // 선택지의 Icon Texture
         public List<EventChoice> choices;                                                   // 유저가 고를 수 있는 선택지
     }
 
@@ -89,7 +126,7 @@ namespace WeWillSurvive.MainEvent
     [System.Serializable]
     public class EventChoice
     {
-        public string choiceId;                 // 선택 ID
+        public EChoiceType choiceType;          // 선택 ID
         public List<EventResult> results;       // 선택에 대한 결과 리스트
     }
 

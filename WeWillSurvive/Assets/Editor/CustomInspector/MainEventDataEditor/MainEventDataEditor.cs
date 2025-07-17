@@ -4,44 +4,17 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using WeWillSurvive.MainEvent;
+using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
-    #region EIconType
-    public enum EIconType
-    {
-        // O, X 아이콘
-        O = 0,
-        X,
-
-        // 캐릭터 아이콘
-        Lead = 100,
-        Cook,
-        Bell,
-        DrK,
-
-        // 아이템 아이콘
-        Food = 200,
-        SpecialFood,
-        Water,
-        MedicKit,
-        SuperMedicKit,
-        RepairKit,
-        SuperRepairKit,
-        NiceSpacesuit,
-        Radio,
-        LaserGun,
-        BoardGame,
-
-        // 선택하지 않음
-        Noting = 300,
-    }
-    #endregion
-
     [CustomEditor(typeof(MainEventData))]
     public class MainEventDataEditor : Editor
     {
-        private Dictionary<EIconType, Texture2D> _iconTextures = new();
+        private const float ICON_FIXED_WIDTH = 64;
+        private const float ICON_FIXED_HEIGHT = 64;
+
+        private Dictionary<EChoiceType, Texture2D> _iconTextures = new();
 
         private int selectedChoiceIndex = 0;
         private int selectedResultIndex = 0;
@@ -78,7 +51,7 @@ namespace WeWillSurvive
             EditorGUILayout.Space(20);
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("이벤트 타입", EditorStyles.boldLabel, GUILayout.Width(100));
-            var options = Util.EnumUtil.GetEnumDescriptions<EMainEventType>();
+            var options = EnumUtil.GetEnumDescriptions<EMainEventType>();
             int newType = EditorGUILayout.Popup(eventTypeProp.enumValueIndex, options, GUILayout.Width(300));
             EditorGUILayout.EndHorizontal();
 
@@ -97,21 +70,22 @@ namespace WeWillSurvive
             // 이벤트 타입 별 UI 변경
             EditorGUILayout.Space(20);
             SerializedProperty choicesProp = serializedObject.FindProperty("choices");
+            SerializedProperty iconTexturesProp = serializedObject.FindProperty("iconTextures");
             var eventType = (EMainEventType)eventTypeProp.enumValueIndex;
             switch (eventType)
             {
                 case EMainEventType.YesOrNo:
                 case EMainEventType.SendSomeone:
-                    DrawStaticChoiceUI(choicesProp);
+                    DrawStaticChoiceUI(choicesProp, iconTexturesProp);
                     break;
                 case EMainEventType.UseItems:
-                    DrawEditableChoiceUI(choicesProp, GetItemIconNames());
+                    DrawEditableChoiceUI(choicesProp, iconTexturesProp, GetItemIconNames());
                     break;
                 case EMainEventType.ChooseSomeone:
-                    DrawEditableChoiceUI(choicesProp, GetCharacterIconNames());
+                    DrawEditableChoiceUI(choicesProp, iconTexturesProp, GetCharacterIconNames());
                     break;
                 case EMainEventType.Trade:
-                    DrawEditableChoiceUI(choicesProp, GetItemIconNames());
+                    DrawEditableChoiceUI(choicesProp, iconTexturesProp, GetItemIconNames());
                     break;
                 default:
                     EditorGUILayout.PropertyField(choicesProp);
@@ -121,10 +95,13 @@ namespace WeWillSurvive
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void DrawStaticChoiceUI(SerializedProperty choicesProp)
+        private void DrawStaticChoiceUI(SerializedProperty choicesProp, SerializedProperty iconTexturesProp)
         {
-            EditorGUILayout.LabelField("선택지 목록", EditorStyles.boldLabel, GUILayout.Width(80));
+            EditorGUILayout.LabelField("아이콘 목록", EditorStyles.boldLabel, GUILayout.Width(80));
+            DrawChoiceIcons(iconTexturesProp);
+            EditorGUILayout.Space(10);
 
+            EditorGUILayout.LabelField("선택지 목록", EditorStyles.boldLabel, GUILayout.Width(80));
             DrawChoiceSelector(choicesProp);
             EditorGUILayout.Space(10);
 
@@ -134,11 +111,15 @@ namespace WeWillSurvive
             DrawResultTabsUI(resultsProp);
         }
 
-        private void DrawEditableChoiceUI(SerializedProperty choicesProp, string[] choiceOptions)
+        private void DrawEditableChoiceUI(SerializedProperty choicesProp, SerializedProperty iconTexturesProp, string[] choiceOptions)
         {
+            EditorGUILayout.LabelField("아이콘 목록", EditorStyles.boldLabel, GUILayout.Width(80));
+            DrawChoiceIcons(iconTexturesProp);
+            EditorGUILayout.Space(10);
+
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("선택지 목록", EditorStyles.boldLabel, GUILayout.Width(80));
-            DrawAddRemoveButtonUI(choicesProp, ref selectedChoiceIndex, InitializeEventChoiceProperty);
+            DrawAddRemoveChoiceButtonUI(choicesProp, iconTexturesProp);
             EditorGUILayout.EndHorizontal();
 
             DrawChoiceSelector(choicesProp);
@@ -150,22 +131,58 @@ namespace WeWillSurvive
             if (choicesProp.arraySize > 0)
             {
                 SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
-                SerializedProperty choiceIdProp = selectedChoiceProp.FindPropertyRelative("choiceId");
+                SerializedProperty selectedIconTextureProp = iconTexturesProp.GetArrayElementAtIndex(selectedChoiceIndex);
+                SerializedProperty choiceTypeProp = selectedChoiceProp.FindPropertyRelative("choiceType");
                 SerializedProperty resultsProp = selectedChoiceProp.FindPropertyRelative("results");
 
                 // EIconType 드롭다운으로 선택
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Label("선택지 타입", EditorStyles.boldLabel, GUILayout.Width(100));
-                int currentIndex = Mathf.Max(0, Array.IndexOf(choiceOptions, choiceIdProp.stringValue));
-                //int newType = EditorGUILayout.Popup(eventTypeProp.enumValueIndex, options, GUILayout.Width(300));
+
+                int enumIndex = choiceTypeProp.enumValueIndex;
+                string enumName = choiceTypeProp.enumNames[enumIndex];
+                string choiceName = EnumUtil.GetDescription((EChoiceType)Enum.Parse(typeof(EChoiceType), enumName));
+
+                int choiceIndex = Array.IndexOf(choiceOptions, choiceName);
+                int currentIndex = Mathf.Max(0, choiceIndex);
+
                 int newIndex = EditorGUILayout.Popup(currentIndex, choiceOptions, GUILayout.Width(300));
-                choiceIdProp.stringValue = choiceOptions[newIndex];
+                if (currentIndex != newIndex || choiceIndex < 0)
+                {
+                    EChoiceType choiceType = EnumUtil.GetEnumByDescription<EChoiceType>(choiceOptions[newIndex]).Value;
+                    int newEnumValueIndex = EnumUtil.GetEnumIndex(choiceType);
+
+                    choiceTypeProp.enumValueIndex = newEnumValueIndex;
+                    selectedIconTextureProp.objectReferenceValue = GetIconTexture(choiceType);
+                }
                 EditorGUILayout.EndHorizontal();
 
                 // EventResult 출력
                 EditorGUILayout.Space(20);
                 DrawResultTabsUI(resultsProp);
             }
+        }
+
+        private void DrawChoiceIcons(SerializedProperty iconTexturesProp)
+        {
+            GUIStyle style = new GUIStyle(GUI.skin.button)
+            {
+                fixedWidth = ICON_FIXED_WIDTH,
+                fixedHeight = ICON_FIXED_HEIGHT,
+                margin = new RectOffset(10, 10, 5, 5),
+                padding = new RectOffset(2, 2, 2, 2)
+            };
+
+            EditorGUILayout.BeginHorizontal();
+            for (int i = 0; i < iconTexturesProp.arraySize; i++)
+            {
+                SerializedProperty element = iconTexturesProp.GetArrayElementAtIndex(i);
+                Texture2D texture = element.objectReferenceValue as Texture2D;
+
+                if (texture != null)
+                    GUILayout.Label(texture, style);
+            }
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DrawChoiceSelector(SerializedProperty choicesProp)
@@ -176,32 +193,34 @@ namespace WeWillSurvive
             if (choicesProp.arraySize == 0)
                 EditorGUILayout.HelpBox("선택지를 추가해주세요.", MessageType.Info);
 
+            GUIStyle style = new GUIStyle(GUI.skin.button)
+            {
+                fixedWidth = ICON_FIXED_WIDTH,
+                fixedHeight = ICON_FIXED_HEIGHT,
+                margin = new RectOffset(10, 10, 5, 5),
+                padding = new RectOffset(2, 2, 2, 2),
+                wordWrap = true
+            };
+
             EditorGUILayout.BeginHorizontal();
             for (int i = 0; i < choicesProp.arraySize; i++)
             {
                 SerializedProperty choiceProp = choicesProp.GetArrayElementAtIndex(i);
-                string choiceId = choiceProp.FindPropertyRelative("choiceId").stringValue;
+                SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("choiceType");
 
-                Texture2D icon = null;
-                if (Enum.TryParse(choiceId, out EIconType iconType))
-                    icon = GetIconTexture(iconType);
+                int index = choiceTypeProp.enumValueIndex;
+                string enumName = choiceTypeProp.enumNames[index];
+                EChoiceType choiceType = (EChoiceType)Enum.Parse(typeof(EChoiceType), enumName);
 
-                GUIStyle style = new GUIStyle(GUI.skin.button)
-                {
-                    fixedWidth = 64,
-                    fixedHeight = 64,
-                    margin = new RectOffset(10, 10, 5, 5),
-                    padding = new RectOffset(2, 2, 2, 2)
-                };
-
-                Rect buttonRect = GUILayoutUtility.GetRect(64, 64, style);
+                Rect buttonRect = GUILayoutUtility.GetRect(ICON_FIXED_WIDTH, ICON_FIXED_HEIGHT, style);
 
                 if (selectedChoiceIndex == i)
                 {
-                    EditorGUI.DrawRect(new Rect(buttonRect.x - 2, buttonRect.y - 2, 68, 68), Color.cyan);
+                    EditorGUI.DrawRect(new Rect(buttonRect.x - 2, buttonRect.y - 2, ICON_FIXED_WIDTH + 4, ICON_FIXED_HEIGHT + 4), Color.cyan);
                 }
 
-                GUIContent content = icon != null ? new GUIContent(icon) : new GUIContent(choiceId);
+                Texture2D iconTexture = GetIconTexture(choiceType);
+                GUIContent content = iconTexture != null ? new GUIContent(iconTexture) : new GUIContent(EnumUtil.GetDescription(choiceType));
                 if (GUI.Button(buttonRect, content, style))
                 {
                     selectedChoiceIndex = i;
@@ -267,6 +286,37 @@ namespace WeWillSurvive
             }
         }
 
+        private void DrawAddRemoveChoiceButtonUI(SerializedProperty choicesProp, SerializedProperty iconTexturesProp)
+        {
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("+", GUILayout.Width(24)))
+            {
+                // Choice 생성 및 초기화
+                int choiceInsertIndex = choicesProp.arraySize;
+                choicesProp.InsertArrayElementAtIndex(choiceInsertIndex);
+                SerializedProperty newChoiceElement = choicesProp.GetArrayElementAtIndex(choiceInsertIndex);
+                InitializeEventChoiceProperty(newChoiceElement);
+
+                // IconTexture 생성 및 초기화
+                int iconTextureInsertIndex = iconTexturesProp.arraySize;
+                iconTexturesProp.InsertArrayElementAtIndex(iconTextureInsertIndex);
+                SerializedProperty newIconTextureElement = iconTexturesProp.GetArrayElementAtIndex(iconTextureInsertIndex);
+                newIconTextureElement.objectReferenceValue = null;
+
+                selectedChoiceIndex = choiceInsertIndex;
+            }
+
+            GUI.enabled = choicesProp.arraySize > 0;
+            if (GUILayout.Button("-", GUILayout.Width(24)))
+            {
+                choicesProp.DeleteArrayElementAtIndex(selectedChoiceIndex);
+                iconTexturesProp.DeleteArrayElementAtIndex(selectedChoiceIndex);
+                selectedChoiceIndex = Mathf.Clamp(selectedChoiceIndex - 1, 0, choicesProp.arraySize - 1);
+            }
+            GUI.enabled = true;
+            EditorGUILayout.EndHorizontal();
+        }
+
         private void DrawAddRemoveButtonUI(SerializedProperty prop, ref int selectedIndex, Action<SerializedProperty> onElementInserted = null)
         {
             EditorGUILayout.BeginHorizontal();
@@ -298,23 +348,40 @@ namespace WeWillSurvive
             switch (type)
             {
                 case EMainEventType.YesOrNo:
-                    data.choices = new List<EventChoice>
                     {
-                        new EventChoice { choiceId = EIconType.O.ToString(), results = new List<EventResult>() { new EventResult() }},
-                        new EventChoice { choiceId = EIconType.X.ToString(), results = new List<EventResult>() { new EventResult() }},
-                    };
+                        data.iconTextures = new List<Texture2D>
+                        {
+                            GetIconTexture(EChoiceType.Yes),
+                            GetIconTexture(EChoiceType.No),
+                        };
+                        data.choices = new List<EventChoice>
+                        {
+                            new EventChoice { choiceType = EChoiceType.Yes, results = new List<EventResult>() { new EventResult() } },
+                            new EventChoice { choiceType = EChoiceType.No, results = new List<EventResult>() { new EventResult() } },
+                        };
+                    }
                     break;
                 case EMainEventType.SendSomeone:
-                    data.choices = new List<EventChoice>
                     {
-                        new EventChoice { choiceId = "누군가를\n보냄", results = new List<EventResult>() { new EventResult() }},
-                        new EventChoice { choiceId = EIconType.Noting.ToString(), results = new List<EventResult>() { new EventResult() }},
-                    };
+                        data.iconTextures = new List<Texture2D>
+                        {
+                            GetIconTexture(EChoiceType.Lead),
+                            GetIconTexture(EChoiceType.Cook),
+                            GetIconTexture(EChoiceType.Bell),
+                            GetIconTexture(EChoiceType.DrK),
+                        };
+                        data.choices = new List<EventChoice>
+                        {
+                            new EventChoice { choiceType = EChoiceType.Sendsomeone, results = new List<EventResult>() { new EventResult() }},
+                            new EventChoice { choiceType = EChoiceType.Noting, results = new List<EventResult>() { new EventResult() }},
+                        };
+                    }
                     break;
                 case EMainEventType.ChooseSomeone:
                 case EMainEventType.UseItems:
                 case EMainEventType.Trade:
-                    data.choices = new List<EventChoice>(); // 초기 빈 리스트 (에디터에서 추가)
+                    data.iconTextures = new List<Texture2D>();  // 초기 빈 리스트 (에디터에서 추가)
+                    data.choices = new List<EventChoice>();     // 초기 빈 리스트 (에디터에서 추가)
                     break;
 
             }
@@ -323,6 +390,9 @@ namespace WeWillSurvive
         private void InitializeEventChoiceProperty(SerializedProperty choiceProp)
         {
             if (choiceProp == null) return;
+
+            SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("choiceType");
+            choiceTypeProp.enumValueIndex = EnumUtil.GetEnumIndex(EChoiceType.None);
 
             SerializedProperty resultsProp = choiceProp.FindPropertyRelative("results");
             resultsProp.ClearArray();
@@ -352,7 +422,7 @@ namespace WeWillSurvive
         {
             _iconTextures.Clear();
 
-            foreach (EIconType type in Enum.GetValues(typeof(EIconType)))
+            foreach (EChoiceType type in Enum.GetValues(typeof(EChoiceType)))
             {
                 string path = $"Assets/Editor/Icons/{type}.png"; // enum 이름 그대로 사용
                 Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
@@ -362,7 +432,7 @@ namespace WeWillSurvive
             }
         }
 
-        private Texture2D GetIconTexture(EIconType type)
+        private Texture2D GetIconTexture(EChoiceType type)
         {
             if (_iconTextures.TryGetValue(type, out var texture))
                 return texture;
@@ -371,15 +441,36 @@ namespace WeWillSurvive
         }
 
         private string[] GetAnswerIconNames() => GetIconNamesInRange(0, 99);
-        private string[] GetCharacterIconNames() => GetIconNamesInRange(100, 199);
-        private string[] GetItemIconNames() => GetIconNamesInRange(200, 299);
+        private string[] GetCharacterIconNames()
+        {
+            return GetItemChoiceTypes(100, 199)
+                .Append(EChoiceType.Noting)
+                .Select(e => EnumUtil.GetDescription(e))
+                .ToArray();
+        }
+
+        private string[] GetItemIconNames()
+        {
+            return GetItemChoiceTypes(200, 299)
+                .Append(EChoiceType.Noting)
+                .Select(e => EnumUtil.GetDescription(e))
+                .ToArray();
+        }
 
         private string[] GetIconNamesInRange(int minInclusive, int maxInclusive)
         {
-            return Enum.GetValues(typeof(EIconType))
-                .Cast<EIconType>()
+            return Enum.GetValues(typeof(EChoiceType))
+                .Cast<EChoiceType>()
                 .Where(e => (int)e >= minInclusive && (int)e <= maxInclusive)
                 .Select(e => e.ToString())
+                .ToArray();
+        }
+
+        private EChoiceType[] GetItemChoiceTypes(int minInclusive, int maxInclusive)
+        {
+            return Enum.GetValues(typeof(EChoiceType))
+                .Cast<EChoiceType>()
+                .Where(e => (int)e >= minInclusive && (int)e < maxInclusive)
                 .ToArray();
         }
     }
