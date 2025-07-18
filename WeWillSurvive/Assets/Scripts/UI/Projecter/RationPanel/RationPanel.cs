@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,9 +34,9 @@ namespace WeWillSurvive
             }
         }
 
-        public override void RefreshPage(int startPageIndex)
+        public override async UniTask RefreshPageAsync(int startPageIndex)
         {
-            StartPageIndex = startPageIndex;
+            await base.RefreshPageAsync(startPageIndex);
 
             foreach (var rationCharacter in _rationCharacters)
             {

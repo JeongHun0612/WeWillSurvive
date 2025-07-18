@@ -1,20 +1,30 @@
 ﻿using UnityEngine;
 using WeWillSurvive.Item;
 using WeWillSurvive.Character;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace WeWillSurvive.Character
 {
     [CreateAssetMenu(fileName = "CharacterData", menuName = "Scriptable Objects/CharacterData")]
     public class CharacterData : ScriptableObject
     {
-        [field: SerializeField] public ECharacter Type { get; private set; }
-        [field: SerializeField] public EItem ItemType { get; private set; }
-        [field: SerializeField] public string Name { get; private set; }
+        [Header("## Character Type and Name")]
+        [SerializeField] private ECharacter _type;
+        [SerializeField] private EItem _itemType;
+        [SerializeField] private string _name;
+        public ECharacter Type => _type;
+        public EItem ItemType => _itemType;
+        public string Name => _name;
 
         [Header("## Character Status")]
-        [field: SerializeField] public float MaxHunger { get; private set; }
-        [field: SerializeField] public float MaxThirst { get; private set; }
-        [field: SerializeField] public float MaxHealth { get; private set; }
+        [SerializeField] private float _maxHunger;
+        [SerializeField] private float _maxThirst;
+        [SerializeField] private float _maxHealth;
+        public float MaxHunger => _maxHunger;
+        public float MaxThirst => _maxThirst;
+        public float MaxHealth => _maxHealth;
+
 
         [Header("## Morale Sprites")]
         [SerializeField] private Sprite _normal;
@@ -37,38 +47,108 @@ namespace WeWillSurvive.Character
         [Tooltip("다침 + 공포 + 미침 상태")]
         [SerializeField] private Sprite _injuredScaredMad;
 
+        [Header("## State Active Message")]
+        [SerializeField] private string _hungerActiveMessage;
+        [SerializeField] private string _starveActiveMessage;
+        [SerializeField] private string _thirstyActiveMessage;
+        [SerializeField] private string _dehydrateActiveMessage;
+        [SerializeField] private string _injuredActiveMessage;
+        [SerializeField] private string _sickActiveMessage;
+        [SerializeField] private string _anxiousActiveMessage;
+        [SerializeField] private string _panicActiveMessage;
+        [SerializeField] private string _madActiveMessage;
+        [SerializeField] private string _deadActiveMessage;
+
+
+        [Header("## State Resolve Message")]
+        [SerializeField] private string _hungerResolvedMessage;
+        //[SerializeField] private string _starveResolvedMessage;
+        [SerializeField] private string _thirstyResolvedMessage;
+        //[SerializeField] private string _dehydrateResolvedMessage;
+        [SerializeField] private string _injuredResolvedMessage;
+        [SerializeField] private string _sickResolvedMessage;
+        [SerializeField] private string _anxiousResolvedMessage;
+        [SerializeField] private string _panicResolvedMessage;
+        [SerializeField] private string _madResolvedMessage;
+
+        private Dictionary<EState, string> _stateActiveMessageDict = new();
+        private Dictionary<EState, string> _stateResolvedMessageDict = new();
+
+        public void Initialize()
+        {
+            _stateActiveMessageDict = new()
+            {
+                [EState.Hungry] = _hungerResolvedMessage,
+                [EState.Starve] = _starveActiveMessage,
+                [EState.Thirsty] = _thirstyResolvedMessage,
+                [EState.Dehydrate] = _dehydrateActiveMessage,
+                [EState.Injured] = _injuredResolvedMessage,
+                [EState.Sick] = _sickResolvedMessage,
+                [EState.Anxious] = _anxiousResolvedMessage,
+                [EState.Panic] = _panicResolvedMessage,
+                [EState.Mad] = _madResolvedMessage,
+                [EState.Dead] = _deadActiveMessage,
+            };
+
+            _stateResolvedMessageDict = new()
+            {
+                [EState.Hungry] = _hungerResolvedMessage,
+                [EState.Starve] = _hungerResolvedMessage,
+                [EState.Thirsty] = _thirstyResolvedMessage,
+                [EState.Dehydrate] = _thirstyResolvedMessage,
+                [EState.Injured] = _injuredResolvedMessage,
+                [EState.Sick] = _sickResolvedMessage,
+                [EState.Anxious] = _anxiousResolvedMessage,
+                [EState.Panic] = _panicResolvedMessage,
+                [EState.Mad] = _madResolvedMessage,
+            };
+        }
+
+        public string GetStateActiveMessage(EState state)
+        {
+            if (!_stateActiveMessageDict.TryGetValue(state, out string message))
+            {
+                Debug.LogError($"[{state}] ActiveMessage not found.");
+                return string.Empty;
+            }
+
+            return message;
+        }
+
+        public string GetStateResolvedMessage(EState state)
+        {
+            if (!_stateResolvedMessageDict.TryGetValue(state, out string message))
+            {
+                Debug.LogError($"[{state}] ResolvedMessage not found.");
+                return string.Empty;
+            }
+
+            return message;
+        }
+
         public Sprite GetMainSprite(EState state, EMorale morale)
         {
-            var isHurt = EState.Injured | EState.Sick;
-            var isAnxiety = EState.Anxious | EState.Panic;
-            var isMad = EState.Mad;
+            bool isHurt = (state & (EState.Injured | EState.Sick)) != 0;
+            bool isAnxiety = (state & (EState.Anxious | EState.Panic)) != 0;
+            bool isMad = (state & EState.Mad) != 0;
 
-            // 다침 + 공포 + 미침
-            if ((state & isHurt) != 0 &&
-                (state & isAnxiety) != 0 &&
-                (state & isMad) != 0)
+            // 상태 조합 우선순위
+            if (isHurt && isAnxiety && isMad)
                 return _injuredScaredMad;
 
-            // 다침 + 미침
-            if ((state & isHurt) != 0 &&
-                (state & isMad) != 0)
+            if (isHurt && isMad)
                 return _injuredMad;
 
-            // 다침 + 공포
-            if ((state & isHurt) != 0 &&
-                (state & isAnxiety) != 0)
+            if (isHurt && isAnxiety)
                 return _injuredScared;
 
-            // 미침
-            if ((state & isMad) != 0)
+            if (isMad)
                 return _mad;
 
-            // 공포
-            if ((state & isAnxiety) != 0)
+            if (isAnxiety)
                 return _scared;
 
-            // 다침
-            if ((state & isHurt) != 0)
+            if (isHurt)
                 return _injured;
 
 

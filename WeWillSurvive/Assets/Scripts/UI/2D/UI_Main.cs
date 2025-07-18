@@ -54,7 +54,11 @@ namespace WeWillSurvive
             _roomMonitorButton.onClick.AddListener(() => UIManager.Instance.ShowPopup<UI_RoomMonitor>());
 
             // Projecter
-            _projecterButton.onClick.AddListener(() => UIManager.Instance.ShowPopup<UI_Projecter>());
+            _projecterButton.onClick.AddListener(() =>
+            {
+                UIManager.Instance.ClosePopups(remain: 1);
+                UIManager.Instance.ShowPopup<UI_Projecter>();
+            });
 
             // Next Day
             _nextDayButton.onClick.AddListener(() => GameManager.Instance.StartNextDay());
@@ -87,12 +91,12 @@ namespace WeWillSurvive
             _medicKitSprites[1] = await resource.LoadAssetAsync<Sprite>("special_medical_kit");
         }
 
-        public override void OnShow()
-        {
-            base.OnShow();
+        //public override void OnShow()
+        //{
+        //    base.OnShow();
 
-            UpdateUI();
-        }
+        //    UpdateUI();
+        //}
 
         public void UseItemDebug(int type)
         {

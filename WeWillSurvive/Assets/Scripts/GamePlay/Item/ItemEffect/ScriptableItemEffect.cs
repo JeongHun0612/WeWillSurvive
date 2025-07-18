@@ -4,9 +4,9 @@ using WeWillSurvive.Item;
 
 namespace WeWillSurvive.ItemEffect
 {
-    public abstract class ScriptableItemEffect : ScriptableObject, IItemEffect
+    public abstract class ScriptableItemEffect : ScriptableObject
     {
-        [field: SerializeField] public EItem Item { get; private set; }
+        [field:SerializeField] public EItem ItemType { get; private set; }
         public abstract void Apply(CharacterBase character);
     }
 }

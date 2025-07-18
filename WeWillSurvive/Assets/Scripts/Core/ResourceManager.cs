@@ -45,6 +45,39 @@ namespace WeWillSurvive.Core
             return null;
         }
 
+        /// <summary>
+        /// 특정 라벨을 가진 모든 Addressable 리소스를 로드
+        /// </summary>
+        public async UniTask<List<T>> LoadAssetsByLabelAsync<T>(string label) where T : Object
+        {
+            List<T> loadedList = new List<T>();
+
+            var handle = Addressables.LoadAssetsAsync<T>(label, null);  // 콜백 없이 로드
+            await handle.Task;
+
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                foreach (var asset in handle.Result)
+                {
+                    string key = asset.name;
+                    if (!_loadedAssets.ContainsKey(key))
+                    {
+                        _loadedAssets[key] = asset;
+                    }
+
+                    loadedList.Add(asset);
+                }
+
+                Debug.Log($"label : {label} 리소스 {loadedList.Count}개 로드 성공");
+            }
+            else
+            {
+                Debug.LogError($"{label} 라벨 리소스 로드 실패");
+            }
+
+            return loadedList;
+        }
+
         public void UnloadAsset(string key)
         {
             if (_loadedAssets.ContainsKey(key))

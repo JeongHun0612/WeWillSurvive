@@ -16,30 +16,27 @@ MonoBehaviour:
   title: "\uD14C\uC2A4\uD2B8 \uC774\uBCA4\uD2B8"
   descriptions:
   - "\uD14C\uC2A4\uD2B8 \uC774\uBCA4\uD2B8 \uBCF8\uBB38 \uB0B4\uC6A9"
-  triggerConditions:
-  - conditionType: 0
-    targetId: Cook
-    parameter: 
-    value: 
-  eventType: 0
+  triggerConditions: []
+  eventType: 1
   choices:
-  - choiceId: O
+  - choiceType: 201
+    iconTexture: {fileID: 2800000, guid: 9c833eaa9fe75864a90e8391f44047f7, type: 3}
     results:
     - conditions: []
-      resultText: "O\uB97C \uC120\uD0DD\uD588\uC744 \uB54C \uACB0\uACFC"
-      effects:
-      - effectType: 0
-        targetId: Food
-        parameter: 
-        value: 2
+      resultText: 
+      effects: []
       probability: 1
-  - choiceId: X
+  - choiceType: 200
+    iconTexture: {fileID: 2800000, guid: c50fef4daef70c542b0a906159ae22f5, type: 3}
     results:
     - conditions: []
-      resultText: "X\uB97C \uC120\uD0DD\uD588\uC744 \uB54C \uACB0\uACFC"
-      effects:
-      - effectType: 0
-        targetId: Water
-        parameter: 
-        value: 3
+      resultText: 
+      effects: []
+      probability: 1
+  - choiceType: 300
+    iconTexture: {fileID: 0}
+    results:
+    - conditions: []
+      resultText: 
+      effects: []
       probability: 1

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace WeWillSurvive
 {
@@ -18,7 +19,12 @@ namespace WeWillSurvive
 
         public abstract void Initialize();
 
-        public virtual void RefreshPage(int startPageIndex) { StartPageIndex = startPageIndex; }
+        public virtual async UniTask RefreshPageAsync(int startPageIndex) 
+        {
+            StartPageIndex = startPageIndex;
+            await UniTask.CompletedTask;
+        }
+
         public virtual void ShowPage(int localIndex) { gameObject.SetActive(true); }
         public virtual void ApplyResult() { }
 

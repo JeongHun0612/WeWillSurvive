@@ -42,17 +42,19 @@ namespace WeWillSurvive.Core
 
         public void StartNextDay()
         {
-            Day++;
             UIManager.Instance.PadeUI.StartPadeSequence(OnNewDay);
         }
 
         private void OnNewDay()
         {
+            Day++;
+
+            UIManager.Instance.ClosePopups(remain: 1);
+
             if (UIManager.Instance.GetCurrentScene<UI_Background>() == null)
                 UIManager.Instance.ShowScene<UI_Background>();
 
-            if (Day > 1)
-                CharacterManager.UpdateCharacterStatus();
+            CharacterManager.UpdateCharacterStatus();
 
             // 모든 플레이어가 사망 시 생존 실패
             if (CharacterManager.AliveCharacterCount() == 0)
@@ -64,6 +66,8 @@ namespace WeWillSurvive.Core
             // TOOD 엔딩 분기 확인
 
             EventBus.Publish(new NewDayEvent() { CurrentDay = Day });
+
+            // TODO 로그 초기화
         }
 
         public void NewDay()
