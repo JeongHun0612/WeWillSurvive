@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using UnityEngine;
 
 namespace WeWillSurvive.MainEvent
@@ -82,6 +83,10 @@ namespace WeWillSurvive.MainEvent
         [Description("레이져건")] LaserGun,
         [Description("보드게임")] BoardGame,
         [Description("통신장비")] CommDevice,
+        [Description("도끼")] Ax,
+        [Description("쇠파이프")] Pipe,
+        [Description("손전등")] Flashlight,
+        [Description("행성탐사지도")] Map,
 
         // 기타
         [Description("아무것도 선택하지 않음")] Noting = 300,
@@ -110,8 +115,9 @@ namespace WeWillSurvive.MainEvent
         public List<string> descriptions = new();                                           // 랜덤 출력용 텍스트(이벤트 본문)
         public List<Condition> triggerConditions = new();                                   // 이벤트 발생 조건
         public EMainEventType eventType;                                                    // 이벤트 타입 (YesOrNo, UseItem, ChooseSomeone 등)
-        public List<Texture2D> iconTextures;                                                // 선택지의 Icon Texture
         public List<EventChoice> choices;                                                   // 유저가 고를 수 있는 선택지
+
+        public EventChoice GetEventChoice(EChoiceType choiceType) => choices.FirstOrDefault(choice => choice.choiceType == choiceType);
     }
 
     [System.Serializable]
@@ -127,7 +133,17 @@ namespace WeWillSurvive.MainEvent
     public class EventChoice
     {
         public EChoiceType choiceType;          // 선택 ID
+        public Texture2D iconTexture;           // 아이콘 텍스쳐
         public List<EventResult> results;       // 선택에 대한 결과 리스트
+
+        public EventResult GetRandomResult()
+        {
+            if (results == null || results.Count == 0)
+                return null;
+
+            int index = Random.Range(0, results.Count);
+            return results[index];
+        }
     }
 
     [System.Serializable]

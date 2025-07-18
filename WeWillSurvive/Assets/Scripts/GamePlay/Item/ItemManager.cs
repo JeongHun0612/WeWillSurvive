@@ -21,6 +21,10 @@ namespace WeWillSurvive.Item
         Radio,
         LaserGun,
         BoardGame,
+        Ax,
+        Pipe,
+        Flashlight,
+        Map,
 
         // Character
         Lead = 100,
@@ -55,8 +59,8 @@ namespace WeWillSurvive.Item
             AddItem(EItem.DrK);
             AddItem(EItem.Bell);
 
-            AddItem(EItem.Food, 4f);
-            AddItem(EItem.Water, 3f);
+            AddItem(EItem.Food, 5f);
+            AddItem(EItem.Water, 5f);
             AddItem(EItem.BoardGame);
             AddItem(EItem.LaserGun);
             //AddItem(EItem.MedicKit, 1);
