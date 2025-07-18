@@ -31,6 +31,7 @@ namespace WeWillSurvive.Item
         Cook,
         Bell,
         DrK,
+        Starmac,
     }
 
     public class ItemManager : IService
