@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: survey_11
+  m_EditorClassIdentifier: 
+  eventId: survey_11
+  title: "\uC6B0\uC8FC \uD559\uAD50 \uD0D0\uC0AC"
+  descriptions:
+  - "(\uD0D0\uC0AC)"
+  triggerConditions: []
+  eventType: 2
+  choices:
+  - choiceType: 100
+    iconTexture: {fileID: 2800000, guid: 9c1c7e0dca2ceb24b94b8fd5fa497391, type: 3}
+    results:
+    - conditions: []
+      resultText: "\uC774 \uD559\uAD50\uB294 \uD55C\uB54C \uC6B0\uC8FC \uD0D0\uC0AC\uB300\uC6D0\uC744
+        \uD6C8\uB828\uC2DC\uD0A4\uB358 \uC911\uC2EC\uC9C0\uC600\uB2E4. \uC9C0\uAE08\uC740
+        \uBAA8\uB4E0 \uAC83\uC774 \uBC84\uB824\uC838 \uACE0\uC694 \uC18D\uC5D0 \uAC07\uD600
+        \uC788\uC9C0\uB9CC, \uC5F0\uAD6C\uC2E4\uC774\uB098 \uAC15\uC758\uC2E4\uC758
+        \uAD6C\uC11D\uC5D0\uC11C \uC4F8 \uB9CC\uD55C \uC7A5\uBE44\uB098 \uC911\uC694\uD55C
+        \uD0D0\uC0AC \uAE30\uB85D\uB4E4\uC774 \uBC1C\uACAC\uB420 \uAC00\uB2A5\uC131\uC774
+        \uC788\uB2E4. \uACFC\uAC70\uC758 \uC9C0\uC2DD\uC744 \uB418\uC0B4\uB9B4 \uAE30\uD68C\uB97C
+        \uB193\uCCD0\uC120 \uC548 \uB41C\uB2E4.\r\r"
+      effects: []
+      probability: 1
+    - conditions: []
+      resultText: "\uD3D0\uD5C8\uAC00 \uB41C \uC124\uBE44\uC2E4 \uC548\uC5D0\uB294
+        \uBD80\uC11C\uC9C4 \uAE30\uACC4 \uC794\uD574\uAC00 \uB110\uB824 \uC788\uC5C8\uB2E4.
+        \uADF8\uC911 \uC190\uC5D0 \uB4E4\uC5B4\uC62C \uB9CC\uD55C \uC801\uB2F9\uD55C
+        \uAE38\uC774\uC758 \uC1E0\uD30C\uC774\uD504 \uD558\uB098\uB97C \uAEBC\uB0B4
+        \uB4E4\uC5C8\uB2E4. \uBC29\uC5B4\uC6A9\uC73C\uB85C\uB294 \uAF64 \uB4E0\uB4E0\uD574
+        \uBCF4\uC778\uB2E4.\r\r"
+      effects:
+      - effectType: 0
+        targetId: Pipe
+        parameter: 
+        value: 1
+      probability: 1
+    - conditions: []
+      resultText: "\uCC45\uC0C1 \uC704\uC5D0 \uBC29\uCE58\uB41C \uD0D0\uC0AC \uC9C0\uB3C4\uB294
+        \uC190\uC0C1\uB418\uC9C0 \uC54A\uC740 \uC0C1\uD0DC\uC600\uB2E4.\r\r"
+      effects:
+      - effectType: 0
+        targetId: Map
+        parameter: 
+        value: 1
+      probability: 1
+  - choiceType: 101
+    iconTexture: {fileID: 2800000, guid: ce3adeb574cb93f479b27e05f596f120, type: 3}
+    results:
+    - conditions: []
+      resultText: "\uC774 \uD559\uAD50\uB294 \uD55C\uB54C \uC6B0\uC8FC \uD0D0\uC0AC\uB300\uC6D0\uC744
+        \uD6C8\uB828\uC2DC\uD0A4\uB358 \uC911\uC2EC\uC9C0\uC600\uB2E4. \uC9C0\uAE08\uC740
+        \uBAA8\uB4E0 \uAC83\uC774 \uBC84\uB824\uC838 \uACE0\uC694 \uC18D\uC5D0 \uAC07\uD600
+        \uC788\uC9C0\uB9CC, \uC5F0\uAD6C\uC2E4\uC774\uB098 \uAC15\uC758\uC2E4\uC758
+        \uAD6C\uC11D\uC5D0\uC11C \uC4F8 \uB9CC\uD55C \uC7A5\uBE44\uB098 \uC911\uC694\uD55C
+        \uD0D0\uC0AC \uAE30\uB85D\uB4E4\uC774 \uBC1C\uACAC\uB420 \uAC00\uB2A5\uC131\uC774
+        \uC788\uB2E4. \uACFC\uAC70\uC758 \uC9C0\uC2DD\uC744 \uB418\uC0B4\uB9B4 \uAE30\uD68C\uB97C
+        \uB193\uCCD0\uC120 \uC548 \uB41C\uB2E4.\r\r"
+      effects: []
+      probability: 1
+    - conditions: []
+      resultText: "\uD3D0\uD5C8\uAC00 \uB41C \uC124\uBE44\uC2E4 \uC548\uC5D0\uB294
+        \uBD80\uC11C\uC9C4 \uAE30\uACC4 \uC794\uD574\uAC00 \uB110\uB824 \uC788\uC5C8\uB2E4.
+        \uADF8\uC911 \uC190\uC5D0 \uB4E4\uC5B4\uC62C \uB9CC\uD55C \uC801\uB2F9\uD55C
+        \uAE38\uC774\uC758 \uC1E0\uD30C\uC774\uD504 \uD558\uB098\uB97C \uAEBC\uB0B4
+        \uB4E4\uC5C8\uB2E4. \uBC29\uC5B4\uC6A9\uC73C\uB85C\uB294 \uAF64 \uB4E0\uB4E0\uD574
+        \uBCF4\uC778\uB2E4.\r\r"
+      effects:
+      - effectType: 0
+        targetId: Pipe
+        parameter: 
+        value: 1
+      probability: 1
+    - conditions: []
+      resultText: "\uCC45\uC0C1 \uC704\uC5D0 \uBC29\uCE58\uB41C \uD0D0\uC0AC \uC9C0\uB3C4\uB294
+        \uC190\uC0C1\uB418\uC9C0 \uC54A\uC740 \uC0C1\uD0DC\uC600\uB2E4.\r\r"
+      effects:
+      - effectType: 0
+        targetId: Map
+        parameter: 
+        value: 1
+      probability: 1
+  - choiceType: 102
+    iconTexture: {fileID: 2800000, guid: 6de2b98c14c702e4498a3e92162da2ac, type: 3}
+    results:
+    - conditions: []
+      resultText: "\uC774 \uD559\uAD50\uB294 \uD55C\uB54C \uC6B0\uC8FC \uD0D0\uC0AC\uB300\uC6D0\uC744
+        \uD6C8\uB828\uC2DC\uD0A4\uB358 \uC911\uC2EC\uC9C0\uC600\uB2E4. \uC9C0\uAE08\uC740
+        \uBAA8\uB4E0 \uAC83\uC774 \uBC84\uB824\uC838 \uACE0\uC694 \uC18D\uC5D0 \uAC07\uD600
+        \uC788\uC9C0\uB9CC, \uC5F0\uAD6C\uC2E4\uC774\uB098 \uAC15\uC758\uC2E4\uC758
+        \uAD6C\uC11D\uC5D0\uC11C \uC4F8 \uB9CC\uD55C \uC7A5\uBE44\uB098 \uC911\uC694\uD55C
+        \uD0D0\uC0AC \uAE30\uB85D\uB4E4\uC774 \uBC1C\uACAC\uB420 \uAC00\uB2A5\uC131\uC774
+        \uC788\uB2E4. \uACFC\uAC70\uC758 \uC9C0\uC2DD\uC744 \uB418\uC0B4\uB9B4 \uAE30\uD68C\uB97C
+        \uB193\uCCD0\uC120 \uC548 \uB41C\uB2E4.\r\r"
+      effects: []
+      probability: 1
+    - conditions: []
+      resultText: "\uD3D0\uD5C8\uAC00 \uB41C \uC124\uBE44\uC2E4 \uC548\uC5D0\uB294
+        \uBD80\uC11C\uC9C4 \uAE30\uACC4 \uC794\uD574\uAC00 \uB110\uB824 \uC788\uC5C8\uB2E4.
+        \uADF8\uC911 \uC190\uC5D0 \uB4E4\uC5B4\uC62C \uB9CC\uD55C \uC801\uB2F9\uD55C
+        \uAE38\uC774\uC758 \uC1E0\uD30C\uC774\uD504 \uD558\uB098\uB97C \uAEBC\uB0B4
+        \uB4E4\uC5C8\uB2E4. \uBC29\uC5B4\uC6A9\uC73C\uB85C\uB294 \uAF64 \uB4E0\uB4E0\uD574
+        \uBCF4\uC778\uB2E4.\r\r"
+      effects:
+      - effectType: 0
+        targetId: Pipe
+        parameter: 
+        value: 1
+      probability: 1
+    - conditions: []
+      resultText: "\uCC45\uC0C1 \uC704\uC5D0 \uBC29\uCE58\uB41C \uD0D0\uC0AC \uC9C0\uB3C4\uB294
+        \uC190\uC0C1\uB418\uC9C0 \uC54A\uC740 \uC0C1\uD0DC\uC600\uB2E4.\r\r"
+      effects:
+      - effectType: 0
+        targetId: Map
+        parameter: 
+        value: 1
+      probability: 1
+  - choiceType: 103
+    iconTexture: {fileID: 2800000, guid: 0dad9e33662bf5442a545e29908227eb, type: 3}
+    results:
+    - conditions: []
+      resultText: "\uC774 \uD559\uAD50\uB294 \uD55C\uB54C \uC6B0\uC8FC \uD0D0\uC0AC\uB300\uC6D0\uC744
+        \uD6C8\uB828\uC2DC\uD0A4\uB358 \uC911\uC2EC\uC9C0\uC600\uB2E4. \uC9C0\uAE08\uC740
+        \uBAA8\uB4E0 \uAC83\uC774 \uBC84\uB824\uC838 \uACE0\uC694 \uC18D\uC5D0 \uAC07\uD600
+        \uC788\uC9C0\uB9CC, \uC5F0\uAD6C\uC2E4\uC774\uB098 \uAC15\uC758\uC2E4\uC758
+        \uAD6C\uC11D\uC5D0\uC11C \uC4F8 \uB9CC\uD55C \uC7A5\uBE44\uB098 \uC911\uC694\uD55C
+        \uD0D0\uC0AC \uAE30\uB85D\uB4E4\uC774 \uBC1C\uACAC\uB420 \uAC00\uB2A5\uC131\uC774
+        \uC788\uB2E4. \uACFC\uAC70\uC758 \uC9C0\uC2DD\uC744 \uB418\uC0B4\uB9B4 \uAE30\uD68C\uB97C
+        \uB193\uCCD0\uC120 \uC548 \uB41C\uB2E4.\r\r"
+      effects: []
+      probability: 1
+    - conditions: []
+      resultText: "\uD3D0\uD5C8\uAC00 \uB41C \uC124\uBE44\uC2E4 \uC548\uC5D0\uB294
+        \uBD80\uC11C\uC9C4 \uAE30\uACC4 \uC794\uD574\uAC00 \uB110\uB824 \uC788\uC5C8\uB2E4.
+        \uADF8\uC911 \uC190\uC5D0 \uB4E4\uC5B4\uC62C \uB9CC\uD55C \uC801\uB2F9\uD55C
+        \uAE38\uC774\uC758 \uC1E0\uD30C\uC774\uD504 \uD558\uB098\uB97C \uAEBC\uB0B4
+        \uB4E4\uC5C8\uB2E4. \uBC29\uC5B4\uC6A9\uC73C\uB85C\uB294 \uAF64 \uB4E0\uB4E0\uD574
+        \uBCF4\uC778\uB2E4.\r\r"
+      effects:
+      - effectType: 0
+        targetId: Pipe
+        parameter: 
+        value: 1
+      probability: 1
+    - conditions: []
+      resultText: "\uCC45\uC0C1 \uC704\uC5D0 \uBC29\uCE58\uB41C \uD0D0\uC0AC \uC9C0\uB3C4\uB294
+        \uC190\uC0C1\uB418\uC9C0 \uC54A\uC740 \uC0C1\uD0DC\uC600\uB2E4.\r\r"
+      effects:
+      - effectType: 0
+        targetId: Map
+        parameter: 
+        value: 1
+      probability: 1
+  - choiceType: 300
+    iconTexture: {fileID: 0}
+    results:
+    - conditions: []
+      resultText: 
+      effects: []
+      probability: 1
