@@ -67,6 +67,11 @@ namespace WeWillSurvive.Item
             AddItem(EItem.RepairKit);
             AddItem(EItem.NiceSpacesuit);
             AddItem(EItem.Radio);
+            AddItem(EItem.Ax);
+            AddItem(EItem.Pipe);
+            AddItem(EItem.Flashlight);
+            AddItem(EItem.Map);
+            AddItem(EItem.Starmac);
         }
 
         public void Dipose()

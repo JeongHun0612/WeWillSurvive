@@ -28,6 +28,16 @@ MonoBehaviour:
   _injuredScared: {fileID: 21300000, guid: a14bd32fe8eca5d4caccec9ed8f5adcf, type: 3}
   _scaredMad: {fileID: 21300000, guid: 40d5cc0b8d4d7ba499023414be2b5f72, type: 3}
   _injuredScaredMad: {fileID: 21300000, guid: 9eb4cd7826a260247b8c3e9a85765afb, type: 3}
+  _normalRoom: {fileID: 21300000, guid: f5e6e37695332c24eb9d1e82ece9fa63, type: 3}
+  _highRoom: {fileID: 21300000, guid: f5e6e37695332c24eb9d1e82ece9fa63, type: 3}
+  _lowRoom: {fileID: 21300000, guid: f5e6e37695332c24eb9d1e82ece9fa63, type: 3}
+  _injuredRoom: {fileID: 21300000, guid: ae987efff7a9541458868511e77e3028, type: 3}
+  _scaredRoom: {fileID: 21300000, guid: cc593a543f4f8374a87f7394b5ba26e2, type: 3}
+  _madRoom: {fileID: 21300000, guid: 793b5c6edabdec145898e0d3b57b22e5, type: 3}
+  _injuredMadRoom: {fileID: 21300000, guid: e79b0676b63cf344e9510acaadeed92c, type: 3}
+  _injuredScaredRoom: {fileID: 21300000, guid: 7c9dd2223d6a5b94798f01765212cc64, type: 3}
+  _scaredMadRoom: {fileID: 21300000, guid: 11a36a50abd37fa49ac781d04fd9fcd1, type: 3}
+  _injuredScaredMadRoom: {fileID: 21300000, guid: 608b29a87c0f5de4ba4ac3736e5f16f1, type: 3}
   _hungerActiveMessage: "\uBCA8\uC740 \uC2DD\uB7C9 \uCC3D\uACE0 \uC55E\uC744 \uC11C\uC131\uC778\uB2E4."
   _starveActiveMessage: "\uBCA8\uC740 \uC190\uC5D0 \uC954 \uB3C4\uAD6C\uB97C \uB193\uCE58\uACE0
     \uAD73\uC740 \uD45C\uC815\uC774\uB2E4."

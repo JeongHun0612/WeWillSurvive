@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.UI;
@@ -33,13 +34,16 @@ namespace WeWillSurvive
             CharacterBase characterInfo = ServiceLocator.Get<CharacterManager>().GetCharacter(owner);
 
             GameObject character = _characters[(int)owner];
-            character.SetActive(true);
 
             if (characterInfo == null || character == null)
             {
                 Debug.LogError($"[{gameObject.name}] Character 찾을 수 없음");
                 return;
             }
+
+            // 캐릭터 정보 설정
+            character.SetActive(true);
+            character.GetComponentInChildren<Image>().sprite = characterInfo.RoomSprite;
 
             // 우주 기지 내 존재하지 않거나 죽은 경우
             if (characterInfo.State.HasState(EState.Exploring) || characterInfo.State.HasState(EState.Dead))
