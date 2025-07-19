@@ -37,11 +37,11 @@ namespace WeWillSurvive.Status
 
         public override void ApplyRecovery()
         {
-            _level = (EThirstLevel)Mathf.Max(0, (int)(object)_level - 1);
+            base.ApplyRecovery();
 
-            //_level = EHungerLevel.Normal;
+            //_level = (EThirstLevel)Mathf.Max(0, (int)(object)_level - 1);
 
-            _dayCounter = 0;
+            _level = EThirstLevel.Normal;
         }
     }
 }

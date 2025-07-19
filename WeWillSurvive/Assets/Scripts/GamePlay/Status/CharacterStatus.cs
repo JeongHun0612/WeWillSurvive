@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Status
@@ -27,7 +27,7 @@ namespace WeWillSurvive.Status
         {
             foreach (var status in _statuses.Values)
             {
-                status.OnNewDay(_owner);
+                status.OnNewDay();
 
                  //Debug.Log($"{_owner.Name} - {status.StatusType} : {status.CurrentValue}");
 

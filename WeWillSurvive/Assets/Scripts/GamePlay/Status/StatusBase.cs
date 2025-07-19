@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+Ôªøusing System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
@@ -20,10 +20,9 @@ namespace WeWillSurvive
 
         public abstract EStatusType StatusType { get; }
 
-        public abstract void ApplyRecovery();
         protected abstract bool IsDeadLevel(TLevel level);
 
-        public virtual void OnNewDay(CharacterBase owner)
+        public virtual void OnNewDay()
         {
             _dayCounter++;
 
@@ -31,22 +30,33 @@ namespace WeWillSurvive
             {
                 if (IsDeadLevel(_level))
                 {
-                    owner.OnDead();
+                    _owner.OnDead();
                     return;
                 }
 
-                _level = (TLevel)(object)((int)(object)_level + 1); // Level ¡ı∞°
+                _level = (TLevel)(object)((int)(object)_level + 1); // Level Ï¶ùÍ∞Ä
                 _dayCounter = 0;
             }
 
             if (LevelStateMap.TryGetValue(_level, out var state))
             {
-                // Log ø° ≥≤±Ë
-                string stateMessage = owner.Data.GetStateActiveMessage(state);
-                LogManager.AddCharacterStatusLog(owner.Data.Type, stateMessage);
+                // Log Ïóê ÎÇ®ÍπÄ
+                string stateMessage = _owner.Data.GetStateActiveMessage(state);
+                LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
 
-                owner.State.AddState(state);
+                _owner.State.AddState(state);
             }
+        }
+
+        public virtual void ApplyRecovery()
+        {
+            if (LevelStateMap.TryGetValue(_level, out var state))
+            {
+                string stateMessage = _owner.Data.GetStateResolvedMessage(state);
+                LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
+            }
+
+            _dayCounter = 0;
         }
     }
 }

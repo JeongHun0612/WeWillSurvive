@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Status
@@ -36,9 +36,9 @@ namespace WeWillSurvive.Status
 
         public override void ApplyRecovery()
         {
-            _owner.Status.RemoveStatus(StatusType);
+            base.ApplyRecovery();
 
-            _dayCounter = 0;
+            _owner.Status.RemoveStatus(StatusType);
         }
     }
 }

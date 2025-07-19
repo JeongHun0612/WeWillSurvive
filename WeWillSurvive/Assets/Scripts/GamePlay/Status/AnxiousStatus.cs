@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Status
@@ -34,16 +34,16 @@ namespace WeWillSurvive.Status
 
         protected override bool IsDeadLevel(EAnxiousLevel level) => level == EAnxiousLevel.Panic;
 
-        public override void OnNewDay(CharacterBase owner)
+        public override void OnNewDay()
         {
-            // TODO onwer °¡ È¥ÀÚ ³²¾ÆÀÖÀ¸¸é ´ÙÀ½ ´Ü°è·Î
+            // TODO onwer ê°€ í˜¼ì ë‚¨ì•„ìˆìœ¼ë©´ ë‹¤ìŒ ë‹¨ê³„ë¡œ
         }
 
         public override void ApplyRecovery()
         {
-            _owner.Status.RemoveStatus(StatusType);
+            base.ApplyRecovery();
 
-            _dayCounter = 0;
+            _owner.Status.RemoveStatus(StatusType);
         }
     }
 }

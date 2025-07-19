@@ -15,7 +15,7 @@ namespace WeWillSurvive.Status
     {
         public EStatusType StatusType { get; }
 
-        public void OnNewDay(CharacterBase owner);
+        public void OnNewDay();
         public void ApplyRecovery();
     }
 }
