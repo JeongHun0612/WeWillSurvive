@@ -78,15 +78,15 @@ namespace WeWillSurvive.Character
         {
             _stateActiveMessageDict = new()
             {
-                [EState.Hungry] = _hungerResolvedMessage,
+                [EState.Hungry] = _hungerActiveMessage,
                 [EState.Starve] = _starveActiveMessage,
-                [EState.Thirsty] = _thirstyResolvedMessage,
+                [EState.Thirsty] = _thirstyActiveMessage,
                 [EState.Dehydrate] = _dehydrateActiveMessage,
-                [EState.Injured] = _injuredResolvedMessage,
-                [EState.Sick] = _sickResolvedMessage,
-                [EState.Anxious] = _anxiousResolvedMessage,
-                [EState.Panic] = _panicResolvedMessage,
-                [EState.Mad] = _madResolvedMessage,
+                [EState.Injured] = _injuredActiveMessage,
+                [EState.Sick] = _sickActiveMessage,
+                [EState.Anxious] = _anxiousActiveMessage,
+                [EState.Panic] = _panicActiveMessage,
+                [EState.Mad] = _madActiveMessage,
                 [EState.Dead] = _deadActiveMessage,
             };
 

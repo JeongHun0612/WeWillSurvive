@@ -8,6 +8,7 @@ using WeWillSurvive.Status;
 using WeWillSurvive.UI;
 using WeWillSurvive.Item;
 using WeWillSurvive.FarmingReport;
+using WeWillSurvive.Log;
 
 namespace WeWillSurvive.Core
 {
@@ -17,6 +18,7 @@ namespace WeWillSurvive.Core
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
         private EventBus EventBus => ServiceLocator.Get<EventBus>();
 
         private async void Start()
@@ -64,10 +66,10 @@ namespace WeWillSurvive.Core
             }
 
             // TOOD 엔딩 분기 확인
-
             EventBus.Publish(new NewDayEvent() { CurrentDay = Day });
 
             // TODO 로그 초기화
+            LogManager.ClearAllLogs();
         }
 
         public void NewDay()

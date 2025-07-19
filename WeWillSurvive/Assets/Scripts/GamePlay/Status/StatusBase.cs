@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Character;
+using WeWillSurvive.Core;
+using WeWillSurvive.Log;
 using WeWillSurvive.Status;
 
 namespace WeWillSurvive
@@ -13,6 +15,8 @@ namespace WeWillSurvive
         protected CharacterBase _owner;
         protected TLevel _level;
         protected int _dayCounter;
+
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         public abstract EStatusType StatusType { get; }
 
@@ -37,7 +41,10 @@ namespace WeWillSurvive
 
             if (LevelStateMap.TryGetValue(_level, out var state))
             {
-                Debug.Log(owner.Data.GetStateActiveMessage(state));
+                // Log ¿¡ ³²±è
+                string stateMessage = owner.Data.GetStateActiveMessage(state);
+                LogManager.AddCharacterStatusLog(owner.Data.Type, stateMessage);
+
                 owner.State.AddState(state);
             }
         }

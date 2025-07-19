@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Text;
+using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 
 namespace WeWillSurvive.Log
@@ -10,7 +11,7 @@ namespace WeWillSurvive.Log
         private List<string> _mainEventResultLogs = new();
         private List<string> _characterEventResultLogs = new();
         private List<string> _expeditionResultLogs = new();
-        private List<string> _characterStatusLogs = new();
+        private Dictionary<ECharacter, List<string>> _characterStatusLogs = new();
 
         public async UniTask InitializeAsync()
         {
@@ -18,20 +19,67 @@ namespace WeWillSurvive.Log
             await UniTask.Yield();
         }
 
-        public void AddMainEventResultLog(string message)
-        {
-            if (_mainEventResultLogs == null)
-                _mainEventResultLogs = new();
+        public void AddMainEventResultLog(string message) => AddLogToList(_mainEventResultLogs, message);
+        public void AddCharacterEventResultLog(string message) => AddLogToList(_characterEventResultLogs, message);
+        public void AddExpeditionResultLog(string message) => AddLogToList(_expeditionResultLogs, message);
 
-            _mainEventResultLogs.Add(message);
+        public void AddCharacterStatusLog(ECharacter character, string message)
+        {
+            if (_characterStatusLogs == null)
+                _characterStatusLogs = new();
+
+            if (!_characterStatusLogs.TryGetValue(character, out var logMessages))
+            {
+                _characterStatusLogs[character] = new List<string> { message };
+            }
+            else
+            {
+                logMessages.Add(message);
+            }
         }
 
-        public string GetMainEventResultLog()
+        public string GetLogMessage()
         {
-            if (_mainEventResultLogs == null || _mainEventResultLogs.Count == 0)
-                return string.Empty;
+            StringBuilder sb = new();
 
-            return string.Join("\n\n", _mainEventResultLogs);
+            void AppendSection(List<string> logs)
+            {
+                if (logs.Count == 0) return;
+
+                sb.AppendLine(string.Join("\n\n", logs));
+                sb.AppendLine();
+            }
+
+            AppendSection(_mainEventResultLogs);
+            AppendSection(_characterEventResultLogs);
+            AppendSection(_expeditionResultLogs);
+
+            if (_characterStatusLogs.Count > 0)
+            {
+                foreach (var kvp in _characterStatusLogs)
+                {
+                    sb.AppendLine(string.Join("\n", kvp.Value));
+                    sb.AppendLine();
+                }
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+        public void ClearAllLogs()
+        {
+            _mainEventResultLogs?.Clear();
+            _characterEventResultLogs?.Clear();
+            _expeditionResultLogs?.Clear();
+            _characterStatusLogs?.Clear();
+        }
+
+        private void AddLogToList(List<string> target, string message)
+        {
+            if (target == null)
+                target = new();
+
+            target.Add(message);
         }
     }
 }

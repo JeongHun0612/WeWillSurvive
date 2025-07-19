@@ -31,10 +31,11 @@ namespace WeWillSurvive
         {
             await base.RefreshPageAsync(startPageIndex);
 
+            string logMessage = LogManager.GetLogMessage();
+
             gameObject.SetActive(true);
             await UniTask.NextFrame();
 
-            string logMessage = LogManager.GetMainEventResultLog();
             _pageTexts = TMPTextUtil.SplitTextByLines(_tempText, logMessage, _maxLineCount);
             PageCount = _pageTexts.Count;
         }
