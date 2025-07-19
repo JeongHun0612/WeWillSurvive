@@ -25,15 +25,21 @@ namespace WeWillSurvive
         int _currentRoomIdx;
         bool _changingBackground;
 
-        public override void Initialize()
+        public async override UniTask InitializeAsync()
         {
-            base.Initialize();
-            SetBackground(ERoom.Main);
-
             // 배경 클릭하면 Popup UI 닫음 (UI_Main/UI_Room은 남겨놓음)
             _backgroundImage.GetComponent<Button>().onClick.AddListener(() => UIManager.Instance.ClosePopups(remain: 1));
             _leftButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx - 1)));
             _rightButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx + 1)));
+
+            await UniTask.CompletedTask;
+        }
+
+        public override void OnShow()
+        {
+            _changingBackground = false;
+
+            SetBackground(ERoom.Main);
         }
 
         public void ChangeBackground(ERoom roomName)

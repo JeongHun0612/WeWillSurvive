@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
 using System.Collections;
@@ -17,20 +17,30 @@ namespace WeWillSurvive
         // TEMP
         const float SCREEN_WIDTH = 1920f;
 
-        private void Awake()
+        public async override UniTask InitializeAsync()
         {
             _black = transform.GetChild(0).gameObject;
+
+            await UniTask.CompletedTask;
         }
 
-        /// <param name="right"> ¿ŞÂÊ¿¡¼­ ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿ </param>
-        /// <param name="coverAction"> È­¸é µ¤Àº ÈÄ¿¡ ÇÒ Çàµ¿ </param>
+        public override void CanvasInitialize()
+        {
+            base.CanvasInitialize();
+            _canvas.sortingOrder = 50;
+        }
+
+        /// <param name="right"> ì™¼ìª½ì—ì„œ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™ </param>
+        /// <param name="coverAction"> í™”ë©´ ë®ì€ í›„ì— í•  í–‰ë™ </param>
         public void Wipe(bool right, Action coverAction = null, Action finishAction = null)
         {
+            Show();
             StartCoroutine(CoWipe(right, coverAction, finishAction));
         }
 
         public void FadeIO(Action coverAction = null, Action finishAction = null)
         {
+            Show();
             StartCoroutine(CoFadeIO(coverAction, finishAction));
         }
 
@@ -38,6 +48,7 @@ namespace WeWillSurvive
         {
             _black.transform.localPosition = new Vector3(-(SCREEN_WIDTH + 50f), 0f, 0f);
             _black.GetComponent<Image>().color = Color.black;
+            Hide();
         }
 
         private IEnumerator CoWipe(bool right, Action coverAction, Action finishAction)

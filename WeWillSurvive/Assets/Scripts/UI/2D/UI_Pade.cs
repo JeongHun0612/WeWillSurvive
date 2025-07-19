@@ -7,14 +7,13 @@ using WeWillSurvive.Core;
 
 namespace WeWillSurvive.UI
 {
-    public class UI_Pade : UI_Base
+    public class UI_Pade : UI_Popup
     {
         [SerializeField] private Image _padeImage;
         [SerializeField] private TMP_Text _dayText;
 
         public void StartPadeSequence(Action callback = null)
         {
-            gameObject.SetActive(true);
             _padeImage.color = Color.clear;
             _dayText.alpha = 0f;
 

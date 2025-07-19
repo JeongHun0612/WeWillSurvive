@@ -13,18 +13,6 @@ namespace WeWillSurvive
 
         UI_Background _ui;
 
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            _ui =  UIManager.Instance.GetCurrentScene<UI_Background>();
-            if (_ui == null)
-            {
-                Debug.LogError($"[{name}] 2D Scene에서 열리지 않았음");
-                return;
-            }
-        }        
-
         // 방 세팅
         public void SetupRoomUI(ECharacter owner)
         {

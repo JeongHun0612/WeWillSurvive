@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -19,21 +20,19 @@ namespace WeWillSurvive
         private ItemManager _itemManager;
         private CharacterManager _characterManager;
 
-        public override void Initialize()
+        public async override UniTask InitializeAsync()
         {
-            base.Initialize();
             for (int i = 0; i < MAX_STATE; i++)
                 Instantiate(_stateContent, _state);
 
             _itemManager = ServiceLocator.Get<ItemManager>();
             _characterManager = ServiceLocator.Get<CharacterManager>();
+
+            await UniTask.CompletedTask;
         }
 
         public void SetPanel(EItem item)
         {
-            if (!_initialized)
-                Initialize();
-
             for (int i = 0; i < MAX_STATE; i++)
                 _state.GetChild(i).gameObject.SetActive(false);
 

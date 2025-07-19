@@ -44,36 +44,6 @@ namespace WeWillSurvive
         private Sprite[] _medicKitSprites;
         private EventBus EventBus => ServiceLocator.Get<EventBus>();
 
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            ui = UIManager.Instance.GetCurrentScene<UI_Background>();
-            if (ui == null)
-            {
-                Debug.LogError($"[{name}] 2D Scene에서 열리지 않았음");
-                return;
-            }
-
-            // Room Monitor
-            _roomMonitorButton.onClick.AddListener(() => UIManager.Instance.ShowPopup<UI_RoomMonitor>());
-
-            // Projecter
-            _projecterButton.onClick.AddListener(() =>
-            {
-                UIManager.Instance.ClosePopups(remain: 1);
-                UIManager.Instance.ShowPopup<UI_Projecter>();
-            });
-
-            // Next Day
-            _nextDayButton.onClick.AddListener(() => GameManager.Instance.StartNextDay());
-
-            EventBus.Subscribe<NewDayEvent>(OnNewDayEvent);
-
-            _itemManager = ServiceLocator.Get<ItemManager>();
-            UpdateUI();
-        }
-
         public override async UniTask InitializeAsync()
         {
             ResourceManager resource = ServiceLocator.Get<ResourceManager>();
@@ -94,14 +64,29 @@ namespace WeWillSurvive
             _medicKitSprites = new Sprite[2];
             _medicKitSprites[0] = await resource.LoadAssetAsync<Sprite>("medical_kit");
             _medicKitSprites[1] = await resource.LoadAssetAsync<Sprite>("special_medical_kit");
+
+            // Room Monitor
+            _roomMonitorButton.onClick.AddListener(() => UIManager.Instance.ShowPopup<UI_RoomMonitor>());
+
+            // Projecter
+            _projecterButton.onClick.AddListener(() =>
+            {
+                UIManager.Instance.ClosePopups(remain: 1);
+                UIManager.Instance.ShowPopup<UI_Projecter>();
+            });
+
+            // Next Day
+            _nextDayButton.onClick.AddListener(() => GameManager.Instance.StartNextDay());
+
+            EventBus.Subscribe<NewDayEvent>(OnNewDayEvent);
+
+            _itemManager = ServiceLocator.Get<ItemManager>();
         }
 
-        //public override void OnShow()
-        //{
-        //    base.OnShow();
-
-        //    UpdateUI();
-        //}
+        public override void OnShow()
+        {
+            UpdateUI();
+        }
 
         public void UseItemDebug(int type)
         {

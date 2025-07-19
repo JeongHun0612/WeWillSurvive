@@ -5,18 +5,11 @@ namespace WeWillSurvive.UI
 {
     public class UI_Base : MonoBehaviour
     {
-        protected bool _initialized = false;
-
-        private void Start()
-        {
-            if (_initialized) return;
-            Initialize();
-        }
+        protected Canvas _canvas;
 
         public virtual void Show()
         {
             gameObject.SetActive(true);
-            if (!_initialized) Initialize();
             OnShow();
         }
 
@@ -34,8 +27,22 @@ namespace WeWillSurvive.UI
         {
         }
 
-        public virtual void Initialize() { _initialized = true; }
+        public virtual void Initialize() { }
 
         public virtual async UniTask InitializeAsync() { await UniTask.Yield(); }
+
+        public virtual void CanvasInitialize()
+        {
+            // Canvas ¼³Á¤
+            _canvas = GetComponent<Canvas>();
+            if (_canvas == null)
+            {
+                Debug.LogError($"{name} Canvas Component is Null");
+                return;
+            }
+
+            _canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            _canvas.overrideSorting = true;
+        }
     }
 }

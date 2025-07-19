@@ -36,7 +36,6 @@ namespace WeWillSurvive.UI
         public ResourceManager ResourceManager => _resourceManager ??= ServiceLocator.Get<ResourceManager>();
 
         public UI_Black BlackUI { get; private set; }
-        public UI_Pade PadeUI { get; private set; }
 
         public async UniTask InitializeAsync(IProgress<float> progress = null)
         {
@@ -45,6 +44,20 @@ namespace WeWillSurvive.UI
                 Debug.LogWarning("UIManager is already initialized.");
                 return;
             }
+
+            // BlackUI Instantiate
+            try
+            {
+                var asset = await ResourceManager.LoadAssetAsync<GameObject>("UI_Black");
+                BlackUI = Instantiate(asset.GetComponent<UI_Black>(), transform);
+                BlackUI.CanvasInitialize();
+                await BlackUI.InitializeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Error loading blackUI prefab: {ex.Message}");
+            }
+            BlackUI.Show();
 
             Debug.Log("Starting UI initialization with UniTask...");
             _initializationProgress = 0f;
@@ -95,7 +108,7 @@ namespace WeWillSurvive.UI
                 try
                 {
                     var asset = await ResourceManager.LoadAssetAsync<GameObject>(path);
-                    asset.SetActive(false);
+                    asset.SetActive(true);
 
                     UI_Scene prefab = asset.GetComponent<UI_Scene>();
                     if (prefab != null)
@@ -106,8 +119,12 @@ namespace WeWillSurvive.UI
                         if (!_sceneCache.ContainsKey(sceneType))
                         {
                             _sceneCache.Add(sceneType, instance);
+                            instance.CanvasInitialize();
                             await instance.InitializeAsync();
+
                             instance.Hide();
+                            await UniTask.Yield();
+
                             Debug.Log($"SceneUI loaded and initialized: {sceneType.Name}");
                         }
                         else
@@ -138,7 +155,7 @@ namespace WeWillSurvive.UI
                 try
                 {
                     var asset = await ResourceManager.LoadAssetAsync<GameObject>(path);
-                    asset.SetActive(false);
+                    asset.SetActive(true);
 
                     UI_Popup prefab = asset.GetComponent<UI_Popup>();
                     if (prefab != null)
@@ -149,9 +166,12 @@ namespace WeWillSurvive.UI
                         if (!_popupCache.ContainsKey(popupType))
                         {
                             _popupCache.Add(popupType, instance);
+                            instance.CanvasInitialize();
                             await instance.InitializeAsync();
-                            instance.Hide();
+
                             Debug.Log($"PopupUI loaded and initialized: {popupType.Name}");
+                            instance.Hide();
+                            await UniTask.Yield();
                         }
                         else
                         {
@@ -176,36 +196,12 @@ namespace WeWillSurvive.UI
                 await UniTask.Yield();
             }
 
-            // BlackUI Instantiate
-            try
-            {
-                var asset = await ResourceManager.LoadAssetAsync<GameObject>("UI_Black");
-                BlackUI = Instantiate(asset.GetComponent<UI_Black>(), transform);
-                await BlackUI.InitializeAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"Error loading blackUI prefab: {ex.Message}");
-            }
-
-            // PadeUI Instantiate
-            try
-            {
-                var asset = await ResourceManager.LoadAssetAsync<GameObject>("UI_Pade");
-                PadeUI = Instantiate(asset.GetComponent<UI_Pade>(), transform);
-                await PadeUI.InitializeAsync();
-                PadeUI.Hide();
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"Error loading padeUI prefab: {ex.Message}");
-            }
-
             _isInitialized = true;
             _initializationProgress = 1f;
             progress?.Report(1f);
 
             Debug.Log("UI initialization completed successfully.");
+            BlackUI.Hide();
         }
 
         public T ShowPopup<T>(bool remember = true) where T : UI_Popup
@@ -232,7 +228,9 @@ namespace WeWillSurvive.UI
             if (_currentPopup != null)
             {
                 _currentPopup.Hide();
-                _popupHistory.Pop();
+
+                if (_currentPopup.RememberInHistory)
+                    _popupHistory.Pop();
 
                 if (_popupHistory.Count > 0)
                     _currentPopup = _popupHistory.Peek();

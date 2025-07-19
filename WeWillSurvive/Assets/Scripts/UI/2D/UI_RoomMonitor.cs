@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -20,16 +21,8 @@ namespace WeWillSurvive
         private UI_Background _ui;
         private Button[] _buttons = new Button[4];
 
-        public override void Initialize()
+        public async override UniTask InitializeAsync()
         {
-            base.Initialize();
-
-            _ui = UIManager.Instance.GetCurrentScene<UI_Background>();
-            if (_ui == null)
-            {
-                Debug.LogError($"[{name}] 2D Scene에서 열리지 않았음");
-                return;
-            }
 
             _buttons[(int)ECharacter.Lead] = _leadButton;
             _buttons[(int)ECharacter.Cook] = _cookButton;
@@ -42,6 +35,8 @@ namespace WeWillSurvive
                 Enum.TryParse(roomName, out ERoom room);
                 _buttons[(int)character.Data.Type].onClick.AddListener(() => _ui.ChangeBackground(room));
             }
+
+            await UniTask.CompletedTask;
         }
 
         public override void OnShow()

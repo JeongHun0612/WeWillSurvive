@@ -5,40 +5,29 @@ namespace WeWillSurvive.UI
 {
     public class UI_Popup : UI_Base
     {
+        private const int DEFAULT_SORTING_ORDER = 10;
+
         public bool RememberInHistory = true;
-
-        private Canvas _canvas;
-
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            // Canvas 설정
-            _canvas = GetComponent<Canvas>();
-            if (_canvas == null)
-            {
-                Debug.LogError($"{name} Canvas Component is Null");
-                return;
-            }
-
-            _canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            _canvas.overrideSorting = true;
-        }
+        public int SortingOffset = 0;
 
         public override void OnShow()
         {
             SetCanvasOrder();
         }
 
+        public override void CanvasInitialize()
+        {
+            base.CanvasInitialize();
+
+            _canvas.sortingOrder = DEFAULT_SORTING_ORDER;
+        }
+
         private void SetCanvasOrder()
         {
             if (_canvas == null)
-            {
-                Debug.LogError($"Canvas is Null");
-                return;
-            }
+                CanvasInitialize();
 
-            _canvas.sortingOrder = 10 + UIManager.Instance.PopupHistoryCount;
+            _canvas.sortingOrder = DEFAULT_SORTING_ORDER + SortingOffset + UIManager.Instance.PopupHistoryCount;
         }
 
         public void ClosePopupUI()
