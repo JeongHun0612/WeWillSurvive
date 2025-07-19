@@ -25,12 +25,16 @@ namespace WeWillSurvive
         int _currentRoomIdx;
         bool _changingBackground;
 
+        private EventBus EventBus => ServiceLocator.Get<EventBus>();
+
         public async override UniTask InitializeAsync()
         {
             // 배경 클릭하면 Popup UI 닫음 (UI_Main/UI_Room은 남겨놓음)
             _backgroundImage.GetComponent<Button>().onClick.AddListener(() => UIManager.Instance.ClosePopups(remain: 1));
             _leftButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx - 1)));
             _rightButton.onClick.AddListener(() => ChangeBackground((ERoom)(_currentRoomIdx + 1)));
+
+            EventBus.Subscribe<MoveRoomEvent>(OnMoveRoomEvent);
 
             await UniTask.CompletedTask;
         }
@@ -106,6 +110,10 @@ namespace WeWillSurvive
                 string name = Enum.GetName(typeof(ECharacter), player);
                 UIManager.Instance.ShowPopup<UI_Room>().SetupRoomUI(player);
             }
+        }
+        private void OnMoveRoomEvent(MoveRoomEvent context)
+        {
+            ChangeBackground(context.TargetRoom);
         }
     }
 }

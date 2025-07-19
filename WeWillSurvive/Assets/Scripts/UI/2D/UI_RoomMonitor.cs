@@ -21,9 +21,10 @@ namespace WeWillSurvive
         private UI_Background _ui;
         private Button[] _buttons = new Button[4];
 
+        private EventBus EventBus => ServiceLocator.Get<EventBus>();
+
         public async override UniTask InitializeAsync()
         {
-
             _buttons[(int)ECharacter.Lead] = _leadButton;
             _buttons[(int)ECharacter.Cook] = _cookButton;
             _buttons[(int)ECharacter.Bell] = _bellButton;
@@ -33,7 +34,9 @@ namespace WeWillSurvive
             {
                 string roomName = Enum.GetName(typeof(ECharacter), character.Data.Type);
                 Enum.TryParse(roomName, out ERoom room);
-                _buttons[(int)character.Data.Type].onClick.AddListener(() => _ui.ChangeBackground(room));
+                _buttons[(int)character.Data.Type].onClick.AddListener(() =>
+                    EventBus.Publish(new MoveRoomEvent() { TargetRoom = room })
+                );
             }
 
             await UniTask.CompletedTask;
