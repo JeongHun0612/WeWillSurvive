@@ -44,7 +44,7 @@ namespace WeWillSurvive.Core
 
         public void StartNextDay()
         {
-            UIManager.Instance.PadeUI.StartPadeSequence(OnNewDay);
+            UIManager.Instance.ShowOverlay<UI_Pade>().StartPadeSequence(OnNewDay);
         }
 
         private void OnNewDay()

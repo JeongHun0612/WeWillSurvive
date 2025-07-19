@@ -7,7 +7,7 @@ using WeWillSurvive.Core;
 
 namespace WeWillSurvive.UI
 {
-    public class UI_Pade : UI_Popup
+    public class UI_Pade : UI_Overlay
     {
         [SerializeField] private Image _padeImage;
         [SerializeField] private TMP_Text _dayText;
@@ -30,7 +30,7 @@ namespace WeWillSurvive.UI
                 .AppendInterval(2f)
                 .Append(_padeImage.DOFade(0f, 1f).SetEase(Ease.OutCubic))
                 .Join(_dayText.DOFade(0f, 1f).SetEase(Ease.OutCubic))
-                .OnComplete(() => gameObject.SetActive(false));
+                .OnComplete(() => UIManager.Instance.CloseCurrentOverlay());
         }
     }
 }

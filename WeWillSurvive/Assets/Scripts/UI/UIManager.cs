@@ -11,18 +11,22 @@ namespace WeWillSurvive.UI
     {
         [SerializeField] private Transform _sceneLayer;
         [SerializeField] private Transform _popupLayer;
+        [SerializeField] private Transform _overlayLayer;
 
         [SerializeField] private string[] _scenePrefabPaths;
         [SerializeField] private string[] _popupPrefabPaths;
+        [SerializeField] private string[] _overlayPrefabPaths;
 
         private UI_Scene _currentScene;
         private UI_Popup _currentPopup;
+        private UI_Overlay _currentOverlay;
 
         private readonly Stack<UI_Popup> _popupHistory = new Stack<UI_Popup>();
         public int PopupHistoryCount => _popupHistory.Count;
 
         private readonly Dictionary<Type, UI_Scene> _sceneCache = new Dictionary<Type, UI_Scene>();
         private readonly Dictionary<Type, UI_Popup> _popupCache = new Dictionary<Type, UI_Popup>();
+        private readonly Dictionary<Type, UI_Overlay> _overlayCache = new Dictionary<Type, UI_Overlay>();
 
         private readonly string _path = "Assets/Prefabs/UI/";
 
@@ -45,60 +49,15 @@ namespace WeWillSurvive.UI
                 return;
             }
 
-            // BlackUI Instantiate
-            try
-            {
-                var asset = await ResourceManager.LoadAssetAsync<GameObject>("UI_Black");
-                BlackUI = Instantiate(asset.GetComponent<UI_Black>(), transform);
-                BlackUI.CanvasInitialize();
-                await BlackUI.InitializeAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"Error loading blackUI prefab: {ex.Message}");
-            }
-            BlackUI.Show();
+            _overlayPrefabPaths = LoadPrefabFileNames(_path + "Overlay");
+            await InitializeOverlays(_overlayPrefabPaths);
+            ShowOverlay<UI_Black>();
 
             Debug.Log("Starting UI initialization with UniTask...");
             _initializationProgress = 0f;
 
-            {
-                string path = _path + "Popup";
-                if (Directory.Exists(path))
-                {
-                    string[] prefabFiles = Directory.GetFiles(path, "*.prefab");
-                    _popupPrefabPaths = new string[prefabFiles.Length];
-
-                    for (int i = 0; i < _popupPrefabPaths.Length; i++)
-                    {
-                        string fileName = Path.GetFileNameWithoutExtension(prefabFiles[i]);
-                        _popupPrefabPaths[i] = fileName;
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning("폴더를 찾을 수 없습니다: " + path);
-                }
-            }
-
-            { 
-                string path = _path + "Scene";
-                if (Directory.Exists(path))
-                {
-                    string[] prefabFiles = Directory.GetFiles(path, "*.prefab");
-                    _scenePrefabPaths = new string[prefabFiles.Length];
-
-                    for (int i = 0; i < _scenePrefabPaths.Length; i++)
-                    {
-                        string fileName = Path.GetFileNameWithoutExtension(prefabFiles[i]);
-                        _scenePrefabPaths[i] = fileName;
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning("폴더를 찾을 수 없습니다: " + path);
-                }
-            }
+            _popupPrefabPaths = LoadPrefabFileNames(_path + "Popup");
+            _scenePrefabPaths = LoadPrefabFileNames(_path + "Scene");
 
             int totalItems = _scenePrefabPaths.Length + _popupPrefabPaths.Length;
             int processedItems = 0;
@@ -121,10 +80,7 @@ namespace WeWillSurvive.UI
                             _sceneCache.Add(sceneType, instance);
                             instance.CanvasInitialize();
                             await instance.InitializeAsync();
-
                             instance.Hide();
-                            await UniTask.Yield();
-
                             Debug.Log($"SceneUI loaded and initialized: {sceneType.Name}");
                         }
                         else
@@ -168,10 +124,8 @@ namespace WeWillSurvive.UI
                             _popupCache.Add(popupType, instance);
                             instance.CanvasInitialize();
                             await instance.InitializeAsync();
-
-                            Debug.Log($"PopupUI loaded and initialized: {popupType.Name}");
                             instance.Hide();
-                            await UniTask.Yield();
+                            Debug.Log($"PopupUI loaded and initialized: {popupType.Name}");
                         }
                         else
                         {
@@ -201,7 +155,7 @@ namespace WeWillSurvive.UI
             progress?.Report(1f);
 
             Debug.Log("UI initialization completed successfully.");
-            BlackUI.Hide();
+            CloseCurrentOverlay();
         }
 
         public T ShowPopup<T>(bool remember = true) where T : UI_Popup
@@ -277,12 +231,45 @@ namespace WeWillSurvive.UI
             return scene as T;
         }
 
-        public void HideCurrentScene()
+        public void CloseCurrentScene()
         {
             if (_currentScene != null)
             {
                 _currentScene.Hide();
                 _currentScene = null;
+            }
+        }
+
+        public T ShowOverlay<T>() where T : UI_Overlay
+        {
+            Type overlayType = typeof(T);
+
+            if (!_overlayCache.TryGetValue(overlayType, out UI_Overlay overlay))
+            {
+                Debug.LogError($"Overlay of type {overlayType.Name} not found!");
+                return null;
+            }
+
+            if (_currentOverlay != null)
+            {
+                if (_currentOverlay == overlay)
+                    return overlay as T;
+
+                _currentScene.Hide();
+            }
+
+            _currentOverlay = overlay;
+            _currentOverlay.Show();
+
+            return overlay as T;
+        }
+
+        public void CloseCurrentOverlay()
+        {
+            if (_currentOverlay != null)
+            {
+                _currentOverlay.Hide();
+                _currentOverlay = null;
             }
         }
 
@@ -295,6 +282,66 @@ namespace WeWillSurvive.UI
         public T GetCurrentScene<T>() where T : UI_Scene
         {
             return _currentScene as T;
+        }
+
+        private string[] LoadPrefabFileNames(string folderPath)
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                Debug.LogWarning("폴더를 찾을 수 없습니다: " + folderPath);
+                return Array.Empty<string>();
+            }
+
+            string[] prefabFiles = Directory.GetFiles(folderPath, "*.prefab");
+            string[] result = new string[prefabFiles.Length];
+
+            for (int i = 0; i < prefabFiles.Length; i++)
+            {
+                result[i] = Path.GetFileNameWithoutExtension(prefabFiles[i]);
+            }
+
+            return result;
+        }
+
+        private async UniTask InitializeOverlays(string[] paths)
+        {
+            foreach (string path in paths)
+            {
+                try
+                {
+                    var asset = await ResourceManager.LoadAssetAsync<GameObject>(path);
+                    UI_Overlay prefab = asset.GetComponent<UI_Overlay>();
+                    if (prefab != null)
+                    {
+                        UI_Overlay instance = Instantiate(prefab, _overlayLayer);
+                        Type overlayType = instance.GetType();
+
+                        if (!_overlayCache.ContainsKey(overlayType))
+                        {
+                            _overlayCache.Add(overlayType, instance);
+                            instance.CanvasInitialize();
+                            await instance.InitializeAsync();
+                            instance.Hide();
+                            Debug.Log($"OverlayUI loaded and initialized: {overlayType.Name}");
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"Duplicate overlayUI type: {overlayType.Name}");
+                            Destroy(instance.gameObject);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError($"Failed to load overlayUI prefab at path: {path}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Error loading overlayUI prefab at path {path}: {ex.Message}");
+                }
+
+                await UniTask.Yield();
+            }
         }
     }
 }

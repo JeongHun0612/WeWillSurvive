@@ -8,7 +8,7 @@ using WeWillSurvive.UI;
 
 namespace WeWillSurvive
 {
-    public class UI_Black : UI_Base
+    public class UI_Black : UI_Overlay
     {
         GameObject _black;
         [SerializeField] float _wipeDuration = 0.5f;
@@ -34,13 +34,11 @@ namespace WeWillSurvive
         /// <param name="coverAction"> 화면 덮은 후에 할 행동 </param>
         public void Wipe(bool right, Action coverAction = null, Action finishAction = null)
         {
-            Show();
             StartCoroutine(CoWipe(right, coverAction, finishAction));
         }
 
         public void FadeIO(Action coverAction = null, Action finishAction = null)
         {
-            Show();
             StartCoroutine(CoFadeIO(coverAction, finishAction));
         }
 
@@ -48,7 +46,7 @@ namespace WeWillSurvive
         {
             _black.transform.localPosition = new Vector3(-(SCREEN_WIDTH + 50f), 0f, 0f);
             _black.GetComponent<Image>().color = Color.black;
-            Hide();
+            UIManager.Instance.CloseCurrentOverlay();
         }
 
         private IEnumerator CoWipe(bool right, Action coverAction, Action finishAction)

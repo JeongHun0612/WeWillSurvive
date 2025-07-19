@@ -51,7 +51,7 @@ namespace WeWillSurvive
             _changingBackground = true;
 
             // Wipe
-            UIManager.Instance.BlackUI.Wipe(right: (int)roomName < _currentRoomIdx, 
+            UIManager.Instance.ShowOverlay<UI_Black>().Wipe(right: (int)roomName < _currentRoomIdx, 
                 coverAction: () => SetBackground(roomName), finishAction: () => _changingBackground = false);
         }
 
