@@ -53,7 +53,6 @@ namespace WeWillSurvive.Character
             if (IsDead) return;
 
             State.SetState(EState.Normal);
-
             Status.OnNewDay();
 
             if (!IsExploring)

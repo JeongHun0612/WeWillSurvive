@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace WeWillSurvive
 {
@@ -9,9 +10,9 @@ namespace WeWillSurvive
             PanelType = EPanelType.Expedition;
         }
 
-        public override void RefreshPage(int startPageIndex)
+        public override async UniTask RefreshPageAsync(int startPageIndex)
         {
-            StartPageIndex = startPageIndex;
+            await base.RefreshPageAsync(startPageIndex);
 
             // TODO 플레이어 중 누군가가 탐험을 나가있는 경우
 

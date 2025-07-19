@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,8 +23,10 @@ namespace WeWillSurvive
         [Header("## Page Move Button")]
         [SerializeField] private Button _prevButton;
         [SerializeField] private Button _nextButton;
+        [SerializeField] private Button _nextDayButton;
 
         private PagePanel _currentPanel;
+        private MainEventPanel _mainEventPanel;
 
         private int _totalPageCount;
         private int _currentPageIndex;
@@ -44,13 +47,14 @@ namespace WeWillSurvive
                 panelMoveButton.Initialize(OnClickMovePanel);
             }
 
+            _mainEventPanel = GetPagePanel(EPanelType.MainEvent) as MainEventPanel;
+            _mainEventPanel.ChoiceImageSelected -= UpdateNextButton;
+            _mainEventPanel.ChoiceImageSelected += UpdateNextButton;
+
             // NewDay 이벤트 등록
             EventBus.Subscribe<NewDayEvent>(OnNewDayEvent);
 
-            // Page 초기화 및 할당
-            InitializePagePanels();
-
-            await UniTask.Yield();
+            await UniTask.CompletedTask;
         }
 
         public override void OnShow()
@@ -60,19 +64,21 @@ namespace WeWillSurvive
             ShowCurrentPage(_currentPageIndex);
         }
 
-        private void InitializePagePanels()
+        private async UniTask InitializePagePanels()
         {
             gameObject.SetActive(true);
 
             _totalPageCount = 0;
             _currentPageIndex = 0;
             _currentPanel = null;
+            _prevButton.gameObject.SetActive(false);
+            _nextDayButton.gameObject.SetActive(false);
 
             _dayText.text = $"Day {GameManager.Instance.Day}";
 
             foreach (var pagePanel in _pagePanels)
             {
-                pagePanel.RefreshPage(_totalPageCount);
+                await pagePanel.RefreshPageAsync(_totalPageCount);
                 pagePanel.Hide();
 
                 // 해당 페이지가 존재하지 않는 경우
@@ -108,14 +114,6 @@ namespace WeWillSurvive
                 return;
             }
 
-            // 마지막 페이지에서는 다음 날짜로 이동
-            if (targetPageIndex == _totalPageCount)
-            {
-                ApplyResultPanels();
-                GameManager.Instance.StartNextDay();
-                return;
-            }
-
             foreach (var pagePanel in _pagePanels)
             {
                 if (!pagePanel.HasPage(targetPageIndex))
@@ -139,8 +137,24 @@ namespace WeWillSurvive
 
         private void UpdateMoveButton()
         {
-            _prevButton.interactable = _currentPageIndex > 0;
-            //_nextButton.interactable = _currentPageIndex < _totalPageCount - 1;
+            UpdatePrevButton();
+            UpdateNextButton();
+        }
+
+        private void UpdatePrevButton()
+        {
+            _prevButton.gameObject.SetActive(_currentPageIndex > 0);
+        }
+        private void UpdateNextButton()
+        {
+            _nextButton.gameObject.SetActive(_currentPageIndex < _totalPageCount - 1);
+
+            if (_currentPageIndex == _totalPageCount - 1)
+            {
+                _nextDayButton.gameObject.SetActive(_mainEventPanel.ShouldEnableNextButton());
+            }
+            else
+                _nextDayButton.gameObject.SetActive(false);
         }
 
         private void UpdatePanelMoveButton()
@@ -162,6 +176,11 @@ namespace WeWillSurvive
             return null;
         }
 
+        private PagePanel GetPagePanel(EPanelType panelType)
+        {
+            return _pagePanels.FirstOrDefault(panel => panel.PanelType == panelType);
+        }
+
         public void OnClickPrevPage() => ShowCurrentPage(_currentPageIndex - 1);
         public void OnClickNextPage() => ShowCurrentPage(_currentPageIndex + 1);
         public void OnClickMovePanel(EPanelType panelType)
@@ -177,9 +196,15 @@ namespace WeWillSurvive
             }
         }
 
+        public void OnClickNextDay()
+        {
+            ApplyResultPanels();
+            GameManager.Instance.StartNextDay();
+        }
+
         private void OnNewDayEvent(NewDayEvent context)
         {
-            InitializePagePanels();
+            InitializePagePanels().Forget();
         }
     }
 }

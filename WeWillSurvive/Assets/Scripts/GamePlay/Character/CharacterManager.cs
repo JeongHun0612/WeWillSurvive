@@ -41,6 +41,7 @@ namespace WeWillSurvive.Character
 
                 if (data != null)
                 {
+                    data.Initialize();
                     _characterDatas.Add(data);
                 }
             }
@@ -67,6 +68,10 @@ namespace WeWillSurvive.Character
                 if (!ItemManager.HasItem(character.Data.ItemType))
                 {
                     character.OnDead();
+                }
+                else
+                {
+                    ItemManager.RemoveItem(character.Data.ItemType);
                 }
             }
 

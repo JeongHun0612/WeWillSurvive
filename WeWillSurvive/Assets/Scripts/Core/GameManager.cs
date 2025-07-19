@@ -8,6 +8,7 @@ using WeWillSurvive.Status;
 using WeWillSurvive.UI;
 using WeWillSurvive.Item;
 using WeWillSurvive.FarmingReport;
+using WeWillSurvive.Log;
 
 namespace WeWillSurvive.Core
 {
@@ -17,6 +18,7 @@ namespace WeWillSurvive.Core
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
         private EventBus EventBus => ServiceLocator.Get<EventBus>();
 
         private async void Start()
@@ -42,17 +44,19 @@ namespace WeWillSurvive.Core
 
         public void StartNextDay()
         {
-            Day++;
             UIManager.Instance.PadeUI.StartPadeSequence(OnNewDay);
         }
 
         private void OnNewDay()
         {
+            Day++;
+
+            UIManager.Instance.ClosePopups(remain: 1);
+
             if (UIManager.Instance.GetCurrentScene<UI_Background>() == null)
                 UIManager.Instance.ShowScene<UI_Background>();
 
-            if (Day > 1)
-                CharacterManager.UpdateCharacterStatus();
+            CharacterManager.UpdateCharacterStatus();
 
             // 모든 플레이어가 사망 시 생존 실패
             if (CharacterManager.AliveCharacterCount() == 0)
@@ -62,8 +66,10 @@ namespace WeWillSurvive.Core
             }
 
             // TOOD 엔딩 분기 확인
-
             EventBus.Publish(new NewDayEvent() { CurrentDay = Day });
+
+            // TODO 로그 초기화
+            LogManager.ClearAllLogs();
         }
 
         public void NewDay()

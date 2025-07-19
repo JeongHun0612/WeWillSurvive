@@ -19,8 +19,8 @@ namespace WeWillSurvive.Status
         {
             _statuses.Clear();
 
-            AddStatus(new HungerStatus(_owner.Data.MaxHunger));
-            AddStatus(new ThirstStatus(_owner.Data.MaxThirst));
+            AddStatus(new HungerStatus(_owner));
+            AddStatus(new ThirstStatus(_owner));
         }
 
         public void OnNewDay()
@@ -28,6 +28,8 @@ namespace WeWillSurvive.Status
             foreach (var status in _statuses.Values)
             {
                 status.OnNewDay(_owner);
+
+                 //Debug.Log($"{_owner.Name} - {status.StatusType} : {status.CurrentValue}");
 
                 if (_owner.IsDead) break;
             }

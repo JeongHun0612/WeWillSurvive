@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Character;
 
@@ -9,59 +8,42 @@ namespace WeWillSurvive.Status
         Anxious, Panic
     }
 
-    public class AnxiousStatus : IStatus
+    public class AnxiousStatus : StatusBase<EAnxiousLevel>
     {
-        // 레벨별 상태 매핑
-        private static readonly Dictionary<EAnxiousLevel, EState> _anxiousStateMap = new()
+        public override EStatusType StatusType => EStatusType.Anxious;
+
+        public AnxiousStatus(CharacterBase owner)
         {
-            [EAnxiousLevel.Anxious] = EState.Anxious,
-            [EAnxiousLevel.Panic] = EState.Panic
-        };
+            _owner = owner;
 
-        // 상태별 전이 기준값
-        private static readonly Dictionary<EAnxiousLevel, int> _anxiousThresholds = new()
-        {
-            [EAnxiousLevel.Anxious] = 30,
-            [EAnxiousLevel.Panic] = 0,
-        };
+            _level = EAnxiousLevel.Anxious;
+            _dayCounter = 0;
 
-        public EStatusType StatusType => EStatusType.Anxious;
-        public float MaxValue { get; private set; } = 0f;
-        public float CurrentValue { get; private set; } = 0f;
-        public float DecreasePerDay { get; private set; } = 10f;
+            LevelStateMap = new()
+            {
+                [EAnxiousLevel.Anxious] = EState.Anxious,
+                [EAnxiousLevel.Panic] = EState.Panic
+            };
 
-        private EAnxiousLevel _level = EAnxiousLevel.Anxious;
-
-        public AnxiousStatus(float value)
-        {
-            MaxValue = value;
-            CurrentValue = value;
+            DaysToNextLevel = new()
+            {
+                [EAnxiousLevel.Anxious] = 3,
+                [EAnxiousLevel.Panic] = 2,
+            };
         }
 
-        public void OnNewDay(CharacterBase owner)
+        protected override bool IsDeadLevel(EAnxiousLevel level) => level == EAnxiousLevel.Panic;
+
+        public override void OnNewDay(CharacterBase owner)
         {
-            CurrentValue = Mathf.Max(0f, CurrentValue - DecreasePerDay);
-
-            if (_anxiousThresholds.TryGetValue(_level, out var threshold) && CurrentValue <= threshold)
-            {
-                if (_level == EAnxiousLevel.Panic)
-                {
-                    owner.OnDead();
-                    return;
-                }
-
-                _level++;
-            }
-
-            if (_anxiousStateMap.TryGetValue(_level, out var state))
-            {
-                owner.State.AddState(state);
-            }
+            // TODO onwer 가 혼자 남아있으면 다음 단계로
         }
 
-        public void ApplyRecovery(float value)
+        public override void ApplyRecovery()
         {
-            CurrentValue = Mathf.Min(MaxValue, CurrentValue + value);
+            _owner.Status.RemoveStatus(StatusType);
+
+            _dayCounter = 0;
         }
     }
 }

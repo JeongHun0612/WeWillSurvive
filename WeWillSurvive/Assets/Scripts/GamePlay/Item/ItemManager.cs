@@ -36,21 +36,20 @@ namespace WeWillSurvive.Item
 
     public class ItemManager : IService
     {
-        private readonly Dictionary<EItem, IItemEffect> _itemEffects = new();
+        private readonly Dictionary<EItem, ScriptableItemEffect> _itemEffects = new();
         public Dictionary<EItem, float> Items { get; private set; } = new();
 
         private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
 
         public async UniTask InitializeAsync()
         {
-            // ItemEffects 초기화
-            var data = await ResourceManager.LoadAssetAsync<ItemEffectData>();
-
-            foreach (var itemEffect in data.ItemEffects)
+            //// ItemEffects 초기화
+            var itemEffects = await ResourceManager.LoadAssetsByLabelAsync<ScriptableItemEffect>("ItemEffect");
+            foreach (var itemEffect in itemEffects)
             {
-                if (!_itemEffects.ContainsKey(itemEffect.Item))
+                if (!_itemEffects.ContainsKey(itemEffect.ItemType))
                 {
-                    _itemEffects.Add(itemEffect.Item, itemEffect);
+                    _itemEffects.Add(itemEffect.ItemType, itemEffect);
                 }
             }
 
@@ -108,16 +107,12 @@ namespace WeWillSurvive.Item
                 if (_itemEffects.TryGetValue(item, out var itemEffect))
                 {
                     itemEffect.Apply(target);
-                    Items[item] -= usedCount;
-
-                    if (Items[item] == 0f)
-                    {
-                        RemoveItem(item);
-                    }
                 }
-                else
+
+                Items[item] -= usedCount;
+                if (Items[item] == 0f)
                 {
-                    Debug.LogWarning($"ItemEffect [{itemEffect}] not found.");
+                    RemoveItem(item);
                 }
             }
             else
