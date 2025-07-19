@@ -103,7 +103,7 @@ namespace WeWillSurvive.Character
             }
 
             // Test
-            //GetCharacter(ECharacter.Bell).State.SetState(EState.Exploring);
+            //GetCharacter(ECharacter.Bell).State.SetState(EState.Panic);
         }
 
         public int AliveCharacterCount()

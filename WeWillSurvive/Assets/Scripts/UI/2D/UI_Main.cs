@@ -23,12 +23,17 @@ namespace WeWillSurvive
         [Header("Items")]
         [SerializeField] private Transform _foods;
         [SerializeField] private Transform _waters;
-        [SerializeField] private Transform _boardGame;
-        [SerializeField] private Transform _gun;
-        [SerializeField] private Transform _repairKit;
         [SerializeField] private Transform _medicKit;
+        [SerializeField] private Transform _repairKit;
         [SerializeField] private Transform _spacesuit;
         [SerializeField] private Transform _radio;
+        [SerializeField] private Transform _gun;
+        [SerializeField] private Transform _boardGame;
+        [SerializeField] private Transform _ax;
+        [SerializeField] private Transform _pipe;
+        [SerializeField] private Transform _flashlight;
+        [SerializeField] private Transform _map;
+        [SerializeField] private Transform _starmac;
 
         private UI_Background ui;
         private ItemManager _itemManager;
@@ -162,6 +167,11 @@ namespace WeWillSurvive
 
             _radio.gameObject.SetActive(_itemManager.GetItemCount(EItem.Radio) > 0);
             _spacesuit.gameObject.SetActive(_itemManager.GetItemCount(EItem.NiceSpacesuit) > 0);
+            _ax.gameObject.SetActive(_itemManager.GetItemCount(EItem.Ax) > 0);
+            _pipe.gameObject.SetActive(_itemManager.GetItemCount(EItem.Pipe) > 0);
+            _flashlight.gameObject.SetActive(_itemManager.GetItemCount(EItem.Flashlight) > 0);
+            _map.gameObject.SetActive(_itemManager.GetItemCount(EItem.Map) > 0);
+            _starmac.gameObject.SetActive(_itemManager.GetItemCount(EItem.Starmac) > 0);
         }
 
         private void UpdateFoodUI()

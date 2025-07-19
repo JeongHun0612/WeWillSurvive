@@ -1,10 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
-using UnityEngine;
-using WeWillSurvive.Core;
+﻿using UnityEngine;
 using WeWillSurvive.UI;
-using WeWillSurvive.Character;
-using static Define;
 using UnityEngine.UI;
 using WeWillSurvive.Item;
 
@@ -19,8 +14,11 @@ namespace WeWillSurvive
         {
             if ((int)_itemType >= 100)
             {
+                Transform t = transform.Find("CharacterImage");
+                if (t == null) return;
+
                 // 클릭 가능 범위 Image와 맞추기
-                Image image = transform.Find("CharacterImage").GetComponent<Image>();
+                Image image = t.GetComponent<Image>();
                 image.raycastPadding = image.sprite.border;
             }
         }

@@ -26,7 +26,7 @@ namespace WeWillSurvive.Character
         public float MaxHealth => _maxHealth;
 
 
-        [Header("## Morale Sprites")]
+        [Header("## Morale Sprites (Main)")]
         [SerializeField] private Sprite _normal;
         [SerializeField] private Sprite _high;
         [SerializeField] private Sprite _low;
@@ -46,6 +46,27 @@ namespace WeWillSurvive.Character
         [SerializeField] private Sprite _scaredMad;
         [Tooltip("다침 + 공포 + 미침 상태")]
         [SerializeField] private Sprite _injuredScaredMad;
+
+        [Header("## Morale Sprites (Room)")]
+        [SerializeField] private Sprite _normalRoom;
+        [SerializeField] private Sprite _highRoom;
+        [SerializeField] private Sprite _lowRoom;
+
+        [Header("## Status Sprites (Room)")]
+        [Tooltip("다친 상태")]
+        [SerializeField] private Sprite _injuredRoom;
+        [Tooltip("공포 상태")]
+        [SerializeField] private Sprite _scaredRoom;
+        [Tooltip("미친 상태")]
+        [SerializeField] private Sprite _madRoom;
+        [Tooltip("다침 + 미침 상태")]
+        [SerializeField] private Sprite _injuredMadRoom;
+        [Tooltip("다침 + 공포 상태")]
+        [SerializeField] private Sprite _injuredScaredRoom;
+        [Tooltip("공포 + 미침 상태")]
+        [SerializeField] private Sprite _scaredMadRoom;
+        [Tooltip("다침 + 공포 + 미침 상태")]
+        [SerializeField] private Sprite _injuredScaredMadRoom;
 
         [Header("## State Active Message")]
         [SerializeField] private string _hungerActiveMessage;
@@ -160,6 +181,44 @@ namespace WeWillSurvive.Character
                 EMorale.Normal => _normal,
                 EMorale.High => _high,
                 EMorale.VeryHigh => _high,
+                _ => null
+            };
+        }
+
+        public Sprite GetRoomSprite(EState state, EMorale morale)
+        {
+            bool isHurt = (state & (EState.Injured | EState.Sick)) != 0;
+            bool isAnxiety = (state & (EState.Anxious | EState.Panic)) != 0;
+            bool isMad = (state & EState.Mad) != 0;
+
+            // 상태 조합 우선순위
+            if (isHurt && isAnxiety && isMad)
+                return _injuredScaredMadRoom;
+
+            if (isHurt && isMad)
+                return _injuredMadRoom;
+
+            if (isHurt && isAnxiety)
+                return _injuredScaredRoom;
+
+            if (isMad)
+                return _madRoom;
+
+            if (isAnxiety)
+                return _scaredRoom;
+
+            if (isHurt)
+                return _injuredRoom;
+
+
+            // 사기 기반 표정
+            return morale switch
+            {
+                EMorale.VeryLow => _lowRoom,
+                EMorale.Low => _lowRoom,
+                EMorale.Normal => _normalRoom,
+                EMorale.High => _highRoom,
+                EMorale.VeryHigh => _highRoom,
                 _ => null
             };
         }

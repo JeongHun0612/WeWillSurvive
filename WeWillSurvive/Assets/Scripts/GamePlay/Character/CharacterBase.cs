@@ -24,6 +24,7 @@ namespace WeWillSurvive.Character
         public bool IsExploring { get; private set; }
         public bool IsDead { get; private set; }
         public Sprite MainSprite => Data.GetMainSprite(State.CurrentState, Morale);
+        public Sprite RoomSprite => Data.GetRoomSprite(State.CurrentState, Morale);
 
         public event Action<EState> OnStateChangedEvent;
 
