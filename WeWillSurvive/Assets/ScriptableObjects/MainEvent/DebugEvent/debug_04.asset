@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
-  m_Name: ox_test_01
+  m_Name: debug_04
   m_EditorClassIdentifier: 
-  eventId: ox_test_01
-  title: "\uD589\uC131 \uD0D0\uC0AC \uC9C0\uB3C4\uB97C \uD1B5\uD574 \uBBF8\uD0D0\uC0AC
-    \uC9C0\uC5ED \uBC1C\uACAC"
+  eventId: debug_04
+  title: 
   descriptions:
   - "\uC6B0\uC8FC \uAE30\uC9C0\uB97C \uD0D0\uC0C9\uD558\uB2E4\uAC00 \uD589\uC131
     \uD0D0\uC0AC \uC9C0\uB3C4\uC5D0\uB294 \uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC774 \uD45C\uC2DC\uB418\uC5B4\uC788\uB2E4\uB294

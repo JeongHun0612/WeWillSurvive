@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: debug_07
+  m_EditorClassIdentifier: 
+  eventId: debug_07
+  title: 
+  descriptions:
+  - "\uAE30\uC9C0 \uC55E\uC5D0 \uD0A4\uBCF4\uB2E4 \uD070 \uBC84\uC12F \uAC19\uC740
+    \uC678\uACC4 \uC0DD\uBA85\uCCB4\uAC00 \uB098\uD0C0\uB0AC\uB2E4. \uB9D0\uC740
+    \uD1B5\uD558\uC9C0 \uC54A\uC9C0\uB9CC \uC190\uC9D3\uC73C\uB85C \uBB34\uC5C7\uC744
+    \uC6D0\uD558\uB294\uC9C0 \uC54C\uB824\uC628\uB2E4. \uC190\uC804\uB4F1\uC744 \uAC74\uB124\uBA74
+    \uC791\uC740 \uBB3C\uBCD1 \uBA87 \uAC1C\uB97C \uC900\uB2E4\uACE0 \uD55C\uB2E4.
+    \uC124\uBA85\uC740 \uC5C6\uC9C0\uB9CC, \uADF8 \uD45C\uC815\uC744 \uBCF4\uC544\uC120
+    \uB098\uC05C \uC758\uB3C4\uB294 \uC5C6\uC5B4 \uBCF4\uC778\uB2E4."
+  triggerConditions: []
+  eventType: 1
+  choices:
+  - choiceType: 214
+    iconTexture: {fileID: 2800000, guid: 22d8cc569472e114cbc82a15605d841f, type: 3}
+    results:
+    - conditions: []
+      resultText: "\uC190\uC804\uB4F1\uC744 \uC870\uC2EC\uC2A4\uB7FD\uAC8C \uAC74\uB124\uC790,
+        \uC678\uACC4 \uC0DD\uBA85\uCCB4\uB294 \uC9E7\uAC8C \uACE0\uAC1C\uB97C \uB044\uB355\uC774\uACE0
+        \uBB3C\uBCD1\uB4E4\uC744 \uC870\uC2EC\uD788 \uB0B4\uB824\uB193\uC558\uB2E4.
+        \uB9D0\uC740 \uC5C6\uC5C8\uC9C0\uB9CC, \uADF8 \uC874\uC7AC\uC5D0\uAC8C\uC120
+        \uD655\uC2E4\uD55C \uD638\uC758\uAC00 \uB290\uAEF4\uC84C\uB2E4."
+      effects: []
+      probability: 1
+  - choiceType: 200
+    iconTexture: {fileID: 2800000, guid: c50fef4daef70c542b0a906159ae22f5, type: 3}
+    results:
+    - conditions: []
+      resultText: "\uC190\uC804\uB4F1\uC744 \uC870\uC2EC\uC2A4\uB7FD\uAC8C \uAC74\uB124\uC790,
+        \uC678\uACC4 \uC0DD\uBA85\uCCB4\uB294 \uC9E7\uAC8C \uACE0\uAC1C\uB97C \uB044\uB355\uC774\uACE0
+        \uBB3C\uBCD1\uB4E4\uC744 \uC870\uC2EC\uD788 \uB0B4\uB824\uB193\uC558\uB2E4.
+        \uB9D0\uC740 \uC5C6\uC5C8\uC9C0\uB9CC, \uADF8 \uC874\uC7AC\uC5D0\uAC8C\uC120
+        \uD655\uC2E4\uD55C \uD638\uC758\uAC00 \uB290\uAEF4\uC84C\uB2E4."
+      effects: []
+      probability: 1
+  - choiceType: 203
+    iconTexture: {fileID: 2800000, guid: 6ac7114a2d6a92c47a093c022a255d99, type: 3}
+    results:
+    - conditions: []
+      resultText: "\uC190\uC804\uB4F1\uC744 \uC870\uC2EC\uC2A4\uB7FD\uAC8C \uAC74\uB124\uC790,
+        \uC678\uACC4 \uC0DD\uBA85\uCCB4\uB294 \uC9E7\uAC8C \uACE0\uAC1C\uB97C \uB044\uB355\uC774\uACE0
+        \uBB3C\uBCD1\uB4E4\uC744 \uC870\uC2EC\uD788 \uB0B4\uB824\uB193\uC558\uB2E4.
+        \uB9D0\uC740 \uC5C6\uC5C8\uC9C0\uB9CC, \uADF8 \uC874\uC7AC\uC5D0\uAC8C\uC120
+        \uD655\uC2E4\uD55C \uD638\uC758\uAC00 \uB290\uAEF4\uC84C\uB2E4."
+      effects: []
+      probability: 1
+  - choiceType: 300
+    iconTexture: {fileID: 0}
+    results:
+    - conditions: []
+      resultText: "\uC6B0\uB9AC\uAC00 \uAC70\uC808\uC758 \uBAB8\uC9D3\uC744 \uD558\uC790,
+        \uC678\uACC4 \uC0DD\uBA85\uCCB4\uB294 \uC2E4\uB9DD\uD55C \uB4EF \uBAB8\uC744
+        \uB3CC\uB824 \uC0AC\uB77C\uC84C\uB2E4. \uAE08\uC138 \uAE30\uC9C0 \uC8FC\uBCC0\uC758
+        \uACF5\uAE30\uB294 \uB2E4\uC2DC \uC801\uB9C9\uC5D0 \uD729\uC2F8\uC600\uB2E4."
+      effects: []
+      probability: 1
