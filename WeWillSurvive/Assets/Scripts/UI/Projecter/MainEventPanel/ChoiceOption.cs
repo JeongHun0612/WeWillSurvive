@@ -50,7 +50,7 @@ namespace WeWillSurvive
             if (isSelected)
                 _image.color = Color.white;
             else
-                _image.color = new Color(1f, 1f, 1f, 0.5f);
+                _image.color = new Color(1f, 1f, 1f, 0.6f);
         }
     }
 }

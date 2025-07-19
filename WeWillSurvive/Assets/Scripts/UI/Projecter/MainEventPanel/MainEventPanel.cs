@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WeWillSurvive.Core;
+using WeWillSurvive.Log;
 using WeWillSurvive.MainEvent;
 
 namespace WeWillSurvive
@@ -11,9 +13,8 @@ namespace WeWillSurvive
     public class MainEventPanel : PagePanel
     {
         [Header("## Event Text")]
+        [SerializeField] private RectTransform _textRootLayout;
         [SerializeField] private TMP_Text _eventText;
-        [SerializeField] private TMP_Text _tempText;
-        [SerializeField] private int _maxLineCount;
 
         [Header("## Choice Objects")]
         [SerializeField] private List<ChoiceOption> _choiceOptions;
@@ -23,7 +24,12 @@ namespace WeWillSurvive
         private MainEventData _mainEventData = null;
         private ChoiceOption _selectedOption = null;
 
+        private int _maxLineCount;
+
         public Action ChoiceImageSelected;
+
+
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         public override void Initialize()
         {
@@ -33,13 +39,16 @@ namespace WeWillSurvive
             {
                 choiceImage.Initialize(OnClickChoiceImage);
             }
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_textRootLayout);
+            _maxLineCount = TMPTextUtil.CalculateMaxLineCount(_eventText);
         }
 
         public override async UniTask RefreshPageAsync(int startPageIndex)
         {
             await base.RefreshPageAsync(startPageIndex);
 
-            _mainEventData = MainEventManager.Instance.DebugEventData;
+            _mainEventData = MainEventManager.Instance.GetRandomMainEventData();
             _selectedOption = null;
 
             // 선택지 업데이트
@@ -48,7 +57,7 @@ namespace WeWillSurvive
             gameObject.SetActive(true);
             await UniTask.NextFrame();
 
-            _pageTexts = TMPTextUtil.SplitTextByLines(_tempText, _mainEventData.descriptions[0], _maxLineCount);
+            _pageTexts = TMPTextUtil.SplitTextByLines(_eventText, _mainEventData.descriptions[0], _maxLineCount);
             PageCount = _pageTexts.Count;
         }
 
@@ -61,18 +70,12 @@ namespace WeWillSurvive
 
         public override void ApplyResult()
         {
-            if (_selectedOption == null)
-            {
-                // 선택하지 않음
-                //_notingChoice.results
-                //choice.results.
-            }
-            else
-            {
-                //_selectedOption.EventChoice.results
-            }
+            // 선택한 옵션에 따라 이벤트 초이스 할당
+            var eventChoice = (_selectedOption == null) ? _mainEventData.GetEventChoice(EChoiceType.Noting) : _selectedOption.EventChoice;
 
-            //_mainEventData.eventType
+            // 이벤트 결과 메시지 Log로 전달
+            var resultMessage = eventChoice.GetRandomResult().resultText;
+            LogManager.AddMainEventResultLog(resultMessage);
         }
 
         public bool ShouldEnableNextButton()

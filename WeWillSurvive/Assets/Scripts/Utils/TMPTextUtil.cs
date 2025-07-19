@@ -1,7 +1,9 @@
+﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace WeWillSurvive
 {
@@ -21,6 +23,12 @@ namespace WeWillSurvive
             while (currentLine < totalLines)
             {
                 int endLine = Mathf.Min(currentLine + maxLineCount - 1, totalLines - 1);
+
+                if (currentLine >= textInfo.lineInfo.Length || endLine >= textInfo.lineInfo.Length)
+                {
+                    Debug.LogWarning("SplitTextByLines: lineInfo 인덱스 초과 감지됨.");
+                    break;
+                }
 
                 int firstVisibleChar = textInfo.lineInfo[currentLine].firstVisibleCharacterIndex;
                 int lastVisibleChar = textInfo.lineInfo[endLine].lastVisibleCharacterIndex;
@@ -55,6 +63,18 @@ namespace WeWillSurvive
 
             tmpText.text = string.Empty;
             return pages;
+        }
+
+        public static int CalculateMaxLineCount(TMP_Text tmpText)
+        {
+            // 텍스트 영역의 전체 높이
+            float totalHeight = ((RectTransform)tmpText.transform).rect.height;
+
+            // 실제 한 줄 높이 추정 (기본 폰트 크기 + 줄 간격 보정)
+            float lineHeight = tmpText.fontSize * (1 + tmpText.lineSpacing);
+
+            // 줄 수 = 전체 높이 / 줄 높이
+            return Mathf.FloorToInt(totalHeight / lineHeight);
         }
     }
 }

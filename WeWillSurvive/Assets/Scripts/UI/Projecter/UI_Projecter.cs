@@ -76,6 +76,12 @@ namespace WeWillSurvive
 
             _dayText.text = $"Day {GameManager.Instance.Day}";
 
+            // PanelButton 전부 활성화
+            foreach (var panelMoveButton in _panelMoveButtons)
+            {
+                panelMoveButton.Enabled();
+            }
+
             foreach (var pagePanel in _pagePanels)
             {
                 await pagePanel.RefreshPageAsync(_totalPageCount);
