@@ -619,10 +619,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneLayer: {fileID: 1440951035}
   _popupLayer: {fileID: 1338889086}
+  _overlayLayer: {fileID: 0}
   _scenePrefabPaths:
   - UI_Background
   _popupPrefabPaths:
   - UI_Main
+  _overlayPrefabPaths: []
 --- !u!1 &1338889085
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +830,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4b070ec71cbd64aa4f6dc8e0dc9455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugEventData: {fileID: 11400000, guid: c6f207de1e2e69440bb1b00803b71558, type: 2}
+  DebugEventData: {fileID: 0}
+  DebugMainEventDatas:
+  - {fileID: 11400000, guid: 8d9c03a143643774f88b00f6b97d482e, type: 2}
+  - {fileID: 11400000, guid: 9153087e7ccd66a41a7da01656e447c0, type: 2}
+  - {fileID: 11400000, guid: 79a064e5d9c38d348b23d9938df203dd, type: 2}
+  - {fileID: 11400000, guid: 964d6ed250457ed4bbbd798d3f9b3015, type: 2}
+  - {fileID: 11400000, guid: 7f1a4304f38ff1a4eb87611029a3b74d, type: 2}
+  - {fileID: 11400000, guid: 27df391e5b3a6c04da4b23bbbf92429d, type: 2}
+  - {fileID: 11400000, guid: 8d274a5b0eae9c24dba8216df40c9c32, type: 2}
+  - {fileID: 11400000, guid: 062b33ae85b140149ba6372efee97a9b, type: 2}
+  - {fileID: 11400000, guid: 4ca74110d09d96446b7f85d3fd0ffccc, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
