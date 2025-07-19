@@ -23,6 +23,7 @@ namespace WeWillSurvive
         [Header("## Page Move Button")]
         [SerializeField] private Button _prevButton;
         [SerializeField] private Button _nextButton;
+        [SerializeField] private Button _nextDayButton;
 
         private PagePanel _currentPanel;
         private MainEventPanel _mainEventPanel;
@@ -71,6 +72,7 @@ namespace WeWillSurvive
             _currentPageIndex = 0;
             _currentPanel = null;
             _prevButton.gameObject.SetActive(false);
+            _nextDayButton.gameObject.SetActive(false);
 
             _dayText.text = $"Day {GameManager.Instance.Day}";
 
@@ -112,14 +114,6 @@ namespace WeWillSurvive
                 return;
             }
 
-            // 마지막 페이지에서는 다음 날짜로 이동
-            if (targetPageIndex == _totalPageCount)
-            {
-                ApplyResultPanels();
-                GameManager.Instance.StartNextDay();
-                return;
-            }
-
             foreach (var pagePanel in _pagePanels)
             {
                 if (!pagePanel.HasPage(targetPageIndex))
@@ -153,16 +147,14 @@ namespace WeWillSurvive
         }
         private void UpdateNextButton()
         {
+            _nextButton.gameObject.SetActive(_currentPageIndex < _totalPageCount - 1);
+
             if (_currentPageIndex == _totalPageCount - 1)
             {
-                _nextButton.image.color = Color.red;
-                _nextButton.gameObject.SetActive(_mainEventPanel.ShouldEnableNextButton());
+                _nextDayButton.gameObject.SetActive(_mainEventPanel.ShouldEnableNextButton());
             }
             else
-            {
-                _nextButton.image.color = Color.white;
-                _nextButton.gameObject.SetActive(true);
-            }
+                _nextDayButton.gameObject.SetActive(false);
         }
 
         private void UpdatePanelMoveButton()
@@ -202,6 +194,12 @@ namespace WeWillSurvive
                     break;
                 }
             }
+        }
+
+        public void OnClickNextDay()
+        {
+            ApplyResultPanels();
+            GameManager.Instance.StartNextDay();
         }
 
         private void OnNewDayEvent(NewDayEvent context)
