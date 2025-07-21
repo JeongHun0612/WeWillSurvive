@@ -8,7 +8,6 @@ namespace WeWillSurvive.UI
         private const int DEFAULT_SORTING_ORDER = 10;
 
         public bool RememberInHistory = true;
-        public int SortingOffset = 0;
 
         public override void OnShow()
         {
@@ -27,7 +26,7 @@ namespace WeWillSurvive.UI
             if (_canvas == null)
                 CanvasInitialize();
 
-            _canvas.sortingOrder = DEFAULT_SORTING_ORDER + SortingOffset + UIManager.Instance.PopupHistoryCount;
+            _canvas.sortingOrder = DEFAULT_SORTING_ORDER + UIManager.Instance.PopupHistoryCount;
         }
 
         public void ClosePopupUI()

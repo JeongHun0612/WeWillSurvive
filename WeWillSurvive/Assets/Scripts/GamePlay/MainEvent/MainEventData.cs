@@ -21,39 +21,39 @@ namespace WeWillSurvive.MainEvent
         ChooseSomeone,      // 특정 대원을 선택하는 이벤트
 
         [Description("교환 이벤트")]
-        Trade               // 교환 이벤트
+        Trade,              // 교환 이벤트
+
+        [Description("이벤트가 존재하지 않을 시")]
+        Noting,
     }
 
     public enum EConditionType
     {
-        [Description("캐릭터가 우주 기지에 있을 시")]
+        [InspectorName("캐릭터가 우주 기지에 있을 시")]
         CharacterInShelter,
 
-        [Description("캐릭터의 상태가 특정 값보다 높을 시")]
-        CharacterStatusUpper,
-
-        [Description("캐릭터의 상태가 특정 값보다 낮을 시")]
-        CharacterStatusLower,
-
-        [Description("캐릭터가 특정 상태일 시")]
+        [InspectorName("캐릭터가 특정 상태일 시")]
         CharacterHasState,
 
-        [Description("캐릭터의 탐사 횟수가 특정 값보다 높을 시")]
+        [InspectorName("캐릭터가 특정 상태가 아닐 시")]
+        CharacterNotHasState,
+
+        [InspectorName("캐릭터의 탐사 횟수가 특정 값보다 높을 시")]
         CharacterExpeditionCountUpper,
 
-        [Description("캐릭터의 탐사 횟수가 특정 값보다 낮을 시")]
+        [InspectorName("캐릭터의 탐사 횟수가 특정 값보다 낮을 시")]
         CharacterExpeditionCountLower,
 
-        [Description("특정 아이템을 보유하고 있을 시")]
+        [InspectorName("특정 아이템을 보유하고 있을 시")]
         HasItem,
 
-        [Description("아이템 수량이 특정 값 이상일 시")]
+        [InspectorName("아이템 수량이 특정 값 이상일 시")]
         ItemCountUpper,
 
-        [Description("아이템 수량이 특정 값 이하일 시")]
+        [InspectorName("아이템 수량이 특정 값 이하일 시")]
         ItemCountLower,
 
-        [Description("특정 날짜 이후부터")]
+        [InspectorName("특정 날짜 이후부터")]
         DayCountUpper,
     }
 

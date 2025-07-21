@@ -76,16 +76,17 @@ namespace WeWillSurvive
             {
                 case EMainEventType.YesOrNo:
                 case EMainEventType.SendSomeone:
-                    DrawStaticChoiceUI(choicesProp, iconTexturesProp);
+                case EMainEventType.Noting:
+                    DrawStaticChoiceUI(choicesProp);
                     break;
                 case EMainEventType.UseItems:
-                    DrawEditableChoiceUI(choicesProp, iconTexturesProp, GetItemIconNames());
+                    DrawEditableChoiceUI(choicesProp, GetItemIconNames());
                     break;
                 case EMainEventType.ChooseSomeone:
-                    DrawEditableChoiceUI(choicesProp, iconTexturesProp, GetCharacterIconNames());
+                    DrawEditableChoiceUI(choicesProp, GetCharacterIconNames());
                     break;
                 case EMainEventType.Trade:
-                    DrawEditableChoiceUI(choicesProp, iconTexturesProp, GetItemIconNames());
+                    DrawEditableChoiceUI(choicesProp, GetItemIconNames());
                     break;
                 default:
                     EditorGUILayout.PropertyField(choicesProp);
@@ -95,7 +96,7 @@ namespace WeWillSurvive
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void DrawStaticChoiceUI(SerializedProperty choicesProp, SerializedProperty iconTexturesProp)
+        private void DrawStaticChoiceUI(SerializedProperty choicesProp)
         {
             EditorGUILayout.LabelField("선택지 목록", EditorStyles.boldLabel, GUILayout.Width(80));
             DrawChoiceSelector(choicesProp);
@@ -107,11 +108,11 @@ namespace WeWillSurvive
             DrawResultTabsUI(resultsProp);
         }
 
-        private void DrawEditableChoiceUI(SerializedProperty choicesProp, SerializedProperty iconTexturesProp, string[] choiceOptions)
+        private void DrawEditableChoiceUI(SerializedProperty choicesProp, string[] choiceOptions)
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("선택지 목록", EditorStyles.boldLabel, GUILayout.Width(80));
-            DrawAddRemoveChoiceButtonUI(choicesProp, iconTexturesProp);
+            DrawAddRemoveChoiceButtonUI(choicesProp);
             EditorGUILayout.EndHorizontal();
 
             DrawChoiceSelector(choicesProp);
@@ -257,7 +258,7 @@ namespace WeWillSurvive
             }
         }
 
-        private void DrawAddRemoveChoiceButtonUI(SerializedProperty choicesProp, SerializedProperty iconTexturesProp)
+        private void DrawAddRemoveChoiceButtonUI(SerializedProperty choicesProp)
         {
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("+", GUILayout.Width(24)))
@@ -364,6 +365,19 @@ namespace WeWillSurvive
                                 iconTexture = null,
                                 results = new List<EventResult>() { new EventResult() }
                             },
+                        };
+                    }
+                    break;
+                case EMainEventType.Noting:
+                    {
+                        data.choices = new List<EventChoice>
+                        {
+                            new EventChoice
+                            {
+                                choiceType = EChoiceType.Noting,
+                                iconTexture = null,
+                                results = new List<EventResult>() { new EventResult() }
+                            }
                         };
                     }
                     break;

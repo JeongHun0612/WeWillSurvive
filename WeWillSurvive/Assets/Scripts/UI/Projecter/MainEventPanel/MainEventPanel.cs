@@ -48,8 +48,14 @@ namespace WeWillSurvive
         {
             await base.RefreshPageAsync(startPageIndex);
 
-            _mainEventData = MainEventManager.Instance.GetRandomMainEventData();
+            _mainEventData = MainEventManager.Instance.GetDailyMainEvent();
             _selectedOption = null;
+
+            if (_mainEventData == null)
+            {
+                PageCount = 0;
+                return;
+            }
 
             // 선택지 업데이트
             UpdateChoiceOptions(_mainEventData);
@@ -64,6 +70,11 @@ namespace WeWillSurvive
         public override void ShowPage(int localIndex)
         {
             base.ShowPage(localIndex);
+
+            if (localIndex == PageCount - 1)
+                AllChoiceOptionEnabled();
+            else
+                AllChoiceOptionDisabeld();
 
             _eventText.text = _pageTexts[localIndex];
         }
@@ -85,11 +96,7 @@ namespace WeWillSurvive
 
         private void UpdateChoiceOptions(MainEventData mainEventData)
         {
-            foreach (var choiceOption in _choiceOptions)
-            {
-                choiceOption.OnSelected(false);
-                choiceOption.gameObject.SetActive(false);
-            }
+            AllChoiceOptionDisabeld();
 
             int index = 0;
             foreach (var choice in mainEventData.choices)
@@ -100,6 +107,22 @@ namespace WeWillSurvive
 
                 _choiceOptions[index].Initialize(choice);
                 index++;
+            }
+        }
+
+        private void AllChoiceOptionDisabeld()
+        {
+            foreach (var choiceOption in _choiceOptions)
+            {
+                choiceOption.OnSelected(false);
+                choiceOption.gameObject.SetActive(false);
+            }
+        }
+        private void AllChoiceOptionEnabled()
+        {
+            foreach (var choiceOption in _choiceOptions)
+            {
+                choiceOption.gameObject.SetActive(true);
             }
         }
 

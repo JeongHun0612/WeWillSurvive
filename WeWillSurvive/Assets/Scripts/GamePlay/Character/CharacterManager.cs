@@ -125,5 +125,15 @@ namespace WeWillSurvive.Character
 
             return null;
         }
+
+        public bool IsInShelter(ECharacter characterType)
+        {
+            if (Characters.TryGetValue(characterType, out var character))
+            {
+                return character.IsExploring;
+            }
+
+            return false;
+        }
     }
 }

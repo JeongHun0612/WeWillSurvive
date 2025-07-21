@@ -3,7 +3,6 @@ using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
-using WeWillSurvive.Status;
 using WeWillSurvive.Util;
 
 namespace WeWillSurvive
@@ -22,8 +21,11 @@ namespace WeWillSurvive
             var valueProp = property.FindPropertyRelative("value");
 
             // ConditionType
-            var descriptions = EnumUtil.GetEnumDescriptions<EConditionType>();
-            conditionTypeProp.enumValueIndex = EditorGUI.Popup(rect, "이벤트 발생 조건 타입", conditionTypeProp.enumValueIndex, descriptions);
+            //var descriptions = EnumUtil.GetEnumDescriptions<EConditionType>();
+            //conditionTypeProp.enumValueIndex = EditorGUI.Popup(rect, "이벤트 발생 조건 타입", conditionTypeProp.enumValueIndex, descriptions);
+            //rect.y += EditorGUIUtility.singleLineHeight + 2;
+
+            EditorGUI.PropertyField(rect, conditionTypeProp, new GUIContent("이벤트 발생 조건 타입"));
             rect.y += EditorGUIUtility.singleLineHeight + 2;
 
             var conditionType = (EConditionType)conditionTypeProp.enumValueIndex;
@@ -78,9 +80,8 @@ namespace WeWillSurvive
             switch (type)
             {
                 case EConditionType.CharacterInShelter:
-                case EConditionType.CharacterStatusUpper:
-                case EConditionType.CharacterStatusLower:
                 case EConditionType.CharacterHasState:
+                case EConditionType.CharacterNotHasState:
                 case EConditionType.CharacterExpeditionCountUpper:
                 case EConditionType.CharacterExpeditionCountLower:
                     return System.Enum.GetNames(typeof(ECharacter));
@@ -97,10 +98,8 @@ namespace WeWillSurvive
         {
             switch (type)
             {
-                case EConditionType.CharacterStatusUpper:
-                case EConditionType.CharacterStatusLower:
-                    return System.Enum.GetNames(typeof(EStatusType));
                 case EConditionType.CharacterHasState:
+                case EConditionType.CharacterNotHasState:
                     return EnumUtil.GetEnumDescriptions<EState>();
                 default:
                     return null;
@@ -122,9 +121,8 @@ namespace WeWillSurvive
         {
             switch (type)
             {
-                case EConditionType.CharacterStatusUpper:
-                case EConditionType.CharacterStatusLower:
                 case EConditionType.CharacterHasState:
+                case EConditionType.CharacterNotHasState:
                     return true;
                 default:
                     return false;
@@ -134,8 +132,6 @@ namespace WeWillSurvive
         {
             switch (type)
             {
-                case EConditionType.CharacterStatusUpper:
-                case EConditionType.CharacterStatusLower:
                 case EConditionType.CharacterExpeditionCountUpper:
                 case EConditionType.CharacterExpeditionCountLower:
                 case EConditionType.ItemCountUpper:
