@@ -13,7 +13,7 @@ namespace WeWillSurvive.MainEvent
         public List<MainEventData> _testDatas = new();
 
         [Header("## 첫째날 전용 메인 이벤트")]
-        [SerializeField] private MainEventData _firstDayMainEventData;
+        [SerializeField] private List<MainEventData> _firstDayMainEventDatas;
 
         [Header("## 메인 이벤트가 발생하지 않는 날")]
         [SerializeField] private List<MainEventData> _notingMainEventDatas = new();
@@ -37,7 +37,7 @@ namespace WeWillSurvive.MainEvent
 
             if (GameManager.Instance.Day == 1)
             {
-                return _firstDayMainEventData;
+                return GetValidMainEvent(_firstDayMainEventDatas);
             }
 
             if (!isDailyMainEvent)
@@ -88,6 +88,14 @@ namespace WeWillSurvive.MainEvent
                     {
                         return CharacterManager.IsInShelter(Enum.Parse<ECharacter>(condition.targetId));
                     }
+                case EConditionType.AliveCountCheck:
+                    {
+                        int minValue = int.Parse(condition.value1);
+                        int maxValue = int.Parse(condition.value2);
+                        int aliveCount = CharacterManager.AliveCharacterCount();
+
+                        return aliveCount >= minValue && aliveCount <= maxValue;
+                    }
                 case EConditionType.CharacterHasState:
                     {
                         var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(condition.targetId));
@@ -102,13 +110,13 @@ namespace WeWillSurvive.MainEvent
                     }
                 case EConditionType.CharacterExpeditionCountUpper:
                     {
-                        int countUpper = int.Parse(condition.value);
+                        int countUpper = int.Parse(condition.value1);
                         return false;
                         //return CharacterManager.GetExpeditionCount(condition.targetId) > countUpper;
                     }
                 case EConditionType.CharacterExpeditionCountLower:
                     {
-                        int countLower = int.Parse(condition.value);
+                        int countLower = int.Parse(condition.value1);
                         return false;
                         //return CharacterManager.GetExpeditionCount(condition.targetId) < countLower;
                     }
@@ -118,16 +126,16 @@ namespace WeWillSurvive.MainEvent
                     }
                 case EConditionType.ItemCountUpper:
                     {
-                        int itemUpper = int.Parse(condition.value);
+                        int itemUpper = int.Parse(condition.value1);
                         return ItemManager.GetItemCount(Enum.Parse<EItem>(condition.targetId)) >= itemUpper;
                     }
                 case EConditionType.ItemCountLower:
                     {
-                        int itemLower = int.Parse(condition.value);
+                        int itemLower = int.Parse(condition.value1);
                         return ItemManager.GetItemCount(Enum.Parse<EItem>(condition.targetId)) <= itemLower;
                     }
                 case EConditionType.DayCountUpper:
-                    int minDay = int.Parse(condition.value);
+                    int minDay = int.Parse(condition.value1);
                     return GameManager.Instance.Day >= minDay;
                 default:
                     Debug.LogWarning($"Unknown condition type: {condition.conditionType}");

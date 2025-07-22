@@ -32,6 +32,10 @@ namespace WeWillSurvive.MainEvent
         [InspectorName("캐릭터가 우주 기지에 있을 시")]
         CharacterInShelter,
 
+        [InspectorName("생존 인원이 특정 값 사이일 때")]
+        [Tooltip("Value1(최소) ~ Value2(최대) 까지의 인원")]
+        AliveCountCheck,
+
         [InspectorName("캐릭터가 특정 상태일 시")]
         CharacterHasState,
 
@@ -126,7 +130,8 @@ namespace WeWillSurvive.MainEvent
         public EConditionType conditionType;
         public string targetId;   // 캐릭터 이름, 아이템 이름, 상태 이름 등
         public string parameter;  // 비교할 속성 (ex: Status, State 등)
-        public string value;      // 비교할 값
+        public string value1;      // 비교할 값 1
+        public string value2;      // 비교할 값 2
     }
 
     [System.Serializable]

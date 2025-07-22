@@ -24,7 +24,8 @@ MonoBehaviour:
   - conditionType: 9
     targetId: Lead
     parameter: 
-    value: 50
+    value1: 50
+    value2: 
   eventType: 5
   choices:
   - choiceType: 300

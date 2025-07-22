@@ -18,13 +18,10 @@ namespace WeWillSurvive
             var conditionTypeProp = property.FindPropertyRelative("conditionType");
             var targetIdProp = property.FindPropertyRelative("targetId");
             var parameterProp = property.FindPropertyRelative("parameter");
-            var valueProp = property.FindPropertyRelative("value");
+            var value1Prop = property.FindPropertyRelative("value1");
+            var value2Prop = property.FindPropertyRelative("value2");
 
             // ConditionType
-            //var descriptions = EnumUtil.GetEnumDescriptions<EConditionType>();
-            //conditionTypeProp.enumValueIndex = EditorGUI.Popup(rect, "이벤트 발생 조건 타입", conditionTypeProp.enumValueIndex, descriptions);
-            //rect.y += EditorGUIUtility.singleLineHeight + 2;
-
             EditorGUI.PropertyField(rect, conditionTypeProp, new GUIContent("이벤트 발생 조건 타입"));
             rect.y += EditorGUIUtility.singleLineHeight + 2;
 
@@ -46,10 +43,17 @@ namespace WeWillSurvive
                 rect.y += EditorGUIUtility.singleLineHeight + 2;
             }
 
-            // Value
-            if (NeedsValue(conditionType))
+            // Value 1
+            if (NeedsValue1(conditionType))
             {
-                EditorGUI.PropertyField(rect, valueProp);
+                EditorGUI.PropertyField(rect, value1Prop);
+                rect.y += EditorGUIUtility.singleLineHeight + 2;
+            }
+
+            // Value 2
+            if (NeedsValue2(conditionType))
+            {
+                EditorGUI.PropertyField(rect, value2Prop);
                 rect.y += EditorGUIUtility.singleLineHeight + 2;
             }
 
@@ -110,6 +114,7 @@ namespace WeWillSurvive
         {
             switch (type)
             {
+                case EConditionType.AliveCountCheck:
                 case EConditionType.DayCountUpper:
                     return false;
                 default:
@@ -128,15 +133,26 @@ namespace WeWillSurvive
                     return false;
             }
         }
-        private bool NeedsValue(EConditionType type)
+        private bool NeedsValue1(EConditionType type)
         {
             switch (type)
             {
+                case EConditionType.AliveCountCheck:
                 case EConditionType.CharacterExpeditionCountUpper:
                 case EConditionType.CharacterExpeditionCountLower:
                 case EConditionType.ItemCountUpper:
                 case EConditionType.ItemCountLower:
                 case EConditionType.DayCountUpper:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        private bool NeedsValue2(EConditionType type)
+        {
+            switch (type)
+            {
+                case EConditionType.AliveCountCheck:
                     return true;
                 default:
                     return false;
