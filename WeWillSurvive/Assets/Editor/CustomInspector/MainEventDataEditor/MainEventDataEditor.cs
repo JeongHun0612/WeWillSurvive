@@ -178,7 +178,6 @@ namespace WeWillSurvive
             {
                 SerializedProperty choiceProp = choicesProp.GetArrayElementAtIndex(i);
                 SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("choiceType");
-                SerializedProperty iconTextureProp = choiceProp.FindPropertyRelative("iconTexture");
 
                 int index = choiceTypeProp.enumValueIndex;
                 string enumName = choiceTypeProp.enumNames[index];
@@ -191,7 +190,7 @@ namespace WeWillSurvive
                     EditorGUI.DrawRect(new Rect(buttonRect.x - 2, buttonRect.y - 2, ICON_FIXED_WIDTH + 4, ICON_FIXED_HEIGHT + 4), Color.cyan);
                 }
 
-                Texture2D iconTexture = iconTextureProp.objectReferenceValue as Texture2D;
+                Texture2D iconTexture = GetIconTexture(choiceType);
                 GUIContent content = iconTexture != null ? new GUIContent(iconTexture) : new GUIContent(EnumUtil.GetDescription(choiceType));
                 if (GUI.Button(buttonRect, content, style))
                 {
@@ -319,13 +318,11 @@ namespace WeWillSurvive
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Yes,
-                                iconTexture = GetIconTexture(EChoiceType.Yes),
                                 results = new List<EventResult>() { new EventResult() }
                             },
                             new EventChoice
                             {
                                 choiceType = EChoiceType.No,
-                                iconTexture = GetIconTexture(EChoiceType.No),
                                 results = new List<EventResult>() { new EventResult() }
                             },
                         };
@@ -338,31 +335,26 @@ namespace WeWillSurvive
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Lead,
-                                iconTexture = GetIconTexture(EChoiceType.Lead),
                                 results = new List<EventResult>() { new EventResult() }
                             },
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Cook,
-                                iconTexture = GetIconTexture(EChoiceType.Cook),
                                 results = new List<EventResult>() { new EventResult() }
                             },
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Bell,
-                                iconTexture = GetIconTexture(EChoiceType.Bell),
                                 results = new List<EventResult>() { new EventResult() }
                             },
                             new EventChoice
                             {
                                 choiceType = EChoiceType.DrK,
-                                iconTexture = GetIconTexture(EChoiceType.DrK),
                                 results = new List<EventResult>() { new EventResult() }
                             },
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Noting,
-                                iconTexture = null,
                                 results = new List<EventResult>() { new EventResult() }
                             },
                         };
@@ -375,7 +367,6 @@ namespace WeWillSurvive
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Noting,
-                                iconTexture = null,
                                 results = new List<EventResult>() { new EventResult() }
                             }
                         };

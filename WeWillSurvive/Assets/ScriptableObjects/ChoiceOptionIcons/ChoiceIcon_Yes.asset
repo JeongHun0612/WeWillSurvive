@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13b32075bb0a4643ab52c16c27ba02e, type: 3}
+  m_Name: ChoiceIcon_Yes
+  m_EditorClassIdentifier: 
+  ChoiceType: 0
+  NormalSprite: {fileID: 21300000, guid: aedca2f4ddaf9e24fa29ae4b9540a56c, type: 3}
+  DisabledSprite: {fileID: 21300000, guid: 8c498a8c5c50fd7499c042f66448ca1a, type: 3}

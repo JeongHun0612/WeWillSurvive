@@ -12,13 +12,17 @@ namespace WeWillSurvive
 {
     public class MainEventPanel : PagePanel
     {
-        [Header("## Event Text")]
+        [Header("## 선택 옵션 아이콘 데이터")]
+        [SerializeField] private List<ChoiceOptionIconData> _choiceOptionIconDatas;
+
+        [Header("## 이벤트 텍스트")]
         [SerializeField] private RectTransform _textRootLayout;
         [SerializeField] private TMP_Text _eventText;
 
-        [Header("## Choice Objects")]
+        [Header("## ChoiceOption 오브젝트")]
         [SerializeField] private List<ChoiceOption> _choiceOptions;
 
+        private Dictionary<EChoiceType, ChoiceOptionIconData> _choiceOptionIconDicts = new();
         private List<string> _pageTexts = new();
 
         private MainEventData _mainEventData = null;
@@ -34,6 +38,16 @@ namespace WeWillSurvive
         public override void Initialize()
         {
             PanelType = EPanelType.MainEvent;
+
+            // ChoiceOptionData Dictonary 로 정리
+            _choiceOptionIconDicts.Clear();
+            foreach (var choiceOptionData in _choiceOptionIconDatas)
+            {
+                if (!_choiceOptionIconDicts.ContainsKey(choiceOptionData.ChoiceType))
+                {
+                    _choiceOptionIconDicts[choiceOptionData.ChoiceType] = choiceOptionData;
+                }
+            }
 
             foreach (var choiceImage in _choiceOptions)
             {
@@ -71,11 +85,6 @@ namespace WeWillSurvive
         {
             base.ShowPage(localIndex);
 
-            if (localIndex == PageCount - 1)
-                AllChoiceOptionEnabled();
-            else
-                AllChoiceOptionDisabeld();
-
             _eventText.text = _pageTexts[localIndex];
         }
 
@@ -96,34 +105,27 @@ namespace WeWillSurvive
 
         private void UpdateChoiceOptions(MainEventData mainEventData)
         {
-            AllChoiceOptionDisabeld();
+            foreach (var choiceOption in _choiceOptions)
+                choiceOption.Disabeld();
 
             int index = 0;
             foreach (var choice in mainEventData.choices)
             {
-                var iconTexture = choice.iconTexture;
-                if (iconTexture == null)
+                var choiceOptionIconData = GetChoiceOptionIconData(choice.choiceType);
+                if (choiceOptionIconData == null)
                     continue;
 
-                _choiceOptions[index].Initialize(choice);
+                _choiceOptions[index].Initialize(choice, choiceOptionIconData);
                 index++;
             }
         }
 
-        private void AllChoiceOptionDisabeld()
+        private ChoiceOptionIconData GetChoiceOptionIconData(EChoiceType choiceType)
         {
-            foreach (var choiceOption in _choiceOptions)
-            {
-                choiceOption.OnSelected(false);
-                choiceOption.gameObject.SetActive(false);
-            }
-        }
-        private void AllChoiceOptionEnabled()
-        {
-            foreach (var choiceOption in _choiceOptions)
-            {
-                choiceOption.gameObject.SetActive(true);
-            }
+            if (!_choiceOptionIconDicts.TryGetValue(choiceType, out var choiceOptionIconData))
+                return null;
+
+            return choiceOptionIconData;
         }
 
         public void OnClickChoiceImage(ChoiceOption choiceOption)

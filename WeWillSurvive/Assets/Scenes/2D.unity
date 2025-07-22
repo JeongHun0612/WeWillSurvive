@@ -830,8 +830,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4b070ec71cbd64aa4f6dc8e0dc9455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugEventData: {fileID: 0}
-  DebugMainEventDatas:
+  _testDatas:
+  - {fileID: 11400000, guid: b447ea0a95525b04d8fc822de400f16c, type: 2}
+  _firstDayMainEventDatas:
+  - {fileID: 11400000, guid: b447ea0a95525b04d8fc822de400f16c, type: 2}
+  - {fileID: 11400000, guid: 8c786bdfa14894f43b92cd9891bad491, type: 2}
+  - {fileID: 11400000, guid: 0437000116083be4b9c57b6b562fdab5, type: 2}
+  _notingMainEventDatas:
+  - {fileID: 11400000, guid: 99ac09b63cf8fe24c847b8b7588f2c10, type: 2}
+  - {fileID: 11400000, guid: 94a74ffaecaad5d4495967ced555bff9, type: 2}
+  - {fileID: 11400000, guid: a88192818fefa5d4786ac158369b5585, type: 2}
+  - {fileID: 11400000, guid: 9678661b5f59bb64b836fa55528429b5, type: 2}
+  _debugMainEventDatas:
   - {fileID: 11400000, guid: 8d9c03a143643774f88b00f6b97d482e, type: 2}
   - {fileID: 11400000, guid: 9153087e7ccd66a41a7da01656e447c0, type: 2}
   - {fileID: 11400000, guid: 79a064e5d9c38d348b23d9938df203dd, type: 2}

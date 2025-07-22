@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.MainEvent;
@@ -11,6 +11,7 @@ namespace WeWillSurvive
         private Button _button;
 
         private EventChoice _eventChoice;
+        private ChoiceOptionIconData _choiceOptionIconData;
 
         public EventChoice EventChoice => _eventChoice;
 
@@ -22,35 +23,30 @@ namespace WeWillSurvive
             _button.onClick.AddListener(() => callback?.Invoke(this));
         }
 
-        public void InitChoiceData(EventChoice eventChoice)
+        public void Initialize(EventChoice eventChoice, ChoiceOptionIconData choiceOptionIconData)
         {
             _eventChoice = eventChoice;
+            _choiceOptionIconData = choiceOptionIconData;
 
-            SetChoiceIcon(eventChoice.iconTexture);
-
-            gameObject.SetActive(true);
+            OnSelected(false);
         }
 
-        public void Initialize(EventChoice eventChoice)
+        public void Disabeld()
         {
-            _eventChoice = eventChoice;
-
-            SetChoiceIcon(eventChoice.iconTexture);
-
-            gameObject.SetActive(true);
-        }
-
-        public void SetChoiceIcon(Texture2D iconTexture)
-        {
-            _image.sprite = Sprite.Create(iconTexture, new Rect(0, 0, iconTexture.width, iconTexture.height), new Vector2(0.5f, 0.5f));
+            _eventChoice = null;
+            _choiceOptionIconData = null;
+            gameObject.SetActive(false);
         }
 
         public void OnSelected(bool isSelected)
         {
+            if (_choiceOptionIconData == null)
+                return;
+
             if (isSelected)
-                _image.color = Color.white;
+                _image.sprite = _choiceOptionIconData.NormalSprite;
             else
-                _image.color = new Color(1f, 1f, 1f, 0.6f);
+                _image.sprite = _choiceOptionIconData.DisabledSprite;
         }
     }
 }

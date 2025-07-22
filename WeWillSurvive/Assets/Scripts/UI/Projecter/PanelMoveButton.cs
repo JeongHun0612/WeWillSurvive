@@ -31,6 +31,7 @@ namespace WeWillSurvive
         public void Disabled()
         {
             _button.interactable = false;
+            _button.image.color = new Color(0.6f, 0.6f, 0.6f, 1f);
             _disabledImage.SetActive(true);
         }
 

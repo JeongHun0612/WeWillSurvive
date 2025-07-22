@@ -12,6 +12,9 @@ namespace WeWillSurvive
         [SerializeField] private EItem _item;
         [SerializeField] private float _usageAmount;
 
+        [SerializeField] private Sprite _normalSprite;
+        [SerializeField] private Sprite _selectedSprite;
+
         private Image _itemImage;
         private Button _itemButton;
 
@@ -34,7 +37,7 @@ namespace WeWillSurvive
         public void Refresh()
         {
             _isSelected = false;
-            _itemImage.color = new Color(1f, 1f, 1f, 0.3f);
+            _itemImage.sprite = _normalSprite;
         }
 
         public void UsedItem(CharacterBase target)
@@ -49,12 +52,12 @@ namespace WeWillSurvive
         {
             if (isSelected)
             {
-                _itemImage.color = Color.white;
+                _itemImage.sprite = _selectedSprite;
                 ItemManager.UpdateItemCount(_item, -_usageAmount);
             }
             else
             {
-                _itemImage.color = new Color(1f, 1f, 1f, 0.3f);
+                _itemImage.sprite = _normalSprite;
                 ItemManager.UpdateItemCount(_item, _usageAmount);
             }
         }

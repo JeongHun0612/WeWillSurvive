@@ -6,6 +6,7 @@ using UnityEngine;
 namespace WeWillSurvive.MainEvent
 {
     #region Enum
+
     public enum EMainEventType
     {
         [Description("\"O\" 또는 \"X\" 를 선택하는 이벤트")]
@@ -75,18 +76,17 @@ namespace WeWillSurvive.MainEvent
         [Description("DrK")] DrK,
 
         // 아이템 아이콘
-        [Description("식량")] Food = 200,
-        [Description("특별식량")] SpecialFood,
+        [Description("우주식량")] Food = 200,
+        [Description("특별우주식량")] SpecialFood,
         [Description("물")] Water,
-        [Description("구급키트")] MedicKit,
-        [Description("특별구급키트")] SuperMedicKit,
+        [Description("의료키트")] MedicKit,
+        [Description("특별의료키트")] SpecialMedicKit,
         [Description("수리키트")] RepairKit,
-        [Description("특별수리키트")] SuperRepairKit,
-        [Description("우주복")] NiceSpacesuit,
-        [Description("라디오")] Radio,
-        [Description("레이져건")] LaserGun,
+        [Description("특별수리키트")] SpecialRepairKit,
+        [Description("예비통신장비")] CommDevice,
+        [Description("고급우주복")] NiceSpacesuit,
+        [Description("총")] Gun,
         [Description("보드게임")] BoardGame,
-        [Description("통신장비")] CommDevice,
         [Description("도끼")] Ax,
         [Description("쇠파이프")] Pipe,
         [Description("손전등")] Flashlight,
@@ -130,15 +130,14 @@ namespace WeWillSurvive.MainEvent
         public EConditionType conditionType;
         public string targetId;   // 캐릭터 이름, 아이템 이름, 상태 이름 등
         public string parameter;  // 비교할 속성 (ex: Status, State 등)
-        public string value1;      // 비교할 값 1
-        public string value2;      // 비교할 값 2
+        public string value1;     // 비교할 값 1
+        public string value2;     // 비교할 값 2
     }
 
     [System.Serializable]
     public class EventChoice
     {
         public EChoiceType choiceType;          // 선택 ID
-        public Texture2D iconTexture;           // 아이콘 텍스쳐
         public List<EventResult> results;       // 선택에 대한 결과 리스트
 
         public EventResult GetRandomResult()

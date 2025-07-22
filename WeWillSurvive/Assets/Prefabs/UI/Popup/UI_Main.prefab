@@ -4070,7 +4070,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RememberInHistory: 1
-  SortingOffset: 0
   _roomMonitorButton: {fileID: 2744086864018402203}
   _nextDayButton: {fileID: 6100197463389445627}
   _projecterButton: {fileID: 6081510089960796063}
@@ -4080,7 +4079,7 @@ MonoBehaviour:
   _medicKit: {fileID: 5064334011685080547}
   _repairKit: {fileID: 2543784510139502961}
   _spacesuit: {fileID: 3220419560118539256}
-  _radio: {fileID: 1524894352252815997}
+  _commDevice: {fileID: 1524894352252815997}
   _gun: {fileID: 897121824898209908}
   _boardGame: {fileID: 8595013320341935238}
   _ax: {fileID: 870406667945886637}
@@ -6828,7 +6827,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1719506013232232598, guid: fedbdb44b1a64584da6a5c227a1c2d29, type: 3}
       propertyPath: m_Name
-      value: Radio
+      value: CommDevice
       objectReference: {fileID: 0}
     - target: {fileID: 1719506013232232598, guid: fedbdb44b1a64584da6a5c227a1c2d29, type: 3}
       propertyPath: m_IsActive

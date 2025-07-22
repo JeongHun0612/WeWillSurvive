@@ -26,7 +26,7 @@ namespace WeWillSurvive
         [SerializeField] private Transform _medicKit;
         [SerializeField] private Transform _repairKit;
         [SerializeField] private Transform _spacesuit;
-        [SerializeField] private Transform _radio;
+        [SerializeField] private Transform _commDevice;
         [SerializeField] private Transform _gun;
         [SerializeField] private Transform _boardGame;
         [SerializeField] private Transform _ax;
@@ -124,10 +124,10 @@ namespace WeWillSurvive
             UpdateWaterUI();
 
             _boardGame.gameObject.SetActive(_itemManager.GetItemCount(EItem.BoardGame) > 0);
-            _gun.gameObject.SetActive(_itemManager.GetItemCount(EItem.LaserGun) > 0);
+            _gun.gameObject.SetActive(_itemManager.GetItemCount(EItem.Gun) > 0);
 
             _repairKit.gameObject.SetActive(false);
-            if (_itemManager.GetItemCount(EItem.SuperRepairKit) > 0)
+            if (_itemManager.GetItemCount(EItem.SpecialRepairKit) > 0)
             {
                 _repairKit.gameObject.SetActive(true);
                 _repairKit.GetComponent<Image>().sprite = _repairKitSprites[1];
@@ -139,7 +139,7 @@ namespace WeWillSurvive
             }
 
             _medicKit.gameObject.SetActive(false);
-            if (_itemManager.GetItemCount(EItem.SuperMedicKit) > 0)
+            if (_itemManager.GetItemCount(EItem.SpecialMedicKit) > 0)
             {
                 _medicKit.gameObject.SetActive(true);
                 _medicKit.GetComponent<Image>().sprite = _medicKitSprites[1];
@@ -150,7 +150,7 @@ namespace WeWillSurvive
                 _medicKit.GetComponent<Image>().sprite = _medicKitSprites[0];
             }
 
-            _radio.gameObject.SetActive(_itemManager.GetItemCount(EItem.Radio) > 0);
+            _commDevice.gameObject.SetActive(_itemManager.GetItemCount(EItem.CommDevice) > 0);
             _spacesuit.gameObject.SetActive(_itemManager.GetItemCount(EItem.NiceSpacesuit) > 0);
             _ax.gameObject.SetActive(_itemManager.GetItemCount(EItem.Ax) > 0);
             _pipe.gameObject.SetActive(_itemManager.GetItemCount(EItem.Pipe) > 0);

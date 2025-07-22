@@ -26,7 +26,7 @@ MonoBehaviour:
   eventType: 1
   choices:
   - choiceType: 214
-    iconTexture: {fileID: 2800000, guid: 22d8cc569472e114cbc82a15605d841f, type: 3}
+    iconTexture: {fileID: 2800000, guid: 22d9ad2e14a521d47a0d10e5c56efe3d, type: 3}
     results:
     - conditions: []
       resultText: "\uC190\uC804\uB4F1\uC744 \uC870\uC2EC\uC2A4\uB7FD\uAC8C \uAC74\uB124\uC790,
@@ -37,7 +37,7 @@ MonoBehaviour:
       effects: []
       probability: 1
   - choiceType: 200
-    iconTexture: {fileID: 2800000, guid: c50fef4daef70c542b0a906159ae22f5, type: 3}
+    iconTexture: {fileID: 2800000, guid: 7a8576c0962abfb469ec4cff0a2411d5, type: 3}
     results:
     - conditions: []
       resultText: "\uC190\uC804\uB4F1\uC744 \uC870\uC2EC\uC2A4\uB7FD\uAC8C \uAC74\uB124\uC790,
@@ -48,7 +48,7 @@ MonoBehaviour:
       effects: []
       probability: 1
   - choiceType: 203
-    iconTexture: {fileID: 2800000, guid: 6ac7114a2d6a92c47a093c022a255d99, type: 3}
+    iconTexture: {fileID: 2800000, guid: aeb3757559af0204fbbbe9d15f80a1fa, type: 3}
     results:
     - conditions: []
       resultText: "\uC190\uC804\uB4F1\uC744 \uC870\uC2EC\uC2A4\uB7FD\uAC8C \uAC74\uB124\uC790,
