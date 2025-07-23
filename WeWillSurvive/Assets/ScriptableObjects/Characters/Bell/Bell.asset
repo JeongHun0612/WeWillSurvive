@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580d94716f0b81d4f852c346d5b5817d, type: 3}
+  m_Name: Bell
+  m_EditorClassIdentifier: 
+  _type: 3
+  _itemType: 102
+  _name: Bell
+  SpriteData: {fileID: 11400000, guid: 20510b9a6b864604c9b54a923d6d209f, type: 2}
+  StateMessageData: {fileID: 11400000, guid: 0496286237bab0d4b9985fa69ff5e06d, type: 2}
+  ExpeditionMessageData: {fileID: 11400000, guid: ab24f37fefb33fe46b29fea9e08a0195, type: 2}

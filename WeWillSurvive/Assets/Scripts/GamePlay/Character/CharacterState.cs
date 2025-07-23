@@ -62,6 +62,10 @@ namespace WeWillSurvive.Character
     {
         public EState CurrentState { get; private set; }
 
+        public bool IsHurt => HasState(EState.Injured) || HasState(EState.Sick);
+        public bool IsAnxious => HasState(EState.Anxious) || HasState(EState.Panic);
+        public bool IsMad => HasState(EState.Mad);
+
         public void SetState(EState state)
         {
             if (CurrentState == EState.Dead) return;

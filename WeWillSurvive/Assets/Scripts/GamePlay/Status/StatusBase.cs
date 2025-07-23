@@ -41,7 +41,7 @@ namespace WeWillSurvive
             if (LevelStateMap.TryGetValue(_level, out var state))
             {
                 // Log 에 남김
-                string stateMessage = _owner.Data.GetStateActiveMessage(state);
+                string stateMessage = _owner.Data.StateMessageData.GetStateActiveMessage(state);
                 LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
 
                 _owner.State.AddState(state);
@@ -52,7 +52,7 @@ namespace WeWillSurvive
         {
             if (LevelStateMap.TryGetValue(_level, out var state))
             {
-                string stateMessage = _owner.Data.GetStateResolvedMessage(state);
+                string stateMessage = _owner.Data.StateMessageData.GetStateResolvedMessage(state);
                 LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
             }
 

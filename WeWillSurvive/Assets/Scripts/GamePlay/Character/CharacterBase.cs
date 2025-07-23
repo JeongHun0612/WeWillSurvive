@@ -23,8 +23,8 @@ namespace WeWillSurvive.Character
         public EMorale Morale { get; private set; }
         public bool IsExploring { get; private set; }
         public bool IsDead { get; private set; }
-        public Sprite MainSprite => Data.GetMainSprite(State.CurrentState, Morale);
-        public Sprite RoomSprite => Data.GetRoomSprite(State.CurrentState, Morale);
+        public Sprite MainSprite => Data.SpriteData.GetSeatedSprite(State, Morale);
+        public Sprite RoomSprite => Data.SpriteData.GetStandingSprite(State, Morale);
 
         public event Action<EState> OnStateChangedEvent;
 

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04f9178d0b73f074cb0cf7ecae83e8dc, type: 3}
+  m_Name: CookSprite
+  m_EditorClassIdentifier: 
+  _normalSeated: {fileID: 21300000, guid: bba9cce94695ddf41a3c7e84e726a887, type: 3}
+  _highSeated: {fileID: 21300000, guid: bba9cce94695ddf41a3c7e84e726a887, type: 3}
+  _lowSeated: {fileID: 21300000, guid: bba9cce94695ddf41a3c7e84e726a887, type: 3}
+  _injuredSeated: {fileID: 21300000, guid: 51d6a4ee4a4669c40bf4d95dfc45fcd6, type: 3}
+  _scaredSeated: {fileID: 21300000, guid: 0d419c912d8d1a643bd45052b87c45ae, type: 3}
+  _madSeated: {fileID: 21300000, guid: f85945d72d7f8e64c86716f8418f496d, type: 3}
+  _injuredScaredSeated: {fileID: 21300000, guid: fbf66b29a4c106a429d6bf0f29b465bc, type: 3}
+  _injuredMadSeated: {fileID: 21300000, guid: 6d193119cc399a6468fb9897f368916a, type: 3}
+  _scaredMadSeated: {fileID: 21300000, guid: 23eb89ca5ee099d43ae5f04ee429210c, type: 3}
+  _injuredScaredMadSeated: {fileID: 21300000, guid: e5c52e84c279b2240a30beb9aa10f6be, type: 3}
+  _normalStanding: {fileID: 21300000, guid: 8c91b90837e56d244a906e1f684dd052, type: 3}
+  _highStanding: {fileID: 21300000, guid: 8c91b90837e56d244a906e1f684dd052, type: 3}
+  _lowStanding: {fileID: 21300000, guid: 8c91b90837e56d244a906e1f684dd052, type: 3}
+  _injuredStanding: {fileID: 21300000, guid: f470b41f8d2a6fe4992697f8dab4548a, type: 3}
+  _scaredStanding: {fileID: 21300000, guid: ba979a79171f06a4c9192196f5147c10, type: 3}
+  _madStanding: {fileID: 21300000, guid: a87f388ca84654e4db29c4e7cc416490, type: 3}
+  _injuredScaredStanding: {fileID: 21300000, guid: 749c675ca006ce34486289ac44f331a2, type: 3}
+  _injuredMadStanding: {fileID: 21300000, guid: e563197d21d1f404eba60de4420ecae3, type: 3}
+  _scaredMadStanding: {fileID: 21300000, guid: 9b90f544c38e19c468cbd9a15d98c138, type: 3}
+  _injuredScaredMadStanding: {fileID: 21300000, guid: a43506f50e0f3ac44a72cc47510b94f2, type: 3}

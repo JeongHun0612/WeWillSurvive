@@ -9,35 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 580d94716f0b81d4f852c346d5b5817d, type: 3}
-  m_Name: DrK
+  m_Script: {fileID: 11500000, guid: b8ec7e54f7c6e4746ba71b8da3def6a0, type: 3}
+  m_Name: DrKStateMessage
   m_EditorClassIdentifier: 
-  _type: 2
-  _itemType: 103
-  _name: DrK
-  _maxHunger: 100
-  _maxThirst: 100
-  _maxHealth: 100
-  _normal: {fileID: 21300000, guid: 898adc4a231a96848808c1deeb950805, type: 3}
-  _high: {fileID: 21300000, guid: 898adc4a231a96848808c1deeb950805, type: 3}
-  _low: {fileID: 21300000, guid: 898adc4a231a96848808c1deeb950805, type: 3}
-  _injured: {fileID: 21300000, guid: bd1edb9b8ee013546b1e1be4e96ba656, type: 3}
-  _scared: {fileID: 21300000, guid: 8b8f1faa58f3bd24fb886e59f41f3f4f, type: 3}
-  _mad: {fileID: 21300000, guid: 6eb6def5c7ac7444cb9674f78bff56b3, type: 3}
-  _injuredMad: {fileID: 21300000, guid: e1356e3adea4ed749b851e313c7e6ed2, type: 3}
-  _injuredScared: {fileID: 21300000, guid: 46adf2effc72d124eac3ee7cceb79ada, type: 3}
-  _scaredMad: {fileID: 21300000, guid: 7847ef7223796d3499cbfda61c77cc3a, type: 3}
-  _injuredScaredMad: {fileID: 21300000, guid: fa42b641656f5f349a80ed211eab9d0f, type: 3}
-  _normalRoom: {fileID: 21300000, guid: 706cfb46fee9eb243b9a25c86e7e5ed8, type: 3}
-  _highRoom: {fileID: 21300000, guid: 706cfb46fee9eb243b9a25c86e7e5ed8, type: 3}
-  _lowRoom: {fileID: 21300000, guid: 706cfb46fee9eb243b9a25c86e7e5ed8, type: 3}
-  _injuredRoom: {fileID: 21300000, guid: 81f87f55ee53ed74397a05a7d071e65b, type: 3}
-  _scaredRoom: {fileID: 21300000, guid: 73dedccb80e00c54b96233515253c98a, type: 3}
-  _madRoom: {fileID: 21300000, guid: 6c07536674b213d4f8c8026def8a4f30, type: 3}
-  _injuredMadRoom: {fileID: 21300000, guid: 25019dbc1aa54074c8d4d572aed7b794, type: 3}
-  _injuredScaredRoom: {fileID: 21300000, guid: ee25dc0d83aa0dc49acff07f7cb31da1, type: 3}
-  _scaredMadRoom: {fileID: 21300000, guid: 6a301bb6b6cc5d54481cd86da556836f, type: 3}
-  _injuredScaredMadRoom: {fileID: 21300000, guid: 6cfdf6663b11c8842b67d2acd9b0abf7, type: 3}
   _hungerActiveMessage: "\uB2E5\uD130 K\uB294 \uBA39\uB294 \uCC99\uD558\uBA70 \uC785\uC220\uC744
     \uAE68\uBB38\uB2E4."
   _starveActiveMessage: "\uB2E5\uD130 K\uB294 \uB208\uC744 \uAC10\uACE0 \uC228\uB9CC
@@ -60,7 +34,11 @@ MonoBehaviour:
     \uB204\uC6CC \uC788\uB2E4. \uB2E4\uC2DC\uB294 \uC77C\uC5B4\uB098\uC9C0 \uC54A\uB294\uB2E4."
   _hungerResolvedMessage: "\uB2E5\uD130 K\uB294 \uB354 \uC774\uC0C1 \uBC30\uACE0\uD504\uC9C0
     \uC54A\uB2E4."
+  _starveResolvedMessage: "\uB2E5\uD130 K\uB294 \uB354 \uC774\uC0C1 \uBC30\uACE0\uD504\uC9C0
+    \uC54A\uB2E4."
   _thirstyResolvedMessage: "\uB2E5\uD130 K\uB294 \uB354 \uC774\uC0C1 \uBAA9\uB9C8\uB974\uC9C0
+    \uC54A\uB2E4."
+  _dehydrateResolvedMessage: "\uB2E5\uD130 K\uB294 \uB354 \uC774\uC0C1 \uBAA9\uB9C8\uB974\uC9C0
     \uC54A\uB2E4."
   _injuredResolvedMessage: "\uB2E5\uD130 K\uB294 \uC0C1\uCC98\uB97C \uCE58\uB8CC\uD558\uACE0
     \uC870\uC6A9\uD788 \uC790\uB9AC\uB85C \uB3CC\uC544\uAC04\uB2E4."
