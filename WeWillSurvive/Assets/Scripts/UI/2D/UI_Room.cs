@@ -20,6 +20,7 @@ namespace WeWillSurvive
             {
                 if (!_characterDicts.ContainsKey(characterUI.CharacterType))
                 {
+                    characterUI.Initialize();
                     _characterDicts.Add(characterUI.CharacterType, characterUI);
                 }
             }
