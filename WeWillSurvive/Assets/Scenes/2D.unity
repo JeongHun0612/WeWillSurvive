@@ -598,6 +598,7 @@ RectTransform:
   m_Children:
   - {fileID: 1440951035}
   - {fileID: 1338889086}
+  - {fileID: 1776017009}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -619,7 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneLayer: {fileID: 1440951035}
   _popupLayer: {fileID: 1338889086}
-  _overlayLayer: {fileID: 0}
+  _overlayLayer: {fileID: 1338889086}
   _scenePrefabPaths:
   - UI_Background
   _popupPrefabPaths:
@@ -726,8 +727,58 @@ Transform:
   m_Children:
   - {fileID: 1763924378}
   - {fileID: 2021487586}
+  - {fileID: 1755360068}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1755360067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1755360068}
+  - component: {fileID: 1755360069}
+  m_Layer: 0
+  m_Name: SprteManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1755360068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755360067}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1616773905}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1755360069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755360067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39cf96b02fccc74ab4980e97a61a824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteAtlasPrefabs:
+  - Assets/SpriteAtlases/UI_Atlas.spriteatlasv2
+  - Assets/SpriteAtlases/Item_Atlas.spriteatlasv2
+  - Assets/SpriteAtlases/Character_Standing_Atlas.spriteatlasv2
+  - Assets/SpriteAtlases/Character_Seated_Atlas.spriteatlasv2
 --- !u!1 &1763924377
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +837,41 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 99342b66315817e499b94429140a2cd3, type: 2}
   - {fileID: 11400000, guid: c425556c5b544d546a96ba08f6a71295, type: 2}
   - {fileID: 11400000, guid: 37892deb7494027448235ec4a438e529, type: 2}
+--- !u!1 &1776017008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1776017009}
+  m_Layer: 5
+  m_Name: OverlayLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1776017009
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776017008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1280973035}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2021487585
 GameObject:
   m_ObjectHideFlags: 0
