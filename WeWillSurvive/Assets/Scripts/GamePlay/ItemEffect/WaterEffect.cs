@@ -9,6 +9,9 @@ namespace WeWillSurvive.ItemEffect
     {
         public override void Apply(CharacterBase character)
         {
+            if (character == null)
+                return;
+
             var status = character.Status.GetStatus<ThirstStatus>(EStatusType.Thirst);
             status?.ApplyRecovery();
         }

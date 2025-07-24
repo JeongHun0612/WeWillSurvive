@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Item
+  m_EditorClassIdentifier: 
+  m_GroupName: Item
+  m_GUID: a6ae59c0764d0d945ae6acea3b724169
+  m_SerializeEntries:
+  - m_GUID: 012126978c0240f42abd48bcd064dc63
+    m_Address: Assets/Sprites/Items/Item_Normal/food7.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0164b554526199d47863fdfe439a5f51
+    m_Address: Assets/Sprites/Items/Item_Normal/water1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 016c89da8a9fd5749990e373865ca048
+    m_Address: Assets/Sprites/Items/Item_Normal/special_repair_kit.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 068a267a56b9be243b3486f3a978ae36
+    m_Address: Assets/Sprites/Items/Item_Normal/ax.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 06f3fb45f31cefd49a6b927eee18d9c7
+    m_Address: Assets/Sprites/Items/Item_Normal/water2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 35e8968e0c682bd45a25c9b29ad97b0e
+    m_Address: Assets/Sprites/Items/Item_Normal/water4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4be9d66bdb217154ab301654c5d4a6d9
+    m_Address: Assets/Sprites/Items/Item_Normal/repair_kit.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58dd74090b5fec94cbcc7f235171508b
+    m_Address: Assets/Sprites/Items/Item_Normal/medical_kit.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c37491890eb6604db2e8c3a47df000d
+    m_Address: Assets/Sprites/Items/Item_Normal/spacesuit.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a433bcba5ba60c4c999ab7ca472c969
+    m_Address: Assets/Sprites/Items/Item_Normal/water3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c1119eb55f7c7e48b96714a73e2118d
+    m_Address: Assets/Sprites/Items/Item_Normal/board_game.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 97681a93cc38b57489e44554242d2fb1
+    m_Address: Assets/Sprites/Items/Item_Normal/gun.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa7b55fa62a6d2d4dba3a32b6ac91efc
+    m_Address: Assets/Sprites/Items/Item_Normal/food3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aedca2f4ddaf9e24fa29ae4b9540a56c
+    m_Address: Assets/Sprites/Items/Item_Normal/food1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9283858b4ac42145971ea69ba5151bc
+    m_Address: Assets/Sprites/Items/Item_Normal/pipe.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9b221e1ae7a3bf48b931a6a9d27a250
+    m_Address: Assets/Sprites/Items/Item_Normal/communi_device.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c08de666d99a52c4395c363289f9ea29
+    m_Address: Assets/Sprites/Items/Item_Normal/food5.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4778b14441948847962b1d0a9bf4125
+    m_Address: Assets/Sprites/Items/Item_Normal/food6.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9d07bc397ac2ae4a996fd6c5d2a2823
+    m_Address: Assets/Sprites/Items/Item_Normal/flashlight.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd1fcf17b0d128b4d95bcbea0bf6991d
+    m_Address: Assets/Sprites/Items/Item_Normal/special_medical_kit.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cdfa6e250abe16f429ed2ff594fd4068
+    m_Address: Assets/Sprites/Items/Item_Normal/food2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5bb7f4377e4b5641a8069f4fafaf55a
+    m_Address: Assets/Sprites/Items/Item_Normal/special_food.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6d928ffce34abc43ae16db34e90677d
+    m_Address: Assets/Sprites/Items/Item_Normal/food4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f055f637e21d7a44088dd011fe2f324d
+    m_Address: Assets/Sprites/Items/Item_Normal/map.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f80653f7dbfead941950d5ff532a9448
+    m_Address: Assets/Sprites/Items/Item_Normal/Starmac.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f7b3b476672664a47ab9721e6106ada6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 23c1ef4aaf631e54d91f74bf7cd17160, type: 2}
+    - {fileID: 11400000, guid: dcf155f818c17d14bb842f5299f70ffb, type: 2}

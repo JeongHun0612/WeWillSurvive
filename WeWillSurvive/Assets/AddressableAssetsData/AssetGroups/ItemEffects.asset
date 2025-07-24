@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - ItemEffect
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3a2a924304e69c469ba6a45972f8887
+    m_Address: Assets/ScriptableObjects/ItemEffects/MedicKitEffect.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemEffect
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c6a14748e6a8b2640a2bafda735f8dd9
     m_Address: Assets/ScriptableObjects/ItemEffects/WaterEffect.asset
     m_ReadOnly: 0
