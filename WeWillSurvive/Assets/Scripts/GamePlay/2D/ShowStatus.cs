@@ -10,25 +10,12 @@ namespace WeWillSurvive
         [SerializeField] private EItem _itemType;
         [SerializeField] private Vector2 _statusPanelPosition = Vector2.zero;
 
-        private void Awake()
-        {
-            if ((int)_itemType >= 100)
-            {
-                Transform t = transform.Find("CharacterImage");
-                if (t == null) return;
-
-                // 클릭 가능 범위 Image와 맞추기
-                Image image = t.GetComponent<Image>();
-                image.raycastPadding = image.sprite.border;
-            }
-        }
-
-        public void ShowStatusPanel()
+        public void ShowStatusPanel(string text)
         {
             UIManager.Instance.ClosePopups(remain: 1);
             UI_StatePanel ui = UIManager.Instance.ShowPopup<UI_StatePanel>();
-            ui.transform.GetChild(0).localPosition = _statusPanelPosition;
-            ui.SetPanel(_itemType);
+
+            ui.SetPanel(_statusPanelPosition, text);
         }
     }
 }

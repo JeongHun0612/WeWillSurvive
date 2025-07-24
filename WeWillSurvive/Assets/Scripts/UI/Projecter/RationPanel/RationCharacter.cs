@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Character;
@@ -11,22 +12,29 @@ namespace WeWillSurvive
 
         [Header("## Character Image")]
         [SerializeField] private Image _characterImage;
-        [SerializeField] private Sprite _normalSprite;
-        [SerializeField] private Sprite _notingSprite;
 
         [Header("## RationItem (Food, Water, Medicalkit)")]
         [SerializeField] private RationItem _foodItem;
         [SerializeField] private RationItem _waterItem;
         [SerializeField] private RationItem _medicalKitItem;
 
+        private Sprite _normalSprite;
+        private Sprite _notingSprite;
+
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
-        public void Initialize(RationPanel rationPanel)
+        public void Initialize()
         {
+            _normalSprite = SpriteManager.Instance.GetSprite(ESpriteAtlas.UI_Atlas, $"{_characterType}_Icon_Normal");
+            _notingSprite = SpriteManager.Instance.GetSprite(ESpriteAtlas.UI_Atlas, $"{_characterType}_Icon_Disabled");
+
             _foodItem.Initialize();
             _waterItem.Initialize();
             _medicalKitItem.Initialize();
+        }
 
+        public void RegisterEvent(RationPanel rationPanel)
+        {
             _foodItem.ItemSelectedEvent -= rationPanel.UpdateFoodItemCount;
             _foodItem.ItemSelectedEvent += rationPanel.UpdateFoodItemCount;
 
@@ -40,21 +48,18 @@ namespace WeWillSurvive
 
             if (character.IsDead || character.IsExploring)
             {
-                _characterImage.sprite = _notingSprite;
-                _characterImage.color = new Color(1f, 1f, 1f, 0.3f);
+                DisabledRationCharacter();
+                return;
             }
-            else
-            {
-                _characterImage.sprite = _normalSprite;
-                _characterImage.color = Color.white;
 
-                _waterItem.Refresh();
-                _foodItem.Refresh();
-                _medicalKitItem.Refresh();
+            _characterImage.sprite = _normalSprite;
 
-                bool isInjured = character.State.HasState(EState.Injured | EState.Sick);
-                _medicalKitItem.gameObject.SetActive(isInjured);
-            }
+            _waterItem.Refresh();
+            _foodItem.Refresh();
+            _medicalKitItem.Refresh();
+
+            bool isInjured = character.State.HasState(EState.Injured | EState.Sick);
+            _medicalKitItem.gameObject.SetActive(isInjured);
         }
 
         public void ApplyRationItem()
@@ -63,6 +68,14 @@ namespace WeWillSurvive
             _foodItem.UsedItem(target);
             _waterItem.UsedItem(target);
             _medicalKitItem.UsedItem(target);
+        }
+
+        private void DisabledRationCharacter()
+        {
+            _characterImage.sprite = _notingSprite;
+            _waterItem.gameObject.SetActive(false);
+            _foodItem.gameObject.SetActive(false);
+            _medicalKitItem.gameObject.SetActive(false);
         }
     }
 }

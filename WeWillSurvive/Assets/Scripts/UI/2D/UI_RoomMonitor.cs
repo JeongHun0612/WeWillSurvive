@@ -18,7 +18,6 @@ namespace WeWillSurvive
         [SerializeField] Button _bellButton;
         [SerializeField] Button _drKButton;
 
-        private UI_Background _ui;
         private Button[] _buttons = new Button[4];
 
         private EventBus EventBus => ServiceLocator.Get<EventBus>();
@@ -39,7 +38,7 @@ namespace WeWillSurvive
                 );
             }
 
-            await UniTask.CompletedTask;
+            await UniTask.Yield();
         }
 
         public override void OnShow()

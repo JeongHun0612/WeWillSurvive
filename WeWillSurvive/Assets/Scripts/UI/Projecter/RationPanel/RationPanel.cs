@@ -30,7 +30,8 @@ namespace WeWillSurvive
 
             foreach (var rationCharacter in _rationCharacters)
             {
-                rationCharacter.Initialize(this);
+                rationCharacter.Initialize();
+                rationCharacter.RegisterEvent(this);
             }
         }
 

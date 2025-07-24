@@ -54,7 +54,7 @@ namespace WeWillSurvive
             // NewDay 이벤트 등록
             EventBus.Subscribe<NewDayEvent>(OnNewDayEvent);
 
-            await UniTask.CompletedTask;
+            await UniTask.Yield();
         }
 
         public override void OnShow()

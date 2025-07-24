@@ -49,8 +49,6 @@ namespace WeWillSurvive.Core
                             {
 								_spriteAtlasDicts.Add(type, asset);
 								Debug.Log($"spriteAtlas loaded: {asset.name}");
-
-								Debug.Log($"{asset.name} - {asset.spriteCount}");
 							}
                         }
                         else
@@ -70,6 +68,10 @@ namespace WeWillSurvive.Core
 
 				await UniTask.Yield();
 			}
+
+
+			_isInitialized = true;
+			Debug.Log("Sprite initialization completed successfully.");
 		}
 
 		public Sprite GetSprite(ESpriteAtlas type, string name)

@@ -26,8 +26,6 @@ namespace WeWillSurvive.Character
         public Sprite MainSprite => Data.SpriteData.GetSeatedSprite(State, Morale);
         public Sprite RoomSprite => Data.SpriteData.GetStandingSprite(State, Morale);
 
-        public event Action<EState> OnStateChangedEvent;
-
         public void Initialize(CharacterData data)
         {
             Data = data;
@@ -55,11 +53,6 @@ namespace WeWillSurvive.Character
 
             State.SetState(EState.Normal);
             Status.OnNewDay();
-
-            if (!IsExploring)
-            {
-                OnStateChangedEvent?.Invoke(State.CurrentState);
-            }
         }
 
         public void SetMorale(EMorale morale)
@@ -76,7 +69,6 @@ namespace WeWillSurvive.Character
             IsDead = true;
 
             State.SetState(EState.Dead);
-            OnStateChangedEvent?.Invoke(State.CurrentState);
         }
     }
 }

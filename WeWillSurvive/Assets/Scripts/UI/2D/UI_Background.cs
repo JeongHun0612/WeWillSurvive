@@ -36,7 +36,7 @@ namespace WeWillSurvive
 
             EventBus.Subscribe<MoveRoomEvent>(OnMoveRoomEvent);
 
-            await UniTask.CompletedTask;
+            await UniTask.Yield();
         }
 
         public override void OnShow()

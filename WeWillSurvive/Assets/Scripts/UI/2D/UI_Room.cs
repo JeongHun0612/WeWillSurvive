@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
+using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.UI;
@@ -8,38 +9,35 @@ namespace WeWillSurvive
 {
     public class UI_Room : UI_Popup
     {
-        // TODO: 사기 + 상태별로 게임 오브젝트 만들어서 배열에 저장
-        [SerializeField] GameObject[] _characters;
+        [SerializeField] private UI_Character[] _characterUIs;
 
-        UI_Background _ui;
+        private Dictionary<ECharacter, UI_Character> _characterDicts = new();
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public async override UniTask InitializeAsync()
+        {
+            foreach (var characterUI in _characterUIs)
+            {
+                if (!_characterDicts.ContainsKey(characterUI.CharacterType))
+                {
+                    _characterDicts.Add(characterUI.CharacterType, characterUI);
+                }
+            }
+
+            await UniTask.Yield();
+        }
 
         // 방 세팅
         public void SetupRoomUI(ECharacter owner)
         {
-            foreach (var c in _characters)
-                c.SetActive(false);
-
-            CharacterBase characterInfo = ServiceLocator.Get<CharacterManager>().GetCharacter(owner);
-
-            GameObject character = _characters[(int)owner];
-
-            if (characterInfo == null || character == null)
+            foreach (var characterUI in _characterUIs)
             {
-                Debug.LogError($"[{gameObject.name}] Character 찾을 수 없음");
-                return;
+                characterUI.gameObject.SetActive(false);
             }
 
-            // 캐릭터 정보 설정
-            character.SetActive(true);
-            character.GetComponentInChildren<Image>().sprite = characterInfo.RoomSprite;
-
-            // 우주 기지 내 존재하지 않거나 죽은 경우
-            if (characterInfo.State.HasState(EState.Exploring) || characterInfo.State.HasState(EState.Dead))
+            if (_characterDicts.TryGetValue(owner, out var targetCharacterUI))
             {
-                // TODO: 빔 프로젝터 비활성화
-
-                // 캐릭터 비활성화
-                character.SetActive(false);
+                targetCharacterUI.UpdateCharacterImage();
             }
         }
     }
