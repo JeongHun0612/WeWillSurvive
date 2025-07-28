@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
@@ -19,6 +20,23 @@ namespace WeWillSurvive
         private Sprite[] _foodBoxSprites;
 
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
+
+        public async override UniTask InitializeAsync()
+        {
+            await base.InitializeAsync();
+
+            _foodSprites = new Sprite[2];
+            _foodSprites[0] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/food1.png");
+            _foodSprites[1] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/food2.png");
+
+            _foodBoxSprites = new Sprite[5];
+            _foodBoxSprites[0] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/foodbox_1.png");
+            _foodBoxSprites[1] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/foodbox_2.png");
+            _foodBoxSprites[2] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/foodbox_3.png");
+            _foodBoxSprites[3] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/foodbox_4.png");
+            _foodBoxSprites[4] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/foodbox_5.png");
+        }
 
         public override void Initialize()
         {

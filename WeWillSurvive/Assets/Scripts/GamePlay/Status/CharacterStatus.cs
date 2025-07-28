@@ -21,6 +21,10 @@ namespace WeWillSurvive.Status
 
             AddStatus(new HungerStatus(_owner));
             AddStatus(new ThirstStatus(_owner));
+
+            // Debug
+            AddStatus(new InjuryStatus(_owner));
+            AddStatus(new AnxiousStatus(_owner));
         }
 
         public void OnNewDay()

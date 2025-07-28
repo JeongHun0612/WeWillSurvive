@@ -1,5 +1,3 @@
-using UnityEngine;
-using static Define;
 
 namespace WeWillSurvive
 {
@@ -11,5 +9,10 @@ namespace WeWillSurvive
     public struct MoveRoomEvent
     {
         public ERoom TargetRoom;
+    }
+
+    public struct MoveRoomCompleteEvent
+    {
+        public ERoom CurrentRoom;
     }
 }

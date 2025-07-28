@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WeWillSurvive
 {
-    public enum EExpeditionStateType
+    public enum EExpeditionReadyState
     { 
         Normal,
         Warning,
@@ -14,27 +14,35 @@ namespace WeWillSurvive
     public class CharacterExpeditionMessageData : ScriptableObject
     {
         [Header("## 탐사를 정상적으로 나갈 수 있는 경우")]
-        [SerializeField] private List<string> _normalExpeditionMessages;
+        [SerializeField] private List<string> _expeditionNormalMessages;
 
         [Header("## 탐사를 나가기 위험한 상태인 경우")]
-        [SerializeField] private List<string> _warningExpeditionMessages;
+        [SerializeField] private List<string> _expeditionWarningeMessages;
 
         [Header("## 탐사를 나갈 수 없는 경우")]
-        [SerializeField] private List<string> _impossibleExpeditionMessages;
+        [SerializeField] private List<string> _expeditionImpossibleMessages;
 
-        public string GetExpeditionMessage(EExpeditionStateType type)
+        [Header("## 탐사를 나간 후")]
+        [SerializeField] private List<string> _expeditionStartMessages;
+
+        public string GetExpeditionReadyMessage(EExpeditionReadyState type)
         {
             switch (type)
             {
-                case EExpeditionStateType.Normal:
-                    return GetRandomMessage(_normalExpeditionMessages);
-                case EExpeditionStateType.Warning:
-                    return GetRandomMessage(_warningExpeditionMessages);
-                case EExpeditionStateType.Impossible:
-                    return GetRandomMessage(_impossibleExpeditionMessages);
+                case EExpeditionReadyState.Normal:
+                    return GetRandomMessage(_expeditionNormalMessages);
+                case EExpeditionReadyState.Warning:
+                    return GetRandomMessage(_expeditionWarningeMessages);
+                case EExpeditionReadyState.Impossible:
+                    return GetRandomMessage(_expeditionImpossibleMessages);
                 default:
                     return string.Empty;
             }
+        }
+
+        public string GetExpeditionStartMessage()
+        {
+            return GetRandomMessage(_expeditionStartMessages);
         }
 
         private string GetRandomMessage(List<string> messages)

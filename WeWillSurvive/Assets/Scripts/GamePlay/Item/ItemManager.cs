@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 using WeWillSurvive.Character;
@@ -10,21 +11,21 @@ namespace WeWillSurvive.Item
 {
     public enum EItem
     {
-        [InspectorName("우주식량")] Food,
-        [InspectorName("특별우주식량")] SpecialFood,
-        [InspectorName("물")] Water,
-        [InspectorName("의료키트")] MedicKit,
-        [InspectorName("특별의료키트")] SpecialMedicKit,
-        [InspectorName("수리키트")] RepairKit,
-        [InspectorName("특별수리키트")] SpecialRepairKit,
-        [InspectorName("예비통신장비")] CommDevice,
-        [InspectorName("고급우주복")] NiceSpacesuit,
-        [InspectorName("총")] Gun,
-        [InspectorName("보드게임")] BoardGame,
-        [InspectorName("도끼")] Ax,
-        [InspectorName("쇠파이프")] Pipe,
-        [InspectorName("손전등")] Flashlight,
-        [InspectorName("행성탐사지도")] Map,
+        [InspectorName("우주식량")] [Description("우주식량")] Food,
+        [InspectorName("특별우주식량")] [Description("특별우주식량")] SpecialFood,
+        [InspectorName("물")] [Description("물")] Water,
+        [InspectorName("의료키트")] [Description("의료키트")] MedicKit,
+        [InspectorName("특별의료키트")] [Description("특별의료키트")] SpecialMedicKit,
+        [InspectorName("수리키트")] [Description("수리키트")] RepairKit,
+        [InspectorName("특별수리키트")] [Description("특별수리키트")] SpecialRepairKit,
+        [InspectorName("예비통신장비")] [Description("예비통신장비")] CommDevice,
+        [InspectorName("고급우주복")] [Description("고급우주복")] NiceSpacesuit,
+        [InspectorName("총")] [Description("총")] Gun,
+        [InspectorName("보드게임")] [Description("보드게임")] BoardGame,
+        [InspectorName("도끼")] [Description("도끼")] Ax,
+        [InspectorName("쇠파이프")] [Description("쇠파이프")] Pipe,
+        [InspectorName("손전등")] [Description("손전등")] Flashlight,
+        [InspectorName("행성탐사지도")] [Description("행성탐사지도")] Map,
 
         // Character
         Lead = 100,
@@ -43,7 +44,7 @@ namespace WeWillSurvive.Item
 
         public async UniTask InitializeAsync()
         {
-            //// ItemEffects 초기화
+            // ItemEffects 초기화
             var itemEffects = await ResourceManager.LoadAssetsByLabelAsync<ScriptableItemEffect>("ItemEffect");
             foreach (var itemEffect in itemEffects)
             {
@@ -57,13 +58,13 @@ namespace WeWillSurvive.Item
             AddItem(EItem.Lead);
             AddItem(EItem.Cook);
             AddItem(EItem.DrK);
-            AddItem(EItem.Bell);
+            //AddItem(EItem.Bell);
 
-            AddItem(EItem.Food, 5f);
-            AddItem(EItem.Water, 5f);
+            AddItem(EItem.Food, 5.25f);
+            AddItem(EItem.Water, 5.25f);
             AddItem(EItem.BoardGame);
             AddItem(EItem.Gun);
-            //AddItem(EItem.MedicKit, 1);
+            AddItem(EItem.MedicKit);
             AddItem(EItem.RepairKit);
             AddItem(EItem.NiceSpacesuit);
             AddItem(EItem.CommDevice);

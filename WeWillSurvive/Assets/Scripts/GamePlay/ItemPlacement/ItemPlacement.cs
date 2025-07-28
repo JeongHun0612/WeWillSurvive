@@ -1,11 +1,13 @@
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using WeWillSurvive.Item;
-using WeWillSurvive.UI;
+using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
+    [RequireComponent(typeof(ShowStatus))]
     public class ItemPlacement : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] protected EItem _itemType;
@@ -17,6 +19,12 @@ namespace WeWillSurvive
         public EItem ItemType => _itemType;
         public string Name => _name;
         public float Count { get; protected set; }
+
+        public async virtual UniTask InitializeAsync()
+        {
+            _showStatus = gameObject.GetComponent<ShowStatus>();
+            await UniTask.CompletedTask;
+        }
 
         public virtual void Initialize()
         {
@@ -48,9 +56,9 @@ namespace WeWillSurvive
                 return;
 
             if (_itemType == EItem.Food || _itemType == EItem.Water)
-                _showStatus.ShowStatusPanel($"{Name} : {Count}");
+                _showStatus.ShowStatusPanel($"{EnumUtil.GetDescription(_itemType)} : {Count}");
             else
-                _showStatus.ShowStatusPanel($"{Name}");
+                _showStatus.ShowStatusPanel($"{EnumUtil.GetDescription(_itemType)}");
         }
     }
 }

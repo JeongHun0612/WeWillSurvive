@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI_Sprites
+  m_EditorClassIdentifier: 
+  m_GroupName: UI_Sprites
+  m_GUID: 989188f69886a5145831e4dbaf8c185e
+  m_SerializeEntries:
+  - m_GUID: 325332b50932f094abae69abc4ecf08c
+    m_Address: Assets/Sprites/UI/Projecter/Category_window.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 491c75d78afbb4f45983236ea371ce06
+    m_Address: Assets/Sprites/UI/Projecter/window_star.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ae0bc090ce85a34aaa60778f494e902
+    m_Address: Assets/Sprites/UI/Character_Icons/DrK_Icon_Disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54222a96d4a4a024ab411fc42440d5d9
+    m_Address: Assets/Sprites/UI/Character_Icons/DrK_Icon_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b82f1a179600bc4286d392009fc0e02
+    m_Address: Assets/Sprites/UI/Projecter/window_Magnifier.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d253caca49485c408c6314cb60f270f
+    m_Address: Assets/Sprites/UI/Character_Icons/Cook_Icon_Disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d37924ff4e3f6842a7db4a321600d5e
+    m_Address: Assets/Sprites/UI/Character_Icons/Cook_Icon_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79e7621b90069024d8f1a4a43555cabe
+    m_Address: Assets/Sprites/UI/Projecter/NextDay.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7dbfc30b454a5874f847d82600f176bb
+    m_Address: Assets/Sprites/UI/Projecter/panel.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86415d5b8236b684ca4c81124f5d046b
+    m_Address: Assets/Sprites/UI/HUD/nextPage_right.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e412c6c5881d5443916b4742f4bbeca
+    m_Address: Assets/Sprites/UI/Projecter/window_food.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a7ca7704979e27d4fba499b1be0025a7
+    m_Address: Assets/Sprites/UI/HUD/nextPage_left.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab75d5574fa57ff4486ba481dc0fc306
+    m_Address: Assets/Sprites/UI/Character_Icons/Lead_Icon_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b79b02163da7944429512005c9aa4fb1
+    m_Address: Assets/Sprites/UI/Projecter/X.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8705ac3bc5ce014ea4f0aac8fd9823f
+    m_Address: Assets/Sprites/UI/Projecter/window_text.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc738b1cc8339474f8197b4a4990a0ef
+    m_Address: Assets/Sprites/UI/Character_Icons/Bell_Icon_Disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd4937e0a9784544aa1cb1d229a5892f
+    m_Address: Assets/Sprites/UI/Projecter/Pbutton.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eee80fb380e7dfa46976429db7e4ed79
+    m_Address: Assets/Sprites/UI/Character_Icons/Bell_Icon_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3cf11f288789324c85379faa208c42f
+    m_Address: Assets/Sprites/UI/Projecter/Nbutton.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc8a56b4468c4024d879a070c444740a
+    m_Address: Assets/Sprites/UI/Character_Icons/Lead_Icon_Disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f7b3b476672664a47ab9721e6106ada6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c359a170ae6312e4c827e54588646419, type: 2}
+    - {fileID: 11400000, guid: a0c30ee3f62d44d41945486e63ee96b3, type: 2}

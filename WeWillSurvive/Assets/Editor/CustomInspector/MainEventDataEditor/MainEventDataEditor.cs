@@ -70,7 +70,6 @@ namespace WeWillSurvive
             // 이벤트 타입 별 UI 변경
             EditorGUILayout.Space(20);
             SerializedProperty choicesProp = serializedObject.FindProperty("choices");
-            SerializedProperty iconTexturesProp = serializedObject.FindProperty("iconTextures");
             var eventType = (EMainEventType)eventTypeProp.enumValueIndex;
             switch (eventType)
             {

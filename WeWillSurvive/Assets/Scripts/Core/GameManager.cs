@@ -24,7 +24,6 @@ namespace WeWillSurvive.Core
         private async void Start()
         {
             await ServiceLocator.AutoRegisterServices();
-            await SpriteManager.Instance.InitializeAsync();
             await UIManager.Instance.InitializeAsync();
 
             if (SceneManager.GetActiveScene().name == "2D")
@@ -54,8 +53,8 @@ namespace WeWillSurvive.Core
 
             UIManager.Instance.ClosePopups(remain: 1);
 
-            if (UIManager.Instance.GetCurrentScene<UI_Background>() == null)
-                UIManager.Instance.ShowScene<UI_Background>();
+            if (UIManager.Instance.GetCurrentScene<UI_Room>() == null)
+                UIManager.Instance.ShowScene<UI_Room>();
 
             CharacterManager.UpdateCharacterStatus();
 

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
@@ -13,8 +14,19 @@ namespace WeWillSurvive
             Special,
         }
 
-        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
         private Sprite[] _medickitSprites;
+
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
+
+        public async override UniTask InitializeAsync()
+        {
+            await base.InitializeAsync();
+
+            _medickitSprites = new Sprite[2];
+            _medickitSprites[0] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/medical_kit.png");
+            _medickitSprites[1] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/special_medical_kit.png");
+        }
 
         public override void Initialize()
         {

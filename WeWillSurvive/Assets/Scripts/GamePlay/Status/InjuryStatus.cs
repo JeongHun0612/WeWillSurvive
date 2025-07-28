@@ -10,7 +10,7 @@ namespace WeWillSurvive.Status
 
     public class InjuryStatus : StatusBase<EInjuredLevel>
     {
-        public override EStatusType StatusType => EStatusType.Anxious;
+        public override EStatusType StatusType => EStatusType.Injury;
 
         public InjuryStatus(CharacterBase owner)
         {

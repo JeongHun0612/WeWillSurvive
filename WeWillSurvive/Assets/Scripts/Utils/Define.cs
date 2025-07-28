@@ -2,13 +2,13 @@
 
 public static class Define
 {
-    public enum ERoom
+    public enum ESpriteAtalsName
     {
-        Lead,
-        Cook,
-        Main,
-        DrK,
-        Bell,
-        MaxCount
+
+    }
+
+    public enum ESpriteName
+    {
+
     }
 }

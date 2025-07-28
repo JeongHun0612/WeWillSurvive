@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
@@ -13,6 +14,17 @@ namespace WeWillSurvive
         }
 
         private Sprite[] _waterSprites;
+        private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
+
+        public async override UniTask InitializeAsync()
+        {
+            await base.InitializeAsync();
+
+            _waterSprites = new Sprite[3];
+            _waterSprites[0] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/water1.png");
+            _waterSprites[1] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/water2.png");
+            _waterSprites[2] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/water3.png");
+        }
 
         public override void Initialize()
         {

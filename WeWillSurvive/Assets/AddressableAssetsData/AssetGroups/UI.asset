@@ -16,47 +16,42 @@ MonoBehaviour:
   m_GUID: 66fe4bcea3ce838468c230e3b9d48fe7
   m_SerializeEntries:
   - m_GUID: 1daadf42996e4944ba1ed1596b413564
-    m_Address: UI_Projecter
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2885a077c284806449fe1b321ef8ecb2
-    m_Address: UI_Room
+    m_Address: Assets/Prefabs/UI/Popup/UI_Projecter.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3058f23e8b4cbda4c82938f0ea39894b
-    m_Address: UI_StatePanel
+    m_Address: Assets/Prefabs/UI/Popup/UI_StatePanel.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4a950e283cbdba24287f0265638529d4
-    m_Address: UI_RoomMonitor
+    m_Address: Assets/Prefabs/UI/Popup/UI_RoomMonitor.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 519c5e39ada8678449a67fedf56b18af
-    m_Address: UI_Pade
+    m_Address: Assets/Prefabs/UI/Overlay/UI_Pade.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5414e63584d4bfa47b32793ceb9f663a
+    m_Address: Assets/Prefabs/UI/Popup/UI_HUD.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5da234b65a6db434cb59dbb512d24863
-    m_Address: UI_Black
+    m_Address: Assets/Prefabs/UI/Overlay/UI_Black.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7e0b65b1a1fc43d4ba53a0c8ec7c4503
-    m_Address: UI_Main
+  - m_GUID: 95c2f281fc2abb3498e3a52c733b3889
+    m_Address: Assets/Prefabs/UI/UI_Loading.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cc70620c4161b614abaf0ea443f64d38
-    m_Address: UI_Background
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ffe0d04b6491ea84ba928958fdecbed2
-    m_Address: UI_Character
+  - m_GUID: b562060cde8dbe543b69f2ad99c66c5f
+    m_Address: Assets/Prefabs/UI/Scene/UI_Room.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
+using WeWillSurvive.Expedition;
 using WeWillSurvive.Item;
 using WeWillSurvive.Util;
 
@@ -32,8 +33,8 @@ namespace WeWillSurvive.MainEvent
 
         public MainEventData GetDailyMainEvent()
         {
-            // TODO 메인 이벤트가 발생하는 날인지 확인
-            bool isDailyMainEvent = true;
+            // 탐사 준비 단계이면 메인 이벤트 X
+            bool isDailyMainEvent = !(ExpeditionManager.Instance.CurrentState == EExpeditionState.Ready);
 
             if (GameManager.Instance.Day == 1)
             {

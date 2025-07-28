@@ -36,6 +36,7 @@ namespace WeWillSurvive.Status
 
         public override void OnNewDay()
         {
+            base.OnNewDay();
             // TODO onwer 가 혼자 남아있으면 다음 단계로
         }
 
