@@ -44,6 +44,8 @@ namespace WeWillSurvive
                     _characterImage.sprite = Owner.MainSprite;
                 else if (roomType == ERoomType.CharacterRoom)
                     _characterImage.sprite = Owner.RoomSprite;
+
+                gameObject.SetActive(true);
             }
         }
 

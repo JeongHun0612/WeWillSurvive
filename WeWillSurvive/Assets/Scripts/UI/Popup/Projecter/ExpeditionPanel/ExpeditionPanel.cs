@@ -9,39 +9,18 @@ namespace WeWillSurvive
 {
     public class ExpeditionPanel : PagePanel
     {
-        [Header("## Expedition Ready Panel")]
-        [SerializeField] private GameObject _expeditionReadyPanel;
-        [SerializeField] private List<ExpeditionStatusPanel> _expeditionStatusPanels;
-        [Header("## Expedition Ready Button")]
-        [SerializeField] private Image _readyImage;
-        [SerializeField] private Sprite _readyNormalSprite;
-        [SerializeField] private Sprite _readySelectedSprite;
-
-        [Header("## Expedition Select Panel")]
-        [SerializeField] private GameObject _expeditionSelectPanel;
-        [SerializeField] private List<ExpeditionSelectCharacter> _expeditionSelectCharacters;
-
-
-        private bool _isReady;
+        [SerializeField] private ExpeditionReadyPanel _readyPanel;
+        [SerializeField] private ExpeditionSelectPanel _selectPanel;
 
         public async override UniTask InitializeAsync()
         {
             PanelType = EPanelType.Expedition;
-            _isReady = false;
 
-            _expeditionReadyPanel.SetActive(false);
-            _expeditionSelectPanel.SetActive(false);
+            await _readyPanel.InitializeAsync();
+            await _selectPanel.InitializeAsync();
 
-            await UniTask.Yield();
-        }
-
-        public override void Initialize()
-        {
-            PanelType = EPanelType.Expedition;
-            _isReady = false;
-
-            _expeditionReadyPanel.SetActive(false);
-            _expeditionSelectPanel.SetActive(false);
+            _readyPanel.gameObject.SetActive(false);
+            _selectPanel.gameObject.SetActive(false);
         }
 
         public override async UniTask RefreshPageAsync(int startPageIndex)
@@ -50,11 +29,10 @@ namespace WeWillSurvive
 
             EExpeditionState expeditionState = ExpeditionManager.Instance.CurrentState;
 
-            // 플레이어 중 누군가가 탐사를 나가있는 경우 or 첫째날은 탐사 패널 X
-            //bool isExpedition = expeditionState == EExpeditionState.Expedition || GameManager.Instance.Day == 1;
-            bool isExpedition = expeditionState == EExpeditionState.Expedition;
+            // 플레이어 중 누군가가 탐사를 나가있는 경우 or 첫째날은 탐사 불가능
+            bool isExpeditionImpossible = expeditionState == EExpeditionState.Exploring || GameManager.Instance.Day == 1;
 
-            if (isExpedition)
+            if (isExpeditionImpossible)
             {
                 PageCount = 0;
                 return;
@@ -64,26 +42,17 @@ namespace WeWillSurvive
 
             if (expeditionState == EExpeditionState.Normal)
             {
-                _isReady = false;
-                _expeditionReadyPanel.SetActive(true);
-                _expeditionSelectPanel.SetActive(false);
+                _readyPanel.gameObject.SetActive(true);
+                _selectPanel.gameObject.SetActive(false);
 
-                // expeditionStatusPanel 업데이트
-                foreach (var expeditionStatusPanel in _expeditionStatusPanels)
-                {
-                    expeditionStatusPanel.UpdateExpeditionStatusPanel();
-                }
+                _readyPanel.UpdateReadyPanel();
             }
             else if (expeditionState == EExpeditionState.Ready)
             {
-                _expeditionReadyPanel.SetActive(false);
-                _expeditionSelectPanel.SetActive(true);
+                _readyPanel.gameObject.SetActive(false);
+                _selectPanel.gameObject.SetActive(true);
 
-                // expeditionSelectCharacter 업데이트
-                foreach (var expeditionSelectCharacter in _expeditionSelectCharacters)
-                {
-                    expeditionSelectCharacter.UpdateSelectCharacter();
-                }
+                _selectPanel.UpdateSelectPanel();
             }
         }
 
@@ -94,28 +63,21 @@ namespace WeWillSurvive
 
         public override void ApplyResult()
         {
-            if (_isReady)
-                ExpeditionManager.Instance.CurrentState = EExpeditionState.Ready;
+            EExpeditionState expeditionState = ExpeditionManager.Instance.CurrentState;
 
-        }
-
-        public void OnClickExpeditionReady()
-        {
-            _isReady = !_isReady;
-
-            if (_isReady)
+            if (expeditionState == EExpeditionState.Normal && _readyPanel.IsReady)
             {
-                _readyImage.sprite = _readySelectedSprite;
+                ExpeditionManager.Instance.ReadyExpedition();
             }
-            else
+            else if (expeditionState == EExpeditionState.Ready)
             {
-                _readyImage.sprite = _readyNormalSprite;
+                if (_selectPanel.SelectCharacter != null)
+                {
+                    // TODO 탐사 시작
+                    var target = _selectPanel.SelectCharacter.Owner;
+                    ExpeditionManager.Instance.StartExpedition(target);
+                }
             }
-        }
-
-        public void OnClickSelectCharacter()
-        {
-
         }
     }
 }

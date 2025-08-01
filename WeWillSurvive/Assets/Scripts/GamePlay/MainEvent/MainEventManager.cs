@@ -22,6 +22,9 @@ namespace WeWillSurvive.MainEvent
         [Header("## MainEventData")]
         public List<MainEventData> _debugMainEventDatas = new();
 
+        [Header("## TestEvent")]
+        public MainEventData _testEventData;
+
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
 
@@ -111,6 +114,7 @@ namespace WeWillSurvive.MainEvent
                     }
                 case EConditionType.CharacterExpeditionCountUpper:
                     {
+                        var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(condition.targetId));
                         int countUpper = int.Parse(condition.value1);
                         return false;
                         //return CharacterManager.GetExpeditionCount(condition.targetId) > countUpper;

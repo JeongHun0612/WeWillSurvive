@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using WeWillSurvive.Item;
-using WeWillSurvive.Character;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace WeWillSurvive.Character
 {

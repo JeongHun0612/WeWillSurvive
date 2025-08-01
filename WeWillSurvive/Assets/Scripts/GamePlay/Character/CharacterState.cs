@@ -66,6 +66,10 @@ namespace WeWillSurvive.Character
         public bool IsAnxious => HasState(EState.Anxious | EState.Panic);
         public bool IsMad => HasState(EState.Mad);
 
+        public bool IsExpeditionStateNormal => HasState(EState.Normal) || HasState(EState.Hungry | EState.Thirsty);
+        public bool IsExpeditionStateWarning => HasState(EState.Starve | EState.Dehydrate | EState.Injured | EState.Anxious | EState.Panic);
+        public bool IsExpeditionStateImpossible => HasState(EState.Sick | EState.Mad);
+
         public void SetState(EState state)
         {
             if (CurrentState == EState.Dead) return;
@@ -87,6 +91,9 @@ namespace WeWillSurvive.Character
 
         public bool HasState(EState state)
         {
+            if (state == EState.Normal)
+                return CurrentState == EState.Normal;
+
             return (CurrentState & state) != 0;
         }
 

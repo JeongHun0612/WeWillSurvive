@@ -32,10 +32,9 @@ namespace WeWillSurvive
 
         public Action ChoiceImageSelected;
 
-
         private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
-        public async override UniTask InitializeAsync()
+        public override UniTask InitializeAsync()
         {
             PanelType = EPanelType.MainEvent;
 
@@ -57,30 +56,7 @@ namespace WeWillSurvive
             LayoutRebuilder.ForceRebuildLayoutImmediate(_textRootLayout);
             _maxLineCount = TMPTextUtil.CalculateMaxLineCount(_eventText);
 
-            await UniTask.Yield();
-        }
-
-        public override void Initialize()
-        {
-            PanelType = EPanelType.MainEvent;
-
-            // ChoiceOptionData Dictonary 로 정리
-            _choiceOptionIconDicts.Clear();
-            foreach (var choiceOptionData in _choiceOptionIconDatas)
-            {
-                if (!_choiceOptionIconDicts.ContainsKey(choiceOptionData.ChoiceType))
-                {
-                    _choiceOptionIconDicts[choiceOptionData.ChoiceType] = choiceOptionData;
-                }
-            }
-
-            foreach (var choiceImage in _choiceOptions)
-            {
-                choiceImage.Initialize(OnClickChoiceImage);
-            }
-
-            LayoutRebuilder.ForceRebuildLayoutImmediate(_textRootLayout);
-            _maxLineCount = TMPTextUtil.CalculateMaxLineCount(_eventText);
+            return UniTask.CompletedTask;
         }
 
         public override async UniTask RefreshPageAsync(int startPageIndex)

@@ -39,7 +39,6 @@ namespace WeWillSurvive
             foreach (var pagePanel in _pagePanels)
             {
                 await pagePanel.InitializeAsync();
-                //pagePanel.Initialize();
             }
 
             // PanelMoveButton 초기화

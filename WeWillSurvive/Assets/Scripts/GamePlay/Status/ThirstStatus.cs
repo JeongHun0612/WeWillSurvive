@@ -13,6 +13,8 @@ namespace WeWillSurvive.Status
     {
         public override EStatusType StatusType => EStatusType.Thirst;
 
+        protected override bool IsLastLevel(EThirstLevel level) => level == EThirstLevel.Dehydrate;
+
         public ThirstStatus(CharacterBase owner)
         {
             _owner = owner;
@@ -27,13 +29,33 @@ namespace WeWillSurvive.Status
 
             DaysToNextLevel = new()
             {
-                [EThirstLevel.Normal] = 3,
-                [EThirstLevel.Thirsty] = 2,
-                [EThirstLevel.Dehydrate] = 2,
+                [EThirstLevel.Normal] = 2,
+                [EThirstLevel.Thirsty] = 3,
+                [EThirstLevel.Dehydrate] = 3,
+            };
+
+            StateTransitionTable = new()
+            {
+                [EThirstLevel.Normal] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.5f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.5f },
+                },
+
+                [EThirstLevel.Thirsty] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.8f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                },
+
+                [EThirstLevel.Dehydrate] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.8f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                },
             };
         }
 
-        protected override bool IsDeadLevel(EThirstLevel level) => level == EThirstLevel.Dehydrate;
 
         public override void ApplyRecovery()
         {

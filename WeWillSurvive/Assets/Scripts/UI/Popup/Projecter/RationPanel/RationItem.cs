@@ -38,6 +38,7 @@ namespace WeWillSurvive
         {
             _isSelected = false;
             _itemImage.sprite = _normalSprite;
+            gameObject.SetActive(true);
         }
 
         public void UsedItem(CharacterBase target)

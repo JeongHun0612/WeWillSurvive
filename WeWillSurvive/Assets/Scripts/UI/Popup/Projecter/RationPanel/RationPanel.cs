@@ -30,22 +30,7 @@ namespace WeWillSurvive
 
             foreach (var rationCharacter in _rationCharacters)
             {
-                //rationCharacter.Initialize();
                 await rationCharacter.InitializeAsync();
-                rationCharacter.RegisterEvent(this);
-            }
-
-            await UniTask.Yield();
-        }
-
-        public override void Initialize()
-        {
-            PanelType = EPanelType.Ration;
-            PageCount = 1;
-
-            foreach (var rationCharacter in _rationCharacters)
-            {
-                rationCharacter.Initialize();
                 rationCharacter.RegisterEvent(this);
             }
         }

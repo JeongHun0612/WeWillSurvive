@@ -13,6 +13,9 @@ namespace WeWillSurvive.Status
     {
         public override EStatusType StatusType => EStatusType.Hunger;
 
+        protected override bool IsLastLevel(EHungerLevel level) => level == EHungerLevel.Starve;
+
+
         public HungerStatus(CharacterBase owner)
         {
             _owner = owner;
@@ -27,13 +30,32 @@ namespace WeWillSurvive.Status
 
             DaysToNextLevel = new()
             {
-                [EHungerLevel.Normal] = 3,
-                [EHungerLevel.Hungry] = 2,
-                [EHungerLevel.Starve] = 2,
+                [EHungerLevel.Normal] = 2,
+                [EHungerLevel.Hungry] = 4,
+                [EHungerLevel.Starve] = 4,
+            };
+
+            StateTransitionTable = new()
+            {
+                [EHungerLevel.Normal] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.5f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.5f },
+                },
+
+                [EHungerLevel.Hungry] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.8f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                },
+
+                [EHungerLevel.Starve] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.8f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                },
             };
         }
-
-        protected override bool IsDeadLevel(EHungerLevel level) => level == EHungerLevel.Starve;
 
         public override void ApplyRecovery()
         {

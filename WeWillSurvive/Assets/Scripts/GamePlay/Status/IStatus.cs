@@ -1,5 +1,3 @@
-using UnityEngine;
-using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Status
 {
@@ -16,6 +14,7 @@ namespace WeWillSurvive.Status
         public EStatusType StatusType { get; }
 
         public void OnNewDay();
+        public void OnExpeditionResult();
         public void ApplyRecovery();
     }
 }

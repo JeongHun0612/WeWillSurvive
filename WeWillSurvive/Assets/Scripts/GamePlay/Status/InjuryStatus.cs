@@ -12,6 +12,8 @@ namespace WeWillSurvive.Status
     {
         public override EStatusType StatusType => EStatusType.Injury;
 
+        protected override bool IsLastLevel(EInjuredLevel level) => level == EInjuredLevel.Sick;
+
         public InjuryStatus(CharacterBase owner)
         {
             _owner = owner;
@@ -27,12 +29,21 @@ namespace WeWillSurvive.Status
 
             DaysToNextLevel = new()
             {
-                [EInjuredLevel.Injured] = 3,
-                [EInjuredLevel.Sick] = 2,
+                [EInjuredLevel.Injured] = 4,
+                [EInjuredLevel.Sick] = 4,
+            };
+
+            StateTransitionTable = new()
+            {
+                [EInjuredLevel.Injured] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.6f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                    new StateTransition { TransitionType = EStateTransitionType.Death, Probability = 0.2f },
+                },
             };
         }
 
-        protected override bool IsDeadLevel(EInjuredLevel level) => level == EInjuredLevel.Sick;
 
         public override void ApplyRecovery()
         {

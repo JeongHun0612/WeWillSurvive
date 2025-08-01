@@ -101,9 +101,6 @@ namespace WeWillSurvive.Character
 
                 character.OnNewDay();
             }
-
-            // Test
-            //GetCharacter(ECharacter.Bell).State.SetState(EState.Panic);
         }
 
         public int AliveCharacterCount()

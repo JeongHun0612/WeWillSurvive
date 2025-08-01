@@ -27,6 +27,7 @@ namespace WeWillSurvive
         {
             _eventChoice = eventChoice;
             _choiceOptionIconData = choiceOptionIconData;
+            gameObject.SetActive(true);
 
             OnSelected(false);
         }

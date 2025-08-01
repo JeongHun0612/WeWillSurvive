@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using WeWillSurvive.Character;
 
 namespace WeWillSurvive
 {
@@ -25,19 +26,19 @@ namespace WeWillSurvive
         [Header("## 탐사를 나간 후")]
         [SerializeField] private List<string> _expeditionStartMessages;
 
-        public string GetExpeditionReadyMessage(EExpeditionReadyState type)
+        public string GetExpeditionReadyMessage(CharacterState state)
         {
-            switch (type)
-            {
-                case EExpeditionReadyState.Normal:
-                    return GetRandomMessage(_expeditionNormalMessages);
-                case EExpeditionReadyState.Warning:
-                    return GetRandomMessage(_expeditionWarningeMessages);
-                case EExpeditionReadyState.Impossible:
-                    return GetRandomMessage(_expeditionImpossibleMessages);
-                default:
-                    return string.Empty;
-            }
+            // (1) 탐사를 정상적으로 나갈 수 있는 경우
+            if (state.IsExpeditionStateNormal)
+                return GetRandomMessage(_expeditionNormalMessages);
+            // (2) 탐사를 나가기 위험한 상태인 경우
+            else if (state.IsExpeditionStateWarning)
+                return GetRandomMessage(_expeditionWarningeMessages);
+            // (3) 탐사를 나갈 수 없는 경우
+            else if (state.IsExpeditionStateImpossible)
+                return GetRandomMessage(_expeditionImpossibleMessages);
+
+            return string.Empty;
         }
 
         public string GetExpeditionStartMessage()

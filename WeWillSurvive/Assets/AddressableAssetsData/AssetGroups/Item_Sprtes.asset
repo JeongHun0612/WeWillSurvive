@@ -40,8 +40,28 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12b7101cf2249fc41864cb77d0e7e263
+    m_Address: Assets/Sprites/Items/Item_DIsabled/medical_kit_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 35e8968e0c682bd45a25c9b29ad97b0e
     m_Address: Assets/Sprites/Items/Item_Normal/water4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3641afed9c1ef7747840c23edcae5bf7
+    m_Address: Assets/Sprites/Items/Item_DIsabled/ax_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 407bb82b3fe6ec541baeb4d51beb2066
+    m_Address: Assets/Sprites/Items/Item_DIsabled/water1_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45e9fc700d2ca7e43b27ba6114172070
+    m_Address: Assets/Sprites/Items/Item_DIsabled/flashlight_disabled.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -70,13 +90,48 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8409734428c13bb4692df132c9db7fe1
+    m_Address: Assets/Sprites/Items/Item_DIsabled/special_food_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c498a8c5c50fd7499c042f66448ca1a
+    m_Address: Assets/Sprites/Items/Item_DIsabled/food_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96ae019a445906f4dbc5ba2050e4165c
+    m_Address: Assets/Sprites/Items/Item_DIsabled/repair_kit_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 97681a93cc38b57489e44554242d2fb1
     m_Address: Assets/Sprites/Items/Item_Normal/gun.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9afe82a529b3fd84d9585b58dad77cde
+    m_Address: Assets/Sprites/Items/Item_DIsabled/gun_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a2de8d91ff1c24b4881aca968e7af59d
+    m_Address: Assets/Sprites/Items/Item_DIsabled/communi_device_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a87e242547da3354382770e55970c82c
+    m_Address: Assets/Sprites/Items/Item_DIsabled/special_repair_kit_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aa7b55fa62a6d2d4dba3a32b6ac91efc
     m_Address: Assets/Sprites/Items/Item_Normal/foodbox_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab6a07b39454c1245a1fb21752d6d9f5
+    m_Address: Assets/Sprites/Items/Item_DIsabled/spacesuit_disabled.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -120,8 +175,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf71a991ca8b72044b12069dbdf12b12
+    m_Address: Assets/Sprites/Items/Item_DIsabled/map_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d5bb7f4377e4b5641a8069f4fafaf55a
     m_Address: Assets/Sprites/Items/Item_Normal/special_food.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7b3d2c5b42a7434fa7a57a79e2f71c5
+    m_Address: Assets/Sprites/Items/Item_DIsabled/special_medical_kit_disabled.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -132,6 +197,16 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f055f637e21d7a44088dd011fe2f324d
     m_Address: Assets/Sprites/Items/Item_Normal/map.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f62b2365b9ce48542865f1a2b0ef6664
+    m_Address: Assets/Sprites/Items/Item_DIsabled/board_game_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6b8957108c6ab84481a7daad59403f3
+    m_Address: Assets/Sprites/Items/Item_DIsabled/pipe_disabled.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

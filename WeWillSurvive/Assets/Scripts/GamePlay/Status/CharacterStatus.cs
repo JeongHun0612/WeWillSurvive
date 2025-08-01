@@ -23,8 +23,8 @@ namespace WeWillSurvive.Status
             AddStatus(new ThirstStatus(_owner));
 
             // Debug
-            AddStatus(new InjuryStatus(_owner));
-            AddStatus(new AnxiousStatus(_owner));
+            //AddStatus(new InjuryStatus(_owner));
+            //AddStatus(new AnxiousStatus(_owner));
         }
 
         public void OnNewDay()
@@ -33,7 +33,15 @@ namespace WeWillSurvive.Status
             {
                 status.OnNewDay();
 
-                 //Debug.Log($"{_owner.Name} - {status.StatusType} : {status.CurrentValue}");
+                if (_owner.IsDead) break;
+            }
+        }
+
+        public void ApplyExpeditionResults()
+        {
+            foreach (var status in _statuses.Values)
+            {
+                status.OnExpeditionResult();
 
                 if (_owner.IsDead) break;
             }

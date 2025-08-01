@@ -32,8 +32,6 @@ namespace WeWillSurvive
             _foodItem.Initialize();
             _waterItem.Initialize();
             _medicalKitItem.Initialize();
-
-            await UniTask.Yield();
         }
 
         public void Initialize()

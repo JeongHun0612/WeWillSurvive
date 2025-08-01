@@ -12,6 +12,9 @@ namespace WeWillSurvive.Status
     {
         public override EStatusType StatusType => EStatusType.Anxious;
 
+        protected override bool IsLastLevel(EAnxiousLevel level) => level == EAnxiousLevel.Panic;
+
+
         public AnxiousStatus(CharacterBase owner)
         {
             _owner = owner;
@@ -30,14 +33,27 @@ namespace WeWillSurvive.Status
                 [EAnxiousLevel.Anxious] = 3,
                 [EAnxiousLevel.Panic] = 2,
             };
-        }
 
-        protected override bool IsDeadLevel(EAnxiousLevel level) => level == EAnxiousLevel.Panic;
+            StateTransitionTable = new()
+            {
+                [EAnxiousLevel.Anxious] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.7f },
+                    new StateTransition { TransitionType = EStateTransitionType.Recovery, Probability = 0.2f },
+                    new StateTransition { TransitionType = EStateTransitionType.Death, Probability = 0.1f },
+                },
+                [EAnxiousLevel.Panic] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.6f },
+                    new StateTransition { TransitionType = EStateTransitionType.Recovery, Probability = 0.2f },
+                    new StateTransition { TransitionType = EStateTransitionType.Death, Probability = 0.2f },
+                },
+            };
+        }
 
         public override void OnNewDay()
         {
-            base.OnNewDay();
-            // TODO onwer 가 혼자 남아있으면 다음 단계로
+            ApplyCurrentLevelState();
         }
 
         public override void ApplyRecovery()
