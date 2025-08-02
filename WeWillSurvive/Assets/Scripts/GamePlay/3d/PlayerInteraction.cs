@@ -40,7 +40,7 @@ namespace WeWillSurvive
 
             DetectInteractible();
 
-            if (canInteract)
+            if (canInteract && currentInteractible != null)
             {
 
                 if (Input.GetKey(KeyCode.Space) && currentInteractible.interactibleType == InteractibleType.Putout)
@@ -48,7 +48,7 @@ namespace WeWillSurvive
                     holdTimer += Time.deltaTime;
                     if (holdTimer >= 0.4f)
                     {
-                        currentInteractible?.Escape();
+                        if (currentInteractible != null){currentInteractible.Escape();}
                     }
                 }
                 else
@@ -58,7 +58,7 @@ namespace WeWillSurvive
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    currentInteractible?.Interact();
+                    if (currentInteractible != null){currentInteractible?.Interact();}
                 }
             }
         }
@@ -119,7 +119,7 @@ namespace WeWillSurvive
                 {
                     currentInteractible = closest;
                     canInteract = true;
-                    currentInteractible.ShowInteractionUI();
+                    if (currentInteractible != null){currentInteractible.ShowInteractionUI();}
                     return;
                 }
             }

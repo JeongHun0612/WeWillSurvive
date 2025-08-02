@@ -84,7 +84,7 @@ namespace WeWillSurvive
                 else break; // 수량 모두 소진됨
             }
 
-            // 3. storage에게 랜덤 아이템 종류 및 수량 배정
+            // 3. storage에게 랜덤 아이템 수량 배정
             Shuffle(storagesToAssign);
             foreach (var storage in storagesToAssign)
             {

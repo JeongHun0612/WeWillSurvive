@@ -12,17 +12,29 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4757630901630601015, guid: 903f541d06c1b0244aa56490c278789a, type: 3}
+    - target: {fileID: 1190617063194413914, guid: f3ebfad4caa27bb4d8d30991cc8f0e94, type: 3}
+      propertyPath: interactableValue
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5342070324339640178, guid: f3ebfad4caa27bb4d8d30991cc8f0e94, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5342070324339640178, guid: f3ebfad4caa27bb4d8d30991cc8f0e94, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5342070324339640178, guid: f3ebfad4caa27bb4d8d30991cc8f0e94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.523
       objectReference: {fileID: 0}
     - target: {fileID: 5342070324339640178, guid: f3ebfad4caa27bb4d8d30991cc8f0e94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 5.724
       objectReference: {fileID: 0}
     - target: {fileID: 5342070324339640178, guid: f3ebfad4caa27bb4d8d30991cc8f0e94, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5342070324339640178, guid: f3ebfad4caa27bb4d8d30991cc8f0e94, type: 3}
       propertyPath: m_LocalRotation.w

@@ -36,6 +36,7 @@ namespace WeWillSurvive
                 {
                     Destroy(gameObject);
                     HideInteractionUI();
+                    return;
                 }
             }
 
@@ -45,6 +46,7 @@ namespace WeWillSurvive
                 {
                     Destroy(gameObject);
                     HideInteractionUI();
+                    return;
                 }
             }
 
@@ -57,12 +59,14 @@ namespace WeWillSurvive
 
                 storageScript.decrease(repeatGet);
                 for (int i = 0; i < repeatGet; i++) inventory.AddItem(itemID);
+                return;
             }
 
             if (interactibleType == InteractibleType.Putout)
             {
                 resultAdd.Add(inventory.returnItem(), inventory.returnCrew());
                 inventory.flushAll();
+                return;
             }
         }
 
