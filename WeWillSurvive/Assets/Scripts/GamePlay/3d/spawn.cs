@@ -5,15 +5,18 @@ namespace WeWillSurvive
 {
     public class spawn : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> prefabs = new List<GameObject>();
+        [SerializeField] private List<GameObject> Safeprefabs = new List<GameObject>();
+        [SerializeField] private List<GameObject> Oneprefabs = new List<GameObject>();
+        [SerializeField] private List<int> prefabNum = new List<int>();
+        [SerializeField] private List<int> prefabCount = new List<int>();
         [SerializeField] private SlotMaster sharedInventory;
-        [SerializeField] private int maxStorage = 9;
-        [SerializeField] private int minStorage = 5;
+        [SerializeField] private int maxStorage;
+        [SerializeField] private int minStorage;
 
-        [SerializeField] private int totalFood;
-        private int maxFood;
-        [SerializeField] private int totalWater;
-        private int maxWater;
+        [SerializeField] private int maxItems = 30;
+        private int maxI;
+        [SerializeField] private int minItems = 10;
+        private int minI;
 
         private List<Interactible> itemsToAssign = new();
         private List<Interactible> storagesToAssign = new();
@@ -25,90 +28,91 @@ namespace WeWillSurvive
 
         public void DistributeItemsAndStorages()
         {
-            maxFood = totalFood;
-            maxWater = totalWater;
+            //prefabCount 초기화
+            for (int i = 0; i < 12; i++)
+            {
+                prefabCount[i] = prefabNum[i];
+            }
+            maxI = maxItems; minI = minItems;
 
-            // 1. 자식 오브젝트 순회
+            List<(Vector3 pos, Quaternion rot)> spawnTransforms = new();
+            List<Interactible> storagesToAssign = new();
+
+            //자식 오브젝트 순회로 위치 잡기
             foreach (Transform child in transform)
             {
                 var entity = child.GetComponent<Interactible>();
                 if (entity == null) continue;
 
-                entity.inventory = sharedInventory;
-
                 if (entity.interactibleType == InteractibleType.Item)
                 {
                     if (entity.interactableValue == 0)
                     {
-                        itemsToAssign.Add(entity);
+                        spawnTransforms.Add((entity.transform.position, entity.transform.rotation));
+                        Destroy(entity.gameObject);
                     }
                     else
                     {
-                        if (entity.interactableValue == 1) maxFood--;
-                        if (entity.interactableValue == 2) maxWater--;
+                        int idx = entity.interactableValue - 1;
+                        if (idx >= 0 && idx < 12)
+                        {
+                            prefabCount[idx]--;
+                            if(idx != 0 && idx != 1){minI--;}
+                            maxI--;
+                        }
                     }
                 }
-                else
+                else if (entity.interactibleType == InteractibleType.Storage)
                 {
-                    if (entity.interactibleType == InteractibleType.Storage) storagesToAssign.Add(entity);
+                    storagesToAssign.Add(entity);
+                }
+            }
+            Shuffle(spawnTransforms);
+
+            //필수품 먼저 넣고 다음 0번 1번 랜덤하게 넣기
+            if(spawnTransforms.Count < minI){ Debug.LogWarning("Warning! : not enough random items to spawn all critical items");}
+            int maxV = Mathf.Min(maxI, spawnTransforms.Count);
+            int spawnCount = Random.Range(minI, maxV);
+
+            int j = 2;
+            for(int i=0; i < spawnCount; i++){
+                if(minI>0 || j>=12){
+                    while(prefabCount[j] <= 0)j++;
+                    if(j>=12) continue;
+                    prefabCount[j]--;
+                    minI--;
+                    Instantiate(Oneprefabs[j], spawnTransforms[i].pos, spawnTransforms[i].rot, transform);
+                }
+                else{
+                    int index;
+                    bool has0 = prefabCount[0] > 0;
+                    bool has1 = prefabCount[1] > 0;
+
+                    if (has0 && !has1) index = 0;
+                    else if (!has0 && has1) index = 1;
+                    else if (has0 && has1) index = Random.value < 0.5f ? 0 : 1;
+                    else break;
+
+                    Instantiate(Oneprefabs[index], spawnTransforms[i].pos, spawnTransforms[i].rot, transform);
+                    prefabCount[index]--;
                 }
             }
 
-            // 2. 랜덤으로 아이템 부여
-            Shuffle(itemsToAssign);
-            foreach (var item in itemsToAssign)
+            //남은 것 넣기
+            foreach (var store in storagesToAssign)
             {
-                if (maxFood > 0 && maxWater > 0)
-                {
-                    if (Random.value < 0.5f)
-                    {
-                        item.interactableValue = 1; // food
-                        maxFood--;
-                    }
-                    else
-                    {
-                        item.interactableValue = 2; // water
-                        maxWater--;
-                    }
-                }
-                else if (maxFood > 0)
-                {
-                    item.interactableValue = 1;
-                    maxFood--;
-                }
-                else if (maxWater > 0)
-                {
-                    item.interactableValue = 2;
-                    maxWater--;
-                }
-                else break; // 수량 모두 소진됨
+                if (store.interactableValue == 0 || prefabCount[store.interactableValue-1] <= 0) break;
+                store.storageScript.SetStorage(store.interactableValue, Safeprefabs[store.interactableValue-1], prefabCount[store.interactableValue-1]);
             }
 
-            // 3. storage에게 랜덤 아이템 수량 배정
-            Shuffle(storagesToAssign);
-            foreach (var storage in storagesToAssign)
+            foreach (Transform child in transform)
             {
-                if (maxFood <= 0 && maxWater <= 0) break;
-
-                int amount = Random.Range(minStorage, maxStorage + 1);
-
-                if (storage.interactableValue == 1)
-                {
-                    // food 배정
-                    amount = Mathf.Min(amount, maxFood);
-                    storage.storageScript.SetStorage(1, prefabs[0], amount);
-                    maxFood -= amount;
-                }
-                if (storage.interactableValue == 2)
-                {
-                    // water 배정
-                    amount = Mathf.Min(amount, maxWater);
-                    storage.storageScript.SetStorage(2, prefabs[1], amount);
-                    maxWater -= amount;
-                }
+                var entity = child.GetComponent<Interactible>();
+                if (entity == null) continue;
+                entity.inventory = sharedInventory;
             }
         }
-
+            
         private void Shuffle<T>(List<T> list)
         {
             for (int i = 0; i < list.Count; i++)

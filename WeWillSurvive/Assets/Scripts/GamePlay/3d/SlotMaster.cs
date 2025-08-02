@@ -77,32 +77,33 @@ namespace WeWillSurvive
             }
 
             var def = itemDefinitions[itemId];
+            int size = def.amountLimit;
 
-            // 기존 슬롯에 추가
-            foreach (var slot in slots)
+            for (int i = 0; i <= slots.Count - size; i++)
             {
-                if (slot.data == def && slot.amount < def.amountLimit)
+                bool canFit = true;
+                for (int j = 0; j < size; j++)
                 {
-                    slot.amount++;
-                    slot.text.text = slot.amount.ToString();
+                    if (slots[i + j].data != null)
+                    {
+                        canFit = false;
+                        break;
+                    }
+                }
+
+                if (canFit)
+                {
+                    for (int j = 0; j < size; j++)
+                    {
+                        slots[i + j].data = def;
+                        slots[i + j].amount = 1;
+                        slots[i + j].image.sprite = def.sprite;
+                        slots[i + j].text.text = "";
+                    }
                     return true;
                 }
             }
 
-            // 빈 슬롯에 새로 할당
-            foreach (var slot in slots)
-            {
-                if (slot.data == null)
-                {
-                    slot.data = def;
-                    slot.amount = 1;
-                    slot.image.sprite = def.sprite;
-                    slot.text.text = "1";
-                    return true;
-                }
-            }
-
-            // 슬롯에 들어갈 곳이 없음
             ShowWarningForSeconds();
             return false;
         }

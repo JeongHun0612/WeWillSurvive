@@ -10,6 +10,7 @@ namespace WeWillSurvive
 
         public LayerMask interactableLayerMask; // Interactable 레이어 지정
         public float interactRange = 2f; // 상호작용 최대 거리
+        public float interactRadius = 0.5f;
         private float holdTimer = 0f;
 
         private bool isFirstPerson = true;
@@ -48,7 +49,7 @@ namespace WeWillSurvive
                     holdTimer += Time.deltaTime;
                     if (holdTimer >= 0.4f)
                     {
-                        if (currentInteractible != null){currentInteractible.Escape();}
+                        if (currentInteractible != null) { currentInteractible.Escape(); }
                     }
                 }
                 else
@@ -58,7 +59,7 @@ namespace WeWillSurvive
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    if (currentInteractible != null){currentInteractible?.Interact();}
+                    if (currentInteractible != null) { currentInteractible?.Interact(); }
                 }
             }
         }
@@ -76,8 +77,8 @@ namespace WeWillSurvive
             if (isFirstPerson)
             {
                 Ray ray = playercamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-                Debug.DrawRay(ray.origin, ray.direction * interactRange, Color.red, 1f);
-                if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactableLayerMask))
+                Vector3 origin = ray.origin - ray.direction * interactRadius;
+                if (Physics.SphereCast(origin, interactRadius, ray.direction, out RaycastHit hit, interactRange, interactableLayerMask))
                 {
                     var interactible = hit.collider.GetComponent<Interactible>();
                     if (interactible != null)
@@ -119,7 +120,7 @@ namespace WeWillSurvive
                 {
                     currentInteractible = closest;
                     canInteract = true;
-                    if (currentInteractible != null){currentInteractible.ShowInteractionUI();}
+                    if (currentInteractible != null) { currentInteractible.ShowInteractionUI(); }
                     return;
                 }
             }
