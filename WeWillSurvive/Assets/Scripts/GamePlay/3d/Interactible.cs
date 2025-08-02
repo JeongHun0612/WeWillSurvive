@@ -35,6 +35,7 @@ namespace WeWillSurvive
                 if (inventory.AddItem(interactableValue))
                 {
                     Destroy(gameObject);
+                    HideInteractionUI();
                 }
             }
 
@@ -43,6 +44,7 @@ namespace WeWillSurvive
                 if (inventory.AddCrew(interactableValue))
                 {
                     Destroy(gameObject);
+                    HideInteractionUI();
                 }
             }
 
