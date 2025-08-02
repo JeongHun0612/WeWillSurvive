@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Sprite_Atlas
+  m_EditorClassIdentifier: 
+  m_GroupName: Sprite_Atlas
+  m_GUID: b991f5913a4e65c40bb667fcd3f305a8
+  m_SerializeEntries:
+  - m_GUID: 2731df5cf4e3f1c4d8c20f8ad4b6e11d
+    m_Address: Assets/SpriteAtlases/Character_Seated_Atlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b5850e1db0b36a478d97f2f94bd7cc2
+    m_Address: Assets/SpriteAtlases/Character_Standing_Atlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85b08646402168a4e84f35c6b2ff5167
+    m_Address: Assets/SpriteAtlases/Item_Atlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f43380473416b04586c5e9f20aac07b
+    m_Address: Assets/SpriteAtlases/UI_Atlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f7b3b476672664a47ab9721e6106ada6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a12432dd530b3ce4ca1f28cf67f5f13b, type: 2}
+    - {fileID: 11400000, guid: 4dd5ef5414ff7b54e91534f27293c606, type: 2}

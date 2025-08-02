@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Status
@@ -19,15 +19,29 @@ namespace WeWillSurvive.Status
         {
             _statuses.Clear();
 
-            AddStatus(new HungerStatus(_owner.Data.MaxHunger));
-            AddStatus(new ThirstStatus(_owner.Data.MaxThirst));
+            AddStatus(new HungerStatus(_owner));
+            AddStatus(new ThirstStatus(_owner));
+
+            // Debug
+            //AddStatus(new InjuryStatus(_owner));
+            //AddStatus(new AnxiousStatus(_owner));
         }
 
         public void OnNewDay()
         {
             foreach (var status in _statuses.Values)
             {
-                status.OnNewDay(_owner);
+                status.OnNewDay();
+
+                if (_owner.IsDead) break;
+            }
+        }
+
+        public void ApplyExpeditionResults()
+        {
+            foreach (var status in _statuses.Values)
+            {
+                status.OnExpeditionResult();
 
                 if (_owner.IsDead) break;
             }

@@ -20,11 +20,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9d04fc0dcdbeb004c9ebaa846f3388e6
-    m_Address: ItemEffectData
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a066ab5fc7eb3db48be8fc9c08e17e09
     m_Address: Cook
     m_ReadOnly: 0

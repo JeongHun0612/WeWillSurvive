@@ -7,6 +7,8 @@ using WeWillSurvive.Character;
 using WeWillSurvive.Status;
 using WeWillSurvive.UI;
 using WeWillSurvive.Item;
+using WeWillSurvive.FarmingReport;
+using WeWillSurvive.Log;
 
 namespace WeWillSurvive.Core
 {
@@ -16,6 +18,8 @@ namespace WeWillSurvive.Core
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
+        private EventBus EventBus => ServiceLocator.Get<EventBus>();
 
         private async void Start()
         {
@@ -24,11 +28,48 @@ namespace WeWillSurvive.Core
 
             if (SceneManager.GetActiveScene().name == "2D")
             {
-                UIManager.Instance.ShowScene<UI_Background>();
+                OnStartSurvive();
+            }
+        }
+
+        public void OnStartSurvive()
+        {
+            Day = 0;
+
+            CharacterManager.SettingCharacter();
+            FarmingReportManager.Instance.UpdateFarmingReport();
+
+            StartNextDay();
+        }
+
+        public void StartNextDay()
+        {
+            UIManager.Instance.ShowOverlay<UI_Pade>().StartPadeSequence(OnNewDay);
+        }
+
+        private void OnNewDay()
+        {
+            Day++;
+
+            UIManager.Instance.ClosePopups(remain: 1);
+
+            if (UIManager.Instance.GetCurrentScene<UI_Room>() == null)
+                UIManager.Instance.ShowScene<UI_Room>();
+
+            CharacterManager.UpdateCharacterStatus();
+
+            // 모든 플레이어가 사망 시 생존 실패
+            if (CharacterManager.AliveCharacterCount() == 0)
+            {
+                Debug.Log("Game End");
+                return;
             }
 
-            // Temp
-            Day = 1;
+            // TOOD 엔딩 분기 확인
+            EventBus.Publish(new NewDayEvent() { CurrentDay = Day });
+
+            // TODO 로그 초기화
+            LogManager.ClearAllLogs();
         }
 
         public void NewDay()
@@ -75,6 +116,10 @@ namespace WeWillSurvive.Core
             // Day + 1
             Debug.Log($"[Day {Day}]\n사용한 아이템: {s} / 나간 사람: {explorerName}");
             Day += 1;
+
+
+            // EventBus를 통해 새로운 날이 시작됐음을 알림
+            EventBus.Publish(new NewDayEvent() { CurrentDay = Day });
         }
     }
 }

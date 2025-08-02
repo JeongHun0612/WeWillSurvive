@@ -1,21 +1,32 @@
+ï»¿using Cysharp.Threading.Tasks;
 using UnityEngine;
-using WeWillSurvive.Core;
 
 namespace WeWillSurvive.UI
 {
     public class UI_Popup : UI_Base
     {
+        private const int DEFAULT_SORTING_ORDER = 10;
+
         public bool RememberInHistory = true;
 
-        public override void Initialize()
+        public override void OnShow()
         {
-            base.Initialize();
+            SetCanvasOrder();
+        }
 
-            // Canvas ¼³Á¤
-            Canvas canvas = GetComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvas.overrideSorting = true;
-            canvas.sortingOrder = 10 + UIManager.Instance.PopupHistoryCount;
+        public override void CanvasInitialize()
+        {
+            base.CanvasInitialize();
+
+            _canvas.sortingOrder = DEFAULT_SORTING_ORDER;
+        }
+
+        private void SetCanvasOrder()
+        {
+            if (_canvas == null)
+                CanvasInitialize();
+
+            _canvas.sortingOrder = DEFAULT_SORTING_ORDER + UIManager.Instance.PopupHistoryCount;
         }
 
         public void ClosePopupUI()

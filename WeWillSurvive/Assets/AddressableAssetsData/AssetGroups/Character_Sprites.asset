@@ -1,0 +1,343 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Character_Sprites
+  m_EditorClassIdentifier: 
+  m_GroupName: Character_Sprites
+  m_GUID: 72ac3d6a8ebf2f845a3afcaef4374efa
+  m_SerializeEntries:
+  - m_GUID: 08221729db04b1c45bab091823e38a25
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Seating/Lead_Seat_HurtMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c8bed76b026e274cbe91e90691d1077
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Seating/Bell_Seat_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d419c912d8d1a643bd45052b87c45ae
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Seating/Cook_Seat_Panic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 11a36a50abd37fa49ac781d04fd9fcd1
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Standing/Bell_Stand_PanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 150fcd76c9caf2e48b6c47c578a1ddfd
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Seating/Lead_Seat_Panic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23eb89ca5ee099d43ae5f04ee429210c
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Seating/Cook_Seat_PanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25019dbc1aa54074c8d4d572aed7b794
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Standing/DrK_Stand_HurtMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ec926b31be1acf4c893c91bbb9c0a8e
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Seating/Bell_Seat_HurtMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a51c641e2aacc94f887046e9f4f557b
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Seating/Lead_Seat_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3fcf94c2ee01564469df3c1d8aae2889
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Standing/Lead_Stand_HurtMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3fe175927b27ec240b1ad8405a5a2bfe
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Standing/Lead_Stand_Panic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40d5cc0b8d4d7ba499023414be2b5f72
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Seating/Bell_Seat_PanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 453f38845f6142a448e95ffd906da090
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Seating/Lead_Seat_HurtPanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46adf2effc72d124eac3ee7cceb79ada
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Seating/DrK_Seat_HurtPanic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b394bbb6587b0042af49f1c564e7ab8
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Seating/Lead_Seat_Mad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 51d6a4ee4a4669c40bf4d95dfc45fcd6
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Seating/Cook_Seat_Hurt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d4468178dea350488409dba50ec9d84
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Seating/Bell_Seat_Hurt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 608b29a87c0f5de4ba4ac3736e5f16f1
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Standing/Bell_Stand_HurtPanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64cf0b738f6f073478a67510d848498b
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Seating/Lead_Seat_HurtPanic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a301bb6b6cc5d54481cd86da556836f
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Standing/DrK_Stand_PanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c07536674b213d4f8c8026def8a4f30
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Standing/DrK_Stand_Mad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6cfdf6663b11c8842b67d2acd9b0abf7
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Standing/DrK_Stand_HurtPanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d193119cc399a6468fb9897f368916a
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Seating/Cook_Seat_HurtMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6eb6def5c7ac7444cb9674f78bff56b3
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Seating/DrK_Seat_Mad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fb562c9341a2a243a86c74530734a48
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Seating/Lead_Seat_PanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 706cfb46fee9eb243b9a25c86e7e5ed8
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Standing/DrK_Stand_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73dedccb80e00c54b96233515253c98a
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Standing/DrK_Stand_Panic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 749c675ca006ce34486289ac44f331a2
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Standing/Cook_Stand_HurtPanic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7847ef7223796d3499cbfda61c77cc3a
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Seating/DrK_Seat_PanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 793b5c6edabdec145898e0d3b57b22e5
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Standing/Bell_Stand_Mad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c9dd2223d6a5b94798f01765212cc64
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Standing/Bell_Stand_HurtPanic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81f87f55ee53ed74397a05a7d071e65b
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Standing/DrK_Stand_Hurt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 863627697a78d6d48a813424f0cf8bfa
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Standing/Lead_Stand_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 898adc4a231a96848808c1deeb950805
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Seating/DrK_Seat_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b8f1faa58f3bd24fb886e59f41f3f4f
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Seating/DrK_Seat_Panic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c91b90837e56d244a906e1f684dd052
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Standing/Cook_Stand_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90aa9ef7e15cc3e4ebce0d0a6a92dd09
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Seating/Lead_Seat_Hurt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b19504b63ab76b40bcc7f8caad6f168
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Standing/Lead_Stand_Mad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b90f544c38e19c468cbd9a15d98c138
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Standing/Cook_Stand_PanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9eb4cd7826a260247b8c3e9a85765afb
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Seating/Bell_Seat_HurtPanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a14bd32fe8eca5d4caccec9ed8f5adcf
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Seating/Bell_Seat_HurtPanic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a43506f50e0f3ac44a72cc47510b94f2
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Standing/Cook_Stand_HurtPanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a87f388ca84654e4db29c4e7cc416490
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Standing/Cook_Stand_Mad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae987efff7a9541458868511e77e3028
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Standing/Bell_Stand_Hurt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba979a79171f06a4c9192196f5147c10
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Standing/Cook_Stand_Panic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bba9cce94695ddf41a3c7e84e726a887
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Seating/Cook_Seat_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd1edb9b8ee013546b1e1be4e96ba656
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Seating/DrK_Seat_Hurt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc593a543f4f8374a87f7394b5ba26e2
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Standing/Bell_Stand_Panic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd19f4f0cf52bc84f89b6c4a26645c64
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Seating/Bell_Seat_Panic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e01b9a99252ba0a40ad96d8e9e92deea
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Standing/Lead_Stand_HurtPanic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1356e3adea4ed749b851e313c7e6ed2
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Seating/DrK_Seat_HurtMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e563197d21d1f404eba60de4420ecae3
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Standing/Cook_Stand_HurtMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5c52e84c279b2240a30beb9aa10f6be
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Seating/Cook_Seat_HurtPanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e79b0676b63cf344e9510acaadeed92c
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Standing/Bell_Stand_HurtMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebae9506d24c8924a82bde2a454b0b96
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Standing/Lead_Stand_PanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee25dc0d83aa0dc49acff07f7cb31da1
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Standing/DrK_Stand_HurtPanic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f13bcf5a1c3582641b068848284d8b74
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Standing/Lead_Stand_HurtPanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f470b41f8d2a6fe4992697f8dab4548a
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Standing/Cook_Stand_Hurt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5e6e37695332c24eb9d1e82ece9fa63
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Standing/Bell_Stand_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6577cd784690d5449239bd5c921a3a0
+    m_Address: Assets/Sprites/Characters/Lead/Lead_Standing/Lead_Stand_Hurt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f85945d72d7f8e64c86716f8418f496d
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Seating/Cook_Seat_Mad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fa42b641656f5f349a80ed211eab9d0f
+    m_Address: Assets/Sprites/Characters/DrK/DrK_Seating/DrK_Seat_HurtPanicMad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbf66b29a4c106a429d6bf0f29b465bc
+    m_Address: Assets/Sprites/Characters/Cook/Cook_Seating/Cook_Seat_HurtPanic.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc167b0b0ade921428e3948c1582234d
+    m_Address: Assets/Sprites/Characters/Bell/Bell_Seating/Bell_Seat_Mad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f7b3b476672664a47ab9721e6106ada6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b9a6b17cc5d5c914097436a51af805ee, type: 2}
+    - {fileID: 11400000, guid: 500769a335b0bc3438bd82407c9ed7c7, type: 2}

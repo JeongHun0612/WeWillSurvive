@@ -5,15 +5,11 @@ namespace WeWillSurvive.UI
 {
     public class UI_Scene : UI_Base
     {
-        public override void Initialize()
+        public override void CanvasInitialize()
         {
-            base.Initialize();
+            base.CanvasInitialize();
 
-            // Canvas ¼³Á¤
-            Canvas canvas = GetComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvas.overrideSorting = true;
-            canvas.sortingOrder = 0;
+            _canvas.sortingOrder = 0;
         }
     }
 }

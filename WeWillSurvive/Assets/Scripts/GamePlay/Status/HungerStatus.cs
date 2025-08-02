@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using WeWillSurvive.Character;
 
@@ -9,60 +9,61 @@ namespace WeWillSurvive.Status
         Normal, Hungry, Starve
     }
 
-    public class HungerStatus : IStatus
+    public class HungerStatus : StatusBase<EHungerLevel>
     {
-        // 레벨별 상태 매핑
-        private static readonly Dictionary<EHungerLevel, EState> _hungerStateMap = new()
+        public override EStatusType StatusType => EStatusType.Hunger;
+
+        protected override bool IsLastLevel(EHungerLevel level) => level == EHungerLevel.Starve;
+
+
+        public HungerStatus(CharacterBase owner)
         {
-            [EHungerLevel.Hungry] = EState.Hungry,
-            [EHungerLevel.Starve] = EState.Starve
-        };
+            _owner = owner;
+            _level = EHungerLevel.Normal;
+            _dayCounter = 0;
 
-        // 상태별 전이 기준값
-        private static readonly Dictionary<EHungerLevel, int> _hungerThresholds = new()
-        {
-            [EHungerLevel.Normal] = 60,
-            [EHungerLevel.Hungry] = 30,
-            [EHungerLevel.Starve] = 0,
-        };
-
-        public EStatusType StatusType => EStatusType.Hunger;
-        public float MaxValue { get; private set; } = 0f;
-        public float CurrentValue { get; private set; } = 0f;
-        public float DecreasePerDay { get; private set; } = 10f;
-
-        private EHungerLevel _level = EHungerLevel.Normal;
-
-        public HungerStatus(float value)
-        {
-            MaxValue = value;
-            CurrentValue = value;
-        }
-
-        public void OnNewDay(CharacterBase owner)
-        {
-            CurrentValue = Mathf.Max(0f, CurrentValue - DecreasePerDay);
-
-            if (_hungerThresholds.TryGetValue(_level, out var threshold) && CurrentValue <= threshold)
+            LevelStateMap = new()
             {
-                if (_level == EHungerLevel.Starve)
+                [EHungerLevel.Hungry] = EState.Hungry,
+                [EHungerLevel.Starve] = EState.Starve
+            };
+
+            DaysToNextLevel = new()
+            {
+                [EHungerLevel.Normal] = 2,
+                [EHungerLevel.Hungry] = 4,
+                [EHungerLevel.Starve] = 4,
+            };
+
+            StateTransitionTable = new()
+            {
+                [EHungerLevel.Normal] = new()
                 {
-                    owner.OnDead();
-                    return;
-                }
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.5f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.5f },
+                },
 
-                _level++;
-            }
+                [EHungerLevel.Hungry] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.8f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                },
 
-            if (_hungerStateMap.TryGetValue(_level, out var state))
-            {
-                owner.State.AddState(state);
-            }
+                [EHungerLevel.Starve] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.8f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                },
+            };
         }
 
-        public void ApplyRecovery(float value)
+        public override void ApplyRecovery()
         {
-            CurrentValue = Mathf.Min(MaxValue, CurrentValue + value);
+            base.ApplyRecovery();
+
+            //_level = (EHungerLevel)Mathf.Max(0, (int)(object)_level - 1);
+
+            _level = EHungerLevel.Normal;
         }
     }
 }

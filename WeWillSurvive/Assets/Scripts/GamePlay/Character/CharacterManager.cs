@@ -41,6 +41,7 @@ namespace WeWillSurvive.Character
 
                 if (data != null)
                 {
+                    data.Initialize();
                     _characterDatas.Add(data);
                 }
             }
@@ -67,6 +68,10 @@ namespace WeWillSurvive.Character
                 if (!ItemManager.HasItem(character.Data.ItemType))
                 {
                     character.OnDead();
+                }
+                else
+                {
+                    ItemManager.RemoveItem(character.Data.ItemType);
                 }
             }
 
@@ -96,9 +101,6 @@ namespace WeWillSurvive.Character
 
                 character.OnNewDay();
             }
-
-            // Test
-            //GetCharacter(ECharacter.Bell).State.SetState(EState.Exploring);
         }
 
         public int AliveCharacterCount()
@@ -119,6 +121,16 @@ namespace WeWillSurvive.Character
             }
 
             return null;
+        }
+
+        public bool IsInShelter(ECharacter characterType)
+        {
+            if (Characters.TryGetValue(characterType, out var character))
+            {
+                return character.IsExploring;
+            }
+
+            return false;
         }
     }
 }

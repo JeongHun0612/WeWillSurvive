@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using UnityEngine;
+癤퓎sing UnityEngine;
 using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Status
@@ -9,62 +8,48 @@ namespace WeWillSurvive.Status
         Injured, Sick
     }
 
-    public class InjuryStatus : IStatus
+    public class InjuryStatus : StatusBase<EInjuredLevel>
     {
-        // 레벨별 상태 매핑
-        private static readonly Dictionary<EInjuredLevel, EState> _injuryStateMap = new()
+        public override EStatusType StatusType => EStatusType.Injury;
+
+        protected override bool IsLastLevel(EInjuredLevel level) => level == EInjuredLevel.Sick;
+
+        public InjuryStatus(CharacterBase owner)
         {
-            [EInjuredLevel.Injured] = EState.Injured,
-            [EInjuredLevel.Sick] = EState.Sick
-        };
+            _owner = owner;
 
-        // 상태별 전이 기준값
-        private static readonly Dictionary<EInjuredLevel, int> _injuryThresholds = new()
-        {
-            [EInjuredLevel.Injured] = 50,
-            [EInjuredLevel.Sick] = 0,
-        };
+            _level = EInjuredLevel.Injured;
+            _dayCounter = 0;
 
-        public EStatusType StatusType => EStatusType.Injury;
-
-        public float MaxValue { get; private set; } = 0f;
-
-        public float CurrentValue { get; private set; } = 0f;
-
-        public float DecreasePerDay { get; private set; } = 10f;
-
-        private EInjuredLevel _level = EInjuredLevel.Injured;
-
-        public InjuryStatus(float value)
-        {
-            MaxValue = value;
-            CurrentValue = value;
-        }
-
-        public void OnNewDay(CharacterBase owner)
-        {
-            CurrentValue = Mathf.Max(0f, CurrentValue - DecreasePerDay);
-
-            if (_injuryThresholds.TryGetValue(_level, out var threshold) && CurrentValue <= threshold)
+            LevelStateMap = new()
             {
-                if (_level == EInjuredLevel.Sick)
+                [EInjuredLevel.Injured] = EState.Injured,
+                [EInjuredLevel.Sick] = EState.Sick
+            };
+
+            DaysToNextLevel = new()
+            {
+                [EInjuredLevel.Injured] = 4,
+                [EInjuredLevel.Sick] = 4,
+            };
+
+            StateTransitionTable = new()
+            {
+                [EInjuredLevel.Injured] = new()
                 {
-                    owner.OnDead();
-                    return;
-                }
-
-                _level++;
-            }
-
-            if (_injuryStateMap.TryGetValue(_level, out var state))
-            {
-                owner.State.AddState(state);
-            }
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.6f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                    new StateTransition { TransitionType = EStateTransitionType.Death, Probability = 0.2f },
+                },
+            };
         }
 
-        public void ApplyRecovery(float value)
+
+        public override void ApplyRecovery()
         {
-            CurrentValue = Mathf.Min(MaxValue, CurrentValue + value);
+            base.ApplyRecovery();
+
+            _owner.Status.RemoveStatus(StatusType);
         }
     }
 }

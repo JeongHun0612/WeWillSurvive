@@ -9,60 +9,61 @@ namespace WeWillSurvive.Status
         Normal, Thirsty, Dehydrate
     }
 
-    public class ThirstStatus : IStatus
+    public class ThirstStatus : StatusBase<EThirstLevel>
     {
-        // 레벨별 상태 매핑
-        private static readonly Dictionary<EThirstLevel, EState> _thirstyStateMap = new()
+        public override EStatusType StatusType => EStatusType.Thirst;
+
+        protected override bool IsLastLevel(EThirstLevel level) => level == EThirstLevel.Dehydrate;
+
+        public ThirstStatus(CharacterBase owner)
         {
-            [EThirstLevel.Thirsty] = EState.Thirsty,
-            [EThirstLevel.Dehydrate] = EState.Dehydrate
-        };
+            _owner = owner;
+            _level = EThirstLevel.Normal;
+            _dayCounter = 0;
 
-        // 상태별 전이 기준값
-        private static readonly Dictionary<EThirstLevel, float> _thirstThresholds = new()
-        {
-            [EThirstLevel.Normal] = 60,
-            [EThirstLevel.Thirsty] = 30,
-            [EThirstLevel.Dehydrate] = 0,
-        };
-
-        public EStatusType StatusType => EStatusType.Thirst;
-        public float MaxValue { get; private set; } = 0f;
-        public float CurrentValue { get; private set; } = 0f;
-        public float DecreasePerDay { get; private set; } = 10f;
-
-        private EThirstLevel _level = EThirstLevel.Normal;
-
-        public ThirstStatus(float value)
-        {
-            MaxValue = value;
-            CurrentValue = value;
-        }
-
-        public void OnNewDay(CharacterBase owner)
-        {
-            CurrentValue = Mathf.Max(0f, CurrentValue - DecreasePerDay);
-
-            if (_thirstThresholds.TryGetValue(_level, out var threshold) && CurrentValue <= threshold)
+            LevelStateMap = new()
             {
-                if (_level == EThirstLevel.Dehydrate)
+                [EThirstLevel.Thirsty] = EState.Thirsty,
+                [EThirstLevel.Dehydrate] = EState.Dehydrate
+            };
+
+            DaysToNextLevel = new()
+            {
+                [EThirstLevel.Normal] = 2,
+                [EThirstLevel.Thirsty] = 3,
+                [EThirstLevel.Dehydrate] = 3,
+            };
+
+            StateTransitionTable = new()
+            {
+                [EThirstLevel.Normal] = new()
                 {
-                    owner.OnDead();
-                    return;
-                }
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.5f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.5f },
+                },
 
-                _level++;
-            }
+                [EThirstLevel.Thirsty] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.8f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                },
 
-            if (_thirstyStateMap.TryGetValue(_level, out var state))
-            {
-                owner.State.AddState(state);
-            }
+                [EThirstLevel.Dehydrate] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.8f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                },
+            };
         }
 
-        public void ApplyRecovery(float value)
+
+        public override void ApplyRecovery()
         {
-            CurrentValue = Mathf.Min(MaxValue, CurrentValue + value);
+            base.ApplyRecovery();
+
+            //_level = (EThirstLevel)Mathf.Max(0, (int)(object)_level - 1);
+
+            _level = EThirstLevel.Normal;
         }
     }
 }

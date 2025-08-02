@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5295be8627174344faae0878ca0c2301, type: 3}
+  m_Name: WaterSupply_02
+  m_EditorClassIdentifier: 
+  Type: 2
+  MinValue: 1
+  MaxValue: 2
+  ReportText: "\uBB3C\uBCD1 \uBA87 \uAC1C\uAC00 \uB193\uC5EC \uC788\uC5C8\uC9C0\uB9CC,
+    \uBD84\uBA85\uD788 \uBD80\uC871\uD588\uB2E4. \"\uC544\uAEF4 \uB9C8\uC154\uC57C\uACA0\uC5B4.\"
+    \uB9AC\uB4DC\uC758 \uB9D0\uC740 \uBA85\uB839 \uAC19\uAE30\uB3C4, \uD0C4\uC2DD
+    \uAC19\uAE30\uB3C4 \uD588\uB2E4. \uBAA9\uC774 \uB9C8\uB978 \uAC74 \uB204\uAD6C\uBCF4\uB2E4
+    \uC2A4\uC2A4\uB85C\uAC00 \uBA3C\uC800\uC600\uB2E4."

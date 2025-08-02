@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using WeWillSurvive.Core;
 
@@ -11,20 +10,23 @@ namespace WeWillSurvive.UI
     {
         [SerializeField] private Transform _sceneLayer;
         [SerializeField] private Transform _popupLayer;
+        [SerializeField] private Transform _overlayLayer;
 
         [SerializeField] private string[] _scenePrefabPaths;
         [SerializeField] private string[] _popupPrefabPaths;
+        [SerializeField] private string[] _overlayPrefabPaths;
+        [SerializeField] private string _loadingPrefabPath;
 
         private UI_Scene _currentScene;
         private UI_Popup _currentPopup;
+        private UI_Overlay _currentOverlay;
 
         private readonly Stack<UI_Popup> _popupHistory = new Stack<UI_Popup>();
         public int PopupHistoryCount => _popupHistory.Count;
 
         private readonly Dictionary<Type, UI_Scene> _sceneCache = new Dictionary<Type, UI_Scene>();
         private readonly Dictionary<Type, UI_Popup> _popupCache = new Dictionary<Type, UI_Popup>();
-
-        private readonly string _path = "Assets/Prefabs/UI/";
+        private readonly Dictionary<Type, UI_Overlay> _overlayCache = new Dictionary<Type, UI_Overlay>();
 
         private bool _isInitialized = false;
         public bool IsInitialized => _isInitialized;
@@ -32,10 +34,13 @@ namespace WeWillSurvive.UI
         private float _initializationProgress = 0f;
         public float InitializationProgress => _initializationProgress;
 
+        private int _processedItems;
+        private int _totalItems;
+
         private ResourceManager _resourceManager;
         public ResourceManager ResourceManager => _resourceManager ??= ServiceLocator.Get<ResourceManager>();
 
-        public UI_Black BlackUI;
+        public UI_Loading LoadingUI { get; private set; }
 
         public async UniTask InitializeAsync(IProgress<float> progress = null)
         {
@@ -45,152 +50,26 @@ namespace WeWillSurvive.UI
                 return;
             }
 
+            // LoadingUI Instantiate
+            await LoadingUIInitialize();
+            LoadingUI.Show();
+
             Debug.Log("Starting UI initialization with UniTask...");
             _initializationProgress = 0f;
 
-            {
-                string path = _path + "Popup";
-                if (Directory.Exists(path))
-                {
-                    string[] prefabFiles = Directory.GetFiles(path, "*.prefab");
-                    _popupPrefabPaths = new string[prefabFiles.Length];
+            _totalItems = _scenePrefabPaths.Length + _popupPrefabPaths.Length;
+            _processedItems = 0;
 
-                    for (int i = 0; i < _popupPrefabPaths.Length; i++)
-                    {
-                        string fileName = Path.GetFileNameWithoutExtension(prefabFiles[i]);
-                        _popupPrefabPaths[i] = fileName;
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning("폴더를 찾을 수 없습니다: " + path);
-                }
-            }
-
-            { 
-                string path = _path + "Scene";
-                if (Directory.Exists(path))
-                {
-                    string[] prefabFiles = Directory.GetFiles(path, "*.prefab");
-                    _scenePrefabPaths = new string[prefabFiles.Length];
-
-                    for (int i = 0; i < _scenePrefabPaths.Length; i++)
-                    {
-                        string fileName = Path.GetFileNameWithoutExtension(prefabFiles[i]);
-                        _scenePrefabPaths[i] = fileName;
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning("폴더를 찾을 수 없습니다: " + path);
-                }
-            }
-
-            int totalItems = _scenePrefabPaths.Length + _popupPrefabPaths.Length;
-            int processedItems = 0;
-
-            foreach (string path in _scenePrefabPaths)
-            {
-                try
-                {
-                    var asset = await ResourceManager.LoadAssetAsync<GameObject>(path);
-                    asset.SetActive(false);
-
-                    UI_Scene prefab = asset.GetComponent<UI_Scene>();
-                    if (prefab != null)
-                    {
-                        UI_Scene instance = Instantiate(prefab, _sceneLayer);
-                        Type sceneType = instance.GetType();
-
-                        if (!_sceneCache.ContainsKey(sceneType))
-                        {
-                            _sceneCache.Add(sceneType, instance);
-                            await instance.InitializeAsync();
-                            instance.Hide();
-                            Debug.Log($"SceneUI loaded and initialized: {sceneType.Name}");
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"Duplicate sceneUI type: {sceneType.Name}");
-                            Destroy(instance.gameObject);
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogError($"Failed to load sceneUI prefab at path: {path}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"Error loading sceneUI prefab at path {path}: {ex.Message}");
-                }
-
-                processedItems++;
-                _initializationProgress = (float)processedItems / totalItems;
-                progress?.Report(_initializationProgress);
-
-                await UniTask.Yield();
-            }
-
-            foreach (string path in _popupPrefabPaths)
-            {
-                try
-                {
-                    var asset = await ResourceManager.LoadAssetAsync<GameObject>(path);
-                    asset.SetActive(false);
-
-                    UI_Popup prefab = asset.GetComponent<UI_Popup>();
-                    if (prefab != null)
-                    {
-                        UI_Popup instance = Instantiate(prefab, _popupLayer);
-                        Type popupType = instance.GetType();
-
-                        if (!_popupCache.ContainsKey(popupType))
-                        {
-                            _popupCache.Add(popupType, instance);
-                            await instance.InitializeAsync();
-                            instance.Hide();
-                            Debug.Log($"PopupUI loaded and initialized: {popupType.Name}");
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"Duplicate popupUI type: {popupType.Name}");
-                            Destroy(instance.gameObject);
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogError($"Failed to load popupUI prefab at path: {path}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"Error loading popupUI prefab at path {path}: {ex.Message}");
-                }
-
-                processedItems++;
-                _initializationProgress = (float)processedItems / totalItems;
-                progress?.Report(_initializationProgress);
-
-                await UniTask.Yield();
-            }
-
-            try
-            {
-                var asset = await ResourceManager.LoadAssetAsync<GameObject>("UI_Black");
-                BlackUI = Instantiate(asset.GetComponent<UI_Black>(), transform);
-                await BlackUI.InitializeAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"Error loading blackUI prefab: {ex.Message}");
-            }
+            await InitializeUIElements<UI_Overlay>(_overlayPrefabPaths, _overlayLayer, _overlayCache);
+            await InitializeUIElements<UI_Scene>(_scenePrefabPaths, _sceneLayer, _sceneCache);
+            await InitializeUIElements<UI_Popup>(_popupPrefabPaths, _popupLayer, _popupCache);
 
             _isInitialized = true;
             _initializationProgress = 1f;
             progress?.Report(1f);
 
             Debug.Log("UI initialization completed successfully.");
+            LoadingUI.Hide();
         }
 
         public T ShowPopup<T>(bool remember = true) where T : UI_Popup
@@ -217,7 +96,9 @@ namespace WeWillSurvive.UI
             if (_currentPopup != null)
             {
                 _currentPopup.Hide();
-                _popupHistory.Pop();
+
+                if (_currentPopup.RememberInHistory)
+                    _popupHistory.Pop();
 
                 if (_popupHistory.Count > 0)
                     _currentPopup = _popupHistory.Peek();
@@ -264,12 +145,45 @@ namespace WeWillSurvive.UI
             return scene as T;
         }
 
-        public void HideCurrentScene()
+        public void CloseCurrentScene()
         {
             if (_currentScene != null)
             {
                 _currentScene.Hide();
                 _currentScene = null;
+            }
+        }
+
+        public T ShowOverlay<T>() where T : UI_Overlay
+        {
+            Type overlayType = typeof(T);
+
+            if (!_overlayCache.TryGetValue(overlayType, out UI_Overlay overlay))
+            {
+                Debug.LogError($"Overlay of type {overlayType.Name} not found!");
+                return null;
+            }
+
+            if (_currentOverlay != null)
+            {
+                if (_currentOverlay == overlay)
+                    return overlay as T;
+
+                _currentScene.Hide();
+            }
+
+            _currentOverlay = overlay;
+            _currentOverlay.Show();
+
+            return overlay as T;
+        }
+
+        public void CloseCurrentOverlay()
+        {
+            if (_currentOverlay != null)
+            {
+                _currentOverlay.Hide();
+                _currentOverlay = null;
             }
         }
 
@@ -282,6 +196,67 @@ namespace WeWillSurvive.UI
         public T GetCurrentScene<T>() where T : UI_Scene
         {
             return _currentScene as T;
+        }
+
+        private async UniTask InitializeUIElements<T>(string[] paths, Transform layer, Dictionary<Type, T> cache, IProgress<float> progress = null) where T : UI_Base
+        {
+            foreach (string path in paths)
+            {
+                try
+                {
+                    var asset = await ResourceManager.LoadAssetAsync<GameObject>(path);
+                    T prefab = asset.GetComponent<T>();
+                    if (prefab != null)
+                    {
+                        T instance = Instantiate(prefab, layer);
+                        Type uiType = instance.GetType();
+
+                        if (!cache.ContainsKey(uiType))
+                        {
+                            cache.Add(uiType, instance);
+                            instance.CanvasInitialize();
+                            await instance.InitializeAsync();
+                            instance.Hide();
+                            Debug.Log($"{typeof(T).Name} loaded and initialized: {uiType.Name}");
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"Duplicate {typeof(T).Name} type: {uiType.Name}");
+                            Destroy(instance.gameObject);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError($"Failed to load {typeof(T).Name} prefab at path: {path}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Error loading {typeof(T).Name} prefab at path {path}: {ex.Message}");
+                }
+
+
+                _processedItems++;
+                float progressValue = (float)_processedItems / _totalItems;
+                progress?.Report(progressValue);
+
+                await UniTask.Yield();
+            }
+        }
+
+        public async UniTask LoadingUIInitialize()
+        {
+            try
+            {
+                var asset = await ResourceManager.LoadAssetAsync<GameObject>(_loadingPrefabPath);
+                LoadingUI = Instantiate(asset.GetComponent<UI_Loading>(), transform);
+                LoadingUI.CanvasInitialize();
+                await LoadingUI.InitializeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Error loading loadingUI prefab: {ex.Message}");
+            }
         }
     }
 }

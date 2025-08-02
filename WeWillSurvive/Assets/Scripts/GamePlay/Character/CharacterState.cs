@@ -1,29 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
+using WeWillSurvive.Util;
 
 namespace WeWillSurvive.Character
 {
     [Flags]
     public enum EState
     {
-        Normal = 0,             // 정상
-        Hungry = 1 << 0,        // 허기짐
-        Starve = 1 << 1,        // 영양 결핍 (굶음)
-        Thirsty = 1 << 2,       // 갈증
-        Dehydrate = 1 << 3,     // 수분 고갈 (탈수)
-        Injured = 1 << 4,       // 다침
-        Sick = 1 << 5,          // 병듦
-        Anxious = 1 << 6,       // 불안함
-        Panic = 1 << 7,         // 공포
-        Mad = 1 << 8,           // 미침
-        Exploring = 1 << 9,     // 나감
-        Dead = 1 << 10,         // 사망
+        [InspectorName("정상")]
+        [Description("정상")]
+        Normal = 0,
+
+        [InspectorName("허기짐")]
+        [Description("허기짐")]
+        Hungry = 1 << 0,
+
+        [InspectorName("영양 결핍")]
+        [Description("영양 결핍")]
+        Starve = 1 << 1,
+
+        [InspectorName("갈증")]
+        [Description("갈증")]
+        Thirsty = 1 << 2,
+
+        [InspectorName("수분 고갈")]
+        [Description("수분 고갈")]
+        Dehydrate = 1 << 3,
+
+        [InspectorName("다침")]
+        [Description("다침")]
+        Injured = 1 << 4,
+
+        [InspectorName("병듦")]
+        [Description("병듦")]
+        Sick = 1 << 5,
+
+        [InspectorName("불안함")]
+        [Description("불안함")]
+        Anxious = 1 << 6,
+
+        [InspectorName("공포")]
+        [Description("공포")]
+        Panic = 1 << 7,
+
+        [InspectorName("미침")]
+        [Description("미침")]
+        Mad = 1 << 8,
+
+        [InspectorName("탐사")]
+        [Description("탐사")]
+        Exploring = 1 << 9,
+
+        [InspectorName("사망")]
+        [Description("사망")]
+        Dead = 1 << 10,
     }
 
     public class CharacterState
     {
         public EState CurrentState { get; private set; }
+
+        public bool IsHurt => HasState(EState.Injured | EState.Sick);
+        public bool IsAnxious => HasState(EState.Anxious | EState.Panic);
+        public bool IsMad => HasState(EState.Mad);
+
+        public bool IsExpeditionStateNormal => HasState(EState.Normal) || HasState(EState.Hungry | EState.Thirsty);
+        public bool IsExpeditionStateWarning => HasState(EState.Starve | EState.Dehydrate | EState.Injured | EState.Anxious | EState.Panic);
+        public bool IsExpeditionStateImpossible => HasState(EState.Sick | EState.Mad);
 
         public void SetState(EState state)
         {
@@ -32,58 +77,44 @@ namespace WeWillSurvive.Character
             CurrentState = state;
         }
 
-        public void AddState(EState status)
+        public void AddState(EState state)
         {
             if (CurrentState == EState.Dead) return;
 
-            CurrentState |= status;
+            CurrentState |= state;
         }
 
-        public void RemoveState(EState status)
+        public void RemoveState(EState state)
         {
-            CurrentState &= ~status;
+            CurrentState &= ~state;
         }
 
-        public bool HasState(EState status)
+        public bool HasState(EState state)
         {
-            return CurrentState.HasFlag(status);
+            if (state == EState.Normal)
+                return CurrentState == EState.Normal;
+
+            return (CurrentState & state) != 0;
         }
 
-        public List<string> FormatStateString()
+        public string FormatStateString()
         {
             if (CurrentState == EState.Normal)
-                return new List<string>() { GetStateText(CurrentState) };
+                return EnumUtil.GetDescription(EState.Normal);
 
             var descriptions = new List<string>();
 
             foreach (EState state in Enum.GetValues(typeof(EState)))
             {
-                if (state == EState.Normal || !HasState(state)) continue;
+                if (state == EState.Normal) continue;
 
-                descriptions.Add(GetStateText(state));
+                if (CurrentState.HasFlag(state))
+                {
+                    descriptions.Add(EnumUtil.GetDescription(state));
+                }
             }
 
-            return descriptions;
-        }
-
-        private string GetStateText(EState state)
-        {
-            return state switch
-            {
-                EState.Normal => "Normal",
-                EState.Hungry => "Hungry",
-                EState.Starve => "Starve",
-                EState.Thirsty => "Thirsty",
-                EState.Dehydrate => "Dehydrate",
-                EState.Injured => "Injured",
-                EState.Sick => "Sick",
-                EState.Anxious => "Anxious",
-                EState.Panic => "Panic",
-                EState.Mad => "Mad",
-                EState.Exploring => "Exploring",
-                EState.Dead => "Dead",
-                _ => string.Empty
-            };
+            return string.Join("\n", descriptions);
         }
     }
 }

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43e72b830ca2ee469b6a510e2b474de, type: 3}
+  m_Name: CookExpeditionMessage
+  m_EditorClassIdentifier: 
+  _expeditionNormalMessages:
+  - "\uCFE1\uC740 \uBAB8 \uC0C1\uD0DC\uAC00 \uC591\uD638\uD558\uC5EC \uD0D0\uC0AC\uAC00
+    \uAC00\uB2A5\uD558\uB2E4."
+  _expeditionWarningeMessages:
+  - "\uCFE1\uC740 \uD0D0\uC0AC\uAC00 \uAC00\uB2A5\uD558\uAE34 \uD558\uC9C0\uB9CC
+    \uC0C1\uD0DC\uAC00 \uC644\uBCBD\uD558\uC9C4 \uC54A\uB2E4."
+  _expeditionImpossibleMessages:
+  - "\uCFE1\uC740 \uC774\uBC88\uC5D0\uB294 \uD0D0\uC0AC\uC5D0 \uB098\uAC00\uAE30
+    \uD798\uB4E4 \uAC83 \uAC19\uB2E4."
+  _expeditionStartMessages:
+  - "\uCFE1\uC740 \uBB38\uC744 \uC5F4\uBA70 \uACE0\uAC1C\uB97C \uB044\uB355\uC600\uB2E4.
+    \u201C\uB2E4\uB140\uC624\uACA0\uC5B4.\u201D \uCFE1\uC740 \uD0D0\uC0AC\uB97C \uB098\uAC14\uB2E4."
+  - "\uCFE1\uC740 \uC870\uC6A9\uD788 \uC8FC\uBCC0\uC744 \uC0B4\uD53C\uBA70 \uBB38
+    \uC55E\uC73C\uB85C \uB2E4\uAC00\uC130\uB2E4. \uCFE1\uC740 \uD0D0\uC0AC\uB97C
+    \uB098\uAC14\uB2E4."
+  - "\uCFE1\uC740 \uC9E7\uAC8C \uACE0\uAC1C\uB97C \uB044\uB355\uC774\uACE0 \uBB38\uC744
+    \uD1B5\uACFC\uD588\uB2E4. \uCFE1\uC740 \uD0D0\uC0AC\uB97C \uB098\uAC14\uB2E4."
