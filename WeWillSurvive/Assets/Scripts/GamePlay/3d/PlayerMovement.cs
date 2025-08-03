@@ -14,6 +14,10 @@ namespace WeWillSurvive
         private float rotationX = 0f;
         private float rotationY = 0f;
 
+        // 입력 저장용
+        private Vector2 moveInput;
+        private bool isBoosting = false;
+
         void Start()
         {
             rb = GetComponent<Rigidbody>();
@@ -24,32 +28,38 @@ namespace WeWillSurvive
 
         void Update()
         {
+            // 마우스 회전 처리
             RotateView();
+
+            // 키보드 입력 처리
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
+            moveInput = new Vector2(h, v);
+            isBoosting = Input.GetKey(KeyCode.LeftShift);
+        }
+
+        void FixedUpdate()
+        {
             Move();
+            
             Vector3 horizontalVelocity = rb.linearVelocity;
 
             if (horizontalVelocity.magnitude > maxSpeed)
             {
-                horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
-                rb.linearVelocity = new Vector3(horizontalVelocity.x, rb.linearVelocity.y, horizontalVelocity.z);
+                Vector3 clamped = horizontalVelocity.normalized * maxSpeed;
+                rb.linearVelocity = new Vector3(clamped.x, rb.linearVelocity.y, clamped.z);
             }
         }
 
         void Move()
         {
-            float speed = Input.GetKey(KeyCode.LeftShift) ? moveSpeed * boosterMultiplier : moveSpeed;
+            float speed = isBoosting ? moveSpeed * boosterMultiplier : moveSpeed;
 
             Vector3 forward = transform.forward;
             Vector3 right = transform.right;
-            forward.Normalize();
-            right.Normalize();
 
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
+            Vector3 moveDir = (forward * moveInput.y + right * moveInput.x).normalized;
 
-            Vector3 moveDir = (forward * v + right * h).normalized;
-
-            // 방향 입력이 있을 때만 힘을 가함
             if (moveDir.sqrMagnitude > 0.01f)
             {
                 rb.AddForce(moveDir * speed, ForceMode.Acceleration);
