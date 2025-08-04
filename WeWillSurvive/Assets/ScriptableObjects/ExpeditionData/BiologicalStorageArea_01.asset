@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c892834911cfea46ab15527a7a17674, type: 3}
+  m_Name: BiologicalStorageArea_01
+  m_EditorClassIdentifier: 
+  _explorationLocation: 5
+  _rewardDatas:
+  - _exploringMessage: "\uB2E4\uC591\uD55C \uC0DD\uBB3C\uCCB4\uB97C \uBCF4\uAD00\uD558\uB358
+      \uC774 \uC2DC\uC124\uC740 \uD604\uC7AC \uC2EC\uAC01\uD55C \uD30C\uAD34 \uC0C1\uD0DC\uC9C0\uB9CC,
+      \uC0DD\uBB3C \uC5F0\uAD6C \uAD00\uB828 \uC7A5\uBE44\uB098 \uC2E4\uD5D8 \uB3C4\uAD6C\uB4E4\uC774
+      \uACF3\uACF3\uC5D0 \uB0A8\uC544 \uC788\uC744 \uC218 \uC788\uB2E4. \uC2E0\uC911\uD558\uAC8C
+      \uC811\uADFC\uD55C\uB2E4\uBA74 \uADC0\uC911\uD55C \uC790\uC6D0\uC744 \uBC1C\uACAC\uD560
+      \uC218 \uC788\uB2E4."
+    _rewardItems: []
+  - _exploringMessage: "\uD734\uAC8C\uC2E4\uC758 \uCE90\uBE44\uB2DB \uC548\uC5D0\uC11C
+      \uBA3C\uC9C0\uAC00 \uC870\uAE08 \uBB3B\uC740 \uBCF4\uB4DC\uAC8C\uC784\uD310\uC774
+      \uBC1C\uACAC\uB410\uB2E4."
+    _rewardItems:
+    - _rewardItem: 10
+      _minAmount: 1
+      _maxAmount: 1
+  - _exploringMessage: "\uAE09\uD788 \uB5A0\uB09C \uB4EF\uD55C \uD754\uC801 \uC606\uC5D0
+      \uB193\uC778 \uC2DD\uB7C9 \uD329\uC774 \uB208\uC5D0 \uB744\uC5C8\uB2E4. \uD3EC\uC7A5\uB3C4
+      \uC190\uC0C1\uB418\uC9C0 \uC54A\uC558\uB2E4."
+    _rewardItems:
+    - _rewardItem: 0
+      _minAmount: 1
+      _maxAmount: 2
+  - _exploringMessage: "\uC57D\uD488 \uCC3D\uACE0 \uD55C\uAD6C\uC11D\uC5D0\uC11C
+      \uBA3C\uC9C0\uB9CC \uC313\uC778 \uCC44 \uC628\uC804\uD55C \uC758\uB8CC \uD0A4\uD2B8\uB97C
+      \uBC1C\uACAC\uD588\uB2E4."
+    _rewardItems:
+    - _rewardItem: 3
+      _minAmount: 1
+      _maxAmount: 1

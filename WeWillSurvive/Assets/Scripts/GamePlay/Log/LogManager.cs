@@ -1,8 +1,9 @@
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
+using WeWillSurvive.Item;
 
 namespace WeWillSurvive.Log
 {
@@ -21,7 +22,32 @@ namespace WeWillSurvive.Log
 
         public void AddMainEventResultLog(string message) => AddLogToList(_mainEventResultLogs, message);
         public void AddCharacterEventResultLog(string message) => AddLogToList(_characterEventResultLogs, message);
+
         public void AddExpeditionResultLog(string message) => AddLogToList(_expeditionResultLogs, message);
+
+        public void AddExpeditionResultLog(string message, List<ExpeditionRewardItemResult> rewardItemResults = null)
+        {
+            if (_expeditionResultLogs == null)
+                _expeditionResultLogs = new();
+
+            string logText = message + '\n';
+
+            if (rewardItemResults != null && rewardItemResults.Count > 0)
+            {
+                var rewardStrings = new List<string>();
+
+                foreach (var rewardItemResult in rewardItemResults)
+                {
+                    // TMP Sprite Asset에서 EItem 이름과 동일한 Sprite name을 찾는 방식
+                    //rewardStrings.Add($"<sprite name={rewardItemResult.RewardItem}> +{rewardItemResult.Amount}");
+                    rewardStrings.Add($"[{rewardItemResult.RewardItem}] +{rewardItemResult.Amount}");
+                }
+
+                logText += string.Join(" ", rewardStrings);
+            }
+
+            _expeditionResultLogs.Add(logText);
+        }
 
         public void AddCharacterStatusLog(ECharacter character, string message)
         {
@@ -37,6 +63,7 @@ namespace WeWillSurvive.Log
                 logMessages.Add(message);
             }
         }
+
 
         public string GetLogMessage()
         {

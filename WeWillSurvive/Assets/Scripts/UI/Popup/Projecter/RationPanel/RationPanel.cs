@@ -88,7 +88,7 @@ namespace WeWillSurvive
             if (overflow > 0f)
             {
                 overflowText.gameObject.SetActive(true);
-                overflowText.text = $"+ {overflow:0.#}";
+                overflowText.text = $"+ {overflow:0.##}";
             }
             else
             {
