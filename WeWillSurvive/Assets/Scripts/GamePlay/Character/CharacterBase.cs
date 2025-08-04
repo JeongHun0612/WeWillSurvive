@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
+using WeWillSurvive.Log;
 using WeWillSurvive.Status;
 
 namespace WeWillSurvive.Character
@@ -31,6 +33,8 @@ namespace WeWillSurvive.Character
 
         public Sprite MainSprite => Data.SpriteData.GetSeatedSprite(State, Morale);
         public Sprite RoomSprite => Data.SpriteData.GetStandingSprite(State, Morale);
+
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         public void Initialize(CharacterData data)
         {
@@ -100,6 +104,9 @@ namespace WeWillSurvive.Character
 
             _maxExplorationDays = ExpeditionManager.Instance.GetRandomExpeditionDay();
             _explorationDayCounter = 0;
+
+            string expeditionStartMessage = Data.ExpeditionMessageData.GetExpeditionStartMessage();
+            LogManager.AddExpeditionResultLog(expeditionStartMessage);
         }
 
         private void OnExpeditionComplete()
