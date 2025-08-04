@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MonkeyBreedingBase_01
   m_EditorClassIdentifier: 
   _explorationLocation: 4
-  _rewordDatas:
+  _rewardDatas:
   - _exploringMessage: "\uC774\uACF3\uC740 \uC0DD\uBA85\uCCB4\uB97C \uC774\uC6A9\uD55C
       \uC5F0\uAD6C\uAC00 \uBE44\uBC00\uB9AC\uC5D0 \uC774\uB8E8\uC5B4\uC9C0\uB358
       \uC2DC\uC124\uC774\uB2E4. \uBD88\uC548\uD55C \uBD84\uC704\uAE30 \uC18D\uC5D0\uC11C
@@ -21,24 +21,24 @@ MonoBehaviour:
       \uC874\uC7AC\uD560 \uAC00\uB2A5\uC131\uC774 \uC788\uB2E4. \uC2E0\uC911\uD558\uAC8C
       \uC811\uADFC\uD55C\uB2E4\uBA74, \uC608\uC0C1\uCE58 \uBABB\uD55C \uC720\uC6A9\uD55C
       \uBB3C\uAC74\uC744 \uBC1C\uACAC\uD560\uC9C0\uB3C4 \uBAA8\uB978\uB2E4."
-    _rewordItems: []
+    _rewardItems: []
   - _exploringMessage: "\uC800\uC7A5\uC18C \uBC14\uB2E5\uC5D0\uC11C \uC791\uC740
       \uC2DD\uC218\uD329 \uBA87 \uAC1C\uAC00 \uBAA8\uC2B5\uC744 \uB4DC\uB7EC\uB0C8\uB2E4.
       \uD3EC\uC7A5\uC5D0 \uC190\uC0C1\uC774 \uC5C6\uC5C8\uB2E4."
-    _rewordItems:
+    _rewardItems:
     - _rewardItem: 2
       _minAmount: 1
       _maxAmount: 3
   - _exploringMessage: "\uC870\uC6A9\uD55C \uAD6C\uC5ED\uC5D0\uC11C \uC0AC\uC6A9
       \uD754\uC801 \uC5C6\uB294 \uBCF4\uB4DC\uAC8C\uC784\uD310\uC744 \uBC1C\uACAC\uD588\uB2E4."
-    _rewordItems:
+    _rewardItems:
     - _rewardItem: 10
       _minAmount: 1
       _maxAmount: 1
   - _exploringMessage: "\uC758\uB8CC\uC6A9 \uCE68\uB300 \uBC11\uC5D0\uC11C \uC870\uC2EC\uC2A4\uB7FD\uAC8C
       \uC758\uB8CC \uD0A4\uD2B8\uB97C \uAEBC\uB0C8\uB2E4. \uC0AC\uC6A9 \uD754\uC801
       \uC5C6\uC774 \uBCF4\uAD00\uB41C \uC0C1\uD0DC\uC600\uB2E4."
-    _rewordItems:
+    _rewardItems:
     - _rewardItem: 3
       _minAmount: 1
       _maxAmount: 1

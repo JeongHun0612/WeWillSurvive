@@ -62,7 +62,7 @@ namespace WeWillSurvive.Item
             AddItem(EItem.DrK);
             //AddItem(EItem.Bell);
 
-            AddItem(EItem.Food, 5.25f);
+            AddItem(EItem.Food, 7.25f);
             AddItem(EItem.Water, 5.25f);
             AddItem(EItem.BoardGame);
             AddItem(EItem.Gun);
