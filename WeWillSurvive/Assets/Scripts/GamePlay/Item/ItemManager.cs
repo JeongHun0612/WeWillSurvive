@@ -33,6 +33,8 @@ namespace WeWillSurvive.Item
         Bell,
         DrK,
         Starmac,
+
+        None = 500,
     }
 
     public class ItemManager : IService
@@ -84,12 +86,16 @@ namespace WeWillSurvive.Item
         {
             if (Items.TryGetValue(item, out var remain))
             {
-                Items[item] = remain + count;
+                if (item == EItem.Food || item == EItem.Water)
+                    Items[item] = remain + count;
+
             }
             else
             {
                 Items.Add(item, count);
             }
+
+            Debug.Log($"[아이템 추가] {item} {count}개 | Total : {Items[item]}개");
         }
 
         public void RemoveItem(EItem item)

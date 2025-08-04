@@ -26,7 +26,6 @@ namespace WeWillSurvive.Expedition
 
         public EExpeditionState CurrentState => _currentState;
 
-
         protected override void Awake()
         {
             base.Awake();

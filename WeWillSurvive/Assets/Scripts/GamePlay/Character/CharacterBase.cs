@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
+using WeWillSurvive.Item;
 using WeWillSurvive.Log;
 using WeWillSurvive.Status;
 
@@ -35,6 +36,7 @@ namespace WeWillSurvive.Character
         public Sprite RoomSprite => Data.SpriteData.GetStandingSprite(State, Morale);
 
         private LogManager LogManager => ServiceLocator.Get<LogManager>();
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
 
         public void Initialize(CharacterData data)
         {
@@ -102,16 +104,35 @@ namespace WeWillSurvive.Character
             IsExploring = true;
             TotalExploringCount++;
 
+            // 탐사 기간 할당
             _maxExplorationDays = ExpeditionManager.Instance.GetRandomExpeditionDay();
             _explorationDayCounter = 0;
 
+            // 탐사 출발 메시지 로그 전달
             string expeditionStartMessage = Data.ExpeditionMessageData.GetExpeditionStartMessage();
             LogManager.AddExpeditionResultLog(expeditionStartMessage);
         }
 
         private void OnExpeditionComplete()
         {
-            // TOOD 탐사 완료 (상태 변화 및 결과 반영 (로그, 아이템))
+            // 탐사 장소 랜덤 할당
+            var expeditionData = ExpeditionManager.Instance.GetRandomExpeditionData();
+
+            // 탐사 보상 및 로그 적용
+            foreach (var rewardData in expeditionData.RewardDatas)
+            {
+                var rewardItemResults = rewardData.GetRewardItemResults();
+                foreach (var rewardItemResult in rewardItemResults)
+                {
+                    // 탐사 보상 아이템 추가
+                    ItemManager.AddItem(rewardItemResult.RewardItem, rewardItemResult.Amount);
+                }
+
+                // 탐사 결과 로그
+                LogManager.AddExpeditionResultLog(rewardData.ExploringMessage, rewardItemResults);
+            }
+
+            // 탐사 후 상태 적용
             Status.ApplyExpeditionResults();
 
             ExpeditionManager.Instance.CompleteExpedition();

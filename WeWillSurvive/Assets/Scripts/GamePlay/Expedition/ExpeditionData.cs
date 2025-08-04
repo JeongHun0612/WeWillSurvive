@@ -31,10 +31,10 @@ namespace WeWillSurvive
     {
         [SerializeField] private EExplorationLocation _explorationLocation;
 
-        [SerializeField] private List<ExpeditionRewardData> _rewordDatas = new();
+        [SerializeField] private List<ExpeditionRewardData> _rewardDatas = new();
 
         public EExplorationLocation ExplorationLocation => _explorationLocation;
-        public List<ExpeditionRewardData> RewordDatas => _rewordDatas;
+        public List<ExpeditionRewardData> RewardDatas => _rewardDatas;
     }
 
     [System.Serializable]
@@ -47,10 +47,27 @@ namespace WeWillSurvive
 
         [Tooltip("획득 아이템 타입")]
         [SerializeField] 
-        private List<ExpeditionRewardItem> _rewordItems = new();
+        private List<ExpeditionRewardItem> _rewardItems = new();
 
-        public List<ExpeditionRewardItem> RewordItems => _rewordItems;
+        public List<ExpeditionRewardItem> RewardItems => _rewardItems;
         public string ExploringMessage => _exploringMessage;
+
+        public List<ExpeditionRewardItemResult> GetRewardItemResults()
+        {
+            var results = new List<ExpeditionRewardItemResult>();
+
+            foreach (var rewardItem in _rewardItems)
+            {
+                int amount = rewardItem.GetRandomAmount();
+
+                if (amount <= 0)
+                    continue;
+
+                results.Add(new ExpeditionRewardItemResult(rewardItem.RewardItem, amount));
+            }
+
+            return results;
+        }
     }
 
     [System.Serializable]
@@ -71,5 +88,31 @@ namespace WeWillSurvive
         public EItem RewardItem => _rewardItem;
         public int MinAmount => _minAmount;
         public int MaxAmount => _maxAmount;
+
+        public int GetRandomAmount()
+        {
+            return Random.Range(_minAmount, _maxAmount + 1);
+        }
+    }
+
+    [System.Serializable]
+    public class ExpeditionRewardItemResult
+    {
+        [Tooltip("획득 아이템 타입")]
+        [SerializeField]
+        private EItem _rewardItem;
+
+        [Tooltip("획득 아이템 개수")]
+        [SerializeField]
+        private int _amount;
+
+        public EItem RewardItem => _rewardItem;
+        public int Amount => _amount;
+
+        public ExpeditionRewardItemResult(EItem itemType, int amount)
+        {
+            _rewardItem = itemType;
+            _amount = amount;
+        }
     }
 }
