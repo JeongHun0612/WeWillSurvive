@@ -39,8 +39,8 @@ namespace WeWillSurvive.Log
                 foreach (var rewardItemResult in rewardItemResults)
                 {
                     // TMP Sprite Asset에서 EItem 이름과 동일한 Sprite name을 찾는 방식
-                    //rewardStrings.Add($"<sprite name={rewardItemResult.RewardItem}> +{rewardItemResult.Amount}");
-                    rewardStrings.Add($"[{rewardItemResult.RewardItem}] +{rewardItemResult.Amount}");
+                    rewardStrings.Add($"\n<sprite name={rewardItemResult.RewardItem}> +{rewardItemResult.Amount}");
+                    //rewardStrings.Add($"[{rewardItemResult.RewardItem}] +{rewardItemResult.Amount}");
                 }
 
                 logText += string.Join(" ", rewardStrings);
