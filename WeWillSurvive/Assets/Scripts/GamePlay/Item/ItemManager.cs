@@ -74,7 +74,7 @@ namespace WeWillSurvive.Item
             AddItem(EItem.Pipe);
             AddItem(EItem.Flashlight);
             AddItem(EItem.Map);
-            AddItem(EItem.Starmac);
+            //AddItem(EItem.Starmac);
         }
 
         public void Dipose()
@@ -106,7 +106,7 @@ namespace WeWillSurvive.Item
             }
         }
 
-        public void UsedItem(CharacterBase target, EItem item, float usedCount)
+        public void UsedItem(EItem item, float usedCount, CharacterBase target = null)
         {
             if (Items.TryGetValue(item, out var remain))
             {
@@ -116,7 +116,7 @@ namespace WeWillSurvive.Item
                     return;
                 }
 
-                if (_itemEffects.TryGetValue(item, out var itemEffect))
+                if (_itemEffects.TryGetValue(item, out var itemEffect) && target != null)
                 {
                     itemEffect.Apply(target);
                 }
@@ -165,6 +165,25 @@ namespace WeWillSurvive.Item
             return Items
                 .Where(kvp => kvp.Key != EItem.Water && kvp.Key != EItem.Food)
                 .Sum(kvp => kvp.Value);
+        }
+    }
+
+    [System.Serializable]
+    public class ResultItemData
+    {
+        [SerializeField]
+        private EItem _itemType;
+
+        [SerializeField]
+        private int _amount;
+
+        public EItem ItemType => _itemType;
+        public int Amount => _amount;
+
+        public ResultItemData(EItem itemType, int amount)
+        {
+            _itemType = itemType;
+            _amount = amount;
         }
     }
 }

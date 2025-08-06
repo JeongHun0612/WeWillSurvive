@@ -124,7 +124,6 @@ namespace WeWillSurvive
             {
                 SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
                 SerializedProperty choiceTypeProp = selectedChoiceProp.FindPropertyRelative("choiceType");
-                SerializedProperty iconTextureProp = selectedChoiceProp.FindPropertyRelative("iconTexture");
                 SerializedProperty resultsProp = selectedChoiceProp.FindPropertyRelative("results");
 
                 // EIconType 드롭다운으로 선택
@@ -145,7 +144,6 @@ namespace WeWillSurvive
                     int newEnumValueIndex = EnumUtil.GetEnumIndex(choiceType);
 
                     choiceTypeProp.enumValueIndex = newEnumValueIndex;
-                    iconTextureProp.objectReferenceValue = GetIconTexture(choiceType);
                 }
                 EditorGUILayout.EndHorizontal();
 
@@ -386,9 +384,6 @@ namespace WeWillSurvive
 
             SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("choiceType");
             choiceTypeProp.enumValueIndex = EnumUtil.GetEnumIndex(EChoiceType.None);
-
-            SerializedProperty iconTextureProp = choiceProp.FindPropertyRelative("iconTexture");
-            iconTextureProp.objectReferenceValue = null;
 
             SerializedProperty resultsProp = choiceProp.FindPropertyRelative("results");
             resultsProp.ClearArray();

@@ -94,9 +94,9 @@ namespace WeWillSurvive
             // 선택한 옵션에 따라 이벤트 초이스 할당
             var eventChoice = (_selectedOption == null) ? _mainEventData.GetEventChoice(EChoiceType.Noting) : _selectedOption.EventChoice;
 
-            // 이벤트 결과 메시지 Log로 전달
-            var resultMessage = eventChoice.GetRandomResult().resultText;
-            LogManager.AddMainEventResultLog(resultMessage);
+            // 이벤트 결과 처리
+            var eventResult = eventChoice.GetRandomResult();
+            MainEventManager.Instance.SetMainEventResult(eventResult);
         }
 
         public bool ShouldEnableNextButton()

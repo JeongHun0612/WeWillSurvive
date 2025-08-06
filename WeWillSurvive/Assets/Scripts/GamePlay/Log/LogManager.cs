@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
@@ -16,37 +17,21 @@ namespace WeWillSurvive.Log
 
         public async UniTask InitializeAsync()
         {
-
             await UniTask.Yield();
         }
 
-        public void AddMainEventResultLog(string message) => AddLogToList(_mainEventResultLogs, message);
         public void AddCharacterEventResultLog(string message) => AddLogToList(_characterEventResultLogs, message);
 
-        public void AddExpeditionResultLog(string message) => AddLogToList(_expeditionResultLogs, message);
-
-        public void AddExpeditionResultLog(string message, List<ExpeditionRewardItemResult> rewardItemResults = null)
+        public void AddMainEventResultLog(string message, List<ResultItemData> resultItemDatas = null)
         {
-            if (_expeditionResultLogs == null)
-                _expeditionResultLogs = new();
+            string logText = message + '\n' + GetItemLogText(resultItemDatas);
+            AddLogToList(_mainEventResultLogs, logText);
+        }
 
-            string logText = message + '\n';
-
-            if (rewardItemResults != null && rewardItemResults.Count > 0)
-            {
-                var rewardStrings = new List<string>();
-
-                foreach (var rewardItemResult in rewardItemResults)
-                {
-                    // TMP Sprite Asset에서 EItem 이름과 동일한 Sprite name을 찾는 방식
-                    rewardStrings.Add($"\n<sprite name={rewardItemResult.RewardItem}> +{rewardItemResult.Amount}");
-                    //rewardStrings.Add($"[{rewardItemResult.RewardItem}] +{rewardItemResult.Amount}");
-                }
-
-                logText += string.Join(" ", rewardStrings);
-            }
-
-            _expeditionResultLogs.Add(logText);
+        public void AddExpeditionResultLog(string message, List<ResultItemData> resultItemDatas = null)
+        {
+            string logText = message + '\n' + GetItemLogText(resultItemDatas);
+            AddLogToList(_expeditionResultLogs, logText);;
         }
 
         public void AddCharacterStatusLog(ECharacter character, string message)
@@ -63,7 +48,6 @@ namespace WeWillSurvive.Log
                 logMessages.Add(message);
             }
         }
-
 
         public string GetLogMessage()
         {
@@ -107,6 +91,23 @@ namespace WeWillSurvive.Log
                 target = new();
 
             target.Add(message);
+        }
+
+        private string GetItemLogText(List<ResultItemData> itemLogEntries)
+        {
+            if (itemLogEntries == null || !itemLogEntries.Any())
+                return string.Empty;
+
+            var itemLogStrings = itemLogEntries
+                .Where(entry => entry.Amount != 0) // Amount가 0이 아닌 항목만 필터링
+                .Select(entry =>
+                {
+                    // ToString("+#;-#")는 양수일 때 '+', 음수일 때 '-'를 자동으로 붙여줍니다.
+                    string formattedAmount = entry.Amount.ToString("+#;-#");
+                    return $"<sprite name={entry.ItemType}> {formattedAmount}";
+                });
+
+            return "\n" + string.Join(" ", itemLogStrings);
         }
     }
 }

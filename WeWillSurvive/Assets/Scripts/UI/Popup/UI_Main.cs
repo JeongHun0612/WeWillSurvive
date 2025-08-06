@@ -67,7 +67,7 @@ namespace WeWillSurvive
         {
             //_itemManager.UsedItem(ServiceLocator.Get<CharacterManager>().Characters[ECharacter.Bell], (EItem)type, 0.25f);
             var target = ServiceLocator.Get<CharacterManager>().Characters[ECharacter.Lead];
-            ItemManager.UsedItem(target, (EItem)type, 1f);
+            ItemManager.UsedItem((EItem)type, 1f, target);
             UpdateUI();
         }
 

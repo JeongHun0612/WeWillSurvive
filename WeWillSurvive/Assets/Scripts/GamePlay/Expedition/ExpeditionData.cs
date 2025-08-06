@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Item;
+using WeWillSurvive.Log;
 
 namespace WeWillSurvive
 {
@@ -52,9 +53,9 @@ namespace WeWillSurvive
         public List<ExpeditionRewardItem> RewardItems => _rewardItems;
         public string ExploringMessage => _exploringMessage;
 
-        public List<ExpeditionRewardItemResult> GetRewardItemResults()
+        public List<ResultItemData> GetRewardItemDatas()
         {
-            var results = new List<ExpeditionRewardItemResult>();
+            var results = new List<ResultItemData>();
 
             foreach (var rewardItem in _rewardItems)
             {
@@ -63,7 +64,7 @@ namespace WeWillSurvive
                 if (amount <= 0)
                     continue;
 
-                results.Add(new ExpeditionRewardItemResult(rewardItem.RewardItem, amount));
+                results.Add(new ResultItemData(rewardItem.RewardItem, amount));
             }
 
             return results;

@@ -5,6 +5,7 @@ using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
 using WeWillSurvive.Item;
+using WeWillSurvive.Log;
 using WeWillSurvive.Util;
 
 namespace WeWillSurvive.MainEvent
@@ -22,11 +23,9 @@ namespace WeWillSurvive.MainEvent
         [Header("## MainEventData")]
         public List<MainEventData> _debugMainEventDatas = new();
 
-        [Header("## TestEvent")]
-        public MainEventData _testEventData;
-
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         protected override void Awake()
         {
@@ -51,6 +50,61 @@ namespace WeWillSurvive.MainEvent
             else
             {
                 return GetValidMainEvent(_debugMainEventDatas);
+            }
+        }
+
+        public void SetMainEventResult(EventResult eventResult)
+        {
+            // 이벤트 결과 적용
+            var resultItemDatas = new List<ResultItemData>();
+            foreach (var effect in eventResult.effects)
+            {
+                ApplyResultEffect(effect);
+
+                if (effect.effectType == EEffectType.AddItem || effect.effectType == EEffectType.RemoveItem)
+                {
+                    EItem itemType = Enum.Parse<EItem>(effect.targetId);
+                    int amount = int.Parse(effect.value);
+
+                    // RemoveItem 타입이면 음수로 전달
+                    if (effect.effectType == EEffectType.RemoveItem)
+                        amount = -amount;
+
+                    resultItemDatas.Add(new ResultItemData(itemType, amount));
+                }
+            }
+
+            // 이벤트 결과 메시지 Log로 전달
+            var resultMessage = eventResult.resultText;
+            LogManager.AddMainEventResultLog(resultMessage, resultItemDatas);
+        }
+
+        private void ApplyResultEffect(EventEffect effect)
+        {
+            switch (effect.effectType)
+            {
+                case EEffectType.AddItem:
+                    {
+                        EItem item = Enum.Parse<EItem>(effect.targetId);
+                        float count = int.Parse(effect.value);
+                        ItemManager.AddItem(item, count);
+
+                        //ResultItemData
+                    }
+                    break;
+                case EEffectType.RemoveItem:
+                    {
+                        EItem item = Enum.Parse<EItem>(effect.targetId);
+                        float count = int.Parse(effect.value);
+                        ItemManager.UsedItem(item, count);
+                    }
+                    break;
+                case EEffectType.IncreaseStatus:
+                    break;
+                case EEffectType.DecreaseStatus:
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -83,6 +137,7 @@ namespace WeWillSurvive.MainEvent
             int randomIndex = UnityEngine.Random.Range(0, validEvents.Count);
             return validEvents[randomIndex];
         }
+
 
         private bool CheckCondition(Condition condition)
         {

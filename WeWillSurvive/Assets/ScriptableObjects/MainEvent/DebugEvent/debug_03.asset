@@ -13,50 +13,44 @@ MonoBehaviour:
   m_Name: debug_03
   m_EditorClassIdentifier: 
   eventId: debug_03
-  title: "\uBC29\uC7AC \uC13C\uD130 \uD0D0\uC0AC"
+  title: "\uB3C4\uB9C8\uBC40\uD615 \uC9C0\uC131\uCCB4"
   descriptions:
-  - "(\uD0D0\uC0AC)"
+  - "\uBC1C\uC18C\uB9AC\uB3C4 \uC5C6\uC774 \uAE30\uC9C0 \uADFC\uCC98\uC5D0 \uB2E4\uAC00\uC628
+    \uB3C4\uB9C8\uBC40\uCC98\uB7FC \uC0DD\uAE34 \uC678\uACC4\uC778. \uBC29\uC5B4
+    \uD0DC\uC138\uB97C \uAC16\uCD94\uAE30\uB3C4 \uC804\uC5D0 \uC190\uC744 \uB4E4\uC5B4
+    \uD3C9\uD654\uB97C \uD45C\uD604\uD588\uB2E4. \uC1E0\uD30C\uC774\uD504\uB97C \uAC74\uB124\uBA74
+    \uADF8\uB4E4\uC774 \uAC00\uC9C0\uACE0 \uC788\uB294 \uBB3C\uACFC \uC2DD\uB7C9\uC744
+    \uC900\uB2E4\uB294 \uC870\uAC74\uC73C\uB85C \uAD50\uD658\uC744 \uC694\uAD6C\uD588\uB2E4."
   triggerConditions: []
-  eventType: 2
+  eventType: 4
   choices:
-  - choiceType: 100
-    iconTexture: {fileID: 2800000, guid: badf596829c595141939e424c04bca7c, type: 3}
+  - choiceType: 212
     results:
     - conditions: []
-      resultText: "\uD55C\uB54C\uB294 \uAE30\uC9C0\uC758 \uC548\uC804\uC744 \uCC45\uC784\uC84C\uB358
-        \uC774 \uBC29\uC7AC \uC13C\uD130\uB294 \uC9C0\uAE08\uC740 \uAE30\uB2A5\uC744
-        \uC783\uACE0 \uD3D0\uD5C8\uAC00 \uB418\uC5C8\uB2E4. \uD558\uC9C0\uB9CC \uAE34\uAE09
-        \uC0C1\uD669 \uB300\uBE44 \uBB3C\uC790\uB098 \uACE0\uAE09 \uBCF4\uD638 \uC7A5\uBE44\uAC00
-        \uC544\uC9C1 \uB0A8\uC544 \uC788\uC744\uC9C0\uB3C4 \uBAA8\uB978\uB2E4. \uD0D0\uC0AC
-        \uC911 \uC870\uC2EC\uC2A4\uB7FD\uAC8C \uC811\uADFC\uD574 \uBCFC \uD544\uC694\uAC00
-        \uC788\uB2E4."
-      effects: []
-      probability: 1
-  - choiceType: 101
-    iconTexture: {fileID: 2800000, guid: d21e278794c293c4bae3661ffcd9b76a, type: 3}
-    results:
-    - conditions: []
-      resultText: 
-      effects: []
-      probability: 1
-  - choiceType: 102
-    iconTexture: {fileID: 2800000, guid: b238160e000089e47ad261302c6d1a3c, type: 3}
-    results:
-    - conditions: []
-      resultText: 
-      effects: []
-      probability: 1
-  - choiceType: 103
-    iconTexture: {fileID: 2800000, guid: 073574a12f4a3d94fbbc091e8b00a0c4, type: 3}
-    results:
-    - conditions: []
-      resultText: 
-      effects: []
+      resultText: "\uC1E0\uD30C\uC774\uD504\uB97C \uB0B4\uC8FC\uC790 \uC678\uACC4\uC778\uC740
+        \uB208\uC744 \uAC00\uB298\uAC8C \uB728\uBA70 \uAC10\uC0AC\uC758 \uBAB8\uC9D3\uC744
+        \uCDE8\uD588\uB2E4. \uC190\uC5D0\uB294 \uBB3C\uACFC \uC2DD\uB7C9\uB4E4\uC774
+        \uC950\uC5B4\uC84C\uACE0, \uC11C\uB85C \uB9CC\uC871\uD558\uBA70 \uB3CC\uC544\uAC14\uB2E4.\n"
+      effects:
+      - effectType: 0
+        targetId: Food
+        parameter: 
+        value: 1
+      - effectType: 0
+        targetId: Water
+        parameter: 
+        value: 1
+      - effectType: 1
+        targetId: Pipe
+        parameter: 
+        value: 1
       probability: 1
   - choiceType: 300
-    iconTexture: {fileID: 0}
     results:
     - conditions: []
-      resultText: 
+      resultText: "\uC6B0\uB9AC\uAC00 \uC544\uBB34 \uB9D0\uC5C6\uC774 \uD55C\uBC1C
+        \uBB3C\uB7EC\uB098\uC790, \uC678\uACC4\uC778\uC740 \uACE0\uAC1C\uB97C \uAC38\uC6B0\uB6B1\uD558\uBA70
+        \uCC9C\uCC9C\uD788 \uB4B7\uAC78\uC74C\uC9C8\uCCE4\uB2E4. \uC804\uD22C\uB294
+        \uC5C6\uC5C8\uC9C0\uB9CC, \uC544\uC26C\uC6B4 \uAE30\uD68C\uAC00 \uD758\uB7EC\uAC00\uBC84\uB838\uB2E4."
       effects: []
       probability: 1

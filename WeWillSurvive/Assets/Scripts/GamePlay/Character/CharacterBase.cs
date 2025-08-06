@@ -121,11 +121,11 @@ namespace WeWillSurvive.Character
             // 탐사 보상 및 로그 적용
             foreach (var rewardData in expeditionData.RewardDatas)
             {
-                var rewardItemResults = rewardData.GetRewardItemResults();
+                var rewardItemResults = rewardData.GetRewardItemDatas();
                 foreach (var rewardItemResult in rewardItemResults)
                 {
                     // 탐사 보상 아이템 추가
-                    ItemManager.AddItem(rewardItemResult.RewardItem, rewardItemResult.Amount);
+                    ItemManager.AddItem(rewardItemResult.ItemType, rewardItemResult.Amount);
                 }
 
                 // 탐사 결과 로그

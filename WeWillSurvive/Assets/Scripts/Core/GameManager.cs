@@ -71,55 +71,5 @@ namespace WeWillSurvive.Core
             // TODO 로그 초기화
             LogManager.ClearAllLogs();
         }
-
-        public void NewDay()
-        {
-            // 빔 프로젝터에서 받을 정보
-            // 1. 사용한 아이템
-            // Key에게 Value만큼 사용 (사용 대상을 특정하는 아이템이 아니면 아무거나 넣으면 됨)
-            Dictionary<EItem, Dictionary<ECharacter, float>> UsedItems = new Dictionary<EItem, Dictionary<ECharacter, float>>();
-
-            // 아이템 사용
-            string s = "";
-            foreach (KeyValuePair<EItem, Dictionary<ECharacter, float>> usedItem in UsedItems)
-            {
-                float usedCount = 0;
-                foreach (KeyValuePair<ECharacter, float> usedCharacter in usedItem.Value)
-                {
-                    CharacterBase character = CharacterManager.GetCharacter(usedCharacter.Key);
-                    ItemManager.UsedItem(character, usedItem.Key, usedCharacter.Value);
-                    usedCount += usedCharacter.Value;
-                }
-
-                // Debug
-                if (usedCount > 0)
-                    s += $"{Enum.GetName(typeof(EItem), usedItem.Key)} {usedCount}개, ";
-            }
-            if (s == "") s = "없음";
-
-            // 2. 탐사 보낼 캐릭터 (여러 명 보내는 경우 있으면 수정)
-            // 캐릭터 정보 업데이트
-            CharacterManager.UpdateCharacterStatus();
-
-            // Temp
-            string explorerName = "없음";
-            if (Day == 2)
-            {
-                ECharacter exploreCharacter = ECharacter.Lead;
-                CharacterManager.GetCharacter(exploreCharacter).State.AddState(EState.Exploring);
-                explorerName = Enum.GetName(typeof(ECharacter), exploreCharacter);
-            }
-
-            // 3. 이벤트?
-            // 이벤트 별로 함수 만들어서 호출
-
-            // Day + 1
-            Debug.Log($"[Day {Day}]\n사용한 아이템: {s} / 나간 사람: {explorerName}");
-            Day += 1;
-
-
-            // EventBus를 통해 새로운 날이 시작됐음을 알림
-            EventBus.Publish(new NewDayEvent() { CurrentDay = Day });
-        }
     }
 }

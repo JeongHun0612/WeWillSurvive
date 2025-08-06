@@ -45,7 +45,7 @@ namespace WeWillSurvive
         {
             if (_isSelected)
             {
-                ItemManager.UsedItem(target, _item, 0f);
+                ItemManager.UsedItem(_item, 0f, target);
             }
         }
 

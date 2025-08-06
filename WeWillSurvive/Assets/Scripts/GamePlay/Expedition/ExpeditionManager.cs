@@ -15,8 +15,8 @@ namespace WeWillSurvive.Expedition
 
     public class ExpeditionManager : MonoSingleton<ExpeditionManager>
     {
-        private const int MIN_EXPEDITION_DAY = 2;
-        private const int MAX_EXPEDITION_DAY = 3;
+        private const int MIN_EXPEDITION_DAY = 5;
+        private const int MAX_EXPEDITION_DAY = 7;
 
         [SerializeField]
         private List<ExpeditionData> _expeditionDatas;
