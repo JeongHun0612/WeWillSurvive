@@ -42,19 +42,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BurnAmount: 0.547
+    - _BurnAmount: 0
     - _BurnDepth: 0.726
     - _BurnGrain: 50
-    - _BurnLayer: 0.073
+    - _BurnLayer: 0.046
     - _BurnWidth: 0.368
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RoomLength: 10
     - _endX: 750
-    - _lineThickness: 1
+    - _lineThickness: 0.243
     - _startX: -2350
     m_Colors:
-    - _BurnEffect_Color: {r: 1227.7275, g: 0, b: 0, a: 0}
+    - _BurnEffect_Color: {r: 2.693462, g: 0.0054748696, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &6430059071807562116
