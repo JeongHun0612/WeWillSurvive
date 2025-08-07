@@ -18,10 +18,16 @@ MonoBehaviour:
   - "\uB9AC\uB4DC\uB294 \uD558\uB8E8 \uC885\uC77C \uBA40\uB9AC \uCC3D\uBC16\uB9CC
     \uBC14\uB77C\uBD24\uB2E4. \uC544\uBB34 \uB9D0 \uC5C6\uC774. \uC544\uBB34 \uAC10\uC815\uB3C4
     \uC5C6\uC774. \uADF8\uAC8C \uB354 \uBB34\uC11C\uC6E0\uB2E4."
-  triggerConditions: []
+  triggerConditions:
+  - conditionType: 0
+    targetId: Lead
+    parameter: 
+    value1: 
+    value2: 
   eventType: 5
   choices:
   - choiceType: 300
+    amount: 0
     results:
     - conditions: []
       resultText: "\uB9AC\uB4DC\uB294 \uC544\uCE68 \uC810\uAC80\uC744 \uB9C8\uCCE4\uB2E4.

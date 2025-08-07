@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Status
@@ -19,8 +20,8 @@ namespace WeWillSurvive.Status
         {
             _statuses.Clear();
 
-            AddStatus(new HungerStatus(_owner));
-            AddStatus(new ThirstStatus(_owner));
+            AddStatus(EStatusType.Hunger);
+            AddStatus(EStatusType.Thirst);
 
             // Debug
             //AddStatus(new InjuryStatus(_owner));
@@ -47,19 +48,65 @@ namespace WeWillSurvive.Status
             }
         }
 
-        public void AddStatus(IStatus status)
+        public void AddStatus(EStatusType type)
         {
-            if (!_statuses.ContainsKey(status.StatusType))
+            if (!HasStatus(type))
             {
-                _statuses.Add(status.StatusType, status);
+                switch (type)
+                {
+                    case EStatusType.Hunger:
+                        _statuses.Add(type, new HungerStatus(_owner));
+                        break;
+                    case EStatusType.Thirst:
+                        _statuses.Add(type, new ThirstStatus(_owner));
+                        break;
+                    case EStatusType.Injury:
+                        _statuses.Add(type, new InjuryStatus(_owner));
+                        break;
+                    case EStatusType.Anxious:
+                        _statuses.Add(type, new AnxiousStatus(_owner));
+                        break;
+                    default:
+                        Debug.LogWarning($"StatusType에는 {type}이 존재하지 않습니다.");
+                        break;
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"이미 [{type}]이 존재합니다.");
             }
         }
 
         public void RemoveStatus(EStatusType type)
         {
-            if (_statuses.ContainsKey(type))
+            if (HasStatus(type))
             {
                 _statuses.Remove(type);
+                Debug.Log($"[{type}] 상태 제거");
+            }
+        }
+
+        public void WorsenStatus(EStatusType type, int step = 1)
+        {
+            var status = GetStatus<IStatus>(type);
+
+            if (status == null)
+            {
+                AddStatus(type);
+            }
+            else
+            {
+                status.WorsenStatus(step);
+            }
+        }
+
+        public void RecoveryStatus(EStatusType type, int step = 1)
+        {
+            var status = GetStatus<IStatus>(type);
+
+            if (status != null)
+            {
+                status.RecoveryStatus(step);
             }
         }
 
@@ -71,6 +118,11 @@ namespace WeWillSurvive.Status
             }
 
             return null;
+        }
+
+        public bool HasStatus(EStatusType type)
+        {
+            return _statuses.ContainsKey(type);
         }
     }
 }

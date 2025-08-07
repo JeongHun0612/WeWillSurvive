@@ -14,7 +14,7 @@ namespace WeWillSurvive
                 return;
 
             var status = character.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
-            status?.ApplyRecovery();
+            status?.RecoveryStatus(10);
         }
     }
 }

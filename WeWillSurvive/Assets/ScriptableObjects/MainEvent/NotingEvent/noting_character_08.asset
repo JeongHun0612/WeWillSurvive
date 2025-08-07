@@ -19,10 +19,16 @@ MonoBehaviour:
     \uADF8\uB7EC\uB2E4 \uBB38\uB4DD \uD63C\uC7A3\uB9D0\uC744 \uD588\uB2E4. \u201C\uB2E4\uB4E4
     \uC774\uC0C1\uD574\uC84C\uC5B4\u2026\u201D \uAC00\uC7A5 \uC5B4\uB9B0 \uB108\uAC00
     \uC81C\uC77C \uC774\uC131\uC801\uC774\uB77C\uB2C8."
-  triggerConditions: []
+  triggerConditions:
+  - conditionType: 0
+    targetId: DrK
+    parameter: 
+    value1: 
+    value2: 
   eventType: 5
   choices:
   - choiceType: 300
+    amount: 0
     results:
     - conditions: []
       resultText: "\uB2E5\uD130 K\uB294 \uC544\uCE68\uC5D0 \uC870\uC6A9\uD788 \uB300\uC6D0\uB4E4\uC744

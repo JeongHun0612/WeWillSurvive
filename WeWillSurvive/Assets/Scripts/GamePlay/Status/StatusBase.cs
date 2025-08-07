@@ -38,7 +38,7 @@ namespace WeWillSurvive
 
             if (DaysToNextLevel.TryGetValue(_level, out int daysRequired) && _dayCounter > daysRequired)
             {
-                AdvanceLevelOrDie();
+                WorsenStatus();
             }
 
             ApplyCurrentLevelState();
@@ -76,23 +76,14 @@ namespace WeWillSurvive
             ApplyCurrentLevelState();
         }
 
-        public virtual void ApplyRecovery()
+        public virtual void WorsenStatus(int step = 1)
         {
-            if (LevelStateMap.TryGetValue(_level, out var state))
+            if (step <= 0)
             {
-                string stateMessage = _owner.Data.StateMessageData.GetStateResolvedMessage(state);
-                LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
-            }
-            else
-            {
-                Debug.LogWarning($"{_level}에 대한 LevelStateMap이 존재하지 않습니다.");
+                Debug.LogWarning($"Status 상태 악화 Step은 1보다 큰 값이여야 합니다.");
+                return;
             }
 
-            _dayCounter = 0;
-        }
-
-        protected void AdvanceLevelOrDie(int step = 1)
-        {
             int currentLevel = (int)(object)_level;
             int maxLevel = System.Enum.GetValues(typeof(TLevel)).Length - 1;
 
@@ -104,8 +95,40 @@ namespace WeWillSurvive
                 return;
             }
 
+            // 레벨 업데이트
             _level = (TLevel)(object)targetLevel;
             _dayCounter = 0;
+        }
+
+        public virtual void RecoveryStatus(int step = 1)
+        {
+            if (step <= 0)
+            {
+                Debug.LogWarning($"Status 상태 개선 Step은 1보다 큰 값이여야 합니다.");
+                return;
+            }
+
+            int currentLevel = (int)(object)_level;
+            int targetLevel = currentLevel - step;
+
+            if (targetLevel < 0)
+                targetLevel = 0;
+
+            if (targetLevel < currentLevel)
+            {
+                if (LevelStateMap.TryGetValue(_level, out var state))
+                {
+                    string stateMessage = _owner.Data.StateMessageData.GetStateResolvedMessage(state);
+                    LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
+                }
+                else
+                {
+                    Debug.LogWarning($"{_level}에 대한 LevelStateMap이 존재하지 않습니다.");
+                }
+
+                _level = (TLevel)(object)targetLevel;
+                _dayCounter = 0;
+            }
         }
 
         protected void ApplyCurrentLevelState()
@@ -132,12 +155,12 @@ namespace WeWillSurvive
                     break;
                 case EStateTransitionType.Worsen:
                     {
-                        AdvanceLevelOrDie();
+                        WorsenStatus();
                     }
                     break;
                 case EStateTransitionType.Recovery:
                     {
-                        ApplyRecovery();
+                        RecoveryStatus();
                     }
                     break;
                 case EStateTransitionType.Death:

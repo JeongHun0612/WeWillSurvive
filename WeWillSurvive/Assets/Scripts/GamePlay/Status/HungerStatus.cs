@@ -56,14 +56,5 @@ namespace WeWillSurvive.Status
                 },
             };
         }
-
-        public override void ApplyRecovery()
-        {
-            base.ApplyRecovery();
-
-            //_level = (EHungerLevel)Mathf.Max(0, (int)(object)_level - 1);
-
-            _level = EHungerLevel.Normal;
-        }
     }
 }

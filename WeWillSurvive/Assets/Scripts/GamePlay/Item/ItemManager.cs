@@ -122,6 +122,8 @@ namespace WeWillSurvive.Item
                 }
 
                 Items[item] -= usedCount;
+                Debug.Log($"[아이템 사용] {item} {usedCount}개 | Total : {Items[item]}개");
+
                 if (Items[item] == 0f)
                 {
                     RemoveItem(item);
@@ -132,6 +134,7 @@ namespace WeWillSurvive.Item
                 Debug.LogWarning($"Item [{item}] not found.");
                 return;
             }
+
         }
 
         public void UpdateItemCount(EItem item, float updateCount)
@@ -145,9 +148,14 @@ namespace WeWillSurvive.Item
             Items[item] += updateCount;
         }
 
-        public bool HasItem(EItem item)
+        public bool HasItem(EItem item, float count = 1f)
         {
-            return Items.ContainsKey(item);
+            if (Items.TryGetValue(item, out float remain))
+            {
+                return remain + 1e-5f >= count;
+            }
+
+            return false;
         }
 
         public float GetItemCount(EItem item)

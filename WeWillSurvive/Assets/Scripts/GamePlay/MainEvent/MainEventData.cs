@@ -10,19 +10,22 @@ namespace WeWillSurvive.MainEvent
     public enum EMainEventType
     {
         [Description("\"O\" 또는 \"X\" 를 선택하는 이벤트")]
-        YesOrNo,            // "O" 또는 "X" 를 선택하는 이벤트
+        YesOrNo,
 
         [Description("특정 아이템을 사용하는 이벤트")]
-        UseItems,           // 특정 아이템을 사용하는 이벤트
+        UseItems,
 
         [Description("특정 대원을 탐사를 보내는 이벤트")]
-        SendSomeone,        // 특정 대원을 탐사를 보내는 이벤트
+        SendSomeone,
 
         [Description("특정 대원을 선택하는 이벤트")]
-        ChooseSomeone,      // 특정 대원을 선택하는 이벤트
+        ChooseSomeone,
 
-        [Description("교환 이벤트")]
-        Trade,              // 교환 이벤트
+        [Description("침입 이벤트")]
+        Invasion,
+
+        [Description("조사 이벤트")]
+        Exploration,
 
         [Description("이벤트가 존재하지 않을 시")]
         Noting,
@@ -35,13 +38,19 @@ namespace WeWillSurvive.MainEvent
 
         [InspectorName("생존 인원이 특정 값 사이일 때")]
         [Tooltip("Value1(최소) ~ Value2(최대) 까지의 인원")]
-        AliveCountCheck,
+        AliveCount,
 
-        [InspectorName("캐릭터가 특정 상태일 시")]
+        [InspectorName("캐릭터가 특정 상태(State)를 보유하고 있을 시")]
         CharacterHasState,
 
-        [InspectorName("캐릭터가 특정 상태가 아닐 시")]
+        [InspectorName("캐릭터가 특정 상태(State)를 보유하고 있지 않을 시")]
         CharacterNotHasState,
+
+        [InspectorName("캐릭터가 특정 상태(Status)를 보유하고 있을 시")]
+        CharacterHasStatus,
+
+        [InspectorName("캐릭터가 특정 상태(Status)를 보유하고 있지 않을 시")]
+        CharacterNotHasStatus,
 
         [InspectorName("캐릭터의 탐사 횟수가 특정 값보다 높을 시")]
         CharacterExpeditionCountUpper,
@@ -95,6 +104,7 @@ namespace WeWillSurvive.MainEvent
         // 기타
         [Description("아무것도 선택하지 않음")] Noting = 300,
         [Description("누군가를 보냄")] Sendsomeone,
+        [Description("맨손")] Hand,
 
         None,
     }
@@ -104,8 +114,13 @@ namespace WeWillSurvive.MainEvent
         [Description("아이템 획득")] AddItem,
         [Description("아이템 삭제")] RemoveItem,
 
-        [Description("스테이터스 증가")] IncreaseStatus,
-        [Description("스테이터스 감소")] DecreaseStatus,
+        [Description("엔딩 분기 진행")] AdvanceEndingProgress,
+        [Description("엔딩 완료")] EndingComplete,
+
+        [Description("스테이터스 악화")] WorsenStatus,
+        [Description("스테이터스 치유")] RecoveryStatus,
+
+        [Description("캐릭터 사망")] CharacterDaed
     }
     #endregion
 
@@ -138,16 +153,8 @@ namespace WeWillSurvive.MainEvent
     public class EventChoice
     {
         public EChoiceType choiceType;          // 선택 ID
+        public int amount;                      // 필요 갯수
         public List<EventResult> results;       // 선택에 대한 결과 리스트
-
-        public EventResult GetRandomResult()
-        {
-            if (results == null || results.Count == 0)
-                return null;
-
-            int index = Random.Range(0, results.Count);
-            return results[index];
-        }
     }
 
     [System.Serializable]

@@ -13,7 +13,7 @@ namespace WeWillSurvive.ItemEffect
                 return;
 
             var status = character.Status.GetStatus<ThirstStatus>(EStatusType.Thirst);
-            status?.ApplyRecovery();
+            status?.RecoveryStatus(10);
         }
     }
 }

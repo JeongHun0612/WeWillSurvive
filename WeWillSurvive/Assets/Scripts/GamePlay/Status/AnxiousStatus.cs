@@ -54,13 +54,11 @@ namespace WeWillSurvive.Status
         public override void OnNewDay()
         {
             ApplyCurrentLevelState();
-        }
 
-        public override void ApplyRecovery()
-        {
-            base.ApplyRecovery();
-
-            _owner.Status.RemoveStatus(StatusType);
+            if (_level == 0)
+            {
+                _owner.Status.RemoveStatus(StatusType);
+            }
         }
     }
 }

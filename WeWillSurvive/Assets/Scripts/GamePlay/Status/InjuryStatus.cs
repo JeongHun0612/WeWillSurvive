@@ -44,12 +44,14 @@ namespace WeWillSurvive.Status
             };
         }
 
-
-        public override void ApplyRecovery()
+        public override void RecoveryStatus(int step = 1)
         {
-            base.ApplyRecovery();
+            base.RecoveryStatus(step);
 
-            _owner.Status.RemoveStatus(StatusType);
+            if (_level == 0)
+            {
+                _owner.Status.RemoveStatus(StatusType);
+            }
         }
     }
 }

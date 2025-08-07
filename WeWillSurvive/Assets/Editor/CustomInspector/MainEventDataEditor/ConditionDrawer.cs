@@ -3,6 +3,7 @@ using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
+using WeWillSurvive.Status;
 using WeWillSurvive.Util;
 
 namespace WeWillSurvive
@@ -86,6 +87,8 @@ namespace WeWillSurvive
                 case EConditionType.CharacterInShelter:
                 case EConditionType.CharacterHasState:
                 case EConditionType.CharacterNotHasState:
+                case EConditionType.CharacterHasStatus:
+                case EConditionType.CharacterNotHasStatus:
                 case EConditionType.CharacterExpeditionCountUpper:
                 case EConditionType.CharacterExpeditionCountLower:
                     return System.Enum.GetNames(typeof(ECharacter));
@@ -105,6 +108,9 @@ namespace WeWillSurvive
                 case EConditionType.CharacterHasState:
                 case EConditionType.CharacterNotHasState:
                     return EnumUtil.GetEnumDescriptions<EState>();
+                case EConditionType.CharacterHasStatus:
+                case EConditionType.CharacterNotHasStatus:
+                    return EnumUtil.GetEnumDescriptions<EStatusType>();
                 default:
                     return null;
             }
@@ -114,7 +120,7 @@ namespace WeWillSurvive
         {
             switch (type)
             {
-                case EConditionType.AliveCountCheck:
+                case EConditionType.AliveCount:
                 case EConditionType.DayCountUpper:
                     return false;
                 default:
@@ -128,6 +134,8 @@ namespace WeWillSurvive
             {
                 case EConditionType.CharacterHasState:
                 case EConditionType.CharacterNotHasState:
+                case EConditionType.CharacterHasStatus:
+                case EConditionType.CharacterNotHasStatus:
                     return true;
                 default:
                     return false;
@@ -137,7 +145,7 @@ namespace WeWillSurvive
         {
             switch (type)
             {
-                case EConditionType.AliveCountCheck:
+                case EConditionType.AliveCount:
                 case EConditionType.CharacterExpeditionCountUpper:
                 case EConditionType.CharacterExpeditionCountLower:
                 case EConditionType.ItemCountUpper:
@@ -152,7 +160,7 @@ namespace WeWillSurvive
         {
             switch (type)
             {
-                case EConditionType.AliveCountCheck:
+                case EConditionType.AliveCount:
                     return true;
                 default:
                     return false;

@@ -18,10 +18,16 @@ MonoBehaviour:
   - "\uC815\uB9D0, \uC544\uBB34 \uC77C\uB3C4 \uC5C6\uC5C8\uB2E4. \uCFE1\uC774 \uAC10\uC790\uB97C
     \uBCF4\uACE0 \"\uC598\uB294 \uB0B4 \uCE5C\uAD6C\uC57C\"\uB77C\uACE0 \uB9D0\uD55C
     \uAC83 \uBE7C\uACE0\uB294."
-  triggerConditions: []
+  triggerConditions:
+  - conditionType: 0
+    targetId: Cook
+    parameter: 
+    value1: 
+    value2: 
   eventType: 5
   choices:
   - choiceType: 300
+    amount: 0
     results:
     - conditions: []
       resultText: "\uCFE1\uC740 \uC624\uB298 \uC544\uCE68\uC5D0\uB3C4 \uCC3D\uACE0\uB97C
