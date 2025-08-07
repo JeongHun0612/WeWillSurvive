@@ -92,7 +92,7 @@ namespace WeWillSurvive
             var status = Enum.Parse<EStatusType>(effect.parameter);
             var step = Mathf.Max(1, int.Parse(effect.value));
 
-            character.Status.RecoveryStatus(status, step);
+            character.Status.WorsenStatus(status, step);
         }
     }
 
