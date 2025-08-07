@@ -163,9 +163,6 @@ namespace WeWillSurvive.MainEvent
                     // RemoveItem 타입이면 음수로 전달
                     if (effect.effectType == EEffectType.RemoveItem)
                     {
-                        if (!ItemManager.HasItem(itemType))
-                            continue;
-
                         amount = -amount;
                     }
 

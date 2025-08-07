@@ -38,7 +38,7 @@ MonoBehaviour:
         \uAF2D \uBB38\uC744 \uC5F4\uACE0 \uD658\uC601\uD558\uC790."
       effects:
       - effectType: 1
-        targetId: Map
+        targetId: RepairKit
         parameter: 
         value: 1
       - effectType: 2

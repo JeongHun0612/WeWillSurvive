@@ -71,8 +71,6 @@ namespace WeWillSurvive
 
         public MainEventData GetEndingEventData()
         {
-            Debug.Log($"엔딩 이벤트 발생까지 남은 기간 : {_globalDayCounter}");
-
             // 전역 쿨타임이 아직 안됐으면 이벤트 발생 X
             if (_globalDayCounter > 0)
                 return null;

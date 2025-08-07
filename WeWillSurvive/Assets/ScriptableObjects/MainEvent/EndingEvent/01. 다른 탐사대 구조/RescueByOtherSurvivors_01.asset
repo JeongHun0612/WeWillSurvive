@@ -23,7 +23,7 @@ MonoBehaviour:
   eventType: 1
   choices:
   - choiceType: 207
-    amount: 0
+    amount: 1
     results:
     - conditions: []
       resultText: "\uAE30\uC801\uCC98\uB7FC \uC218\uC2E0\uC74C\uC774 \uC7A1\uD614\uB2E4.

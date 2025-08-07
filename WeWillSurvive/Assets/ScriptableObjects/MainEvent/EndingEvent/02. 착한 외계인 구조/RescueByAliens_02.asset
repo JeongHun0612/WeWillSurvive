@@ -36,8 +36,8 @@ MonoBehaviour:
         \uB098\uC911\uC5D0 \uC0DD\uC874\uD558\uB294 \uB370 \uB3C4\uC6C0\uC744 \uBC1B\uC744
         \uC218 \uC788\uC744 \uAC83\uC774\uB2E4."
       effects:
-      - effectType: 1
-        targetId: Map
+      - effectType: 2
+        targetId: RescueByAliens
         parameter: 
         value: 
       probability: 1

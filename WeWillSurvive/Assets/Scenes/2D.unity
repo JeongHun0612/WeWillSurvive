@@ -645,6 +645,7 @@ MonoBehaviour:
   _endingEventDatas:
   - {fileID: 11400000, guid: aee0c1cbc6d831c478915eafeb04a8d4, type: 2}
   - {fileID: 11400000, guid: c8c76c36e37b00943a8affb968931ab2, type: 2}
+  - {fileID: 11400000, guid: 6f10d02b430363c4587a456e9618b77a, type: 2}
   IsEnding: 0
 --- !u!1 &1280973031
 GameObject:

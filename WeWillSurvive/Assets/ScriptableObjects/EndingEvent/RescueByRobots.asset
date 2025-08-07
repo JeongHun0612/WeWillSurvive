@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe112bed0a713f4b9c79e266715529b, type: 3}
+  m_Name: RescueByRobots
+  m_EditorClassIdentifier: 
+  _endingType: 2
+  _endingEventDatas:
+  - {fileID: 11400000, guid: da4ffb2d760509d448a0df600b128421, type: 2}
+  - {fileID: 11400000, guid: 281c05dd7e8052446988abe83d2efd9a, type: 2}
+  - {fileID: 11400000, guid: b0f3bc36bd7ad004aab8c0d1aa1209bd, type: 2}
+  - {fileID: 11400000, guid: 5fee45812966b1f48a4faa1131ebcb19, type: 2}
+  - {fileID: 11400000, guid: 33767e6d131402f499b5eab2a274d2d3, type: 2}
+  - {fileID: 11400000, guid: 4b3836bcc6fc3eb41a752ca135168c70, type: 2}
+  _minDayCounter: 4
+  _maxDayCounter: 5
