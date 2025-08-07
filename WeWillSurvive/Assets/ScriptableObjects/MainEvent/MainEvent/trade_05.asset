@@ -33,7 +33,7 @@ MonoBehaviour:
         \uC810\uC740 \uC54C \uC218 \uC788\uC5C8\uB2E4."
       effects:
       - effectType: 1
-        targetId: Ax
+        targetId: NiceSpacesuit
         parameter: 
         value: 1
       - effectType: 0

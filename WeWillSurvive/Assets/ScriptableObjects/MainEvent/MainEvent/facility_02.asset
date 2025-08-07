@@ -32,7 +32,7 @@ MonoBehaviour:
         \uB5A8\uC5B4\uC838 \uBC84\uB838\uB2E4."
       effects:
       - effectType: 1
-        targetId: Ax
+        targetId: RepairKit
         parameter: 
         value: 1
       - effectType: 1

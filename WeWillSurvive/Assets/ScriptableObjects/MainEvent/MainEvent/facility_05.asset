@@ -31,8 +31,8 @@ MonoBehaviour:
         \uB204\uC218\uB97C \uB9C9\uC558\uB2E4. \uB0B4\uBD80 \uACF5\uAE30\uB294 \uB9D1\uC544\uC84C\uACE0,
         \uBAA8\uB4E0 \uC7A5\uBE44\uB294 \uC815\uC0C1 \uC720\uC9C0\uB418\uC5C8\uB2E4."
       effects:
-      - effectType: 1
-        targetId: Ax
+      - effectType: 5
+        targetId: Lead
         parameter: Anxious
         value: 1
       - effectType: 5

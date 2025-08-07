@@ -34,7 +34,7 @@ MonoBehaviour:
         \uC950\uC5B4\uC84C\uACE0, \uC11C\uB85C \uB9CC\uC871\uD558\uBA70 \uB3CC\uC544\uAC14\uB2E4.\n"
       effects:
       - effectType: 1
-        targetId: Ax
+        targetId: Pipe
         parameter: 
         value: 1
       - effectType: 0

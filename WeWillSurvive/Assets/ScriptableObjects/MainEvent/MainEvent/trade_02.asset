@@ -36,7 +36,7 @@ MonoBehaviour:
         \uC2DD\uB7C9\uC744 \uBA39\uB294\uB2E4\uB294 \uAC83\uC744 \uC54C\uAC8C \uB418\uC5C8\uB2E4."
       effects:
       - effectType: 1
-        targetId: Ax
+        targetId: CommDevice
         parameter: 
         value: 1
       - effectType: 0

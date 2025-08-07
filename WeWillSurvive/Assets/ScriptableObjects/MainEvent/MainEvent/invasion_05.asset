@@ -50,7 +50,7 @@ MonoBehaviour:
         \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
       effects:
       - effectType: 1
-        targetId: Ax
+        targetId: Gun
         parameter: 
         value: 1
       probability: 1

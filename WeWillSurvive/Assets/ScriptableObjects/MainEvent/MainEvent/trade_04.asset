@@ -37,7 +37,7 @@ MonoBehaviour:
         \uAE30\uC9C0\uC5D0 \uC7A0\uAE50 \uC6C3\uC74C\uC18C\uB9AC\uAC00 \uB3CC\uC558\uB2E4."
       effects:
       - effectType: 1
-        targetId: Ax
+        targetId: BoardGame
         parameter: 
         value: 1
       - effectType: 0

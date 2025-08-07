@@ -48,7 +48,7 @@ MonoBehaviour:
         \uC228\uC744 \uD5D0\uB5A1\uC600\uC9C0\uB9CC, \uBB34\uC0AC\uD588\uB2E4."
       effects:
       - effectType: 1
-        targetId: Ax
+        targetId: Gun
         parameter: 
         value: 1
       probability: 1

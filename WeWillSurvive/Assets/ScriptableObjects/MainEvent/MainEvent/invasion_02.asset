@@ -49,7 +49,7 @@ MonoBehaviour:
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       effects:
       - effectType: 1
-        targetId: Ax
+        targetId: Gun
         parameter: 
         value: 1
       probability: 1

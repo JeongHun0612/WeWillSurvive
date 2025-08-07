@@ -36,7 +36,7 @@ MonoBehaviour:
         \uD655\uC2E4\uD55C \uD638\uC758\uAC00 \uB290\uAEF4\uC84C\uB2E4."
       effects:
       - effectType: 1
-        targetId: Ax
+        targetId: Flashlight
         parameter: 
         value: 1
       - effectType: 0

@@ -35,7 +35,7 @@ MonoBehaviour:
         \uAC83 \uAC19\uC558\uB2E4."
       effects:
       - effectType: 1
-        targetId: Ax
+        targetId: MedicKit
         parameter: 
         value: 1
       - effectType: 0
