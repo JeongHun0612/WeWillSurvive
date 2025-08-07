@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: RescueByAliens_04
+  m_EditorClassIdentifier: 
+  eventId: RescueByAliens_04
+  title: "\uCC29\uD55C \uC678\uACC4\uC778\uC758 \uAE30\uC9C0 \uC218\uB9AC \uC694\uCCAD"
+  descriptions:
+  - "\uCC29\uD55C \uC678\uACC4\uC778\uC740 \uADF8\uB4E4\uC758 \uAC70\uC8FC \uAE30\uC9C0\uAC00
+    \uC190\uC0C1\uB418\uC5C8\uB2E4\uBA70 \uB3C4\uC6C0\uC744 \uC694\uCCAD\uD588\uB2E4.
+    \uC218\uB9AC \uD0A4\uD2B8\uAC00 \uC788\uB2E4\uBA74 \uC751\uAE09 \uC870\uCE58\uAC00
+    \uAC00\uB2A5\uD558\uB2E4\uACE0 \uD55C\uB2E4. \uADF8\uB4E4\uC758 \uC0DD\uC874\uC774
+    \uACE7 \uC6B0\uB9AC\uC758 \uD76C\uB9DD\uC77C \uC218 \uC788\uB2E4."
+  triggerConditions: []
+  eventType: 1
+  choices:
+  - choiceType: 205
+    amount: 1
+    results:
+    - conditions: []
+      resultText: "\uC6B0\uB9AC\uB294 \uC218\uB9AC \uD0A4\uD2B8\uB97C \uAC74\uB124\uC8FC\uC5C8\uB2E4.
+        \uC678\uACC4\uC778\uB4E4\uC740 \uC989\uC2DC \uC791\uC5C5\uC5D0 \uCC29\uC218\uD588\uACE0,
+        \uADF8\uB4E4\uC758 \uAE30\uC9C0\uB294 \uB2E4\uC2DC \uC791\uB3D9\uD558\uAE30
+        \uC2DC\uC791\uD588\uB2E4. \uADF8\uB4E4\uC740 \uACE0\uAC1C\uB97C \uC219\uC5EC
+        \uAC10\uC0AC\uC758 \uB73B\uC744 \uC804\uD588\uB2E4. \uC774\uC81C \uADF8 \uC678\uACC4\uC778\uB4E4\uC740
+        \uC790\uC2E0\uB4E4\uC758 \uAD6C\uC870\uC120\uC744 \uC774\uC6A9\uD558\uC5EC
+        \uC6B0\uB9AC\uB97C \uC9C0\uAD6C\uB85C \uBCF4\uB0B4\uC8FC\uAE30\uB85C \uC57D\uC18D\uD588\uB2E4.
+        \uB2E4\uC74C\uC5D0 \uC678\uACC4\uC778\uB4E4\uC774 \uCC3E\uC544\uC624\uBA74
+        \uAF2D \uBB38\uC744 \uC5F4\uACE0 \uD658\uC601\uD558\uC790."
+      effects:
+      - effectType: 1
+        targetId: Map
+        parameter: 
+        value: 1
+      - effectType: 2
+        targetId: RescueByAliens
+        parameter: 
+        value: 
+      probability: 1
+  - choiceType: 206
+    amount: 1
+    results:
+    - conditions: []
+      resultText: "\uC6B0\uB9AC\uB294 \uC218\uB9AC \uD0A4\uD2B8\uB97C \uAC74\uB124\uC8FC\uC5C8\uB2E4.
+        \uC678\uACC4\uC778\uB4E4\uC740 \uC989\uC2DC \uC791\uC5C5\uC5D0 \uCC29\uC218\uD588\uACE0,
+        \uADF8\uB4E4\uC758 \uAE30\uC9C0\uB294 \uB2E4\uC2DC \uC791\uB3D9\uD558\uAE30
+        \uC2DC\uC791\uD588\uB2E4. \uADF8\uB4E4\uC740 \uACE0\uAC1C\uB97C \uC219\uC5EC
+        \uAC10\uC0AC\uC758 \uB73B\uC744 \uC804\uD588\uB2E4. \uC774\uC81C \uADF8 \uC678\uACC4\uC778\uB4E4\uC740
+        \uC790\uC2E0\uB4E4\uC758 \uAD6C\uC870\uC120\uC744 \uC774\uC6A9\uD558\uC5EC
+        \uC6B0\uB9AC\uB97C \uC9C0\uAD6C\uB85C \uBCF4\uB0B4\uC8FC\uAE30\uB85C \uC57D\uC18D\uD588\uB2E4.
+        \uB2E4\uC74C\uC5D0 \uC678\uACC4\uC778\uB4E4\uC774 \uCC3E\uC544\uC624\uBA74
+        \uAF2D \uBB38\uC744 \uC5F4\uACE0 \uD658\uC601\uD558\uC790."
+      effects:
+      - effectType: 1
+        targetId: SpecialRepairKit
+        parameter: 
+        value: 1
+      - effectType: 2
+        targetId: RescueByAliens
+        parameter: 
+        value: 
+      probability: 1
+  - choiceType: 300
+    amount: 1
+    results:
+    - conditions: []
+      resultText: "\uB3C4\uC640\uC8FC\uACE0 \uC2F6\uC5C8\uC9C0\uB9CC, \uC218\uB9AC
+        \uD0A4\uD2B8\uB294 \uC5C6\uC5C8\uB2E4. \uADF8\uB4E4\uC758 \uAE30\uC9C0\uB294
+        \uC810\uCC28 \uCE68\uBB35\uD588\uACE0 \uB098\uC911\uC5D0 \uB3C4\uC6C0\uC744
+        \uC904 \uC218 \uC788\uB2E4\uBA74 \uB2E4\uC74C\uC5D0\uB294 \uAF2D \uB3C4\uC640\uC8FC\uAE30\uB85C
+        \uC57D\uC18D\uD588\uB2E4. \uADF8\uB9AC\uACE0 \uC810\uCC28 \uC5F0\uB77D\uC740
+        \uB450\uC808\uB418\uC5C8\uB2E4."
+      effects: []
+      probability: 1

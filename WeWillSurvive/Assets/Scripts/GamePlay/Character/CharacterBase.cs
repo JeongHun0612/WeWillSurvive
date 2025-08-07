@@ -32,8 +32,11 @@ namespace WeWillSurvive.Character
         public bool IsExploring { get; private set; }
         public bool IsDead { get; private set; }
 
+
+        public bool IsInShelter => !IsDead && !IsExploring;
         public Sprite MainSprite => Data.SpriteData.GetSeatedSprite(State, Morale);
         public Sprite RoomSprite => Data.SpriteData.GetStandingSprite(State, Morale);
+
 
         private LogManager LogManager => ServiceLocator.Get<LogManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();

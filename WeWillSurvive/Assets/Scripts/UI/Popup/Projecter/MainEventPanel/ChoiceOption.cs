@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
@@ -19,6 +20,7 @@ namespace WeWillSurvive
 
         public EventChoice EventChoice => _eventChoice;
 
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
 
         public void Initialize(Action<ChoiceOption> callback)
@@ -36,19 +38,7 @@ namespace WeWillSurvive
             gameObject.SetActive(true);
 
             OnSelected(false);
-
-            // ChoiceType이 Item이면
-            if (Enum.TryParse<EItem>($"{eventChoice.choiceType}", out EItem item))
-            {
-                bool hasItem = ItemManager.HasItem(item);
-                _button.interactable = hasItem;
-                _notingIcon.SetActive(!hasItem);
-            }
-            else
-            {
-                _button.interactable = true;
-                _notingIcon.SetActive(false);
-            }
+            UpdateChoiceButtonState(eventChoice);
         }
 
         public void Disabeld()
@@ -61,12 +51,46 @@ namespace WeWillSurvive
         public void OnSelected(bool isSelected)
         {
             if (_choiceOptionIconData == null)
+            {
+                // Debugging
+                _image.sprite = null;
+
+                if (isSelected)
+                    _image.color = Color.gray;
+                else
+                    _image.color = Color.black;
+
                 return;
+            }
+
+            _image.color = Color.white;
 
             if (isSelected)
                 _image.sprite = _choiceOptionIconData.NormalSprite;
             else
                 _image.sprite = _choiceOptionIconData.DisabledSprite;
+        }
+
+        private void UpdateChoiceButtonState(EventChoice eventChoice)
+        {
+            bool isAvailable = false;
+
+            if (Enum.TryParse($"{eventChoice.choiceType}", out ECharacter characterType))
+            {
+                var character = CharacterManager.GetCharacter(characterType);
+                isAvailable = (character != null && character.IsInShelter);
+            }
+            else if (Enum.TryParse($"{eventChoice.choiceType}", out EItem item))
+            {
+                isAvailable = ItemManager.HasItem(item, eventChoice.amount);
+            }
+            else
+            {
+                isAvailable = true;
+            }
+
+            _button.interactable = isAvailable;
+            _notingIcon.SetActive(!isAvailable);
         }
     }
 }

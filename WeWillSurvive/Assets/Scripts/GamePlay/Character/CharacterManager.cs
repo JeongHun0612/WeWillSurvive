@@ -101,6 +101,12 @@ namespace WeWillSurvive.Character
 
                 character.OnNewDay();
             }
+
+            // 모든 플레이어가 사망 시 데드 엔딩
+            if (AliveCharacterCount() == 0)
+            {
+                EndingManager.Instance.Ending(EEndingType.DeathByStarvation);
+            }
         }
 
         public int AliveCharacterCount()
@@ -121,16 +127,6 @@ namespace WeWillSurvive.Character
             }
 
             return null;
-        }
-
-        public bool IsInShelter(ECharacter characterType)
-        {
-            if (Characters.TryGetValue(characterType, out var character))
-            {
-                return character.IsExploring;
-            }
-
-            return false;
         }
     }
 }

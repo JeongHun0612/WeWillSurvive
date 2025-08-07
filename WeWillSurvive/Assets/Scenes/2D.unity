@@ -597,6 +597,54 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1109370756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1109370757}
+  - component: {fileID: 1109370758}
+  m_Layer: 0
+  m_Name: EndingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1109370757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109370756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1616773905}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1109370758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109370756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4e7bc1d1544484d854bc78b02296ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _endingEventDatas:
+  - {fileID: 11400000, guid: aee0c1cbc6d831c478915eafeb04a8d4, type: 2}
+  - {fileID: 11400000, guid: c8c76c36e37b00943a8affb968931ab2, type: 2}
+  IsEnding: 0
 --- !u!1 &1280973031
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,6 +878,7 @@ Transform:
   - {fileID: 1763924378}
   - {fileID: 2021487586}
   - {fileID: 824903880}
+  - {fileID: 1109370757}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1763924377
@@ -934,13 +983,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4b070ec71cbd64aa4f6dc8e0dc9455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _testDatas:
-  - {fileID: 11400000, guid: b447ea0a95525b04d8fc822de400f16c, type: 2}
   _firstDayMainEventDatas:
   - {fileID: 11400000, guid: b447ea0a95525b04d8fc822de400f16c, type: 2}
   - {fileID: 11400000, guid: 8c786bdfa14894f43b92cd9891bad491, type: 2}
   - {fileID: 11400000, guid: 0437000116083be4b9c57b6b562fdab5, type: 2}
-  _notingMainEventDatas:
+  _nothingHappensEventDatas:
   - {fileID: 11400000, guid: aedcfa8786ece384291482cf89d770ef, type: 2}
   - {fileID: 11400000, guid: 9a7df631887eb8c4da2ebb8809d221d6, type: 2}
   - {fileID: 11400000, guid: af5b7d29064f23c439ca591dce882f62, type: 2}
@@ -958,7 +1005,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 79a064e5d9c38d348b23d9938df203dd, type: 2}
   - {fileID: 11400000, guid: 97b9b31f3faa34344a582230a1972588, type: 2}
   - {fileID: 11400000, guid: 18bec4b5c4f9dac43b3579eea0d48984, type: 2}
-  _testEventData: {fileID: 11400000, guid: 4ca74110d09d96446b7f85d3fd0ffccc, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
