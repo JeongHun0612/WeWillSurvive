@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
 using WeWillSurvive.Util;
 
@@ -75,6 +76,8 @@ namespace WeWillSurvive
             {
                 case EMainEventType.YesOrNo:
                 case EMainEventType.SendSomeone:
+                case EMainEventType.Invasion:
+                case EMainEventType.Exploration:
                 case EMainEventType.Noting:
                     DrawStaticChoiceUI(choicesProp);
                     break;
@@ -83,9 +86,6 @@ namespace WeWillSurvive
                     break;
                 case EMainEventType.ChooseSomeone:
                     DrawEditableChoiceUI(choicesProp, GetCharacterIconNames());
-                    break;
-                case EMainEventType.Trade:
-                    DrawEditableChoiceUI(choicesProp, GetItemIconNames());
                     break;
                 default:
                     EditorGUILayout.PropertyField(choicesProp);
@@ -124,15 +124,17 @@ namespace WeWillSurvive
             {
                 SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
                 SerializedProperty choiceTypeProp = selectedChoiceProp.FindPropertyRelative("choiceType");
+                SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("amount");
                 SerializedProperty resultsProp = selectedChoiceProp.FindPropertyRelative("results");
 
                 // EIconType 드롭다운으로 선택
                 EditorGUILayout.BeginHorizontal();
-                GUILayout.Label("선택지 타입", EditorStyles.boldLabel, GUILayout.Width(100));
+                EditorGUILayout.LabelField("선택지 타입", EditorStyles.boldLabel, GUILayout.Width(100));
 
                 int enumIndex = choiceTypeProp.enumValueIndex;
                 string enumName = choiceTypeProp.enumNames[enumIndex];
-                string choiceName = EnumUtil.GetDescription((EChoiceType)Enum.Parse(typeof(EChoiceType), enumName));
+                EChoiceType currentChoiceType = (EChoiceType)Enum.Parse(typeof(EChoiceType), enumName);
+                string choiceName = EnumUtil.GetDescription(currentChoiceType);
 
                 int choiceIndex = Array.IndexOf(choiceOptions, choiceName);
                 int currentIndex = Mathf.Max(0, choiceIndex);
@@ -144,6 +146,15 @@ namespace WeWillSurvive
                     int newEnumValueIndex = EnumUtil.GetEnumIndex(choiceType);
 
                     choiceTypeProp.enumValueIndex = newEnumValueIndex;
+                }
+                EditorGUILayout.EndHorizontal();
+
+                // 선택된 타입이 아이템일 경우에만 Amount 필드를 표시합니다.
+                EditorGUILayout.BeginHorizontal();
+                if (Enum.IsDefined(typeof(EItem), currentChoiceType.ToString()))
+                {
+                    EditorGUILayout.LabelField("필요 개수", EditorStyles.boldLabel, GUILayout.Width(100));
+                    EditorGUILayout.PropertyField(amountProp, GUIContent.none, GUILayout.Width(50));
                 }
                 EditorGUILayout.EndHorizontal();
 
@@ -215,8 +226,13 @@ namespace WeWillSurvive
             for (int i = 0; i < resultsProp.arraySize; i++)
             {
                 string tabName = $"결과 {i + 1}";
-                if (GUILayout.Toggle(selectedResultIndex == i, tabName, "Button", GUILayout.MaxWidth(100)))
+                bool isCurrentlySelected = (selectedResultIndex == i);
+
+                bool isNowSelected = GUILayout.Toggle(isCurrentlySelected, tabName, "Button", GUILayout.MaxWidth(100));
+
+                if (isNowSelected && !isCurrentlySelected)
                 {
+                    GUI.FocusControl(null);
                     selectedResultIndex = i;
                 }
             }
@@ -315,11 +331,13 @@ namespace WeWillSurvive
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Yes,
+                                amount = 1,
                                 results = new List<EventResult>() { new EventResult() }
                             },
                             new EventChoice
                             {
                                 choiceType = EChoiceType.No,
+                                amount = 1,
                                 results = new List<EventResult>() { new EventResult() }
                             },
                         };
@@ -332,26 +350,81 @@ namespace WeWillSurvive
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Lead,
+                                amount = 1,
                                 results = new List<EventResult>() { new EventResult() }
                             },
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Cook,
+                                amount = 1,
                                 results = new List<EventResult>() { new EventResult() }
                             },
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Bell,
+                                amount = 1,
                                 results = new List<EventResult>() { new EventResult() }
                             },
                             new EventChoice
                             {
                                 choiceType = EChoiceType.DrK,
+                                amount = 1,
                                 results = new List<EventResult>() { new EventResult() }
                             },
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Noting,
+                                amount = 1,
+                                results = new List<EventResult>() { new EventResult() }
+                            },
+                        };
+                    }
+                    break;
+                case EMainEventType.Invasion:
+                    {
+                        data.choices = new List<EventChoice>
+                        {
+                            new EventChoice
+                            {
+                                choiceType = EChoiceType.Gun,
+                                amount = 1,
+                                results = new List<EventResult>() { new EventResult() }
+                            },
+                            new EventChoice
+                            {
+                                choiceType = EChoiceType.Pipe,
+                                amount = 1,
+                                results = new List<EventResult>() { new EventResult() }
+                            },
+                            new EventChoice
+                            {
+                                choiceType = EChoiceType.Ax,
+                                amount = 1,
+                                results = new List<EventResult>() { new EventResult() }
+                            },
+                            new EventChoice
+                            {
+                                choiceType = EChoiceType.Noting,
+                                amount = 1,
+                                results = new List<EventResult>() { new EventResult() }
+                            },
+                        };
+                    }
+                    break;
+                case EMainEventType.Exploration:
+                    {
+                        data.choices = new List<EventChoice>
+                        {
+                            new EventChoice
+                            {
+                                choiceType = EChoiceType.Flashlight,
+                                amount = 1,
+                                results = new List<EventResult>() { new EventResult() }
+                            },
+                            new EventChoice
+                            {
+                                choiceType = EChoiceType.Hand,
+                                amount = 1,
                                 results = new List<EventResult>() { new EventResult() }
                             },
                         };
@@ -364,6 +437,7 @@ namespace WeWillSurvive
                             new EventChoice
                             {
                                 choiceType = EChoiceType.Noting,
+                                amount = 1,
                                 results = new List<EventResult>() { new EventResult() }
                             }
                         };
@@ -371,8 +445,9 @@ namespace WeWillSurvive
                     break;
                 case EMainEventType.ChooseSomeone:
                 case EMainEventType.UseItems:
-                case EMainEventType.Trade:
-                    data.choices = new List<EventChoice>();     // 초기 빈 리스트 (에디터에서 추가)
+                    {
+                        data.choices = new List<EventChoice>();
+                    }
                     break;
 
             }
@@ -384,6 +459,9 @@ namespace WeWillSurvive
 
             SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("choiceType");
             choiceTypeProp.enumValueIndex = EnumUtil.GetEnumIndex(EChoiceType.None);
+
+            SerializedProperty amountProp = choiceProp.FindPropertyRelative("amount");
+            amountProp.intValue = 1;
 
             SerializedProperty resultsProp = choiceProp.FindPropertyRelative("results");
             resultsProp.ClearArray();

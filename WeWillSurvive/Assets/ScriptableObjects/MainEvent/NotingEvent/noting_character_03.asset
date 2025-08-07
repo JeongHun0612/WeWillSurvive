@@ -24,17 +24,27 @@ MonoBehaviour:
     parameter: 
     value1: 
     value2: 
-  eventType: 5
+  eventType: 6
   choices:
   - choiceType: 300
     amount: 0
     results:
-    - conditions: []
+    - conditions:
+      - conditionType: 0
+        targetId: Cook
+        parameter: 
+        value1: 
+        value2: 
       resultText: "\uCFE1\uC740 \uC624\uB298 \uC544\uCE68\uC5D0\uB3C4 \uCC3D\uACE0\uB97C
         \uD655\uC778\uD588\uB2E4. \uC2DD\uB7C9\uC740 \uADF8\uB300\uB85C\uC600\uB2E4."
       effects: []
       probability: 1
-    - conditions: []
+    - conditions:
+      - conditionType: 0
+        targetId: Cook
+        parameter: 
+        value1: 
+        value2: 
       resultText: "\uCFE1\uC740 \uC77C\uC5B4\uB098\uC790\uB9C8\uC790 \uC2DD\uB7C9\uC744
         \uC138\uC5B4\uBCF4\uC558\uB2E4. \uC5B4\uC81C\uC640 \uD55C \uAC1C\uB3C4 \uB2E4\uB974\uC9C0
         \uC54A\uC558\uB2E4."

@@ -24,17 +24,27 @@ MonoBehaviour:
     parameter: 
     value1: 
     value2: 
-  eventType: 5
+  eventType: 6
   choices:
   - choiceType: 300
     amount: 0
     results:
-    - conditions: []
+    - conditions:
+      - conditionType: 0
+        targetId: Lead
+        parameter: 
+        value1: 
+        value2: 
       resultText: "\uB9AC\uB4DC\uB294 \uC544\uCE68 \uC810\uAC80\uC744 \uB9C8\uCCE4\uB2E4.
         \uAE30\uC9C0\uB294 \uADF8\uB300\uB85C\uC600\uB2E4."
       effects: []
       probability: 1
-    - conditions: []
+    - conditions:
+      - conditionType: 0
+        targetId: Lead
+        parameter: 
+        value1: 
+        value2: 
       resultText: "\uB9AC\uB4DC\uB294 \uAE34 \uC228\uC744 \uB0B4\uC26C\uC5C8\uB2E4.
         \uBC24\uC740 \uBB34\uC0AC\uD788 \uC9C0\uB098\uAC14\uB2E4."
       effects: []

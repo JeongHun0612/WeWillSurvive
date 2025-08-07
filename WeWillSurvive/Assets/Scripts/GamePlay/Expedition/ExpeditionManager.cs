@@ -24,13 +24,22 @@ namespace WeWillSurvive.Expedition
         private EExpeditionState _currentState;
         private ExpeditionData _lastExpeditionData;
 
+        public int TotalExpeditionCount = 0;
         public EExpeditionState CurrentState => _currentState;
 
         protected override void Awake()
         {
             base.Awake();
 
+            ResetState();
+        }
+
+        public void ResetState()
+        {
             _currentState = EExpeditionState.Normal;
+            _lastExpeditionData = null;
+
+            TotalExpeditionCount = 0;
         }
 
         public void ReadyExpedition()
@@ -42,6 +51,8 @@ namespace WeWillSurvive.Expedition
         {
             _currentState = EExpeditionState.Exploring;
             target.OnExploring();
+
+            TotalExpeditionCount++;
         }
 
         public void CompleteExpedition()

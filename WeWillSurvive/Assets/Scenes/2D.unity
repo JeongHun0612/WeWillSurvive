@@ -460,6 +460,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09e507c431eb0aa43ae4d8191025a5b5, type: 2}
   - {fileID: 11400000, guid: 209da0d58b34346469cf3fc8db62dd87, type: 2}
   - {fileID: 11400000, guid: 552a3b7a3e84a5c4db5ab3f5240d5251, type: 2}
+  TotalExpeditionCount: 0
 --- !u!1 &838413417
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,12 +1000,32 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e266b66280ad59947a486e02dbfbe8bd, type: 2}
   - {fileID: 11400000, guid: 1384726ff7dcb3e41ad0e1eeb2d76d24, type: 2}
   - {fileID: 11400000, guid: 99ac09b63cf8fe24c847b8b7588f2c10, type: 2}
-  _debugMainEventDatas:
+  _mainEventDatas:
+  - {fileID: 11400000, guid: 3c8687cccdf892b49b9bad3f808d2d7e, type: 2}
+  - {fileID: 11400000, guid: 8df72e761857a554681b87d0ec6bff62, type: 2}
+  - {fileID: 11400000, guid: bf515926fe58ae746a13c798494a1fd3, type: 2}
+  - {fileID: 11400000, guid: c84022c72639a4c43b53cfbba041abd1, type: 2}
+  - {fileID: 11400000, guid: 012332cb82314b34aba81756a530410a, type: 2}
+  - {fileID: 11400000, guid: c50c8c5dae0f43b408a2ebc6c6ec2af5, type: 2}
+  - {fileID: 11400000, guid: e0c5eb9711d0b0541adadcc68f5e506b, type: 2}
+  - {fileID: 11400000, guid: e403479ba91a2fd4db81d2a5b56faec1, type: 2}
+  - {fileID: 11400000, guid: 7ebdd96d4a3958041ac9d1025423faa3, type: 2}
+  - {fileID: 11400000, guid: 4671769103295d342af22e5d2edf048e, type: 2}
+  - {fileID: 11400000, guid: 6386b305aa4b47c46b2189154317a405, type: 2}
+  - {fileID: 11400000, guid: 6dc1766e5601b9f4d9bdbee7d3c4af94, type: 2}
+  - {fileID: 11400000, guid: a433a377f4333214484a9e82a61c9d95, type: 2}
+  - {fileID: 11400000, guid: ac2b4a53df9b8fd41a528e457cea5eef, type: 2}
+  - {fileID: 11400000, guid: d2823b11d7af8694d9dbaec2810af7f4, type: 2}
   - {fileID: 11400000, guid: 8d9c03a143643774f88b00f6b97d482e, type: 2}
   - {fileID: 11400000, guid: 9153087e7ccd66a41a7da01656e447c0, type: 2}
   - {fileID: 11400000, guid: 79a064e5d9c38d348b23d9938df203dd, type: 2}
   - {fileID: 11400000, guid: 97b9b31f3faa34344a582230a1972588, type: 2}
-  - {fileID: 11400000, guid: 18bec4b5c4f9dac43b3579eea0d48984, type: 2}
+  - {fileID: 11400000, guid: bb2d09dd4238bf14fb5e36981f8edc66, type: 2}
+  - {fileID: 11400000, guid: 27eec44539f59834b8efb3c402229c9a, type: 2}
+  - {fileID: 11400000, guid: b909098a389bb2244b1fcd3f9a5e5f9b, type: 2}
+  - {fileID: 11400000, guid: 1e6f1745dbb3dc147a81ead7ae4d9f8b, type: 2}
+  - {fileID: 11400000, guid: 4306636abd4393342bba5d4eb992889b, type: 2}
+  _testEventData: {fileID: 11400000, guid: 3c8687cccdf892b49b9bad3f808d2d7e, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

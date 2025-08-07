@@ -30,9 +30,10 @@ MonoBehaviour:
     \uC815\uC0C1\uC774\uB2E4. \uC774\uC0C1 \uC5C6\uC74C\uC744 \uC54C\uB9AC\uB294
     \uC2E0\uD638\uAC00 \uC5B4\uCA50\uC9C0 \uC870\uB871\uCC98\uB7FC \uB290\uAEF4\uC84C\uB2E4.\r"
   triggerConditions: []
-  eventType: 5
+  eventType: 6
   choices:
   - choiceType: 300
+    amount: 0
     results:
     - conditions: []
       resultText: "\uC544\uBB34 \uC77C\uB3C4 \uC5C6\uC5C8\uB358 \uBC24. \uC6B0\uB9AC\uB294

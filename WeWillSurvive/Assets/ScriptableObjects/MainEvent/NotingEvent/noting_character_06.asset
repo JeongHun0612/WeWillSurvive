@@ -24,17 +24,27 @@ MonoBehaviour:
     parameter: 
     value1: 
     value2: 
-  eventType: 5
+  eventType: 6
   choices:
   - choiceType: 300
     amount: 0
     results:
-    - conditions: []
+    - conditions:
+      - conditionType: 0
+        targetId: Bell
+        parameter: 
+        value1: 
+        value2: 
       resultText: "\uBCA8\uC740 \uC544\uCE68\uC5D0\uB3C4 \uAE30\uACC4\uB97C \uC0B4\uD3C8\uB2E4.
         \uB2E4\uD589\uD788 \uC791\uB3D9\uC740 \uC815\uC0C1\uC774\uB2E4."
       effects: []
       probability: 1
-    - conditions: []
+    - conditions:
+      - conditionType: 0
+        targetId: Bell
+        parameter: 
+        value1: 
+        value2: 
       resultText: "\uBCA8\uC740 \uB3C4\uAD6C\uB97C \uCC59\uACBC\uB2E4. \uC5B4\uC81C\uBCF4\uB2E4
         \uC88B\uC544\uC9C4 \uAC83\uB3C4, \uB098\uBE60\uC9C4 \uAC83\uB3C4 \uC5C6\uB2E4."
       effects: []

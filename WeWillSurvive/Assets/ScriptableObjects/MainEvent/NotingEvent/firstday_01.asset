@@ -38,10 +38,10 @@ MonoBehaviour:
     parameter: "\uC815\uC0C1"
     value1: 4
     value2: 4
-  eventType: 5
+  eventType: 6
   choices:
   - choiceType: 300
-    iconTexture: {fileID: 0}
+    amount: 0
     results:
     - conditions: []
       resultText: "\uBD88\uC2DC\uCC29\uD55C \uB2E4\uC74C \uB0A0, \uAE30\uC9C0 \uB0B4\uBD80\uB294

@@ -32,8 +32,6 @@ namespace WeWillSurvive
 
         public Action ChoiceImageSelected;
 
-        private LogManager LogManager => ServiceLocator.Get<LogManager>();
-
         public override UniTask InitializeAsync()
         {
             PanelType = EPanelType.MainEvent;
@@ -100,7 +98,9 @@ namespace WeWillSurvive
 
         public bool ShouldEnableNextButton()
         {
-            return _mainEventData == null || _mainEventData.eventType != EMainEventType.YesOrNo || _selectedOption != null;
+            return _mainEventData == null || 
+                (_mainEventData.eventType != EMainEventType.YesOrNo && _mainEventData.eventType != EMainEventType.Exploration) || 
+                _selectedOption != null;
         }
 
         private void UpdateChoiceOptions(MainEventData mainEventData)

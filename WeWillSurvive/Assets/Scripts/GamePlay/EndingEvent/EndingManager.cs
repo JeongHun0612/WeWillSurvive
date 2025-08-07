@@ -27,8 +27,8 @@ namespace WeWillSurvive
     public class EndingManager : MonoSingleton<EndingManager>
     {
         // 전체 엔딩 이벤트에 대한 전역 발생 주기
-        private const int MIN_GLOBAL_DAY_COUNT = 2;
-        private const int MAX_GLOBAL_DAY_COUNT = 3;
+        private const int MIN_GLOBAL_DAY_COUNT = 3;
+        private const int MAX_GLOBAL_DAY_COUNT = 4;
 
         [SerializeField] private List<EndingEventData> _endingEventDatas;
 
@@ -71,6 +71,8 @@ namespace WeWillSurvive
 
         public MainEventData GetEndingEventData()
         {
+            Debug.Log($"엔딩 이벤트 발생까지 남은 기간 : {_globalDayCounter}");
+
             // 전역 쿨타임이 아직 안됐으면 이벤트 발생 X
             if (_globalDayCounter > 0)
                 return null;

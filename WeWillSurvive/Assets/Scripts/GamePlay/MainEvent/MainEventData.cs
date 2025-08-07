@@ -52,6 +52,9 @@ namespace WeWillSurvive.MainEvent
         [InspectorName("캐릭터가 특정 상태(Status)를 보유하고 있지 않을 시")]
         CharacterNotHasStatus,
 
+        [InspectorName("총 탐사 횟수가 특정 값 이상 일시")]
+        TotalExpeditionCountUpper,
+
         [InspectorName("캐릭터의 탐사 횟수가 특정 값보다 높을 시")]
         CharacterExpeditionCountUpper,
 

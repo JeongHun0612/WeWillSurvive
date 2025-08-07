@@ -80,8 +80,12 @@ namespace WeWillSurvive
                 case EEffectType.AddItem:
                 case EEffectType.RemoveItem:
                     return System.Enum.GetNames(typeof(EItem));
-                case EEffectType.IncreaseStatus:
-                case EEffectType.DecreaseStatus:
+                case EEffectType.AdvanceEndingProgress:
+                case EEffectType.EndingComplete:
+                    return System.Enum.GetNames(typeof(EEndingType));
+                case EEffectType.WorsenStatus:
+                case EEffectType.RecoveryStatus:
+                case EEffectType.CharacterDaed:
                     return System.Enum.GetNames(typeof(ECharacter));
                 default:
                     return null;
@@ -92,8 +96,8 @@ namespace WeWillSurvive
         {
             switch (type)
             {
-                case EEffectType.IncreaseStatus:
-                case EEffectType.DecreaseStatus:
+                case EEffectType.WorsenStatus:
+                case EEffectType.RecoveryStatus:
                     return System.Enum.GetNames(typeof(EStatusType));
                 default:
                     return null;
@@ -113,8 +117,8 @@ namespace WeWillSurvive
         {
             switch (type)
             {
-                case EEffectType.IncreaseStatus:
-                case EEffectType.DecreaseStatus:
+                case EEffectType.WorsenStatus:
+                case EEffectType.RecoveryStatus:
                     return true;
                 default:
                     return false;
@@ -127,8 +131,8 @@ namespace WeWillSurvive
             {
                 case EEffectType.AddItem:
                 case EEffectType.RemoveItem:
-                case EEffectType.IncreaseStatus:
-                case EEffectType.DecreaseStatus:
+                case EEffectType.WorsenStatus:
+                case EEffectType.RecoveryStatus:
                     return true;
                 default:
                     return false;

@@ -24,17 +24,27 @@ MonoBehaviour:
     parameter: 
     value1: 
     value2: 
-  eventType: 5
+  eventType: 6
   choices:
   - choiceType: 300
     amount: 0
     results:
-    - conditions: []
+    - conditions:
+      - conditionType: 0
+        targetId: DrK
+        parameter: 
+        value1: 
+        value2: 
       resultText: "\uB2E5\uD130 K\uB294 \uC544\uCE68\uC5D0 \uC870\uC6A9\uD788 \uB300\uC6D0\uB4E4\uC744
         \uC0B4\uD3C8\uB2E4. \uBAA8\uB450 \uBB34\uC0AC\uD588\uB2E4."
       effects: []
       probability: 1
-    - conditions: []
+    - conditions:
+      - conditionType: 0
+        targetId: DrK
+        parameter: 
+        value1: 
+        value2: 
       resultText: "\uB2E5\uD130 K\uB294 \uC544\uCE68 \uC810\uAC80\uC744 \uB9C8\uCCE4\uB2E4.
         \uC774\uC0C1 \uC9D5\uD6C4\uB294 \uC5C6\uC5C8\uB2E4."
       effects: []

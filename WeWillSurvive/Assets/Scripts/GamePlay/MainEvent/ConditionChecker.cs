@@ -1,6 +1,7 @@
 ﻿using System;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
+using WeWillSurvive.Expedition;
 using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
 using WeWillSurvive.Status;
@@ -109,6 +110,21 @@ namespace WeWillSurvive
             var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(condition.targetId));
             var status = EnumUtil.GetEnumByDescription<EStatusType>(condition.parameter).Value;
             return !character.Status.HasStatus(status);
+        }
+    }
+
+    /// <summary>
+    /// 총 탐사 횟수가 특정 값 이상 일시
+    /// </summary>
+    public class TotalExpeditionCountUpperChecker : IConditionChecker
+    {
+        public EConditionType HandledConditionType => EConditionType.TotalExpeditionCountUpper;
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public bool IsMet(Condition condition)
+        {
+            int countUpper = int.Parse(condition.value1);
+            return ExpeditionManager.Instance.TotalExpeditionCount >= countUpper;
         }
     }
 

@@ -121,6 +121,7 @@ namespace WeWillSurvive
             switch (type)
             {
                 case EConditionType.AliveCount:
+                case EConditionType.TotalExpeditionCountUpper:
                 case EConditionType.DayCountUpper:
                     return false;
                 default:
@@ -146,6 +147,7 @@ namespace WeWillSurvive
             switch (type)
             {
                 case EConditionType.AliveCount:
+                case EConditionType.TotalExpeditionCountUpper:
                 case EConditionType.CharacterExpeditionCountUpper:
                 case EConditionType.CharacterExpeditionCountLower:
                 case EConditionType.ItemCountUpper:

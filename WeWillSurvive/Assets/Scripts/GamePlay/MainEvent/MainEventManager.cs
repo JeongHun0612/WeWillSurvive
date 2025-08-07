@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
 using WeWillSurvive.Item;
@@ -20,13 +19,18 @@ namespace WeWillSurvive.MainEvent
         [SerializeField] private List<MainEventData> _nothingHappensEventDatas = new();
 
         [Header("## MainEventData")]
-        public List<MainEventData> _debugMainEventDatas = new();
+        public List<MainEventData> _mainEventDatas = new();
+
+
+        [Header("## 테스트 이벤트")]
+        public MainEventData _testEventData;
 
         private MainEventData _lastSelectedEvent = null;
 
         private Dictionary<EConditionType, IConditionChecker> _conditionHandlers = new();
         private Dictionary<EEffectType, IResultApplicator> _effectApplicators = new();
 
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
         private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         protected override void Awake()
@@ -44,6 +48,9 @@ namespace WeWillSurvive.MainEvent
 
         public MainEventData GetDailyMainEvent()
         {
+            if (_testEventData != null)
+                return _testEventData;
+
             List<MainEventData> eventPool;
 
             if (GameManager.Instance.Day == 1)
@@ -62,7 +69,7 @@ namespace WeWillSurvive.MainEvent
 
                 // 탐사 준비 단계가 아니면 일반 이벤트, 맞으면 아무일도 없는 이벤트
                 bool isExpeditionReady = ExpeditionManager.Instance.CurrentState == EExpeditionState.Ready;
-                eventPool = isExpeditionReady ? _nothingHappensEventDatas : _debugMainEventDatas;
+                eventPool = isExpeditionReady ? _nothingHappensEventDatas : _mainEventDatas;
             }
 
             // 결정된 목록에서 유효한 이벤트를 찾아서 반환
@@ -155,7 +162,12 @@ namespace WeWillSurvive.MainEvent
 
                     // RemoveItem 타입이면 음수로 전달
                     if (effect.effectType == EEffectType.RemoveItem)
+                    {
+                        if (!ItemManager.HasItem(itemType))
+                            continue;
+
                         amount = -amount;
+                    }
 
                     resultItemDatas.Add(new ResultItemData(itemType, amount));
                 }

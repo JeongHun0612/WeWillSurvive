@@ -50,21 +50,6 @@ namespace WeWillSurvive
 
         public void OnSelected(bool isSelected)
         {
-            if (_choiceOptionIconData == null)
-            {
-                // Debugging
-                _image.sprite = null;
-
-                if (isSelected)
-                    _image.color = Color.gray;
-                else
-                    _image.color = Color.black;
-
-                return;
-            }
-
-            _image.color = Color.white;
-
             if (isSelected)
                 _image.sprite = _choiceOptionIconData.NormalSprite;
             else
