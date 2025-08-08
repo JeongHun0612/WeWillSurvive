@@ -23,8 +23,11 @@ namespace WeWillSurvive
         [Header("## 탐사를 나갈 수 없는 경우")]
         [SerializeField] private List<string> _expeditionImpossibleMessages;
 
-        [Header("## 탐사를 나간 후")]
+        [Header("## 탐사 출발 스크립트")]
         [SerializeField] private List<string> _expeditionStartMessages;
+
+        [Header("## 탐사 사망 스크립트")]
+        [SerializeField] private List<string> _expeditionDeadMessages;
 
         public string GetExpeditionReadyMessage(CharacterState state)
         {
@@ -44,6 +47,11 @@ namespace WeWillSurvive
         public string GetExpeditionStartMessage()
         {
             return GetRandomMessage(_expeditionStartMessages);
+        }
+
+        public string GetExpeditionDeadMessage()
+        {
+            return GetRandomMessage(_expeditionDeadMessages);
         }
 
         private string GetRandomMessage(List<string> messages)

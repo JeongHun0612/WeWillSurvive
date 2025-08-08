@@ -106,6 +106,12 @@ namespace WeWillSurvive.Character
             IsDead = true;
 
             State.SetState(EState.Dead);
+
+            // Dead Log 출력
+            string stateMessage = Data.StateMessageData.GetStateActiveMessage(EState.Dead);
+
+            LogManager.ClearCharacterStatusLog(Data.Type);
+            LogManager.AddCharacterStatusLog(Data.Type, stateMessage);
         }
 
         public void OnExploring()
@@ -126,33 +132,38 @@ namespace WeWillSurvive.Character
 
         private void OnExpeditionComplete()
         {
-            // 탐사 장소 랜덤 할당
-            var expeditionData = ExpeditionManager.Instance.GetRandomExpeditionData();
-
-            // 탐사 보상 및 로그 적용
-            foreach (var rewardData in expeditionData.RewardDatas)
-            {
-                var rewardItemResults = rewardData.GetRewardItemDatas();
-                foreach (var rewardItemResult in rewardItemResults)
-                {
-                    // 탐사 보상 아이템 추가
-                    ItemManager.AddItem(rewardItemResult.ItemType, rewardItemResult.Amount);
-                }
-
-                // 탐사 결과 로그
-                LogManager.AddExpeditionResultLog(rewardData.ExploringMessage, rewardItemResults);
-            }
-
             // 탐사 후 상태 적용
             Status.ApplyExpeditionResults();
 
-            if (IsDead)
-            {
-                Debug.Log("탐사 중 사망");
-            }
-
             ExpeditionManager.Instance.CompleteExpedition();
             IsExploring = false;
+
+            if (IsDead)
+            {
+                Debug.Log($"[{Name}] 탐사 중 사망");
+                var deadMessage = Data.ExpeditionMessageData.GetExpeditionDeadMessage();
+                LogManager.AddExpeditionResultLog(deadMessage);
+                return;
+            }
+
+            // 탐사 장소 랜덤 할당
+            var expeditionData = ExpeditionManager.Instance.GetRandomExpeditionData();
+
+            foreach (var rewardData in expeditionData.RewardDatas)
+            {
+                foreach (var rewardItem in rewardData.RewardItems)
+                {
+                    EItem item = rewardItem.RewardItem;
+                    int amount = rewardItem.GetRandomAmount();
+
+                    // 탐사 보상 아이템 추가
+                    ItemManager.AddItem(item, amount);
+                    LogManager.AddRewardItemData(new RewardItemData(item, amount));
+                }
+
+                // 탐사 결과 로그
+                LogManager.AddExpeditionResultLog(rewardData.ExploringMessage);
+            }
         }
     }
 }

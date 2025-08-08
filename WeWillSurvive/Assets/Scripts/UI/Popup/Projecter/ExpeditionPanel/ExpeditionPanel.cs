@@ -73,7 +73,7 @@ namespace WeWillSurvive
             {
                 if (_selectPanel.SelectCharacter != null)
                 {
-                    // TODO 탐사 시작
+                    // 탐사 시작
                     var target = _selectPanel.SelectCharacter.Owner;
                     ExpeditionManager.Instance.StartExpedition(target);
                 }

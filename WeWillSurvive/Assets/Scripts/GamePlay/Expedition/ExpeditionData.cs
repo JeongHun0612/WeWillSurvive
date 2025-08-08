@@ -53,9 +53,9 @@ namespace WeWillSurvive
         public List<ExpeditionRewardItem> RewardItems => _rewardItems;
         public string ExploringMessage => _exploringMessage;
 
-        public List<ResultItemData> GetRewardItemDatas()
+        public List<RewardItemData> GetRewardItemDatas()
         {
-            var results = new List<ResultItemData>();
+            var results = new List<RewardItemData>();
 
             foreach (var rewardItem in _rewardItems)
             {
@@ -64,7 +64,7 @@ namespace WeWillSurvive
                 if (amount <= 0)
                     continue;
 
-                results.Add(new ResultItemData(rewardItem.RewardItem, amount));
+                results.Add(new RewardItemData(rewardItem.RewardItem, amount));
             }
 
             return results;
