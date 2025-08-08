@@ -217,6 +217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeadRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 8496833421297011399, guid: bbc49fd57aa558a4db7a9e0340dfc6a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -249,6 +253,10 @@ PrefabInstance:
     - target: {fileID: 8566614840343203306, guid: 56035d3f1aa30f24d87c71d5cfc56646, type: 3}
       propertyPath: m_Name
       value: BellRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566614840343203306, guid: 56035d3f1aa30f24d87c71d5cfc56646, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9056728450014805278, guid: 56035d3f1aa30f24d87c71d5cfc56646, type: 3}
       propertyPath: m_Pivot.x
@@ -724,6 +732,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DrKRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 7521115491486628744, guid: 1741f80a84d835944afb0a52edb42970, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -836,6 +848,10 @@ PrefabInstance:
     - target: {fileID: 4168339598268200009, guid: 86a2a664de2695146b0f3062445d860b, type: 3}
       propertyPath: m_Name
       value: CookRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168339598268200009, guid: 86a2a664de2695146b0f3062445d860b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

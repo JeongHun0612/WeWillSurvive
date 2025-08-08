@@ -51,7 +51,7 @@ namespace WeWillSurvive
                 _itemObjects[0].GetComponent<Image>().sprite = _medickitSprites[(int)EMedicalKitSpriteType.Special];
                 _itemObjects[0].gameObject.SetActive(true);
 
-                _name = "SpecialMedicalKit";
+                _itemType = EItem.SpecialMedicKit;
                 Count = ItemManager.GetItemCount(EItem.SpecialMedicKit);
             }
             else
@@ -59,7 +59,7 @@ namespace WeWillSurvive
                 _itemObjects[0].GetComponent<Image>().sprite = _medickitSprites[(int)EMedicalKitSpriteType.Normal];
                 _itemObjects[0].gameObject.SetActive(count != 0f);
 
-                _name = "MedicalKit";
+                _itemType = EItem.MedicKit;
                 Count = ItemManager.GetItemCount(EItem.MedicKit);
             }
         }

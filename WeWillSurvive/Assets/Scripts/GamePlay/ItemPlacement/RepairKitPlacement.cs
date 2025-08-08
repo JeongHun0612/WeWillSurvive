@@ -51,15 +51,15 @@ namespace WeWillSurvive
                 _itemObjects[0].GetComponent<Image>().sprite = _repairkitSprites[(int)ERepairKitSpriteType.Special];
                 _itemObjects[0].gameObject.SetActive(true);
 
-                _name = "SpecialRepairKit";
+                _itemType = EItem.SpecialRepairKit;
                 Count = ItemManager.GetItemCount(EItem.SpecialRepairKit);
             }
             else
             {
                 _itemObjects[0].GetComponent<Image>().sprite = _repairkitSprites[(int)ERepairKitSpriteType.Normal];
                 _itemObjects[0].gameObject.SetActive(count != 0f);
-             
-                _name = "RepairKit";
+
+                _itemType = EItem.RepairKit;
                 Count = ItemManager.GetItemCount(EItem.RepairKit);
             }
         }

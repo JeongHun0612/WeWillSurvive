@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 226d998e36a6c5048a4b19dfcadb9aa8, type: 3}
+  m_Name: ItemDebugData
+  m_EditorClassIdentifier: 
+  Lead:
+    item: 100
+    isActive: 1
+    count: 1
+  Cook:
+    item: 101
+    isActive: 0
+    count: 0
+  Bell:
+    item: 102
+    isActive: 0
+    count: 0
+  DrK:
+    item: 103
+    isActive: 0
+    count: 0
+  Food:
+    item: 0
+    isActive: 1
+    count: 3
+  Water:
+    item: 2
+    isActive: 1
+    count: 3
+  SpecialFood:
+    item: 1
+    isActive: 0
+    count: 0
+  MedicKit:
+    item: 3
+    isActive: 1
+    count: 1
+  SpecialMedicKit:
+    item: 4
+    isActive: 0
+    count: 0
+  RepairKit:
+    item: 5
+    isActive: 1
+    count: 1
+  SpecialRepairKit:
+    item: 6
+    isActive: 0
+    count: 0
+  CommDevice:
+    item: 7
+    isActive: 0
+    count: 0
+  NiceSpacesuit:
+    item: 8
+    isActive: 1
+    count: 1
+  Gun:
+    item: 9
+    isActive: 1
+    count: 1
+  BoardGame:
+    item: 10
+    isActive: 0
+    count: 0
+  Ax:
+    item: 11
+    isActive: 0
+    count: 0
+  Pipe:
+    item: 12
+    isActive: 0
+    count: 0
+  Flashlight:
+    item: 13
+    isActive: 0
+    count: 0
+  Map:
+    item: 14
+    isActive: 0
+    count: 0

@@ -56,25 +56,17 @@ namespace WeWillSurvive.Item
                 }
             }
 
-            // Temp
-            AddItem(EItem.Lead);
-            AddItem(EItem.Cook);
-            AddItem(EItem.DrK);
-            //AddItem(EItem.Bell);
+            // Item Deubg 전용
+            #if UNITY_EDITOR
+            var itemDebugData = await ResourceManager.LoadAssetAsync<ItemDebugData>("ItemDebugData");
+            foreach (var itemData in itemDebugData.GetItemDatas())
+            {
+                if (!itemData.isActive)
+                    continue;
 
-            AddItem(EItem.Food, 7.25f);
-            AddItem(EItem.Water, 5.25f);
-            AddItem(EItem.BoardGame);
-            AddItem(EItem.Gun);
-            AddItem(EItem.MedicKit);
-            AddItem(EItem.RepairKit);
-            AddItem(EItem.NiceSpacesuit);
-            AddItem(EItem.CommDevice);
-            AddItem(EItem.Ax);
-            AddItem(EItem.Pipe);
-            AddItem(EItem.Flashlight);
-            AddItem(EItem.Map);
-            //AddItem(EItem.Starmac);
+                AddItem(itemData.item, itemData.count);
+            }
+            #endif
         }
 
         public void Dipose()
@@ -84,11 +76,13 @@ namespace WeWillSurvive.Item
 
         public void AddItem(EItem item, float count = 1f)
         {
+            if (count <= 0f)
+                count = 1f;
+
             if (Items.TryGetValue(item, out var remain))
             {
                 if (item == EItem.Food || item == EItem.Water)
                     Items[item] = remain + count;
-
             }
             else
             {

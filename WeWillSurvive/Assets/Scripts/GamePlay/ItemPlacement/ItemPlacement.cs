@@ -11,13 +11,11 @@ namespace WeWillSurvive
     public class ItemPlacement : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] protected EItem _itemType;
-        [SerializeField] protected string _name;
         [SerializeField] protected List<GameObject> _itemObjects;
 
         private ShowStatus _showStatus;
 
         public EItem ItemType => _itemType;
-        public string Name => _name;
         public float Count { get; protected set; }
 
         public async virtual UniTask InitializeAsync()
