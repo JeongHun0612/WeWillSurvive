@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Item;
@@ -13,7 +14,15 @@ namespace WeWillSurvive.Log
         private List<string> _mainEventResultLogs = new();
         private List<string> _characterEventResultLogs = new();
         private List<string> _expeditionResultLogs = new();
-        private Dictionary<ECharacter, List<string>> _characterStatusLogs = new();
+        private Dictionary<ECharacter, List<string>> _characterStatusLogs = new()
+        {
+            [ECharacter.Lead] = new(),
+            [ECharacter.Cook] = new(),
+            [ECharacter.Bell] = new(),
+            [ECharacter.DrK] = new(),
+        };
+
+        private List<RewardItemData> _rewardItemDatas = new();
 
         public async UniTask InitializeAsync()
         {
@@ -22,30 +31,55 @@ namespace WeWillSurvive.Log
 
         public void AddCharacterEventResultLog(string message) => AddLogToList(_characterEventResultLogs, message);
 
-        public void AddMainEventResultLog(string message, List<ResultItemData> resultItemDatas = null)
+        public void AddMainEventResultLog(string message)
         {
-            string logText = message + '\n' + GetItemLogText(resultItemDatas);
+            string logText = message;
+            if (_rewardItemDatas != null)
+            {
+                logText = logText + '\n' + GetRewardItemLogText(_rewardItemDatas);
+                _rewardItemDatas.Clear();
+            }
+
             AddLogToList(_mainEventResultLogs, logText);
         }
 
-        public void AddExpeditionResultLog(string message, List<ResultItemData> resultItemDatas = null)
+        public void AddExpeditionResultLog(string message)
         {
-            string logText = message + '\n' + GetItemLogText(resultItemDatas);
+            string logText = message;
+            if (_rewardItemDatas != null)
+            {
+                logText = logText + '\n' + GetRewardItemLogText(_rewardItemDatas);
+                _rewardItemDatas.Clear();
+            }
+
             AddLogToList(_expeditionResultLogs, logText);;
         }
 
         public void AddCharacterStatusLog(ECharacter character, string message)
         {
-            if (_characterStatusLogs == null)
-                _characterStatusLogs = new();
-
-            if (!_characterStatusLogs.TryGetValue(character, out var logMessages))
+            if (_characterStatusLogs.TryGetValue(character, out var logMessages))
             {
-                _characterStatusLogs[character] = new List<string> { message };
+                logMessages.Add(message);
             }
             else
             {
-                logMessages.Add(message);
+                Debug.LogWarning($"[AddCharacterStatusLog] : {character} 타입의 로그 리스트가 존재하지 않습니다.");
+            }
+        }
+
+        public void AddRewardItemData(RewardItemData rewardItemData)
+        {
+            if (_rewardItemDatas == null)
+                _rewardItemDatas = new();
+
+            _rewardItemDatas.Add(rewardItemData);
+        }
+
+        public void ClearCharacterStatusLog(ECharacter character)
+        {
+            if (_characterStatusLogs.ContainsKey(character))
+            {
+                _characterStatusLogs[character].Clear();
             }
         }
 
@@ -65,13 +99,13 @@ namespace WeWillSurvive.Log
             AppendSection(_characterEventResultLogs);
             AppendSection(_expeditionResultLogs);
 
-            if (_characterStatusLogs.Count > 0)
+            foreach (var statusLog in _characterStatusLogs.Values)
             {
-                foreach (var kvp in _characterStatusLogs)
-                {
-                    sb.AppendLine(string.Join("\n", kvp.Value));
-                    sb.AppendLine();
-                }
+                if (statusLog == null || statusLog.Count <= 0)
+                    continue;
+
+                sb.AppendLine(string.Join("\n", statusLog));
+                sb.AppendLine();
             }
 
             return sb.ToString().TrimEnd();
@@ -82,7 +116,13 @@ namespace WeWillSurvive.Log
             _mainEventResultLogs?.Clear();
             _characterEventResultLogs?.Clear();
             _expeditionResultLogs?.Clear();
-            _characterStatusLogs?.Clear();
+
+            foreach (var statusLog in _characterStatusLogs.Values)
+            {
+                statusLog?.Clear();
+            }
+
+            _rewardItemDatas?.Clear();
         }
 
         private void AddLogToList(List<string> target, string message)
@@ -93,12 +133,12 @@ namespace WeWillSurvive.Log
             target.Add(message);
         }
 
-        private string GetItemLogText(List<ResultItemData> itemLogEntries)
+        private string GetRewardItemLogText(List<RewardItemData> rewardItemDatas)
         {
-            if (itemLogEntries == null || !itemLogEntries.Any())
+            if (rewardItemDatas == null || !rewardItemDatas.Any())
                 return string.Empty;
 
-            var itemLogStrings = itemLogEntries
+            var itemLogStrings = rewardItemDatas
                 .Where(entry => entry.Amount != 0) // Amount가 0이 아닌 항목만 필터링
                 .Select(entry =>
                 {

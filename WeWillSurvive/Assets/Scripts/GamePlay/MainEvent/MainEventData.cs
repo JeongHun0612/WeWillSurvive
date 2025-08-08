@@ -114,16 +114,16 @@ namespace WeWillSurvive.MainEvent
 
     public enum EEffectType
     {
-        [Description("아이템 획득")] AddItem,
-        [Description("아이템 삭제")] RemoveItem,
+        [InspectorName("아이템 획득")] AddItem,
+        [InspectorName("아이템 삭제")] RemoveItem,
 
-        [Description("엔딩 분기 진행")] AdvanceEndingProgress,
-        [Description("엔딩 완료")] EndingComplete,
+        [InspectorName("엔딩 분기 진행")] AdvanceEndingProgress,
+        [InspectorName("엔딩 완료")] EndingComplete,
 
-        [Description("스테이터스 악화")] WorsenStatus,
-        [Description("스테이터스 치유")] RecoveryStatus,
+        [InspectorName("스테이터스 악화")] WorsenStatus,
+        [InspectorName("스테이터스 치유")] RecoveryStatus,
 
-        [Description("캐릭터 사망")] CharacterDaed
+        [InspectorName("캐릭터 사망")] CharacterDaed
     }
     #endregion
 

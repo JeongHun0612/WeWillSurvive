@@ -85,15 +85,7 @@ namespace WeWillSurvive
             }
 
             int currentLevel = (int)(object)_level;
-            int maxLevel = System.Enum.GetValues(typeof(TLevel)).Length - 1;
-
             int targetLevel = currentLevel + step;
-
-            if (targetLevel > maxLevel)
-            {
-                _owner.OnDead();
-                return;
-            }
 
             // 레벨 업데이트
             _level = (TLevel)(object)targetLevel;
@@ -133,6 +125,14 @@ namespace WeWillSurvive
 
         protected void ApplyCurrentLevelState()
         {
+            int maxLevel = System.Enum.GetValues(typeof(TLevel)).Length - 1;
+
+            if ((int)(object)_level > maxLevel)
+            {
+                _owner.OnDead();
+                return;
+            }
+
             if (LevelStateMap.TryGetValue(_level, out var state))
             {
                 // Log 출력

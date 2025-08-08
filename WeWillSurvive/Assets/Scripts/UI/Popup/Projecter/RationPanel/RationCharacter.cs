@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -25,6 +25,8 @@ namespace WeWillSurvive
         private Sprite _normalSprite;
         private Sprite _notingSprite;
 
+        private CharacterBase _owner;
+
         private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
@@ -36,16 +38,8 @@ namespace WeWillSurvive
             _foodItem.Initialize();
             _waterItem.Initialize();
             _medicalKitItem.Initialize();
-        }
 
-        public void Initialize()
-        {
-            _normalSprite = SpriteManager.Instance.GetSprite(ESpriteAtlas.UI_Atlas, $"{_characterType}_Icon_Normal");
-            _notingSprite = SpriteManager.Instance.GetSprite(ESpriteAtlas.UI_Atlas, $"{_characterType}_Icon_Disabled");
-
-            _foodItem.Initialize();
-            _waterItem.Initialize();
-            _medicalKitItem.Initialize();
+            _owner = CharacterManager.GetCharacter(_characterType);
         }
 
         public void RegisterEvent(RationPanel rationPanel)
@@ -59,9 +53,7 @@ namespace WeWillSurvive
 
         public void Refresh()
         {
-            var character = CharacterManager.GetCharacter(_characterType);
-
-            if (character.IsDead || character.IsExploring)
+            if (!_owner.IsInShelter)
             {
                 DisabledRationCharacter();
                 return;
@@ -69,26 +61,25 @@ namespace WeWillSurvive
 
             _characterImage.sprite = _normalSprite;
 
-            // RationItem �ʱ�ȭ
+            // RationItem 초기화
             _waterItem.Refresh();
             _foodItem.Refresh();
             _medicalKitItem.Refresh();
 
-            bool isInjured = character.State.HasState(EState.Injured | EState.Sick);
+            bool isInjured = _owner.State.HasState(EState.Injured | EState.Sick);
             _medicalKitItem.gameObject.SetActive(isInjured);
 
 
-            // StatePanel �ʱ�ȭ
-            _statePanel.SetStateText(character.GetFormatStateString());
+            // StatePanel 초기화
+            _statePanel.SetStateText(_owner.GetFormatStateString());
             _statePanel.HidePanel();
         }
 
         public void ApplyRationItem()
         {
-            CharacterBase target = CharacterManager.GetCharacter(_characterType);
-            _foodItem.UsedItem(target);
-            _waterItem.UsedItem(target);
-            _medicalKitItem.UsedItem(target);
+            _foodItem.UsedItem(_owner);
+            _waterItem.UsedItem(_owner);
+            _medicalKitItem.UsedItem(_owner);
         }
 
         private void DisabledRationCharacter()
@@ -101,6 +92,9 @@ namespace WeWillSurvive
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (!_owner.IsInShelter)
+                return;
+
             _statePanel.ShowPanel();
         }
 

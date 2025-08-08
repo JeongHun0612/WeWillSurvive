@@ -6,7 +6,7 @@ using WeWillSurvive.Item;
 
 namespace WeWillSurvive
 {
-    [CreateAssetMenu(fileName = "ItemDebugData", menuName = "Scriptable Objects/ItemDebugData")]
+    [CreateAssetMenu(fileName = "ItemDebugData", menuName = "Scriptable Objects/Debug/ItemDebugData")]
     public class ItemDebugData : ScriptableObject
     {
         [System.Serializable]

@@ -54,6 +54,11 @@ namespace WeWillSurvive.Status
         public override void OnNewDay()
         {
             ApplyCurrentLevelState();
+        }
+
+        public override void RecoveryStatus(int step = 1)
+        {
+            base.RecoveryStatus(step);
 
             if (_level == 0)
             {

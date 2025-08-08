@@ -3,6 +3,7 @@ using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Item;
+using WeWillSurvive.Log;
 using WeWillSurvive.MainEvent;
 using WeWillSurvive.Status;
 
@@ -23,12 +24,14 @@ namespace WeWillSurvive
         public EEffectType HandledEffectType => EEffectType.AddItem;
 
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         public void Apply(EventEffect effect)
         {
             EItem item = Enum.Parse<EItem>(effect.targetId);
             float count = int.Parse(effect.value);
             ItemManager.AddItem(item, count);
+            LogManager.AddRewardItemData(new RewardItemData(item, (int)count));
         }
     }
 
@@ -40,12 +43,14 @@ namespace WeWillSurvive
         public EEffectType HandledEffectType => EEffectType.RemoveItem;
 
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         public void Apply(EventEffect effect)
         {
             EItem item = Enum.Parse<EItem>(effect.targetId);
             float count = int.Parse(effect.value);
             ItemManager.UsedItem(item, count);
+            LogManager.AddRewardItemData(new RewardItemData(item, (int)-count));
         }
     }
 

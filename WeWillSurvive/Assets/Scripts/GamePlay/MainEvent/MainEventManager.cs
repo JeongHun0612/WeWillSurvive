@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
 using WeWillSurvive.Item;
@@ -26,6 +27,7 @@ namespace WeWillSurvive.MainEvent
         public MainEventData _testEventData;
 
         private MainEventData _lastSelectedEvent = null;
+        private EventChoice _pendingEventChoice = null;
 
         private Dictionary<EConditionType, IConditionChecker> _conditionHandlers = new();
         private Dictionary<EEffectType, IResultApplicator> _effectApplicators = new();
@@ -44,12 +46,22 @@ namespace WeWillSurvive.MainEvent
         public void ResetState()
         {
             _lastSelectedEvent = null;
+            _pendingEventChoice = null;
         }
 
         public MainEventData GetDailyMainEvent()
         {
             if (_testEventData != null)
+            {
+                foreach (var item in _testEventData.triggerConditions)
+                {
+                    EState state = (EState)int.Parse(item.parameter);
+                    Debug.Log(state);
+                }
+                
+
                 return _testEventData;
+            }
 
             List<MainEventData> eventPool;
 
@@ -78,11 +90,20 @@ namespace WeWillSurvive.MainEvent
             return choseEvent;
         }
 
-        public void ProcessChoice(EventChoice choice)
+        public void QueueEventChoiceForProcessing(EventChoice choice)
         {
-            if (choice == null) return;
+            _pendingEventChoice = choice;
+        }
 
-            EventResult result = GetEventResultFromChoice(choice);
+        public void ProcessPendingChoice()
+        {
+            if (_pendingEventChoice == null)
+            {
+                Debug.Log("처리할 이벤트 선택지가 없습니다.");
+                return;
+            }
+
+            EventResult result = GetEventResultFromChoice(_pendingEventChoice);
 
             if (result == null)
             {
@@ -90,7 +111,9 @@ namespace WeWillSurvive.MainEvent
                 return;
             }
 
-            ApplyResultEffect(result);
+            ApplyEventResult(result);
+
+            _pendingEventChoice = null;
         }
 
         private MainEventData GetValidMainEvent(List<MainEventData> mainEventDatas)
@@ -147,32 +170,17 @@ namespace WeWillSurvive.MainEvent
             return validResults[0];
         }
 
-        private void ApplyResultEffect(EventResult eventResult)
+        private void ApplyEventResult(EventResult eventResult)
         {
             // 이벤트 결과 적용
-            var resultItemDatas = new List<ResultItemData>();
             foreach (var effect in eventResult.effects)
             {
                 ApplyResultEffect(effect);
-
-                if (effect.effectType == EEffectType.AddItem || effect.effectType == EEffectType.RemoveItem)
-                {
-                    EItem itemType = Enum.Parse<EItem>(effect.targetId);
-                    int amount = int.Parse(effect.value);
-
-                    // RemoveItem 타입이면 음수로 전달
-                    if (effect.effectType == EEffectType.RemoveItem)
-                    {
-                        amount = -amount;
-                    }
-
-                    resultItemDatas.Add(new ResultItemData(itemType, amount));
-                }
             }
 
             // 이벤트 결과 메시지 Log로 전달
             var resultMessage = eventResult.resultText;
-            LogManager.AddMainEventResultLog(resultMessage, resultItemDatas);
+            LogManager.AddMainEventResultLog(resultMessage);
         }
 
         private bool IsConditionsMet(List<Condition> conditions)

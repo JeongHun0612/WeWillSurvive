@@ -37,10 +37,11 @@ namespace WeWillSurvive.Core
         {
             Day = 0;
 
+            CharacterManager.SettingCharacter();
+
             MainEventManager.Instance.ResetState();
             EndingManager.Instance.ResetState();
 
-            CharacterManager.SettingCharacter();
             FarmingReportManager.Instance.UpdateFarmingReport();
 
             StartNextDay();
@@ -52,6 +53,9 @@ namespace WeWillSurvive.Core
             {
                 // 플레이어 상태 업데이트
                 CharacterManager.UpdateCharacterStatus();
+
+                // 메인 이벤트 결과 업데이트
+                MainEventManager.Instance.ProcessPendingChoice();
 
                 // 엔딩 매니져 업데이트
                 EndingManager.Instance.OnNewDay();

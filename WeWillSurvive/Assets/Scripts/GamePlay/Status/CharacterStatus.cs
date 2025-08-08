@@ -21,14 +21,15 @@ namespace WeWillSurvive.Status
             _statuses.Clear();
 
             AddStatus(EStatusType.Hunger);
+            //WorsenStatus(EStatusType.Hunger, 2);
+
             AddStatus(EStatusType.Thirst);
+            //WorsenStatus(EStatusType.Thirst, 2);
+
 
             // Debug
-            AddStatus(EStatusType.Injury);
-            WorsenStatus(EStatusType.Injury);
-
-            AddStatus(EStatusType.Anxious);
-            WorsenStatus(EStatusType.Anxious);
+            //AddStatus(EStatusType.Injury);
+            //AddStatus(EStatusType.Anxious);
         }
 
         public void OnNewDay()

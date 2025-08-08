@@ -116,7 +116,7 @@ namespace WeWillSurvive.Item
                 }
 
                 Items[item] -= usedCount;
-                Debug.Log($"[아이템 사용] {item} {usedCount}개 | Total : {Items[item]}개");
+                Debug.Log($"[아이템 사용] {item} | Total : {Items[item]}개");
 
                 if (Items[item] == 0f)
                 {
@@ -171,7 +171,7 @@ namespace WeWillSurvive.Item
     }
 
     [System.Serializable]
-    public class ResultItemData
+    public class RewardItemData
     {
         [SerializeField]
         private EItem _itemType;
@@ -182,7 +182,7 @@ namespace WeWillSurvive.Item
         public EItem ItemType => _itemType;
         public int Amount => _amount;
 
-        public ResultItemData(EItem itemType, int amount)
+        public RewardItemData(EItem itemType, int amount)
         {
             _itemType = itemType;
             _amount = amount;
