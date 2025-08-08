@@ -15,7 +15,7 @@ namespace WeWillSurvive
             UIManager.Instance.ClosePopups(remain: 1);
             UI_StatePanel ui = UIManager.Instance.ShowPopup<UI_StatePanel>();
 
-            ui.SetPanel(_statusPanelPosition, text);
+            ui.ShowStatePanel(_statusPanelPosition, text);
         }
     }
 }

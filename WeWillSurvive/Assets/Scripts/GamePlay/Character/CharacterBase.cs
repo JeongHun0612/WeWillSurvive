@@ -90,6 +90,14 @@ namespace WeWillSurvive.Character
             Morale = morale;
         }
 
+        public string GetFormatStateString()
+        {
+            string styledName = $"<color=#000000><size=125%>{Name}</size></color>";
+            string stateText = State.FormatStateString();
+
+            return $"{styledName}\n{stateText}";
+        }
+
         public void OnDead()
         {
             if (IsDead) return;
@@ -137,6 +145,11 @@ namespace WeWillSurvive.Character
 
             // 탐사 후 상태 적용
             Status.ApplyExpeditionResults();
+
+            if (IsDead)
+            {
+                Debug.Log("탐사 중 사망");
+            }
 
             ExpeditionManager.Instance.CompleteExpedition();
             IsExploring = false;

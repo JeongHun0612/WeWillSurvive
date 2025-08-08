@@ -1,12 +1,13 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 
 namespace WeWillSurvive
 {
-    public class RationCharacter : MonoBehaviour
+    public class RationCharacter : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
     {
         [SerializeField] private ECharacter _characterType;
 
@@ -17,6 +18,9 @@ namespace WeWillSurvive
         [SerializeField] private RationItem _foodItem;
         [SerializeField] private RationItem _waterItem;
         [SerializeField] private RationItem _medicalKitItem;
+
+        [Header("## State Panel")]
+        [SerializeField] private StatePanel _statePanel;
 
         private Sprite _normalSprite;
         private Sprite _notingSprite;
@@ -65,12 +69,18 @@ namespace WeWillSurvive
 
             _characterImage.sprite = _normalSprite;
 
+            // RationItem 초기화
             _waterItem.Refresh();
             _foodItem.Refresh();
             _medicalKitItem.Refresh();
 
             bool isInjured = character.State.HasState(EState.Injured | EState.Sick);
             _medicalKitItem.gameObject.SetActive(isInjured);
+
+
+            // StatePanel 초기화
+            _statePanel.SetStateText(character.GetFormatStateString());
+            _statePanel.HidePanel();
         }
 
         public void ApplyRationItem()
@@ -87,6 +97,16 @@ namespace WeWillSurvive
             _waterItem.gameObject.SetActive(false);
             _foodItem.gameObject.SetActive(false);
             _medicalKitItem.gameObject.SetActive(false);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            _statePanel.ShowPanel();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _statePanel.HidePanel();
         }
     }
 }

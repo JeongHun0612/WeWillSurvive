@@ -1,21 +1,24 @@
-using TMPro;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UI;
 using WeWillSurvive.UI;
 
 namespace WeWillSurvive
 {
     public class UI_StatePanel : UI_Popup
     {
-        [SerializeField] private RectTransform _panel;
-        [SerializeField] private TMP_Text _stateText;
+        [SerializeField] private StatePanel _statePanel;
 
-        public void SetPanel(Vector2 panelPos, string text)
+        public async override UniTask InitializeAsync()
         {
-            _panel.localPosition = panelPos;
-            _stateText.text = text;
+            await UniTask.CompletedTask;
+        }
 
-            LayoutRebuilder.ForceRebuildLayoutImmediate(_panel);
+        public void ShowStatePanel(Vector2 panelPos, string text)
+        {
+            _statePanel.MovePanelPosition(panelPos);
+            _statePanel.SetStateText(text);
+
+            _statePanel.ShowPanel();
         }
     }
 }

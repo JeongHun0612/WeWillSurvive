@@ -54,8 +54,7 @@ namespace WeWillSurvive
             if (_showStatus == null)
                 return;
 
-            string stateText = Owner.State.FormatStateString();
-            _showStatus.ShowStatusPanel(stateText);
+            _showStatus.ShowStatusPanel(Owner.GetFormatStateString());
         }
     }
 }

@@ -18,24 +18,24 @@ MonoBehaviour:
     count: 1
   Cook:
     item: 101
-    isActive: 0
-    count: 0
+    isActive: 1
+    count: 1
   Bell:
     item: 102
-    isActive: 0
-    count: 0
+    isActive: 1
+    count: 1
   DrK:
     item: 103
-    isActive: 0
-    count: 0
+    isActive: 1
+    count: 1
   Food:
     item: 0
     isActive: 1
-    count: 3
+    count: 4.5
   Water:
     item: 2
     isActive: 1
-    count: 3
+    count: 4.5
   SpecialFood:
     item: 1
     isActive: 0
@@ -58,8 +58,8 @@ MonoBehaviour:
     count: 0
   CommDevice:
     item: 7
-    isActive: 0
-    count: 0
+    isActive: 1
+    count: 1
   NiceSpacesuit:
     item: 8
     isActive: 1
@@ -70,21 +70,21 @@ MonoBehaviour:
     count: 1
   BoardGame:
     item: 10
-    isActive: 0
-    count: 0
+    isActive: 1
+    count: 1
   Ax:
     item: 11
-    isActive: 0
-    count: 0
+    isActive: 1
+    count: 1
   Pipe:
     item: 12
-    isActive: 0
-    count: 0
+    isActive: 1
+    count: 1
   Flashlight:
     item: 13
-    isActive: 0
-    count: 0
+    isActive: 1
+    count: 1
   Map:
     item: 14
-    isActive: 0
-    count: 0
+    isActive: 1
+    count: 1
