@@ -952,10 +952,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1452.8001708984375,
-            "y": -1144.800048828125,
-            "width": 208.0,
-            "height": 301.5999755859375
+            "x": -1452.7999267578125,
+            "y": -1134.39990234375,
+            "width": 207.9998779296875,
+            "height": 301.59991455078127
         }
     },
     "m_Slots": [
@@ -2589,7 +2589,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
     "m_ObjectId": "758e1f50b69b4985a6ec492703180ce5",
     "m_Id": 0,
-    "m_DisplayName": "Image",
+    "m_DisplayName": "_MainTex",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -3479,7 +3479,7 @@
     "m_ObjectId": "a041498cd331466eb074ef39fcbfc622",
     "m_Title": "make natural cutoff form L to R",
     "m_Position": {
-        "x": -823.9998779296875,
+        "x": -824.0,
         "y": -1559.9998779296875
     }
 }
@@ -3759,7 +3759,7 @@
     "m_ShaderOutputName": "B",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 2.0,
+        "x": 1.0,
         "y": 2.0,
         "z": 2.0,
         "w": 2.0
@@ -3779,10 +3779,10 @@
     "m_Guid": {
         "m_GuidSerialized": "6277016f-1c99-4b34-85df-3810707ae0f6"
     },
-    "m_Name": "Image",
+    "m_Name": "_MainTex",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Image",
-    "m_DefaultReferenceName": "_Image",
+    "m_RefNameGeneratedByDisplayName": "_MainTex",
+    "m_DefaultReferenceName": "_MainTex",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -4813,7 +4813,7 @@
     "m_ObjectId": "df239234c13b4c2d9d16e4f31f0f0413",
     "m_Title": "xAmount on Obj",
     "m_Position": {
-        "x": -1810.4000244140625,
+        "x": -1810.400146484375,
         "y": -1204.800048828125
     }
 }
