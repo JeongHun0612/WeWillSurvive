@@ -4,7 +4,6 @@ using WeWillSurvive.Character;
 using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
 using WeWillSurvive.Status;
-using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
@@ -27,35 +26,29 @@ namespace WeWillSurvive
 
             var actionType = (EActionType)actionTypeProp.enumValueIndex;
 
-
-            //var descriptions = EnumUtil.GetEnumDescriptions<EEffectType>();
-            //effectTypeTypeProp.enumValueIndex = EditorGUI.Popup(rect, "이벤트 결과 타입", effectTypeTypeProp.enumValueIndex, descriptions);
-            //rect.y += EditorGUIUtility.singleLineHeight + 2;
-
-            //var conditionType = (EEffectType)effectTypeTypeProp.enumValueIndex;
-
-            //// TargetID
-            //if (NeedsTargetId(conditionType))
-            //{
-            //    var options = GetTargetIdOptions(conditionType);
-            //    DrawConditionalPopupField(options, "Target ID", rect, targetIdProp);
-            //    rect.y += EditorGUIUtility.singleLineHeight + 2;
-            //}
-
-            //// Parameter
-            //if (NeedsParameter(conditionType))
-            //{
-            //    var options = GetParameterOptions(conditionType);
-            //    DrawConditionalPopupField(options, "Parameter", rect, parameterProp);
-            //    rect.y += EditorGUIUtility.singleLineHeight + 2;
-            //}
-
-            //// Value
-            //if (NeedsValue(conditionType))
-            //{
-            //    EditorGUI.PropertyField(rect, valueProp);
-            //    rect.y += EditorGUIUtility.singleLineHeight + 2;
-            //}
+            switch (actionType)
+            {
+                case EActionType.AddItem:
+                case EActionType.RemoveItem:
+                    PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
+                    PropertyUtil.DrawIntField(ref rect, "갯수", valueProp);
+                    break;
+                case EActionType.AdvanceEndingProgress:
+                case EActionType.EndingComplete:
+                    PropertyUtil.DrawEnumPopupAsString<EEndingType>(ref rect, "엔딩", targetIdProp);
+                    break;
+                case EActionType.WorsenStatus:
+                case EActionType.RecoveryStatus:
+                    PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
+                    PropertyUtil.DrawIntField(ref rect, "단계", valueProp);
+                    break;
+                case EActionType.CharacterDaed:
+                    PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    break;
+                default:
+                    break;
+            }
 
             EditorGUI.EndProperty();
         }
@@ -64,85 +57,5 @@ namespace WeWillSurvive
         {
             return (EditorGUIUtility.singleLineHeight + 2) * 4;
         }
-
-        //private void DrawConditionalPopupField(string[] options, string label, Rect rect, SerializedProperty prop)
-        //{
-        //    if (options != null && options.Length > 0)
-        //    {
-        //        int selectedIndex = Mathf.Max(0, System.Array.IndexOf(options, prop.stringValue));
-        //        int newIndex = EditorGUI.Popup(rect, label, selectedIndex, options);
-        //        prop.stringValue = options[newIndex];
-        //    }
-        //    else
-        //    {
-        //        prop.stringValue = EditorGUI.TextField(rect, label, prop.stringValue);
-        //    }
-        //}
-
-        //private string[] GetTargetIdOptions(EEffectType type)
-        //{
-        //    switch (type)
-        //    {
-        //        case EEffectType.AddItem:
-        //        case EEffectType.RemoveItem:
-        //            return System.Enum.GetNames(typeof(EItem));
-        //        case EEffectType.AdvanceEndingProgress:
-        //        case EEffectType.EndingComplete:
-        //            return System.Enum.GetNames(typeof(EEndingType));
-        //        case EEffectType.WorsenStatus:
-        //        case EEffectType.RecoveryStatus:
-        //        case EEffectType.CharacterDaed:
-        //            return System.Enum.GetNames(typeof(ECharacter));
-        //        default:
-        //            return null;
-        //    }
-        //}
-
-        //private string[] GetParameterOptions(EEffectType type)
-        //{
-        //    switch (type)
-        //    {
-        //        case EEffectType.WorsenStatus:
-        //        case EEffectType.RecoveryStatus:
-        //            return System.Enum.GetNames(typeof(EStatusType));
-        //        default:
-        //            return null;
-        //    }
-        //}
-
-        //private bool NeedsTargetId(EEffectType type)
-        //{
-        //    switch (type)
-        //    {
-        //        default:
-        //            return true;
-        //    }
-        //}
-
-        //private bool NeedsParameter(EEffectType type)
-        //{
-        //    switch (type)
-        //    {
-        //        case EEffectType.WorsenStatus:
-        //        case EEffectType.RecoveryStatus:
-        //            return true;
-        //        default:
-        //            return false;
-        //    }
-        //}
-
-        //private bool NeedsValue(EEffectType type)
-        //{
-        //    switch (type)
-        //    {
-        //        case EEffectType.AddItem:
-        //        case EEffectType.RemoveItem:
-        //        case EEffectType.WorsenStatus:
-        //        case EEffectType.RecoveryStatus:
-        //            return true;
-        //        default:
-        //            return false;
-        //    }
-        //}
     }
 }

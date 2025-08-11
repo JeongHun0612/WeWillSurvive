@@ -1,17 +1,17 @@
-
-using System.ComponentModel;
+ï»¿
+using UnityEngine;
 
 namespace WeWillSurvive.Status
 {
     public enum EStatusType
     {
-        [Description("¹è°íÇÄ")]
+        [InspectorName("ë°°ê³ í””")]
         Hunger,
-        [Description("¸ñ¸¶¸§")]
+        [InspectorName("ëª©ë§ˆë¦„")]
         Thirst,
-        [Description("ºÎ»ó")]
+        [InspectorName("ë¶€ìƒ")]
         Injury,
-        [Description("ºÒ¾ÈÇÔ")]
+        [InspectorName("ë¶ˆì•ˆí•¨")]
         Anxious
     }
 

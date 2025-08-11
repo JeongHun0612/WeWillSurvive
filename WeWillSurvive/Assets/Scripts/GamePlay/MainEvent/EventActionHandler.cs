@@ -6,6 +6,7 @@ using WeWillSurvive.Item;
 using WeWillSurvive.Log;
 using WeWillSurvive.MainEvent;
 using WeWillSurvive.Status;
+using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
@@ -28,10 +29,13 @@ namespace WeWillSurvive
 
         public void Apply(EventAction action)
         {
-            EItem item = Enum.Parse<EItem>(action.targetId);
-            float count = int.Parse(action.value);
+            EItem item = EnumUtil.ParseEnum<EItem>(action.targetId);
+
+            if (!int.TryParse(action.value, out var count))
+                Debug.LogWarning($"Value : {action.value} | int 타입으로 파싱 실패");
+
             ItemManager.AddItem(item, count);
-            LogManager.AddRewardItemData(new RewardItemData(item, (int)count));
+            LogManager.AddRewardItemData(new RewardItemData(item, count));
         }
     }
 
@@ -47,10 +51,13 @@ namespace WeWillSurvive
 
         public void Apply(EventAction action)
         {
-            EItem item = Enum.Parse<EItem>(action.targetId);
-            float count = int.Parse(action.value);
+            EItem item = EnumUtil.ParseEnum<EItem>(action.targetId);
+
+            if (!int.TryParse(action.value, out var count))
+                Debug.LogWarning($"Value : {action.value} | int 타입으로 파싱 실패");
+
             ItemManager.UsedItem(item, count);
-            LogManager.AddRewardItemData(new RewardItemData(item, (int)-count));
+            LogManager.AddRewardItemData(new RewardItemData(item, -count));
         }
     }
 
@@ -63,7 +70,7 @@ namespace WeWillSurvive
 
         public void Apply(EventAction action)
         {
-            EEndingType endingType = Enum.Parse<EEndingType>(action.targetId);
+            EEndingType endingType = EnumUtil.ParseEnum<EEndingType>(action.targetId);
             EndingManager.Instance.AdvanceEndingProgress(endingType);
         }
     }
@@ -77,7 +84,7 @@ namespace WeWillSurvive
 
         public void Apply(EventAction action)
         {
-            EEndingType endingType = Enum.Parse<EEndingType>(action.targetId);
+            EEndingType endingType = EnumUtil.ParseEnum<EEndingType>(action.targetId);
             EndingManager.Instance.Ending(endingType);
         }
     }
@@ -93,9 +100,14 @@ namespace WeWillSurvive
 
         public void Apply(EventAction action)
         {
-            var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(action.targetId));
-            var status = Enum.Parse<EStatusType>(action.parameter);
-            var step = Mathf.Max(1, int.Parse(action.value));
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(action.targetId);
+            var character = CharacterManager.GetCharacter(characterType);
+            var status = EnumUtil.ParseEnum<EStatusType>(action.parameter);
+
+            if (!int.TryParse(action.value, out var value))
+                Debug.LogWarning($"Value : {action.value} | int 타입으로 파싱 실패");
+
+            var step = Mathf.Max(1, value);
 
             character.Status.WorsenStatus(status, step);
         }
@@ -112,9 +124,14 @@ namespace WeWillSurvive
 
         public void Apply(EventAction action)
         {
-            var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(action.targetId));
-            var status = Enum.Parse<EStatusType>(action.parameter);
-            var step = Mathf.Max(1, int.Parse(action.value));
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(action.targetId);
+            var character = CharacterManager.GetCharacter(characterType);
+            var status = EnumUtil.ParseEnum<EStatusType>(action.parameter);
+
+            if (!int.TryParse(action.value, out var value))
+                Debug.LogWarning($"Value : {action.value} | int 타입으로 파싱 실패");
+
+            var step = Mathf.Max(1, value);
 
             character.Status.RecoveryStatus(status, step);
         }
@@ -131,7 +148,8 @@ namespace WeWillSurvive
 
         public void Apply(EventAction action)
         {
-            var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(action.targetId));
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(action.targetId);
+            var character = CharacterManager.GetCharacter(characterType);
             character.OnDead();
         }
     }
