@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -29,7 +29,6 @@ namespace WeWillSurvive.Util
             return Array.IndexOf(all, value);
         }
 
-
         public static T? GetEnumByDescription<T>(string description) where T : struct, Enum
         {
             foreach (var field in typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static))
@@ -43,6 +42,15 @@ namespace WeWillSurvive.Util
             }
 
             return null;
+        }
+
+        public static TEnum ParseEnum<TEnum>(string value, TEnum defaultValue = default) where TEnum : struct, Enum
+        {
+            if (Enum.TryParse(value, out TEnum result))
+                return result;
+
+            Debug.LogWarning($"[EnumUtil] '{value}'를 {typeof(TEnum).Name}으로 변환할 수 없습니다. 기본값 '{defaultValue}' 반환.");
+            return defaultValue;
         }
     }
 }

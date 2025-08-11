@@ -1,10 +1,9 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
-using WeWillSurvive.Status;
-using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
@@ -28,34 +27,40 @@ namespace WeWillSurvive
 
             var conditionType = (EConditionType)conditionTypeProp.enumValueIndex;
 
-            // TargetID
-            if (NeedsTargetId(conditionType))
+            switch (conditionType)
             {
-                var options = GetTargetIdOptions(conditionType);
-                DrawConditionalPopupField(options, "Target ID", rect, targetIdProp);
-                rect.y += EditorGUIUtility.singleLineHeight + 2;
-            }
-
-            // Parameter
-            if (NeedsParameter(conditionType))
-            {
-                var options = GetParameterOptions(conditionType);
-                DrawConditionalPopupField(options, "Parameter", rect, parameterProp);
-                rect.y += EditorGUIUtility.singleLineHeight + 2;
-            }
-
-            // Value 1
-            if (NeedsValue1(conditionType))
-            {
-                EditorGUI.PropertyField(rect, value1Prop);
-                rect.y += EditorGUIUtility.singleLineHeight + 2;
-            }
-
-            // Value 2
-            if (NeedsValue2(conditionType))
-            {
-                EditorGUI.PropertyField(rect, value2Prop);
-                rect.y += EditorGUIUtility.singleLineHeight + 2;
+                case EConditionType.CharacterInShelter:
+                    PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    break;
+                case EConditionType.AliveCount:
+                    PropertyUtil.DrawMinMaxIntFields(ref rect, "최소 인원", value1Prop, "최대 인원", value2Prop, 0, 4);
+                    break;
+                case EConditionType.CharacterHasState:
+                case EConditionType.CharacterNotHasState:
+                    PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    PropertyUtil.DrawFlagsAsIntString<EState>(ref rect, "상태", parameterProp);
+                    break;
+                case EConditionType.TotalExpeditionCountUpper:
+                    PropertyUtil.DrawIntField(ref rect, "탐사 횟수", value1Prop);
+                    break;
+                case EConditionType.CharacterExpeditionCountUpper:
+                case EConditionType.CharacterExpeditionCountLower:
+                    PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    PropertyUtil.DrawIntField(ref rect, "탐사 횟수", value1Prop);
+                    break;
+                case EConditionType.HasItem:
+                    PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
+                    break;
+                case EConditionType.ItemCountUpper:
+                case EConditionType.ItemCountLower:
+                    PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
+                    PropertyUtil.DrawIntField(ref rect, "갯수", value1Prop);
+                    break;
+                case EConditionType.DayCountUpper:
+                    PropertyUtil.DrawIntField(ref rect, "날짜", value1Prop);
+                    break;
+                default:
+                    break;
             }
 
             EditorGUI.EndProperty();
@@ -64,109 +69,6 @@ namespace WeWillSurvive
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             return (EditorGUIUtility.singleLineHeight + 2) * 4;
-        }
-
-        private void DrawConditionalPopupField(string[] options, string label, Rect rect, SerializedProperty prop)
-        {
-            if (options != null && options.Length > 0)
-            {
-                int selectedIndex = Mathf.Max(0, System.Array.IndexOf(options, prop.stringValue));
-                int newIndex = EditorGUI.Popup(rect, label, selectedIndex, options);
-                prop.stringValue = options[newIndex];
-            }
-            else
-            {
-                prop.stringValue = EditorGUI.TextField(rect, label, prop.stringValue);
-            }
-        }
-
-        private string[] GetTargetIdOptions(EConditionType type)
-        {
-            switch (type)
-            {
-                case EConditionType.CharacterInShelter:
-                case EConditionType.CharacterHasState:
-                case EConditionType.CharacterNotHasState:
-                case EConditionType.CharacterHasStatus:
-                case EConditionType.CharacterNotHasStatus:
-                case EConditionType.CharacterExpeditionCountUpper:
-                case EConditionType.CharacterExpeditionCountLower:
-                    return System.Enum.GetNames(typeof(ECharacter));
-                case EConditionType.ItemCountUpper:
-                case EConditionType.ItemCountLower:
-                case EConditionType.HasItem:
-                    return System.Enum.GetNames(typeof(EItem));
-                default:
-                    return null;
-            }
-        }
-
-        private string[] GetParameterOptions(EConditionType type)
-        {
-            switch (type)
-            {
-                case EConditionType.CharacterHasState:
-                case EConditionType.CharacterNotHasState:
-                    return EnumUtil.GetEnumDescriptions<EState>();
-                case EConditionType.CharacterHasStatus:
-                case EConditionType.CharacterNotHasStatus:
-                    return EnumUtil.GetEnumDescriptions<EStatusType>();
-                default:
-                    return null;
-            }
-        }
-
-        private bool NeedsTargetId(EConditionType type)
-        {
-            switch (type)
-            {
-                case EConditionType.AliveCount:
-                case EConditionType.TotalExpeditionCountUpper:
-                case EConditionType.DayCountUpper:
-                    return false;
-                default:
-                    return true;
-            }
-        }
-
-        private bool NeedsParameter(EConditionType type)
-        {
-            switch (type)
-            {
-                case EConditionType.CharacterHasState:
-                case EConditionType.CharacterNotHasState:
-                case EConditionType.CharacterHasStatus:
-                case EConditionType.CharacterNotHasStatus:
-                    return true;
-                default:
-                    return false;
-            }
-        }
-        private bool NeedsValue1(EConditionType type)
-        {
-            switch (type)
-            {
-                case EConditionType.AliveCount:
-                case EConditionType.TotalExpeditionCountUpper:
-                case EConditionType.CharacterExpeditionCountUpper:
-                case EConditionType.CharacterExpeditionCountLower:
-                case EConditionType.ItemCountUpper:
-                case EConditionType.ItemCountLower:
-                case EConditionType.DayCountUpper:
-                    return true;
-                default:
-                    return false;
-            }
-        }
-        private bool NeedsValue2(EConditionType type)
-        {
-            switch (type)
-            {
-                case EConditionType.AliveCount:
-                    return true;
-                default:
-                    return false;
-            }
         }
     }
 }

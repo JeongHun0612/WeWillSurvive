@@ -1,10 +1,10 @@
 ﻿using System;
+using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
 using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
-using WeWillSurvive.Status;
 using WeWillSurvive.Util;
 
 namespace WeWillSurvive
@@ -26,7 +26,8 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(condition.targetId));
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.targetId);
+            var character = CharacterManager.GetCharacter(characterType);
             return character.IsInShelter;
         }
     }
@@ -41,10 +42,13 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            int minValue = int.Parse(condition.value1);
-            int maxValue = int.Parse(condition.value2);
-            int aliveCount = CharacterManager.AliveCharacterCount();
+            if (!int.TryParse(condition.value1, out var minValue))
+                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
 
+            if (!int.TryParse(condition.value2, out var maxValue))
+                Debug.LogWarning($"Value2 : {condition.value1} | int 타입으로 파싱 실패");
+
+            int aliveCount = CharacterManager.AliveCharacterCount();
             return aliveCount >= minValue && aliveCount <= maxValue;
         }
     }
@@ -59,8 +63,10 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(condition.targetId));
-            var state = EnumUtil.GetEnumByDescription<EState>(condition.parameter).Value;
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.targetId);
+            var character = CharacterManager.GetCharacter(characterType);
+
+            EState state = EnumUtil.ParseEnum<EState>(condition.parameter);
             return character.State.HasState(state);
         }
     }
@@ -75,41 +81,11 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(condition.targetId));
-            var state = EnumUtil.GetEnumByDescription<EState>(condition.parameter).Value;
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.targetId);
+            var character = CharacterManager.GetCharacter(characterType);
+
+            EState state = EnumUtil.ParseEnum<EState>(condition.parameter);
             return !character.State.HasState(state);
-        }
-    }
-
-    /// <summary>
-    /// 캐릭터가 특정 상태(Status)를 가지고 있는 지
-    /// </summary>
-    public class CharacterHasStatusChecker : IConditionChecker
-    {
-        public EConditionType HandledConditionType => EConditionType.CharacterHasStatus;
-        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
-
-        public bool IsMet(Condition condition)
-        {
-            var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(condition.targetId));
-            var status = EnumUtil.GetEnumByDescription<EStatusType>(condition.parameter).Value;
-            return character.Status.HasStatus(status);
-        }
-    }
-
-    /// <summary>
-    /// 캐릭터가 특정 상태(Status)를 가지고 있지 않은 지
-    /// </summary>
-    public class CharacterNotHasStatusChecker : IConditionChecker
-    {
-        public EConditionType HandledConditionType => EConditionType.CharacterNotHasStatus;
-        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
-
-        public bool IsMet(Condition condition)
-        {
-            var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(condition.targetId));
-            var status = EnumUtil.GetEnumByDescription<EStatusType>(condition.parameter).Value;
-            return !character.Status.HasStatus(status);
         }
     }
 
@@ -119,11 +95,12 @@ namespace WeWillSurvive
     public class TotalExpeditionCountUpperChecker : IConditionChecker
     {
         public EConditionType HandledConditionType => EConditionType.TotalExpeditionCountUpper;
-        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
         public bool IsMet(Condition condition)
         {
-            int countUpper = int.Parse(condition.value1);
+            if (!int.TryParse(condition.value1, out var countUpper))
+                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+
             return ExpeditionManager.Instance.TotalExpeditionCount >= countUpper;
         }
     }
@@ -138,8 +115,12 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(condition.targetId));
-            int countUpper = int.Parse(condition.value1);
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.targetId);
+            var character = CharacterManager.GetCharacter(characterType);
+
+            if (!int.TryParse(condition.value1, out var countUpper))
+                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+
             return character.TotalExploringCount > countUpper;
         }
     }
@@ -154,8 +135,12 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            var character = CharacterManager.GetCharacter(Enum.Parse<ECharacter>(condition.targetId));
-            int countLower = int.Parse(condition.value1);
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.targetId);
+            var character = CharacterManager.GetCharacter(characterType);
+
+            if (!int.TryParse(condition.value1, out var countLower))
+                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+
             return character.TotalExploringCount < countLower;
         }
     }
@@ -170,7 +155,8 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            return ItemManager.HasItem(Enum.Parse<EItem>(condition.targetId));
+            EItem item = EnumUtil.ParseEnum<EItem>(condition.targetId);
+            return ItemManager.HasItem(item);
         }
     }
 
@@ -184,8 +170,12 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            int itemUpper = int.Parse(condition.value1);
-            return ItemManager.GetItemCount(Enum.Parse<EItem>(condition.targetId)) >= itemUpper;
+            EItem item = EnumUtil.ParseEnum<EItem>(condition.targetId);
+
+            if (!int.TryParse(condition.value1, out var itemUpper))
+                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+
+            return ItemManager.GetItemCount(item) >= itemUpper;
         }
     }
 
@@ -199,8 +189,12 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            int itemLower = int.Parse(condition.value1);
-            return ItemManager.GetItemCount(Enum.Parse<EItem>(condition.targetId)) <= itemLower;
+            EItem item = EnumUtil.ParseEnum<EItem>(condition.targetId);
+
+            if (!int.TryParse(condition.value1, out var itemLower))
+                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+
+            return ItemManager.GetItemCount(item) <= itemLower;
         }
     }
 
@@ -213,8 +207,10 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            int minDay = int.Parse(condition.value1);
-            return GameManager.Instance.Day >= minDay;
+            if (!int.TryParse(condition.value1, out var day))
+                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+
+            return GameManager.Instance.Day >= day;
         }
     }
 }
