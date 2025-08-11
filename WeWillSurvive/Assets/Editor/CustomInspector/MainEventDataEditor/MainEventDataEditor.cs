@@ -249,7 +249,7 @@ namespace WeWillSurvive
 
                 SerializedProperty conditionsProp = selectedResult.FindPropertyRelative("conditions");
                 SerializedProperty textProp = selectedResult.FindPropertyRelative("resultText");
-                SerializedProperty effectsProp = selectedResult.FindPropertyRelative("effects");
+                SerializedProperty actionsProp = selectedResult.FindPropertyRelative("actions");
                 SerializedProperty probProp = selectedResult.FindPropertyRelative("probability");
 
                 // 결과 데이터 필드
@@ -263,7 +263,7 @@ namespace WeWillSurvive
                 EditorGUILayout.Space(5);
                 EditorGUILayout.PropertyField(textProp, new GUIContent("결과 텍스트"));
                 EditorGUILayout.Space(5);
-                EditorGUILayout.PropertyField(effectsProp, new GUIContent("효과"), true);
+                EditorGUILayout.PropertyField(actionsProp, new GUIContent("결과 액션"), true);
                 EditorGUILayout.Space(5);
                 EditorGUILayout.Slider(probProp, 0f, 1f, new GUIContent("발생 확률"));
                 EditorGUILayout.EndVertical();
@@ -478,13 +478,13 @@ namespace WeWillSurvive
             SerializedProperty textProp = resultProp.FindPropertyRelative("resultText");
             SerializedProperty probProp = resultProp.FindPropertyRelative("probability");
             SerializedProperty conditionsProp = resultProp.FindPropertyRelative("conditions");
-            SerializedProperty effectsProp = resultProp.FindPropertyRelative("effects");
+            SerializedProperty actionsProp = resultProp.FindPropertyRelative("effects");
 
             textProp.stringValue = string.Empty;
             probProp.floatValue = 1.0f;
 
             conditionsProp.ClearArray();
-            effectsProp.ClearArray();
+            actionsProp.ClearArray();
         }
 
         private void LoadIconTextures()

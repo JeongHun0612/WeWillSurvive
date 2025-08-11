@@ -46,12 +46,6 @@ namespace WeWillSurvive.MainEvent
         [InspectorName("캐릭터가 특정 상태(State)를 보유하고 있지 않을 시")]
         CharacterNotHasState,
 
-        [InspectorName("캐릭터가 특정 상태(Status)를 보유하고 있을 시")]
-        CharacterHasStatus,
-
-        [InspectorName("캐릭터가 특정 상태(Status)를 보유하고 있지 않을 시")]
-        CharacterNotHasStatus,
-
         [InspectorName("총 탐사 횟수가 특정 값 이상 일시")]
         TotalExpeditionCountUpper,
 
@@ -112,7 +106,7 @@ namespace WeWillSurvive.MainEvent
         None,
     }
 
-    public enum EEffectType
+    public enum EActionType
     {
         [InspectorName("아이템 획득")] AddItem,
         [InspectorName("아이템 삭제")] RemoveItem,
@@ -138,6 +132,15 @@ namespace WeWillSurvive.MainEvent
         public List<Condition> triggerConditions = new();                                   // 이벤트 발생 조건
         public EMainEventType eventType;                                                    // 이벤트 타입 (YesOrNo, UseItem, ChooseSomeone 등)
         public List<EventChoice> choices;                                                   // 유저가 고를 수 있는 선택지
+
+        public string GetRandomDescription()
+        {
+            if (descriptions == null || descriptions.Count == 0)
+                return string.Empty;
+
+            int index = Random.Range(0, descriptions.Count);
+            return descriptions[index];
+        }
 
         public EventChoice GetEventChoice(EChoiceType choiceType) => choices.FirstOrDefault(choice => choice.choiceType == choiceType);
     }
@@ -168,7 +171,7 @@ namespace WeWillSurvive.MainEvent
         [TextArea(3, 10)]
         public string resultText;               // 결과 텍스트
 
-        public List<EventEffect> effects;       // 결과 보상
+        public List<EventAction> actions;       // 결과 반영
 
         [Range(0, 1)] 
         public float probability;               // 발생 확률 (총합 1.0 안 넘게)
@@ -177,15 +180,15 @@ namespace WeWillSurvive.MainEvent
         {
             conditions = new();
             resultText = string.Empty;
-            effects = new();
+            actions = new();
             probability = 1.0f;
         }
     }
 
     [System.Serializable]
-    public class EventEffect
+    public class EventAction
     {
-        public EEffectType effectType;
+        public EActionType actionType;
         public string targetId;
         public string parameter;
         public string value;

@@ -9,7 +9,7 @@ using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
-    public interface IConditionChecker
+    public interface IEventConditionHandler
     {
         EConditionType HandledConditionType { get; }
 
@@ -19,7 +19,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 캐릭터가 우주선 내에 존재하는지
     /// </summary>
-    public class CharacterInShelterChecker : IConditionChecker
+    public class CharacterInShelterChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.CharacterInShelter;
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
@@ -35,7 +35,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 캐릭터가 몇명 생존해 있는지
     /// </summary>
-    public class AliveCountChecker : IConditionChecker
+    public class AliveCountChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.AliveCount;
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
@@ -56,7 +56,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 캐릭터가 특정 상태(State)를 가지고 있는 지
     /// </summary>
-    public class CharacterHasStateChecker : IConditionChecker
+    public class CharacterHasStateChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.CharacterHasState;
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
@@ -74,7 +74,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 캐릭터가 특정 상태(State)를 가지고 있지 않은 지
     /// </summary>
-    public class CharacterNotHasStateChecker : IConditionChecker
+    public class CharacterNotHasStateChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.CharacterNotHasState;
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
@@ -92,7 +92,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 총 탐사 횟수가 특정 값 이상 일시
     /// </summary>
-    public class TotalExpeditionCountUpperChecker : IConditionChecker
+    public class TotalExpeditionCountUpperChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.TotalExpeditionCountUpper;
 
@@ -108,7 +108,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 캐릭터의 탐사 횟수가 특정 값보다 높을 시
     /// </summary>
-    public class CharacterExpeditionCountUpperChecker : IConditionChecker
+    public class CharacterExpeditionCountUpperChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.CharacterExpeditionCountUpper;
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
@@ -128,7 +128,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 캐릭터의 탐사 횟수가 특정 값보다 낮을 시
     /// </summary>
-    public class CharacterExpeditionCountLowerChecker : IConditionChecker
+    public class CharacterExpeditionCountLowerChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.CharacterExpeditionCountLower;
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
@@ -148,7 +148,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 특정 아이템을 보유하고 있을 시
     /// </summary>
-    public class HasItemChecker : IConditionChecker
+    public class HasItemChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.HasItem;
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
@@ -163,7 +163,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 아이템 수량이 특정 값 이상일 시
     /// </summary>
-    public class ItemCountUpperChecker : IConditionChecker
+    public class ItemCountUpperChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.ItemCountUpper;
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
@@ -182,7 +182,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 아이템 수량이 특정 값 이하일 시
     /// </summary>
-    public class ItemCountLowerChecker : IConditionChecker
+    public class ItemCountLowerChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.ItemCountLower;
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
@@ -201,7 +201,7 @@ namespace WeWillSurvive
     /// <summary>
     /// 특정 날짜 이후부터
     /// </summary>
-    public class DayCountUpperChecker : IConditionChecker
+    public class DayCountUpperChecker : IEventConditionHandler
     {
         public EConditionType HandledConditionType => EConditionType.DayCountUpper;
 

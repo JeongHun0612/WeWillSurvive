@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
 using WeWillSurvive.Item;
@@ -29,18 +28,17 @@ namespace WeWillSurvive.MainEvent
         private MainEventData _lastSelectedEvent = null;
         private EventChoice _pendingEventChoice = null;
 
-        private Dictionary<EConditionType, IConditionChecker> _conditionHandlers = new();
-        private Dictionary<EEffectType, IResultApplicator> _effectApplicators = new();
+        private Dictionary<EConditionType, IEventConditionHandler> _eventConditionHandlers = new();
+        private Dictionary<EActionType, IEventActionHandler> _eventActionHandlers = new();
 
-        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
         private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         protected override void Awake()
         {
             base.Awake();
 
-            SetupConditionHandlers();
-            SetupEffectApplicators();
+            SetupEventConditionHandlers();
+            SetupEventActionHandlers();
         }
 
         public void ResetState()
@@ -53,12 +51,7 @@ namespace WeWillSurvive.MainEvent
         {
             if (_testEventData != null)
             {
-                foreach (var item in _testEventData.triggerConditions)
-                {
-                    EState state = (EState)int.Parse(item.parameter);
-                    Debug.Log(state);
-                }
-                
+                IsConditionsMet(_testEventData.triggerConditions);
 
                 return _testEventData;
             }
@@ -173,9 +166,9 @@ namespace WeWillSurvive.MainEvent
         private void ApplyEventResult(EventResult eventResult)
         {
             // 이벤트 결과 적용
-            foreach (var effect in eventResult.effects)
+            foreach (var action in eventResult.actions)
             {
-                ApplyResultEffect(effect);
+                ApplyResultAction(action);
             }
 
             // 이벤트 결과 메시지 Log로 전달
@@ -199,58 +192,58 @@ namespace WeWillSurvive.MainEvent
             return true;
         }
 
-        private void SetupConditionHandlers()
+        private void SetupEventConditionHandlers()
         {
             var checkerTypes = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => typeof(IConditionChecker).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+                .Where(t => typeof(IEventConditionHandler).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 
             foreach (var checkerType in checkerTypes)
             {
-                IConditionChecker checker = (IConditionChecker)Activator.CreateInstance(checkerType);
+                IEventConditionHandler checker = (IEventConditionHandler)Activator.CreateInstance(checkerType);
 
-                if (!_conditionHandlers.ContainsKey(checker.HandledConditionType))
+                if (!_eventConditionHandlers.ContainsKey(checker.HandledConditionType))
                 {
-                    _conditionHandlers.Add(checker.HandledConditionType, checker);
+                    _eventConditionHandlers.Add(checker.HandledConditionType, checker);
                 }
             }
         }
 
-        private void SetupEffectApplicators()
+        private void SetupEventActionHandlers()
         {
             var applicatorTypes = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => typeof(IResultApplicator).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+                .Where(t => typeof(IEventActionHandler).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 
             foreach (var applicatorType in applicatorTypes)
             {
-                IResultApplicator applicator = (IResultApplicator)Activator.CreateInstance(applicatorType);
+                IEventActionHandler applicator = (IEventActionHandler)Activator.CreateInstance(applicatorType);
 
-                if (!_effectApplicators.ContainsKey(applicator.HandledEffectType))
+                if (!_eventActionHandlers.ContainsKey(applicator.HandledActionType))
                 {
-                    _effectApplicators.Add(applicator.HandledEffectType, applicator);
+                    _eventActionHandlers.Add(applicator.HandledActionType, applicator);
                 }
             }
         }
 
-        private void ApplyResultEffect(EventEffect effect)
+        private void ApplyResultAction(EventAction action)
         {
-            if (_effectApplicators.TryGetValue(effect.effectType, out var applicator))
+            if (_eventActionHandlers.TryGetValue(action.actionType, out var applicator))
             {
-                applicator.Apply(effect);
+                applicator.Apply(action);
             }
             else
             {
-                Debug.LogWarning($"적용할 수 있는 핸들러가 없는 효과 타입입니다: {effect.effectType}");
+                Debug.LogWarning($"핸들러가 등록되지 않은 EventAction 타입입니다: {action.actionType}");
             }
         }
 
         private bool CheckCondition(Condition condition)
         {
-            if (_conditionHandlers.TryGetValue(condition.conditionType, out var handler))
+            if (_eventConditionHandlers.TryGetValue(condition.conditionType, out var handler))
             {
                 return handler.IsMet(condition);
             }
 
-            Debug.LogWarning($"핸들러가 등록되지 않은 조건 타입입니다: {condition.conditionType}");
+            Debug.LogWarning($"핸들러가 등록되지 않은 EventCondition 타입입니다: {condition.conditionType}");
             return false;
         }
     }
