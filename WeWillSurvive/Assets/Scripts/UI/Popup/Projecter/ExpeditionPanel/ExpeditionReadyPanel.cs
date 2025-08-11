@@ -31,8 +31,8 @@ namespace WeWillSurvive
                 await expeditionStatusPanel.InitializeAsync();
             }
 
-            _readyNormalSprite = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_DIsabled/medical_kit_disabled.png");
-            _readySelectedSprite = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/medical_kit.png");
+            _readyNormalSprite = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/UI/Projecter/bag_disabled.png");
+            _readySelectedSprite = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/UI/Projecter/bag.png");
         }
 
         public void UpdateReadyPanel()

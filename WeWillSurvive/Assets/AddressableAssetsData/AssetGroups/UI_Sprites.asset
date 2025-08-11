@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: UI_Sprites
   m_GUID: 989188f69886a5145831e4dbaf8c185e
   m_SerializeEntries:
+  - m_GUID: 090fc77916119fb4ebf85ea71ad7d581
+    m_Address: Assets/Sprites/UI/Projecter/bag_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 325332b50932f094abae69abc4ecf08c
     m_Address: Assets/Sprites/UI/Projecter/Category_window.png
     m_ReadOnly: 0
@@ -25,6 +30,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a28be432620754459af7c9b7f380d3f
+    m_Address: Assets/Sprites/UI/Projecter/no_normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4ae0bc090ce85a34aaa60778f494e902
     m_Address: Assets/Sprites/UI/Character_Icons/DrK_Icon_Disabled.png
     m_ReadOnly: 0
@@ -32,6 +42,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54222a96d4a4a024ab411fc42440d5d9
     m_Address: Assets/Sprites/UI/Character_Icons/DrK_Icon_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55d430d143b1b734fa96ed179d69accf
+    m_Address: Assets/Sprites/UI/Projecter/yes_disabled.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -47,6 +62,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6d37924ff4e3f6842a7db4a321600d5e
     m_Address: Assets/Sprites/UI/Character_Icons/Cook_Icon_Normal.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76683570c0a0fd54f92675940113c782
+    m_Address: Assets/Sprites/UI/Projecter/yes_normal.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -85,6 +105,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c44814b7aa184e24b819741fcba93088
+    m_Address: Assets/Sprites/UI/Projecter/no_disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c8705ac3bc5ce014ea4f0aac8fd9823f
     m_Address: Assets/Sprites/UI/Projecter/window_text.png
     m_ReadOnly: 0
@@ -97,6 +122,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dd4937e0a9784544aa1cb1d229a5892f
     m_Address: Assets/Sprites/UI/Projecter/Pbutton.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea68916022eb7544ebd86a546f3aa939
+    m_Address: Assets/Sprites/UI/Projecter/bag.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
