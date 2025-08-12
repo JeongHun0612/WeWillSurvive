@@ -30,53 +30,37 @@ MonoBehaviour:
       resultText: "\uC218\uB9AC \uD0A4\uD2B8 \uB355\uBD84\uC5D0 \uD68C\uB85C\uB97C
         \uC548\uC804\uD558\uAC8C \uBCF5\uAD6C\uD588\uB2E4. \uC804\uB825\uC740 \uC548\uC815\uB410\uACE0,
         \uC7A5\uBE44\uB4E4\uB3C4 \uBB38\uC81C\uC5C6\uB2E4."
-      effects:
-      - effectType: 5
-        targetId: Lead
-        parameter: Anxious
-        value: 1
-      - effectType: 5
-        targetId: Cook
-        parameter: Anxious
-        value: 1
-      - effectType: 5
-        targetId: DrK
-        parameter: Anxious
-        value: 1
-      - effectType: 5
-        targetId: Bell
-        parameter: Anxious
-        value: 1
+      actions: []
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
     - conditions:
-      - conditionType: 9
+      - conditionType: 200
         targetId: Gun
         parameter: 
-        value1: 
+        value1: 1
         value2: 
       resultText: "\uC804\uB825 \uACFC\uBD80\uD558\uB85C \uCD1D\uC774 \uD0C0\uBC84\uB838\uB2E4.
         \uC800\uC7A5\uC18C\uC5D0 \uC788\uB358 \uC77C\uBD80 \uC7A5\uBE44\uB4E4\uB3C4
         \uBD88\uC548\uC815\uD574\uC84C\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: Gun
         parameter: 
         value: 1
       probability: 1
     - conditions:
-      - conditionType: 9
+      - conditionType: 200
         targetId: Flashlight
         parameter: 
-        value1: 
+        value1: 1
         value2: 
       resultText: "\uC804\uB825 \uACFC\uBD80\uD558\uB85C \uC190\uC804\uB4F1\uC774
         \uD0C0\uBC84\uB838\uB2E4. \uC800\uC7A5\uC18C\uC5D0 \uC788\uB358 \uC77C\uBD80
         \uC7A5\uBE44\uB4E4\uB3C4 \uBD88\uC548\uC815\uD574\uC84C\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: Flashlight
         parameter: 
         value: 1
@@ -85,5 +69,5 @@ MonoBehaviour:
       resultText: "\uC804\uB825 \uACFC\uBD80\uD558\uB85C\uAC00 \uD0C0\uBC84\uB838\uC9C0\uB9CC
         \uB2E4\uD589\uD788 \uC800\uC7A5\uC18C\uC5D0 \uC788\uB358 \uC7A5\uBE44\uB4E4\uC740
         \uBA40\uCA61\uD558\uB2E4."
-      effects: []
+      actions: []
       probability: 1

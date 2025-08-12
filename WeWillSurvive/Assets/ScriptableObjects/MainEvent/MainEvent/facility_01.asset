@@ -31,12 +31,12 @@ MonoBehaviour:
         \uAC00\uC7A5 \uC911\uC694\uD574 \uBCF4\uC774\uB294 \uC608\uBE44\uD1B5\uC2E0\uC7A5\uBE44\uB97C
         \uAEBC\uB0B4\uC654\uB2E4. \uB2E4\uB978 \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC740
         \uC9C4\uB3D9 \uC18D\uC5D0 \uD30C\uC190\uB418\uC5B4\uBC84\uB838\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: Ax
         parameter: 
         value: 1
-      - effectType: 1
+      - actionType: 201
         targetId: Gun
         parameter: 
         value: 1
@@ -49,12 +49,12 @@ MonoBehaviour:
         \uAC00\uC7A5 \uC911\uC694\uD574 \uBCF4\uC774\uB294 \uB3C4\uB07C\uB97C \uAEBC\uB0B4\uC654\uB2E4.
         \uB2E4\uB978 \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC740 \uC9C4\uB3D9 \uC18D\uC5D0
         \uD30C\uC190\uB418\uC5B4\uBC84\uB838\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: CommDevice
         parameter: 
         value: 1
-      - effectType: 1
+      - actionType: 201
         targetId: Gun
         parameter: 
         value: 1
@@ -67,32 +67,32 @@ MonoBehaviour:
         \uAC00\uC7A5 \uC911\uC694\uD574 \uBCF4\uC774\uB294 \uCD1D\uC744 \uAEBC\uB0B4\uC654\uB2E4.
         \uB2E4\uB978 \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC740 \uC9C4\uB3D9 \uC18D\uC5D0
         \uD30C\uC190\uB418\uC5B4\uBC84\uB838\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: CommDevice
         parameter: 
         value: 1
-      - effectType: 1
+      - actionType: 201
         targetId: Ax
         parameter: 
         value: 1
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
     - conditions: []
       resultText: "\uB2E4\uB978 \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC740 \uC9C4\uB3D9
         \uC18D\uC5D0 \uD30C\uC190\uB418\uC5B4\uBC84\uB838\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: CommDevice
         parameter: 
         value: 1
-      - effectType: 1
+      - actionType: 201
         targetId: Ax
         parameter: 
         value: 1
-      - effectType: 1
+      - actionType: 201
         targetId: Gun
         parameter: 
         value: 1

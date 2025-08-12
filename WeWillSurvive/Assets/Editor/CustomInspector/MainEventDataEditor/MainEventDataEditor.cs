@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
 using WeWillSurvive.Util;
 
@@ -48,30 +48,29 @@ namespace WeWillSurvive
             EditorGUILayout.Space(5);
             EditorGUILayout.PropertyField(triggerConditionsProp, new GUIContent("이벤트 발생 조건 목록"));
 
+
             // 이벤트 타입 선택
             EditorGUILayout.Space(20);
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Label("이벤트 타입", EditorStyles.boldLabel, GUILayout.Width(100));
-            var options = EnumUtil.GetEnumDescriptions<EMainEventType>();
-            int newType = EditorGUILayout.Popup(eventTypeProp.enumValueIndex, options, GUILayout.Width(300));
-            EditorGUILayout.EndHorizontal();
+            var currentValue = eventTypeProp.intValue;
+            EditorGUILayout.PropertyField(eventTypeProp, new GUIContent("이벤트 타입"));
 
-            // 이벤트 타입이 변경되면 choices 초기화
-            if (newType != eventTypeProp.enumValueIndex || data.choices == null)
+            if (currentValue != eventTypeProp.intValue || data.choices == null)
             {
-                eventTypeProp.enumValueIndex = newType;
-                serializedObject.ApplyModifiedProperties(); // 먼저 반영
+                serializedObject.ApplyModifiedProperties(); // 변경된 enum 값을 실제 객체에 먼저 반영
 
-                InitializeChoicesForEventType((EMainEventType)newType, data);
+                // 변경된 최신 값을 가져와서 초기화 함수를 호출
+                Undo.RecordObject(data, "Initialize Choices for EventType");
+                //InitializeChoicesForEventType((EMainEventType)eventTypeProp.intValue, data);
                 EditorUtility.SetDirty(data);
 
-                serializedObject.Update(); // 변경 반영한 뒤 다시 동기화
+                serializedObject.Update();
             }
 
             // 이벤트 타입 별 UI 변경
             EditorGUILayout.Space(20);
             SerializedProperty choicesProp = serializedObject.FindProperty("choices");
-            var eventType = (EMainEventType)eventTypeProp.enumValueIndex;
+            var eventType = (EMainEventType)eventTypeProp.intValue;
+
             switch (eventType)
             {
                 case EMainEventType.YesOrNo:
@@ -82,14 +81,23 @@ namespace WeWillSurvive
                     DrawStaticChoiceUI(choicesProp);
                     break;
                 case EMainEventType.UseItems:
-                    DrawEditableChoiceUI(choicesProp, GetItemIconNames());
+                    DrawEditableChoiceUI(choicesProp, GetItemNames());
                     break;
                 case EMainEventType.ChooseSomeone:
-                    DrawEditableChoiceUI(choicesProp, GetCharacterIconNames());
+                    DrawEditableChoiceUI(choicesProp, GetCharacterNames());
                     break;
                 default:
                     EditorGUILayout.PropertyField(choicesProp);
                     break;
+            }
+
+            if (choicesProp.arraySize > 0)
+            {
+                // 선택한 선택지 결과 출력
+                SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
+                SerializedProperty resultsProp = selectedChoiceProp.FindPropertyRelative("results");
+                EditorGUILayout.Space(20);
+                DrawResultTabsUI(resultsProp);
             }
 
             serializedObject.ApplyModifiedProperties();
@@ -101,66 +109,36 @@ namespace WeWillSurvive
             DrawChoiceSelector(choicesProp);
             EditorGUILayout.Space(10);
 
-            // 선택한 선택지 결과 출력
-            SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
-            SerializedProperty resultsProp = selectedChoiceProp.FindPropertyRelative("results");
-            DrawResultTabsUI(resultsProp);
+            if (choicesProp.arraySize > 0)
+            {
+                SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
+                SerializedProperty choiceTypeProp = selectedChoiceProp.FindPropertyRelative("choiceType");
+                SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("amount");
+
+                // 이벤트 타입 선택
+                EditorGUILayout.PropertyField(choiceTypeProp, new GUIContent("선택지 타입"));
+                EditorGUILayout.PropertyField(amountProp, new GUIContent("필요 갯수"));
+            }
         }
 
-        private void DrawEditableChoiceUI(SerializedProperty choicesProp, string[] choiceOptions)
+        private void DrawEditableChoiceUI(SerializedProperty choicesProp, (string[] displayOptions, List<EChoiceType> enumValues) options)
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("선택지 목록", EditorStyles.boldLabel, GUILayout.Width(80));
-            DrawAddRemoveChoiceButtonUI(choicesProp);
+            DrawAddRemoveButtonUI(choicesProp, ref selectedChoiceIndex, InitializeEventChoiceProperty);
             EditorGUILayout.EndHorizontal();
 
             DrawChoiceSelector(choicesProp);
             EditorGUILayout.Space(10);
-
-            // 선택지 편집 영역
-            selectedChoiceIndex = Mathf.Clamp(selectedChoiceIndex, 0, choicesProp.arraySize - 1);
 
             if (choicesProp.arraySize > 0)
             {
                 SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
                 SerializedProperty choiceTypeProp = selectedChoiceProp.FindPropertyRelative("choiceType");
                 SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("amount");
-                SerializedProperty resultsProp = selectedChoiceProp.FindPropertyRelative("results");
 
-                // EIconType 드롭다운으로 선택
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("선택지 타입", EditorStyles.boldLabel, GUILayout.Width(100));
-
-                int enumIndex = choiceTypeProp.enumValueIndex;
-                string enumName = choiceTypeProp.enumNames[enumIndex];
-                EChoiceType currentChoiceType = (EChoiceType)Enum.Parse(typeof(EChoiceType), enumName);
-                string choiceName = EnumUtil.GetDescription(currentChoiceType);
-
-                int choiceIndex = Array.IndexOf(choiceOptions, choiceName);
-                int currentIndex = Mathf.Max(0, choiceIndex);
-
-                int newIndex = EditorGUILayout.Popup(currentIndex, choiceOptions, GUILayout.Width(300));
-                if (currentIndex != newIndex || choiceIndex < 0)
-                {
-                    EChoiceType choiceType = EnumUtil.GetEnumByDescription<EChoiceType>(choiceOptions[newIndex]).Value;
-                    int newEnumValueIndex = EnumUtil.GetEnumIndex(choiceType);
-
-                    choiceTypeProp.enumValueIndex = newEnumValueIndex;
-                }
-                EditorGUILayout.EndHorizontal();
-
-                // 선택된 타입이 아이템일 경우에만 Amount 필드를 표시합니다.
-                EditorGUILayout.BeginHorizontal();
-                if (Enum.IsDefined(typeof(EItem), currentChoiceType.ToString()))
-                {
-                    EditorGUILayout.LabelField("필요 개수", EditorStyles.boldLabel, GUILayout.Width(100));
-                    EditorGUILayout.PropertyField(amountProp, GUIContent.none, GUILayout.Width(50));
-                }
-                EditorGUILayout.EndHorizontal();
-
-                // EventResult 출력
-                EditorGUILayout.Space(20);
-                DrawResultTabsUI(resultsProp);
+                DrawFilteredEnumPopup(new GUIContent("선택지 타입"), choiceTypeProp, options.displayOptions, options.enumValues);
+                EditorGUILayout.PropertyField(amountProp, new GUIContent("필요 갯수"));
             }
         }
 
@@ -168,9 +146,6 @@ namespace WeWillSurvive
         {
             if (choicesProp == null)
                 return;
-
-            if (choicesProp.arraySize == 0)
-                EditorGUILayout.HelpBox("선택지를 추가해주세요.", MessageType.Info);
 
             GUIStyle style = new GUIStyle(GUI.skin.button)
             {
@@ -181,15 +156,20 @@ namespace WeWillSurvive
                 wordWrap = true
             };
 
+            if (choicesProp.arraySize == 0)
+                EditorGUILayout.HelpBox("선택지를 추가해주세요.", MessageType.Info);
+
+            // 안전 범위 보정
+            if (selectedChoiceIndex < 0 || selectedChoiceIndex >= choicesProp.arraySize)
+                selectedChoiceIndex = Mathf.Clamp(selectedChoiceIndex, 0, choicesProp.arraySize - 1);
+
             EditorGUILayout.BeginHorizontal();
             for (int i = 0; i < choicesProp.arraySize; i++)
             {
                 SerializedProperty choiceProp = choicesProp.GetArrayElementAtIndex(i);
                 SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("choiceType");
 
-                int index = choiceTypeProp.enumValueIndex;
-                string enumName = choiceTypeProp.enumNames[index];
-                EChoiceType choiceType = (EChoiceType)Enum.Parse(typeof(EChoiceType), enumName);
+                var choiceType = (EChoiceType)choiceTypeProp.intValue;
 
                 Rect buttonRect = GUILayoutUtility.GetRect(ICON_FIXED_WIDTH, ICON_FIXED_HEIGHT, style);
 
@@ -199,7 +179,7 @@ namespace WeWillSurvive
                 }
 
                 Texture2D iconTexture = GetIconTexture(choiceType);
-                GUIContent content = iconTexture != null ? new GUIContent(iconTexture) : new GUIContent(EnumUtil.GetDescription(choiceType));
+                GUIContent content = iconTexture != null ? new GUIContent(iconTexture) : new GUIContent(choiceType.ToString());
                 if (GUI.Button(buttonRect, content, style))
                 {
                     selectedChoiceIndex = i;
@@ -207,6 +187,28 @@ namespace WeWillSurvive
                 }
             }
             EditorGUILayout.EndHorizontal();
+        }
+
+        private void DrawFilteredEnumPopup(GUIContent label, SerializedProperty property, string[] displayOptions, List<EChoiceType> enumValues)
+        {
+            // 현재 저장된 값을 기준으로 목록에서의 인덱스를 찾습니다.
+            var currentValue = (EChoiceType)property.intValue;
+            int currentIndex = enumValues.IndexOf(currentValue);
+            if (currentIndex == -1)
+            {
+                currentIndex = 0;
+
+                if (enumValues.Count > 0)
+                {
+                    property.intValue = (int)enumValues[0];
+                }
+            }
+
+            int newIndex = EditorGUILayout.Popup(label, currentIndex, displayOptions);
+            if (newIndex != currentIndex)
+            {
+                property.intValue = (int)enumValues[newIndex];
+            }
         }
 
         private void DrawResultTabsUI(SerializedProperty resultsProp)
@@ -220,6 +222,12 @@ namespace WeWillSurvive
 
             if (resultsProp.arraySize == 0)
                 EditorGUILayout.HelpBox("결과를 추가해주세요.", MessageType.Info);
+
+
+            // 안전 범위 보정
+            if (selectedResultIndex < 0 || selectedResultIndex >= resultsProp.arraySize)
+                selectedResultIndex = Mathf.Clamp(selectedResultIndex, 0, resultsProp.arraySize - 1);
+
 
             // 탭 버튼 영역
             EditorGUILayout.BeginHorizontal();
@@ -237,11 +245,9 @@ namespace WeWillSurvive
                 }
             }
             EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space(5);
 
             // 선택된 결과 출력
-            EditorGUILayout.Space(5);
-            selectedResultIndex = Mathf.Clamp(selectedResultIndex, 0, resultsProp.arraySize - 1);
-
             if (resultsProp.arraySize > 0)
             {
                 SerializedProperty selectedResult = resultsProp.GetArrayElementAtIndex(selectedResultIndex);
@@ -270,30 +276,6 @@ namespace WeWillSurvive
             }
         }
 
-        private void DrawAddRemoveChoiceButtonUI(SerializedProperty choicesProp)
-        {
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("+", GUILayout.Width(24)))
-            {
-                // Choice 생성 및 초기화
-                int choiceInsertIndex = choicesProp.arraySize;
-                choicesProp.InsertArrayElementAtIndex(choiceInsertIndex);
-                SerializedProperty newChoiceElement = choicesProp.GetArrayElementAtIndex(choiceInsertIndex);
-                InitializeEventChoiceProperty(newChoiceElement);
-
-                selectedChoiceIndex = choiceInsertIndex;
-            }
-
-            GUI.enabled = choicesProp.arraySize > 0;
-            if (GUILayout.Button("-", GUILayout.Width(24)))
-            {
-                choicesProp.DeleteArrayElementAtIndex(selectedChoiceIndex);
-                selectedChoiceIndex = Mathf.Clamp(selectedChoiceIndex - 1, 0, choicesProp.arraySize - 1);
-            }
-            GUI.enabled = true;
-            EditorGUILayout.EndHorizontal();
-        }
-
         private void DrawAddRemoveButtonUI(SerializedProperty prop, ref int selectedIndex, Action<SerializedProperty> onElementInserted = null)
         {
             EditorGUILayout.BeginHorizontal();
@@ -301,10 +283,10 @@ namespace WeWillSurvive
             {
                 int insertIndex = prop.arraySize;
                 prop.InsertArrayElementAtIndex(insertIndex);
-                selectedIndex = insertIndex;
-
                 SerializedProperty newElement = prop.GetArrayElementAtIndex(insertIndex);
                 onElementInserted?.Invoke(newElement);
+
+                selectedIndex = insertIndex;
             }
 
             GUI.enabled = prop.arraySize > 0;
@@ -443,13 +425,9 @@ namespace WeWillSurvive
                         };
                     }
                     break;
-                case EMainEventType.ChooseSomeone:
-                case EMainEventType.UseItems:
-                    {
-                        data.choices = new List<EventChoice>();
-                    }
+                default:
+                    data.choices = new List<EventChoice>();
                     break;
-
             }
         }
 
@@ -458,12 +436,12 @@ namespace WeWillSurvive
             if (choiceProp == null) return;
 
             SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("choiceType");
-            choiceTypeProp.enumValueIndex = EnumUtil.GetEnumIndex(EChoiceType.None);
-
             SerializedProperty amountProp = choiceProp.FindPropertyRelative("amount");
+            SerializedProperty resultsProp = choiceProp.FindPropertyRelative("results");
+
+            choiceTypeProp.intValue = 0;
             amountProp.intValue = 1;
 
-            SerializedProperty resultsProp = choiceProp.FindPropertyRelative("results");
             resultsProp.ClearArray();
             resultsProp.arraySize = 1;
 
@@ -478,7 +456,7 @@ namespace WeWillSurvive
             SerializedProperty textProp = resultProp.FindPropertyRelative("resultText");
             SerializedProperty probProp = resultProp.FindPropertyRelative("probability");
             SerializedProperty conditionsProp = resultProp.FindPropertyRelative("conditions");
-            SerializedProperty actionsProp = resultProp.FindPropertyRelative("effects");
+            SerializedProperty actionsProp = resultProp.FindPropertyRelative("actions");
 
             textProp.stringValue = string.Empty;
             probProp.floatValue = 1.0f;
@@ -509,38 +487,44 @@ namespace WeWillSurvive
             return null;
         }
 
-        private string[] GetAnswerIconNames() => GetIconNamesInRange(0, 99);
-        private string[] GetCharacterIconNames()
+        private (string[] displayOptions, List<EChoiceType> enumValues) GetCharacterNames()
         {
-            return GetItemChoiceTypes(100, 199)
-                .Append(EChoiceType.Noting)
-                .Select(e => EnumUtil.GetDescription(e))
-                .ToArray();
+            return GetFilteredEnumOptions(v =>
+            {
+                int val = (int)v;
+
+                bool isInCharacterRange = (val >= 100 && val < 200);
+                bool isNotingItem = (val == 500);
+
+                return isInCharacterRange || isNotingItem;
+            });
         }
 
-        private string[] GetItemIconNames()
+        private (string[] displayOptions, List<EChoiceType> enumValues) GetItemNames()
         {
-            return GetItemChoiceTypes(200, 299)
-                .Append(EChoiceType.Noting)
-                .Select(e => EnumUtil.GetDescription(e))
-                .ToArray();
+            return GetFilteredEnumOptions(v =>
+            {
+                int val = (int)v;
+
+                bool isInItemRange = (val >= 200 && val < 300);
+                bool isNotingItem = (val == 500);
+
+                return isInItemRange || isNotingItem;
+            });
         }
 
-        private string[] GetIconNamesInRange(int minInclusive, int maxInclusive)
+        private (string[] displayOptions, List<EChoiceType> enumValues) GetFilteredEnumOptions(System.Func<EChoiceType, bool> filter)
         {
-            return Enum.GetValues(typeof(EChoiceType))
-                .Cast<EChoiceType>()
-                .Where(e => (int)e >= minInclusive && (int)e <= maxInclusive)
-                .Select(e => e.ToString())
-                .ToArray();
-        }
+            var allValues = System.Enum.GetValues(typeof(EChoiceType)).Cast<EChoiceType>();
+            var filteredValues = allValues.Where(filter).ToList();
 
-        private EChoiceType[] GetItemChoiceTypes(int minInclusive, int maxInclusive)
-        {
-            return Enum.GetValues(typeof(EChoiceType))
-                .Cast<EChoiceType>()
-                .Where(e => (int)e >= minInclusive && (int)e < maxInclusive)
-                .ToArray();
+            var displayNames = filteredValues.Select(v => {
+                var member = typeof(EChoiceType).GetMember(v.ToString())[0];
+                var inspectorName = member.GetCustomAttribute<InspectorNameAttribute>();
+                return inspectorName != null ? inspectorName.displayName : v.ToString();
+            }).ToArray();
+
+            return (displayNames, filteredValues);
         }
     }
 }

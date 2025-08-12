@@ -24,7 +24,7 @@ MonoBehaviour:
   eventType: 0
   choices:
   - choiceType: 0
-    amount: 0
+    amount: 1
     results:
     - conditions: []
       resultText: "\uC6B0\uB9AC\uB294 \uC6A9\uAE30\uB97C \uB0B4\uC5B4 \uBB38\uC744
@@ -32,14 +32,14 @@ MonoBehaviour:
         \uC11C \uC788\uC5C8\uB2E4. \uC548\uB3C4\uC640 \uD658\uD76C\uAC00 \uB4A4\uC11E\uC778
         \uB208\uBB3C\uC774 \uD758\uB800\uB2E4. \uC6B0\uB9AC\uB294 \uB9C8\uCE68\uB0B4
         \uC0B4\uC544\uB0A8\uC558\uB2E4."
-      effects:
-      - effectType: 3
-        targetId: RescueByOtherSurvivors
+      actions:
+      - actionType: 301
+        targetId: 
         parameter: 
         value: 
       probability: 1
   - choiceType: 1
-    amount: 0
+    amount: 1
     results:
     - conditions: []
       resultText: "\uC6B0\uB9B0 \uBB38\uC744 \uC5F4\uC9C0 \uC54A\uC558\uB2E4. \uADF8\uB4E4\uC740
@@ -47,5 +47,5 @@ MonoBehaviour:
         \uBA54\uC6E0\uB2E4. \uB2E4\uC74C \uB450\uB4DC\uB9BC\uC744 \uAE30\uB2E4\uB9AC\uBA70,
         \uC6B0\uB9AC\uB294 \uBD88\uC548\uD55C \uD558\uB8E8\uD558\uB8E8\uB97C \uBC84\uD168\uC57C
         \uD55C\uB2E4."
-      effects: []
+      actions: []
       probability: 1

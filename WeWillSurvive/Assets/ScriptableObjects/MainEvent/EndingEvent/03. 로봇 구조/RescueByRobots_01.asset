@@ -34,17 +34,13 @@ MonoBehaviour:
         \uC190\uC0C1 \uC0C1\uD0DC\uB97C \uD655\uC778\uD588\uB2E4. \uC791\uB3D9\uC740
         \uBD88\uAC00\uB2A5\uD558\uC9C0\uB9CC, \uC5F0\uB8CC\uB9CC \uC788\uC73C\uBA74
         \uB2E4\uC2DC \uC6C0\uC9C1\uC77C \uC218 \uC788\uC744\uC9C0\uB3C4 \uBAA8\uB978\uB2E4."
-      effects:
-      - effectType: 1
-        targetId: Flashlight
-        parameter: 
-        value: 1
-      - effectType: 2
+      actions:
+      - actionType: 300
         targetId: RescueByRobots
         parameter: 
-        value: 1
+        value: 
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
     - conditions: []
@@ -53,5 +49,5 @@ MonoBehaviour:
         \uD655\uC778\uD558\uC9C0 \uBABB\uD588\uB2E4. \uADF8 \uB85C\uBD07 \uAC19\uC740
         \uD615\uCCB4\uB294 \uC5B4\uB460 \uC18D\uC5D0 \uBB3B\uD614\uACE0, \uC544\uBB34\uAC83\uB3C4
         \uD655\uC778\uD560 \uC218 \uC5C6\uC5C8\uB2E4."
-      effects: []
+      actions: []
       probability: 1

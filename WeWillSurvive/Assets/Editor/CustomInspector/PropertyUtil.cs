@@ -185,6 +185,48 @@ namespace WeWillSurvive
 
             rect.y += h + 2f;
         }
+
+
+        // ============
+        // UTil
+        // ============
+
+        /// <summary>
+        /// SerializedProperty가 유효한 Enum 값을 가지고 있는지 확인하고,
+        /// 그렇지 않다면 Enum의 첫 번째 값으로 보정합니다.
+        /// </summary>
+        /// <typeparam name="T">검사할 Enum의 타입</typeparam>
+        /// <param name="property">검사 및 보정할 SerializedProperty (int 기반 Enum이어야 함)</param>
+        /// <returns>값이 보정되었다면 true, 원래부터 유효했다면 false를 반환합니다.</returns>
+        public static bool TryValidateAndFixEnumProperty<T>(SerializedProperty property) where T : Enum
+        {
+            // 프로퍼티가 int 타입을 기반으로 하는지 확인
+            if (property.propertyType != SerializedPropertyType.Enum)
+            {
+                // 에디터에서는 Enum이 int로 취급될 때도 있으므로 int도 허용
+                if (property.propertyType != SerializedPropertyType.Integer)
+                {
+                    Debug.LogError($"{property.name} is not an Enum or Integer property.");
+                    return false;
+                }
+            }
+
+            var enumValue = (T)Enum.ToObject(typeof(T), property.intValue);
+
+            // 현재 값이 Enum에 정의되어 있는지 확인
+            if (!Enum.IsDefined(typeof(T), enumValue))
+            {
+                var allValues = Enum.GetValues(typeof(T));
+                if (allValues.Length > 0)
+                {
+                    // 첫 번째 값으로 보정
+                    property.intValue = Convert.ToInt32(allValues.GetValue(0));
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
 #endif

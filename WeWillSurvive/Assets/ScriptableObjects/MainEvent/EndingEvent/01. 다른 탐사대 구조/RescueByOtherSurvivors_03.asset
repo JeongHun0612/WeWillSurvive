@@ -35,15 +35,15 @@ MonoBehaviour:
         \uD655\uC2E4\uD788 \uC804\uB2EC\uD558\uACA0\uB2E4\uACE0 \uB9D0\uD588\uB2E4.
         \uC791\uC740 \uD76C\uC0DD\uC774 \uD070 \uAD6C\uC870\uB85C \uC774\uC5B4\uC9C8
         \uC218 \uC788\uB2E4."
-      effects:
-      - effectType: 1
-        targetId: Food
+      actions:
+      - actionType: 201
+        targetId: 
         parameter: 
         value: 2
-      - effectType: 2
-        targetId: RescueByOtherSurvivors
+      - actionType: 300
+        targetId: 
         parameter: 
-        value: 2
+        value: 
       probability: 1
   - choiceType: 202
     amount: 2
@@ -55,20 +55,24 @@ MonoBehaviour:
         \uD655\uC2E4\uD788 \uC804\uB2EC\uD558\uACA0\uB2E4\uACE0 \uB9D0\uD588\uB2E4.
         \uC791\uC740 \uD76C\uC0DD\uC774 \uD070 \uAD6C\uC870\uB85C \uC774\uC5B4\uC9C8
         \uC218 \uC788\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: Water
         parameter: 
         value: 2
-      - effectType: 2
-        targetId: RescueByOtherSurvivors
+      - actionType: 300
+        targetId: 
         parameter: 
         value: 
       probability: 1
-  - choiceType: 300
-    amount: 0
+  - choiceType: 500
+    amount: 1
     results:
     - conditions: []
-      resultText: 
-      effects: []
+      resultText: "\uC6B0\uB9B0 \uB098\uB20C \uC5EC\uC720\uAC00 \uC5C6\uC5C8\uB2E4.
+        \uAC70\uC808\uD558\uC790 \uAD50\uC2E0\uC740 \uB04A\uACBC\uB2E4. \uAD6C\uC870
+        \uC694\uCCAD\uB3C4 \uD568\uAED8 \uB2EB\uD78C \uB4EF\uD588\uB2E4. \uC120\uD0DD\uD558\uC9C0
+        \uC54A\uC740 \uAC83\uC758 \uBB34\uAC8C\uAC00 \uC6B0\uB9AC \uBAA8\uB450\uB97C
+        \uC9D3\uB20C\uB800\uB2E4."
+      actions: []
       probability: 1

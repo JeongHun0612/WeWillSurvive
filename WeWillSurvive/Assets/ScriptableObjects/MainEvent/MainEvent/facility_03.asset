@@ -33,55 +33,55 @@ MonoBehaviour:
         \uBD88\uC548\uD568\uC774 \uC904\uC5B4\uB4E4\uC5C8\uACE0, \uC0AC\uAE30\uB3C4
         \uC870\uAE08 \uD68C\uBCF5\uB418\uC5C8\uB2E4. \uC190\uC804\uB4F1\uC740 \uC57D\uAC04\uC758
         \uC190\uC0C1\uC744 \uC785\uC5C8\uC9C0\uB9CC \uC0AC\uC6A9 \uAC00\uB2A5\uD558\uB2E4."
-      effects:
-      - effectType: 5
-        targetId: Lead
+      actions:
+      - actionType: 101
+        targetId: 
         parameter: Anxious
-        value: 1
-      - effectType: 5
+        value: 10
+      - actionType: 101
         targetId: Cook
         parameter: Anxious
-        value: 1
-      - effectType: 5
+        value: 10
+      - actionType: 101
         targetId: DrK
         parameter: Anxious
-        value: 1
-      - effectType: 5
+        value: 10
+      - actionType: 101
         targetId: Bell
         parameter: Anxious
-        value: 1
+        value: 10
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
     - conditions:
-      - conditionType: 9
+      - conditionType: 200
         targetId: MedicKit
         parameter: 
-        value1: 
+        value1: 1
         value2: 
       resultText: "\uC5B4\uB460 \uC18D \uC0DD\uD65C\uC774 \uC774\uC5B4\uC84C\uB2E4.
         \uBC14\uB2E5\uC5D0 \uB193\uC5EC\uC788\uB358 \uC758\uB8CC\uD0A4\uD2B8\uAC00
         \uBD80\uC11C\uC84C\uACE0, \uBA87\uBA87\uC740 \uC6B0\uC6B8\uD55C \uAE30\uC0C9\uC744
         \uAC10\uCD94\uC9C0 \uBABB\uD588\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: MedicKit
         parameter: 
         value: 1
       probability: 1
     - conditions:
-      - conditionType: 9
+      - conditionType: 200
         targetId: RepairKit
         parameter: 
-        value1: 
+        value1: 1
         value2: 
       resultText: "\uC5B4\uB460 \uC18D \uC0DD\uD65C\uC774 \uC774\uC5B4\uC84C\uB2E4.
         \uBC14\uB2E5\uC5D0 \uB193\uC5EC\uC788\uB358 \uC218\uB9AC\uD0A4\uD2B8\uAC00
         \uBD80\uC11C\uC84C\uACE0, \uBA87\uBA87\uC740 \uC6B0\uC6B8\uD55C \uAE30\uC0C9\uC744
         \uAC10\uCD94\uC9C0 \uBABB\uD588\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: RepairKit
         parameter: 
         value: 1
@@ -89,5 +89,5 @@ MonoBehaviour:
     - conditions: []
       resultText: "\uC5B4\uB460 \uC18D \uC0DD\uD65C\uC774 \uC774\uC5B4\uC84C\uC9C0\uB9CC
         \uB2E4\uD589\uD788 \uC544\uBB34\uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0 \uC54A\uC558\uB2E4."
-      effects: []
+      actions: []
       probability: 1

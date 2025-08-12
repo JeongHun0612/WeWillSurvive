@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 using WeWillSurvive.Character;
@@ -11,21 +10,21 @@ namespace WeWillSurvive.Item
 {
     public enum EItem
     {
-        [InspectorName("우주식량")] [Description("우주식량")] Food,
-        [InspectorName("특별우주식량")] [Description("특별우주식량")] SpecialFood,
-        [InspectorName("물")] [Description("물")] Water,
-        [InspectorName("의료키트")] [Description("의료키트")] MedicKit,
-        [InspectorName("특별의료키트")] [Description("특별의료키트")] SpecialMedicKit,
-        [InspectorName("수리키트")] [Description("수리키트")] RepairKit,
-        [InspectorName("특별수리키트")] [Description("특별수리키트")] SpecialRepairKit,
-        [InspectorName("예비통신장비")] [Description("예비통신장비")] CommDevice,
-        [InspectorName("고급우주복")] [Description("고급우주복")] NiceSpacesuit,
-        [InspectorName("총")] [Description("총")] Gun,
-        [InspectorName("보드게임")] [Description("보드게임")] BoardGame,
-        [InspectorName("도끼")] [Description("도끼")] Ax,
-        [InspectorName("쇠파이프")] [Description("쇠파이프")] Pipe,
-        [InspectorName("손전등")] [Description("손전등")] Flashlight,
-        [InspectorName("행성탐사지도")] [Description("행성탐사지도")] Map,
+        [InspectorName("우주식량")] Food,
+        [InspectorName("특별우주식량")] SpecialFood,
+        [InspectorName("물")] Water,
+        [InspectorName("의료키트")] MedicKit,
+        [InspectorName("특별의료키트")] SpecialMedicKit,
+        [InspectorName("수리키트")] RepairKit,
+        [InspectorName("특별수리키트")] SpecialRepairKit,
+        [InspectorName("예비통신장비")] CommDevice,
+        [InspectorName("고급우주복")] NiceSpacesuit,
+        [InspectorName("총")] Gun,
+        [InspectorName("보드게임")] BoardGame,
+        [InspectorName("도끼")] Ax,
+        [InspectorName("쇠파이프")] Pipe,
+        [InspectorName("손전등")] Flashlight,
+        [InspectorName("행성탐사지도")] Map,
 
         // Character
         Lead = 100,
@@ -57,7 +56,7 @@ namespace WeWillSurvive.Item
             }
 
             // Item Deubg 전용
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             var itemDebugData = await ResourceManager.LoadAssetAsync<ItemDebugData>("ItemDebugData");
             foreach (var itemData in itemDebugData.GetItemDatas())
             {
@@ -66,7 +65,7 @@ namespace WeWillSurvive.Item
 
                 AddItem(itemData.item, itemData.count);
             }
-            #endif
+#endif
         }
 
         public void Dipose()
@@ -76,20 +75,71 @@ namespace WeWillSurvive.Item
 
         public void AddItem(EItem item, float count = 1f)
         {
-            if (count <= 0f)
-                count = 1f;
+            // Food 와 Water를 제외하고는 1개씩만 소유 가능
+            bool isStackable = (item == EItem.Food || item == EItem.Water);
 
-            if (Items.TryGetValue(item, out var remain))
+            if (Items.ContainsKey(item))
             {
-                if (item == EItem.Food || item == EItem.Water)
-                    Items[item] = remain + count;
+                if (isStackable)
+                {
+                    Items[item] += count;
+                }
             }
             else
             {
-                Items.Add(item, count);
+                if (isStackable)
+                {
+                    Items.Add(item, count);
+                }
+                else
+                {
+                    Items.Add(item, 1f);
+                }
             }
 
-            Debug.Log($"[아이템 추가] {item} {count}개 | Total : {Items[item]}개");
+            Debug.Log($"[아이템 추가] {item} | Total : {Items[item]}개");
+        }
+
+        public void DeleteItem(EItem item, float count)
+        {
+            TryDecreaseItemCount(item, count);
+        }
+
+        public void UsedItem(EItem item, float usedCount, CharacterBase target = null)
+        {
+            if (!Items.TryGetValue(item, out var remain) || remain - usedCount < 0)
+            {
+                Debug.LogWarning($"아이템 [{item}]이 부족하거나 없습니다. (보유: {remain}, 필요: {usedCount})");
+                return;
+            }
+
+            if (_itemEffects.TryGetValue(item, out var itemEffect) && target != null)
+            {
+                itemEffect.Apply(target);
+            }
+
+            TryDecreaseItemCount(item, usedCount);
+        }
+
+        public bool TryDecreaseItemCount(EItem item, float amountToDecrease)
+        {
+            if (Items.TryGetValue(item, out var remain))
+            {
+                var newRemain = Mathf.Max(0f, remain - amountToDecrease);
+                Items[item] = newRemain;
+                Debug.Log($"[아이템 수량 변경] {item} | Total : {newRemain}개");
+
+                if (newRemain <= 0f)
+                {
+                    RemoveItem(item);
+                }
+                return true;
+            }
+            else
+            {
+                Debug.LogWarning($"개수를 줄일 아이템 [{item}]이(가) 없습니다.");
+                return false;
+            }
         }
 
         public void RemoveItem(EItem item)
@@ -98,37 +148,6 @@ namespace WeWillSurvive.Item
             {
                 Items.Remove(item);
             }
-        }
-
-        public void UsedItem(EItem item, float usedCount, CharacterBase target = null)
-        {
-            if (Items.TryGetValue(item, out var remain))
-            {
-                if (remain - usedCount < 0)
-                {
-                    Debug.Log("남은 Item 갯수를 초과하였습니다.");
-                    return;
-                }
-
-                if (_itemEffects.TryGetValue(item, out var itemEffect) && target != null)
-                {
-                    itemEffect.Apply(target);
-                }
-
-                Items[item] -= usedCount;
-                Debug.Log($"[아이템 사용] {item} | Total : {Items[item]}개");
-
-                if (Items[item] == 0f)
-                {
-                    RemoveItem(item);
-                }
-            }
-            else
-            {
-                Debug.LogWarning($"Item [{item}] not found.");
-                return;
-            }
-
         }
 
         public void UpdateItemCount(EItem item, float updateCount)

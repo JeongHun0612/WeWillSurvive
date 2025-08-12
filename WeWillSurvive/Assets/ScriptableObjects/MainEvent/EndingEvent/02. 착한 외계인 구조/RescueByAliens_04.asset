@@ -36,12 +36,12 @@ MonoBehaviour:
         \uC6B0\uB9AC\uB97C \uC9C0\uAD6C\uB85C \uBCF4\uB0B4\uC8FC\uAE30\uB85C \uC57D\uC18D\uD588\uB2E4.
         \uB2E4\uC74C\uC5D0 \uC678\uACC4\uC778\uB4E4\uC774 \uCC3E\uC544\uC624\uBA74
         \uAF2D \uBB38\uC744 \uC5F4\uACE0 \uD658\uC601\uD558\uC790."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: RepairKit
         parameter: 
         value: 1
-      - effectType: 2
+      - actionType: 300
         targetId: RescueByAliens
         parameter: 
         value: 
@@ -59,17 +59,17 @@ MonoBehaviour:
         \uC6B0\uB9AC\uB97C \uC9C0\uAD6C\uB85C \uBCF4\uB0B4\uC8FC\uAE30\uB85C \uC57D\uC18D\uD588\uB2E4.
         \uB2E4\uC74C\uC5D0 \uC678\uACC4\uC778\uB4E4\uC774 \uCC3E\uC544\uC624\uBA74
         \uAF2D \uBB38\uC744 \uC5F4\uACE0 \uD658\uC601\uD558\uC790."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: SpecialRepairKit
         parameter: 
         value: 1
-      - effectType: 2
+      - actionType: 300
         targetId: RescueByAliens
         parameter: 
         value: 
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
     - conditions: []
@@ -79,5 +79,5 @@ MonoBehaviour:
         \uC904 \uC218 \uC788\uB2E4\uBA74 \uB2E4\uC74C\uC5D0\uB294 \uAF2D \uB3C4\uC640\uC8FC\uAE30\uB85C
         \uC57D\uC18D\uD588\uB2E4. \uADF8\uB9AC\uACE0 \uC810\uCC28 \uC5F0\uB77D\uC740
         \uB450\uC808\uB418\uC5C8\uB2E4."
-      effects: []
+      actions: []
       probability: 1

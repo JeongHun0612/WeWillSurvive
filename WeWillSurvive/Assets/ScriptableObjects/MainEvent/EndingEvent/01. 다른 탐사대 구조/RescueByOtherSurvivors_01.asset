@@ -34,18 +34,14 @@ MonoBehaviour:
         \uADF8 \uC5EC\uC6B4\uC5D0 \uC7A0\uAE34 \uCC44 \uC11C\uB85C\uC758 \uB208\uC744
         \uBC14\uB77C\uBCF4\uBA70 \uD76C\uB9DD\uC758 \uBD88\uC528\uB97C \uB2E4\uC2DC
         \uC9C0\uD3C8\uB2E4."
-      effects:
-      - effectType: 1
-        targetId: CommDevice
-        parameter: 
-        value: 1
-      - effectType: 2
-        targetId: RescueByOtherSurvivors
+      actions:
+      - actionType: 300
+        targetId: 
         parameter: 
         value: 
       probability: 1
-  - choiceType: 300
-    amount: 0
+  - choiceType: 500
+    amount: 1
     results:
     - conditions: []
       resultText: "\uC6B0\uB9AC\uB294 \uC608\uBE44 \uD1B5\uC2E0 \uC7A5\uBE44\uAC00
@@ -55,5 +51,5 @@ MonoBehaviour:
         \uCE68\uBB35\uACFC \uBD88\uC548\uBFD0\uC774\uC5C8\uB2E4. \uC870\uC6A9\uD55C
         \uCE68\uBB35\uC774 \uAE30\uC9C0\uB97C \uAC10\uC30C\uACE0, \uB204\uAD6C\uB3C4
         \uBA3C\uC800 \uC785\uC744 \uC5F4\uC9C0 \uC54A\uC558\uB2E4."
-      effects: []
+      actions: []
       probability: 1

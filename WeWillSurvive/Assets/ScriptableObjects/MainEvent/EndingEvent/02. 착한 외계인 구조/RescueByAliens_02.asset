@@ -35,8 +35,8 @@ MonoBehaviour:
         \uD55C\uB2E4. \uC88B\uC740 \uAD00\uACC4\uB97C \uC720\uC9C0\uD55C\uB2E4\uBA74
         \uB098\uC911\uC5D0 \uC0DD\uC874\uD558\uB294 \uB370 \uB3C4\uC6C0\uC744 \uBC1B\uC744
         \uC218 \uC788\uC744 \uAC83\uC774\uB2E4."
-      effects:
-      - effectType: 2
+      actions:
+      - actionType: 300
         targetId: RescueByAliens
         parameter: 
         value: 
@@ -52,8 +52,8 @@ MonoBehaviour:
         \uD55C\uB2E4. \uC88B\uC740 \uAD00\uACC4\uB97C \uC720\uC9C0\uD55C\uB2E4\uBA74
         \uB098\uC911\uC5D0 \uC0DD\uC874\uD558\uB294 \uB370 \uB3C4\uC6C0\uC744 \uBC1B\uC744
         \uC218 \uC788\uC744 \uAC83\uC774\uB2E4."
-      effects:
-      - effectType: 2
+      actions:
+      - actionType: 300
         targetId: RescueByAliens
         parameter: 
         value: 
@@ -69,8 +69,8 @@ MonoBehaviour:
         \uD55C\uB2E4. \uC88B\uC740 \uAD00\uACC4\uB97C \uC720\uC9C0\uD55C\uB2E4\uBA74
         \uB098\uC911\uC5D0 \uC0DD\uC874\uD558\uB294 \uB370 \uB3C4\uC6C0\uC744 \uBC1B\uC744
         \uC218 \uC788\uC744 \uAC83\uC774\uB2E4."
-      effects:
-      - effectType: 2
+      actions:
+      - actionType: 300
         targetId: RescueByAliens
         parameter: 
         value: 
@@ -86,13 +86,13 @@ MonoBehaviour:
         \uD55C\uB2E4. \uC88B\uC740 \uAD00\uACC4\uB97C \uC720\uC9C0\uD55C\uB2E4\uBA74
         \uB098\uC911\uC5D0 \uC0DD\uC874\uD558\uB294 \uB370 \uB3C4\uC6C0\uC744 \uBC1B\uC744
         \uC218 \uC788\uC744 \uAC83\uC774\uB2E4."
-      effects:
-      - effectType: 2
+      actions:
+      - actionType: 300
         targetId: RescueByAliens
         parameter: 
         value: 
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
     - conditions: []
@@ -104,5 +104,5 @@ MonoBehaviour:
         \uB0B4\uB9AC\uC9C0 \uBABB\uD55C \uC6B0\uB9AC\uB294 \uADF8\uC800 \uC870\uC6A9\uD788
         \uC11C\uB85C\uC758 \uC5BC\uAD74\uC744 \uBC14\uB77C\uBCFC \uC218\uBC16\uC5D0
         \uC5C6\uC5C8\uB2E4."
-      effects: []
+      actions: []
       probability: 1

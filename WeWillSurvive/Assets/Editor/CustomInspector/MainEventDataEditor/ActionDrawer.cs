@@ -21,10 +21,15 @@ namespace WeWillSurvive
             var valueProp = property.FindPropertyRelative("value");
 
             // EffectType
-            EditorGUI.PropertyField(rect, actionTypeProp, new GUIContent("결과 액션 타입"));
-            rect.y += EditorGUIUtility.singleLineHeight + 2;
+            PropertyUtil.TryValidateAndFixEnumProperty<EActionType>(actionTypeProp);
 
-            var actionType = (EActionType)actionTypeProp.enumValueIndex;
+            var currentValue = (EActionType)actionTypeProp.intValue;
+            var newValue = (EActionType)EditorGUI.EnumPopup(rect, "결과 액션 타입", currentValue);
+            if (newValue != currentValue)
+                actionTypeProp.intValue = (int)newValue;
+
+            rect.y += EditorGUIUtility.singleLineHeight + 2;
+            var actionType = (EActionType)actionTypeProp.intValue;
 
             switch (actionType)
             {

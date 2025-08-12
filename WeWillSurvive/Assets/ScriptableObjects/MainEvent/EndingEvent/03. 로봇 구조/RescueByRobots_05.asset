@@ -33,12 +33,12 @@ MonoBehaviour:
         \uBCF4\uC774\uAE30 \uC2DC\uC791\uD588\uB2E4. \uAD6C\uC870\uC6A9 \uB85C\uBD07\uB4E4\uC774
         \uAE30\uC9C0\uB97C \uCC3E\uC544\uC62C \uB54C\uAE4C\uC9C0\uB9CC \uBC84\uD2F0\uBA74,
         \uC6B0\uB9AC\uB294 \uC0DD\uC874\uD560 \uC218 \uC788\uC744 \uAC83\uC774\uB2E4."
-      effects:
-      - effectType: 1
-        targetId: Food
+      actions:
+      - actionType: 201
+        targetId: 
         parameter: 
         value: 4
-      - effectType: 2
+      - actionType: 300
         targetId: RescueByRobots
         parameter: 
         value: 
@@ -53,17 +53,17 @@ MonoBehaviour:
         \uBCF4\uC774\uAE30 \uC2DC\uC791\uD588\uB2E4. \uAD6C\uC870\uC6A9 \uB85C\uBD07\uB4E4\uC774
         \uAE30\uC9C0\uB97C \uCC3E\uC544\uC62C \uB54C\uAE4C\uC9C0\uB9CC \uBC84\uD2F0\uBA74,
         \uC6B0\uB9AC\uB294 \uC0DD\uC874\uD560 \uC218 \uC788\uC744 \uAC83\uC774\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: Water
         parameter: 
         value: 4
-      - effectType: 2
+      - actionType: 300
         targetId: RescueByRobots
         parameter: 
         value: 
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
     - conditions: []
@@ -73,5 +73,5 @@ MonoBehaviour:
         \uC0DD\uC874\uB3C4 \uC911\uC694\uD558\uC9C0\uB9CC, \uC6B0\uB9AC\uC758 \uC0DD\uC874\uC5D0
         \uB354 \uC911\uC694\uD55C \uAC83\uC740 \uC0AC\uC2E4\uC774\uB2E4. \uB098\uC911\uC5D0
         \uC5EC\uC720\uAC00 \uB418\uBA74 \uB2E4\uC2DC \uC190\uC744 \uB0B4\uBC00\uC5B4\uBCF4\uC790."
-      effects: []
+      actions: []
       probability: 1

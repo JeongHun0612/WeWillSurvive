@@ -34,18 +34,18 @@ MonoBehaviour:
         \uC55E\uC5D0 \uC870\uC2EC\uC2A4\uB7FD\uAC8C \uB193\uACE0 \uC0AC\uB77C\uC84C\uB2E4.
         \uC678\uACC4\uC778\uB4E4\uB3C4 \uC6B0\uB9AC\uC640 \uAC19\uC740 \uC6B0\uC8FC
         \uC2DD\uB7C9\uC744 \uBA39\uB294\uB2E4\uB294 \uAC83\uC744 \uC54C\uAC8C \uB418\uC5C8\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: CommDevice
         parameter: 
         value: 1
-      - effectType: 0
-        targetId: Food
+      - actionType: 200
+        targetId: 
         parameter: 
         value: 2
       probability: 1
-  - choiceType: 300
-    amount: 0
+  - choiceType: 500
+    amount: 1
     results:
     - conditions: []
       resultText: "\uC7A5\uBE44\uB97C \uBCF4\uC5EC\uC904 \uC218 \uC5C6\uB2E4\uBA70
@@ -53,5 +53,5 @@ MonoBehaviour:
         \uC815\uC9C0\uD558\uB354\uB2C8, \uACE7 \uC5BC\uC74C\uCC98\uB7FC \uCC28\uAC00\uC6B4
         \uD45C\uC815\uC73C\uB85C \uB3CC\uC544\uC130\uB2E4. \uADF8\uB4E4\uC774 \uC9C0\uB098\uAC04
         \uC790\uB9AC\uB294 \uD558\uC580 \uC11C\uB9AC\uB9CC\uC774 \uB0A8\uC558\uB2E4."
-      effects: []
+      actions: []
       probability: 1

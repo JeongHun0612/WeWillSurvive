@@ -35,21 +35,21 @@ MonoBehaviour:
         \uC6B0\uB9AC\uB294 \uC2A4\uD0C0\uB9E5\uACFC \uC11C\uB85C\uC758 \uB208\uC744
         \uBC14\uB77C\uBCF4\uBA70 \uD76C\uB9DD\uC758 \uBD88\uC528\uB97C \uB2E4\uC2DC
         \uC9C0\uD3C8\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: SpecialFood
         parameter: 
         value: 1
-      - effectType: 0
+      - actionType: 200
         targetId: Starmac
         parameter: 
         value: 1
-      - effectType: 2
+      - actionType: 300
         targetId: RescueByRobots
         parameter: 
         value: 
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
     - conditions: []
@@ -59,5 +59,5 @@ MonoBehaviour:
         \uADF8\uC800 \uD3C9\uBC94\uD55C \uB85C\uBD07\uC5D0 \uBD88\uACFC\uD558\uB2E4\uACE0
         \uC0DD\uAC01\uD558\uACE0 \uB098\uC911\uC5D0 \uB2E4\uC2DC \uBCF5\uAD6C\uD574\uBCF4\uAE30\uB85C
         \uD588\uB2E4."
-      effects: []
+      actions: []
       probability: 1

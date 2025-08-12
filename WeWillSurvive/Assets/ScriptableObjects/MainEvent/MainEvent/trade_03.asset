@@ -32,27 +32,27 @@ MonoBehaviour:
         \uB208\uC744 \uAC00\uB298\uAC8C \uB728\uBA70 \uAC10\uC0AC\uC758 \uBAB8\uC9D3\uC744
         \uCDE8\uD588\uB2E4. \uC190\uC5D0\uB294 \uBB3C\uACFC \uC2DD\uB7C9\uB4E4\uC774
         \uC950\uC5B4\uC84C\uACE0, \uC11C\uB85C \uB9CC\uC871\uD558\uBA70 \uB3CC\uC544\uAC14\uB2E4.\n"
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: Pipe
         parameter: 
         value: 1
-      - effectType: 0
-        targetId: Food
+      - actionType: 200
+        targetId: 
         parameter: 
         value: 1
-      - effectType: 0
+      - actionType: 200
         targetId: Water
         parameter: 
         value: 1
       probability: 1
-  - choiceType: 300
-    amount: 0
+  - choiceType: 500
+    amount: 1
     results:
     - conditions: []
       resultText: "\uC6B0\uB9AC\uAC00 \uC544\uBB34 \uB9D0\uC5C6\uC774 \uD55C\uBC1C
         \uBB3C\uB7EC\uB098\uC790, \uC678\uACC4\uC778\uC740 \uACE0\uAC1C\uB97C \uAC38\uC6B0\uB6B1\uD558\uBA70
         \uCC9C\uCC9C\uD788 \uB4B7\uAC78\uC74C\uC9C8\uCCE4\uB2E4. \uC804\uD22C\uB294
         \uC5C6\uC5C8\uC9C0\uB9CC, \uC544\uC26C\uC6B4 \uAE30\uD68C\uAC00 \uD758\uB7EC\uAC00\uBC84\uB838\uB2E4."
-      effects: []
+      actions: []
       probability: 1

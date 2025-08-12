@@ -31,15 +31,15 @@ MonoBehaviour:
     \uB0A8\uC740 \uC5BC\uAD74\uB4E4\uC744 \uBC14\uB77C\uBCF4\uBA70 \uC11C\uB85C \uC54C\uC558\uB2E4.
     \uC774\uC81C \uC774 \uC778\uC6D0\uC73C\uB85C \uC0B4\uC544\uB0A8\uC544\uC57C \uD55C\uB2E4.\r"
   triggerConditions:
-  - conditionType: 1
+  - conditionType: 1000
     targetId: Lead
     parameter: "\uC815\uC0C1"
     value1: 2
     value2: 3
-  eventType: 6
+  eventType: 100
   choices:
-  - choiceType: 300
-    amount: 0
+  - choiceType: 500
+    amount: 1
     results:
     - conditions: []
       resultText: "\uBD88\uC2DC\uCC29\uD55C \uB2E4\uC74C \uB0A0, \uAE30\uC9C0 \uB0B4\uBD80\uB294
@@ -53,5 +53,5 @@ MonoBehaviour:
         \uC544\uBB34\uB3C4 \uBAA8\uB978\uB2E4. \uC774\uC81C, \uAE30\uB2E4\uB9AC\uB294
         \uB3D9\uC548 \uC2A4\uC2A4\uB85C \uC0B4\uC544\uAC00\uC57C \uD560 \uC2DC\uAC04\uC774
         \uC2DC\uC791\uB410\uB2E4.\r"
-      effects: []
+      actions: []
       probability: 1

@@ -75,8 +75,8 @@ namespace WeWillSurvive
 
             gameObject.SetActive(true);
             await UniTask.NextFrame();
-
-            _pageTexts = TMPTextUtil.SplitTextByLines(_eventText, _mainEventData.descriptions[0], _maxLineCount);
+            
+            _pageTexts = TMPTextUtil.SplitTextByLines(_eventText, _mainEventData.GetRandomDescription(), _maxLineCount);
             PageCount = _pageTexts.Count;
         }
 

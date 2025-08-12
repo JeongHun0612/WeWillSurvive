@@ -29,9 +29,9 @@ MonoBehaviour:
         \uC548\uC73C\uB85C \uB4E4\uC5B4\uAC00\uC790, \uC9C4\uC5F4\uB300 \uC544\uB798
         \uBA3C\uC9C0 \uC313\uC778 \uC6B0\uC8FC \uC2DD\uB7C9\uB4E4\uC774 \uBC1C\uACAC\uB418\uC5C8\uB2E4.
         \uC190\uC804\uB4F1\uB3C4 \uBB34\uC0AC\uD788 \uC791\uB3D9 \uC911\uC774\uB2E4."
-      effects:
-      - effectType: 0
-        targetId: Food
+      actions:
+      - actionType: 200
+        targetId: 
         parameter: 
         value: 2
       probability: 0.8
@@ -40,13 +40,13 @@ MonoBehaviour:
         \uBD80\uB52A\uD600 \uBC14\uB2E5\uC5D0 \uB5A8\uC5B4\uB728\uB838\uB2E4. \uC720\uB9AC
         \uB80C\uC988\uAC00 \uAE68\uC838\uBC84\uB838\uACE0, \uACB0\uAD6D \uC5BB\uC740
         \uAC74 \uC544\uBB34\uAC83\uB3C4 \uC5C6\uC5C8\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: Flashlight
         parameter: 
         value: 1
       probability: 0.2
-  - choiceType: 302
+  - choiceType: 502
     amount: 1
     results:
     - conditions: []
@@ -54,8 +54,8 @@ MonoBehaviour:
         \uC774\uB3D9\uD558\uB2E4\uAC00 \uAD6C\uC11D\uC5D0\uC11C \uB0A1\uC740 \uB3C4\uB07C
         \uD558\uB098\uB97C \uBC1C\uACAC\uD588\uB2E4. \uB2E4\uD589\uD788 \uB2E4\uCE58\uC9C4
         \uC54A\uC558\uB2E4."
-      effects:
-      - effectType: 0
+      actions:
+      - actionType: 200
         targetId: Ax
         parameter: 
         value: 1
@@ -64,5 +64,5 @@ MonoBehaviour:
       resultText: "\uCC3D\uACE0 \uB0B4\uBD80\uB294 \uB108\uBB34 \uC5B4\uB450\uC6E0\uB2E4.
         \uBA87 \uBD84\uC744 \uB4A4\uC838\uBD10\uB3C4 \uC4F8\uB9CC\uD55C \uAC74 \uC544\uBB34\uAC83\uB3C4
         \uC5C6\uC5C8\uB2E4."
-      effects: []
+      actions: []
       probability: 0.8

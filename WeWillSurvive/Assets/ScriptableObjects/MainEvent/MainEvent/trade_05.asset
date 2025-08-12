@@ -31,18 +31,18 @@ MonoBehaviour:
         \uD588\uB2E4. \uC774\uD574\uB294 \uC798 \uD558\uC9C0 \uBABB\uD588\uC9C0\uB9CC,
         \uADF8\uAC83\uC774 \uD1B5\uC2E0\uC5D0\uB294 \uC544\uC8FC \uD6A8\uACFC\uC801\uC774\uB77C\uB294
         \uC810\uC740 \uC54C \uC218 \uC788\uC5C8\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: NiceSpacesuit
         parameter: 
         value: 1
-      - effectType: 0
+      - actionType: 200
         targetId: CommDevice
         parameter: 
         value: 1
       probability: 1
-  - choiceType: 300
-    amount: 0
+  - choiceType: 500
+    amount: 1
     results:
     - conditions: []
       resultText: "\uACE0\uAC1C\uB97C \uC800\uC73C\uBA70 \uC6B0\uC8FC\uBCF5\uC744
@@ -50,5 +50,5 @@ MonoBehaviour:
         \uC54A\uACE0 \uC870\uC6A9\uD788 \uB3CC\uC544\uC130\uB2E4. \uAE30\uC220\uC801\uC73C\uB85C
         \uC55E\uC120 \uADF8\uB4E4\uC774 \uC544\uC26C\uC6CC\uD55C \uAC83\uC740 \uC6B0\uC8FC\uBCF5\uC77C\uAE4C,
         \uC2E0\uB8B0\uC600\uC744\uAE4C."
-      effects: []
+      actions: []
       probability: 1

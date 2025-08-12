@@ -31,8 +31,8 @@ MonoBehaviour:
         \uC0DD\uBA85\uCCB4\uB4E4\uC774 \uBAA8\uC2B5\uC744 \uB4DC\uB7EC\uB0C8\uB2E4.
         \uADF8\uB4E4\uC740 \uAD6C\uC870\uC120\uACFC \uD568\uAED8 \uC6B0\uB9AC\uB97C
         \uB370\uB9AC\uB7EC \uC654\uB2E4. \uB9C8\uCE68\uB0B4 \uD0C8\uCD9C\uC758 \uC21C\uAC04\uC774\uB2E4."
-      effects:
-      - effectType: 3
+      actions:
+      - actionType: 301
         targetId: RescueByAliens
         parameter: 
         value: 
@@ -47,5 +47,5 @@ MonoBehaviour:
         \uC218 \uC788\uC744\uAE4C? \uB204\uAD6C\uB3C4 \uB9D0\uC740 \uC548 \uD588\uC9C0\uB9CC,
         \uADF8 \uAE30\uD68C\uB294 \uC27D\uAC8C \uC624\uC9C0 \uC54A\uB294 \uAC83\uC774\uB77C\uB294
         \uAC83\uC744 \uC54C\uACE0 \uC788\uC5C8\uB2E4."
-      effects: []
+      actions: []
       probability: 1

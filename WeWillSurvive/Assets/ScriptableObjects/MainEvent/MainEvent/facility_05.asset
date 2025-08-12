@@ -30,44 +30,44 @@ MonoBehaviour:
       resultText: "\uBC30\uAD00\uC5D0 \uC218\uB9AC \uD0A4\uD2B8\uB97C \uC801\uC6A9\uD574
         \uB204\uC218\uB97C \uB9C9\uC558\uB2E4. \uB0B4\uBD80 \uACF5\uAE30\uB294 \uB9D1\uC544\uC84C\uACE0,
         \uBAA8\uB4E0 \uC7A5\uBE44\uB294 \uC815\uC0C1 \uC720\uC9C0\uB418\uC5C8\uB2E4."
-      effects:
-      - effectType: 5
-        targetId: Lead
-        parameter: Anxious
-        value: 1
-      - effectType: 5
-        targetId: Cook
-        parameter: Anxious
-        value: 1
-      - effectType: 5
-        targetId: DrK
-        parameter: Anxious
-        value: 1
-      - effectType: 5
-        targetId: Bell
-        parameter: Anxious
-        value: 1
+      actions: []
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
-    - conditions: []
+    - conditions:
+      - conditionType: 201
+        targetId: 
+        parameter: 
+        value1: 2
+        value2: 
       resultText: "\uBCF4\uAD00\uD568 \uB0B4\uBD80\uAC00 \uC2B5\uAE30\uB85C \uAC00\uB4DD
         \uCC3C\uB2E4. \uC6B0\uC8FC \uC2DD\uB7C9 \uBA87 \uAC1C\uAC00 \uACF0\uD321\uC774\uB85C
         \uC624\uC5FC\uB418\uC5B4 \uD3D0\uAE30\uD574\uC57C \uD588\uB2E4.\n"
-      effects:
-      - effectType: 1
-        targetId: Food
+      actions:
+      - actionType: 201
+        targetId: 
+        parameter: 
+        value: 2
+      probability: 1
+    - conditions:
+      - conditionType: 201
+        targetId: Water
+        parameter: 
+        value1: 2
+        value2: 
+      resultText: "\uBCF4\uAD00\uD568 \uB0B4\uBD80\uAC00 \uC2B5\uAE30\uB85C \uAC00\uB4DD
+        \uCC3C\uB2E4. \uBB3C \uBA87 \uAC1C\uAC00 \uACF0\uD321\uC774\uB85C \uC624\uC5FC\uB418\uC5B4
+        \uD3D0\uAE30\uD574\uC57C \uD588\uB2E4."
+      actions:
+      - actionType: 201
+        targetId: Water
         parameter: 
         value: 2
       probability: 1
     - conditions: []
       resultText: "\uBCF4\uAD00\uD568 \uB0B4\uBD80\uAC00 \uC2B5\uAE30\uB85C \uAC00\uB4DD
-        \uCC3C\uB2E4. \uBB3C \uBA87 \uAC1C\uAC00 \uACF0\uD321\uC774\uB85C \uC624\uC5FC\uB418\uC5B4
-        \uD3D0\uAE30\uD574\uC57C \uD588\uB2E4."
-      effects:
-      - effectType: 1
-        targetId: Water
-        parameter: 
-        value: 2
+        \uCC3C\uC9C0\uB9CC \uB2E4\uD589\uD788 \uC800\uC7A5\uC18C\uC5D0 \uC788\uB358
+        \uC2DD\uB7C9\uACFC \uBB3C\uC740 \uBA40\uCA61\uD558\uB2E4."
+      actions: []
       probability: 1

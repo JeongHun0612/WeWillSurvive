@@ -13,7 +13,7 @@ namespace WeWillSurvive.Character
         Lead,
         Cook,
         DrK,
-        Bell
+        Bell,
     }
 
     public class CharacterManager : IService

@@ -56,8 +56,10 @@ namespace WeWillSurvive
             if (!int.TryParse(action.value, out var count))
                 Debug.LogWarning($"Value : {action.value} | int 타입으로 파싱 실패");
 
-            ItemManager.UsedItem(item, count);
-            LogManager.AddRewardItemData(new RewardItemData(item, -count));
+            if (ItemManager.TryDecreaseItemCount(item, count))
+            {
+                LogManager.AddRewardItemData(new RewardItemData(item, -count));
+            }
         }
     }
 

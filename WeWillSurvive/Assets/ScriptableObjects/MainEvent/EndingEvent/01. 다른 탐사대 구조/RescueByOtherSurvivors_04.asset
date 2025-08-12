@@ -32,15 +32,15 @@ MonoBehaviour:
         \uADF8\uB4E4\uC740 \uC57D\uC18D\uB300\uB85C \uAD6C\uC870 \uBA54\uC2DC\uC9C0\uB97C
         \uC9C0\uAD6C\uC5D0 \uC804\uC1A1\uD588\uB2E4. \uBAA8\uB450\uC758 \uD45C\uC815\uC5D4
         \uC548\uB3C4\uAC10\uC774 \uBC88\uC84C\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: MedicKit
         parameter: 
         value: 1
-      - effectType: 2
-        targetId: RescueByOtherSurvivors
+      - actionType: 300
+        targetId: 
         parameter: 
-        value: 1
+        value: 
       probability: 1
   - choiceType: 204
     amount: 1
@@ -52,17 +52,17 @@ MonoBehaviour:
         \uADF8\uB4E4\uC740 \uC57D\uC18D\uB300\uB85C \uAD6C\uC870 \uBA54\uC2DC\uC9C0\uB97C
         \uC9C0\uAD6C\uC5D0 \uC804\uC1A1\uD588\uB2E4. \uBAA8\uB450\uC758 \uD45C\uC815\uC5D4
         \uC548\uB3C4\uAC10\uC774 \uBC88\uC84C\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: SpecialMedicKit
         parameter: 
         value: 1
-      - effectType: 2
-        targetId: RescueByOtherSurvivors
+      - actionType: 300
+        targetId: 
         parameter: 
         value: 
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
     - conditions: []
@@ -72,5 +72,5 @@ MonoBehaviour:
         \uBB3C\uAC70\uD488\uC774 \uB418\uC5C8\uB2E4. \uC120\uD0DD\uC740 \uBB34\uAC81\uACE0
         \uC4F0\uB838\uB2E4. \uC544\uBB34 \uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0 \uC54A\uC558\uC9C0\uB9CC,
         \uADF8\uAC83\uC774 \uC624\uD788\uB824 \uB354 \uD070 \uBD88\uC548\uC744 \uC548\uACA8\uC92C\uB2E4."
-      effects: []
+      actions: []
       probability: 1

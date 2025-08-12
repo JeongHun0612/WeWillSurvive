@@ -10,42 +10,45 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
-  m_Name: noting_character_06
+  m_Name: noting_character_Bell
   m_EditorClassIdentifier: 
-  eventId: noting_character_06
+  eventId: noting_character_Bell
   title: 
   descriptions:
+  - "\uBCA8\uC740 \uC624\uB298\uB3C4 \uBB34\uC804\uAE30\uB97C \uACE0\uCCE4\uB2E4.
+    \uADF8\uB140\uAC00 \uD3EC\uAE30\uD558\uC9C0 \uC54A\uB294 \uC774\uC720\uB294,
+    \uC6B0\uB9AC \uBAA8\uB450\uAC00 \uD3EC\uAE30\uD560 \uC218 \uC5C6\uAE30 \uB54C\uBB38\uC774\uB2E4."
   - "\uBCA8\uC740 \uBB34\uC804\uAE30\uB97C \uD558\uB8E8 \uC885\uC77C \uB450\uB4DC\uB838\uB2E4.
     \uC774\uC820 \uBB34\uC804\uAE30\uAC00 \uC544\uB2C8\uB77C \uBD81\uC73C\uB85C \uC4F0\uB294
     \uAC74 \uC544\uB2D0\uAE4C \uC2F6\uB2E4."
   triggerConditions:
-  - conditionType: 0
+  - conditionType: 100
     targetId: Bell
     parameter: 
     value1: 
     value2: 
-  eventType: 6
+  eventType: 100
   choices:
-  - choiceType: 300
-    amount: 0
+  - choiceType: 500
+    amount: 1
     results:
     - conditions:
-      - conditionType: 0
+      - conditionType: 100
         targetId: Bell
         parameter: 
         value1: 
         value2: 
       resultText: "\uBCA8\uC740 \uC544\uCE68\uC5D0\uB3C4 \uAE30\uACC4\uB97C \uC0B4\uD3C8\uB2E4.
         \uB2E4\uD589\uD788 \uC791\uB3D9\uC740 \uC815\uC0C1\uC774\uB2E4."
-      effects: []
+      actions: []
       probability: 1
     - conditions:
-      - conditionType: 0
+      - conditionType: 100
         targetId: Bell
         parameter: 
         value1: 
         value2: 
       resultText: "\uBCA8\uC740 \uB3C4\uAD6C\uB97C \uCC59\uACBC\uB2E4. \uC5B4\uC81C\uBCF4\uB2E4
         \uC88B\uC544\uC9C4 \uAC83\uB3C4, \uB098\uBE60\uC9C4 \uAC83\uB3C4 \uC5C6\uB2E4."
-      effects: []
+      actions: []
       probability: 1

@@ -27,8 +27,8 @@ MonoBehaviour:
       resultText: "\uC804\uC120 \uB354\uBBF8 \uC0AC\uC774\uC5D0\uC11C \uC608\uBE44
         \uD1B5\uC2E0 \uC7A5\uBE44\uB97C \uCC3E\uC544\uB0C8\uB2E4. \uC190\uC804\uB4F1\uB3C4
         \uBA40\uCA61\uD558\uB2E4."
-      effects:
-      - effectType: 0
+      actions:
+      - actionType: 200
         targetId: CommDevice
         parameter: 
         value: 1
@@ -37,21 +37,17 @@ MonoBehaviour:
       resultText: "\uD1B5\uC2E0\uC2E4\uC758 \uC790\uAE30\uC7A5 \uC601\uD5A5 \uB54C\uBB38\uC778\uC9C0,
         \uC190\uC804\uB4F1\uC774 \uAE5C\uBE61\uAC70\uB9AC\uB2E4 \uAEBC\uC838\uBC84\uB838\uB2E4.
         \uC544\uBB34\uB7F0 \uC131\uACFC \uC5C6\uC774 \uB3CC\uC544\uC654\uB2E4."
-      effects:
-      - effectType: 1
-        targetId: Flashlight
-        parameter: 
-        value: 1
+      actions: []
       probability: 0.2
-  - choiceType: 302
+  - choiceType: 502
     amount: 1
     results:
     - conditions: []
       resultText: "\uC190\uC744 \uB354\uB4EC\uC5B4 \uB0B4\uBD80\uB97C \uC0B4\uD53C\uB358
         \uC911 \uC791\uC740 \uBCF4\uB4DC\uAC8C\uC784\uD310\uC774 \uB098\uC654\uB2E4.
         \uB204\uAD70\uAC00 \uC228\uACA8\uB480\uB358 \uAC83 \uAC19\uB2E4."
-      effects:
-      - effectType: 0
+      actions:
+      - actionType: 200
         targetId: BoardGame
         parameter: 
         value: 1
@@ -59,5 +55,5 @@ MonoBehaviour:
     - conditions: []
       resultText: "\uBCBD\uBA74 \uB4A4\uCABD\uC744 \uC0C5\uC0C5\uC774 \uC0B4\uD3B4\uBD24\uC9C0\uB9CC,
         \uACB0\uAD6D \uD5C8\uD0D5\uC774\uC5C8\uB2E4."
-      effects: []
+      actions: []
       probability: 0.8

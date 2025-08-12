@@ -35,18 +35,18 @@ MonoBehaviour:
         \uC218\uB9AC \uD0A4\uD2B8\uB97C \uAE30\uC9C0 \uC55E\uC5D0 \uB0B4\uB824\uB450\uACE0
         \uCC9C\uCC9C\uD788 \uBB3C\uB7EC\uAC14\uB2E4. \uC774\uC0C1\uD558\uAC8C\uB3C4,
         \uAE30\uC9C0\uC5D0 \uC7A0\uAE50 \uC6C3\uC74C\uC18C\uB9AC\uAC00 \uB3CC\uC558\uB2E4."
-      effects:
-      - effectType: 1
+      actions:
+      - actionType: 201
         targetId: BoardGame
         parameter: 
         value: 1
-      - effectType: 0
+      - actionType: 200
         targetId: RepairKit
         parameter: 
         value: 1
       probability: 1
-  - choiceType: 300
-    amount: 0
+  - choiceType: 500
+    amount: 1
     results:
     - conditions: []
       resultText: "\uAC70\uC808 \uC758\uC0AC\uB97C \uC804\uD558\uC790 \uC678\uACC4
@@ -55,5 +55,5 @@ MonoBehaviour:
         \uB5A0\uB09C \uB4A4\uC5D0\uB3C4 \uC720\uB9AC\uCC3D \uB108\uBA38\uC5D0 \uADF8\uB4E4\uC758
         \uC2DC\uC120\uC774 \uB0A8\uC544 \uC788\uB294 \uB4EF\uD55C \uAE30\uBD84\uC774
         \uB4E4\uC5C8\uB2E4."
-      effects: []
+      actions: []
       probability: 1

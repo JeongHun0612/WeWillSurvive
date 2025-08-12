@@ -30,8 +30,8 @@ MonoBehaviour:
         \uC131\uACF5\uC801\uC73C\uB85C \uADC0\uD658\uD588\uACE0, \uADC0\uC911\uD55C
         \uD0D0\uC0AC \uC815\uBCF4\uB97C \uAC00\uC838\uC654\uB2E4. \uB85C\uBD07\uC758
         \uC131\uB2A5\uC740 \uAE30\uB300 \uC774\uC0C1\uC774\uC5C8\uB2E4."
-      effects:
-      - effectType: 2
+      actions:
+      - actionType: 300
         targetId: RescueByRobots
         parameter: 
         value: 
@@ -44,8 +44,8 @@ MonoBehaviour:
         \uC131\uACF5\uC801\uC73C\uB85C \uADC0\uD658\uD588\uACE0, \uADC0\uC911\uD55C
         \uD0D0\uC0AC \uC815\uBCF4\uB97C \uAC00\uC838\uC654\uB2E4. \uB85C\uBD07\uC758
         \uC131\uB2A5\uC740 \uAE30\uB300 \uC774\uC0C1\uC774\uC5C8\uB2E4."
-      effects:
-      - effectType: 2
+      actions:
+      - actionType: 300
         targetId: RescueByRobots
         parameter: 
         value: 
@@ -58,8 +58,8 @@ MonoBehaviour:
         \uC131\uACF5\uC801\uC73C\uB85C \uADC0\uD658\uD588\uACE0, \uADC0\uC911\uD55C
         \uD0D0\uC0AC \uC815\uBCF4\uB97C \uAC00\uC838\uC654\uB2E4. \uB85C\uBD07\uC758
         \uC131\uB2A5\uC740 \uAE30\uB300 \uC774\uC0C1\uC774\uC5C8\uB2E4."
-      effects:
-      - effectType: 2
+      actions:
+      - actionType: 300
         targetId: RescueByRobots
         parameter: 
         value: 
@@ -72,13 +72,13 @@ MonoBehaviour:
         \uC131\uACF5\uC801\uC73C\uB85C \uADC0\uD658\uD588\uACE0, \uADC0\uC911\uD55C
         \uD0D0\uC0AC \uC815\uBCF4\uB97C \uAC00\uC838\uC654\uB2E4. \uB85C\uBD07\uC758
         \uC131\uB2A5\uC740 \uAE30\uB300 \uC774\uC0C1\uC774\uC5C8\uB2E4."
-      effects:
-      - effectType: 2
+      actions:
+      - actionType: 300
         targetId: RescueByRobots
         parameter: 
         value: 
       probability: 1
-  - choiceType: 300
+  - choiceType: 500
     amount: 1
     results:
     - conditions: []
@@ -88,5 +88,5 @@ MonoBehaviour:
         \uC218 \uC5C6\uC5C8\uB2E4. \uB2E4\uC74C\uC5D0 \uAE30\uD68C\uAC00 \uB418\uBA74
         \uD55C\uBC88 \uAC19\uC774 \uBC16\uC73C\uB85C \uB098\uAC00\uBCF4\uAE30\uB85C
         \uD588\uB2E4."
-      effects: []
+      actions: []
       probability: 1
