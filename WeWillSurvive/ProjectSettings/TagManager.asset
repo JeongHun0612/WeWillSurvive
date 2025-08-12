@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - wall
+  - burnoff
+  - burnoff2
+  - roomExit
   layers:
   - Default
   - TransparentFX
@@ -12,7 +15,7 @@ TagManager:
   - Interactable
   - Water
   - UI
-  - Walls
+  - CrashableUI
   - 
   - 
   - 
