@@ -46,7 +46,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BurnAmount: 0.35
+    - _BurnAmount: 0
     - _BurnDepth: 1
     - _BurnGrain: 50
     - _BurnLayer: 0.069
