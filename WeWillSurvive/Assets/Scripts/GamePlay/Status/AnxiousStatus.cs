@@ -5,21 +5,20 @@ namespace WeWillSurvive.Status
 {
     public enum EAnxiousLevel
     {
-        Anxious, Panic
+        Normal, Anxious, Panic, Dead
     }
 
     public class AnxiousStatus : StatusBase<EAnxiousLevel>
     {
         public override EStatusType StatusType => EStatusType.Anxious;
 
-        protected override bool IsLastLevel(EAnxiousLevel level) => level == EAnxiousLevel.Panic;
+        protected override bool IsDeadLevel(EAnxiousLevel level) => level == EAnxiousLevel.Dead;
 
 
         public AnxiousStatus(CharacterBase owner)
         {
             _owner = owner;
-
-            _level = EAnxiousLevel.Anxious;
+            _level = EAnxiousLevel.Normal;
             _dayCounter = 0;
 
             LevelStateMap = new()

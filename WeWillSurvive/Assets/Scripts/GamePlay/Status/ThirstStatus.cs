@@ -1,19 +1,18 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using WeWillSurvive.Character;
 
 namespace WeWillSurvive.Status
 {
     public enum EThirstLevel
     {
-        Normal, Thirsty, Dehydrate
+        Normal, Thirsty, Dehydrate, Daed
     }
 
     public class ThirstStatus : StatusBase<EThirstLevel>
     {
         public override EStatusType StatusType => EStatusType.Thirst;
 
-        protected override bool IsLastLevel(EThirstLevel level) => level == EThirstLevel.Dehydrate;
+        protected override bool IsDeadLevel(EThirstLevel level) => level == EThirstLevel.Daed;
 
         public ThirstStatus(CharacterBase owner)
         {

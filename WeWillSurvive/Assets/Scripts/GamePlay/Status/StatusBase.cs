@@ -18,6 +18,7 @@ namespace WeWillSurvive
 
     public abstract class StatusBase<TLevel> : IStatus where TLevel : System.Enum
     {
+        protected TLevel[] OrderedLevels;
         protected Dictionary<TLevel, EState> LevelStateMap;
         protected Dictionary<TLevel, int> DaysToNextLevel;
         protected Dictionary<TLevel, List<StateTransition>> StateTransitionTable;
@@ -30,7 +31,7 @@ namespace WeWillSurvive
 
         public abstract EStatusType StatusType { get; }
 
-        protected abstract bool IsLastLevel(TLevel level);
+        protected abstract bool IsDeadLevel(TLevel level);
 
         public virtual void OnNewDay()
         {
@@ -87,9 +88,7 @@ namespace WeWillSurvive
             int currentLevel = (int)(object)_level;
             int targetLevel = currentLevel + step;
 
-            // 레벨 업데이트
-            _level = (TLevel)(object)targetLevel;
-            _dayCounter = 0;
+            UpdateLevel((TLevel)(object)targetLevel);
         }
 
         public virtual void RecoveryStatus(int step = 1)
@@ -118,16 +117,19 @@ namespace WeWillSurvive
                     Debug.LogWarning($"{_level}에 대한 LevelStateMap이 존재하지 않습니다.");
                 }
 
-                _level = (TLevel)(object)targetLevel;
-                _dayCounter = 0;
+                UpdateLevel((TLevel)(object)targetLevel);
             }
+        }
+
+        public void UpdateLevel(TLevel level)
+        {
+            _level = level;
+            _dayCounter = 0;
         }
 
         protected void ApplyCurrentLevelState()
         {
-            int maxLevel = System.Enum.GetValues(typeof(TLevel)).Length - 1;
-
-            if ((int)(object)_level > maxLevel)
+            if (IsDeadLevel(_level))
             {
                 _owner.OnDead();
                 return;
@@ -149,24 +151,16 @@ namespace WeWillSurvive
             switch (transitionType)
             {
                 case EStateTransitionType.Stay:
-                    {
                         _dayCounter = 0;
-                    }
                     break;
                 case EStateTransitionType.Worsen:
-                    {
                         WorsenStatus();
-                    }
                     break;
                 case EStateTransitionType.Recovery:
-                    {
                         RecoveryStatus();
-                    }
                     break;
                 case EStateTransitionType.Death:
-                    {
                         _owner.OnDead();
-                    }
                     break;
                 default:
                     break;

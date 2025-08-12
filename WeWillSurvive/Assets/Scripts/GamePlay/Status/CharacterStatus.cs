@@ -21,15 +21,19 @@ namespace WeWillSurvive.Status
             _statuses.Clear();
 
             AddStatus(EStatusType.Hunger);
-            //WorsenStatus(EStatusType.Hunger, 2);
-
             AddStatus(EStatusType.Thirst);
-            //WorsenStatus(EStatusType.Thirst, 2);
+            AddStatus(EStatusType.Injury);
+            AddStatus(EStatusType.Anxious);
 
-
-            // Debug
-            //AddStatus(EStatusType.Injury);
-            //AddStatus(EStatusType.Anxious);
+#if UNITY_EDITOR
+            if (_owner.Data.StatusDebugData != null)
+            {
+                GetStatus<HungerStatus>(EStatusType.Hunger).UpdateLevel(_owner.Data.StatusDebugData.Hunger);
+                GetStatus<ThirstStatus>(EStatusType.Thirst).UpdateLevel(_owner.Data.StatusDebugData.Thirst);
+                GetStatus<InjuryStatus>(EStatusType.Injury).UpdateLevel(_owner.Data.StatusDebugData.Injury);
+                GetStatus<AnxiousStatus>(EStatusType.Anxious).UpdateLevel(_owner.Data.StatusDebugData.Anxiety);
+            }
+#endif
         }
 
         public void OnNewDay()

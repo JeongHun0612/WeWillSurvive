@@ -5,20 +5,19 @@ namespace WeWillSurvive.Status
 {
     public enum EInjuredLevel
     {
-        Injured, Sick
+        Normal, Injured, Sick, Dead
     }
 
     public class InjuryStatus : StatusBase<EInjuredLevel>
     {
         public override EStatusType StatusType => EStatusType.Injury;
 
-        protected override bool IsLastLevel(EInjuredLevel level) => level == EInjuredLevel.Sick;
+        protected override bool IsDeadLevel(EInjuredLevel level) => level == EInjuredLevel.Dead;
 
         public InjuryStatus(CharacterBase owner)
         {
             _owner = owner;
-
-            _level = EInjuredLevel.Injured;
+            _level = EInjuredLevel.Normal;
             _dayCounter = 0;
 
             LevelStateMap = new()
@@ -42,6 +41,14 @@ namespace WeWillSurvive.Status
                     new StateTransition { TransitionType = EStateTransitionType.Death, Probability = 0.2f },
                 },
             };
+        }
+
+        public override void OnNewDay()
+        {
+            if (_level == EInjuredLevel.Normal)
+                return;
+
+            base.OnNewDay();
         }
 
         public override void RecoveryStatus(int step = 1)

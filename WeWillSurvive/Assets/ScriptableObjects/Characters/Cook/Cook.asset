@@ -18,3 +18,4 @@ MonoBehaviour:
   SpriteData: {fileID: 11400000, guid: 076ee52fb73ac6e499159144bf1a30fc, type: 2}
   StateMessageData: {fileID: 11400000, guid: eb1548d3be1d3ca4f9ff4f4acb3b77a6, type: 2}
   ExpeditionMessageData: {fileID: 11400000, guid: 2501d3434642cbe4c85d5bc6d4a2db07, type: 2}
+  StatusDebugData: {fileID: 11400000, guid: ea76f611084d583408fc5ff823aa1e08, type: 2}

@@ -23,6 +23,8 @@ namespace WeWillSurvive.Character
         [Header("## 캐릭터 탐사에 대한 메시지 데이터")]
         public CharacterExpeditionMessageData ExpeditionMessageData;
 
+        [Header("## 캐릭터 스테이터스 Debug 데이터")]
+        public StatusDebugData StatusDebugData;
 
         public void Initialize()
         {

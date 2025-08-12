@@ -6,14 +6,14 @@ namespace WeWillSurvive.Status
 {
     public enum EHungerLevel
     {
-        Normal, Hungry, Starve
+        Normal, Hungry, Starve, Dead
     }
 
     public class HungerStatus : StatusBase<EHungerLevel>
     {
         public override EStatusType StatusType => EStatusType.Hunger;
 
-        protected override bool IsLastLevel(EHungerLevel level) => level == EHungerLevel.Starve;
+        protected override bool IsDeadLevel(EHungerLevel level) => level == EHungerLevel.Dead;
 
 
         public HungerStatus(CharacterBase owner)
