@@ -5,20 +5,26 @@ namespace WeWillSurvive.Status
 {
     public enum EThirstLevel
     {
-        Normal, Thirsty, Dehydrate, Daed
+        Normal, Thirsty, Dehydrate, Dead
     }
 
     public class ThirstStatus : StatusBase<EThirstLevel>
     {
         public override EStatusType StatusType => EStatusType.Thirst;
 
-        protected override bool IsDeadLevel(EThirstLevel level) => level == EThirstLevel.Daed;
+        protected override bool IsDeadLevel(EThirstLevel level) => level == EThirstLevel.Dead;
 
         public ThirstStatus(CharacterBase owner)
         {
             _owner = owner;
-            _level = EThirstLevel.Normal;
-            _dayCounter = 0;
+
+            OrderedLevels = new EThirstLevel[]
+            {
+                EThirstLevel.Normal,
+                EThirstLevel.Thirsty,
+                EThirstLevel.Dehydrate,
+                EThirstLevel.Dead,
+            };
 
             LevelStateMap = new()
             {
@@ -53,6 +59,8 @@ namespace WeWillSurvive.Status
                     new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
                 },
             };
+
+            UpdateLevel(EThirstLevel.Normal);
         }
     }
 }

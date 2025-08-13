@@ -21,6 +21,7 @@ namespace WeWillSurvive.Status
 
         public void OnNewDay();
         public void OnExpeditionResult();
+        public void ResetStatus();
         public void WorsenStatus(int step = 1);
         public void RecoveryStatus(int step = 1);
     }

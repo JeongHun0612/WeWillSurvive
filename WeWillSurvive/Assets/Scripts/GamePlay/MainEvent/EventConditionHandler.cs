@@ -48,7 +48,7 @@ namespace WeWillSurvive
             if (!int.TryParse(condition.value2, out var maxValue))
                 Debug.LogWarning($"Value2 : {condition.value1} | int 타입으로 파싱 실패");
 
-            int aliveCount = CharacterManager.AliveCharacterCount();
+            int aliveCount = CharacterManager.AliveCharactersCount();
             return aliveCount >= minValue && aliveCount <= maxValue;
         }
     }

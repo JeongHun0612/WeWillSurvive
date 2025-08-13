@@ -76,7 +76,7 @@ namespace WeWillSurvive.Character
             }
 
             // Character 사기 설정 (남은 인원수에 따라 사기 결정)
-            int aliveCount = AliveCharacterCount();
+            int aliveCount = AliveCharactersCount();
 
             if (_moraleTable.TryGetValue(aliveCount, out EMorale morale))
             {
@@ -103,15 +103,20 @@ namespace WeWillSurvive.Character
             }
 
             // 모든 플레이어가 사망 시 데드 엔딩
-            if (AliveCharacterCount() == 0)
+            if (AliveCharactersCount() == 0)
             {
                 EndingManager.Instance.Ending(EEndingType.DeathByStarvation);
             }
         }
 
-        public int AliveCharacterCount()
+        public int AliveCharactersCount()
         {
             return Characters.Values.Count(character => character != null && !character.IsDead);
+        }
+
+        public int InShelterCharactersCount()
+        {
+            return Characters.Values.Count(character => character != null && character.IsInShelter);
         }
 
         public List<CharacterBase> GetAllCharacters()

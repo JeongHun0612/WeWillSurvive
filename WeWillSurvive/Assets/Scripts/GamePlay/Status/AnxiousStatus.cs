@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using WeWillSurvive.Character;
+using WeWillSurvive.Core;
 
 namespace WeWillSurvive.Status
 {
@@ -14,12 +15,19 @@ namespace WeWillSurvive.Status
 
         protected override bool IsDeadLevel(EAnxiousLevel level) => level == EAnxiousLevel.Dead;
 
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
         public AnxiousStatus(CharacterBase owner)
         {
             _owner = owner;
-            _level = EAnxiousLevel.Normal;
-            _dayCounter = 0;
+
+            OrderedLevels = new EAnxiousLevel[]
+            {
+                EAnxiousLevel.Normal,
+                EAnxiousLevel.Anxious,
+                EAnxiousLevel.Panic,
+                EAnxiousLevel.Dead,
+            };
 
             LevelStateMap = new()
             {
@@ -35,6 +43,10 @@ namespace WeWillSurvive.Status
 
             StateTransitionTable = new()
             {
+                [EAnxiousLevel.Normal] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 1f },
+                },
                 [EAnxiousLevel.Anxious] = new()
                 {
                     new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.7f },
@@ -48,21 +60,21 @@ namespace WeWillSurvive.Status
                     new StateTransition { TransitionType = EStateTransitionType.Death, Probability = 0.2f },
                 },
             };
+
+            UpdateLevel(EAnxiousLevel.Normal);
         }
 
         public override void OnNewDay()
         {
-            ApplyCurrentLevelState();
-        }
+            if (_level == EAnxiousLevel.Normal)
+                return;
 
-        public override void RecoveryStatus(int step = 1)
-        {
-            base.RecoveryStatus(step);
-
-            if (_level == 0)
+            if (CharacterManager.InShelterCharactersCount() <= 1 && _level == EAnxiousLevel.Anxious)
             {
-                _owner.Status.RemoveStatus(StatusType);
+                WorsenStatus();
             }
+
+            ApplyCurrentLevelState();
         }
     }
 }

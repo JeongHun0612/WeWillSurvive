@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
@@ -10,10 +10,10 @@ namespace WeWillSurvive.FarmingReport
 {
     public enum EParmingReportType
     {
-        ReturnCrew,     // »ıÁ¸ÀÚ ¼ö
-        FoodSupply,     // ½Ä·® ¼ö
-        WaterSupply,    // ¹° ¼ö
-        SupportsSupply  // ±âÅ¸ ¹°ÀÚ ¼ö
+        ReturnCrew,     // ìƒì¡´ì ìˆ˜
+        FoodSupply,     // ì‹ëŸ‰ ìˆ˜
+        WaterSupply,    // ë¬¼ ìˆ˜
+        SupportsSupply  // ê¸°íƒ€ ë¬¼ì ìˆ˜
     }
 
     public class FarmingReportManager : MonoSceneSingleton<FarmingReportManager>
@@ -35,19 +35,19 @@ namespace WeWillSurvive.FarmingReport
 
         public void UpdateFarmingReport()
         {
-            // Å©·ç ÀÎ¿ø¿¡ µû¸¥ °á°ú ÅØ½ºÆ®
-            int crewCount = CharacterManager.AliveCharacterCount();
+            // í¬ë£¨ ì¸ì›ì— ë”°ë¥¸ ê²°ê³¼ í…ìŠ¤íŠ¸
+            int crewCount = CharacterManager.AliveCharactersCount();
             LogReportByValue(EParmingReportType.ReturnCrew, crewCount);
 
-            // ½Ä·®¿¡ µû¸¥ °á°ú ÅØ½ºÆ®
+            // ì‹ëŸ‰ì— ë”°ë¥¸ ê²°ê³¼ í…ìŠ¤íŠ¸
             int foodCount = (int)ItemManager.GetItemCount(EItem.Food);
             LogReportByValue(EParmingReportType.FoodSupply, foodCount);
 
-            // ¹°¿¡ µû¸¥ °á°ú ÅØ½ºÆ®
+            // ë¬¼ì— ë”°ë¥¸ ê²°ê³¼ í…ìŠ¤íŠ¸
             int waterCount = (int)ItemManager.GetItemCount(EItem.Water);
             LogReportByValue(EParmingReportType.WaterSupply, waterCount);
 
-            // ´Ù¸¥ µµ±¸¿¡ µû¸¥ °á°ú ÅØ½ºÆ®
+            // ë‹¤ë¥¸ ë„êµ¬ì— ë”°ë¥¸ ê²°ê³¼ í…ìŠ¤íŠ¸
             int supportsCount = (int)ItemManager.GetSupportItemsCount();
             LogReportByValue(EParmingReportType.SupportsSupply, supportsCount);
         }

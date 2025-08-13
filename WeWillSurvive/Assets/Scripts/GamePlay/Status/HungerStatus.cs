@@ -15,12 +15,17 @@ namespace WeWillSurvive.Status
 
         protected override bool IsDeadLevel(EHungerLevel level) => level == EHungerLevel.Dead;
 
-
         public HungerStatus(CharacterBase owner)
         {
             _owner = owner;
-            _level = EHungerLevel.Normal;
-            _dayCounter = 0;
+
+            OrderedLevels = new EHungerLevel[]
+            {
+                EHungerLevel.Normal,
+                EHungerLevel.Hungry,
+                EHungerLevel.Starve,
+                EHungerLevel.Dead,
+            };
 
             LevelStateMap = new()
             {
@@ -55,6 +60,8 @@ namespace WeWillSurvive.Status
                     new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
                 },
             };
+
+            UpdateLevel(EHungerLevel.Normal);
         }
     }
 }

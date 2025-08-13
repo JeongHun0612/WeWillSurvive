@@ -77,53 +77,53 @@ namespace WeWillSurvive
             ApplyCurrentLevelState();
         }
 
-        public virtual void WorsenStatus(int step = 1)
+        public virtual void ResetStatus()
         {
-            if (step <= 0)
+            if (OrderedLevels == null || OrderedLevels.Length < 1)
             {
-                Debug.LogWarning($"Status 상태 악화 Step은 1보다 큰 값이여야 합니다.");
+                Debug.LogWarning($"OrderedLevels 데이터가 존재하지 않습니다.");
                 return;
             }
 
-            int currentLevel = (int)(object)_level;
-            int targetLevel = currentLevel + step;
+            Debug.Log($"[{StatusType}] Reset 데이터");
+            UpdateLevel(OrderedLevels[0]);
+        }
 
-            UpdateLevel((TLevel)(object)targetLevel);
+        public virtual void WorsenStatus(int step = 1)
+        {
+            if (step <= 0)
+                return;
+
+            int currentIndex = System.Array.IndexOf(OrderedLevels, _level);
+            if (currentIndex == -1)
+                return;
+
+            int targetIndex = Mathf.Min(currentIndex + step, OrderedLevels.Length - 1);
+            UpdateLevel(OrderedLevels[targetIndex]);
         }
 
         public virtual void RecoveryStatus(int step = 1)
         {
             if (step <= 0)
-            {
-                Debug.LogWarning($"Status 상태 개선 Step은 1보다 큰 값이여야 합니다.");
                 return;
-            }
 
-            int currentLevel = (int)(object)_level;
-            int targetLevel = currentLevel - step;
+            int currentIndex = System.Array.IndexOf(OrderedLevels, _level);
+            if (currentIndex == -1)
+                return;
 
-            if (targetLevel < 0)
-                targetLevel = 0;
+            int targetIndex = Mathf.Max(currentIndex - step, 0);
 
-            if (targetLevel < currentLevel)
+            if (targetIndex < currentIndex)
             {
-                if (LevelStateMap.TryGetValue(_level, out var state))
-                {
-                    string stateMessage = _owner.Data.StateMessageData.GetStateResolvedMessage(state);
-                    LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
-                }
-                else
-                {
-                    Debug.LogWarning($"{_level}에 대한 LevelStateMap이 존재하지 않습니다.");
-                }
-
-                UpdateLevel((TLevel)(object)targetLevel);
+                LogStateResolved(_level);
             }
+
+            UpdateLevel(OrderedLevels[targetIndex]);
         }
 
-        public void UpdateLevel(TLevel level)
+        public void UpdateLevel(TLevel newLevel)
         {
-            _level = level;
+            _level = newLevel;
             _dayCounter = 0;
         }
 
@@ -137,12 +137,37 @@ namespace WeWillSurvive
 
             if (LevelStateMap.TryGetValue(_level, out var state))
             {
-                // Log 출력
-                string stateMessage = _owner.Data.StateMessageData.GetStateActiveMessage(state);
-                LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
-
                 // State 추가
                 _owner.State.AddState(state);
+
+                // Log 출력
+                LogStateActive(_level);
+            }
+        }
+
+        private void LogStateActive(TLevel level)
+        {
+            if (LevelStateMap.TryGetValue(level, out var state))
+            {
+                string stateMessage = _owner.Data.StateMessageData.GetStateActiveMessage(state);
+                LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
+            }
+            else
+            {
+                Debug.LogWarning($"[{typeof(TLevel)}] {level}에 대한 LevelStateMap이 존재하지 않아 로그를 기록할 수 없습니다.");
+            }
+        }
+
+        private void LogStateResolved(TLevel level)
+        {
+            if (LevelStateMap.TryGetValue(level, out var state))
+            {
+                string stateMessage = _owner.Data.StateMessageData.GetStateResolvedMessage(state);
+                LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
+            }
+            else
+            {
+                Debug.LogWarning($"[{typeof(TLevel)}] {level}에 대한 LevelStateMap이 존재하지 않아 로그를 기록할 수 없습니다.");
             }
         }
 
@@ -151,16 +176,16 @@ namespace WeWillSurvive
             switch (transitionType)
             {
                 case EStateTransitionType.Stay:
-                        _dayCounter = 0;
+                    _dayCounter = 0;
                     break;
                 case EStateTransitionType.Worsen:
-                        WorsenStatus();
+                    WorsenStatus();
                     break;
                 case EStateTransitionType.Recovery:
-                        RecoveryStatus();
+                    RecoveryStatus();
                     break;
                 case EStateTransitionType.Death:
-                        _owner.OnDead();
+                    _owner.OnDead();
                     break;
                 default:
                     break;

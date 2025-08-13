@@ -72,6 +72,7 @@ namespace WeWillSurvive
 
         public void Apply(EventAction action)
         {
+            Debug.Log("엔딩 분기 진행 : " + action.targetId);
             EEndingType endingType = EnumUtil.ParseEnum<EEndingType>(action.targetId);
             EndingManager.Instance.AdvanceEndingProgress(endingType);
         }
@@ -104,14 +105,18 @@ namespace WeWillSurvive
         {
             ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(action.targetId);
             var character = CharacterManager.GetCharacter(characterType);
-            var status = EnumUtil.ParseEnum<EStatusType>(action.parameter);
+            var statusType = EnumUtil.ParseEnum<EStatusType>(action.parameter);
 
             if (!int.TryParse(action.value, out var value))
                 Debug.LogWarning($"Value : {action.value} | int 타입으로 파싱 실패");
 
             var step = Mathf.Max(1, value);
 
-            character.Status.WorsenStatus(status, step);
+            var status = character.Status.GetStatus<IStatus>(statusType);
+            if (status != null)
+            {
+                status.WorsenStatus(step);
+            }
         }
     }
 
@@ -128,14 +133,18 @@ namespace WeWillSurvive
         {
             ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(action.targetId);
             var character = CharacterManager.GetCharacter(characterType);
-            var status = EnumUtil.ParseEnum<EStatusType>(action.parameter);
+            var statusType = EnumUtil.ParseEnum<EStatusType>(action.parameter);
 
             if (!int.TryParse(action.value, out var value))
                 Debug.LogWarning($"Value : {action.value} | int 타입으로 파싱 실패");
 
             var step = Mathf.Max(1, value);
 
-            character.Status.RecoveryStatus(status, step);
+            var status = character.Status.GetStatus<IStatus>(statusType);
+            if (status != null)
+            {
+                status.RecoveryStatus(step);
+            }
         }
     }
 

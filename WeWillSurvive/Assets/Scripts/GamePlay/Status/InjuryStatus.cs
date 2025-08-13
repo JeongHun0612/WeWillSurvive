@@ -17,8 +17,14 @@ namespace WeWillSurvive.Status
         public InjuryStatus(CharacterBase owner)
         {
             _owner = owner;
-            _level = EInjuredLevel.Normal;
-            _dayCounter = 0;
+
+            OrderedLevels = new EInjuredLevel[]
+            {
+                EInjuredLevel.Normal,
+                EInjuredLevel.Injured,
+                EInjuredLevel.Sick,
+                EInjuredLevel.Dead,
+            };
 
             LevelStateMap = new()
             {
@@ -34,6 +40,10 @@ namespace WeWillSurvive.Status
 
             StateTransitionTable = new()
             {
+                [EInjuredLevel.Normal] = new()
+                {
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 1f},
+                },
                 [EInjuredLevel.Injured] = new()
                 {
                     new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.6f },
@@ -41,6 +51,8 @@ namespace WeWillSurvive.Status
                     new StateTransition { TransitionType = EStateTransitionType.Death, Probability = 0.2f },
                 },
             };
+
+            UpdateLevel(EInjuredLevel.Normal);
         }
 
         public override void OnNewDay()
@@ -49,16 +61,6 @@ namespace WeWillSurvive.Status
                 return;
 
             base.OnNewDay();
-        }
-
-        public override void RecoveryStatus(int step = 1)
-        {
-            base.RecoveryStatus(step);
-
-            if (_level == 0)
-            {
-                _owner.Status.RemoveStatus(StatusType);
-            }
         }
     }
 }

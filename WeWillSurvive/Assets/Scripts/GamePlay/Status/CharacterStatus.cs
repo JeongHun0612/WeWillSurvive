@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using WeWillSurvive.Character;
 
@@ -20,18 +21,18 @@ namespace WeWillSurvive.Status
         {
             _statuses.Clear();
 
-            AddStatus(EStatusType.Hunger);
-            AddStatus(EStatusType.Thirst);
-            AddStatus(EStatusType.Injury);
-            AddStatus(EStatusType.Anxious);
+            AddStatus<HungerStatus>();
+            AddStatus<ThirstStatus>();
+            AddStatus<InjuryStatus>();
+            AddStatus<AnxiousStatus>();
 
 #if UNITY_EDITOR
             if (_owner.Data.StatusDebugData != null)
             {
-                GetStatus<HungerStatus>(EStatusType.Hunger).UpdateLevel(_owner.Data.StatusDebugData.Hunger);
-                GetStatus<ThirstStatus>(EStatusType.Thirst).UpdateLevel(_owner.Data.StatusDebugData.Thirst);
-                GetStatus<InjuryStatus>(EStatusType.Injury).UpdateLevel(_owner.Data.StatusDebugData.Injury);
-                GetStatus<AnxiousStatus>(EStatusType.Anxious).UpdateLevel(_owner.Data.StatusDebugData.Anxiety);
+                GetStatus<HungerStatus>().UpdateLevel(_owner.Data.StatusDebugData.Hunger);
+                GetStatus<ThirstStatus>().UpdateLevel(_owner.Data.StatusDebugData.Thirst);
+                GetStatus<InjuryStatus>().UpdateLevel(_owner.Data.StatusDebugData.Injury);
+                GetStatus<AnxiousStatus>().UpdateLevel(_owner.Data.StatusDebugData.Anxiety);
             }
 #endif
         }
@@ -56,32 +57,22 @@ namespace WeWillSurvive.Status
             }
         }
 
-        public void AddStatus(EStatusType type)
+        public void AddStatus<T>() where T : IStatus
         {
+            IStatus newStatus = (T)System.Activator.CreateInstance(typeof(T), _owner);
+            EStatusType type = newStatus.StatusType;
+
             if (!HasStatus(type))
             {
-                switch (type)
-                {
-                    case EStatusType.Hunger:
-                        _statuses.Add(type, new HungerStatus(_owner));
-                        break;
-                    case EStatusType.Thirst:
-                        _statuses.Add(type, new ThirstStatus(_owner));
-                        break;
-                    case EStatusType.Injury:
-                        _statuses.Add(type, new InjuryStatus(_owner));
-                        break;
-                    case EStatusType.Anxious:
-                        _statuses.Add(type, new AnxiousStatus(_owner));
-                        break;
-                    default:
-                        Debug.LogWarning($"StatusType에는 {type}이 존재하지 않습니다.");
-                        break;
-                }
+                _statuses.Add(type, newStatus);
+                Debug.Log($"[{type}] 상태를 새로 추가했습니다.");
             }
             else
             {
-                Debug.LogWarning($"이미 [{type}]이 존재합니다.");
+                // 기존 Status를 리셋
+                var status = GetStatus<IStatus>(type);
+                if (status != null)
+                    status.ResetStatus();
             }
         }
 
@@ -94,30 +85,6 @@ namespace WeWillSurvive.Status
             }
         }
 
-        public void WorsenStatus(EStatusType type, int step = 1)
-        {
-            var status = GetStatus<IStatus>(type);
-
-            if (status == null)
-            {
-                AddStatus(type);
-            }
-            else
-            {
-                status.WorsenStatus(step);
-            }
-        }
-
-        public void RecoveryStatus(EStatusType type, int step = 1)
-        {
-            var status = GetStatus<IStatus>(type);
-
-            if (status != null)
-            {
-                status.RecoveryStatus(step);
-            }
-        }
-
         public T GetStatus<T>(EStatusType type) where T : class, IStatus
         {
             if (_statuses.TryGetValue(type, out var status))
@@ -125,7 +92,13 @@ namespace WeWillSurvive.Status
                 return (T)status;
             }
 
+            Debug.LogWarning($"[{type}]의 Status가 존재하지 않습니다.");
             return null;
+        }
+
+        public T GetStatus<T>() where T : class, IStatus
+        {
+            return _statuses.Values.FirstOrDefault(status => status is T) as T;
         }
 
         public bool HasStatus(EStatusType type)
