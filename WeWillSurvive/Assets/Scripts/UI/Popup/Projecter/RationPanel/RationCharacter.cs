@@ -53,25 +53,15 @@ namespace WeWillSurvive
 
         public void Refresh()
         {
-            if (!_owner.IsInShelter)
+            if (_owner.IsInShelter)
+            {
+                EnabledRationCharacter();
+            }
+            else
             {
                 DisabledRationCharacter();
-                return;
             }
 
-            _characterImage.sprite = _normalSprite;
-
-            // RationItem 초기화
-            _waterItem.Refresh();
-            _foodItem.Refresh();
-            _medicalKitItem.Refresh();
-
-            bool isInjured = _owner.State.HasState(EState.Injured | EState.Sick);
-            _medicalKitItem.gameObject.SetActive(isInjured);
-
-
-            // StatePanel 초기화
-            _statePanel.SetStateText(_owner.GetFormatStateString());
             _statePanel.HidePanel();
         }
 
@@ -82,9 +72,27 @@ namespace WeWillSurvive
             _medicalKitItem.UsedItem(_owner);
         }
 
+        private void EnabledRationCharacter()
+        {
+            _characterImage.sprite = _normalSprite;
+
+            // RationItem 초기화
+            _waterItem.Refresh();
+            _foodItem.Refresh();
+            _medicalKitItem.Refresh();
+
+            bool isInjured = _owner.State.HasState(EState.Injured | EState.Sick);
+            _medicalKitItem.gameObject.SetActive(isInjured);
+
+            // StatePanel 초기화
+            _statePanel.SetStateText(_owner.GetFormatStateString());
+        }
+
         private void DisabledRationCharacter()
         {
             _characterImage.sprite = _notingSprite;
+
+            // RationItem 비활성화
             _waterItem.gameObject.SetActive(false);
             _foodItem.gameObject.SetActive(false);
             _medicalKitItem.gameObject.SetActive(false);
