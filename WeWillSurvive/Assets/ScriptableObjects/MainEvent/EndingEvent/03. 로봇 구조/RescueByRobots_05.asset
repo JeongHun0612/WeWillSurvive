@@ -35,7 +35,7 @@ MonoBehaviour:
         \uC6B0\uB9AC\uB294 \uC0DD\uC874\uD560 \uC218 \uC788\uC744 \uAC83\uC774\uB2E4."
       actions:
       - actionType: 201
-        targetId: 
+        targetId: Food
         parameter: 
         value: 4
       - actionType: 300

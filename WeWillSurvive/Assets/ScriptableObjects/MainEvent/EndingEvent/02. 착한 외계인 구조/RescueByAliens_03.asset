@@ -33,7 +33,7 @@ MonoBehaviour:
         \uC774\uC5B4\uC9C8 \uC218 \uC788\uC744\uC9C0\uB3C4 \uBAA8\uB978\uB2E4."
       actions:
       - actionType: 201
-        targetId: 
+        targetId: Food
         parameter: 
         value: 2
       - actionType: 300

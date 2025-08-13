@@ -117,11 +117,12 @@ namespace WeWillSurvive
                 rect.y += h + 2f;
                 return;
             }
-
+           
             if (!Enum.TryParse<TEnum>(stringProp.stringValue, true, out var current))
             {
                 var values = (TEnum[])Enum.GetValues(typeof(TEnum));
                 current = values.Length > 0 ? values[0] : default;
+                stringProp.stringValue = current.ToString();
             }
 
             EditorGUI.BeginChangeCheck();

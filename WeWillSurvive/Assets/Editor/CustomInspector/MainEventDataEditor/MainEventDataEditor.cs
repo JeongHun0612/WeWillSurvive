@@ -60,7 +60,7 @@ namespace WeWillSurvive
 
                 // 변경된 최신 값을 가져와서 초기화 함수를 호출
                 Undo.RecordObject(data, "Initialize Choices for EventType");
-                //InitializeChoicesForEventType((EMainEventType)eventTypeProp.intValue, data);
+                InitializeChoicesForEventType((EMainEventType)eventTypeProp.intValue, data);
                 EditorUtility.SetDirty(data);
 
                 serializedObject.Update();
@@ -109,16 +109,16 @@ namespace WeWillSurvive
             DrawChoiceSelector(choicesProp);
             EditorGUILayout.Space(10);
 
-            if (choicesProp.arraySize > 0)
-            {
-                SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
-                SerializedProperty choiceTypeProp = selectedChoiceProp.FindPropertyRelative("choiceType");
-                SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("amount");
+            //if (choicesProp.arraySize > 0)
+            //{
+            //    SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
+            //    SerializedProperty choiceTypeProp = selectedChoiceProp.FindPropertyRelative("choiceType");
+            //    SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("amount");
 
-                // 이벤트 타입 선택
-                EditorGUILayout.PropertyField(choiceTypeProp, new GUIContent("선택지 타입"));
-                EditorGUILayout.PropertyField(amountProp, new GUIContent("필요 갯수"));
-            }
+            //    // 이벤트 타입 선택
+            //    EditorGUILayout.PropertyField(choiceTypeProp, new GUIContent("선택지 타입"));
+            //    EditorGUILayout.PropertyField(amountProp, new GUIContent("필요 갯수"));
+            //}
         }
 
         private void DrawEditableChoiceUI(SerializedProperty choicesProp, (string[] displayOptions, List<EChoiceType> enumValues) options)

@@ -22,12 +22,7 @@ MonoBehaviour:
     \uBAA8\uB978 \uCC44."
   - "\uCC98\uC74C\uC5D4 \uD558\uB8E8\uD558\uB8E8\uAC00 \uBD88\uC548\uD588\uB2E4.
     \uC774\uC820 \uD558\uB8E8\uD558\uB8E8\uAC00 \uD750\uB9BF\uD558\uB2E4."
-  triggerConditions:
-  - conditionType: 100
-    targetId: Lead
-    parameter: 
-    value1: 50
-    value2: 
+  triggerConditions: []
   eventType: 100
   choices:
   - choiceType: 500

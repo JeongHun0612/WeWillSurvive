@@ -31,7 +31,7 @@ MonoBehaviour:
         \uC190\uC804\uB4F1\uB3C4 \uBB34\uC0AC\uD788 \uC791\uB3D9 \uC911\uC774\uB2E4."
       actions:
       - actionType: 200
-        targetId: 
+        targetId: Food
         parameter: 
         value: 2
       probability: 0.8

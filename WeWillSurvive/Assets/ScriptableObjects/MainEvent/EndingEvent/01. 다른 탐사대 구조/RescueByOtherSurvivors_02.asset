@@ -36,7 +36,7 @@ MonoBehaviour:
         \uC57D\uC18D\uD558\uACE0 \uC811\uC120\uC744 \uB9C8\uBB34\uB9AC\uD588\uB2E4."
       actions:
       - actionType: 300
-        targetId: 
+        targetId: RescueByOtherSurvivors
         parameter: 
         value: 
       probability: 1

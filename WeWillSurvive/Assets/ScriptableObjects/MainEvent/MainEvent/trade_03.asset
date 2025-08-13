@@ -38,7 +38,7 @@ MonoBehaviour:
         parameter: 
         value: 1
       - actionType: 200
-        targetId: 
+        targetId: Food
         parameter: 
         value: 1
       - actionType: 200

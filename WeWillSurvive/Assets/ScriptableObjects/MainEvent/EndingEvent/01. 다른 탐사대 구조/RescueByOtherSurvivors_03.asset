@@ -37,11 +37,11 @@ MonoBehaviour:
         \uC218 \uC788\uB2E4."
       actions:
       - actionType: 201
-        targetId: 
+        targetId: Food
         parameter: 
         value: 2
       - actionType: 300
-        targetId: 
+        targetId: RescueByOtherSurvivors
         parameter: 
         value: 
       probability: 1

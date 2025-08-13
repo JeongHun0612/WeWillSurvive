@@ -34,7 +34,7 @@ MonoBehaviour:
     results:
     - conditions:
       - conditionType: 100
-        targetId: 
+        targetId: Lead
         parameter: 
         value1: 
         value2: 

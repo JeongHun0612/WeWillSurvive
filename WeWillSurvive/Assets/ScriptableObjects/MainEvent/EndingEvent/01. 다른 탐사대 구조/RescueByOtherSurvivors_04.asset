@@ -38,7 +38,7 @@ MonoBehaviour:
         parameter: 
         value: 1
       - actionType: 300
-        targetId: 
+        targetId: RescueByOtherSurvivors
         parameter: 
         value: 
       probability: 1

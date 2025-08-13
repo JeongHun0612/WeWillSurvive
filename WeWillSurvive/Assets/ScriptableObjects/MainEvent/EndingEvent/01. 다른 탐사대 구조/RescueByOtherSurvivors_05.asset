@@ -34,7 +34,7 @@ MonoBehaviour:
         \uC0B4\uC544\uB0A8\uC558\uB2E4."
       actions:
       - actionType: 301
-        targetId: 
+        targetId: RescueByOtherSurvivors
         parameter: 
         value: 
       probability: 1
