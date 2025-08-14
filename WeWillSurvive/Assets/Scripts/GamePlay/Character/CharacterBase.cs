@@ -28,9 +28,10 @@ namespace WeWillSurvive.Character
         public CharacterStatus Status { get; private set; }
         public string Name { get; private set; }
         public EMorale Morale { get; private set; }
-        public int TotalExploringCount { get; private set; }
         public bool IsExploring { get; private set; }
         public bool IsDead { get; private set; }
+        public int TotalExploringCount { get; private set; }
+        public int TotalCharacterEventCount { get; private set; }
 
 
         public bool IsInShelter => !IsDead && !IsExploring;
@@ -48,9 +49,7 @@ namespace WeWillSurvive.Character
             Status = new CharacterStatus(this);
 
             Name = data.Name;
-            Morale = EMorale.Normal;
-            IsExploring = false;
-            IsDead = false;
+            ResetData();
         }
 
         public void ResetData()
@@ -60,6 +59,11 @@ namespace WeWillSurvive.Character
             Morale = EMorale.Normal;
             IsExploring = false;
             IsDead = false;
+
+            _explorationDayCounter = 0;
+            _maxExplorationDays = 0;
+            TotalExploringCount = 0;
+            TotalCharacterEventCount = 0;
         }
 
         public void OnNewDay()
