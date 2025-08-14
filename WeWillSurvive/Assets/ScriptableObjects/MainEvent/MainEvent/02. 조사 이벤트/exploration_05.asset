@@ -18,7 +18,7 @@ MonoBehaviour:
   - "\uAE30\uC9C0 \uB0B4 \uD658\uAE30\uAD6C \uADFC\uCC98\uC5D0\uC11C \uD76C\uBBF8\uD55C
     \uBC18\uC9DD\uC784\uC774 \uAC10\uC9C0\uB41C\uB2E4. \uC811\uADFC\uD574\uBCFC\uAE4C?"
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 5
   _choices:
   - _choiceIcon: 213
     _amount: 1

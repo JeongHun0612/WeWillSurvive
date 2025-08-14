@@ -19,7 +19,7 @@ MonoBehaviour:
     \uBCF4\uB2C8 \uC0B4\uC9DD \uC5F4\uB824 \uC788\uB2E4. \uC548\uC5D0\uB294 \uBB34\uC5C7\uC774
     \uC788\uC744\uAE4C?"
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 5
   _choices:
   - _choiceIcon: 213
     _amount: 1

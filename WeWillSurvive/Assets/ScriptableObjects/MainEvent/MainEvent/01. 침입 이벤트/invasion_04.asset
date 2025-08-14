@@ -23,13 +23,8 @@ MonoBehaviour:
     \uB4EF, \uBCF4\uC548 \uC2DC\uC2A4\uD15C\uC5D0 \uC811\uADFC \uC911\uC774\uB2E4.
     \uC9C0\uAE08 \uBB34\uB825\uC73C\uB85C \uC800\uC9C0\uD558\uC9C0 \uC54A\uC73C\uBA74
     \uB05D\uC774\uB2E4."
-  _conditions:
-  - _conditionType: 1001
-    _targetId: Lead
-    _parameter: 
-    _value1: 0
-    _value2: 
-  _choiceSchema: 0
+  _conditions: []
+  _choiceSchema: 4
   _choices:
   - _choiceIcon: 211
     _amount: 1

@@ -21,7 +21,7 @@ MonoBehaviour:
     \uB0B4\uBD80 \uC624\uBE0C\uC81D\uD2B8\uC5D0 \uACF0\uD321\uC774\uAC00 \uC0DD\uAE38
     \uC218 \uC788\uB2E4."
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 1
   _choices:
   - _choiceIcon: 205
     _amount: 1

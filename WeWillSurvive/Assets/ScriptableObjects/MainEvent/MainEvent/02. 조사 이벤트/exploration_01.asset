@@ -19,7 +19,7 @@ MonoBehaviour:
     \uD588\uB2E4. \uC190\uC804\uB4F1\uC744 \uC0AC\uC6A9\uD560\uC9C0, \uB9E8\uC190\uC73C\uB85C
     \uB4E4\uC5B4\uAC08\uC9C0\uB294 \uACB0\uC815\uC758 \uBAAB\uC774\uB2E4."
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 5
   _choices:
   - _choiceIcon: 213
     _amount: 1

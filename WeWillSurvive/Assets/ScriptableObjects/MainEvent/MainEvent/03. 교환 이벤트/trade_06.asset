@@ -23,7 +23,7 @@ MonoBehaviour:
     \uC900\uB2E4\uACE0 \uD55C\uB2E4. \uAD50\uD658\uC740 \uB2E8 \uD55C \uBC88\uB9CC
     \uAC00\uB2A5\uD558\uB2E4."
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 1
   _choices:
   - _choiceIcon: 211
     _amount: 1

@@ -36,7 +36,7 @@ MonoBehaviour:
     _parameter: "\uC815\uC0C1"
     _value1: 2
     _value2: 3
-  _choiceSchema: 0
+  _choiceSchema: 100
   _choices:
   - _choiceIcon: 500
     _amount: 0

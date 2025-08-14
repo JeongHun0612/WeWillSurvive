@@ -32,7 +32,7 @@ MonoBehaviour:
     \uC774\uC0C1 \uC5C6\uC74C\uC744 \uC54C\uB9AC\uB294 \uC2E0\uD638\uAC00 \uC5B4\uCA50\uC9C0
     \uC870\uB871\uCC98\uB7FC \uB290\uAEF4\uC84C\uB2E4."
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 100
   _choices:
   - _choiceIcon: 500
     _amount: 0

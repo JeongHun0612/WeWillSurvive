@@ -22,7 +22,7 @@ MonoBehaviour:
     \uADF8\uB4E4\uC774 \uAC00\uC9C0\uACE0 \uC788\uB294 \uBB3C\uACFC \uC2DD\uB7C9\uC744
     \uC900\uB2E4\uB294 \uC870\uAC74\uC73C\uB85C \uAD50\uD658\uC744 \uC694\uAD6C\uD588\uB2E4."
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 1
   _choices:
   - _choiceIcon: 212
     _amount: 1

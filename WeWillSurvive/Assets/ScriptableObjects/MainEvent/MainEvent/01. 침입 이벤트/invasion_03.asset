@@ -22,13 +22,8 @@ MonoBehaviour:
     \uAD34\uBB3C\uCCB4\uAC00 \uD1B5\uB85C\uB97C \uAE30\uC5B4\uC624\uACE0 \uC788\uB2E4.
     \uC2DC\uAC04\uC774 \uC5C6\uB2E4. \uBB54\uAC00\uB97C \uB4E4\uACE0 \uB9C9\uC744
     \uC900\uBE44\uB97C \uD574\uC57C \uD55C\uB2E4."
-  _conditions:
-  - _conditionType: 1001
-    _targetId: Lead
-    _parameter: 
-    _value1: 0
-    _value2: 
-  _choiceSchema: 0
+  _conditions: []
+  _choiceSchema: 4
   _choices:
   - _choiceIcon: 211
     _amount: 1

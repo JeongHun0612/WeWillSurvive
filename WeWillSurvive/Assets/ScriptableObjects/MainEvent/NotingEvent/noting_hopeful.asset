@@ -27,7 +27,7 @@ MonoBehaviour:
     \uADF8\uB9AC\uACE0 \uC5B8\uC820\uAC00, \uB9C8\uC9C0\uB9C9 \uD55C \uC904\uC5D0\uB294
     \u2018\uAD6C\uC870\uB428\u2019\uC774\uB77C\uACE0 \uC801\uD790 \uAC83\uC774\uB2E4."
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 100
   _choices:
   - _choiceIcon: 500
     _amount: 0

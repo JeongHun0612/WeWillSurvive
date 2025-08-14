@@ -65,7 +65,6 @@ namespace WeWillSurvive.Status
             if (!HasStatus(type))
             {
                 _statuses.Add(type, newStatus);
-                Debug.Log($"[{type}] 상태를 새로 추가했습니다.");
             }
             else
             {

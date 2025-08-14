@@ -95,6 +95,8 @@ namespace WeWillSurvive.Ending
             _globalDayCounter = Random.Range(MIN_GLOBAL_DAY_COUNT, MAX_GLOBAL_DAY_COUNT + 1);
             _isEndingEventReady = false;
 
+            Debug.Log($"(엔딩) [{progress.Category}] 이벤트 발생");
+
             return eventData;
         }
 

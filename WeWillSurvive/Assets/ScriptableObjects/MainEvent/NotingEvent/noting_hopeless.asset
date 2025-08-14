@@ -28,7 +28,7 @@ MonoBehaviour:
     _parameter: 
     _value1: 50
     _value2: 
-  _choiceSchema: 0
+  _choiceSchema: 100
   _choices:
   - _choiceIcon: 500
     _amount: 0

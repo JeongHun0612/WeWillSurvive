@@ -151,7 +151,7 @@ namespace WeWillSurvive.MainEvent
         public IReadOnlyList<string> Descriptions => _descriptions;
         public IReadOnlyList<Condition> Conditions => _conditions;
         public EMainEventChoiceSchema ChoiceSchema => _choiceSchema;
-        public List<EventChoice> Choices { get; set; }
+        public List<EventChoice> Choices { get => _choices; set => _choices = value; }
 
         public string GetRandomDescription()
         {

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Ending;
@@ -31,6 +31,7 @@ namespace WeWillSurvive.MainEvent
 
             if (DayCounter <= 0)
             {
+                Debug.Log($"[{Category}] ì´ë²¤íŠ¸ ì¤€ë¹„ ì™„ë£Œ");
                 DayCounter = 0;
                 IsReady = true;
             }
@@ -39,6 +40,7 @@ namespace WeWillSurvive.MainEvent
         public virtual void ResetDayCounter()
         {
             DayCounter = _eventPool.GetRandomCooldownDay();
+            IsReady = false;
         }
     }
 
@@ -83,11 +85,11 @@ namespace WeWillSurvive.MainEvent
         {
             CurrentEventIndex = Mathf.Min(CurrentEventIndex + 1, Events.Count - 1);
 
-            Debug.Log($"¿£µù [{Category}]ÀÇ ÁøÇàµµ°¡ [{CurrentEventIndex + 1}/{Events.Count}]·Î ¾÷µ¥ÀÌÆ®µÇ¾ú½À´Ï´Ù.");
+            Debug.Log($"ì—”ë”© [{Category}]ì˜ ì§„í–‰ë„ê°€ [{CurrentEventIndex + 1}/{Events.Count}]ë¡œ ì—…ë°ì´íŠ¸ë˜ì—ˆìŠµë‹ˆë‹¤.");
 
             if (CurrentEventIndex == Events.Count - 1)
             {
-                // TODO Ending ¿Ï·á
+                // TODO Ending ì™„ë£Œ
             }
         }
 

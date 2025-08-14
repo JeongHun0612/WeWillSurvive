@@ -22,7 +22,7 @@ MonoBehaviour:
     \uC54A\uC740 \uACF3. \uADF8\uACF3\uC5D0\uC11C \uC2E4\uB0B1\uAC19\uC740 \uD76C\uB9DD\uC744
     \uCC3E\uC744 \uC218 \uC788\uC744\uAE4C?"
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 1
   _choices:
   - _choiceIcon: 214
     _amount: 1

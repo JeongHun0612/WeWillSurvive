@@ -20,7 +20,7 @@ MonoBehaviour:
     \uC758\uB8CC \uD0A4\uD2B8, \uD639\uC740 \uC758\uB8CC \uB9CC\uB2A5 \uD0A4\uD2B8\uAC00
     \uC788\uB2E4\uBA74 \uB3C4\uC640\uC904 \uC218 \uC788\uC744 \uAC83\uC774\uB2E4."
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 1
   _choices:
   - _choiceIcon: 203
     _amount: 1

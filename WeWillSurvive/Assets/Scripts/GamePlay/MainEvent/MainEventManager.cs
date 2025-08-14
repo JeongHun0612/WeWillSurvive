@@ -67,6 +67,9 @@ namespace WeWillSurvive.MainEvent
 
         public void OnNewDay()
         {
+            // 메인 이벤트 결과 적용
+            ProcessPendingChoice();
+
             foreach (var mainEventProgress in _mainEventProgresses.Values)
             {
                 mainEventProgress.OnNewDay();
@@ -104,10 +107,12 @@ namespace WeWillSurvive.MainEvent
 
                 var eventProgress = GetRandomCompletedEventProgress();
                 var mainEvents = eventProgress?.Events.ToList();
+
                 var mainEvent = GetValidMainEvent(mainEvents);
 
                 if (mainEvent != null)
                 {
+                    Debug.Log($"(메인) [{eventProgress.Category}] 이벤트 발생");
                     _lastSelectedEvent = mainEvent;
                     eventProgress.ResetDayCounter();
                     return mainEvent;

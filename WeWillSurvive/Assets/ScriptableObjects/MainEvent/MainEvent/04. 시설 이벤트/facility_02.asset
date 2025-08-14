@@ -20,7 +20,7 @@ MonoBehaviour:
     \uBC29\uD654\uBCBD\uC744 \uC9C0\uD0A4\uAE30 \uC704\uD574 \uBCF4\uAD00\uD568 \uD558\uB098\uB97C
     \uD76C\uC0DD\uD574\uC57C \uD55C\uB2E4."
   _conditions: []
-  _choiceSchema: 0
+  _choiceSchema: 1
   _choices:
   - _choiceIcon: 208
     _amount: 1
