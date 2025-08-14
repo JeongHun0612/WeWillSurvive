@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
   m_Name: noting_character_DrK
   m_EditorClassIdentifier: 
-  eventId: noting_character_DrK
-  title: 
-  descriptions:
+  _eventId: noting_character_DrK
+  _title: 
+  _descriptions:
   - "\uB2E5\uD130 K\uB294 \uD63C\uC7A3\uB9D0\uC774 \uB298\uC5C8\uB2E4. \uC774\uACF3\uC758
     \uACF5\uAE30\uAC00 \uC0AC\uB78C\uC744 \uBB34\uB108\uB728\uB9AC\uACE0 \uC788\uB294
     \uAC74 \uC544\uB2D0\uAE4C."
@@ -22,34 +22,34 @@ MonoBehaviour:
     \uADF8\uB7EC\uB2E4 \uBB38\uB4DD \uD63C\uC7A3\uB9D0\uC744 \uD588\uB2E4. \u201C\uB2E4\uB4E4
     \uC774\uC0C1\uD574\uC84C\uC5B4\u2026\u201D \uAC00\uC7A5 \uC5B4\uB9B0 \uB108\uAC00
     \uC81C\uC77C \uC774\uC131\uC801\uC774\uB77C\uB2C8."
-  triggerConditions:
-  - conditionType: 100
-    targetId: DrK
-    parameter: 
-    value1: 
-    value2: 
-  eventType: 100
-  choices:
-  - choiceType: 500
-    amount: 1
-    results:
-    - conditions:
-      - conditionType: 100
-        targetId: DrK
-        parameter: 
-        value1: 
-        value2: 
-      resultText: "\uB2E5\uD130 K\uB294 \uC544\uCE68\uC5D0 \uC870\uC6A9\uD788 \uB300\uC6D0\uB4E4\uC744
+  _conditions:
+  - _conditionType: 100
+    _targetId: DrK
+    _parameter: 
+    _value1: 
+    _value2: 
+  _choiceSchema: 0
+  _choices:
+  - _choiceIcon: 500
+    _amount: 0
+    _results:
+    - _conditions:
+      - _conditionType: 100
+        _targetId: DrK
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: "\uB2E5\uD130 K\uB294 \uC544\uCE68\uC5D0 \uC870\uC6A9\uD788 \uB300\uC6D0\uB4E4\uC744
         \uC0B4\uD3C8\uB2E4. \uBAA8\uB450 \uBB34\uC0AC\uD588\uB2E4."
-      actions: []
-      probability: 1
-    - conditions:
-      - conditionType: 100
-        targetId: DrK
-        parameter: 
-        value1: 
-        value2: 
-      resultText: "\uB2E5\uD130 K\uB294 \uC544\uCE68 \uC810\uAC80\uC744 \uB9C8\uCCE4\uB2E4.
+      _actions: []
+      _probability: 1
+    - _conditions:
+      - _conditionType: 100
+        _targetId: DrK
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: "\uB2E5\uD130 K\uB294 \uC544\uCE68 \uC810\uAC80\uC744 \uB9C8\uCCE4\uB2E4.
         \uC774\uC0C1 \uC9D5\uD6C4\uB294 \uC5C6\uC5C8\uB2E4."
-      actions: []
-      probability: 1
+      _actions: []
+      _probability: 1

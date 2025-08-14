@@ -26,7 +26,7 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.targetId);
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.TargetId);
             var character = CharacterManager.GetCharacter(characterType);
             return character.IsInShelter;
         }
@@ -42,11 +42,11 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            if (!int.TryParse(condition.value1, out var minValue))
-                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+            if (!int.TryParse(condition.Value1, out var minValue))
+                Debug.LogWarning($"Value1 : {condition.Value1} | int 타입으로 파싱 실패");
 
-            if (!int.TryParse(condition.value2, out var maxValue))
-                Debug.LogWarning($"Value2 : {condition.value1} | int 타입으로 파싱 실패");
+            if (!int.TryParse(condition.Value2, out var maxValue))
+                Debug.LogWarning($"Value2 : {condition.Value2} | int 타입으로 파싱 실패");
 
             int aliveCount = CharacterManager.AliveCharactersCount();
             return aliveCount >= minValue && aliveCount <= maxValue;
@@ -63,10 +63,10 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.targetId);
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.TargetId);
             var character = CharacterManager.GetCharacter(characterType);
 
-            EState state = EnumUtil.ParseEnum<EState>(condition.parameter);
+            EState state = EnumUtil.ParseEnum<EState>(condition.Parameter);
             return character.State.HasState(state);
         }
     }
@@ -81,10 +81,10 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.targetId);
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.TargetId);
             var character = CharacterManager.GetCharacter(characterType);
 
-            EState state = EnumUtil.ParseEnum<EState>(condition.parameter);
+            EState state = EnumUtil.ParseEnum<EState>(condition.Parameter);
             return !character.State.HasState(state);
         }
     }
@@ -98,8 +98,8 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            if (!int.TryParse(condition.value1, out var countUpper))
-                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+            if (!int.TryParse(condition.Value1, out var countUpper))
+                Debug.LogWarning($"Value1 : {condition.Value1} | int 타입으로 파싱 실패");
 
             return ExpeditionManager.Instance.TotalExpeditionCount >= countUpper;
         }
@@ -115,11 +115,11 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.targetId);
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.TargetId);
             var character = CharacterManager.GetCharacter(characterType);
 
-            if (!int.TryParse(condition.value1, out var countUpper))
-                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+            if (!int.TryParse(condition.Value1, out var countUpper))
+                Debug.LogWarning($"Value1 : {condition.Value1} | int 타입으로 파싱 실패");
 
             return character.TotalExploringCount > countUpper;
         }
@@ -135,11 +135,11 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.targetId);
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.TargetId);
             var character = CharacterManager.GetCharacter(characterType);
 
-            if (!int.TryParse(condition.value1, out var countLower))
-                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+            if (!int.TryParse(condition.Value1, out var countLower))
+                Debug.LogWarning($"Value1 : {condition.Value1} | int 타입으로 파싱 실패");
 
             return character.TotalExploringCount < countLower;
         }
@@ -155,7 +155,7 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            EItem item = EnumUtil.ParseEnum<EItem>(condition.targetId);
+            EItem item = EnumUtil.ParseEnum<EItem>(condition.TargetId);
             return ItemManager.HasItem(item);
         }
     }
@@ -170,10 +170,10 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            EItem item = EnumUtil.ParseEnum<EItem>(condition.targetId);
+            EItem item = EnumUtil.ParseEnum<EItem>(condition.TargetId);
 
-            if (!int.TryParse(condition.value1, out var itemUpper))
-                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+            if (!int.TryParse(condition.Value1, out var itemUpper))
+                Debug.LogWarning($"Value1 : {condition.Value1} | int 타입으로 파싱 실패");
 
             return ItemManager.GetItemCount(item) >= itemUpper;
         }
@@ -189,10 +189,10 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            EItem item = EnumUtil.ParseEnum<EItem>(condition.targetId);
+            EItem item = EnumUtil.ParseEnum<EItem>(condition.TargetId);
 
-            if (!int.TryParse(condition.value1, out var itemLower))
-                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+            if (!int.TryParse(condition.Value1, out var itemLower))
+                Debug.LogWarning($"Value1 : {condition.Value1} | int 타입으로 파싱 실패");
 
             return ItemManager.GetItemCount(item) <= itemLower;
         }
@@ -207,8 +207,8 @@ namespace WeWillSurvive
 
         public bool IsMet(Condition condition)
         {
-            if (!int.TryParse(condition.value1, out var day))
-                Debug.LogWarning($"Value1 : {condition.value1} | int 타입으로 파싱 실패");
+            if (!int.TryParse(condition.Value1, out var day))
+                Debug.LogWarning($"Value1 : {condition.Value1} | int 타입으로 파싱 실패");
 
             return GameManager.Instance.Day >= day;
         }

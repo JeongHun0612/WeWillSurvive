@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using WeWillSurvive.Core;
+using WeWillSurvive.Ending;
 using WeWillSurvive.Item;
 
 namespace WeWillSurvive.Character

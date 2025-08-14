@@ -5,7 +5,7 @@ using UnityEngine;
 using WeWillSurvive.Core;
 using WeWillSurvive.MainEvent;
 
-namespace WeWillSurvive
+namespace WeWillSurvive.Ending
 {
     public enum EEndingType
     {
@@ -30,12 +30,14 @@ namespace WeWillSurvive
         private const int MIN_GLOBAL_DAY_COUNT = 3;
         private const int MAX_GLOBAL_DAY_COUNT = 4;
 
-        [SerializeField] private List<EndingEventData> _endingEventDatas;
+        [SerializeField] private List<EndingEventPool> _endingEventPools;
 
-        private Dictionary<EEndingType, EndingProgress> _endingProgresses = new();
+        private Dictionary<EEndingType, EndingEventProgress> _endingEventProgresses = new();
         private int _globalDayCounter; // 전체 엔딩 이벤트 쿨타임 카운터
 
-        public bool IsEnding = false;
+        private bool _isEndingEventReady;
+
+        public bool IsEnding { get; private set; }
 
         protected override void Awake()
         {
@@ -49,9 +51,11 @@ namespace WeWillSurvive
         public void ResetState()
         {
             IsEnding = false;
+
+            _isEndingEventReady = false;
             _globalDayCounter = 0;
 
-            foreach (var endingProgress in _endingProgresses.Values)
+            foreach (var endingProgress in _endingEventProgresses.Values)
             {
                 endingProgress.ResetState();
             }
@@ -63,56 +67,42 @@ namespace WeWillSurvive
         {
             _globalDayCounter--;
 
-            foreach (var endingProgress in _endingProgresses.Values)
+            if (_globalDayCounter <= 0)
             {
-                endingProgress.dayCounter--;
+                _globalDayCounter = 0;
+                _isEndingEventReady = true;
+            }
+
+            foreach (var endingEventProgress in _endingEventProgresses.Values)
+            {
+                endingEventProgress.OnNewDay();
             }
         }
 
         public MainEventData GetEndingEventData()
         {
-            // 전역 쿨타임이 아직 안됐으면 이벤트 발생 X
-            if (_globalDayCounter > 0)
+            // 쿨타임이 아직 안됐으면 이벤트 발생 X
+            if (!_isEndingEventReady)
                 return null;
 
-            // 개별 쿨타임이 다 된 엔딩이벤트들만 필터링
-            List<EndingProgress> availableEndings = _endingProgresses.Values
-                .Where(progress => progress.dayCounter <= 0)
-                .ToList();
+            // 쿨타임이 다 된 엔딩프로그래스 중 하나 반환
+            EndingEventProgress progress = GetRandomCompletedEventProgress();
 
-            // 조건에 맞는 엔딩이 없을 시
-            if (availableEndings.Count == 0)
-                return null;
-
-            // 조건에 맞는 엔딩 중 랜덤 선택
-            int randomIndex = Random.Range(0, availableEndings.Count);
-            EndingProgress selectedEnding = availableEndings[randomIndex];
-
-            // 선택된 엔딩의 다음 이벤트 데이터 가져오기
-            int eventIndex = selectedEnding.currentEventIndex;
-            MainEventData eventData = selectedEnding.EndingEventDatas[eventIndex];
+            // 선택된 엔딩의 이벤트 데이터 가져오기
+            MainEventData eventData = progress.GetCurrentEndingEvent();
 
             // 상태 업데이트
             _globalDayCounter = Random.Range(MIN_GLOBAL_DAY_COUNT, MAX_GLOBAL_DAY_COUNT + 1);
-            selectedEnding.ResetDayCounter();
+            _isEndingEventReady = false;
 
             return eventData;
         }
 
         public bool AdvanceEndingProgress(EEndingType endingType)
         {
-            if (_endingProgresses.TryGetValue(endingType, out EndingProgress progress))
+            if (_endingEventProgresses.TryGetValue(endingType, out EndingEventProgress progress))
             {
-                if (progress.currentEventIndex >= progress.EndingEventDatas.Count)
-                {
-                    Debug.LogWarning($"엔딩 [{endingType}]은(는) 이미 모든 이벤트가 진행되어 더 이상 진행할 수 없습니다.");
-                    return false;
-                }
-
-                // 인덱스를 증가시켜 다음 이벤트를 가리키게 한다.
-                progress.currentEventIndex++;
-                Debug.Log($"엔딩 [{endingType}]의 진행도가 다음 단계({progress.currentEventIndex})로 업데이트되었습니다.");
-
+                progress.CompleteEvent();
                 return true;
             }
             else
@@ -129,49 +119,28 @@ namespace WeWillSurvive
             Debug.Log($"Game Ending!! [{endingType}]");
         }
 
+        private EndingEventProgress GetRandomCompletedEventProgress()
+        {
+            var readyProgresses = _endingEventProgresses.Values
+                .Where(progress => progress.IsReady)
+                .ToList();
+
+            if (readyProgresses.Count == 0)
+                return null;
+
+            int randomIndex = UnityEngine.Random.Range(0, readyProgresses.Count);
+            return readyProgresses[randomIndex];
+        }
+
         private void SetupEndingProgress()
         {
-            if (_endingProgresses == null)
-                _endingProgresses = new();
-
-            foreach (var endingEventData in _endingEventDatas)
+            foreach (var endingEventPool in _endingEventPools)
             {
-                if (!_endingProgresses.ContainsKey(endingEventData.endingType))
+                if (!_endingEventProgresses.ContainsKey(endingEventPool.Category))
                 {
-                    _endingProgresses.Add(endingEventData.endingType, new EndingProgress(endingEventData));
+                    _endingEventProgresses.Add(endingEventPool.Category, new EndingEventProgress(endingEventPool));
                 }
             }
-        }
-    }
-
-    [System.Serializable]
-    public class EndingProgress
-    {
-        private EndingEventData _eventData;
-
-        // 현재 진행 상태
-        public int currentEventIndex;
-        public int dayCounter;
-
-        public EEndingType EndingType => _eventData.endingType;
-        public List<MainEventData> EndingEventDatas => _eventData.EndingEventDatas;
-
-        public EndingProgress(EndingEventData data)
-        {
-            _eventData = data;
-            currentEventIndex = 0;
-            dayCounter = 0;
-        }
-
-        public void ResetState()
-        {
-            currentEventIndex = 0;
-            dayCounter = 0;
-        }
-
-        public void ResetDayCounter()
-        {
-            dayCounter = Random.Range(_eventData.MinDayCounter, _eventData.MaxDayCounter + 1);
         }
     }
 }

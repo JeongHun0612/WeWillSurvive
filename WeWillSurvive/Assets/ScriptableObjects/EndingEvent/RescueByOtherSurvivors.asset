@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fe112bed0a713f4b9c79e266715529b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c96ab202bb6ab24eac8f0dc658e151d, type: 3}
   m_Name: RescueByOtherSurvivors
   m_EditorClassIdentifier: 
-  _endingType: 0
-  _endingEventDatas:
+  _category: 0
+  _conditions: []
+  _mainEventDatas:
   - {fileID: 11400000, guid: 42b4a8ec5543da6449cd9eb41f7d3ac6, type: 2}
   - {fileID: 11400000, guid: dd047a1f51fbd1843b7a31216eb7e4a6, type: 2}
   - {fileID: 11400000, guid: ab9308bb0a458d647bb9e4cc2193364c, type: 2}

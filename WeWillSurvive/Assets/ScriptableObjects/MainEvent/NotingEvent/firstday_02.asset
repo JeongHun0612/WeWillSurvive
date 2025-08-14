@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
   m_Name: firstday_02
   m_EditorClassIdentifier: 
-  eventId: firstday_02
-  title: "\uACA8\uC6B0\uC6B0\uC8FC\uAE30\uC9C0\uC5D0\uB3C4\uCC29\uD588\uB2E4."
-  descriptions:
+  _eventId: firstday_02
+  _title: "\uACA8\uC6B0\uC6B0\uC8FC\uAE30\uC9C0\uC5D0\uB3C4\uCC29\uD588\uB2E4."
+  _descriptions:
   - "\uBD88\uC2DC\uCC29 \uD6C4 \uAE30\uC9C0\uAE4C\uC9C0\uC758 \uAE38\uC740 \uC9C0\uC625
     \uAC19\uC558\uB2E4. \uB05D\uAE4C\uC9C0 \uD568\uAED8\uD558\uB358 \uB3D9\uB8CC
     \uBA87 \uBA85\uC740 \uB3CC\uC544\uC624\uC9C0 \uBABB\uD588\uB2E4. \uAE30\uC9C0
@@ -30,19 +30,19 @@ MonoBehaviour:
     \uBAA8\uB450\uAC00 \uB3CC\uC544\uC628 \uAC83\uC740 \uC544\uB2C8\uC5C8\uB2E4.
     \uB0A8\uC740 \uC5BC\uAD74\uB4E4\uC744 \uBC14\uB77C\uBCF4\uBA70 \uC11C\uB85C \uC54C\uC558\uB2E4.
     \uC774\uC81C \uC774 \uC778\uC6D0\uC73C\uB85C \uC0B4\uC544\uB0A8\uC544\uC57C \uD55C\uB2E4.\r"
-  triggerConditions:
-  - conditionType: 1000
-    targetId: Lead
-    parameter: "\uC815\uC0C1"
-    value1: 2
-    value2: 3
-  eventType: 100
-  choices:
-  - choiceType: 500
-    amount: 1
-    results:
-    - conditions: []
-      resultText: "\uBD88\uC2DC\uCC29\uD55C \uB2E4\uC74C \uB0A0, \uAE30\uC9C0 \uB0B4\uBD80\uB294
+  _conditions:
+  - _conditionType: 1000
+    _targetId: Lead
+    _parameter: "\uC815\uC0C1"
+    _value1: 2
+    _value2: 3
+  _choiceSchema: 0
+  _choices:
+  - _choiceIcon: 500
+    _amount: 0
+    _results:
+    - _conditions: []
+      _resultText: "\uBD88\uC2DC\uCC29\uD55C \uB2E4\uC74C \uB0A0, \uAE30\uC9C0 \uB0B4\uBD80\uB294
         \uC544\uC9C1 \uC5B4\uC218\uC120\uD588\uB2E4. \uC5B4\uC81C\uC758 \uC77C\uC740
         \uAFC8\uC774 \uC544\uB2C8\uC5C8\uB2E4. \uC6B0\uC8FC\uC120\uC740 \uC815\uB9D0\uB85C
         \uBB34\uB108\uC84C\uACE0, \uC6B0\uB9AC\uB294 \uC774\uACF3\uC5D0 \uACE0\uB9BD\uB418\uC5C8\uB2E4.\r\n\uC9C0\uAD6C\uC640\uC758
@@ -53,5 +53,5 @@ MonoBehaviour:
         \uC544\uBB34\uB3C4 \uBAA8\uB978\uB2E4. \uC774\uC81C, \uAE30\uB2E4\uB9AC\uB294
         \uB3D9\uC548 \uC2A4\uC2A4\uB85C \uC0B4\uC544\uAC00\uC57C \uD560 \uC2DC\uAC04\uC774
         \uC2DC\uC791\uB410\uB2E4.\r"
-      actions: []
-      probability: 1
+      _actions: []
+      _probability: 1

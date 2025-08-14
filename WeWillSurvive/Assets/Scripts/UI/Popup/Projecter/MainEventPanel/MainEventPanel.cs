@@ -22,7 +22,7 @@ namespace WeWillSurvive
         [Header("## ChoiceOption 오브젝트")]
         [SerializeField] private List<ChoiceOption> _choiceOptions;
 
-        private Dictionary<EChoiceType, ChoiceOptionIconData> _choiceOptionIconDicts = new();
+        private Dictionary<EChoiceIcon, ChoiceOptionIconData> _choiceOptionIconDicts = new();
         private List<string> _pageTexts = new();
 
         private MainEventData _mainEventData = null;
@@ -90,7 +90,7 @@ namespace WeWillSurvive
         public override void ApplyResult()
         {
             // 선택한 옵션에 따라 이벤트 초이스 할당
-            var eventChoice = (_selectedOption == null) ? _mainEventData.GetEventChoice(EChoiceType.Noting) : _selectedOption.EventChoice;
+            var eventChoice = (_selectedOption == null) ? _mainEventData.GetEventChoice(EChoiceIcon.Noting) : _selectedOption.EventChoice;
 
             // 이벤트 결과 임시 저장
             MainEventManager.Instance.QueueEventChoiceForProcessing(eventChoice);
@@ -99,7 +99,7 @@ namespace WeWillSurvive
         public bool ShouldEnableNextButton()
         {
             return _mainEventData == null || 
-                (_mainEventData.eventType != EMainEventType.YesOrNo && _mainEventData.eventType != EMainEventType.Exploration) || 
+                (_mainEventData.ChoiceSchema != EMainEventChoiceSchema.YesOrNo && _mainEventData.ChoiceSchema != EMainEventChoiceSchema.Exploration) || 
                 _selectedOption != null;
         }
 
@@ -109,9 +109,9 @@ namespace WeWillSurvive
                 choiceOption.Disabeld();
 
             int index = 0;
-            foreach (var choice in mainEventData.choices)
+            foreach (var choice in mainEventData.Choices)
             {
-                var choiceOptionIconData = GetChoiceOptionIconData(choice.choiceType);
+                var choiceOptionIconData = GetChoiceOptionIconData(choice.ChoiceIcon);
                 if (choiceOptionIconData == null)
                     continue;
 
@@ -120,7 +120,7 @@ namespace WeWillSurvive
             }
         }
 
-        private ChoiceOptionIconData GetChoiceOptionIconData(EChoiceType choiceType)
+        private ChoiceOptionIconData GetChoiceOptionIconData(EChoiceIcon choiceType)
         {
             if (!_choiceOptionIconDicts.TryGetValue(choiceType, out var choiceOptionIconData))
                 return null;

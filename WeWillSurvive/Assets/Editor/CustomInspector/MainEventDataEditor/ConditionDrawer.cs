@@ -15,11 +15,11 @@ namespace WeWillSurvive
             EditorGUI.BeginProperty(position, label, property);
             Rect rect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
 
-            var conditionTypeProp = property.FindPropertyRelative("conditionType");
-            var targetIdProp = property.FindPropertyRelative("targetId");
-            var parameterProp = property.FindPropertyRelative("parameter");
-            var value1Prop = property.FindPropertyRelative("value1");
-            var value2Prop = property.FindPropertyRelative("value2");
+            var conditionTypeProp = property.FindPropertyRelative("_conditionType");
+            var targetIdProp = property.FindPropertyRelative("_targetId");
+            var parameterProp = property.FindPropertyRelative("_parameter");
+            var value1Prop = property.FindPropertyRelative("_value1");
+            var value2Prop = property.FindPropertyRelative("_value2");
 
             // ConditionType
             PropertyUtil.TryValidateAndFixEnumProperty<EConditionType>(conditionTypeProp);

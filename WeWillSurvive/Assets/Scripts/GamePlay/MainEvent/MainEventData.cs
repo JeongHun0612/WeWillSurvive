@@ -1,31 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace WeWillSurvive.MainEvent
 {
     #region Enum
-    public enum EMainEventType
+    public enum EMainEventChoiceSchema
     {
-        [InspectorName("\"Yes\" 또는 \"No\" 를 선택하는 이벤트")]
+        [InspectorName("\"Yes\" 또는 \"No\" 중 하나를 선택하는 이벤트")]
         YesOrNo = 0,
 
-        [InspectorName("특정 아이템을 사용하는 이벤트")]
+        [InspectorName("특정 아이템 중 하나를 선택하는 이벤트")]
         UseItems = 1,
 
-        [InspectorName("특정 대원을 탐사를 보내는 이벤트")]
+        [InspectorName("모든 대원 중 한명을 선택하는 이벤트")]
         SendSomeone = 2,
 
-        [InspectorName("특정 대원을 선택하는 이벤트")]
+        [InspectorName("특정 대원 중 한명을 선택하는 이벤트")]
         ChooseSomeone = 3,
 
-        [InspectorName("침입 이벤트")]
+        [InspectorName("외부 친입에 무기(도끼, 총, 쇠파이프)를 사용해서 방어하는 이벤트")]
         Invasion = 4,
 
-        [InspectorName("조사 이벤트")]
+        [InspectorName("조사(손전등, 맨손) 이벤트")]
         Exploration = 5,
 
-        [InspectorName("이벤트가 존재하지 않을 시")]
+        [InspectorName("선택지 없음")]
         Noting = 100,
     }
 
@@ -70,7 +71,7 @@ namespace WeWillSurvive.MainEvent
         DayCountUpper = 1002,
     }
 
-    public enum EChoiceType
+    public enum EChoiceIcon
     {
         // O, X 아이콘
         [InspectorName("Yes")] Yes = 0,
@@ -122,76 +123,148 @@ namespace WeWillSurvive.MainEvent
     }
     #endregion
 
-    [CreateAssetMenu(fileName = "MainEventData", menuName = "Scriptable Objects/MainEventData")]
+    [CreateAssetMenu(fileName = "MainEventData", menuName = "Scriptable Objects/MainEvent/MainEventData")]
     public class MainEventData : ScriptableObject
     {
-        public string eventId;                                                              // 고유 ID (ex. "yesorno_01")
-        public string title;                                                                // 엔딩 로그에 남길 타이틀
+        [SerializeField]
+        private string _eventId;                                    // 고유 ID (ex. "yesorno_01")
 
+        [SerializeField]
+        private string _title;                                      // 엔딩 로그에 남길 타이틀
+
+        [SerializeField]
         [TextArea(3, 10)]
-        public List<string> descriptions = new();                                           // 랜덤 출력용 텍스트(이벤트 본문)
-        public List<Condition> triggerConditions = new();                                   // 이벤트 발생 조건
-        public EMainEventType eventType;                                                    // 이벤트 타입 (YesOrNo, UseItem, ChooseSomeone 등)
-        public List<EventChoice> choices;                                                   // 유저가 고를 수 있는 선택지
+        private List<string> _descriptions = new();                 // 랜덤 출력용 텍스트(이벤트 본문)
+
+        [SerializeField]
+        private List<Condition> _conditions = new();                // 이벤트 발생 조건
+
+        [SerializeField]
+        private EMainEventChoiceSchema _choiceSchema;               // 이벤트 선택지 구조 (YesOrNo, UseItem, ChooseSomeone 등)
+
+        [SerializeField]
+        private List<EventChoice> _choices;                         // 유저가 고를 수 있는 선택지
+
+
+        public string EventId => _eventId;
+        public string Title => _title;
+        public IReadOnlyList<string> Descriptions => _descriptions;
+        public IReadOnlyList<Condition> Conditions => _conditions;
+        public EMainEventChoiceSchema ChoiceSchema => _choiceSchema;
+        public List<EventChoice> Choices { get; set; }
 
         public string GetRandomDescription()
         {
-            if (descriptions == null || descriptions.Count == 0)
+            if (_descriptions == null || _descriptions.Count == 0)
                 return string.Empty;
 
-            int index = Random.Range(0, descriptions.Count);
-            return descriptions[index];
+            int index = Random.Range(0, _descriptions.Count);
+            return _descriptions[index];
         }
 
-        public EventChoice GetEventChoice(EChoiceType choiceType) => choices.FirstOrDefault(choice => choice.choiceType == choiceType);
+        public EventChoice GetEventChoice(EChoiceIcon choiceIcon) => _choices.FirstOrDefault(choice => choice.ChoiceIcon == choiceIcon);
     }
 
     [System.Serializable]
     public class Condition
     {
-        public EConditionType conditionType;
-        public string targetId;   // 캐릭터 이름, 아이템 이름, 상태 이름 등
-        public string parameter;  // 비교할 속성 (ex: Status, State 등)
-        public string value1;     // 비교할 값 1
-        public string value2;     // 비교할 값 2
+        [SerializeField]
+        private EConditionType _conditionType;
+
+        [SerializeField]
+        private string _targetId;                   // 캐릭터 이름, 아이템 이름, 상태 이름 등
+
+        [SerializeField]
+        private string _parameter;                  // 비교할 속성 (ex: Status, State 등)
+
+        [SerializeField]
+        private string _value1;                     // 비교할 값 1
+
+        [SerializeField]
+        private string _value2;                     // 비교할 값 2
+
+        public EConditionType ConditionType => _conditionType;
+        public string TargetId => _targetId;
+        public string Parameter => _parameter;
+        public string Value1 => _value1;
+        public string Value2 => _value2;
+
     }
 
     [System.Serializable]
     public class EventChoice
     {
-        public EChoiceType choiceType;          // 선택 ID
-        public int amount;                      // 필요 갯수
-        public List<EventResult> results;       // 선택에 대한 결과 리스트
+        [SerializeField]
+        private EChoiceIcon _choiceIcon;          // 선택 ID
+
+        [SerializeField]
+        private int _amount;                      // 필요 갯수
+
+        [SerializeField]
+        private List<EventResult> _results;       // 선택에 대한 결과 리스트
+
+        public EChoiceIcon ChoiceIcon => _choiceIcon;
+        public int Amount => _amount;
+        public IReadOnlyList<EventResult> Results => _results;
+
+        public EventChoice(EChoiceIcon choiceIcon, int amount = 1, List<EventResult> results = null)
+        {
+            _choiceIcon = choiceIcon;
+            _amount = amount;
+            _results = (results == null) ? new List<EventResult>() { new EventResult() } : results;
+        }
     }
 
     [System.Serializable]
     public class EventResult
     {
-        public List<Condition> conditions;      // 해당 결과가 발생할 조건
+        [SerializeField]
+        private List<Condition> _conditions;      // 해당 결과가 발생할 조건
 
+        [SerializeField]
         [TextArea(3, 10)]
-        public string resultText;               // 결과 텍스트
+        private string _resultText;               // 결과 텍스트
 
-        public List<EventAction> actions;       // 결과 반영
+        [SerializeField]
+        private List<EventAction> _actions;       // 결과 반영
 
-        [Range(0, 1)] 
-        public float probability;               // 발생 확률 (총합 1.0 안 넘게)
+        [SerializeField]
+        [Range(0, 1)]
+        private float _probability;               // 발생 확률 (총합 1.0 안 넘게)
+
+
+        public IReadOnlyList<Condition> Conditions => _conditions;
+        public string ResultText => _resultText;
+        public IReadOnlyList<EventAction> Actions => _actions;
+        public float Probability => _probability;
 
         public EventResult()
         {
-            conditions = new();
-            resultText = string.Empty;
-            actions = new();
-            probability = 1.0f;
+            _conditions = new();
+            _resultText = string.Empty;
+            _actions = new();
+            _probability = 1.0f;
         }
     }
 
     [System.Serializable]
     public class EventAction
     {
-        public EActionType actionType;
-        public string targetId;
-        public string parameter;
-        public string value;
+        [SerializeField]
+        private EActionType _actionType;
+
+        [SerializeField]
+        private string _targetId;
+
+        [SerializeField]
+        private string _parameter;
+
+        [SerializeField]
+        private string _value;
+
+        public EActionType ActionType => _actionType;
+        public string TargetId => _targetId;
+        public string Parameter => _parameter;
+        public string Value => _value;
     }
 }

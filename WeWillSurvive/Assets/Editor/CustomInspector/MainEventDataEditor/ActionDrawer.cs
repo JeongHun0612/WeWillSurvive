@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using WeWillSurvive.Character;
+using WeWillSurvive.Ending;
 using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
 using WeWillSurvive.Status;
@@ -15,10 +16,10 @@ namespace WeWillSurvive
             EditorGUI.BeginProperty(position, label, property);
             Rect rect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
 
-            var actionTypeProp = property.FindPropertyRelative("actionType");
-            var targetIdProp = property.FindPropertyRelative("targetId");
-            var parameterProp = property.FindPropertyRelative("parameter");
-            var valueProp = property.FindPropertyRelative("value");
+            var actionTypeProp = property.FindPropertyRelative("_actionType");
+            var targetIdProp = property.FindPropertyRelative("_targetId");
+            var parameterProp = property.FindPropertyRelative("_parameter");
+            var valueProp = property.FindPropertyRelative("_value");
 
             // EffectType
             PropertyUtil.TryValidateAndFixEnumProperty<EActionType>(actionTypeProp);

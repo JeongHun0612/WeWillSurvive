@@ -4,29 +4,45 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using WeWillSurvive.Core;
+using WeWillSurvive.Ending;
 using WeWillSurvive.Expedition;
-using WeWillSurvive.Item;
 using WeWillSurvive.Log;
 
 namespace WeWillSurvive.MainEvent
 {
+    public enum EMainEventCategory
+    {
+        [InspectorName("침입 이벤트")]
+        Invasion = 0,
+
+        [InspectorName("조사 이벤트")]
+        Exploration = 1,
+
+        [InspectorName("교환 이벤트")]
+        Trade = 2,
+
+        [InspectorName("시설 이벤트")]
+        Facility = 3,
+    }
+
     public class MainEventManager : MonoSingleton<MainEventManager>
     {
         [Header("## 첫째날 전용 메인 이벤트")]
-        [SerializeField] private List<MainEventData> _firstDayMainEventDatas;
+        [SerializeField] private List<MainEventData> _firstDayMainEvents;
 
         [Header("## 메인 이벤트가 발생하지 않는 날")]
-        [SerializeField] private List<MainEventData> _nothingHappensEventDatas = new();
+        [SerializeField] private List<MainEventData> _nothingHappensEvents = new();
 
-        [Header("## MainEventData")]
-        public List<MainEventData> _mainEventDatas = new();
-
+        [Header("## MainEventPool")]
+        [SerializeField] private List<MainEventPool> _mainEventPools = new();
 
         [Header("## 테스트 이벤트")]
         public MainEventData _testEventData;
 
         private MainEventData _lastSelectedEvent = null;
         private EventChoice _pendingEventChoice = null;
+
+        private Dictionary<EMainEventCategory, MainEventProgress> _mainEventProgresses = new();
 
         private Dictionary<EConditionType, IEventConditionHandler> _eventConditionHandlers = new();
         private Dictionary<EActionType, IEventActionHandler> _eventActionHandlers = new();
@@ -36,6 +52,8 @@ namespace WeWillSurvive.MainEvent
         protected override void Awake()
         {
             base.Awake();
+
+            SetupMainEventProgress();
 
             SetupEventConditionHandlers();
             SetupEventActionHandlers();
@@ -47,20 +65,32 @@ namespace WeWillSurvive.MainEvent
             _pendingEventChoice = null;
         }
 
+        public void OnNewDay()
+        {
+            foreach (var mainEventProgress in _mainEventProgresses.Values)
+            {
+                mainEventProgress.OnNewDay();
+            }
+        }
+
         public MainEventData GetDailyMainEvent()
         {
-            if (_testEventData != null)
-            {
-                IsConditionsMet(_testEventData.triggerConditions);
+            List<MainEventData> eventPool;
 
-                return _testEventData;
+            // 탐사 준비 단계면 이벤트 발생 X
+            bool isExpeditionReady = ExpeditionManager.Instance.CurrentState == EExpeditionState.Ready;
+
+            if (isExpeditionReady)
+            {
+                var notingEvent = GetValidMainEvent(_nothingHappensEvents);
+                _lastSelectedEvent = notingEvent;
+                return notingEvent;
             }
 
-            List<MainEventData> eventPool;
 
             if (GameManager.Instance.Day == 1)
             {
-                eventPool = _firstDayMainEventDatas;
+                eventPool = _firstDayMainEvents;
             }
             else
             {
@@ -72,9 +102,18 @@ namespace WeWillSurvive.MainEvent
                     return endingEvent;
                 }
 
-                // 탐사 준비 단계가 아니면 일반 이벤트, 맞으면 아무일도 없는 이벤트
-                bool isExpeditionReady = ExpeditionManager.Instance.CurrentState == EExpeditionState.Ready;
-                eventPool = isExpeditionReady ? _nothingHappensEventDatas : _mainEventDatas;
+                var eventProgress = GetRandomCompletedEventProgress();
+                var mainEvents = eventProgress?.Events.ToList();
+                var mainEvent = GetValidMainEvent(mainEvents);
+
+                if (mainEvent != null)
+                {
+                    _lastSelectedEvent = mainEvent;
+                    eventProgress.ResetDayCounter();
+                    return mainEvent;
+                }
+
+                eventPool = _nothingHappensEvents;
             }
 
             // 결정된 목록에서 유효한 이벤트를 찾아서 반환
@@ -109,20 +148,30 @@ namespace WeWillSurvive.MainEvent
             _pendingEventChoice = null;
         }
 
-        private MainEventData GetValidMainEvent(List<MainEventData> mainEventDatas)
+        private MainEventProgress GetRandomCompletedEventProgress()
         {
+            List<MainEventProgress> readyProgresses = _mainEventProgresses.Values
+                .Where(progress => progress.IsReady && IsConditionsMet(progress.Conditions.ToList()))
+                .ToList();
+
+            if (readyProgresses.Count == 0)
+                return null;
+
+            int randomIndex = UnityEngine.Random.Range(0, readyProgresses.Count);
+            return readyProgresses[randomIndex];
+        }
+
+        private MainEventData GetValidMainEvent(IReadOnlyList<MainEventData> mainEventDatas)
+        {
+            if (mainEventDatas == null || mainEventDatas.Count == 0)
+                return null;
+
             List<MainEventData> validEvents = mainEventDatas
-                .Where(mainEventData => mainEventData != _lastSelectedEvent && IsConditionsMet(mainEventData.triggerConditions))
+                .Where(mainEventData => mainEventData != _lastSelectedEvent && IsConditionsMet(mainEventData.Conditions))
                 .ToList();
 
             if (validEvents.Count == 0)
-            {
-                if (_lastSelectedEvent != null && IsConditionsMet(_lastSelectedEvent.triggerConditions))
-                {
-                    return _lastSelectedEvent;
-                }
                 return null;
-            }
 
             int randomIndex = UnityEngine.Random.Range(0, validEvents.Count);
             return validEvents[randomIndex];
@@ -131,15 +180,15 @@ namespace WeWillSurvive.MainEvent
         private EventResult GetEventResultFromChoice(EventChoice choice)
         {
             // 조건이 충족되는 모든 유효한 결과들을 필터링
-            var validResults = choice.results
-                .Where(result => IsConditionsMet(result.conditions))
+            var validResults = choice.Results
+                .Where(result => IsConditionsMet(result.Conditions))
                 .ToList();
 
             if (validResults.Count == 0)
                 return null;
 
             // 유효한 결과들의 확률 총합을 계산
-            float totalProbability = validResults.Sum(result => result.probability);
+            float totalProbability = validResults.Sum(result => result.Probability);
 
             // 확률 총합을 기반으로 랜덤 포인트를 지정
             float randomPoint = UnityEngine.Random.Range(0, totalProbability);
@@ -148,14 +197,14 @@ namespace WeWillSurvive.MainEvent
             foreach (var result in validResults)
             {
                 // 현재 결과의 확률보다 랜덤 포인트가 작거나 같으면 이 결과를 선택
-                if (randomPoint <= result.probability)
+                if (randomPoint <= result.Probability)
                 {
                     return result;
                 }
                 else
                 {
                     // 아니면, 현재 결과의 확률만큼 랜덤 포인트를 줄이고 다음 결과로 넘어감
-                    randomPoint -= result.probability;
+                    randomPoint -= result.Probability;
                 }
             }
 
@@ -166,17 +215,17 @@ namespace WeWillSurvive.MainEvent
         private void ApplyEventResult(EventResult eventResult)
         {
             // 이벤트 결과 적용
-            foreach (var action in eventResult.actions)
+            foreach (var action in eventResult.Actions)
             {
                 ApplyResultAction(action);
             }
 
             // 이벤트 결과 메시지 Log로 전달
-            var resultMessage = eventResult.resultText;
+            var resultMessage = eventResult.ResultText;
             LogManager.AddMainEventResultLog(resultMessage);
         }
 
-        private bool IsConditionsMet(List<Condition> conditions)
+        private bool IsConditionsMet(IReadOnlyList<Condition> conditions)
         {
             // 조건이 없으면 '충족'으로 간주
             if (conditions == null || conditions.Count == 0)
@@ -190,6 +239,17 @@ namespace WeWillSurvive.MainEvent
             }
 
             return true;
+        }
+
+        private void SetupMainEventProgress()
+        {
+            foreach (var mainEventPool in _mainEventPools)
+            {
+                if (!_mainEventProgresses.ContainsKey(mainEventPool.Category))
+                {
+                    _mainEventProgresses.Add(mainEventPool.Category, new MainEventProgress(mainEventPool));
+                }
+            }
         }
 
         private void SetupEventConditionHandlers()
@@ -226,25 +286,56 @@ namespace WeWillSurvive.MainEvent
 
         private void ApplyResultAction(EventAction action)
         {
-            if (_eventActionHandlers.TryGetValue(action.actionType, out var applicator))
+            if (_eventActionHandlers.TryGetValue(action.ActionType, out var applicator))
             {
                 applicator.Apply(action);
             }
             else
             {
-                Debug.LogWarning($"핸들러가 등록되지 않은 EventAction 타입입니다: {action.actionType}");
+                Debug.LogWarning($"핸들러가 등록되지 않은 EventAction 타입입니다: {action.ActionType}");
             }
         }
 
         private bool CheckCondition(Condition condition)
         {
-            if (_eventConditionHandlers.TryGetValue(condition.conditionType, out var handler))
+            if (_eventConditionHandlers.TryGetValue(condition.ConditionType, out var handler))
             {
                 return handler.IsMet(condition);
             }
 
-            Debug.LogWarning($"핸들러가 등록되지 않은 EventCondition 타입입니다: {condition.conditionType}");
+            Debug.LogWarning($"핸들러가 등록되지 않은 EventCondition 타입입니다: {condition.ConditionType}");
             return false;
         }
     }
+
+    //[System.Serializable]
+    //public class EventProgress
+    //{
+    //    private EndingEventData _eventData;
+
+    //    // 현재 진행 상태
+    //    public int currentEventIndex;
+    //    public int dayCounter;
+
+    //    public EEndingType EndingType => _eventData.endingType;
+    //    public List<MainEventData> EndingEventDatas => _eventData.EndingEventDatas;
+
+    //    public EndingProgress(EndingEventData data)
+    //    {
+    //        _eventData = data;
+    //        currentEventIndex = 0;
+    //        dayCounter = 0;
+    //    }
+
+    //    public void ResetState()
+    //    {
+    //        currentEventIndex = 0;
+    //        dayCounter = 0;
+    //    }
+
+    //    public void ResetDayCounter()
+    //    {
+    //        dayCounter = Random.Range(_eventData.MinDayCounter, _eventData.MaxDayCounter + 1);
+    //    }
+    //}
 }

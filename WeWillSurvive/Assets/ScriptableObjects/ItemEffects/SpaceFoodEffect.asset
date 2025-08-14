@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651c348f908e0fa4fa180dd0743409d0, type: 3}
   m_Name: SpaceFoodEffect
   m_EditorClassIdentifier: 
-  <Item>k__BackingField: 0
-  <Value>k__BackingField: 40
+  <ItemType>k__BackingField: 0

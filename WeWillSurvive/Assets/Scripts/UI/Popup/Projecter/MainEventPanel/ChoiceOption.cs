@@ -5,6 +5,7 @@ using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
+using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
@@ -60,14 +61,17 @@ namespace WeWillSurvive
         {
             bool isAvailable = false;
 
-            if (Enum.TryParse($"{eventChoice.choiceType}", out ECharacter characterType))
+            if (Enum.TryParse($"{eventChoice.ChoiceIcon}", out ECharacter characterType))
             {
                 var character = CharacterManager.GetCharacter(characterType);
                 isAvailable = (character != null && character.IsInShelter);
             }
-            else if (Enum.TryParse($"{eventChoice.choiceType}", out EItem item))
+            else if (Enum.TryParse($"{eventChoice.ChoiceIcon}", out EItem item))
             {
-                isAvailable = ItemManager.HasItem(item, eventChoice.amount);
+                if (eventChoice.Amount == 0)
+                    isAvailable = true;
+                else
+                    isAvailable = ItemManager.HasItem(item, eventChoice.Amount);
             }
             else
             {

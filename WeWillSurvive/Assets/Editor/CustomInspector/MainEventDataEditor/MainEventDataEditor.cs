@@ -15,7 +15,7 @@ namespace WeWillSurvive
         private const float ICON_FIXED_WIDTH = 64;
         private const float ICON_FIXED_HEIGHT = 64;
 
-        private Dictionary<EChoiceType, Texture2D> _iconTextures = new();
+        private Dictionary<EChoiceIcon, Texture2D> _iconTextures = new();
 
         private int selectedChoiceIndex = 0;
         private int selectedResultIndex = 0;
@@ -32,11 +32,11 @@ namespace WeWillSurvive
         {
             serializedObject.Update();
 
-            var eventIdProp = serializedObject.FindProperty("eventId");
-            var titleProp = serializedObject.FindProperty("title");
-            var descriptionsProp = serializedObject.FindProperty("descriptions");
-            var triggerConditionsProp = serializedObject.FindProperty("triggerConditions");
-            var eventTypeProp = serializedObject.FindProperty("eventType");
+            var eventIdProp = serializedObject.FindProperty("_eventId");
+            var titleProp = serializedObject.FindProperty("_title");
+            var descriptionsProp = serializedObject.FindProperty("_descriptions");
+            var triggerConditionsProp = serializedObject.FindProperty("_conditions");
+            var choiceSchemaProp = serializedObject.FindProperty("_choiceSchema");
 
             MainEventData data = (MainEventData)target;
 
@@ -51,16 +51,16 @@ namespace WeWillSurvive
 
             // 이벤트 타입 선택
             EditorGUILayout.Space(20);
-            var currentValue = eventTypeProp.intValue;
-            EditorGUILayout.PropertyField(eventTypeProp, new GUIContent("이벤트 타입"));
+            var currentChoiceSchema = choiceSchemaProp.intValue;
+            EditorGUILayout.PropertyField(choiceSchemaProp, new GUIContent("이벤트 타입"));
 
-            if (currentValue != eventTypeProp.intValue || data.choices == null)
+            if (currentChoiceSchema != choiceSchemaProp.intValue || data.Choices == null)
             {
                 serializedObject.ApplyModifiedProperties(); // 변경된 enum 값을 실제 객체에 먼저 반영
 
                 // 변경된 최신 값을 가져와서 초기화 함수를 호출
                 Undo.RecordObject(data, "Initialize Choices for EventType");
-                InitializeChoicesForEventType((EMainEventType)eventTypeProp.intValue, data);
+                InitializeChoicesForEventType((EMainEventChoiceSchema)choiceSchemaProp.intValue, data);
                 EditorUtility.SetDirty(data);
 
                 serializedObject.Update();
@@ -68,22 +68,22 @@ namespace WeWillSurvive
 
             // 이벤트 타입 별 UI 변경
             EditorGUILayout.Space(20);
-            SerializedProperty choicesProp = serializedObject.FindProperty("choices");
-            var eventType = (EMainEventType)eventTypeProp.intValue;
+            SerializedProperty choicesProp = serializedObject.FindProperty("_choices");
+            var choiceSchema = (EMainEventChoiceSchema)choiceSchemaProp.intValue;
 
-            switch (eventType)
+            switch (choiceSchema)
             {
-                case EMainEventType.YesOrNo:
-                case EMainEventType.SendSomeone:
-                case EMainEventType.Invasion:
-                case EMainEventType.Exploration:
-                case EMainEventType.Noting:
+                case EMainEventChoiceSchema.YesOrNo:
+                case EMainEventChoiceSchema.SendSomeone:
+                case EMainEventChoiceSchema.Invasion:
+                case EMainEventChoiceSchema.Exploration:
+                case EMainEventChoiceSchema.Noting:
                     DrawStaticChoiceUI(choicesProp);
                     break;
-                case EMainEventType.UseItems:
+                case EMainEventChoiceSchema.UseItems:
                     DrawEditableChoiceUI(choicesProp, GetItemNames());
                     break;
-                case EMainEventType.ChooseSomeone:
+                case EMainEventChoiceSchema.ChooseSomeone:
                     DrawEditableChoiceUI(choicesProp, GetCharacterNames());
                     break;
                 default:
@@ -95,7 +95,7 @@ namespace WeWillSurvive
             {
                 // 선택한 선택지 결과 출력
                 SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
-                SerializedProperty resultsProp = selectedChoiceProp.FindPropertyRelative("results");
+                SerializedProperty resultsProp = selectedChoiceProp.FindPropertyRelative("_results");
                 EditorGUILayout.Space(20);
                 DrawResultTabsUI(resultsProp);
             }
@@ -109,19 +109,19 @@ namespace WeWillSurvive
             DrawChoiceSelector(choicesProp);
             EditorGUILayout.Space(10);
 
-            //if (choicesProp.arraySize > 0)
-            //{
-            //    SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
-            //    SerializedProperty choiceTypeProp = selectedChoiceProp.FindPropertyRelative("choiceType");
-            //    SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("amount");
+            if (choicesProp.arraySize > 0)
+            {
+                SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
+                SerializedProperty choiceIconProp = selectedChoiceProp.FindPropertyRelative("_choiceIcon");
+                SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("_amount");
 
-            //    // 이벤트 타입 선택
-            //    EditorGUILayout.PropertyField(choiceTypeProp, new GUIContent("선택지 타입"));
-            //    EditorGUILayout.PropertyField(amountProp, new GUIContent("필요 갯수"));
-            //}
+                // 이벤트 타입 선택
+                EditorGUILayout.PropertyField(choiceIconProp, new GUIContent("선택지 타입"));
+                EditorGUILayout.PropertyField(amountProp, new GUIContent("필요 갯수"));
+            }
         }
 
-        private void DrawEditableChoiceUI(SerializedProperty choicesProp, (string[] displayOptions, List<EChoiceType> enumValues) options)
+        private void DrawEditableChoiceUI(SerializedProperty choicesProp, (string[] displayOptions, List<EChoiceIcon> enumValues) options)
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("선택지 목록", EditorStyles.boldLabel, GUILayout.Width(80));
@@ -134,10 +134,10 @@ namespace WeWillSurvive
             if (choicesProp.arraySize > 0)
             {
                 SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
-                SerializedProperty choiceTypeProp = selectedChoiceProp.FindPropertyRelative("choiceType");
-                SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("amount");
+                SerializedProperty choiceIconProp = selectedChoiceProp.FindPropertyRelative("_choiceIcon");
+                SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("_amount");
 
-                DrawFilteredEnumPopup(new GUIContent("선택지 타입"), choiceTypeProp, options.displayOptions, options.enumValues);
+                DrawFilteredEnumPopup(new GUIContent("선택지 타입"), choiceIconProp, options.displayOptions, options.enumValues);
                 EditorGUILayout.PropertyField(amountProp, new GUIContent("필요 갯수"));
             }
         }
@@ -167,9 +167,9 @@ namespace WeWillSurvive
             for (int i = 0; i < choicesProp.arraySize; i++)
             {
                 SerializedProperty choiceProp = choicesProp.GetArrayElementAtIndex(i);
-                SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("choiceType");
+                SerializedProperty choiceIconProp = choiceProp.FindPropertyRelative("_choiceIcon");
 
-                var choiceType = (EChoiceType)choiceTypeProp.intValue;
+                var choiceIconValue = (EChoiceIcon)choiceIconProp.intValue;
 
                 Rect buttonRect = GUILayoutUtility.GetRect(ICON_FIXED_WIDTH, ICON_FIXED_HEIGHT, style);
 
@@ -178,8 +178,8 @@ namespace WeWillSurvive
                     EditorGUI.DrawRect(new Rect(buttonRect.x - 2, buttonRect.y - 2, ICON_FIXED_WIDTH + 4, ICON_FIXED_HEIGHT + 4), Color.cyan);
                 }
 
-                Texture2D iconTexture = GetIconTexture(choiceType);
-                GUIContent content = iconTexture != null ? new GUIContent(iconTexture) : new GUIContent(choiceType.ToString());
+                Texture2D iconTexture = GetIconTexture(choiceIconValue);
+                GUIContent content = iconTexture != null ? new GUIContent(iconTexture) : new GUIContent(choiceIconValue.ToString());
                 if (GUI.Button(buttonRect, content, style))
                 {
                     selectedChoiceIndex = i;
@@ -189,10 +189,10 @@ namespace WeWillSurvive
             EditorGUILayout.EndHorizontal();
         }
 
-        private void DrawFilteredEnumPopup(GUIContent label, SerializedProperty property, string[] displayOptions, List<EChoiceType> enumValues)
+        private void DrawFilteredEnumPopup(GUIContent label, SerializedProperty property, string[] displayOptions, List<EChoiceIcon> enumValues)
         {
             // 현재 저장된 값을 기준으로 목록에서의 인덱스를 찾습니다.
-            var currentValue = (EChoiceType)property.intValue;
+            var currentValue = (EChoiceIcon)property.intValue;
             int currentIndex = enumValues.IndexOf(currentValue);
             if (currentIndex == -1)
             {
@@ -253,10 +253,10 @@ namespace WeWillSurvive
                 SerializedProperty selectedResult = resultsProp.GetArrayElementAtIndex(selectedResultIndex);
                 if (selectedResult == null) return;
 
-                SerializedProperty conditionsProp = selectedResult.FindPropertyRelative("conditions");
-                SerializedProperty textProp = selectedResult.FindPropertyRelative("resultText");
-                SerializedProperty actionsProp = selectedResult.FindPropertyRelative("actions");
-                SerializedProperty probProp = selectedResult.FindPropertyRelative("probability");
+                SerializedProperty conditionsProp = selectedResult.FindPropertyRelative("_conditions");
+                SerializedProperty textProp = selectedResult.FindPropertyRelative("_resultText");
+                SerializedProperty actionsProp = selectedResult.FindPropertyRelative("_actions");
+                SerializedProperty probProp = selectedResult.FindPropertyRelative("_probability");
 
                 // 결과 데이터 필드
                 EditorGUILayout.BeginVertical(new GUIStyle(GUI.skin.box)
@@ -299,134 +299,64 @@ namespace WeWillSurvive
             EditorGUILayout.EndHorizontal();
         }
 
-        private void InitializeChoicesForEventType(EMainEventType type, MainEventData data)
+        private void InitializeChoicesForEventType(EMainEventChoiceSchema choiceSchema, MainEventData data)
         {
             selectedChoiceIndex = 0;
             selectedResultIndex = 0;
 
-            switch (type)
+            switch (choiceSchema)
             {
-                case EMainEventType.YesOrNo:
+                case EMainEventChoiceSchema.YesOrNo:
                     {
-                        data.choices = new List<EventChoice>
+                        data.Choices = new List<EventChoice>
                         {
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Yes,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.No,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
+                            new EventChoice(EChoiceIcon.Yes, 0),
+                            new EventChoice(EChoiceIcon.No, 0),
                         };
                     }
                     break;
-                case EMainEventType.SendSomeone:
+                case EMainEventChoiceSchema.SendSomeone:
                     {
-                        data.choices = new List<EventChoice>
+                        data.Choices = new List<EventChoice>
                         {
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Lead,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Cook,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Bell,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.DrK,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Noting,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
+                            new EventChoice(EChoiceIcon.Lead),
+                            new EventChoice(EChoiceIcon.Cook),
+                            new EventChoice(EChoiceIcon.Bell),
+                            new EventChoice(EChoiceIcon.DrK),
+                            new EventChoice(EChoiceIcon.Noting, 0),
                         };
                     }
                     break;
-                case EMainEventType.Invasion:
+                case EMainEventChoiceSchema.Invasion:
                     {
-                        data.choices = new List<EventChoice>
+                        data.Choices = new List<EventChoice>
                         {
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Gun,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Pipe,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Ax,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Noting,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
+                            new EventChoice(EChoiceIcon.Gun),
+                            new EventChoice(EChoiceIcon.Pipe),
+                            new EventChoice(EChoiceIcon.Ax),
+                            new EventChoice(EChoiceIcon.Noting, 0),
                         };
                     }
                     break;
-                case EMainEventType.Exploration:
+                case EMainEventChoiceSchema.Exploration:
                     {
-                        data.choices = new List<EventChoice>
+                        data.Choices = new List<EventChoice>
                         {
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Flashlight,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Hand,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            },
+                            new EventChoice(EChoiceIcon.Flashlight),
+                            new EventChoice(EChoiceIcon.Hand, 0),
                         };
                     }
                     break;
-                case EMainEventType.Noting:
+                case EMainEventChoiceSchema.Noting:
                     {
-                        data.choices = new List<EventChoice>
+                        data.Choices = new List<EventChoice>
                         {
-                            new EventChoice
-                            {
-                                choiceType = EChoiceType.Noting,
-                                amount = 1,
-                                results = new List<EventResult>() { new EventResult() }
-                            }
+                            new EventChoice(EChoiceIcon.Noting, 0),
                         };
                     }
                     break;
                 default:
-                    data.choices = new List<EventChoice>();
+                    data.Choices = new List<EventChoice>();
                     break;
             }
         }
@@ -435,9 +365,9 @@ namespace WeWillSurvive
         {
             if (choiceProp == null) return;
 
-            SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("choiceType");
-            SerializedProperty amountProp = choiceProp.FindPropertyRelative("amount");
-            SerializedProperty resultsProp = choiceProp.FindPropertyRelative("results");
+            SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("_choiceType");
+            SerializedProperty amountProp = choiceProp.FindPropertyRelative("_amount");
+            SerializedProperty resultsProp = choiceProp.FindPropertyRelative("_results");
 
             choiceTypeProp.intValue = 0;
             amountProp.intValue = 1;
@@ -453,10 +383,10 @@ namespace WeWillSurvive
         {
             if (resultProp == null) return;
 
-            SerializedProperty textProp = resultProp.FindPropertyRelative("resultText");
-            SerializedProperty probProp = resultProp.FindPropertyRelative("probability");
-            SerializedProperty conditionsProp = resultProp.FindPropertyRelative("conditions");
-            SerializedProperty actionsProp = resultProp.FindPropertyRelative("actions");
+            SerializedProperty textProp = resultProp.FindPropertyRelative("_resultText");
+            SerializedProperty probProp = resultProp.FindPropertyRelative("_probability");
+            SerializedProperty conditionsProp = resultProp.FindPropertyRelative("_conditions");
+            SerializedProperty actionsProp = resultProp.FindPropertyRelative("_actions");
 
             textProp.stringValue = string.Empty;
             probProp.floatValue = 1.0f;
@@ -469,7 +399,7 @@ namespace WeWillSurvive
         {
             _iconTextures.Clear();
 
-            foreach (EChoiceType type in Enum.GetValues(typeof(EChoiceType)))
+            foreach (EChoiceIcon type in Enum.GetValues(typeof(EChoiceIcon)))
             {
                 string path = $"Assets/Editor/Icons/{type}.png"; // enum 이름 그대로 사용
                 Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
@@ -479,15 +409,15 @@ namespace WeWillSurvive
             }
         }
 
-        private Texture2D GetIconTexture(EChoiceType type)
+        private Texture2D GetIconTexture(EChoiceIcon choiceIcon)
         {
-            if (_iconTextures.TryGetValue(type, out var texture))
+            if (_iconTextures.TryGetValue(choiceIcon, out var texture))
                 return texture;
 
             return null;
         }
 
-        private (string[] displayOptions, List<EChoiceType> enumValues) GetCharacterNames()
+        private (string[] displayOptions, List<EChoiceIcon> enumValues) GetCharacterNames()
         {
             return GetFilteredEnumOptions(v =>
             {
@@ -500,7 +430,7 @@ namespace WeWillSurvive
             });
         }
 
-        private (string[] displayOptions, List<EChoiceType> enumValues) GetItemNames()
+        private (string[] displayOptions, List<EChoiceIcon> enumValues) GetItemNames()
         {
             return GetFilteredEnumOptions(v =>
             {
@@ -513,13 +443,14 @@ namespace WeWillSurvive
             });
         }
 
-        private (string[] displayOptions, List<EChoiceType> enumValues) GetFilteredEnumOptions(System.Func<EChoiceType, bool> filter)
+        private (string[] displayOptions, List<EChoiceIcon> enumValues) GetFilteredEnumOptions(System.Func<EChoiceIcon, bool> filter)
         {
-            var allValues = System.Enum.GetValues(typeof(EChoiceType)).Cast<EChoiceType>();
+            var allValues = System.Enum.GetValues(typeof(EChoiceIcon)).Cast<EChoiceIcon>();
             var filteredValues = allValues.Where(filter).ToList();
 
-            var displayNames = filteredValues.Select(v => {
-                var member = typeof(EChoiceType).GetMember(v.ToString())[0];
+            var displayNames = filteredValues.Select(v =>
+            {
+                var member = typeof(EChoiceIcon).GetMember(v.ToString())[0];
                 var inspectorName = member.GetCustomAttribute<InspectorNameAttribute>();
                 return inspectorName != null ? inspectorName.displayName : v.ToString();
             }).ToArray();

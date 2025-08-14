@@ -642,11 +642,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4e7bc1d1544484d854bc78b02296ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _endingEventDatas:
-  - {fileID: 11400000, guid: aee0c1cbc6d831c478915eafeb04a8d4, type: 2}
-  - {fileID: 11400000, guid: c8c76c36e37b00943a8affb968931ab2, type: 2}
-  - {fileID: 11400000, guid: 6f10d02b430363c4587a456e9618b77a, type: 2}
-  IsEnding: 0
+  _endingEventPools:
+  - {fileID: 11400000, guid: d8262023c6aec55408067b1187f1dff5, type: 2}
+  - {fileID: 11400000, guid: 87bbfbcb566d04841ba1fbd71e56018b, type: 2}
+  - {fileID: 11400000, guid: 73e9245f1b8ffce4783230a19b254f1f, type: 2}
 --- !u!1 &1280973031
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,11 +984,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4b070ec71cbd64aa4f6dc8e0dc9455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstDayMainEventDatas:
+  _firstDayMainEvents:
   - {fileID: 11400000, guid: b447ea0a95525b04d8fc822de400f16c, type: 2}
   - {fileID: 11400000, guid: 8c786bdfa14894f43b92cd9891bad491, type: 2}
   - {fileID: 11400000, guid: 0437000116083be4b9c57b6b562fdab5, type: 2}
-  _nothingHappensEventDatas:
+  _nothingHappensEvents:
   - {fileID: 11400000, guid: 27afdaf9f5e6dba4aafbfc4f5919046b, type: 2}
   - {fileID: 11400000, guid: af5b7d29064f23c439ca591dce882f62, type: 2}
   - {fileID: 11400000, guid: df2d589256daaec48aa557fcf186eaac, type: 2}
@@ -997,32 +996,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e266b66280ad59947a486e02dbfbe8bd, type: 2}
   - {fileID: 11400000, guid: 1384726ff7dcb3e41ad0e1eeb2d76d24, type: 2}
   - {fileID: 11400000, guid: 99ac09b63cf8fe24c847b8b7588f2c10, type: 2}
-  _mainEventDatas:
-  - {fileID: 11400000, guid: 3c8687cccdf892b49b9bad3f808d2d7e, type: 2}
-  - {fileID: 11400000, guid: 8df72e761857a554681b87d0ec6bff62, type: 2}
-  - {fileID: 11400000, guid: bf515926fe58ae746a13c798494a1fd3, type: 2}
-  - {fileID: 11400000, guid: c84022c72639a4c43b53cfbba041abd1, type: 2}
-  - {fileID: 11400000, guid: 012332cb82314b34aba81756a530410a, type: 2}
-  - {fileID: 11400000, guid: c50c8c5dae0f43b408a2ebc6c6ec2af5, type: 2}
-  - {fileID: 11400000, guid: e0c5eb9711d0b0541adadcc68f5e506b, type: 2}
-  - {fileID: 11400000, guid: e403479ba91a2fd4db81d2a5b56faec1, type: 2}
-  - {fileID: 11400000, guid: 7ebdd96d4a3958041ac9d1025423faa3, type: 2}
-  - {fileID: 11400000, guid: 4671769103295d342af22e5d2edf048e, type: 2}
-  - {fileID: 11400000, guid: 6386b305aa4b47c46b2189154317a405, type: 2}
-  - {fileID: 11400000, guid: 91036c8f9eae8c1428139bca21ed5661, type: 2}
-  - {fileID: 11400000, guid: 9daa73b9ab37c654999fca792647d12b, type: 2}
-  - {fileID: 11400000, guid: 2748e5780c768784aa7ecbeb48c9a075, type: 2}
-  - {fileID: 11400000, guid: 7842562b50dcce543a15cbd550712bb2, type: 2}
-  - {fileID: 11400000, guid: 8d9c03a143643774f88b00f6b97d482e, type: 2}
-  - {fileID: 11400000, guid: 9153087e7ccd66a41a7da01656e447c0, type: 2}
-  - {fileID: 11400000, guid: 79a064e5d9c38d348b23d9938df203dd, type: 2}
-  - {fileID: 11400000, guid: 97b9b31f3faa34344a582230a1972588, type: 2}
-  - {fileID: 11400000, guid: bb2d09dd4238bf14fb5e36981f8edc66, type: 2}
-  - {fileID: 11400000, guid: 27eec44539f59834b8efb3c402229c9a, type: 2}
-  - {fileID: 11400000, guid: d8c89444b50a19048a168d19fdfe7cb6, type: 2}
-  - {fileID: 11400000, guid: b909098a389bb2244b1fcd3f9a5e5f9b, type: 2}
-  - {fileID: 11400000, guid: 1e6f1745dbb3dc147a81ead7ae4d9f8b, type: 2}
-  - {fileID: 11400000, guid: 4306636abd4393342bba5d4eb992889b, type: 2}
+  _mainEventPools:
+  - {fileID: 11400000, guid: 62d531b64c920ec499b52506dbcf5a9c, type: 2}
+  - {fileID: 11400000, guid: bf429643795976d4e9d8a52043a90f7c, type: 2}
+  - {fileID: 11400000, guid: 10a7b23d8b803d3499a0ce5cd0d26467, type: 2}
+  - {fileID: 11400000, guid: c833e7865b475cc4e8ee5ce33c25ffce, type: 2}
   _testEventData: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

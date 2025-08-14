@@ -10,6 +10,7 @@ using WeWillSurvive.Item;
 using WeWillSurvive.FarmingReport;
 using WeWillSurvive.Log;
 using WeWillSurvive.MainEvent;
+using WeWillSurvive.Ending;
 
 namespace WeWillSurvive.Core
 {
