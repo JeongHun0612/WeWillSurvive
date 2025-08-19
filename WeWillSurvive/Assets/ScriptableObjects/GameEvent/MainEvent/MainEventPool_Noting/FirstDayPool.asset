@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f165e0579c7b5840af71a5594953996, type: 3}
+  m_Name: FirstDayPool
+  m_EditorClassIdentifier: 
+  _category: 100
+  _conditions: []
+  _mainEventDatas:
+  - {fileID: 11400000, guid: b447ea0a95525b04d8fc822de400f16c, type: 2}
+  - {fileID: 11400000, guid: 8c786bdfa14894f43b92cd9891bad491, type: 2}
+  - {fileID: 11400000, guid: 0437000116083be4b9c57b6b562fdab5, type: 2}
+  _minDayCounter: 0
+  _maxDayCounter: 0

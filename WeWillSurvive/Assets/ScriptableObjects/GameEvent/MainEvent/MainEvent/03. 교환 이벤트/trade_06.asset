@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: trade_06
+  m_EditorClassIdentifier: 
+  _eventId: trade_06
+  _title: "\uC0DD\uBB3C \uC218\uC9D1 \uC678\uACC4\uC778"
+  _descriptions:
+  - "\uAE30\uC9C0 \uBC16\uC5D0 \uACE0\uAE54 \uBAA8\uC591\uC758 \uBA38\uB9AC\uB97C
+    \uAC00\uC9C4 \uC0DD\uBA85\uCCB4\uAC00 \uB2E4\uAC00\uC640 \uB3C4\uB07C\uB97C \uAC00\uB9AC\uD0A8\uB2E4.
+    \uC190\uC9D3\uC73C\uB85C \uBB34\uC5B8\uAC00\uB97C \uC790\uB974\uACE0 \uC2F6\uB2E4\uB294
+    \uC758\uB3C4\uB97C \uB4DC\uB7EC\uB0B8\uB2E4. \uB300\uC2E0 \uADF8\uB4E4\uC740
+    \uB2F9\uC2E0\uC5D0\uAC8C \uD589\uC131 \uD0D0\uC0AC \uC9C0\uB3C4 \uD55C \uC7A5\uC744
+    \uC900\uB2E4\uACE0 \uD55C\uB2E4. \uAD50\uD658\uC740 \uB2E8 \uD55C \uBC88\uB9CC
+    \uAC00\uB2A5\uD558\uB2E4."
+  _conditions: []
+  _choiceSchema: 1
+  _choices:
+  - _choiceIcon: 211
+    _amount: 1
+    _results:
+    - _conditions: []
+      _resultText: "\uB3C4\uB07C\uB97C \uAC74\uB124\uC790 \uC678\uACC4\uC778\uC740
+        \uB9E4\uC6B0 \uAE30\uBED0\uD558\uBA70 \uD589\uC131 \uD0D0\uC0AC \uC9C0\uB3C4\uB97C
+        \uC8FC\uC5C8\uB2E4. \uC9C0\uB3C4\uB97C \uC0B4\uD3B4\uBCF4\uB2C8, \uC804\uC5D0
+        \uBCF4\uC9C0 \uBABB\uD588\uB358 \uC7A5\uC18C\uB4E4\uC774 \uB208\uC5D0 \uB744\uC5C8\uB2E4.
+        \uC791\uC9C0\uB9CC \uC720\uC6A9\uD55C \uB2E8\uC11C\uC600\uB2E4."
+      _actions:
+      - _actionType: 201
+        _targetId: Ax
+        _parameter: 
+        _value: 1
+      - _actionType: 200
+        _targetId: Map
+        _parameter: 
+        _value: 1
+      _probability: 1
+  - _choiceIcon: 500
+    _amount: 0
+    _results:
+    - _conditions: []
+      _resultText: "\uB3C4\uB07C\uB97C \uC8FC\uC9C0 \uC54A\uACA0\uB2E4\uB294 \uC758\uC0AC\uB97C
+        \uBC1D\uD788\uC790, \uC678\uACC4\uC778\uC740 \uC791\uAC8C \uD55C\uC228\uC744
+        \uC26C\uACE0 \uC774\uB0B4 \uC0AC\uB77C\uC84C\uB2E4. \uC9C0\uB3C4\uB294 \uADF8\uC640
+        \uD568\uAED8 \uC5B4\uB460 \uC18D\uC73C\uB85C \uC0AC\uB77C\uC84C\uB2E4."
+      _actions: []
+      _probability: 1

@@ -2,8 +2,8 @@
 using UnityEditor;
 using UnityEngine;
 using WeWillSurvive.Character;
+using WeWillSurvive.GameEvent;
 using WeWillSurvive.Item;
-using WeWillSurvive.MainEvent;
 
 namespace WeWillSurvive
 {

@@ -4,8 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using WeWillSurvive.MainEvent;
-using WeWillSurvive.Util;
+using WeWillSurvive.GameEvent;
 
 namespace WeWillSurvive
 {
@@ -365,11 +364,11 @@ namespace WeWillSurvive
         {
             if (choiceProp == null) return;
 
-            SerializedProperty choiceTypeProp = choiceProp.FindPropertyRelative("_choiceType");
+            SerializedProperty choiceIconProp = choiceProp.FindPropertyRelative("_choiceIcon");
             SerializedProperty amountProp = choiceProp.FindPropertyRelative("_amount");
             SerializedProperty resultsProp = choiceProp.FindPropertyRelative("_results");
 
-            choiceTypeProp.intValue = 0;
+            choiceIconProp.intValue = 0;
             amountProp.intValue = 1;
 
             resultsProp.ClearArray();

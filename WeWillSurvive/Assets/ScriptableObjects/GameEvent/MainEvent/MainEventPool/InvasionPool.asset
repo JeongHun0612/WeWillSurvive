@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f165e0579c7b5840af71a5594953996, type: 3}
+  m_Name: InvasionPool
+  m_EditorClassIdentifier: 
+  _category: 0
+  _conditions:
+  - _conditionType: 1001
+    _targetId: Lead
+    _parameter: 
+    _value1: 3
+    _value2: 
+  _mainEventDatas:
+  - {fileID: 11400000, guid: 6386b305aa4b47c46b2189154317a405, type: 2}
+  - {fileID: 11400000, guid: 91036c8f9eae8c1428139bca21ed5661, type: 2}
+  - {fileID: 11400000, guid: 9daa73b9ab37c654999fca792647d12b, type: 2}
+  - {fileID: 11400000, guid: 2748e5780c768784aa7ecbeb48c9a075, type: 2}
+  - {fileID: 11400000, guid: 7842562b50dcce543a15cbd550712bb2, type: 2}
+  _minDayCounter: 4
+  _maxDayCounter: 5

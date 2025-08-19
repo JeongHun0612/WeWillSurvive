@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: trade_08
+  m_EditorClassIdentifier: 
+  _eventId: trade_08
+  _title: "\uC7A5\uB09C\uAE30 \uB9CE\uC740 \uC678\uACC4 \uC0C1\uC778"
+  _descriptions:
+  - "\uC54C\uB85D\uB2EC\uB85D\uD55C \uC637\uC744 \uC785\uC740 \uC678\uACC4 \uC0C1\uC778\uC774
+    \uAE30\uC9C0 \uC55E\uC5D0 \uB098\uD0C0\uB098 \uD5C8\uACF5\uC5D0\uC11C \uBCF4\uB4DC\uAC8C\uC784\uD310\uC744
+    \uAEBC\uB0B4 \uBCF4\uC774\uBA70 \uD765\uC815\uD558\uAE30 \uC2DC\uC791\uD588\uB2E4.
+    \uADF8\uB294 \uC190\uC804\uB4F1\uC774 \uBB34\uCC99 \uADC0\uD558\uB2E4\uACE0 \uB9D0\uD558\uBA70,
+    \uADF8 \uB300\uAC00\uB85C \uBCF4\uB4DC\uAC8C\uC784\uD310\uC744 \uAD50\uD658\uD558\uC790\uACE0
+    \uD55C\uB2E4."
+  _conditions: []
+  _choiceSchema: 1
+  _choices:
+  - _choiceIcon: 213
+    _amount: 1
+    _results:
+    - _conditions: []
+      _resultText: "\uC190\uC804\uB4F1\uC744 \uAC74\uB124\uC8FC\uC790 \uC678\uACC4\uC778\uC740
+        \uC7A5\uB09C\uC2A4\uB7FD\uAC8C \uC6C3\uC73C\uBA70 \uBCF4\uB4DC\uAC8C\uC784\uD310\uC744
+        \uB0B4\uB824\uB193\uC558\uB2E4. \uB0A1\uC558\uC9C0\uB9CC \uC5EC\uC804\uD788
+        \uC0AC\uC6A9\uD560 \uC218 \uC788\uC5B4 \uBCF4\uC778\uB2E4. \uC9C0\uB8E8\uD568\uC744
+        \uB2EC\uB798\uB294 \uB370 \uB3C4\uC6C0\uC774 \uB420\uC9C0\uB3C4 \uBAA8\uB974\uACA0\uB2E4."
+      _actions:
+      - _actionType: 201
+        _targetId: Flashlight
+        _parameter: 
+        _value: 1
+      - _actionType: 200
+        _targetId: BoardGame
+        _parameter: 
+        _value: 1
+      _probability: 1
+  - _choiceIcon: 500
+    _amount: 0
+    _results:
+    - _conditions: []
+      _resultText: "\uC6B0\uB9AC\uAC00 \uC190\uC804\uB4F1\uC744 \uC904 \uC218 \uC5C6\uB2E4\uACE0
+        \uBAB8\uC9D3\uC744 \uD558\uC790 \uC678\uACC4 \uC0C1\uC778\uC740 \uC785\uC744
+        \uC090\uC8FD \uB0B4\uBC00\uACE0 \uD719 \uB3CC\uC544\uC130\uB2E4. \uD5C8\uACF5\uC5D0
+        \uBCF4\uB4DC\uAC8C\uC784\uD310\uC744 \uB2E4\uC2DC \uC9D1\uC5B4\uB123\uACE0\uB294
+        \uAE08\uC138 \uC2DC\uC57C\uC5D0\uC11C \uC0AC\uB77C\uC84C\uB2E4."
+      _actions: []
+      _probability: 1

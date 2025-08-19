@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: trade_05
+  m_EditorClassIdentifier: 
+  _eventId: trade_05
+  _title: "\uAE30\uC220 \uC885\uC871 \uC678\uACC4\uC778"
+  _descriptions:
+  - "\uD669\uAE08\uBE5B \uC678\uD53C\uB97C \uC785\uC740 \uC678\uACC4 \uAE30\uACC4
+    \uC885\uC871\uC774 \uB2E4\uAC00\uC654\uB2E4. \uADF8\uB4E4\uC740 \uACE0\uAE09
+    \uC6B0\uC8FC\uBCF5\uC744 \uAC00\uB9AC\uD0A4\uBA70 \uC790\uC2E0\uB4E4\uC758 \uD1B5\uC2E0
+    \uC7A5\uBE44\uC640 \uBC14\uAFB8\uC790\uACE0 \uD55C\uB2E4."
+  _conditions: []
+  _choiceSchema: 1
+  _choices:
+  - _choiceIcon: 208
+    _amount: 1
+    _results:
+    - _conditions: []
+      _resultText: "\uACE0\uAE09 \uC6B0\uC8FC\uBCF5\uC744 \uAC74\uB124\uC790 \uC678\uACC4\uC778\uC740
+        \uC7A5\uCE58\uB97C \uB4E4\uACE0 \uB2E4\uAC00\uC640 \uAE30\uB2A5 \uC124\uBA85\uC744
+        \uD588\uB2E4. \uC774\uD574\uB294 \uC798 \uD558\uC9C0 \uBABB\uD588\uC9C0\uB9CC,
+        \uADF8\uAC83\uC774 \uD1B5\uC2E0\uC5D0\uB294 \uC544\uC8FC \uD6A8\uACFC\uC801\uC774\uB77C\uB294
+        \uC810\uC740 \uC54C \uC218 \uC788\uC5C8\uB2E4."
+      _actions:
+      - _actionType: 201
+        _targetId: NiceSpacesuit
+        _parameter: 
+        _value: 1
+      - _actionType: 200
+        _targetId: CommDevice
+        _parameter: 
+        _value: 1
+      _probability: 1
+  - _choiceIcon: 500
+    _amount: 0
+    _results:
+    - _conditions: []
+      _resultText: "\uACE0\uAC1C\uB97C \uC800\uC73C\uBA70 \uC6B0\uC8FC\uBCF5\uC744
+        \uC8FC\uC9C0 \uC54A\uC790 \uC678\uACC4\uC778\uC740 \uB354 \uB9D0\uD558\uC9C0
+        \uC54A\uACE0 \uC870\uC6A9\uD788 \uB3CC\uC544\uC130\uB2E4. \uAE30\uC220\uC801\uC73C\uB85C
+        \uC55E\uC120 \uADF8\uB4E4\uC774 \uC544\uC26C\uC6CC\uD55C \uAC83\uC740 \uC6B0\uC8FC\uBCF5\uC77C\uAE4C,
+        \uC2E0\uB8B0\uC600\uC744\uAE4C."
+      _actions: []
+      _probability: 1

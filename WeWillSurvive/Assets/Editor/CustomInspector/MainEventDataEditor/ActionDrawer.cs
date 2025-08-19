@@ -2,8 +2,8 @@
 using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Ending;
+using WeWillSurvive.GameEvent;
 using WeWillSurvive.Item;
-using WeWillSurvive.MainEvent;
 using WeWillSurvive.Status;
 
 namespace WeWillSurvive

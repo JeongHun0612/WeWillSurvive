@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: trade_07
+  m_EditorClassIdentifier: 
+  _eventId: trade_07
+  _title: "\uAD6C\uC2DD \uC6B0\uC8FC\uC120 \uC678\uACC4 \uD0D0\uC0AC\uB300"
+  _descriptions:
+  - "\uAD6C\uC2DD \uC6B0\uC8FC\uC120\uC5D0\uC11C \uB0B4\uB9B0 \uC678\uACC4 \uD0D0\uC0AC\uB300\uAC00
+    \uAE30\uC9C0 \uC8FC\uBCC0\uC758 \uC704\uD5D8 \uC9C0\uC5ED\uC744 \uD30C\uC545\uD574\uC57C
+    \uD55C\uB2E4\uBA70 \uD589\uC131 \uD0D0\uC0AC \uC9C0\uB3C4\uB97C \uC694\uCCAD\uD55C\uB2E4.
+    \uADF8 \uB300\uAC00\uB85C \uC790\uC2E0\uB4E4\uC774 \uC4F0\uB358 \u2018\uCD1D\u2019
+    \uD558\uB098\uB97C \uC81C\uACF5\uD558\uACA0\uB2E4\uACE0 \uC81C\uC548\uD55C\uB2E4.
+    \uD0D0\uC0AC\uB300\uC6D0 \uC911 \uB204\uAD70\uAC00\uB294 \uC678\uACC4\uC778\uC758
+    \uC7A5\uBE44\uB97C \uC870\uC2EC\uC2A4\uB808 \uBC14\uB77C\uBCF4\uACE0 \uC788\uB2E4."
+  _conditions: []
+  _choiceSchema: 1
+  _choices:
+  - _choiceIcon: 214
+    _amount: 1
+    _results:
+    - _conditions: []
+      _resultText: "\uC6B0\uB9AC\uB294 \uD0D0\uC0AC \uC9C0\uB3C4\uB97C \uAC74\uB138\uACE0,
+        \uC678\uACC4\uC778\uC740 \uAE08\uC18D \uCD1D\uC744 \uC870\uC2EC\uC2A4\uB7FD\uAC8C
+        \uAEBC\uB0B4 \uAC74\uB138\uB2E4. \uCD1D\uC740 \uC624\uB798\uB418\uC5B4 \uBCF4\uC600\uC9C0\uB9CC,
+        \uC544\uC9C1 \uC0AC\uC6A9\uD560 \uC218 \uC788\uB294 \uC0C1\uD0DC\uC600\uB2E4.
+        \uC678\uACC4 \uD0D0\uC0AC\uB300\uB294 \uACE0\uAC1C\uB97C \uB044\uB355\uC774\uBA70
+        \uB3CC\uC544\uAC14\uB2E4."
+      _actions:
+      - _actionType: 201
+        _targetId: Map
+        _parameter: 
+        _value: 1
+      - _actionType: 200
+        _targetId: Gun
+        _parameter: 
+        _value: 1
+      _probability: 1
+  - _choiceIcon: 500
+    _amount: 0
+    _results:
+    - _conditions: []
+      _resultText: "\uD0D0\uC0AC \uC9C0\uB3C4\uB97C \uB0B4\uC5B4\uC8FC\uB294 \uAC83\uC740
+        \uC704\uD5D8\uD558\uB2E4\uACE0 \uD310\uB2E8\uD588\uB2E4. \uC678\uACC4 \uD0D0\uC0AC\uB300\uB294
+        \uC544\uC26C\uC6B4 \uAE30\uC0C9\uC744 \uAC10\uCD94\uC9C0 \uBABB\uD558\uACE0
+        \uBC1C\uAC78\uC74C\uC744 \uB3CC\uB838\uB2E4. \uCD1D\uC740 \uADF8\uB4E4\uC758
+        \uC190\uC5D0 \uADF8\uB300\uB85C \uB0A8\uC558\uB2E4."
+      _actions: []
+      _probability: 1

@@ -20,18 +20,25 @@ namespace WeWillSurvive.Character
 
     public class CharacterBase
     {
-        private int _explorationDayCounter = 0;
-        private int _maxExplorationDays = 0;
+        private int _explorationDayCounter = 0;                         // 탐사 카운트
+        private int _maxExplorationDays = 0;                            // 총 탐사 일자
 
-        public CharacterData Data { get; private set; }
-        public CharacterState State { get; private set; }
-        public CharacterStatus Status { get; private set; }
-        public string Name { get; private set; }
-        public EMorale Morale { get; private set; }
-        public bool IsExploring { get; private set; }
-        public bool IsDead { get; private set; }
-        public int TotalExploringCount { get; private set; }
-        public int TotalCharacterEventCount { get; private set; }
+        public CharacterData Data { get; private set; }                 // 캐릭터 데이터
+        public CharacterState State { get; private set; }               // 캐릭터 상태 관리 클래스
+        public CharacterStatus Status { get; private set; }             // 캐릭터 스테이터스 관리 클래스
+        public string Name { get; private set; }                        // 캐릭터 이름
+
+        public EMorale Morale { get; private set; }                     // 캐릭터의 사기
+        public bool IsExploring { get; private set; }                   // 캐릭터가 탐사를 나갔는지
+        public bool IsDead { get; private set; }                        // 캐릭터가 죽었는지
+
+        // 캐릭터 이벤트 성공 확률 관련 변수
+        public float EventBaseRate { get; private set; }                // 기본 이벤트 성공 퍼센트
+        public float EventStateModifier { get; private set; }           // 상태에 따라 변동되는 성공 퍼센트
+        public float EventSelectionModifier { get; private set; }       // 리드의 선택에 의해 변동되는 성공 퍼센트
+
+        public int TotalExploringCount { get; private set; }            // 캐릭터 총 탐사 카운트
+        public int TotalCharacterEventCount { get; private set; }       // 캐릭터 이벤트 총 발생 카운트
 
 
         public bool IsInShelter => !IsDead && !IsExploring;
@@ -49,6 +56,8 @@ namespace WeWillSurvive.Character
             Status = new CharacterStatus(this);
 
             Name = data.Name;
+            EventBaseRate = data.BaseEventRate;
+
             ResetData();
         }
 

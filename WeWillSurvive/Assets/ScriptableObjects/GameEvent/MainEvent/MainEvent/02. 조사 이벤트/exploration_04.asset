@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: exploration_04
+  m_EditorClassIdentifier: 
+  _eventId: exploration_04
+  _title: "\uAD6C\uC11D \uC0AC\uBB3C\uD568"
+  _descriptions:
+  - "\uAD6C\uC11D\uC5D0 \uC788\uB358 \uC0AC\uBB3C\uD568\uC774 \uC7A0\uACA8 \uC788\uC9C4
+    \uC54A\uB2E4. \uC548\uC744 \uC870\uC0AC\uD574\uBCF4\uC790."
+  _conditions: []
+  _choiceSchema: 5
+  _choices:
+  - _choiceIcon: 213
+    _amount: 1
+    _results:
+    - _conditions: []
+      _resultText: "\uC548\uCABD \uAE4A\uC219\uD55C \uACF3\uC5D0\uC11C \uBC00\uBD09\uB41C
+        \uC758\uB8CC \uD0A4\uD2B8\uB97C \uBC1C\uACAC\uD588\uB2E4. \uC190\uC804\uB4F1\uB3C4
+        \uBB38\uC81C \uC5C6\uC774 \uC791\uB3D9 \uC911\uC774\uB2E4."
+      _actions:
+      - _actionType: 200
+        _targetId: MedicKit
+        _parameter: 
+        _value: 1
+      _probability: 0.8
+    - _conditions: []
+      _resultText: "\uC870\uBA85\uD310\uC5D0 \uBD80\uB52A\uD78C \uCDA9\uACA9\uC73C\uB85C
+        \uC190\uC804\uB4F1\uC774 \uC644\uC804\uD788 \uAEBC\uC838\uBC84\uB838\uB2E4.
+        \uC774\uB300\uB85C\uB294 \uC548\uC744 \uB354 \uC870\uC0AC\uD560 \uC218 \uC5C6\uB2E4."
+      _actions:
+      - _actionType: 201
+        _targetId: Flashlight
+        _parameter: 
+        _value: 1
+      _probability: 0.2
+  - _choiceIcon: 502
+    _amount: 0
+    _results:
+    - _conditions: []
+      _resultText: "\uC190\uC73C\uB85C \uCC9C\uCC9C\uD788 \uC548\uC744 \uB4A4\uC838
+        \uC218\uB9AC \uD0A4\uD2B8 \uD558\uB098\uB97C \uC190\uC5D0 \uB123\uC5C8\uB2E4.
+        \uC55E\uC73C\uB85C\uC758 \uD65C\uB3D9\uC5D0 \uB3C4\uC6C0\uC774 \uB420 \uB4EF\uD558\uB2E4."
+      _actions:
+      - _actionType: 200
+        _targetId: RepairKit
+        _parameter: 
+        _value: 1
+      _probability: 0.2
+    - _conditions: []
+      _resultText: "\uC0AC\uBB3C\uD568 \uC548\uCABD\uC740 \uD145 \uBE44\uC5B4 \uC788\uC5C8\uB2E4.
+        \uC2DC\uAC04\uB9CC \uB0AD\uBE44\uD588\uB2E4."
+      _actions: []
+      _probability: 0.8
