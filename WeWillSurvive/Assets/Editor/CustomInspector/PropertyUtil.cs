@@ -41,6 +41,35 @@ namespace WeWillSurvive
             }
         }
 
+        public static float GetFloat(SerializedProperty prop, float fallback = 0f)
+        {
+            switch (prop.propertyType)
+            {
+                case SerializedPropertyType.Float:
+                    return prop.floatValue;
+                case SerializedPropertyType.String:
+                    return float.TryParse(prop.stringValue, out var v) ? v : fallback;
+                default:
+                    return fallback;
+            }
+        }
+
+        public static void SetFloat(SerializedProperty prop, float value)
+        {
+            switch (prop.propertyType)
+            {
+                case SerializedPropertyType.Float:
+                    if (prop.floatValue != value) prop.floatValue = value;
+                    break;
+                case SerializedPropertyType.String:
+                    string s = value.ToString();
+                    if (prop.stringValue != s) prop.stringValue = s;
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
         // ============
         //  GUI Helpers
@@ -64,6 +93,30 @@ namespace WeWillSurvive
             {
                 newInput = Mathf.Clamp(newInput, minLimit, maxLimit);
                 SetInt(prop, newInput);
+                return newInput;
+            }
+
+            return current;
+        }
+
+        /// <summary>
+        /// Float 전용 입력 필드 (prop이 string/float 어느 쪽이어도 지원).
+        /// </summary>
+        public static float DrawFloatField(ref Rect rect, string label, SerializedProperty prop, float
+        minLimit = float.MinValue, float maxLimit = float.MaxValue)
+        {
+            float h = EditorGUIUtility.singleLineHeight;
+            float current = GetFloat(prop, 0f);
+
+            EditorGUI.BeginChangeCheck();
+            float newInput = EditorGUI.FloatField(rect, label, current);
+            rect.y += h + 2f;
+            bool changed = EditorGUI.EndChangeCheck();
+
+            if (changed)
+            {
+                newInput = Mathf.Clamp(newInput, minLimit, maxLimit);
+                SetFloat(prop, newInput);
                 return newInput;
             }
 

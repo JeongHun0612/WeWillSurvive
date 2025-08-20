@@ -15,6 +15,7 @@ MonoBehaviour:
   _type: 2
   _itemType: 103
   _name: DrK
+  _baseEventRate: 60
   SpriteData: {fileID: 11400000, guid: e9acf406589859d46ae58a6ee01d5262, type: 2}
   StateMessageData: {fileID: 11400000, guid: e75f46ef35f88394ca535f608f8ffa15, type: 2}
   ExpeditionMessageData: {fileID: 11400000, guid: 23763f978ac883840aa3e5ca5963235f, type: 2}

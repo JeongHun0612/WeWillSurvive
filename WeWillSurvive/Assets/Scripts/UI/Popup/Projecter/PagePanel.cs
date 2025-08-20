@@ -27,7 +27,7 @@ namespace WeWillSurvive
         }
 
         public virtual void ShowPage(int localIndex) { gameObject.SetActive(true); }
-        public virtual void ApplyResult() { }
+        //public virtual void ApplyResult() { }
 
         public void Hide() => gameObject.SetActive(false);
         public bool HasPage(int localIndex) => localIndex >= StartPageIndex && localIndex < StartPageIndex + PageCount;

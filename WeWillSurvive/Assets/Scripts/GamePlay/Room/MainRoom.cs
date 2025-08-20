@@ -5,7 +5,7 @@ using WeWillSurvive.Core;
 using WeWillSurvive.Item;
 using WeWillSurvive.UI;
 
-namespace WeWillSurvive
+namespace WeWillSurvive.Room
 {
     public class MainRoom : RoomBase
     {
@@ -31,7 +31,7 @@ namespace WeWillSurvive
                 await itemPlacement.InitializeAsync();
             }
 
-            await UniTask.Yield();
+            await UniTask.CompletedTask;
         }
 
         public override void UpdateRoom()

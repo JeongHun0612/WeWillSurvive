@@ -22,6 +22,7 @@ namespace WeWillSurvive
         [SerializeField] private List<RationCharacter> _rationCharacters;
 
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private EventBus EventBus => ServiceLocator.Get<EventBus>();
 
         public async override UniTask InitializeAsync()
         {
@@ -33,6 +34,11 @@ namespace WeWillSurvive
                 await rationCharacter.InitializeAsync();
                 rationCharacter.RegisterEvent(this);
             }
+
+            // 이벤트 등록
+            EventBus.Subscribe<EndDayEvent>(OnEndDayEvent);
+
+            await UniTask.CompletedTask;
         }
 
         public override async UniTask RefreshPageAsync(int startPageIndex)
@@ -53,13 +59,13 @@ namespace WeWillSurvive
             UpdateWaterItemCount();
         }
 
-        public override void ApplyResult()
-        {
-            foreach (var rationCharacter in _rationCharacters)
-            {
-                rationCharacter.ApplyRationItem();
-            }
-        }
+        //public override void ApplyResult()
+        //{
+        //    foreach (var rationCharacter in _rationCharacters)
+        //    {
+        //        rationCharacter.ApplyRationItem();
+        //    }
+        //}
 
         public void UpdateFoodItemCount()
         {
@@ -93,6 +99,14 @@ namespace WeWillSurvive
             else
             {
                 overflowText.gameObject.SetActive(false);
+            }
+        }
+
+        private void OnEndDayEvent(EndDayEvent context)
+        {
+            foreach (var rationCharacter in _rationCharacters)
+            {
+                rationCharacter.ApplyRationItem();
             }
         }
     }

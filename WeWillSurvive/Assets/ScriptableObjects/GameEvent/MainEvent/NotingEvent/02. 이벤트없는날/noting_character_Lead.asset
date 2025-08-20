@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
-  m_Name: noting_character_Lead
+  m_Name: noting_character_lead
   m_EditorClassIdentifier: 
-  _eventId: noting_character_Lead
+  _eventId: noting_character_lead
   _title: 
   _descriptions:
   - "\uB9AC\uB4DC\uB294 \uACC4\uC18D \uBB38 \uC606\uC5D0 \uC549\uC544 \uC788\uC5C8\uB2E4.
@@ -30,25 +30,20 @@ MonoBehaviour:
   _choiceSchema: 100
   _choices:
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions:
-      - _conditionType: 100
-        _targetId: Lead
-        _parameter: 
-        _value1: 
-        _value2: 
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uB9AC\uB4DC\uB294 \uC544\uCE68 \uC810\uAC80\uC744 \uB9C8\uCCE4\uB2E4.
         \uAE30\uC9C0\uB294 \uADF8\uB300\uB85C\uC600\uB2E4."
       _actions: []
-      _probability: 1
-    - _conditions:
-      - _conditionType: 100
-        _targetId: 
-        _parameter: 
-        _value1: 
-        _value2: 
+      _isAffectedByStats: 0
+      _probability: 0.5
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uB9AC\uB4DC\uB294 \uAE34 \uC228\uC744 \uB0B4\uC26C\uC5C8\uB2E4.
         \uBC24\uC740 \uBB34\uC0AC\uD788 \uC9C0\uB098\uAC14\uB2E4."
       _actions: []
-      _probability: 1
+      _isAffectedByStats: 0
+      _probability: 0.5

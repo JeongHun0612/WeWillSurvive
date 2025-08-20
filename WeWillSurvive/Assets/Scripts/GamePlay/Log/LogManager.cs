@@ -29,32 +29,9 @@ namespace WeWillSurvive.Log
             await UniTask.Yield();
         }
 
-        public void AddCharacterEventResultLog(string message) => AddLogToList(_characterEventResultLogs, message);
-
-        public void AddMainEventResultLog(string message)
-        {
-            string logText = message;
-            if (_rewardItemDatas != null)
-            {
-                logText = logText + '\n' + GetRewardItemLogText(_rewardItemDatas);
-                _rewardItemDatas.Clear();
-            }
-
-            AddLogToList(_mainEventResultLogs, logText);
-        }
-
-        public void AddExpeditionResultLog(string message)
-        {
-            string logText = message;
-            if (_rewardItemDatas != null)
-            {
-                logText = logText + '\n' + GetRewardItemLogText(_rewardItemDatas);
-                _rewardItemDatas.Clear();
-            }
-
-            AddLogToList(_expeditionResultLogs, logText);;
-        }
-
+        public void AddCharacterEventResultLog(string message) => AddFormattedLog(_characterEventResultLogs, message);
+        public void AddMainEventResultLog(string message) => AddFormattedLog(_mainEventResultLogs, message);
+        public void AddExpeditionResultLog(string message) => AddFormattedLog(_expeditionResultLogs, message);
         public void AddCharacterStatusLog(ECharacter character, string message)
         {
             if (_characterStatusLogs.TryGetValue(character, out var logMessages))
@@ -123,6 +100,20 @@ namespace WeWillSurvive.Log
             }
 
             _rewardItemDatas?.Clear();
+        }
+
+        private void AddFormattedLog(List<string> logList, string message)
+        {
+            string logText = message;
+
+            // 보상 아이템 데이터가 있으면 로그에 추가
+            if (_rewardItemDatas != null && _rewardItemDatas.Count > 0)
+            {
+                logText += "\n" + GetRewardItemLogText(_rewardItemDatas);
+                _rewardItemDatas.Clear();
+            }
+
+            AddLogToList(logList, logText);
         }
 
         private void AddLogToList(List<string> target, string message)

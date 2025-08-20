@@ -104,7 +104,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 7
-  _name: CommDevice
   _itemObjects:
   - {fileID: 216205717982137822}
 --- !u!1 &619605384389874416
@@ -161,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _roomType: 2
   _background: {fileID: 3408855809231005227}
+  _moveRoomButton: {fileID: 0}
   _characterUI: {fileID: 0}
   _lightOff: {fileID: 0}
   _characterUIs:
@@ -286,7 +286,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 13
-  _name: FlashLight
   _itemObjects:
   - {fileID: 917107150425895938}
 --- !u!1 &1141451277780958253
@@ -618,7 +617,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 14
-  _name: Map
   _itemObjects:
   - {fileID: 1834258085914846497}
 --- !u!1 &2768242871273205618
@@ -849,7 +847,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 9
-  _name: Gun
   _itemObjects:
   - {fileID: 3599858322093363862}
 --- !u!1 &3752130689212496011
@@ -1031,7 +1028,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 5
-  _name: RepairKit
   _itemObjects:
   - {fileID: 3776016192701005791}
 --- !u!1 &4481537364520442039
@@ -1138,7 +1134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 3
-  _name: MedicKit
   _itemObjects:
   - {fileID: 4481537364520442039}
 --- !u!1 &4595493434095668309
@@ -1320,7 +1315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 11
-  _name: Ax
   _itemObjects:
   - {fileID: 4661989879368874629}
 --- !u!1 &5153618842498644490
@@ -1427,7 +1421,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 8
-  _name: Spacesuit
   _itemObjects:
   - {fileID: 5153618842498644490}
 --- !u!1 &5203137062580285175
@@ -2080,7 +2073,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 104
-  _name: Starmac
   _itemObjects:
   - {fileID: 6053013355546006744}
 --- !u!1 &6208264074111269886
@@ -2495,7 +2487,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 0
-  _name: food
   _itemObjects:
   - {fileID: 7757142216256542300}
   - {fileID: 1141451277780958253}
@@ -2541,8 +2532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -685.5, y: 27.6}
-  m_SizeDelta: {x: 189, y: 59}
+  m_AnchoredPosition: {x: -729.5, y: 23.7}
+  m_SizeDelta: {x: 250, y: 159}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8839925369997912081
 CanvasRenderer:
@@ -2567,7 +2558,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: 28, y: 33, z: 21, w: 38}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2609,7 +2600,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 10
-  _name: BoardGame
   _itemObjects:
   - {fileID: 7301274474839784709}
 --- !u!1 &7757142216256542300
@@ -2791,7 +2781,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 12
-  _name: Pipe
   _itemObjects:
   - {fileID: 8570482747666418078}
 --- !u!1 &8902746316420061857
@@ -3025,7 +3014,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 2
-  _name: Water
   _itemObjects:
   - {fileID: 1811338461269421550}
   - {fileID: 5423940710308065015}

@@ -1,6 +1,11 @@
 
 namespace WeWillSurvive
 {
+    public struct EndDayEvent
+    {
+
+    }
+
     public struct NewDayEvent
     {
         public int CurrentDay;

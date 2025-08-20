@@ -49,6 +49,10 @@ namespace WeWillSurvive
                     PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
                     PropertyUtil.DrawIntField(ref rect, "단계", valueProp);
                     break;
+                case EActionType.CharacterEventRateModifier:
+                    PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    PropertyUtil.DrawFloatField(ref rect, "보정 값", valueProp);
+                    break;
                 case EActionType.CharacterDaed:
                     PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
                     break;

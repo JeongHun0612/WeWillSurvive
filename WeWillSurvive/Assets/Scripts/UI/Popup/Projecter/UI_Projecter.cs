@@ -106,10 +106,10 @@ namespace WeWillSurvive
 
         private void ApplyResultPanels()
         {
-            foreach (var pagePanel in _pagePanels)
-            {
-                pagePanel.ApplyResult();
-            }
+            //foreach (var pagePanel in _pagePanels)
+            //{
+            //    pagePanel.ApplyResult();
+            //}
         }
 
         private void ShowCurrentPage(int targetPageIndex)
@@ -204,8 +204,7 @@ namespace WeWillSurvive
 
         public void OnClickNextDay()
         {
-            ApplyResultPanels();
-            GameManager.Instance.StartNextDay();
+            GameManager.Instance.OnEndDay();
         }
 
         private void OnNewDayEvent(NewDayEvent context)

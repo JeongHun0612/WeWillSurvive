@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+using WeWillSurvive.Character;
+using WeWillSurvive.Core;
+using WeWillSurvive.Item;
 
 namespace WeWillSurvive.GameEvent
 {
@@ -25,6 +29,9 @@ namespace WeWillSurvive.GameEvent
 
         [InspectorName("조사(손전등, 맨손) 이벤트")]
         Exploration = 5,
+
+        [InspectorName("캐릭터 이벤트")]
+        CharacterEvent = 50,
 
         [InspectorName("선택지 없음")]
         Noting = 100,
@@ -108,11 +115,23 @@ namespace WeWillSurvive.GameEvent
         None = 1000,
     }
 
+    public enum EOutcomeType
+    { 
+        [InspectorName("Normal")] Normal = 0,
+        [InspectorName("대성공")] CriticalSuccess = 1,
+        [InspectorName("성공")] Success = 2,
+        [InspectorName("실패")] Failure = 3,
+        [InspectorName("대실패")] CriticalFailure = 4,
+    }
+
+
     public enum EActionType
     {
         [InspectorName("스테이터스 악화")] WorsenStatus = 100,
         [InspectorName("스테이터스 치유")] RecoveryStatus = 101,
         [InspectorName("캐릭터 사망")] CharacterDaed = 102,
+        [InspectorName("캐릭터 이벤트 확률 보정")] CharacterEventRateModifier = 103,
+        
 
         [InspectorName("아이템 획득")] AddItem = 200,
         [InspectorName("아이템 삭제")] RemoveItem = 201,
@@ -158,7 +177,7 @@ namespace WeWillSurvive.GameEvent
             if (_descriptions == null || _descriptions.Count == 0)
                 return string.Empty;
 
-            int index = Random.Range(0, _descriptions.Count);
+            int index = UnityEngine.Random.Range(0, _descriptions.Count);
             return _descriptions[index];
         }
 
@@ -188,7 +207,6 @@ namespace WeWillSurvive.GameEvent
         public string Parameter => _parameter;
         public string Value1 => _value1;
         public string Value2 => _value2;
-
     }
 
     [System.Serializable]
@@ -198,26 +216,59 @@ namespace WeWillSurvive.GameEvent
         private EChoiceIcon _choiceIcon;          // 선택 ID
 
         [SerializeField]
-        private int _amount;                      // 필요 갯수
+        private int _requiredAmount;              // 필요 갯수
+
+        [SerializeField]
+        private string _choiceText;               // 선택지 텍스트
 
         [SerializeField]
         private List<EventResult> _results;       // 선택에 대한 결과 리스트
 
         public EChoiceIcon ChoiceIcon => _choiceIcon;
-        public int Amount => _amount;
+        public int RequiredAmount => _requiredAmount;
+        public string ChoiceText => _choiceText;
         public IReadOnlyList<EventResult> Results => _results;
 
-        public EventChoice(EChoiceIcon choiceIcon, int amount = 1, List<EventResult> results = null)
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+
+        public EventChoice(EChoiceIcon choiceIcon, int requiredAmount = 1, string choiceText = "", List<EventResult> results = null)
         {
             _choiceIcon = choiceIcon;
-            _amount = amount;
+            _requiredAmount = requiredAmount;
+            _choiceText = choiceText;
             _results = (results == null) ? new List<EventResult>() { new EventResult() } : results;
+        }
+
+        public bool IsAvailable()
+        {
+            if (Enum.TryParse($"{this.ChoiceIcon}", out ECharacter characterType))
+            {
+                var character = CharacterManager.GetCharacter(characterType);
+                // 해당 캐릭터가 존재하고, 쉼터에 있는지 확인
+                return (character != null && character.IsInShelter);
+            }
+            // 2. 아이콘이 '아이템' 타입인지 확인
+            else if (Enum.TryParse($"{this.ChoiceIcon}", out EItem item))
+            {
+                // 요구량이 0이거나, 요구량만큼 아이템을 가지고 있는지 확인
+                return this.RequiredAmount == 0 || ItemManager.HasItem(item, this.RequiredAmount);
+            }
+            // 3. 위 두 조건에 해당하지 않는 다른 모든 타입의 아이콘
+            else
+            {
+                // 특별한 조건이 없으므로 항상 활성화
+                return true;
+            }
         }
     }
 
     [System.Serializable]
     public class EventResult
     {
+        [SerializeField]
+        private EOutcomeType _outComeType;       // 결과 타입
+
         [SerializeField]
         private List<Condition> _conditions;      // 해당 결과가 발생할 조건
 
@@ -229,13 +280,17 @@ namespace WeWillSurvive.GameEvent
         private List<EventAction> _actions;       // 결과 반영
 
         [SerializeField]
+        private bool _isAffectedByStats;          // 캐릭터 스텟에 영향을 받는가
+
+        [SerializeField]
         [Range(0, 1)]
-        private float _probability;               // 발생 확률 (총합 1.0 안 넘게)
+        private float _probability;               // 발생 확률 (합이 1.0을 넘으면 안됌)
 
-
+        public EOutcomeType OutcomeType => _outComeType;
         public IReadOnlyList<Condition> Conditions => _conditions;
         public string ResultText => _resultText;
         public IReadOnlyList<EventAction> Actions => _actions;
+        public bool IsAffectedByStats => _isAffectedByStats;
         public float Probability => _probability;
 
         public EventResult()

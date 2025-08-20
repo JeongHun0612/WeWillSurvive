@@ -1,4 +1,4 @@
-using System;
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Character;
@@ -36,12 +36,10 @@ namespace WeWillSurvive.GameEvent
 
         public EndingEventPicker EndingEventPicker => _endingEventPicker;
 
-        private LogManager LogManager => ServiceLocator.Get<LogManager>();
-
-        public void Initialize()
+        public async UniTask InitializeAsync()
         {
             // GameEventUtil 초기화
-            GameEventUtil.Initialize();
+            await GameEventUtil.InitializeAsyn();
 
             // EventPicker 초기화
             _pickerMap = new()
@@ -53,6 +51,8 @@ namespace WeWillSurvive.GameEvent
 
             foreach (var picker in _pickerMap.Values) picker.Initialize();
             ResetState();
+
+            await UniTask.Yield();
         }
 
         public void ResetState()
@@ -91,51 +91,6 @@ namespace WeWillSurvive.GameEvent
 
             // 2) 캐릭터 이벤트 선택
             _dailyCharacterEvent = _characterEventPicker.GetDailyCharacterEvent();
-
-
-            //// 1) 주 이벤트(Ending/Main) 중 발생하는 이벤트 선택
-            //var dailyMainEvent = _endingEventPicker.GetDailyEvent();
-            //if (dailyMainEvent == null)
-            //{
-            //    dailyMainEvent = _mainEventPicker.GetDailyEvent();
-            //}
-
-            //// 2) 캐릭터 이벤트 선택
-            //var dailyCharacterEvent = 
-
-            //// 1) 주 이벤트(Ending/Main) 중 우선순위에 따라 1개 선택
-            //foreach (var t in _primaryPriority)
-            //{
-            //    if (!_pickerMap.TryGetValue(t, out var picker)) continue;
-
-            //    var mainEventData = picker.GetDailyEvent();
-            //    if (mainEventData != null)
-            //    {
-            //        _mainDailyEvent.DailyEventData = mainEventData;
-            //        break;
-            //    }
-            //    else
-            //    {
-            //        Debug.Log($"{t} _mainDailyEvent is Null");
-            //    }
-            //}
-
-            //// 2) 캐릭터 이벤트는 별개로 시도
-            //if (_pickerMap.TryGetValue(EGameEventType.CharacterEvent, out var charPicker))
-            //{
-            //    var characterEventData = charPicker.GetDailyEvent();
-            //    if (characterEventData != null)
-            //    {
-            //        _characterDailyEvent.DailyEventData = characterEventData;
-            //    }
-            //    else
-            //    {
-            //        Debug.Log($"_characterDailyEvent is Null");
-            //    }
-            //}
-
-            //Debug.Log($"MainDailyEvent {_mainDailyEvent.DailyEventData?.EventId}");
-            //Debug.Log($"CharacterDailyEvent { _characterDailyEvent.DailyEventData?.EventId}");
         }
 
         public void SelectedMainEventChoice(EventChoice choice)
@@ -160,10 +115,24 @@ namespace WeWillSurvive.GameEvent
     {
         public ECharacter Character { get; set; }
 
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
         public DailyCharacterEvent(MainEventData mainEventData, ECharacter character)
         {
             DailyEventData = mainEventData;
             Character = character;
+        }
+
+        protected override EventResult GetRandomEventResult()
+        {
+            var owner = CharacterManager.GetCharacter(Character);
+            if (owner == null)
+            {
+                Debug.LogError($"{Character}에 해당하는 캐릭터를 찾을 수 없습니다.");
+                return null;
+            }
+
+            return GameEventUtil.GetValidRandomEventResult(DailyEventChoice, owner.EventSuccessRate);
         }
 
         protected override void LogResult(string message)
@@ -185,7 +154,6 @@ namespace WeWillSurvive.GameEvent
             LogManager.AddMainEventResultLog(message);
         }
     }
-
 
     [System.Serializable]
     public abstract class DailyEvent
@@ -211,7 +179,8 @@ namespace WeWillSurvive.GameEvent
                 return;
             }
 
-            EventResult result = GameEventUtil.GetValidRandomEventResult(DailyEventChoice);
+            Debug.Log($"[{DailyEventData.EventId}] 결과 추출");
+            EventResult result = GetRandomEventResult();
 
             if (result == null)
             {
@@ -227,6 +196,11 @@ namespace WeWillSurvive.GameEvent
 
             // 로그 기록
             LogResult(result.ResultText);
+        }
+
+        protected virtual EventResult GetRandomEventResult()
+        {
+            return GameEventUtil.GetValidRandomEventResult(DailyEventChoice);
         }
     }
 }

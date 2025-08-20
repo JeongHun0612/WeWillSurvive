@@ -149,6 +149,28 @@ namespace WeWillSurvive.GameEvent
     }
 
     /// <summary>
+    /// 캐릭터 이벤트 확률 보정
+    /// </summary>
+    public class CharacterEventRateModifierApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.CharacterEventRateModifier;
+
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public void Apply(EventAction action)
+        {
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(action.TargetId);
+            var character = CharacterManager.GetCharacter(characterType);
+
+            if (!float.TryParse(action.Value, out var modifier))
+                Debug.LogWarning($"Value : {action.Value} | float 타입으로 파싱 실패");
+
+            character.EventSelectionModifier = modifier;
+        }
+    }
+
+
+    /// <summary>
     /// 캐릭터 사망
     /// </summary>
     public class CharacterDaedApplicator : IEventActionHandler

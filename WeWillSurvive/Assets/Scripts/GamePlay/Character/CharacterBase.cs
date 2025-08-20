@@ -35,7 +35,17 @@ namespace WeWillSurvive.Character
         // 캐릭터 이벤트 성공 확률 관련 변수
         public float EventBaseRate { get; private set; }                // 기본 이벤트 성공 퍼센트
         public float EventStateModifier { get; private set; }           // 상태에 따라 변동되는 성공 퍼센트
-        public float EventSelectionModifier { get; private set; }       // 리드의 선택에 의해 변동되는 성공 퍼센트
+        public float EventSelectionModifier { get; set; }               // 리드의 선택에 의해 변동되는 성공 퍼센트
+
+        // 계산된 캐릭터 이벤트 성공 확률 반환
+        public float EventSuccessRate
+        {
+            get 
+            {
+                float calculatedRate = EventBaseRate + EventStateModifier + EventSelectionModifier;
+                return Mathf.Clamp(calculatedRate, 0f, 100f);
+            }
+        }
 
         public int TotalExploringCount { get; private set; }            // 캐릭터 총 탐사 카운트
         public int TotalCharacterEventCount { get; private set; }       // 캐릭터 이벤트 총 발생 카운트

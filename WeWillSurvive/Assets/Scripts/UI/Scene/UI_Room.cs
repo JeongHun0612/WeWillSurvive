@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Core;
+using WeWillSurvive.Room;
 using WeWillSurvive.UI;
 
 namespace WeWillSurvive
@@ -91,14 +92,14 @@ namespace WeWillSurvive
 
             UIManager.Instance.ClosePopups(remain: 1);
 
-            // 현재 room 비할성화
+            // 기존 room 비할성화
             _currentRoom?.gameObject.SetActive(false);
 
             // 타켓 room 활성화 및 할당
             if (_roomDicts.TryGetValue(targetRoom, out var room))
             {
                 _currentRoom = room;
-                room.gameObject.SetActive(true);
+                room.OnShowRoom();
                 EventBus.Publish(new MoveRoomCompleteEvent { CurrentRoom = _currentRoom.RoomType });
             }
             else

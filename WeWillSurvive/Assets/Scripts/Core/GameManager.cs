@@ -22,7 +22,7 @@ namespace WeWillSurvive.Core
         {
             await ServiceLocator.AutoRegisterServices();
             await UIManager.Instance.InitializeAsync();
-            GameEventManager.Instance.Initialize();
+            await GameEventManager.Instance.InitializeAsync();
 
             if (SceneManager.GetActiveScene().name == "2D")
             {
@@ -43,16 +43,7 @@ namespace WeWillSurvive.Core
 
         public void StartNextDay()
         {
-            // EnnDayEvent 발생
-            EventBus.Publish(new EndDayEvent { });
-
             Day++;
-
-            if (Day > 1)
-            {
-                // 로그 초기화
-                LogManager.ClearAllLogs();
-            }
 
             if (!EndingManager.Instance.IsEnding)
             {
@@ -67,6 +58,18 @@ namespace WeWillSurvive.Core
             }
 
             UIManager.Instance.ShowOverlay<UI_Pade>().StartPadeSequence(OnNewDay);
+        }
+
+        public void OnEndDay()
+        {
+            // 로그 초기화
+            LogManager.ClearAllLogs();
+
+            // 이벤트 발생
+            EventBus.Publish(new EndDayEvent { });
+
+            // 새로운 날 시작
+            StartNextDay();
         }
 
         private void OnNewDay()

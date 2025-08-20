@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ChoiceIconDatas
+  m_EditorClassIdentifier: 
+  m_GroupName: ChoiceIconDatas
+  m_GUID: 3967ccbfc68cccc4aa8baabed38045b3
+  m_SerializeEntries:
+  - m_GUID: 04a7db9a14ee91e4b80c600d7b68de5b
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_No.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 147ab8efec3325e4f80934cb6ab96abc
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_SpecialMedicKit.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16950c1785e4b9740bb3e03e20398557
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Yes.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1f1af592550647f4a8c5e583dea679a1
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_RepairKit.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2c9e5e1ae8a618041af4702cf5a2ec64
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_SpecialRepairKit.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4555c89cde328b244a45711fe26e4f5c
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Pipe.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4be55fbc9aa83504cb8abf0226e47d3e
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Hand.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e129f1b69fb60140b12230b16a55f0c
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_SpecialFood.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e3ca453a9f1f3340aa598ab071b1964
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Cook.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ee34001c19c3e54bb3ebb45b44e61f3
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Water.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ee64d9c10db80d449da14c90e1339bb
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_CommDevice.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d6cc72df6a323942ac56dbe649a8cbd
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Flashlight.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e2ce460b0dcbf746b745371c61ad977
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Bell.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 893a3e2983697cc4b972bf341d44d913
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Lead.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95bdf6514cdd0d24793193b8fe098211
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Food.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a38daa2f0b4dcfb4e9486d6c5ba2cb4e
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Map.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a55fafae4813c804ca6dec0d5961fbf3
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_DrK.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aeed58593d6b1364fa8d80c28c1068b7
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Gun.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba87be90a57fbda4891c6ab643f4957d
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_Ax.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd620d0cb800eb946b9bbca6768bd7dd
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_MedicKit.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c224667483c8b2244b22e43d75dc90a7
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_BoardGame.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e21183d4c5db72d4592d04b4f45df8c6
+    m_Address: Assets/ScriptableObjects/ChoiceOptionIcons/ChoiceIcon_NiceSpacesuit.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ChoiceIconData
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f7b3b476672664a47ab9721e6106ada6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: f4baa44e809215644954f5359b9f37d8, type: 2}
+    - {fileID: 11400000, guid: f5a37d65124a25a479735620c123c7fe, type: 2}

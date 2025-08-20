@@ -5,16 +5,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
-using WeWillSurvive.Log;
-using WeWillSurvive.MainEvent;
+using WeWillSurvive.GameEvent;
 
 namespace WeWillSurvive
 {
     public class MainEventPanel : PagePanel
     {
-        [Header("## 선택 옵션 아이콘 데이터")]
-        [SerializeField] private List<ChoiceOptionIconData> _choiceOptionIconDatas;
-
         [Header("## 이벤트 텍스트")]
         [SerializeField] private RectTransform _textRootLayout;
         [SerializeField] private TMP_Text _eventText;
@@ -22,7 +18,6 @@ namespace WeWillSurvive
         [Header("## ChoiceOption 오브젝트")]
         [SerializeField] private List<ChoiceOption> _choiceOptions;
 
-        private Dictionary<EChoiceIcon, ChoiceOptionIconData> _choiceOptionIconDicts = new();
         private List<string> _pageTexts = new();
 
         private MainEventData _mainEventData = null;
@@ -32,19 +27,11 @@ namespace WeWillSurvive
 
         public Action ChoiceImageSelected;
 
-        public override UniTask InitializeAsync()
+        private EventBus EventBus => ServiceLocator.Get<EventBus>();
+
+        public async override UniTask InitializeAsync()
         {
             PanelType = EPanelType.MainEvent;
-
-            // ChoiceOptionData Dictonary 로 정리
-            _choiceOptionIconDicts.Clear();
-            foreach (var choiceOptionData in _choiceOptionIconDatas)
-            {
-                if (!_choiceOptionIconDicts.ContainsKey(choiceOptionData.ChoiceType))
-                {
-                    _choiceOptionIconDicts[choiceOptionData.ChoiceType] = choiceOptionData;
-                }
-            }
 
             foreach (var choiceImage in _choiceOptions)
             {
@@ -54,14 +41,17 @@ namespace WeWillSurvive
             LayoutRebuilder.ForceRebuildLayoutImmediate(_textRootLayout);
             _maxLineCount = TMPTextUtil.CalculateMaxLineCount(_eventText);
 
-            return UniTask.CompletedTask;
+            // 이벤트 등록
+            EventBus.Subscribe<EndDayEvent>(OnEndDayEvent);
+            
+            await UniTask.CompletedTask;
         }
 
         public override async UniTask RefreshPageAsync(int startPageIndex)
         {
             await base.RefreshPageAsync(startPageIndex);
 
-            _mainEventData = MainEventManager.Instance.GetDailyMainEvent();
+            _mainEventData = GameEventManager.Instance.DailyMainEvent.DailyEventData;
             _selectedOption = null;
 
             if (_mainEventData == null)
@@ -87,15 +77,6 @@ namespace WeWillSurvive
             _eventText.text = _pageTexts[localIndex];
         }
 
-        public override void ApplyResult()
-        {
-            // 선택한 옵션에 따라 이벤트 초이스 할당
-            var eventChoice = (_selectedOption == null) ? _mainEventData.GetEventChoice(EChoiceIcon.Noting) : _selectedOption.EventChoice;
-
-            // 이벤트 결과 임시 저장
-            MainEventManager.Instance.QueueEventChoiceForProcessing(eventChoice);
-        }
-
         public bool ShouldEnableNextButton()
         {
             return _mainEventData == null || 
@@ -111,21 +92,12 @@ namespace WeWillSurvive
             int index = 0;
             foreach (var choice in mainEventData.Choices)
             {
-                var choiceOptionIconData = GetChoiceOptionIconData(choice.ChoiceIcon);
-                if (choiceOptionIconData == null)
+                if (choice.ChoiceIcon == EChoiceIcon.Noting)
                     continue;
 
-                _choiceOptions[index].Initialize(choice, choiceOptionIconData);
+                _choiceOptions[index].UpdateChoiceOption(choice);
                 index++;
             }
-        }
-
-        private ChoiceOptionIconData GetChoiceOptionIconData(EChoiceIcon choiceType)
-        {
-            if (!_choiceOptionIconDicts.TryGetValue(choiceType, out var choiceOptionIconData))
-                return null;
-
-            return choiceOptionIconData;
         }
 
         public void OnClickChoiceImage(ChoiceOption choiceOption)
@@ -145,6 +117,15 @@ namespace WeWillSurvive
             }
 
             ChoiceImageSelected?.Invoke();
+        }
+
+        private void OnEndDayEvent(EndDayEvent context)
+        {
+            // 선택한 옵션에 따라 이벤트 초이스 할당
+            var eventChoice = (_selectedOption == null) ? _mainEventData.GetEventChoice(EChoiceIcon.Noting) : _selectedOption.EventChoice;
+
+            // 이벤트 결과 임시 저장
+            GameEventManager.Instance.SelectedMainEventChoice(eventChoice);
         }
     }
 }

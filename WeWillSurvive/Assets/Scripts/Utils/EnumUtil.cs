@@ -44,6 +44,20 @@ namespace WeWillSurvive.Util
             return null;
         }
 
+        public static string GetInspectorName(Enum value)
+        {
+            if (value == null)
+                return string.Empty;
+
+            FieldInfo field = value.GetType().GetField(value.ToString());
+            if (field == null)
+                return value.ToString();
+
+            var attributes = (InspectorNameAttribute[])field.GetCustomAttributes(typeof(InspectorNameAttribute), false);
+
+            return attributes.Length > 0 ? attributes[0].displayName : value.ToString();
+        }
+
         public static TEnum ParseEnum<TEnum>(string value, TEnum defaultValue = default) where TEnum : struct, Enum
         {
             if (Enum.TryParse(value, out TEnum result))

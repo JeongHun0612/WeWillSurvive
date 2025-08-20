@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e13b32075bb0a4643ab52c16c27ba02e, type: 3}
+  m_Script: {fileID: 11500000, guid: 22bd9b3da3dc0724b87bb00ec9ba2a86, type: 3}
   m_Name: ChoiceIcon_CommDevice
   m_EditorClassIdentifier: 
-  ChoiceType: 207
+  ChoiceIcon: 207
   NormalSprite: {fileID: 21300000, guid: b9b221e1ae7a3bf48b931a6a9d27a250, type: 3}
   DisabledSprite: {fileID: 21300000, guid: a2de8d91ff1c24b4881aca968e7af59d, type: 3}

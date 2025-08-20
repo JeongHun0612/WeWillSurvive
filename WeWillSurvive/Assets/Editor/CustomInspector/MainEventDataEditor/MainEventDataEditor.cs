@@ -80,10 +80,13 @@ namespace WeWillSurvive
                     DrawStaticChoiceUI(choicesProp);
                     break;
                 case EMainEventChoiceSchema.UseItems:
-                    DrawEditableChoiceUI(choicesProp, GetItemNames());
+                    DrawEditableChoiceUI(choicesProp, choiceSchema, GetItemNames());
                     break;
                 case EMainEventChoiceSchema.ChooseSomeone:
-                    DrawEditableChoiceUI(choicesProp, GetCharacterNames());
+                    DrawEditableChoiceUI(choicesProp, choiceSchema, GetCharacterNames());
+                    break;
+                case EMainEventChoiceSchema.CharacterEvent:
+                    DrawEditableChoiceUI(choicesProp, choiceSchema, GetAllNames());
                     break;
                 default:
                     EditorGUILayout.PropertyField(choicesProp);
@@ -96,6 +99,7 @@ namespace WeWillSurvive
                 SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
                 SerializedProperty resultsProp = selectedChoiceProp.FindPropertyRelative("_results");
                 EditorGUILayout.Space(20);
+
                 DrawResultTabsUI(resultsProp);
             }
 
@@ -112,15 +116,16 @@ namespace WeWillSurvive
             {
                 SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
                 SerializedProperty choiceIconProp = selectedChoiceProp.FindPropertyRelative("_choiceIcon");
-                SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("_amount");
 
                 // 이벤트 타입 선택
-                EditorGUILayout.PropertyField(choiceIconProp, new GUIContent("선택지 타입"));
-                EditorGUILayout.PropertyField(amountProp, new GUIContent("필요 갯수"));
+                using (new EditorGUI.DisabledScope(true))
+                {
+                    EditorGUILayout.PropertyField(choiceIconProp, new GUIContent("선택지 타입"));
+                }
             }
         }
 
-        private void DrawEditableChoiceUI(SerializedProperty choicesProp, (string[] displayOptions, List<EChoiceIcon> enumValues) options)
+        private void DrawEditableChoiceUI(SerializedProperty choicesProp, EMainEventChoiceSchema choiceSchema, (string[] displayOptions, List<EChoiceIcon> enumValues) options)
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("선택지 목록", EditorStyles.boldLabel, GUILayout.Width(80));
@@ -134,10 +139,16 @@ namespace WeWillSurvive
             {
                 SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
                 SerializedProperty choiceIconProp = selectedChoiceProp.FindPropertyRelative("_choiceIcon");
-                SerializedProperty amountProp = selectedChoiceProp.FindPropertyRelative("_amount");
+                SerializedProperty requiredAmountProp = selectedChoiceProp.FindPropertyRelative("_requiredAmount");
+                SerializedProperty choiceTextProp = selectedChoiceProp.FindPropertyRelative("_choiceText");
 
                 DrawFilteredEnumPopup(new GUIContent("선택지 타입"), choiceIconProp, options.displayOptions, options.enumValues);
-                EditorGUILayout.PropertyField(amountProp, new GUIContent("필요 갯수"));
+                EditorGUILayout.PropertyField(requiredAmountProp, new GUIContent("필요 갯수"));
+
+                if (choiceSchema == EMainEventChoiceSchema.CharacterEvent)
+                {
+                    EditorGUILayout.PropertyField(choiceTextProp, new GUIContent("선택지 텍스트"));
+                }
             }
         }
 
@@ -252,10 +263,13 @@ namespace WeWillSurvive
                 SerializedProperty selectedResult = resultsProp.GetArrayElementAtIndex(selectedResultIndex);
                 if (selectedResult == null) return;
 
+                SerializedProperty outComeTypeProp = selectedResult.FindPropertyRelative("_outComeType");
                 SerializedProperty conditionsProp = selectedResult.FindPropertyRelative("_conditions");
                 SerializedProperty textProp = selectedResult.FindPropertyRelative("_resultText");
                 SerializedProperty actionsProp = selectedResult.FindPropertyRelative("_actions");
-                SerializedProperty probProp = selectedResult.FindPropertyRelative("_probability");
+                SerializedProperty isAffectedByStatsProp = selectedResult.FindPropertyRelative("_isAffectedByStats");
+                SerializedProperty probabilityProp = selectedResult.FindPropertyRelative("_probability");
+
 
                 // 결과 데이터 필드
                 EditorGUILayout.BeginVertical(new GUIStyle(GUI.skin.box)
@@ -264,13 +278,23 @@ namespace WeWillSurvive
                     margin = new RectOffset(20, 20, 10, 10)
                 });
 
+                EditorGUILayout.PropertyField(outComeTypeProp, new GUIContent("결과 타입"));
+                EditorGUILayout.Space(5);
                 EditorGUILayout.PropertyField(conditionsProp, new GUIContent("발생 조건"), true);
                 EditorGUILayout.Space(5);
                 EditorGUILayout.PropertyField(textProp, new GUIContent("결과 텍스트"));
                 EditorGUILayout.Space(5);
                 EditorGUILayout.PropertyField(actionsProp, new GUIContent("결과 액션"), true);
                 EditorGUILayout.Space(5);
-                EditorGUILayout.Slider(probProp, 0f, 1f, new GUIContent("발생 확률"));
+
+                EditorGUILayout.Space(5);
+
+                EditorGUILayout.PropertyField(isAffectedByStatsProp, new GUIContent("캐릭터 스텟 영향"));
+                EditorGUILayout.Space(5);
+                if (!isAffectedByStatsProp.boolValue)
+                {
+                    EditorGUILayout.Slider(probabilityProp, 0f, 1f, new GUIContent("발생 확률"));
+                }
                 EditorGUILayout.EndVertical();
             }
         }
@@ -365,11 +389,13 @@ namespace WeWillSurvive
             if (choiceProp == null) return;
 
             SerializedProperty choiceIconProp = choiceProp.FindPropertyRelative("_choiceIcon");
-            SerializedProperty amountProp = choiceProp.FindPropertyRelative("_amount");
+            SerializedProperty requiredAmountProp = choiceProp.FindPropertyRelative("_requiredAmount");
+            SerializedProperty choiceTextProp = choiceProp.FindPropertyRelative("_choiceText");
             SerializedProperty resultsProp = choiceProp.FindPropertyRelative("_results");
 
             choiceIconProp.intValue = 0;
-            amountProp.intValue = 1;
+            requiredAmountProp.intValue = 1;
+            choiceTextProp.stringValue = "";
 
             resultsProp.ClearArray();
             resultsProp.arraySize = 1;
@@ -382,13 +408,17 @@ namespace WeWillSurvive
         {
             if (resultProp == null) return;
 
-            SerializedProperty textProp = resultProp.FindPropertyRelative("_resultText");
-            SerializedProperty probProp = resultProp.FindPropertyRelative("_probability");
+            SerializedProperty outComeTypeProp = resultProp.FindPropertyRelative("_outComeType");
             SerializedProperty conditionsProp = resultProp.FindPropertyRelative("_conditions");
+            SerializedProperty textProp = resultProp.FindPropertyRelative("_resultText");
             SerializedProperty actionsProp = resultProp.FindPropertyRelative("_actions");
+            SerializedProperty isAffectedByStatsProp = resultProp.FindPropertyRelative("_isAffectedByStats");
+            SerializedProperty probabilityProp = resultProp.FindPropertyRelative("_probability");
 
+            outComeTypeProp.intValue = 0;
             textProp.stringValue = string.Empty;
-            probProp.floatValue = 1.0f;
+            isAffectedByStatsProp.boolValue = false;
+            probabilityProp.floatValue = 1.0f;
 
             conditionsProp.ClearArray();
             actionsProp.ClearArray();
@@ -440,6 +470,12 @@ namespace WeWillSurvive
 
                 return isInItemRange || isNotingItem;
             });
+        }
+
+        private (string[] displayOptions, List<EChoiceIcon> enumValues) GetAllNames()
+        {
+            // 모든 옵션을 가져옵니다.
+            return GetFilteredEnumOptions(_ => true);
         }
 
         private (string[] displayOptions, List<EChoiceIcon> enumValues) GetFilteredEnumOptions(System.Func<EChoiceIcon, bool> filter)

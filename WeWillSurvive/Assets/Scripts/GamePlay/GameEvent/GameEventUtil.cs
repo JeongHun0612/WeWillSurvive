@@ -1,23 +1,33 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using WeWillSurvive.Character;
+using WeWillSurvive.Core;
+using WeWillSurvive.Item;
 
 namespace WeWillSurvive.GameEvent
 {
     public static class GameEventUtil
     {
+        private static Dictionary<EChoiceIcon, ChoiceIconData> _choiceIconDatas = new();
         private static Dictionary<EConditionType, IEventConditionHandler> _eventConditionHandlers = new();
         private static Dictionary<EActionType, IEventActionHandler> _eventActionHandlers = new();
 
         private static bool _isInitalized = false;
 
-        public static void Initialize()
+        private static ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
+        private static ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private static CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public static async UniTask InitializeAsyn()
         {
             if (_isInitalized)
                 return;
 
+            await SetupChoiceOptionIconDatas();
             SetupEventConditionHandlers();
             SetupEventActionHandlers();
 
@@ -46,43 +56,122 @@ namespace WeWillSurvive.GameEvent
         }
 
         /// <summary>
+        /// 주어진 EventChoice의 아이콘 타입과 필요 조건을 확인하여 해당 선택지를 활성화할 수 있는지 여부를 반환
+        /// </summary>
+        /// <param name="eventChoice"></param>
+        /// <returns></returns>
+        public static bool IsAvailable(EventChoice eventChoice)
+        {
+            if (eventChoice == null)
+            {
+                Debug.LogWarning("EventChoice 데이터가 null입니다.");
+                return false;
+            }
+
+            if (Enum.TryParse($"{eventChoice.ChoiceIcon}", out ECharacter characterType))
+            {
+                var character = CharacterManager.GetCharacter(characterType);
+                return (character != null && character.IsInShelter);
+            }
+            else if (Enum.TryParse($"{eventChoice.ChoiceIcon}", out EItem item))
+            {
+                return eventChoice.RequiredAmount == 0 || ItemManager.HasItem(item, eventChoice.RequiredAmount);
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
         /// 전달받은 EventChoice에서 유효한 랜덤 Result를 반환
         /// </summary>
         /// <param name="choice"></param>
         /// <returns></returns>
-        public static EventResult GetValidRandomEventResult(EventChoice choice)
+        public static EventResult GetValidRandomEventResult(EventChoice choice, float characterStatValue = 0f)
         {
+            if (choice == null || choice.Results == null || choice.Results.Count == 0)
+            {
+                Debug.LogError("유효하지 않은 EventChoice 데이터입니다.");
+                return null;
+            }
+
             // 조건이 충족되는 모든 유효한 결과들을 필터링
             var validResults = choice.Results
                 .Where(result => IsConditionsMet(result.Conditions))
                 .ToList();
 
             if (validResults.Count == 0)
+            {
+                Debug.LogWarning("유효한 EventResult가 존재하지 않습니다.");
                 return null;
+            }
 
-            // 유효한 결과들의 확률 총합을 계산
-            float totalProbability = validResults.Sum(result => result.Probability);
+            // 캐릭터 성공 확률 필요한 형태(0.00f)로 가공
+            float characterSuccessRate = Mathf.Clamp(characterStatValue, 0f, 100f) / 100.0f;
 
-            // 확률 총합을 기반으로 랜덤 포인트를 지정
-            float randomPoint = UnityEngine.Random.Range(0, totalProbability);
-
-            // 랜덤 포인트를 사용하여 가중치 기반 랜덤 선택을 수행
+            // 고정 확률을 먼저 계산하고, 스탯 영향받는 결과들이 나눠가질 전체 확률 풀을 계산
+            List<float> finalProbabilities = new();
+            float totalFixedProbability = 0f;
             foreach (var result in validResults)
             {
-                // 현재 결과의 확률보다 랜덤 포인트가 작거나 같으면 이 결과를 선택
-                if (randomPoint <= result.Probability)
+                if (!result.IsAffectedByStats)
                 {
-                    return result;
+                    totalFixedProbability += result.Probability;
+                }
+            }
+
+            if (totalFixedProbability > 1.0f)
+                Debug.LogWarning($"고정 확률의 합이 {totalFixedProbability:P2}로 100%를 초과했습니다.");
+
+            float remainingProbabilityPool = Mathf.Max(0f, 1.0f - totalFixedProbability);
+
+            // 각 결과의 최종 확률을 계산
+            foreach (var result in validResults)
+            {
+                float calculatedProbability = 0f;
+
+                if (result.IsAffectedByStats)
+                {
+                    if (result.OutcomeType == EOutcomeType.Success)
+                    {
+                        calculatedProbability = remainingProbabilityPool * characterSuccessRate;
+                    }
+                    else if (result.OutcomeType == EOutcomeType.Failure)
+                    {
+                        calculatedProbability = remainingProbabilityPool * (1.0f - characterSuccessRate);
+                    }
+                }
+                else
+                {
+                    calculatedProbability = result.Probability;
+                }
+
+                Debug.Log($"[{result.OutcomeType}] - 확률: {calculatedProbability:P2}");
+                finalProbabilities.Add(calculatedProbability);
+            }
+
+            // 계산된 최종 확률(가중치)에 따라 랜덤하게 하나의 결과를 선택
+            float totalProbability = finalProbabilities.Sum();
+            float randomPoint = UnityEngine.Random.Range(0, totalProbability);
+
+            for (int i = 0; i < validResults.Count; i++)
+            {
+                // 현재 결과의 확률보다 랜덤 포인트가 작거나 같으면 이 결과를 선택
+                if (randomPoint < finalProbabilities[i])
+                {
+                    Debug.Log($"[{choice.Results[i].OutcomeType}] {i}번째 이벤트 발생");
+                    return choice.Results[i];
                 }
                 else
                 {
                     // 아니면, 현재 결과의 확률만큼 랜덤 포인트를 줄이고 다음 결과로 넘어감
-                    randomPoint -= result.Probability;
+                    randomPoint -= finalProbabilities[i];
                 }
             }
 
-            Debug.LogWarning("확률 계산 중 오류가 발생했을 수 있습니다. 유효한 결과 중 첫 번째를 반환합니다.");
-            return validResults[0];
+            // 만약 부동소수점 오류 등으로 여기까지 오게 되면 마지막 요소를 반환
+            return validResults[choice.Results.Count - 1];
         }
 
         /// <summary>
@@ -114,6 +203,39 @@ namespace WeWillSurvive.GameEvent
             else
             {
                 Debug.LogWarning($"핸들러가 등록되지 않은 EventAction 타입입니다: {action.ActionType}");
+            }
+        }
+
+        /// <summary>
+        /// 이벤트 선택지 아이콘 반환
+        /// </summary>
+        /// <param name="choiceType"></param>
+        /// <returns></returns>
+        public static ChoiceIconData GetChoiceIconData(EChoiceIcon choiceType)
+        {
+            if (!_choiceIconDatas.TryGetValue(choiceType, out var choiceOptionIconData))
+            {
+                Debug.LogError($"{choiceType} 타입의 ChoiceIconData를 찾지 못했습니다.");
+                return null;
+            }
+
+            return choiceOptionIconData;
+        }
+
+        /// <summary>
+        /// 이벤트 선택지 아이콘 데이터 셋팅
+        /// </summary>
+        /// <returns></returns>
+        private static async UniTask SetupChoiceOptionIconDatas()
+        {
+            var choiceIconDatas = await ResourceManager.LoadAssetsByLabelAsync<ChoiceIconData>("ChoiceIconData");
+
+            foreach (var choiceIconData in choiceIconDatas)
+            {
+                if (!_choiceIconDatas.ContainsKey(choiceIconData.ChoiceIcon))
+                {
+                    _choiceIconDatas.Add(choiceIconData.ChoiceIcon, choiceIconData);
+                }
             }
         }
 

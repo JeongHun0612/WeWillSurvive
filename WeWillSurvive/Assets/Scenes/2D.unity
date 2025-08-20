@@ -1143,6 +1143,9 @@ MonoBehaviour:
   _maxGlobalDayCount: 6
   _eventPools:
   - {fileID: 11400000, guid: b672cc5ded89c1540b25f6897e7c3eba, type: 2}
+  - {fileID: 11400000, guid: 2c4ca2dedb45d43499cb76887103aea0, type: 2}
+  - {fileID: 11400000, guid: ce2f1827672bd8a458da92a99242f85f, type: 2}
+  - {fileID: 11400000, guid: 01409ad469abdf449901b39ed6f3ba6a, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

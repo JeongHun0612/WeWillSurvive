@@ -15,6 +15,7 @@ MonoBehaviour:
   _type: 0
   _itemType: 100
   _name: Lead
+  _baseEventRate: 60
   SpriteData: {fileID: 11400000, guid: df51c9b3b5b77da40b8913c9e5844ceb, type: 2}
   StateMessageData: {fileID: 11400000, guid: 1d03620d58dbfc744ab8b6cef1f21949, type: 2}
   ExpeditionMessageData: {fileID: 11400000, guid: 49111307c61df0e49807e6e0194f61da, type: 2}

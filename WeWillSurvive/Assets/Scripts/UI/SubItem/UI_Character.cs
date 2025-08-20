@@ -19,7 +19,7 @@ namespace WeWillSurvive
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
-        public bool IsNoting => Owner.IsExploring || Owner.IsDead;
+        public bool IsNoting => !Owner.IsInShelter;
 
         public void Initialize()
         {
@@ -34,7 +34,7 @@ namespace WeWillSurvive
 
         public void UpdateCharacterImage(ERoomType roomType)
         {
-            if (Owner.IsExploring || Owner.IsDead)
+            if (!Owner.IsInShelter)
             {
                 gameObject.SetActive(false);
             }

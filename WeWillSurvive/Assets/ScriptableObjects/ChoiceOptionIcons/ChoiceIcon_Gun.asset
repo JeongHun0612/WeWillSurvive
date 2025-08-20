@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e13b32075bb0a4643ab52c16c27ba02e, type: 3}
+  m_Script: {fileID: 11500000, guid: 22bd9b3da3dc0724b87bb00ec9ba2a86, type: 3}
   m_Name: ChoiceIcon_Gun
   m_EditorClassIdentifier: 
-  ChoiceType: 209
+  ChoiceIcon: 209
   NormalSprite: {fileID: 21300000, guid: 97681a93cc38b57489e44554242d2fb1, type: 3}
   DisabledSprite: {fileID: 21300000, guid: 9afe82a529b3fd84d9585b58dad77cde, type: 3}

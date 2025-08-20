@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: cook_01
+  m_EditorClassIdentifier: 
+  _eventId: Cook_01
+  _title: 
+  _descriptions:
+  - "\uCFE1\uC740 \uBCBD\uC5D0 \uAC78\uB9B0 \uC870\uB9AC \uB3C4\uAD6C\uB97C \uBCF4\uBA70
+    \uC911\uC5BC\uAC70\uB838\uB2E4. \u201C\uC2DD\uB7C9\uC774 \uBD80\uC871\uD558\uB2E4\uACE0?
+    \uD558, \uB0B4\uAC00 \uC601\uD654 *\u2018\uD654\uC131\uC778 \uC0DD\uC874\uAE30\u2019*\uC5D0\uC11C
+    \uBCF8 \uAC70\uBCF4\uB2E4 \uB354 \uAC04\uB2E8\uD560 \uAC78.\u201D \uCFE1\uC740
+    \uC6B0\uC8FC \uC2DD\uB7C9 \uD558\uB098\uB97C \uC0AC\uC6A9\uD574\uC11C \uB354
+    \uB9CE\uC740 \uC2DD\uB7C9\uC744 \uC5BB\uC744 \uC218 \uC788\uB2E4\uACE0 \uB9D0\uD55C\uB2E4.
+    \uCFE1\uC744 \uBBFF\uC5B4\uBCFC\uAE4C?"
+  _conditions: []
+  _choiceSchema: 50
+  _choices:
+  - _choiceIcon: 200
+    _requiredAmount: 1
+    _choiceText: "\uC218\uD589\uD55C\uB2E4"
+    _results:
+    - _outComeType: 2
+      _conditions: []
+      _resultText: "\uC791\uC5C5\uC2E4\uC5D0\uC11C \uCFE1\uC758 \uD76C\uB9DD\uCC2C
+        \uC678\uCE68\uC774 \uB4E4\uB838\uB2E4. \u201C\uB410\uB2E4! \uC774\uBC88\uC5D4
+        \uC9C4\uC9DC \uC644\uBCBD\uD574!\u201D \uB69C\uAED1\uC744 \uC5F4\uC5B4\uBCF4\uB2C8
+        \uADF8\uB7F4\uC2F8\uD55C \uC2DD\uB7C9\uC774 \uAC00\uB4DD\uD588\uB2E4. \uCFE1\uC758
+        \uB208\uBE5B\uC774 \uC790\uC2E0\uAC10\uC73C\uB85C \uAC00\uB4DD \uCC3C\uB2E4."
+      _actions:
+      - _actionType: 201
+        _targetId: Food
+        _parameter: Hunger
+        _value: 1
+      - _actionType: 200
+        _targetId: Food
+        _parameter: Hunger
+        _value: 3
+      _isAffectedByStats: 1
+      _probability: 1
+    - _outComeType: 3
+      _conditions: []
+      _resultText: "\uBA87 \uC2DC\uAC04 \uB4A4, \uCFE1\uC740 \uC870\uC6A9\uD788 \uB3CC\uC544\uC640
+        \uC6B0\uB9AC\uB97C \uCCD0\uB2E4\uBD24\uB2E4. \u201C\u2026\uC774\uBC88\uC5D4
+        \uC2E4\uD328\uC57C. \uC7AC\uB8CC \uC0C1\uD0DC\uAC00 \uC880 \uB098\uBE74\uB098
+        \uBD10.\u201D \uCC3D\uACE0\uB294 \uB354 \uD5C8\uC804\uD574\uC84C\uACE0, \uCFE1\uC740
+        \uC544\uBB34 \uB9D0 \uC5C6\uC774 \uB3C4\uAD6C\uB97C \uC815\uB9AC\uD588\uB2E4."
+      _actions:
+      - _actionType: 201
+        _targetId: Food
+        _parameter: Hunger
+        _value: 1
+      _isAffectedByStats: 1
+      _probability: 1
+    - _outComeType: 4
+      _conditions: []
+      _resultText: "\uAC11\uC790\uAE30 \u2018\uD391!\u2019 \uD558\uB294 \uD3ED\uC74C\uACFC
+        \uD568\uAED8 \uC791\uC5C5\uC2E4\uC5D0\uC11C \uC5F0\uAE30\uAC00 \uD53C\uC5B4\uC62C\uB790\uB2E4.
+        \uCFE1\uC740 \uD314\uC5D0 \uBD95\uB300\uB97C \uAC10\uACE0 \uB3CC\uC544\uC654\uB2E4.
+        \u201C\uC774\uAC8C \uB2E4 \uC624\uB798\uB41C \uBC25\uC1A5 \uB54C\uBB38\uC774\uC57C\u2026
+        \uADF8\uAC74 \uADF8\uB807\uACE0, \uB2E4\uC74C\uC5D4 \uB354 \uC798\uD560 \uC218
+        \uC788\uC5B4.\u201D"
+      _actions:
+      - _actionType: 201
+        _targetId: Food
+        _parameter: Hunger
+        _value: 1
+      - _actionType: 100
+        _targetId: Cook
+        _parameter: Injury
+        _value: 1
+      _isAffectedByStats: 0
+      _probability: 0.1
+  - _choiceIcon: 1
+    _requiredAmount: 0
+    _choiceText: "\uC218\uD589\uD558\uC9C0 \uC54A\uB294\uB2E4"
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultText: "\u201C\uAD1C\uCC2E\uC544, \uCFE1. \uB2F9\uC7A5\uC740 \uC2DD\uB7C9\uC774
+        \uAE09\uD558\uC9C0 \uC54A\uC544.\u201D \uCFE1\uC740 \uC0B4\uC9DD \uC2E4\uB9DD\uD55C
+        \uB4EF\uD588\uC9C0\uB9CC, \uACE0\uAC1C\uB97C \uB044\uB355\uC600\uB2E4. \u201C\uADF8\uB798,
+        \uB2E4\uC74C\uC5D4 \uAF2D \uB0B4 \uC2E4\uB825\uC744 \uBCF4\uC5EC\uC904\uAC8C.\u201D"
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+  - _choiceIcon: 500
+    _requiredAmount: 0
+    _choiceText: 
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultText: "\u201C\uAD1C\uCC2E\uC544, \uCFE1. \uB2F9\uC7A5\uC740 \uC2DD\uB7C9\uC774
+        \uAE09\uD558\uC9C0 \uC54A\uC544.\u201D \uCFE1\uC740 \uC0B4\uC9DD \uC2E4\uB9DD\uD55C
+        \uB4EF\uD588\uC9C0\uB9CC, \uACE0\uAC1C\uB97C \uB044\uB355\uC600\uB2E4. \u201C\uADF8\uB798,
+        \uB2E4\uC74C\uC5D4 \uAF2D \uB0B4 \uC2E4\uB825\uC744 \uBCF4\uC5EC\uC904\uAC8C.\u201D"
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1

@@ -16,13 +16,13 @@ namespace WeWillSurvive
 
         private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
-        public override UniTask InitializeAsync()
+        public async override UniTask InitializeAsync()
         {
             PanelType = EPanelType.Log;
 
             _maxLineCount = TMPTextUtil.CalculateMaxLineCount(_logText);
 
-            return UniTask.CompletedTask;
+            await UniTask.CompletedTask;
         }
 
         public override async UniTask RefreshPageAsync(int startPageIndex)

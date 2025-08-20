@@ -12,6 +12,8 @@ namespace WeWillSurvive
         [SerializeField] private ExpeditionReadyPanel _readyPanel;
         [SerializeField] private ExpeditionSelectPanel _selectPanel;
 
+        private EventBus EventBus => ServiceLocator.Get<EventBus>();
+
         public async override UniTask InitializeAsync()
         {
             PanelType = EPanelType.Expedition;
@@ -21,6 +23,11 @@ namespace WeWillSurvive
 
             _readyPanel.gameObject.SetActive(false);
             _selectPanel.gameObject.SetActive(false);
+
+            // 이벤트 등록
+            EventBus.Subscribe<EndDayEvent>(OnEndDayEvent);
+
+            await UniTask.CompletedTask;
         }
 
         public override async UniTask RefreshPageAsync(int startPageIndex)
@@ -61,7 +68,7 @@ namespace WeWillSurvive
             base.ShowPage(localIndex);
         }
 
-        public override void ApplyResult()
+        private void OnEndDayEvent(EndDayEvent context)
         {
             EExpeditionState expeditionState = ExpeditionManager.Instance.CurrentState;
 
