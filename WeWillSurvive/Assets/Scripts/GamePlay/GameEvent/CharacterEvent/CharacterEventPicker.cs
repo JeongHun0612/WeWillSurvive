@@ -29,7 +29,7 @@ namespace WeWillSurvive.CharacterEvent
             CharacterEventProgress targetProgress;
 
             // 가장 처음은 Lead의 캐릭터 이벤트 발생
-            if (_totalCharacterEventCount <= 0)
+            if (_totalCharacterEventCount == 0)
             {
                 targetProgress = GetCharacterEventProgress(ECharacter.Lead);
             }
@@ -63,7 +63,7 @@ namespace WeWillSurvive.CharacterEvent
             ResetEventCooldown();
             _totalCharacterEventCount++;
 
-            Debug.Log($"[{targetProgress.Category}] 캐릭터 이벤트 발생");
+            Debug.Log($"[{targetProgress.Category} - {selectedEvent.EventId}] 캐릭터 이벤트 발생");
 
             return new DailyCharacterEvent(selectedEvent, targetProgress.Category);
         }

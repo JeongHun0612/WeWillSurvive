@@ -45,28 +45,21 @@ namespace WeWillSurvive.Core
         {
             Day++;
 
-            if (!EndingManager.Instance.IsEnding)
-            {
-                // 이벤트 결과 반영
-                GameEventManager.Instance.OnDayComplete();
-
-                // 플레이어 상태 업데이트
-                CharacterManager.UpdateCharacterStatus();
-
-                // 이벤트 업데이트
-                GameEventManager.Instance.OnNewDay();
-            }
-
             UIManager.Instance.ShowOverlay<UI_Pade>().StartPadeSequence(OnNewDay);
         }
 
         public void OnEndDay()
         {
+            Debug.Log("[하루 마무리] ==========================================");
+
             // 로그 초기화
             LogManager.ClearAllLogs();
 
             // 이벤트 발생
             EventBus.Publish(new EndDayEvent { });
+
+            // 이벤트 결과 반영
+            GameEventManager.Instance.OnDayComplete();
 
             // 새로운 날 시작
             StartNextDay();
@@ -74,6 +67,8 @@ namespace WeWillSurvive.Core
 
         private void OnNewDay()
         {
+            Debug.Log("[하루 시작] ===========================================");
+
             UIManager.Instance.ClosePopups(remain: 1);
 
             if (UIManager.Instance.GetCurrentScene<UI_Room>() == null)
@@ -84,6 +79,12 @@ namespace WeWillSurvive.Core
                 // TODO 엔딩 컷씬 출력
                 return;
             }
+
+            // 플레이어 상태 업데이트
+            CharacterManager.UpdateCharacterStatus();
+
+            // 이벤트 업데이트
+            GameEventManager.Instance.OnNewDay();
 
             // 하루가 시작 시 발생하는 이벤트
             EventBus.Publish(new NewDayEvent() { CurrentDay = Day });

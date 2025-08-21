@@ -147,7 +147,6 @@ namespace WeWillSurvive.GameEvent
                     calculatedProbability = result.Probability;
                 }
 
-                Debug.Log($"[{result.OutcomeType}] - 확률: {calculatedProbability:P2}");
                 finalProbabilities.Add(calculatedProbability);
             }
 
@@ -160,8 +159,8 @@ namespace WeWillSurvive.GameEvent
                 // 현재 결과의 확률보다 랜덤 포인트가 작거나 같으면 이 결과를 선택
                 if (randomPoint < finalProbabilities[i])
                 {
-                    Debug.Log($"[{choice.Results[i].OutcomeType}] {i}번째 결과 {choice.Results[i].Probability:P2} 확률로 반환");
-                    return choice.Results[i];
+                    Debug.Log($"[{validResults[i].OutcomeType}] {i}번째 결과 {finalProbabilities[i]:P2} 확률로 적용");
+                    return validResults[i];
                 }
                 else
                 {

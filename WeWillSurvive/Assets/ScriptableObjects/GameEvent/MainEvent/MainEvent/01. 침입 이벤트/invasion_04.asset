@@ -277,7 +277,7 @@ MonoBehaviour:
         \uCE58\uB8CC\uAC00 \uD544\uC694\uD558\uB2E4."
       _actions:
       - _actionType: 100
-        _targetId: 
+        _targetId: Lead
         _parameter: Injury
         _value: 1
       _isAffectedByStats: 0

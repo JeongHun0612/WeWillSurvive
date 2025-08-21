@@ -28,7 +28,7 @@ namespace WeWillSurvive.Ending
             // 상태 업데이트
             ResetEventCooldown();
 
-            Debug.Log($"[{name}] [{endingProgress.Category}] 이벤트 발생");
+            Debug.Log($"[{endingProgress.Category} - {selectedEvent.EventId}] 엔딩 이벤트 발생");
 
             return new DailyMainEvent(selectedEvent);
         }

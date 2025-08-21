@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
 using WeWillSurvive.GameEvent;
@@ -67,15 +68,19 @@ namespace WeWillSurvive.MainEvent
             {
                 progress = GetCompletedRandomEventProgress();
 
-                // progress가 null이거나 progress가 적절한 MainEventData를 반환하지 못하면 NotingEventProgress 할당
-                var mainEvent = progress?.GetValidRandomEvent();
-                if (mainEvent != null)
-                {
-                    Debug.Log($"[{name}] [{progress.Category}] 이벤트 발생");
-                    return new DailyMainEvent(mainEvent);
-                }
+                if (progress == null)
+                    progress = _notingEventProgress;
 
-                progress = _notingEventProgress;
+
+                //// progress가 null이거나 progress가 적절한 MainEventData를 반환하지 못하면 NotingEventProgress 할당
+                //var mainEvent = progress?.GetValidRandomEvent();
+                //if (mainEvent != null)
+                //{
+                //    Debug.Log($"[{progress.Category} - {mainEvent.EventId}] 메인 이벤트 발생");
+                //    return new DailyMainEvent(mainEvent);
+                //}
+
+                //progress = _notingEventProgress;
             }
 
             // 최종적으로 선택된 이벤트를 반환
@@ -85,7 +90,7 @@ namespace WeWillSurvive.MainEvent
             // 상태 업데이트
             ResetEventCooldown();
 
-            Debug.Log($"[{name}] [{progress.Category}] 이벤트 발생");
+            Debug.Log($"[{progress.Category} - {selectedEvent.EventId}] 메인 이벤트 발생");
 
             return new DailyMainEvent(selectedEvent);
         }

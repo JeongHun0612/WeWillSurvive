@@ -125,7 +125,6 @@ namespace WeWillSurvive
                     EditorGUILayout.PropertyField(choiceIconProp, new GUIContent("선택지 타입"));
                     EditorGUILayout.PropertyField(requiredAmountProp, new GUIContent("필요 갯수"));
                 }
-
             }
         }
 

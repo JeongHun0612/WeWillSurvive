@@ -125,6 +125,11 @@ namespace WeWillSurvive.Character
             return Characters.Values.ToList();
         }
 
+        public List<CharacterBase> GetCharactersInShelter()
+        {
+            return Characters.Values.Where(character => character.IsInShelter).ToList();
+        }
+
         public CharacterBase GetCharacter(ECharacter characterType)
         {
             if (Characters.TryGetValue(characterType, out var character))

@@ -16,7 +16,6 @@ namespace WeWillSurvive.GameEvent
         EActionType HandledActionType { get; }
 
         void Apply(EventAction action);
-        //GetEventProgress(EMainEventCategory.Facility).ResetDayCounter(10);
     }
 
     /// <summary>

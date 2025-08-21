@@ -59,14 +59,6 @@ namespace WeWillSurvive
             UpdateWaterItemCount();
         }
 
-        //public override void ApplyResult()
-        //{
-        //    foreach (var rationCharacter in _rationCharacters)
-        //    {
-        //        rationCharacter.ApplyRationItem();
-        //    }
-        //}
-
         public void UpdateFoodItemCount()
         {
             float foodItemCount = ItemManager.GetItemCount(EItem.Food);
@@ -78,7 +70,6 @@ namespace WeWillSurvive
             float waterItemCount = ItemManager.GetItemCount(EItem.Water);
             UpdateItemCount(_waterImages, _waterOverflowText, waterItemCount);
         }
-
 
         private void UpdateItemCount(Image[] targetImages, TMP_Text overflowText, float itemCount)
         {

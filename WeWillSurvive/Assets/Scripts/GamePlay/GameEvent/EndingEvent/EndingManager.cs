@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using WeWillSurvive.Core;
-using WeWillSurvive.MainEvent;
 
 namespace WeWillSurvive.Ending
 {
@@ -22,7 +19,6 @@ namespace WeWillSurvive.Ending
         [InspectorName("모든 캐릭터 사망")]
         DeathByStarvation,
     }
-
 
     public class EndingManager : MonoSingleton<EndingManager>
     {

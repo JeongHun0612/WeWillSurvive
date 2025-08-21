@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Character;
@@ -12,9 +12,9 @@ namespace WeWillSurvive.GameEvent
 {
     public enum EGameEventType
     {
-        [InspectorName("¸ŞÀÎ ÀÌº¥Æ®")] MainEvent = 0,
-        [InspectorName("Ä³¸¯ÅÍ ÀÌº¥Æ®")] CharacterEvent = 1,
-        [InspectorName("¿£µù ÀÌº¥Æ®")] EndingEvent = 2,
+        [InspectorName("ë©”ì¸ ì´ë²¤íŠ¸")] MainEvent = 0,
+        [InspectorName("ìºë¦­í„° ì´ë²¤íŠ¸")] CharacterEvent = 1,
+        [InspectorName("ì—”ë”© ì´ë²¤íŠ¸")] EndingEvent = 2,
     }
 
     public class GameEventManager : MonoSingleton<GameEventManager>
@@ -37,10 +37,10 @@ namespace WeWillSurvive.GameEvent
 
         public async UniTask InitializeAsync()
         {
-            // GameEventUtil ÃÊ±âÈ­
+            // GameEventUtil ì´ˆê¸°í™”
             await GameEventUtil.InitializeAsyn();
 
-            // EventPicker ÃÊ±âÈ­
+            // EventPicker ì´ˆê¸°í™”
             _pickerMap = new()
             {
                 { EGameEventType.MainEvent, _mainEventPicker },
@@ -64,7 +64,7 @@ namespace WeWillSurvive.GameEvent
 
         public void OnDayComplete()
         {
-            // ¿À´Ã ¹ß»ıÇÑ ÀÌº¥Æ®¿¡ ´ëÇÑ °á°ú Ã³¸®
+            // ì˜¤ëŠ˜ ë°œìƒí•œ ì´ë²¤íŠ¸ì— ëŒ€í•œ ê²°ê³¼ ì²˜ë¦¬
             _dailyMainEvent?.ApplyEventResult();
             _dailyCharacterEvent?.ApplyEventResult();
         }
@@ -81,14 +81,14 @@ namespace WeWillSurvive.GameEvent
             _dailyMainEvent = null;
             _dailyCharacterEvent = null;
 
-            // 1) ÁÖ ÀÌº¥Æ®(Ending/Main) Áß ¹ß»ıÇÏ´Â ÀÌº¥Æ® ¼±ÅÃ
+            // 1) ì£¼ ì´ë²¤íŠ¸(Ending/Main) ì¤‘ ë°œìƒí•˜ëŠ” ì´ë²¤íŠ¸ ì„ íƒ
             _dailyMainEvent = _endingEventPicker.GetDailyMainEvent();
             if (_dailyMainEvent == null)
             {
                 _dailyMainEvent = _mainEventPicker.GetDailyMainEvent();
             }
 
-            // 2) Ä³¸¯ÅÍ ÀÌº¥Æ® ¼±ÅÃ
+            // 2) ìºë¦­í„° ì´ë²¤íŠ¸ ì„ íƒ
             _dailyCharacterEvent = _characterEventPicker.GetDailyCharacterEvent();
         }
 
@@ -127,7 +127,7 @@ namespace WeWillSurvive.GameEvent
             var owner = CharacterManager.GetCharacter(Character);
             if (owner == null)
             {
-                Debug.LogError($"{Character}¿¡ ÇØ´çÇÏ´Â Ä³¸¯ÅÍ¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+                Debug.LogError($"{Character}ì— í•´ë‹¹í•˜ëŠ” ìºë¦­í„°ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
                 return null;
             }
 
@@ -174,26 +174,26 @@ namespace WeWillSurvive.GameEvent
         {
             if (DailyEventChoice == null)
             {
-                Debug.Log("Ã³¸®ÇÒ ÀÌº¥Æ® ¼±ÅÃÁö°¡ ¾ø½À´Ï´Ù.");
+                Debug.Log("ì²˜ë¦¬í•  ì´ë²¤íŠ¸ ì„ íƒì§€ê°€ ì—†ìŠµë‹ˆë‹¤.");
                 return;
             }
 
-            Debug.Log($"[{DailyEventData.EventId}] °á°ú ÃßÃâ");
+            Debug.Log($"[{DailyEventData.EventId}] ì´ë²¤íŠ¸ ê²°ê³¼ ì ìš©");
             EventResult result = GetRandomEventResult();
 
             if (result == null)
             {
-                Debug.LogWarning("¼±ÅÃÇÑ Choice¿¡ ´ëÇØ À¯È¿ÇÑ Result¸¦ Ã£Áö ¸øÇß½À´Ï´Ù. (Á¶°ÇºÒÃæÁ· ¶Ç´Â È®·ü ¹®Á¦)");
+                Debug.LogWarning("ì„ íƒí•œ Choiceì— ëŒ€í•´ ìœ íš¨í•œ Resultë¥¼ ì°¾ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. (ì¡°ê±´ë¶ˆì¶©ì¡± ë˜ëŠ” í™•ë¥  ë¬¸ì œ)");
                 return;
             }
 
-            // ÀÌº¥Æ® °á°ú Àû¿ë
+            // ì´ë²¤íŠ¸ ê²°ê³¼ ì ìš©
             foreach (var action in result.Actions)
             {
                 GameEventUtil.ApplyResultAction(action);
             }
 
-            // ·Î±× ±â·Ï
+            // ë¡œê·¸ ê¸°ë¡
             LogResult(result.ResultText);
         }
 
