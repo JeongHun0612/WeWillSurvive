@@ -22,14 +22,15 @@ namespace WeWillSurvive.Ending
             }
 
             // 선택된 엔딩의 이벤트 데이터 가져오기
-            var eventData = endingProgress.GetDailyEvent();
+            var selectedEvent = endingProgress.GetDailyEvent();
+            _lastSelectedEvent = selectedEvent;
 
             // 상태 업데이트
             ResetEventCooldown();
 
             Debug.Log($"[{name}] [{endingProgress.Category}] 이벤트 발생");
 
-            return new DailyMainEvent(eventData);
+            return new DailyMainEvent(selectedEvent);
         }
 
         public bool AdvanceEndingProgress(EEndingType endingType)
@@ -72,7 +73,7 @@ namespace WeWillSurvive.Ending
             }
         }
 
-        public override MainEventData GetDailyEvent()
+        public MainEventData GetDailyEvent()
         {
             EventTriggerCount++;
             ResetDayCounter();

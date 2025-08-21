@@ -161,7 +161,7 @@ namespace WeWillSurvive.Character
             // 탐사 후 상태 적용
             Status.ApplyExpeditionResults();
 
-            ExpeditionManager.Instance.CompleteExpedition();
+            ExpeditionManager.Instance.UpdateExpeditionState(EExpeditionState.Normal);
             IsExploring = false;
 
             if (IsDead)

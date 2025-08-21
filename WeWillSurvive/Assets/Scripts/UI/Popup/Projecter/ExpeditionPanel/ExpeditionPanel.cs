@@ -74,7 +74,7 @@ namespace WeWillSurvive
 
             if (expeditionState == EExpeditionState.Normal && _readyPanel.IsReady)
             {
-                ExpeditionManager.Instance.ReadyExpedition();
+                ExpeditionManager.Instance.UpdateExpeditionState(EExpeditionState.Ready);
             }
             else if (expeditionState == EExpeditionState.Ready)
             {
@@ -83,6 +83,10 @@ namespace WeWillSurvive
                     // 탐사 시작
                     var target = _selectPanel.SelectCharacter.Owner;
                     ExpeditionManager.Instance.StartExpedition(target);
+                }
+                else
+                {
+                    ExpeditionManager.Instance.UpdateExpeditionState(EExpeditionState.Normal);
                 }
             }
         }

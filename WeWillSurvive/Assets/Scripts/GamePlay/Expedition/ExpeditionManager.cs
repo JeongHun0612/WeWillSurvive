@@ -42,14 +42,14 @@ namespace WeWillSurvive.Expedition
             TotalExpeditionCount = 0;
         }
 
-        public void ReadyExpedition()
+        public void UpdateExpeditionState(EExpeditionState state)
         {
-            _currentState = EExpeditionState.Ready;
+            _currentState = state;
         }
 
         public void StartExpedition(CharacterBase target)
         {
-            _currentState = EExpeditionState.Exploring;
+            UpdateExpeditionState(EExpeditionState.Exploring);
             target.OnExploring();
 
             TotalExpeditionCount++;
@@ -57,7 +57,7 @@ namespace WeWillSurvive.Expedition
 
         public void CompleteExpedition()
         {
-            _currentState = EExpeditionState.Normal;
+            UpdateExpeditionState(EExpeditionState.Normal);
         }
 
         public int GetRandomExpeditionDay()

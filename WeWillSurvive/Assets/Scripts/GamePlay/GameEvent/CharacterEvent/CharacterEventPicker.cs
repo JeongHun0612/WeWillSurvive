@@ -56,7 +56,8 @@ namespace WeWillSurvive.CharacterEvent
                 targetProgress = minProgresses[Random.Range(0, minProgresses.Count)];
             }
 
-            MainEventData eventData = targetProgress.GetDailyEvent();
+            MainEventData selectedEvent = targetProgress.GetValidRandomEvent();
+            _lastSelectedEvent = selectedEvent;
 
             // 상태 업데이트
             ResetEventCooldown();
@@ -64,7 +65,7 @@ namespace WeWillSurvive.CharacterEvent
 
             Debug.Log($"[{targetProgress.Category}] 캐릭터 이벤트 발생");
 
-            return new DailyCharacterEvent(eventData, targetProgress.Category);
+            return new DailyCharacterEvent(selectedEvent, targetProgress.Category);
         }
 
         private CharacterEventProgress GetCharacterEventProgress(ECharacter characterType)
@@ -84,21 +85,6 @@ namespace WeWillSurvive.CharacterEvent
         {
             base.ResetState();
             Owner = CharacterManager.GetCharacter(Category);
-        }
-
-        public override MainEventData GetDailyEvent()
-        {
-            var validEvents = GetValidEvents();
-
-            if (validEvents.Count == 0)
-                return null;
-
-            EventTriggerCount++;
-            ResetDayCounter();
-
-            // 해당 프로그래스 내에서 랜덤한 이벤트 반환
-            int randomIndex = UnityEngine.Random.Range(0, validEvents.Count);
-            return validEvents[randomIndex];
         }
     }
 }
