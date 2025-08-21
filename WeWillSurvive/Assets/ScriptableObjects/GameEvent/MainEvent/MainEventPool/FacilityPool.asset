@@ -20,5 +20,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e403479ba91a2fd4db81d2a5b56faec1, type: 2}
   - {fileID: 11400000, guid: 7ebdd96d4a3958041ac9d1025423faa3, type: 2}
   - {fileID: 11400000, guid: 4671769103295d342af22e5d2edf048e, type: 2}
-  _minDayCounter: 4
-  _maxDayCounter: 5
+  _minDayCounter: 2
+  _maxDayCounter: 4
