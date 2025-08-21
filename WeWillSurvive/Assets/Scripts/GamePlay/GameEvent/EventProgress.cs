@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace WeWillSurvive.GameEvent
 {
@@ -18,8 +19,6 @@ namespace WeWillSurvive.GameEvent
         public IReadOnlyList<MainEventData> Events => _eventPool.Events;
 
         protected EventProgress() { }
-
-        public abstract MainEventData GetDailyEvent();
 
         public virtual void Initialize(EventPoolBase<TEnum> eventPool)
         {
@@ -59,6 +58,21 @@ namespace WeWillSurvive.GameEvent
         {
             DayCounter = dayCounter;
             IsReady = false;
+        }
+
+        public virtual MainEventData GetValidRandomEvent()
+        {
+            var validEvents = GetValidEvents();
+
+            if (validEvents.Count == 0)
+                return null;
+
+            EventTriggerCount++;
+            ResetDayCounter();
+
+            // 해당 프로그래스 내에서 랜덤한 이벤트 반환
+            int randomIndex = UnityEngine.Random.Range(0, validEvents.Count);
+            return validEvents[randomIndex];
         }
 
         public List<MainEventData> GetValidEvents()

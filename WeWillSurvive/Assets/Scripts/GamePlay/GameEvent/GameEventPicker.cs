@@ -100,22 +100,6 @@ namespace WeWillSurvive.GameEvent
             return readyProgresses[randomIndex];
         }
 
-        protected MainEventData GetValidMainEvent(IReadOnlyList<MainEventData> mainEventDatas)
-        {
-            if (mainEventDatas == null || mainEventDatas.Count == 0)
-                return null;
-
-            List<MainEventData> validEvents = mainEventDatas
-                .Where(mainEventData => mainEventData != _lastSelectedEvent && GameEventUtil.IsConditionsMet(mainEventData.Conditions))
-                .ToList();
-
-            if (validEvents.Count == 0)
-                return null;
-
-            int randomIndex = UnityEngine.Random.Range(0, validEvents.Count);
-            return validEvents[randomIndex];
-        }
-
         protected void ResetEventCooldown()
         {
             int min = Mathf.Min(_minGlobalDayCount, _maxGlobalDayCount);

@@ -68,7 +68,7 @@ namespace WeWillSurvive.MainEvent
                 progress = GetCompletedRandomEventProgress();
 
                 // progress가 null이거나 progress가 적절한 MainEventData를 반환하지 못하면 NotingEventProgress 할당
-                var mainEvent = progress?.GetDailyEvent();
+                var mainEvent = progress?.GetValidRandomEvent();
                 if (mainEvent != null)
                 {
                     Debug.Log($"[{name}] [{progress.Category}] 이벤트 발생");
@@ -79,8 +79,11 @@ namespace WeWillSurvive.MainEvent
             }
 
             // 최종적으로 선택된 이벤트를 반환
-            var selectedEvent = progress.GetDailyEvent();
+            var selectedEvent = progress.GetValidRandomEvent();
             _lastSelectedEvent = selectedEvent;
+
+            // 상태 업데이트
+            ResetEventCooldown();
 
             Debug.Log($"[{name}] [{progress.Category}] 이벤트 발생");
 
@@ -91,19 +94,5 @@ namespace WeWillSurvive.MainEvent
     [System.Serializable]
     public class MainEventProgress : EventProgress<EMainEventCategory>
     {
-        public override MainEventData GetDailyEvent()
-        {
-            var validEvents = GetValidEvents();
-
-            if (validEvents.Count == 0)
-                return null;
-
-            EventTriggerCount++;
-            ResetDayCounter();
-
-            // 해당 프로그래스 내에서 랜덤한 이벤트 반환
-            int randomIndex = UnityEngine.Random.Range(0, validEvents.Count);
-            return validEvents[randomIndex];
-        }
     }
 }
