@@ -97,15 +97,12 @@ namespace WeWillSurvive.Character
                 _explorationDayCounter++;
                 Debug.Log($"[{Name}] 탐사 - [{_explorationDayCounter}/{_maxExplorationDays}]일차");
 
+                // 탐사 완료
                 if (_explorationDayCounter >= _maxExplorationDays)
-                {
-                    State.SetState(EState.Normal);
                     OnExpeditionComplete();
-                }
             }
             else
             {
-                State.SetState(EState.Normal);
                 Status.OnNewDay();
             }
         }

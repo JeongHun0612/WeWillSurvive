@@ -36,14 +36,15 @@ namespace WeWillSurvive
 
         public virtual void OnNewDay()
         {
-            _dayCounter++;
-
-            if (DaysToNextLevel.TryGetValue(_level, out int daysRequired) && _dayCounter > daysRequired)
+            if (DaysToNextLevel.TryGetValue(_level, out int daysRequired) && _dayCounter >= daysRequired)
             {
                 WorsenStatus();
             }
 
-            ApplyCurrentLevelState();
+            _dayCounter++;
+
+            // Log 추가
+            LogStateActive(_level);
         }
 
         public virtual void OnExpeditionResult()
@@ -64,7 +65,7 @@ namespace WeWillSurvive
 
                     if (roll < cumulative)
                     {
-                        Debug.Log($"[{typeof(TLevel)}] {stateTransition.TransitionType} 발생");
+                        Debug.Log($"[{StatusType}] {stateTransition.TransitionType} 발생, 기존 레벨 {_level}");
                         HandleStateTransition(stateTransition.TransitionType);
                         break;
                     }
@@ -74,8 +75,6 @@ namespace WeWillSurvive
             {
                 Debug.LogWarning($"{_level}에 대한 StateTransitionTable이 존재하지 않습니다.");
             }
-
-            ApplyCurrentLevelState();
         }
 
         public virtual void ResetStatus()
@@ -86,74 +85,110 @@ namespace WeWillSurvive
                 return;
             }
 
-            Debug.Log($"[{StatusType}] Reset 데이터");
             UpdateLevel(OrderedLevels[0]);
         }
 
+        /// <summary>
+        /// 상태 악화
+        /// </summary>
+        /// <param name="step">상태 Level 악화 단계</param>
         public virtual void WorsenStatus(int step = 1)
         {
             if (step <= 0)
-                return;
+                step = 1;
 
-            int currentIndex = System.Array.IndexOf(OrderedLevels, _level);
+            int currentIndex = GetCurrentLevelIndex();
             if (currentIndex == -1)
                 return;
 
             int targetIndex = Mathf.Min(currentIndex + step, OrderedLevels.Length - 1);
-            UpdateLevel(OrderedLevels[targetIndex]);
+            ExecuteWorsen(targetIndex);
         }
 
+        /// <summary>
+        /// 상태 회복
+        /// </summary>
+        /// <param name="step">상태 Level 회복 단계</param>
         public virtual void RecoveryStatus(int step = 1)
         {
             if (step <= 0)
-                return;
+                step = 1;
 
-            int currentIndex = System.Array.IndexOf(OrderedLevels, _level);
+            int currentIndex = GetCurrentLevelIndex();
             if (currentIndex == -1)
                 return;
 
             int targetIndex = Mathf.Max(currentIndex - step, 0);
+            ExecuteRecovery(targetIndex);
+        }
 
-            if (targetIndex < currentIndex)
-            {
-                // State에 따른 EventStateModifier 갱신
-                var modifier = GetEventModifier(_level);
-                modifier = Mathf.Max(modifier, _owner.EventStateModifier);
-                _owner.EventStateModifier = modifier;
-
-                LogStateResolved(_level);
-            }
-
-            UpdateLevel(OrderedLevels[targetIndex]);
+        /// <summary>
+        /// 상태 Normal로 회복
+        /// </summary>
+        public virtual void RecoverFully()
+        {
+            ExecuteRecovery(0);
         }
 
         public void UpdateLevel(TLevel newLevel)
         {
-            _level = newLevel;
-            _dayCounter = 0;
-        }
+            // 기존 Level에 해당 State 삭제
+            if (LevelStateMap.TryGetValue(_level, out var currentState))
+            {
+                _owner.State.RemoveState(currentState);
+            }
 
-        protected void ApplyCurrentLevelState()
-        {
+            // 새로운 Level로 갱신
+            _level = newLevel;
+
+            // DeadLevel이면 Character 사망
             if (IsDeadLevel(_level))
             {
                 _owner.OnDead();
                 return;
             }
 
-            if (LevelStateMap.TryGetValue(_level, out var state))
+            // 변경된 Level에 해당 State 추가
+            if (LevelStateMap.TryGetValue(_level, out var newState))
             {
-                // State 추가
-                _owner.State.AddState(state);
-
-                // State에 따른 EventStateModifier 갱신
-                var modifier = GetEventModifier(_level);
-                modifier = Mathf.Min(modifier, _owner.EventStateModifier);
-                _owner.EventStateModifier = modifier;
-
-                // Log 출력
-                LogStateActive(_level);
+                _owner.State.AddState(newState);
             }
+
+            // Counter 초기화
+            _dayCounter = 0;
+        }
+
+        private void ExecuteWorsen(int targetIndex)
+        {
+            int currentIndex = GetCurrentLevelIndex();
+            if (currentIndex == -1 || targetIndex <= currentIndex)
+                return;
+
+            // Level 갱신
+            UpdateLevel(OrderedLevels[targetIndex]);
+
+            // State에 따른 EventStateModifier 갱신
+            var modifier = GetEventModifier(_level);
+            modifier = Mathf.Min(modifier, _owner.EventStateModifier);
+            _owner.EventStateModifier = modifier;
+        }
+
+        private void ExecuteRecovery(int targetIndex)
+        {
+            int currentIndex = GetCurrentLevelIndex();
+            if (currentIndex == -1 || targetIndex >= currentIndex)
+                return;
+
+            // 상태 회복 Log 추가
+            LogStateResolved(_level);
+
+            // Level 갱신
+            UpdateLevel(OrderedLevels[targetIndex]);
+
+            // State에 따른 EventStateModifier 갱신
+            var modifier = GetEventModifier(_level);
+            modifier = Mathf.Max(modifier, _owner.EventStateModifier);
+            _owner.EventStateModifier = modifier;
         }
 
         private float GetEventModifier(TLevel level)
@@ -167,16 +202,21 @@ namespace WeWillSurvive
             return modifier;
         }
 
+        private int GetCurrentLevelIndex()
+        {
+            int currentIndex = System.Array.IndexOf(OrderedLevels, _level);
+            if (currentIndex == -1)
+                Debug.LogWarning($"[RecoveryStatus][{StatusType}] 현재 레벨({_level})이 OrderedLevels에 존재하지 않습니다. 데이터 설정을 확인하세요.");
+
+            return currentIndex;
+        }
+
         private void LogStateActive(TLevel level)
         {
             if (LevelStateMap.TryGetValue(level, out var state))
             {
                 string stateMessage = _owner.Data.StateMessageData.GetStateActiveMessage(state);
                 LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
-            }
-            else
-            {
-                Debug.LogWarning($"[{typeof(TLevel)}] {level}에 대한 LevelStateMap이 존재하지 않아 로그를 기록할 수 없습니다.");
             }
         }
 
@@ -186,10 +226,6 @@ namespace WeWillSurvive
             {
                 string stateMessage = _owner.Data.StateMessageData.GetStateResolvedMessage(state);
                 LogManager.AddCharacterStatusLog(_owner.Data.Type, stateMessage);
-            }
-            else
-            {
-                Debug.LogWarning($"[{typeof(TLevel)}] {level}에 대한 LevelStateMap이 존재하지 않아 로그를 기록할 수 없습니다.");
             }
         }
 

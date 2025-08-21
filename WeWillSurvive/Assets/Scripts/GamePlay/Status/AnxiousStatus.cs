@@ -81,8 +81,6 @@ namespace WeWillSurvive.Status
             {
                 WorsenStatus();
             }
-
-            ApplyCurrentLevelState();
         }
     }
 }
