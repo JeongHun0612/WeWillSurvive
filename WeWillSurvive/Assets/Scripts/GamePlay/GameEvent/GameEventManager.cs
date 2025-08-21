@@ -12,9 +12,9 @@ namespace WeWillSurvive.GameEvent
 {
     public enum EGameEventType
     {
-        MainEvent,
-        CharacterEvent,
-        EndingEvent
+        [InspectorName("메인 이벤트")] MainEvent = 0,
+        [InspectorName("캐릭터 이벤트")] CharacterEvent = 1,
+        [InspectorName("엔딩 이벤트")] EndingEvent = 2,
     }
 
     public class GameEventManager : MonoSingleton<GameEventManager>
@@ -24,8 +24,6 @@ namespace WeWillSurvive.GameEvent
         [SerializeField] private EndingEventPicker _endingEventPicker;
         [SerializeField] private CharacterEventPicker _characterEventPicker;
 
-        private List<EGameEventType> _primaryPriority = new() { EGameEventType.EndingEvent, EGameEventType.MainEvent };
-
         private Dictionary<EGameEventType, IGameEventPicker> _pickerMap;
 
         private DailyMainEvent _dailyMainEvent;
@@ -34,6 +32,7 @@ namespace WeWillSurvive.GameEvent
         public DailyMainEvent DailyMainEvent => _dailyMainEvent;
         public DailyCharacterEvent DailyCharacterEvent => _dailyCharacterEvent;
 
+        public MainEventPicker MainEventPicker => _mainEventPicker;
         public EndingEventPicker EndingEventPicker => _endingEventPicker;
 
         public async UniTask InitializeAsync()

@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,19 +35,19 @@ namespace WeWillSurvive.GameEvent
         }
 
         /// <summary>
-        /// Àü´Ş¹ŞÀº ¸ğµç Á¶°ÇÀÌ ÃæÁ·ÇÏ´ÂÁö °Ë»ç
+        /// ì „ë‹¬ë°›ì€ ëª¨ë“  ì¡°ê±´ì´ ì¶©ì¡±í•˜ëŠ”ì§€ ê²€ì‚¬
         /// </summary>
         /// <param name="conditions"></param>
         /// <returns></returns>
         public static bool IsConditionsMet(IReadOnlyList<Condition> conditions)
         {
-            // Á¶°ÇÀÌ ¾øÀ¸¸é 'ÃæÁ·'À¸·Î °£ÁÖ
+            // ì¡°ê±´ì´ ì—†ìœ¼ë©´ 'ì¶©ì¡±'ìœ¼ë¡œ ê°„ì£¼
             if (conditions == null || conditions.Count == 0)
                 return true;
 
             foreach (var condition in conditions)
             {
-                // ÇÏ³ª¶óµµ Á¶°ÇÀÌ ¸ÂÁö ¾ÊÀ¸¸é Áï½Ã false ¹İÈ¯
+                // í•˜ë‚˜ë¼ë„ ì¡°ê±´ì´ ë§ì§€ ì•Šìœ¼ë©´ ì¦‰ì‹œ false ë°˜í™˜
                 if (!CheckCondition(condition))
                     return false;
             }
@@ -56,7 +56,7 @@ namespace WeWillSurvive.GameEvent
         }
 
         /// <summary>
-        /// ÁÖ¾îÁø EventChoiceÀÇ ¾ÆÀÌÄÜ Å¸ÀÔ°ú ÇÊ¿ä Á¶°ÇÀ» È®ÀÎÇÏ¿© ÇØ´ç ¼±ÅÃÁö¸¦ È°¼ºÈ­ÇÒ ¼ö ÀÖ´ÂÁö ¿©ºÎ¸¦ ¹İÈ¯
+        /// ì£¼ì–´ì§„ EventChoiceì˜ ì•„ì´ì½˜ íƒ€ì…ê³¼ í•„ìš” ì¡°ê±´ì„ í™•ì¸í•˜ì—¬ í•´ë‹¹ ì„ íƒì§€ë¥¼ í™œì„±í™”í•  ìˆ˜ ìˆëŠ”ì§€ ì—¬ë¶€ë¥¼ ë°˜í™˜
         /// </summary>
         /// <param name="eventChoice"></param>
         /// <returns></returns>
@@ -64,7 +64,7 @@ namespace WeWillSurvive.GameEvent
         {
             if (eventChoice == null)
             {
-                Debug.LogWarning("EventChoice µ¥ÀÌÅÍ°¡ nullÀÔ´Ï´Ù.");
+                Debug.LogWarning("EventChoice ë°ì´í„°ê°€ nullì…ë‹ˆë‹¤.");
                 return false;
             }
 
@@ -84,7 +84,7 @@ namespace WeWillSurvive.GameEvent
         }
 
         /// <summary>
-        /// Àü´Ş¹ŞÀº EventChoice¿¡¼­ À¯È¿ÇÑ ·£´ı Result¸¦ ¹İÈ¯
+        /// ì „ë‹¬ë°›ì€ EventChoiceì—ì„œ ìœ íš¨í•œ ëœë¤ Resultë¥¼ ë°˜í™˜
         /// </summary>
         /// <param name="choice"></param>
         /// <returns></returns>
@@ -92,25 +92,25 @@ namespace WeWillSurvive.GameEvent
         {
             if (choice == null || choice.Results == null || choice.Results.Count == 0)
             {
-                Debug.LogError("À¯È¿ÇÏÁö ¾ÊÀº EventChoice µ¥ÀÌÅÍÀÔ´Ï´Ù.");
+                Debug.LogError("ìœ íš¨í•˜ì§€ ì•Šì€ EventChoice ë°ì´í„°ì…ë‹ˆë‹¤.");
                 return null;
             }
 
-            // Á¶°ÇÀÌ ÃæÁ·µÇ´Â ¸ğµç À¯È¿ÇÑ °á°úµéÀ» ÇÊÅÍ¸µ
+            // ì¡°ê±´ì´ ì¶©ì¡±ë˜ëŠ” ëª¨ë“  ìœ íš¨í•œ ê²°ê³¼ë“¤ì„ í•„í„°ë§
             var validResults = choice.Results
                 .Where(result => IsConditionsMet(result.Conditions))
                 .ToList();
 
             if (validResults.Count == 0)
             {
-                Debug.LogWarning("À¯È¿ÇÑ EventResult°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+                Debug.LogWarning("ìœ íš¨í•œ EventResultê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
                 return null;
             }
 
-            // Ä³¸¯ÅÍ ¼º°ø È®·ü ÇÊ¿äÇÑ ÇüÅÂ(0.00f)·Î °¡°ø
+            // ìºë¦­í„° ì„±ê³µ í™•ë¥  í•„ìš”í•œ í˜•íƒœ(0.00f)ë¡œ ê°€ê³µ
             float characterSuccessRate = Mathf.Clamp(characterStatValue, 0f, 100f) / 100.0f;
 
-            // °íÁ¤ È®·üÀ» ¸ÕÀú °è»êÇÏ°í, ½ºÅÈ ¿µÇâ¹Ş´Â °á°úµéÀÌ ³ª´²°¡Áú ÀüÃ¼ È®·ü Ç®À» °è»ê
+            // ê³ ì • í™•ë¥ ì„ ë¨¼ì € ê³„ì‚°í•˜ê³ , ìŠ¤íƒ¯ ì˜í–¥ë°›ëŠ” ê²°ê³¼ë“¤ì´ ë‚˜ëˆ ê°€ì§ˆ ì „ì²´ í™•ë¥  í’€ì„ ê³„ì‚°
             List<float> finalProbabilities = new();
             float totalFixedProbability = 0f;
             foreach (var result in validResults)
@@ -122,11 +122,11 @@ namespace WeWillSurvive.GameEvent
             }
 
             if (totalFixedProbability > 1.0f)
-                Debug.LogWarning($"°íÁ¤ È®·üÀÇ ÇÕÀÌ {totalFixedProbability:P2}·Î 100%¸¦ ÃÊ°úÇß½À´Ï´Ù.");
+                Debug.LogWarning($"ê³ ì • í™•ë¥ ì˜ í•©ì´ {totalFixedProbability:P2}ë¡œ 100%ë¥¼ ì´ˆê³¼í–ˆìŠµë‹ˆë‹¤.");
 
             float remainingProbabilityPool = Mathf.Max(0f, 1.0f - totalFixedProbability);
 
-            // °¢ °á°úÀÇ ÃÖÁ¾ È®·üÀ» °è»ê
+            // ê° ê²°ê³¼ì˜ ìµœì¢… í™•ë¥ ì„ ê³„ì‚°
             foreach (var result in validResults)
             {
                 float calculatedProbability = 0f;
@@ -147,37 +147,37 @@ namespace WeWillSurvive.GameEvent
                     calculatedProbability = result.Probability;
                 }
 
-                Debug.Log($"[{result.OutcomeType}] - È®·ü: {calculatedProbability:P2}");
+                Debug.Log($"[{result.OutcomeType}] - í™•ë¥ : {calculatedProbability:P2}");
                 finalProbabilities.Add(calculatedProbability);
             }
 
-            // °è»êµÈ ÃÖÁ¾ È®·ü(°¡ÁßÄ¡)¿¡ µû¶ó ·£´ıÇÏ°Ô ÇÏ³ªÀÇ °á°ú¸¦ ¼±ÅÃ
+            // ê³„ì‚°ëœ ìµœì¢… í™•ë¥ (ê°€ì¤‘ì¹˜)ì— ë”°ë¼ ëœë¤í•˜ê²Œ í•˜ë‚˜ì˜ ê²°ê³¼ë¥¼ ì„ íƒ
             float totalProbability = finalProbabilities.Sum();
             float randomPoint = UnityEngine.Random.Range(0, totalProbability);
 
             for (int i = 0; i < validResults.Count; i++)
             {
-                // ÇöÀç °á°úÀÇ È®·üº¸´Ù ·£´ı Æ÷ÀÎÆ®°¡ ÀÛ°Å³ª °°À¸¸é ÀÌ °á°ú¸¦ ¼±ÅÃ
+                // í˜„ì¬ ê²°ê³¼ì˜ í™•ë¥ ë³´ë‹¤ ëœë¤ í¬ì¸íŠ¸ê°€ ì‘ê±°ë‚˜ ê°™ìœ¼ë©´ ì´ ê²°ê³¼ë¥¼ ì„ íƒ
                 if (randomPoint < finalProbabilities[i])
                 {
-                    Debug.Log($"[{choice.Results[i].OutcomeType}] {i}¹øÂ° ÀÌº¥Æ® ¹ß»ı");
+                    Debug.Log($"[{choice.Results[i].OutcomeType}] {i}ë²ˆì§¸ ê²°ê³¼ {choice.Results[i].Probability:P2} í™•ë¥ ë¡œ ë°˜í™˜");
                     return choice.Results[i];
                 }
                 else
                 {
-                    // ¾Æ´Ï¸é, ÇöÀç °á°úÀÇ È®·ü¸¸Å­ ·£´ı Æ÷ÀÎÆ®¸¦ ÁÙÀÌ°í ´ÙÀ½ °á°ú·Î ³Ñ¾î°¨
+                    // ì•„ë‹ˆë©´, í˜„ì¬ ê²°ê³¼ì˜ í™•ë¥ ë§Œí¼ ëœë¤ í¬ì¸íŠ¸ë¥¼ ì¤„ì´ê³  ë‹¤ìŒ ê²°ê³¼ë¡œ ë„˜ì–´ê°
                     randomPoint -= finalProbabilities[i];
                 }
             }
 
-            // ¸¸¾à ºÎµ¿¼Ò¼öÁ¡ ¿À·ù µîÀ¸·Î ¿©±â±îÁö ¿À°Ô µÇ¸é ¸¶Áö¸· ¿ä¼Ò¸¦ ¹İÈ¯
+            // ë§Œì•½ ë¶€ë™ì†Œìˆ˜ì  ì˜¤ë¥˜ ë“±ìœ¼ë¡œ ì—¬ê¸°ê¹Œì§€ ì˜¤ê²Œ ë˜ë©´ ë§ˆì§€ë§‰ ìš”ì†Œë¥¼ ë°˜í™˜
             return validResults[choice.Results.Count - 1];
         }
 
         /// <summary>
-        /// ÀÌº¥Æ® Á¶°Ç °Ë»ç
+        /// ì´ë²¤íŠ¸ ì¡°ê±´ ê²€ì‚¬
         /// </summary>
-        /// <param name="condition">ÀÌº¥Æ® Á¶°Ç</param>
+        /// <param name="condition">ì´ë²¤íŠ¸ ì¡°ê±´</param>
         /// <returns></returns>
         public static bool CheckCondition(Condition condition)
         {
@@ -186,14 +186,14 @@ namespace WeWillSurvive.GameEvent
                 return handler.IsMet(condition);
             }
 
-            Debug.LogWarning($"ÇÚµé·¯°¡ µî·ÏµÇÁö ¾ÊÀº EventCondition Å¸ÀÔÀÔ´Ï´Ù: {condition.ConditionType}");
+            Debug.LogWarning($"í•¸ë“¤ëŸ¬ê°€ ë“±ë¡ë˜ì§€ ì•Šì€ EventCondition íƒ€ì…ì…ë‹ˆë‹¤: {condition.ConditionType}");
             return false;
         }
 
         /// <summary>
-        /// ÀÌº¥Æ® °á°ú ¾×¼Ç
+        /// ì´ë²¤íŠ¸ ê²°ê³¼ ì•¡ì…˜
         /// </summary>
-        /// <param name="action">ÀÌº¥Æ® ¾×¼Ç</param>
+        /// <param name="action">ì´ë²¤íŠ¸ ì•¡ì…˜</param>
         public static void ApplyResultAction(EventAction action)
         {
             if (_eventActionHandlers.TryGetValue(action.ActionType, out var applicator))
@@ -202,12 +202,12 @@ namespace WeWillSurvive.GameEvent
             }
             else
             {
-                Debug.LogWarning($"ÇÚµé·¯°¡ µî·ÏµÇÁö ¾ÊÀº EventAction Å¸ÀÔÀÔ´Ï´Ù: {action.ActionType}");
+                Debug.LogWarning($"í•¸ë“¤ëŸ¬ê°€ ë“±ë¡ë˜ì§€ ì•Šì€ EventAction íƒ€ì…ì…ë‹ˆë‹¤: {action.ActionType}");
             }
         }
 
         /// <summary>
-        /// ÀÌº¥Æ® ¼±ÅÃÁö ¾ÆÀÌÄÜ ¹İÈ¯
+        /// ì´ë²¤íŠ¸ ì„ íƒì§€ ì•„ì´ì½˜ ë°˜í™˜
         /// </summary>
         /// <param name="choiceType"></param>
         /// <returns></returns>
@@ -215,7 +215,7 @@ namespace WeWillSurvive.GameEvent
         {
             if (!_choiceIconDatas.TryGetValue(choiceType, out var choiceOptionIconData))
             {
-                Debug.LogError($"{choiceType} Å¸ÀÔÀÇ ChoiceIconData¸¦ Ã£Áö ¸øÇß½À´Ï´Ù.");
+                Debug.LogError($"{choiceType} íƒ€ì…ì˜ ChoiceIconDataë¥¼ ì°¾ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.");
                 return null;
             }
 
@@ -223,7 +223,7 @@ namespace WeWillSurvive.GameEvent
         }
 
         /// <summary>
-        /// ÀÌº¥Æ® ¼±ÅÃÁö ¾ÆÀÌÄÜ µ¥ÀÌÅÍ ¼ÂÆÃ
+        /// ì´ë²¤íŠ¸ ì„ íƒì§€ ì•„ì´ì½˜ ë°ì´í„° ì…‹íŒ…
         /// </summary>
         /// <returns></returns>
         private static async UniTask SetupChoiceOptionIconDatas()
@@ -240,7 +240,7 @@ namespace WeWillSurvive.GameEvent
         }
 
         /// <summary>
-        /// ÀÌº¥Æ® Á¶°Ç ÇÚµé·¯ ¼ÂÆÃ
+        /// ì´ë²¤íŠ¸ ì¡°ê±´ í•¸ë“¤ëŸ¬ ì…‹íŒ…
         /// </summary>
         private static void SetupEventConditionHandlers()
         {
@@ -259,7 +259,7 @@ namespace WeWillSurvive.GameEvent
         }
 
         /// <summary>
-        /// ÀÌº¥Æ® °á°ú ¾×¼Ç ÇÚµé·¯ ¼ÂÆÃ
+        /// ì´ë²¤íŠ¸ ê²°ê³¼ ì•¡ì…˜ í•¸ë“¤ëŸ¬ ì…‹íŒ…
         /// </summary>
         private static void SetupEventActionHandlers()
         {

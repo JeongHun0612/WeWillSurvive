@@ -55,6 +55,12 @@ namespace WeWillSurvive.GameEvent
             IsReady = false;
         }
 
+        public virtual void ResetDayCounter(int dayCounter)
+        {
+            DayCounter = dayCounter;
+            IsReady = false;
+        }
+
         public List<MainEventData> GetValidEvents()
         {
             if (Events == null || Events.Count == 0)

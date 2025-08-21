@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
   m_Name: cook_01
   m_EditorClassIdentifier: 
-  _eventId: Cook_01
+  _eventId: cook_01
   _title: 
   _descriptions:
   - "\uCFE1\uC740 \uBCBD\uC5D0 \uAC78\uB9B0 \uC870\uB9AC \uB3C4\uAD6C\uB97C \uBCF4\uBA70

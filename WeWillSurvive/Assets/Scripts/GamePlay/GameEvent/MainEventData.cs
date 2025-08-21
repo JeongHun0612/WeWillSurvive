@@ -124,7 +124,6 @@ namespace WeWillSurvive.GameEvent
         [InspectorName("대실패")] CriticalFailure = 4,
     }
 
-
     public enum EActionType
     {
         [InspectorName("스테이터스 악화")] WorsenStatus = 100,
@@ -138,6 +137,8 @@ namespace WeWillSurvive.GameEvent
 
         [InspectorName("엔딩 분기 진행")] AdvanceEndingProgress = 300,
         [InspectorName("엔딩 완료")] EndingComplete = 301,
+
+        [InspectorName("특정 메인 이벤트 발생 연기")] PostponeMainEvent = 400,
 
     }
     #endregion

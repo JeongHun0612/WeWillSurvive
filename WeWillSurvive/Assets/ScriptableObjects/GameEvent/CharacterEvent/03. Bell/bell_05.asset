@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: bell_05
+  m_EditorClassIdentifier: 
+  _eventId: bell_05
+  _title: 
+  _descriptions:
+  - "\uBCA8\uC740 \uACE0\uC7A5\uB09C \uC5D0\uC5B4\uB85D \uC2DC\uC2A4\uD15C\uC744
+    \uC0B4\uD3B4\uBCF4\uBA70 \uB9D0\uD588\uB2E4. \"\uC774\uAC78 \uACE0\uCE58\uBA74
+    \uAE30\uC9C0\uC758 \uC548\uC804\uC774 \uD06C\uAC8C \uD5A5\uC0C1\uB420 \uAC70\uC57C.\"
+    \uBCA8\uC740 \uC131\uACF5\uC801\uC73C\uB85C \uC5D0\uC5B4\uB85D \uC2DC\uC2A4\uD15C\uC744
+    \uACE0\uCE5C\uB2E4\uBA74, \uC55E\uC73C\uB85C \uBA70\uCE60 \uB3D9\uC548\uC740
+    \uAE30\uC9C0 \uC2DC\uC124\uC5D0 \uBB38\uC81C\uAC00 \uC0DD\uAE30\uB294 \uC77C\uC740
+    \uC5C6\uB2E4\uACE0 \uB9D0\uD55C\uB2E4. \uAE30\uC9C0\uC758 \uC548\uC804\uC744
+    \uC704\uD574\uC11C\uB77C\uB3C4 \uD55C\uBC88 \uC2DC\uB3C4\uD574\uBCF4\uC790."
+  _conditions: []
+  _choiceSchema: 50
+  _choices:
+  - _choiceIcon: 0
+    _requiredAmount: 0
+    _choiceText: "\uC218\uD589\uD55C\uB2E4"
+    _results:
+    - _outComeType: 2
+      _conditions: []
+      _resultText: "\uBCA8\uC740 \uC5D0\uC5B4\uB85D \uC2DC\uC2A4\uD15C \uC218\uB9AC\uC5D0
+        \uC131\uACF5\uD588\uB2E4. \uAE30\uC9C0\uC758 \uC548\uC804\uC131\uC774 \uD06C\uAC8C
+        \uD5A5\uC0C1\uB418\uC5C8\uB2E4. \"\uC774\uC81C \uC548\uC2EC\uD574\uB3C4 \uB3FC.\"
+        \uC55E\uC73C\uB85C \uC5F4\uD758 \uC815\uB3C4\uB294 \uC2DC\uC124\uC5D0 \uBB38\uC81C\uAC00
+        \uC0DD\uAE30\uB294 \uC77C\uC740 \uC5C6\uC744 \uAC83\uC774\uB2E4."
+      _actions:
+      - _actionType: 400
+        _targetId: Facility
+        _parameter: Hunger
+        _value: 10
+      _isAffectedByStats: 1
+      _probability: 1
+    - _outComeType: 3
+      _conditions: []
+      _resultText: "\uBCA8\uC740 \uC5D0\uC5B4\uB85D \uC2DC\uC2A4\uD15C \uC218\uB9AC\uC5D0
+        \uC2E4\uD328\uD588\uB2E4. \uBD80\uD488\uC774 \uB108\uBB34 \uB0A1\uC544 \uC4F8
+        \uC218 \uC5C6\uC5C8\uB2E4. \uC6B0\uB9AC\uB294 \uC5EC\uC804\uD788 \uAE30\uC9C0
+        \uC2DC\uC124\uC5D0 \uBB38\uC81C\uAC00 \uC0DD\uAE30\uB294 \uAC83\uC744 \uAC71\uC815\uD574\uC57C\uD55C\uB2E4."
+      _actions: []
+      _isAffectedByStats: 1
+      _probability: 1
+    - _outComeType: 4
+      _conditions: []
+      _resultText: "\uC5D0\uC5B4\uB85D\uC774 \uAC11\uC790\uAE30 \uC624\uC791\uB3D9\uD558\uBA70
+        \uACBD\uBCF4\uC74C\uC774 \uC6B8\uB838\uB2E4. \"\uC774\uB807\uAC8C \uB420
+        \uC904\uC740 \uBAB0\uB790\uC5B4.\" \uAE30\uC9C0 \uC2DC\uC124\uC5D0 \uBB38\uC81C\uAC00
+        \uC0DD\uAE30\uC9C0\uB294 \uC54A\uC558\uC9C0\uB9CC, \uBCA8\uC774 \uBD80\uC0C1\uC744
+        \uC785\uC5C8\uB2E4."
+      _actions:
+      - _actionType: 100
+        _targetId: Bell
+        _parameter: Injury
+        _value: 1
+      _isAffectedByStats: 0
+      _probability: 0.1
+  - _choiceIcon: 1
+    _requiredAmount: 0
+    _choiceText: "\uC218\uD589\uD558\uC9C0 \uC54A\uB294\uB2E4"
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultText: "\"\uC9C0\uAE08 \uC5D0\uC5B4\uB85D \uC0C1\uD0DC\uB85C\uB294 \uC218\uB9AC\uAC00
+        \uB108\uBB34 \uC704\uD5D8\uD574 \uBCF4\uC5EC.\" \uBCA8\uC740 \uC7A0\uC2DC
+        \uBBF8\uB904\uB450\uAE30\uB85C \uD588\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+  - _choiceIcon: 500
+    _requiredAmount: 0
+    _choiceText: 
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultText: "\"\uC9C0\uAE08 \uC5D0\uC5B4\uB85D \uC0C1\uD0DC\uB85C\uB294 \uC218\uB9AC\uAC00
+        \uB108\uBB34 \uC704\uD5D8\uD574 \uBCF4\uC5EC.\" \uBCA8\uC740 \uC7A0\uC2DC
+        \uBBF8\uB904\uB450\uAE30\uB85C \uD588\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1

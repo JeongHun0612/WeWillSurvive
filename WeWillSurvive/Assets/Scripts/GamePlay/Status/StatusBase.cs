@@ -21,6 +21,7 @@ namespace WeWillSurvive
         protected TLevel[] OrderedLevels;
         protected Dictionary<TLevel, EState> LevelStateMap;
         protected Dictionary<TLevel, int> DaysToNextLevel;
+        protected Dictionary<TLevel, float> LevelEventModifierMap;
         protected Dictionary<TLevel, List<StateTransition>> StateTransitionTable;
 
         protected CharacterBase _owner;
@@ -115,6 +116,11 @@ namespace WeWillSurvive
 
             if (targetIndex < currentIndex)
             {
+                // State에 따른 EventStateModifier 갱신
+                var modifier = GetEventModifier(_level);
+                modifier = Mathf.Max(modifier, _owner.EventStateModifier);
+                _owner.EventStateModifier = modifier;
+
                 LogStateResolved(_level);
             }
 
@@ -140,9 +146,25 @@ namespace WeWillSurvive
                 // State 추가
                 _owner.State.AddState(state);
 
+                // State에 따른 EventStateModifier 갱신
+                var modifier = GetEventModifier(_level);
+                modifier = Mathf.Min(modifier, _owner.EventStateModifier);
+                _owner.EventStateModifier = modifier;
+
                 // Log 출력
                 LogStateActive(_level);
             }
+        }
+
+        private float GetEventModifier(TLevel level)
+        {
+            if (!LevelEventModifierMap.TryGetValue(level, out var modifier))
+            {
+                Debug.LogWarning($"[{typeof(TLevel)}] {level}에 대한 LevelEventModifierMap이 존재하지 않습니다.");
+                return 0f;
+            }
+
+            return modifier;
         }
 
         private void LogStateActive(TLevel level)

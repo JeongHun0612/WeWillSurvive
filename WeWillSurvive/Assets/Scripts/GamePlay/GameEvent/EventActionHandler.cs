@@ -16,80 +16,7 @@ namespace WeWillSurvive.GameEvent
         EActionType HandledActionType { get; }
 
         void Apply(EventAction action);
-    }
-
-    /// <summary>
-    /// 아이템 획득
-    /// </summary>
-    public class AddItemHandler : IEventActionHandler
-    {
-        public EActionType HandledActionType => EActionType.AddItem;
-
-        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
-        private LogManager LogManager => ServiceLocator.Get<LogManager>();
-
-        public void Apply(EventAction action)
-        {
-            EItem item = EnumUtil.ParseEnum<EItem>(action.TargetId);
-
-            if (!int.TryParse(action.Value, out var count))
-                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
-
-            ItemManager.AddItem(item, count);
-            LogManager.AddRewardItemData(new RewardItemData(item, count));
-        }
-    }
-
-    /// <summary>
-    /// 아이템 삭제
-    /// </summary>
-    public class RemoveItemApplicator : IEventActionHandler
-    {
-        public EActionType HandledActionType => EActionType.RemoveItem;
-
-        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
-        private LogManager LogManager => ServiceLocator.Get<LogManager>();
-
-        public void Apply(EventAction action)
-        {
-            EItem item = EnumUtil.ParseEnum<EItem>(action.TargetId);
-
-            if (!int.TryParse(action.Value, out var count))
-                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
-
-            if (ItemManager.TryDecreaseItemCount(item, count))
-            {
-                LogManager.AddRewardItemData(new RewardItemData(item, -count));
-            }
-        }
-    }
-
-    /// <summary>
-    /// 엔딩 분기 진행
-    /// </summary>
-    public class AdvanceEndingProgressApplicator : IEventActionHandler
-    {
-        public EActionType HandledActionType => EActionType.AdvanceEndingProgress;
-
-        public void Apply(EventAction action)
-        {
-            EEndingType endingType = EnumUtil.ParseEnum<EEndingType>(action.TargetId);
-            GameEventManager.Instance.EndingEventPicker.AdvanceEndingProgress(endingType);
-        }
-    }
-
-    /// <summary>
-    /// 엔딩 완료
-    /// </summary>
-    public class EndingCompleteApplicator : IEventActionHandler
-    {
-        public EActionType HandledActionType => EActionType.EndingComplete;
-
-        public void Apply(EventAction action)
-        {
-            EEndingType endingType = EnumUtil.ParseEnum<EEndingType>(action.TargetId);
-            EndingManager.Instance.Ending(endingType);
-        }
+        //GetEventProgress(EMainEventCategory.Facility).ResetDayCounter(10);
     }
 
     /// <summary>
@@ -169,7 +96,6 @@ namespace WeWillSurvive.GameEvent
         }
     }
 
-
     /// <summary>
     /// 캐릭터 사망
     /// </summary>
@@ -184,6 +110,98 @@ namespace WeWillSurvive.GameEvent
             ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(action.TargetId);
             var character = CharacterManager.GetCharacter(characterType);
             character.OnDead();
+        }
+    }
+
+    /// <summary>
+    /// 아이템 획득
+    /// </summary>
+    public class AddItemHandler : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.AddItem;
+
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
+
+        public void Apply(EventAction action)
+        {
+            EItem item = EnumUtil.ParseEnum<EItem>(action.TargetId);
+
+            if (!int.TryParse(action.Value, out var count))
+                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
+
+            ItemManager.AddItem(item, count);
+            LogManager.AddRewardItemData(new RewardItemData(item, count));
+        }
+    }
+
+    /// <summary>
+    /// 아이템 삭제
+    /// </summary>
+    public class RemoveItemApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.RemoveItem;
+
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
+
+        public void Apply(EventAction action)
+        {
+            EItem item = EnumUtil.ParseEnum<EItem>(action.TargetId);
+
+            if (!int.TryParse(action.Value, out var count))
+                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
+
+            if (ItemManager.TryDecreaseItemCount(item, count))
+            {
+                LogManager.AddRewardItemData(new RewardItemData(item, -count));
+            }
+        }
+    }
+
+    /// <summary>
+    /// 엔딩 분기 진행
+    /// </summary>
+    public class AdvanceEndingProgressApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.AdvanceEndingProgress;
+
+        public void Apply(EventAction action)
+        {
+            EEndingType endingType = EnumUtil.ParseEnum<EEndingType>(action.TargetId);
+            GameEventManager.Instance.EndingEventPicker.AdvanceEndingProgress(endingType);
+        }
+    }
+
+    /// <summary>
+    /// 엔딩 완료
+    /// </summary>
+    public class EndingCompleteApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.EndingComplete;
+
+        public void Apply(EventAction action)
+        {
+            EEndingType endingType = EnumUtil.ParseEnum<EEndingType>(action.TargetId);
+            EndingManager.Instance.Ending(endingType);
+        }
+    }
+
+    /// <summary>
+    /// 특정 이벤트 발생 주기 변경
+    /// </summary>
+    public class PostponeMainEventApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.PostponeMainEvent;
+        public void Apply(EventAction action)
+        {
+            EMainEventCategory category = EnumUtil.ParseEnum<EMainEventCategory>(action.TargetId);
+
+            if (!int.TryParse(action.Value, out var dayCounter))
+                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
+
+            var targetEventProgress = GameEventManager.Instance.MainEventPicker.GetEventProgress(category);
+            targetEventProgress?.ResetDayCounter(dayCounter);
         }
     }
 }

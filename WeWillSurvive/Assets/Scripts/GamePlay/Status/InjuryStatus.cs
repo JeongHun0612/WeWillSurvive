@@ -38,6 +38,14 @@ namespace WeWillSurvive.Status
                 [EInjuredLevel.Sick] = 4,
             };
 
+            LevelEventModifierMap = new()
+            {
+                [EInjuredLevel.Normal] = 0f,
+                [EInjuredLevel.Injured] = -20f,
+                [EInjuredLevel.Sick] = -30f,
+                [EInjuredLevel.Dead] = 0f,
+            };
+
             StateTransitionTable = new()
             {
                 [EInjuredLevel.Normal] = new()

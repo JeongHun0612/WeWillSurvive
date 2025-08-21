@@ -40,6 +40,13 @@ namespace WeWillSurvive.Status
                 [EHungerLevel.Starve] = 4,
             };
 
+            LevelEventModifierMap = new()
+            {
+                [EHungerLevel.Normal] = 10f,
+                [EHungerLevel.Hungry] = 0f,
+                [EHungerLevel.Starve] = -10f,
+            };
+
             StateTransitionTable = new()
             {
                 [EHungerLevel.Normal] = new()
@@ -60,6 +67,7 @@ namespace WeWillSurvive.Status
                     new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
                 },
             };
+
 
             UpdateLevel(EHungerLevel.Normal);
         }

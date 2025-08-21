@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
   m_Name: bell_01
   m_EditorClassIdentifier: 
-  _eventId: Bell_01
+  _eventId: bell_01
   _title: 
   _descriptions:
   - "\uBCA8\uC774 \uC624\uB798\uB41C \uBC1C\uC804\uAE30\uB97C \uB450\uB4DC\uB9AC\uBA70

@@ -76,9 +76,15 @@ namespace WeWillSurvive.GameEvent
             }
         }
 
-        protected TEventProgress GetEventProgress(TEnum category)
+        public TEventProgress GetEventProgress(TEnum category)
         {
-            return _eventProgresses.TryGetValue(category, out var progress) ? progress : null;
+            if (!_eventProgresses.TryGetValue(category, out var progress))
+            {
+                Debug.LogError($"{category} 에 해당하는 EventProgress를 찾지 못했습니다.");
+                return null;
+            }
+
+            return progress;
         }
 
         protected TEventProgress GetCompletedRandomEventProgress()

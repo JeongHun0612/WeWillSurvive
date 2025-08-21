@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: cook_05
+  m_EditorClassIdentifier: 
+  _eventId: cook_05
+  _title: 
+  _descriptions:
+  - "\uCFE1\uC740 \uB0C9\uC7A5 \uBCF4\uAD00 \uC911\uC774\uB358 \uBBF8\uD655\uC778
+    \uC2DD\uD488\uC744 \uAEBC\uB0B4 \uBCF4\uC774\uBA70 \uB9D0\uD588\uB2E4. \"\uC774\uAC74
+    \uBD84\uBA85 \uC6B0\uB9AC\uC5D0\uAC8C \uC88B\uC740 \uC2DD\uB7C9\uC774 \uB420
+    \uAC70\uC57C.\" \uCFE1\uC740 \uC774 \uBBF8\uD655\uC778 \uC2DD\uD488\uC744 \uC798\uB9CC
+    \uD65C\uC6A9\uD558\uBA74 \uB354 \uB9CE\uC740 \uC6B0\uC8FC \uC2DD\uB7C9\uC744
+    \uB9CC\uB4E4 \uC218 \uC788\uB2E4\uACE0 \uB9D0\uD55C\uB2E4. \uC2DD\uB7C9\uC774
+    \uBD80\uC871\uD558\uB2E4\uBA74, \uD55C\uBC88 \uC2DC\uB3C4\uD574\uBD10\uB3C4 \uC88B\uC744
+    \uAC83 \uAC19\uB2E4."
+  _conditions: []
+  _choiceSchema: 50
+  _choices:
+  - _choiceIcon: 200
+    _requiredAmount: 1
+    _choiceText: "\uC218\uD589\uD55C\uB2E4"
+    _results:
+    - _outComeType: 2
+      _conditions: []
+      _resultText: "\uCFE1\uC740 \uC608\uC0C1\uBCF4\uB2E4 \uB9CE\uC740 \uC2DD\uB7C9\uC744
+        \uB9CC\uB4E4\uC5B4\uB0C8\uB2E4. \"\uC774 \uB9DB\uC740 \uC815\uB9D0 \uB180\uB77C\uC6CC!\"
+        \uC0AC\uC2E4 \uAE30\uC874\uC758 \uC6B0\uC8FC \uC2DD\uB7C9\uACFC \uB9DB\uC740
+        \uBE44\uC2B7\uD588\uC9C0\uB9CC, \uADF8\uB798\uB3C4 \uC6B0\uB9AC\uB294 \uB354
+        \uB9CE\uC740 \uC2DD\uB7C9\uC744 \uC5BB\uC5C8\uB2E4."
+      _actions:
+      - _actionType: 201
+        _targetId: Food
+        _parameter: Hunger
+        _value: 1
+      - _actionType: 200
+        _targetId: Food
+        _parameter: Hunger
+        _value: 2
+      _isAffectedByStats: 1
+      _probability: 1
+    - _outComeType: 3
+      _conditions: []
+      _resultText: "\uC2DD\uD488\uC774 \uBCC0\uC9C8\uB418\uC5B4 \uC694\uB9AC\uAC00
+        \uC2E4\uD328\uD588\uB2E4. \uCFE1\uC740 \uC2E4\uB9DD\uC2A4\uB7EC\uC6B4 \uC5BC\uAD74\uB85C
+        \uB3CC\uC544\uC654\uB2E4. \"\uC544\uBB34\uB798\uB3C4 \uC0C1\uD0DC\uAC00 \uC88B\uC9C0
+        \uC54A\uC558\uB098 \uBD10.\""
+      _actions:
+      - _actionType: 201
+        _targetId: Food
+        _parameter: Hunger
+        _value: 1
+      _isAffectedByStats: 1
+      _probability: 1
+    - _outComeType: 4
+      _conditions: []
+      _resultText: "\uC2DD\uD488\uC5D0\uC11C \uC608\uC0C1\uCE58 \uBABB\uD55C \uD654\uD559
+        \uBC18\uC751\uC774 \uC77C\uC5B4\uB098 \uCFE1\uC774 \uB2E4\uCCE4\uB2E4. \"\uC774\uAC74
+        \uC804\uD600 \uC608\uC0C1 \uBABB\uD588\uC5B4.\""
+      _actions:
+      - _actionType: 201
+        _targetId: Food
+        _parameter: Hunger
+        _value: 1
+      - _actionType: 100
+        _targetId: Cook
+        _parameter: Injury
+        _value: 1
+      _isAffectedByStats: 0
+      _probability: 0.1
+  - _choiceIcon: 1
+    _requiredAmount: 0
+    _choiceText: "\uC218\uD589\uD558\uC9C0 \uC54A\uB294\uB2E4"
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultText: "\"\uC774 \uC2DD\uD488\uC740 \uC880 \uC704\uD5D8\uD574 \uBCF4\uC5EC.\"
+        \uCFE1\uC740 \uC870\uC6A9\uD788 \uC2DD\uD488\uC744 \uB0C9\uC7A5\uACE0\uC5D0
+        \uB3CC\uB824\uB193\uC558\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+  - _choiceIcon: 500
+    _requiredAmount: 0
+    _choiceText: 
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultText: "\"\uC774 \uC2DD\uD488\uC740 \uC880 \uC704\uD5D8\uD574 \uBCF4\uC5EC.\"
+        \uCFE1\uC740 \uC870\uC6A9\uD788 \uC2DD\uD488\uC744 \uB0C9\uC7A5\uACE0\uC5D0
+        \uB3CC\uB824\uB193\uC558\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1

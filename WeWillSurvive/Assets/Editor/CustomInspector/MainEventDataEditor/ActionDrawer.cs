@@ -4,6 +4,7 @@ using WeWillSurvive.Character;
 using WeWillSurvive.Ending;
 using WeWillSurvive.GameEvent;
 using WeWillSurvive.Item;
+using WeWillSurvive.MainEvent;
 using WeWillSurvive.Status;
 
 namespace WeWillSurvive
@@ -34,15 +35,6 @@ namespace WeWillSurvive
 
             switch (actionType)
             {
-                case EActionType.AddItem:
-                case EActionType.RemoveItem:
-                    PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
-                    PropertyUtil.DrawIntField(ref rect, "갯수", valueProp);
-                    break;
-                case EActionType.AdvanceEndingProgress:
-                case EActionType.EndingComplete:
-                    PropertyUtil.DrawEnumPopupAsString<EEndingType>(ref rect, "엔딩", targetIdProp);
-                    break;
                 case EActionType.WorsenStatus:
                 case EActionType.RecoveryStatus:
                     PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
@@ -55,6 +47,19 @@ namespace WeWillSurvive
                     break;
                 case EActionType.CharacterDaed:
                     PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    break;
+                case EActionType.AddItem:
+                case EActionType.RemoveItem:
+                    PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
+                    PropertyUtil.DrawIntField(ref rect, "갯수", valueProp);
+                    break;
+                case EActionType.AdvanceEndingProgress:
+                case EActionType.EndingComplete:
+                    PropertyUtil.DrawEnumPopupAsString<EEndingType>(ref rect, "엔딩", targetIdProp);
+                    break;
+                case EActionType.PostponeMainEvent:
+                    PropertyUtil.DrawEnumPopupAsString<EMainEventCategory>(ref rect, "이벤트 타입", targetIdProp);
+                    PropertyUtil.DrawIntField(ref rect, "연기 날짜", valueProp);
                     break;
                 default:
                     break;

@@ -39,6 +39,14 @@ namespace WeWillSurvive.Status
                 [EThirstLevel.Dehydrate] = 3,
             };
 
+
+            LevelEventModifierMap = new()
+            {
+                [EThirstLevel.Normal] = 10f,
+                [EThirstLevel.Thirsty] = 0f,
+                [EThirstLevel.Dehydrate] = -10f,
+            };
+
             StateTransitionTable = new()
             {
                 [EThirstLevel.Normal] = new()

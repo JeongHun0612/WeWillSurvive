@@ -41,6 +41,14 @@ namespace WeWillSurvive.Status
                 [EAnxiousLevel.Panic] = 2,
             };
 
+            LevelEventModifierMap = new()
+            {
+                [EAnxiousLevel.Normal] = 0f,
+                [EAnxiousLevel.Anxious] = -20f,
+                [EAnxiousLevel.Panic] = -30f,
+                [EAnxiousLevel.Dead] = 0f,
+            };
+
             StateTransitionTable = new()
             {
                 [EAnxiousLevel.Normal] = new()
