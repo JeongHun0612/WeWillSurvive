@@ -26,9 +26,11 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 211
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uB3C4\uB07C\uB97C \uAC74\uB124\uC790 \uC678\uACC4\uC778\uC740
         \uB9E4\uC6B0 \uAE30\uBED0\uD558\uBA70 \uD589\uC131 \uD0D0\uC0AC \uC9C0\uB3C4\uB97C
         \uC8FC\uC5C8\uB2E4. \uC9C0\uB3C4\uB97C \uC0B4\uD3B4\uBCF4\uB2C8, \uC804\uC5D0
@@ -43,14 +45,18 @@ MonoBehaviour:
         _targetId: Map
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uB3C4\uB07C\uB97C \uC8FC\uC9C0 \uC54A\uACA0\uB2E4\uB294 \uC758\uC0AC\uB97C
         \uBC1D\uD788\uC790, \uC678\uACC4\uC778\uC740 \uC791\uAC8C \uD55C\uC228\uC744
         \uC26C\uACE0 \uC774\uB0B4 \uC0AC\uB77C\uC84C\uB2E4. \uC9C0\uB3C4\uB294 \uADF8\uC640
         \uD568\uAED8 \uC5B4\uB460 \uC18D\uC73C\uB85C \uC0AC\uB77C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

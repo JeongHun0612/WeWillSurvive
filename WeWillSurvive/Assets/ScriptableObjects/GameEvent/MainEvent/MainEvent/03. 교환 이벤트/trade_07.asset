@@ -26,9 +26,11 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 214
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC6B0\uB9AC\uB294 \uD0D0\uC0AC \uC9C0\uB3C4\uB97C \uAC74\uB138\uACE0,
         \uC678\uACC4\uC778\uC740 \uAE08\uC18D \uCD1D\uC744 \uC870\uC2EC\uC2A4\uB7FD\uAC8C
         \uAEBC\uB0B4 \uAC74\uB138\uB2E4. \uCD1D\uC740 \uC624\uB798\uB418\uC5B4 \uBCF4\uC600\uC9C0\uB9CC,
@@ -44,15 +46,19 @@ MonoBehaviour:
         _targetId: Gun
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uD0D0\uC0AC \uC9C0\uB3C4\uB97C \uB0B4\uC5B4\uC8FC\uB294 \uAC83\uC740
         \uC704\uD5D8\uD558\uB2E4\uACE0 \uD310\uB2E8\uD588\uB2E4. \uC678\uACC4 \uD0D0\uC0AC\uB300\uB294
         \uC544\uC26C\uC6B4 \uAE30\uC0C9\uC744 \uAC10\uCD94\uC9C0 \uBABB\uD558\uACE0
         \uBC1C\uAC78\uC74C\uC744 \uB3CC\uB838\uB2E4. \uCD1D\uC740 \uADF8\uB4E4\uC758
         \uC190\uC5D0 \uADF8\uB300\uB85C \uB0A8\uC558\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

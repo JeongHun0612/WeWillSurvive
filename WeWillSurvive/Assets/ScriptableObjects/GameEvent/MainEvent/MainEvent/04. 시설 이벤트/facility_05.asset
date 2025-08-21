@@ -24,18 +24,23 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 205
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uBC30\uAD00\uC5D0 \uC218\uB9AC \uD0A4\uD2B8\uB97C \uC801\uC6A9\uD574
         \uB204\uC218\uB97C \uB9C9\uC558\uB2E4. \uB0B4\uBD80 \uACF5\uAE30\uB294 \uB9D1\uC544\uC84C\uACE0,
         \uBAA8\uB4E0 \uC7A5\uBE44\uB294 \uC815\uC0C1 \uC720\uC9C0\uB418\uC5C8\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 201
         _targetId: Food
         _parameter: 
@@ -49,8 +54,10 @@ MonoBehaviour:
         _targetId: Food
         _parameter: 
         _value: 2
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 201
         _targetId: Water
         _parameter: 
@@ -64,10 +71,13 @@ MonoBehaviour:
         _targetId: Water
         _parameter: 
         _value: 2
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uBCF4\uAD00\uD568 \uB0B4\uBD80\uAC00 \uC2B5\uAE30\uB85C \uAC00\uB4DD
         \uCC3C\uC9C0\uB9CC \uB2E4\uD589\uD788 \uC800\uC7A5\uC18C\uC5D0 \uC788\uB358
         \uC2DD\uB7C9\uACFC \uBB3C\uC740 \uBA40\uCA61\uD558\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

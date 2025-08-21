@@ -116,12 +116,16 @@ namespace WeWillSurvive
             {
                 SerializedProperty selectedChoiceProp = choicesProp.GetArrayElementAtIndex(selectedChoiceIndex);
                 SerializedProperty choiceIconProp = selectedChoiceProp.FindPropertyRelative("_choiceIcon");
+                SerializedProperty requiredAmountProp = selectedChoiceProp.FindPropertyRelative("_requiredAmount");
+
 
                 // 이벤트 타입 선택
                 using (new EditorGUI.DisabledScope(true))
                 {
                     EditorGUILayout.PropertyField(choiceIconProp, new GUIContent("선택지 타입"));
+                    EditorGUILayout.PropertyField(requiredAmountProp, new GUIContent("필요 갯수"));
                 }
+
             }
         }
 

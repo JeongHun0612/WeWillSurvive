@@ -27,9 +27,11 @@ MonoBehaviour:
   _choiceSchema: 4
   _choices:
   - _choiceIcon: 211
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Lead
         _parameter: 
@@ -43,8 +45,10 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Cook
         _parameter: 
@@ -58,8 +62,10 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Bell
         _parameter: 
@@ -73,8 +79,10 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: DrK
         _parameter: 
@@ -88,11 +96,14 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 209
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Lead
         _parameter: 
@@ -106,8 +117,10 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Cook
         _parameter: 
@@ -121,8 +134,10 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Bell
         _parameter: 
@@ -136,8 +151,10 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: DrK
         _parameter: 
@@ -151,11 +168,14 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 212
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Lead
         _parameter: 
@@ -169,8 +189,10 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Cook
         _parameter: 
@@ -184,8 +206,10 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Bell
         _parameter: 
@@ -199,8 +223,10 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: DrK
         _parameter: 
@@ -214,11 +240,14 @@ MonoBehaviour:
         \uBAA8\uB450 \uC81C\uC815\uC2E0\uC744 \uB418\uCC3E\uC558\uACE0, \uC870\uC885\uC740
         \uB04A\uC5B4\uC84C\uB2E4. \uAE30\uC9C0\uB294 \uC9C0\uCF1C\uC84C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Lead
         _parameter: 
@@ -239,8 +268,10 @@ MonoBehaviour:
         _targetId: Lead
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Lead
         _parameter: 
@@ -262,8 +293,10 @@ MonoBehaviour:
         _targetId: 
         _parameter: Injury
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Cook
         _parameter: 
@@ -284,8 +317,10 @@ MonoBehaviour:
         _targetId: Cook
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Cook
         _parameter: 
@@ -306,8 +341,10 @@ MonoBehaviour:
         _targetId: Cook
         _parameter: Injury
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: DrK
         _parameter: 
@@ -328,8 +365,10 @@ MonoBehaviour:
         _targetId: DrK
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: DrK
         _parameter: 
@@ -350,8 +389,10 @@ MonoBehaviour:
         _targetId: DrK
         _parameter: Injury
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Bell
         _parameter: 
@@ -372,8 +413,10 @@ MonoBehaviour:
         _targetId: Bell
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 100
         _targetId: Bell
         _parameter: 
@@ -394,4 +437,5 @@ MonoBehaviour:
         _targetId: Bell
         _parameter: Injury
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1

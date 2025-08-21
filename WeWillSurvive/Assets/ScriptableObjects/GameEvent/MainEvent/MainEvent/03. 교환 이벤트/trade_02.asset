@@ -26,9 +26,11 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 207
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC608\uBE44 \uD1B5\uC2E0 \uC7A5\uBE44\uB97C \uB0B4\uB193\uC790,
         \uC678\uACC4\uC778\uB4E4\uC740 \uC6B0\uC8FC \uC2DD\uB7C9\uC744 \uAE30\uC9C0
         \uC55E\uC5D0 \uC870\uC2EC\uC2A4\uB7FD\uAC8C \uB193\uACE0 \uC0AC\uB77C\uC84C\uB2E4.
@@ -43,15 +45,19 @@ MonoBehaviour:
         _targetId: Food
         _parameter: 
         _value: 2
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC7A5\uBE44\uB97C \uBCF4\uC5EC\uC904 \uC218 \uC5C6\uB2E4\uBA70
         \uACE0\uAC1C\uB97C \uC800\uC5C8\uB2E4. \uC678\uACC4\uC778\uB4E4\uC740 \uC7A0\uC2DC
         \uC815\uC9C0\uD558\uB354\uB2C8, \uACE7 \uC5BC\uC74C\uCC98\uB7FC \uCC28\uAC00\uC6B4
         \uD45C\uC815\uC73C\uB85C \uB3CC\uC544\uC130\uB2E4. \uADF8\uB4E4\uC774 \uC9C0\uB098\uAC04
         \uC790\uB9AC\uB294 \uD558\uC580 \uC11C\uB9AC\uB9CC\uC774 \uB0A8\uC558\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

@@ -26,9 +26,11 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 210
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uBCF4\uB4DC\uAC8C\uC784\uD310\uC744 \uAC74\uB124\uC790 \uC678\uACC4
         \uACFC\uD559\uC790\uB4E4\uC740 \uD765\uBBF8\uB85C\uC6CC\uD558\uBA70 \uADDC\uCE59\uC744
         \uD574\uC11D\uD558\uB824 \uC560\uC37C\uB2E4. \uACE7 \uADF8\uB4E4\uC740 \uC791\uC740
@@ -44,11 +46,14 @@ MonoBehaviour:
         _targetId: RepairKit
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uAC70\uC808 \uC758\uC0AC\uB97C \uC804\uD558\uC790 \uC678\uACC4
         \uACFC\uD559\uC790\uB4E4\uC740 \uC7A0\uC2DC \uC544\uC26C\uC6CC\uD558\uB2E4\uAC00
         \uACE0\uAC1C\uB97C \uC219\uC774\uACE0 \uB5A0\uB0AC\uB2E4. \uADF8\uB4E4\uC774
@@ -56,4 +61,5 @@ MonoBehaviour:
         \uC2DC\uC120\uC774 \uB0A8\uC544 \uC788\uB294 \uB4EF\uD55C \uAE30\uBD84\uC774
         \uB4E4\uC5C8\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

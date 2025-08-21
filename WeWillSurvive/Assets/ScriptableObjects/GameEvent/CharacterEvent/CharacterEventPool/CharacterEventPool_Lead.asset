@@ -16,5 +16,10 @@ MonoBehaviour:
   _conditions: []
   _mainEventDatas:
   - {fileID: 11400000, guid: 7109fd73c3a061f45b9edd72116d7ab6, type: 2}
+  - {fileID: 11400000, guid: cb27aa24653c22a47a1b6f27ab3ce597, type: 2}
+  - {fileID: 11400000, guid: a66fd703a6c64654a955e2c37eac1277, type: 2}
+  - {fileID: 11400000, guid: e36707d797fbbad41b1073d4f3e15e57, type: 2}
+  - {fileID: 11400000, guid: cc74f4f6c8f4b4446b27b886f61195e1, type: 2}
+  - {fileID: 11400000, guid: b221c1b7886f51e449b45c8150fbc760, type: 2}
   _minDayCounter: 5
   _maxDayCounter: 7

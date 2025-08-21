@@ -26,9 +26,11 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 213
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC190\uC804\uB4F1\uC744 \uC870\uC2EC\uC2A4\uB7FD\uAC8C \uAC74\uB124\uC790,
         \uC678\uACC4 \uC0DD\uBA85\uCCB4\uB294 \uC9E7\uAC8C \uACE0\uAC1C\uB97C \uB044\uB355\uC774\uACE0
         \uBB3C\uBCD1\uB4E4\uC744 \uC870\uC2EC\uD788 \uB0B4\uB824\uB193\uC558\uB2E4.
@@ -43,14 +45,18 @@ MonoBehaviour:
         _targetId: Water
         _parameter: 
         _value: 2
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC6B0\uB9AC\uAC00 \uAC70\uC808\uC758 \uBAB8\uC9D3\uC744 \uD558\uC790,
         \uC678\uACC4 \uC0DD\uBA85\uCCB4\uB294 \uC2E4\uB9DD\uD55C \uB4EF \uBAB8\uC744
         \uB3CC\uB824 \uC0AC\uB77C\uC84C\uB2E4. \uAE08\uC138 \uAE30\uC9C0 \uC8FC\uBCC0\uC758
         \uACF5\uAE30\uB294 \uB2E4\uC2DC \uC801\uB9C9\uC5D0 \uD729\uC2F8\uC600\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

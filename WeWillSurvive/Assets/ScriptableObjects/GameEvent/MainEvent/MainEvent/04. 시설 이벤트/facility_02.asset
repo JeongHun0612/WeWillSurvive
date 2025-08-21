@@ -23,9 +23,11 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 208
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uB098\uBA38\uC9C0\uB97C \uB0B4\uBC84\uB824\uB450\uACE0 \uACE0\uAE09
         \uC6B0\uC8FC\uBCF5\uC744 \uC548\uC804\uD558\uAC8C \uBCF4\uAD00\uC18C\uC5D0
         \uC62E\uACBC\uB2E4. \uB098\uBA38\uC9C0 \uBB3C\uD488\uB4E4\uC740 \uBCBD \uD2C8\uC0C8\uB85C
@@ -39,11 +41,14 @@ MonoBehaviour:
         _targetId: MedicKit
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 205
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uB098\uBA38\uC9C0\uB97C \uB0B4\uBC84\uB824\uB450\uACE0 \uC218\uB9AC\uD0A4\uD2B8\uB97C
         \uC548\uC804\uD558\uAC8C \uBCF4\uAD00\uC18C\uC5D0 \uC62E\uACBC\uB2E4. \uB098\uBA38\uC9C0
         \uBB3C\uD488\uB4E4\uC740 \uBCBD \uD2C8\uC0C8\uB85C \uB5A8\uC5B4\uC838 \uBC84\uB838\uB2E4."
@@ -56,11 +61,14 @@ MonoBehaviour:
         _targetId: MedicKit
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 203
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uB098\uBA38\uC9C0\uB97C \uB0B4\uBC84\uB824\uB450\uACE0 \uC758\uB8CC\uD0A4\uD2B8\uB97C
         \uC548\uC804\uD558\uAC8C \uBCF4\uAD00\uC18C\uC5D0 \uC62E\uACBC\uB2E4. \uB098\uBA38\uC9C0
         \uBB3C\uD488\uB4E4\uC740 \uBCBD \uD2C8\uC0C8\uB85C \uB5A8\uC5B4\uC838 \uBC84\uB838\uB2E4."
@@ -73,11 +81,14 @@ MonoBehaviour:
         _targetId: RepairKit
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uB2E4\uB978 \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC740 \uC9C4\uB3D9
         \uC18D\uC5D0 \uD30C\uC190\uB418\uC5B4\uBC84\uB838\uB2E4."
       _actions:
@@ -93,4 +104,5 @@ MonoBehaviour:
         _targetId: MedicKit
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1

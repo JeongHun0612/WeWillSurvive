@@ -24,18 +24,23 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 205
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC218\uB9AC \uD0A4\uD2B8 \uB355\uBD84\uC5D0 \uD68C\uB85C\uB97C
         \uC548\uC804\uD558\uAC8C \uBCF5\uAD6C\uD588\uB2E4. \uC804\uB825\uC740 \uC548\uC815\uB410\uACE0,
         \uC7A5\uBE44\uB4E4\uB3C4 \uBB38\uC81C\uC5C6\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 200
         _targetId: Gun
         _parameter: 
@@ -49,8 +54,10 @@ MonoBehaviour:
         _targetId: Gun
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions:
+    - _outComeType: 0
+      _conditions:
       - _conditionType: 200
         _targetId: Flashlight
         _parameter: 
@@ -64,10 +71,13 @@ MonoBehaviour:
         _targetId: Flashlight
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC804\uB825 \uACFC\uBD80\uD558\uB85C\uAC00 \uD0C0\uBC84\uB838\uC9C0\uB9CC
         \uB2E4\uD589\uD788 \uC800\uC7A5\uC18C\uC5D0 \uC788\uB358 \uC7A5\uBE44\uB4E4\uC740
         \uBA40\uCA61\uD558\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

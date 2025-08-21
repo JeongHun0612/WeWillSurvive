@@ -23,9 +23,11 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 203
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC6B0\uB9AC\uB294 \uC758\uB8CC \uD0A4\uD2B8\uB97C \uC804\uB2EC\uD588\uB2E4.
         \uC5BC\uB9C8 \uD6C4 \uC678\uBD80 \uD0D0\uC0AC\uB300\uAC00 \uB2E4\uC2DC \uC5F0\uACB0\uB418\uC5C8\uACE0,
         \uD658\uC790\uB294 \uD68C\uBCF5\uB418\uC5C8\uB2E4\uACE0 \uC804\uD574\uC654\uB2E4.
@@ -41,11 +43,14 @@ MonoBehaviour:
         _targetId: RescueByOtherSurvivors
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 204
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC6B0\uB9AC\uB294 \uC758\uB8CC \uD0A4\uD2B8\uB97C \uC804\uB2EC\uD588\uB2E4.
         \uC5BC\uB9C8 \uD6C4 \uC678\uBD80 \uD0D0\uC0AC\uB300\uAC00 \uB2E4\uC2DC \uC5F0\uACB0\uB418\uC5C8\uACE0,
         \uD658\uC790\uB294 \uD68C\uBCF5\uB418\uC5C8\uB2E4\uACE0 \uC804\uD574\uC654\uB2E4.
@@ -58,14 +63,17 @@ MonoBehaviour:
         _parameter: 
         _value: 1
       - _actionType: 300
-        _targetId: 
+        _targetId: RescueByOtherSurvivors
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC6B0\uB9AC\uC5D0\uAC90 \uC904 \uC218 \uC788\uB294 \uC758\uB8CC
         \uBB3C\uC790\uAC00 \uC5C6\uC5C8\uB2E4. \uAD50\uC2E0\uC740 \uC870\uC6A9\uD788
         \uB04A\uC5B4\uC84C\uACE0, \uADF8\uB4E4\uC758 \uAD6C\uC870 \uBA54\uC2DC\uC9C0\uB3C4
@@ -73,4 +81,5 @@ MonoBehaviour:
         \uC4F0\uB838\uB2E4. \uC544\uBB34 \uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0 \uC54A\uC558\uC9C0\uB9CC,
         \uADF8\uAC83\uC774 \uC624\uD788\uB824 \uB354 \uD070 \uBD88\uC548\uC744 \uC548\uACA8\uC92C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

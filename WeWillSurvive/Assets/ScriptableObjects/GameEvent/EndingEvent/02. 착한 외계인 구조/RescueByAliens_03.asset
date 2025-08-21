@@ -24,9 +24,11 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 200
-    _amount: 2
+    _requiredAmount: 2
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC6B0\uB9AC\uB294 \uC2DD\uB7C9\uACFC \uBB3C\uC744 \uB098\uB204\uC5B4\uC8FC\uC5C8\uB2E4.
         \uADF8\uB4E4\uC740 \uACE0\uAC1C\uB97C \uB044\uB355\uC774\uBA70 \uAC10\uC0AC\uB97C
         \uC804\uD588\uB2E4. \uC6B0\uB9AC\uC758 \uACB0\uB2E8\uC774 \uAD6C\uC870\uB85C
@@ -40,11 +42,14 @@ MonoBehaviour:
         _targetId: RescueByAliens
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 202
-    _amount: 2
+    _requiredAmount: 2
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC6B0\uB9AC\uB294 \uC2DD\uB7C9\uACFC \uBB3C\uC744 \uB098\uB204\uC5B4\uC8FC\uC5C8\uB2E4.
         \uADF8\uB4E4\uC740 \uACE0\uAC1C\uB97C \uB044\uB355\uC774\uBA70 \uAC10\uC0AC\uB97C
         \uC804\uD588\uB2E4. \uC6B0\uB9AC\uC758 \uACB0\uB2E8\uC774 \uAD6C\uC870\uB85C
@@ -58,11 +63,14 @@ MonoBehaviour:
         _targetId: RescueByAliens
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uC6B0\uB9AC\uC5D0\uAC8C\uB3C4 \uC5EC\uC720\uB294 \uC5C6\uC5C8\uB2E4.
         \uAC70\uC808\uD558\uC790 \uADF8\uB4E4\uC758 \uB208\uBE5B\uC740 \uC11C\uB298\uD574\uC84C\uB2E4.
         \uC2E0\uB8B0\uB294 \uD754\uB4E4\uB9AC\uACE0, \uC6B0\uB9AC\uB294 \uB2E4\uC2DC
@@ -70,4 +78,5 @@ MonoBehaviour:
         \uC2E0\uB8B0\uB97C \uD68C\uBCF5\uD560 \uC218 \uC788\uC744 \uAC83\uC774\uB77C\uACE0
         \uC0DD\uAC01\uD558\uBA70 \uC704\uC548\uC744 \uC0BC\uC558\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

@@ -24,9 +24,11 @@ MonoBehaviour:
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 207
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uD754\uB4E4\uB9AC\uB294 \uBCBD\uC744 \uBD99\uC7A1\uACE0 \uB6F0\uC5B4\uB4E4\uC5B4,
         \uAC00\uC7A5 \uC911\uC694\uD574 \uBCF4\uC774\uB294 \uC608\uBE44\uD1B5\uC2E0\uC7A5\uBE44\uB97C
         \uAEBC\uB0B4\uC654\uB2E4. \uB2E4\uB978 \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC740
@@ -40,11 +42,14 @@ MonoBehaviour:
         _targetId: Gun
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 211
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uD754\uB4E4\uB9AC\uB294 \uBCBD\uC744 \uBD99\uC7A1\uACE0 \uB6F0\uC5B4\uB4E4\uC5B4,
         \uAC00\uC7A5 \uC911\uC694\uD574 \uBCF4\uC774\uB294 \uB3C4\uB07C\uB97C \uAEBC\uB0B4\uC654\uB2E4.
         \uB2E4\uB978 \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC740 \uC9C4\uB3D9 \uC18D\uC5D0
@@ -58,11 +63,14 @@ MonoBehaviour:
         _targetId: Gun
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 209
-    _amount: 1
+    _requiredAmount: 1
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uD754\uB4E4\uB9AC\uB294 \uBCBD\uC744 \uBD99\uC7A1\uACE0 \uB6F0\uC5B4\uB4E4\uC5B4,
         \uAC00\uC7A5 \uC911\uC694\uD574 \uBCF4\uC774\uB294 \uCD1D\uC744 \uAEBC\uB0B4\uC654\uB2E4.
         \uB2E4\uB978 \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC740 \uC9C4\uB3D9 \uC18D\uC5D0
@@ -76,11 +84,14 @@ MonoBehaviour:
         _targetId: Ax
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
       _resultText: "\uB2E4\uB978 \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC740 \uC9C4\uB3D9
         \uC18D\uC5D0 \uD30C\uC190\uB418\uC5B4\uBC84\uB838\uB2E4."
       _actions:
@@ -96,4 +107,5 @@ MonoBehaviour:
         _targetId: Gun
         _parameter: 
         _value: 1
+      _isAffectedByStats: 0
       _probability: 1
