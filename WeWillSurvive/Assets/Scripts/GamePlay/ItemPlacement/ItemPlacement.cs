@@ -54,9 +54,9 @@ namespace WeWillSurvive
                 return;
 
             if (_itemType == EItem.Food || _itemType == EItem.Water)
-                _showStatus.ShowStatusPanel($"{EnumUtil.GetDescription(_itemType)} : {Count}");
+                _showStatus.ShowStatusPanel($"{EnumUtil.GetInspectorName(_itemType)} : {Count}");
             else
-                _showStatus.ShowStatusPanel($"{EnumUtil.GetDescription(_itemType)}");
+                _showStatus.ShowStatusPanel($"{EnumUtil.GetInspectorName(_itemType)}");
         }
     }
 }

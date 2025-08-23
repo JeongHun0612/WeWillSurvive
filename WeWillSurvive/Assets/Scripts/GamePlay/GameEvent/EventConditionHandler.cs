@@ -161,6 +161,21 @@ namespace WeWillSurvive.GameEvent
     }
 
     /// <summary>
+    /// 특정 아이템을 보유하고 있지 않을 시
+    /// </summary>
+    public class NotHasItemChecker : IEventConditionHandler
+    {
+        public EConditionType HandledConditionType => EConditionType.NotHasItem;
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+
+        public bool IsMet(Condition condition)
+        {
+            EItem item = EnumUtil.ParseEnum<EItem>(condition.TargetId);
+            return !ItemManager.HasItem(item);
+        }
+    }
+
+    /// <summary>
     /// 아이템 수량이 특정 값 이상일 시
     /// </summary>
     public class ItemCountUpperChecker : IEventConditionHandler

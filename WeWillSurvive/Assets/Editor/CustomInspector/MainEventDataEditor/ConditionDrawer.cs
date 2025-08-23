@@ -48,6 +48,7 @@ namespace WeWillSurvive
                     PropertyUtil.DrawIntField(ref rect, "탐사 횟수", value1Prop);
                     break;
                 case EConditionType.HasItem:
+                case EConditionType.NotHasItem:
                     PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
                     break;
                 case EConditionType.ItemCountUpper:

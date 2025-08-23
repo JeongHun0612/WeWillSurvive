@@ -22,7 +22,12 @@ MonoBehaviour:
     \uD558\uB098\uB97C \uC81C\uACF5\uD558\uACA0\uB2E4\uACE0 \uC81C\uC548\uD55C\uB2E4.
     \uD0D0\uC0AC\uB300\uC6D0 \uC911 \uB204\uAD70\uAC00\uB294 \uC678\uACC4\uC778\uC758
     \uC7A5\uBE44\uB97C \uC870\uC2EC\uC2A4\uB808 \uBC14\uB77C\uBCF4\uACE0 \uC788\uB2E4."
-  _conditions: []
+  _conditions:
+  - _conditionType: 201
+    _targetId: Gun
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 214

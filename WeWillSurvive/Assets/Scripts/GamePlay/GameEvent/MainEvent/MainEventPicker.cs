@@ -70,17 +70,6 @@ namespace WeWillSurvive.MainEvent
 
                 if (progress == null)
                     progress = _notingEventProgress;
-
-
-                //// progress가 null이거나 progress가 적절한 MainEventData를 반환하지 못하면 NotingEventProgress 할당
-                //var mainEvent = progress?.GetValidRandomEvent();
-                //if (mainEvent != null)
-                //{
-                //    Debug.Log($"[{progress.Category} - {mainEvent.EventId}] 메인 이벤트 발생");
-                //    return new DailyMainEvent(mainEvent);
-                //}
-
-                //progress = _notingEventProgress;
             }
 
             // 최종적으로 선택된 이벤트를 반환

@@ -20,7 +20,12 @@ MonoBehaviour:
     \uAC00\uC9C4 \uC218\uB9AC \uD0A4\uD2B8\uAC00 \uD544\uC694\uD558\uB2E4\uACE0 \uB9D0\uD558\uBA70,
     \uADF8 \uB300\uAC00\uB85C \uACE0\uAE09 \uC6B0\uC8FC\uBCF5\uC744 \uAD50\uD658\uD558\uC790\uACE0
     \uD55C\uB2E4."
-  _conditions: []
+  _conditions:
+  - _conditionType: 201
+    _targetId: NiceSpacesuit
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 205

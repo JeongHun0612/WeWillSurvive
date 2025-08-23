@@ -22,7 +22,12 @@ MonoBehaviour:
     \uC790\uC2E0\uB4E4 \uC5F0\uAD6C\uC18C\uC5D0\uC11C \uD734\uC2DD\uC774 \uD544\uC694\uD558\uB2E4\uACE0
     \uC124\uBA85\uD558\uBA70, \uB2F9\uC2E0\uB4E4\uC758 \uBB38\uD654\uB97C \uCCB4\uD5D8\uD574\uBCF4\uACE0
     \uC2F6\uB2E4\uACE0 \uD55C\uB2E4."
-  _conditions: []
+  _conditions:
+  - _conditionType: 201
+    _targetId: RepairKit
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 210

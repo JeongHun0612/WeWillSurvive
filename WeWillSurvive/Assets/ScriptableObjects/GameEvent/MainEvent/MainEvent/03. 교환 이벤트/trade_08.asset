@@ -21,7 +21,12 @@ MonoBehaviour:
     \uADF8\uB294 \uC190\uC804\uB4F1\uC774 \uBB34\uCC99 \uADC0\uD558\uB2E4\uACE0 \uB9D0\uD558\uBA70,
     \uADF8 \uB300\uAC00\uB85C \uBCF4\uB4DC\uAC8C\uC784\uD310\uC744 \uAD50\uD658\uD558\uC790\uACE0
     \uD55C\uB2E4."
-  _conditions: []
+  _conditions:
+  - _conditionType: 201
+    _targetId: BoardGame
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 213

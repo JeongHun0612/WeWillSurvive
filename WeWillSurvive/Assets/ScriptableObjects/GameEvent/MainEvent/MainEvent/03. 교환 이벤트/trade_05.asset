@@ -19,7 +19,12 @@ MonoBehaviour:
     \uC885\uC871\uC774 \uB2E4\uAC00\uC654\uB2E4. \uADF8\uB4E4\uC740 \uACE0\uAE09
     \uC6B0\uC8FC\uBCF5\uC744 \uAC00\uB9AC\uD0A4\uBA70 \uC790\uC2E0\uB4E4\uC758 \uD1B5\uC2E0
     \uC7A5\uBE44\uC640 \uBC14\uAFB8\uC790\uACE0 \uD55C\uB2E4."
-  _conditions: []
+  _conditions:
+  - _conditionType: 201
+    _targetId: CommDevice
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 208

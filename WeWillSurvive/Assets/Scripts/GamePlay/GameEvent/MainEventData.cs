@@ -58,12 +58,14 @@ namespace WeWillSurvive.GameEvent
         /// 아이템
         [InspectorName("특정 아이템을 보유하고 있을 시")]
         HasItem = 200,
+        [InspectorName("특정 아이템을 보유하고 있지 않을 시")]
+        NotHasItem = 201,
 
         [InspectorName("아이템 수량이 특정 값 이상일 시")]
-        ItemCountUpper = 201,
+        ItemCountUpper = 202,
 
         [InspectorName("아이템 수량이 특정 값 이하일 시")]
-        ItemCountLower = 202,
+        ItemCountLower = 203,
 
 
         /// 기타

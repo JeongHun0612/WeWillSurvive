@@ -22,7 +22,12 @@ MonoBehaviour:
     \uB2F9\uC2E0\uC5D0\uAC8C \uD589\uC131 \uD0D0\uC0AC \uC9C0\uB3C4 \uD55C \uC7A5\uC744
     \uC900\uB2E4\uACE0 \uD55C\uB2E4. \uAD50\uD658\uC740 \uB2E8 \uD55C \uBC88\uB9CC
     \uAC00\uB2A5\uD558\uB2E4."
-  _conditions: []
+  _conditions:
+  - _conditionType: 201
+    _targetId: Map
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 1
   _choices:
   - _choiceIcon: 211
