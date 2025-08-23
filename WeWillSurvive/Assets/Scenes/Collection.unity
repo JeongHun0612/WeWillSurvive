@@ -1092,7 +1092,6 @@ GameObject:
   - component: {fileID: 285881059}
   - component: {fileID: 285881058}
   - component: {fileID: 285881057}
-  - component: {fileID: 285881061}
   m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
@@ -1184,25 +1183,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920.0001, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &285881061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285881056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ebcf4cc065d6764191144a707eacb93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneLayer: {fileID: 139027317}
-  _popupLayer: {fileID: 0}
-  _overlayLayer: {fileID: 306279567}
-  _scenePrefabPaths: []
-  _popupPrefabPaths: []
-  _overlayPrefabPaths: []
-  _loadingPrefabPath: Assets/Prefabs/UI/UI_Loading.prefab
 --- !u!1 &306279566
 GameObject:
   m_ObjectHideFlags: 0
@@ -4100,7 +4080,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1824662717}
   - component: {fileID: 1824662720}
-  - component: {fileID: 1824662719}
   - component: {fileID: 1824662718}
   m_Layer: 0
   m_Name: Minimap Camera
@@ -4168,14 +4147,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &1824662719
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824662716}
-  m_Enabled: 1
 --- !u!20 &1824662720
 Camera:
   m_ObjectHideFlags: 0
