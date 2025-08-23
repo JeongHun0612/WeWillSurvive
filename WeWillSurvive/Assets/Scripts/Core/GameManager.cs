@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using WeWillSurvive.Character;
 using WeWillSurvive.UI;
 using WeWillSurvive.FarmingReport;
 using WeWillSurvive.Log;
 using WeWillSurvive.GameEvent;
 using WeWillSurvive.Ending;
+using WeWillSurvive.Item;
 
 namespace WeWillSurvive.Core
 {
@@ -15,23 +15,45 @@ namespace WeWillSurvive.Core
         public int Day;
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
         private LogManager LogManager => ServiceLocator.Get<LogManager>();
         private EventBus EventBus => ServiceLocator.Get<EventBus>();
 
         private async void Start()
         {
+            UIManager.Instance.LoadingUI.Show();
+
             await ServiceLocator.AutoRegisterServices();
             await UIManager.Instance.InitializeAsync();
             await GameEventManager.Instance.InitializeAsync();
 
-            if (SceneManager.GetActiveScene().name == "2D")
-            {
-                OnStartSurvive();
-            }
+            UIManager.Instance.LoadingUI.Hide();
+
+            OnMoveTitle();
         }
 
-        public void OnStartSurvive()
+        public void OnMoveTitle()
         {
+            UIManager.Instance.CloseAllUIs();
+            UIManager.Instance.ShowScene<UI_Title>();
+        }
+
+        public void OnStartParming()
+        {
+            UIManager.Instance.CloseAllUIs();
+            ItemManager.Dipose();
+
+            // TODO 파밍맵 생성
+        }
+
+        public async void OnStartSurvive()
+        {
+            UIManager.Instance.CloseAllUIs();
+
+            // TODO 파밍씬 오브젝트 Dipose
+
+            await UIManager.Instance.ShowPopup<UI_Intro>().PlayScene();
+
             Day = 0;
 
             CharacterManager.SettingCharacter();
@@ -69,10 +91,13 @@ namespace WeWillSurvive.Core
         {
             Debug.Log("[하루 시작] ===========================================");
 
-            UIManager.Instance.ClosePopups(remain: 1);
+            UIManager.Instance.CloseAllPopups();
 
             if (UIManager.Instance.GetCurrentScene<UI_Room>() == null)
                 UIManager.Instance.ShowScene<UI_Room>();
+
+            if (UIManager.Instance.GetCurrentHUD<UI_RoomHUD>() == null)
+                UIManager.Instance.ShowHUD<UI_RoomHUD>();
 
             if (EndingManager.Instance.IsEnding)
             {

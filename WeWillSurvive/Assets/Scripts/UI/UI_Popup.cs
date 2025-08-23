@@ -5,7 +5,7 @@ namespace WeWillSurvive.UI
 {
     public class UI_Popup : UI_Base
     {
-        private const int DEFAULT_SORTING_ORDER = 10;
+        private const int DEFAULT_SORTING_ORDER = 20;
 
         public bool RememberInHistory = true;
 

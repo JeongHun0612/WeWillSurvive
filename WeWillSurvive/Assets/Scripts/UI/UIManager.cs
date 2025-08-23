@@ -6,18 +6,22 @@ using WeWillSurvive.Core;
 
 namespace WeWillSurvive.UI
 {
-    public class UIManager : MonoSceneSingleton<UIManager>
+    public class UIManager : MonoSingleton<UIManager>
     {
         [SerializeField] private Transform _sceneLayer;
+        [SerializeField] private Transform _hudLayer;
         [SerializeField] private Transform _popupLayer;
         [SerializeField] private Transform _overlayLayer;
 
         [SerializeField] private string[] _scenePrefabPaths;
+        [SerializeField] private string[] _hudPrefabPaths;
         [SerializeField] private string[] _popupPrefabPaths;
         [SerializeField] private string[] _overlayPrefabPaths;
-        [SerializeField] private string _loadingPrefabPath;
+
+        [SerializeField] private UI_Loading _loadingUI;
 
         private UI_Scene _currentScene;
+        private UI_HUD _currentHUD;
         private UI_Popup _currentPopup;
         private UI_Overlay _currentOverlay;
 
@@ -25,6 +29,7 @@ namespace WeWillSurvive.UI
         public int PopupHistoryCount => _popupHistory.Count;
 
         private readonly Dictionary<Type, UI_Scene> _sceneCache = new Dictionary<Type, UI_Scene>();
+        private readonly Dictionary<Type, UI_HUD> _hudCache = new Dictionary<Type, UI_HUD>();
         private readonly Dictionary<Type, UI_Popup> _popupCache = new Dictionary<Type, UI_Popup>();
         private readonly Dictionary<Type, UI_Overlay> _overlayCache = new Dictionary<Type, UI_Overlay>();
 
@@ -40,7 +45,14 @@ namespace WeWillSurvive.UI
         private ResourceManager _resourceManager;
         public ResourceManager ResourceManager => _resourceManager ??= ServiceLocator.Get<ResourceManager>();
 
-        public UI_Loading LoadingUI { get; private set; }
+        public UI_Loading LoadingUI => _loadingUI;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            LoadingUIInitialize();
+        }
 
         public async UniTask InitializeAsync(IProgress<float> progress = null)
         {
@@ -50,9 +62,7 @@ namespace WeWillSurvive.UI
                 return;
             }
 
-            // LoadingUI Instantiate
-            await LoadingUIInitialize();
-            LoadingUI.Show();
+            _resourceManager = ServiceLocator.Get<ResourceManager>();
 
             Debug.Log("Starting UI initialization with UniTask...");
             _initializationProgress = 0f;
@@ -60,18 +70,33 @@ namespace WeWillSurvive.UI
             _totalItems = _scenePrefabPaths.Length + _popupPrefabPaths.Length;
             _processedItems = 0;
 
-            await InitializeUIElements<UI_Overlay>(_overlayPrefabPaths, _overlayLayer, _overlayCache);
             await InitializeUIElements<UI_Scene>(_scenePrefabPaths, _sceneLayer, _sceneCache);
+            await InitializeUIElements<UI_HUD>(_hudPrefabPaths, _hudLayer, _hudCache);
             await InitializeUIElements<UI_Popup>(_popupPrefabPaths, _popupLayer, _popupCache);
+            await InitializeUIElements<UI_Overlay>(_overlayPrefabPaths, _overlayLayer, _overlayCache);
 
             _isInitialized = true;
             _initializationProgress = 1f;
             progress?.Report(1f);
 
             Debug.Log("UI initialization completed successfully.");
-            LoadingUI.Hide();
         }
 
+        #region Scene, HUD, Overlay
+        public T ShowScene<T>() where T : UI_Scene
+            => ShowCommon<T, UI_Scene>(_sceneCache, ref _currentScene);
+        public T ShowHUD<T>() where T : UI_HUD
+            => ShowCommon<T, UI_HUD>(_hudCache, ref _currentHUD);
+        public T ShowOverlay<T>() where T : UI_Overlay
+            => ShowCommon<T, UI_Overlay>(_overlayCache, ref _currentOverlay);
+
+        public void CloseCurrentScene() => CloseCommon(ref _currentScene);
+        public void CloseCurrentHUD() => CloseCommon(ref _currentHUD);
+        public void CloseCurrentOverlay() => CloseCommon(ref _currentOverlay);
+        #endregion
+
+
+        #region Popup
         public T ShowPopup<T>(bool remember = true) where T : UI_Popup
         {
             Type popupType = typeof(T);
@@ -120,82 +145,53 @@ namespace WeWillSurvive.UI
         {
             ClosePopups(remain: 0);
         }
+        #endregion
 
-        public T ShowScene<T>() where T : UI_Scene
+        public void CloseAllUIs()
         {
-            Type sceneType = typeof(T);
+            CloseCurrentScene();
+            CloseCurrentHUD();
+            CloseAllPopups();
+            CloseCurrentOverlay();
+        }
 
-            if (!_sceneCache.TryGetValue(sceneType, out UI_Scene scene))
+        public T GetCurrentScene<T>() where T : UI_Scene => _currentScene as T;
+        public T GetCurrentHUD<T>() where T : UI_HUD => _currentHUD as T;
+        public T GetCurrentPopup<T>() where T : UI_Popup => _currentPopup as T;
+        public T GetCurrentOverlay<T>() where T : UI_Overlay => _currentOverlay as T;
+
+        private T ShowCommon<T, TBase>(Dictionary<Type, TBase> cache, ref TBase current)
+            where T : TBase
+            where TBase : UI_Base
+        {
+            var type = typeof(T);
+
+            if (!cache.TryGetValue(type, out var target) || target == null)
             {
-                Debug.LogError($"Scene of type {sceneType.Name} not found!");
+                Debug.LogError($"UI of type {type.Name} not found!");
                 return null;
             }
 
-            if (_currentScene != null)
+            if (current != null)
             {
-                if (_currentScene == scene)
-                    return scene as T;
+                if (ReferenceEquals(current, target))
+                    return target as T;
 
-                _currentScene.Hide();
+                current.Hide();
             }
 
-            _currentScene = scene;
-            _currentScene.Show();
-
-            return scene as T;
+            current = target;
+            current.Show();
+            return (T)target;
         }
 
-        public void CloseCurrentScene()
+        private void CloseCommon<TBase>(ref TBase current) where TBase : UI_Base
         {
-            if (_currentScene != null)
-            {
-                _currentScene.Hide();
-                _currentScene = null;
-            }
-        }
+            if (current == null)
+                return;
 
-        public T ShowOverlay<T>() where T : UI_Overlay
-        {
-            Type overlayType = typeof(T);
-
-            if (!_overlayCache.TryGetValue(overlayType, out UI_Overlay overlay))
-            {
-                Debug.LogError($"Overlay of type {overlayType.Name} not found!");
-                return null;
-            }
-
-            if (_currentOverlay != null)
-            {
-                if (_currentOverlay == overlay)
-                    return overlay as T;
-
-                _currentScene.Hide();
-            }
-
-            _currentOverlay = overlay;
-            _currentOverlay.Show();
-
-            return overlay as T;
-        }
-
-        public void CloseCurrentOverlay()
-        {
-            if (_currentOverlay != null)
-            {
-                _currentOverlay.Hide();
-                _currentOverlay = null;
-            }
-        }
-
-        public T GetCurrentPopup<T>() where T : UI_Popup
-        {
-            if (_currentPopup is not T) return null;
-            return _currentPopup as T;
-        }
-
-        public T GetCurrentScene<T>() where T : UI_Scene
-        {
-            return _currentScene as T;
+            current.Hide();
+            current = null;
         }
 
         private async UniTask InitializeUIElements<T>(string[] paths, Transform layer, Dictionary<Type, T> cache, IProgress<float> progress = null) where T : UI_Base
@@ -244,19 +240,36 @@ namespace WeWillSurvive.UI
             }
         }
 
-        public async UniTask LoadingUIInitialize()
+        public void LoadingUIInitialize()
         {
-            try
+            if (_loadingUI == null)
             {
-                var asset = await ResourceManager.LoadAssetAsync<GameObject>(_loadingPrefabPath);
-                LoadingUI = Instantiate(asset.GetComponent<UI_Loading>(), transform);
-                LoadingUI.CanvasInitialize();
-                await LoadingUI.InitializeAsync();
+                Debug.LogError("UI_Loading is null!");
+                return;
             }
-            catch (Exception ex)
-            {
-                Debug.LogError($"Error loading loadingUI prefab: {ex.Message}");
-            }
+
+            _loadingUI.CanvasInitialize();
+            _loadingUI.Initialize();
+            _loadingUI.Hide();
+
+            Debug.Log($"UI_Loading loaded and initialized");
+
+            //Type uiType = _loadingUI.GetType();
+
+            //if (!_overlayCache.ContainsKey(uiType))
+            //{
+            //    _overlayCache.Add(uiType, _loadingUI);
+            //    _loadingUI.CanvasInitialize();
+            //    _loadingUI.Initialize();
+            //    _loadingUI.Hide();
+
+            //    Debug.Log($"UI_Loading loaded and initialized: {uiType.Name}");
+            //}
+            //else
+            //{
+            //    Debug.LogWarning($"Duplicate UI_Loading type: {uiType.Name}");
+            //    Destroy(_loadingUI.gameObject);
+            //}
         }
     }
 }

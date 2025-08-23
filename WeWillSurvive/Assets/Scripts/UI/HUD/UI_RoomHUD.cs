@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,7 +11,7 @@ using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
-    public class UI_HUD : UI_Popup
+    public class UI_RoomHUD : UI_HUD
     {
         [Header("Day Text")]
         [SerializeField] private TMP_Text _dayText;

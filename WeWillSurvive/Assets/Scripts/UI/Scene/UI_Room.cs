@@ -57,8 +57,6 @@ namespace WeWillSurvive
         public override void OnShow()
         {
             _changingRoom = false;
-
-            UIManager.Instance.ShowPopup<UI_HUD>();
         }
 
         public void MoveRoom(ERoom targetRoom)

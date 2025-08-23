@@ -1,11 +1,10 @@
-using UnityEngine;
-using WeWillSurvive.Core;
+using WeWillSurvive.UI;
 
-namespace WeWillSurvive.UI
+namespace WeWillSurvive
 {
-    public class UI_Scene : UI_Base
+    public class UI_HUD : UI_Base
     {
-        private const int DEFAULT_SORTING_ORDER = 0;
+        private const int DEFAULT_SORTING_ORDER = 10;
 
         public override void CanvasInitialize()
         {
