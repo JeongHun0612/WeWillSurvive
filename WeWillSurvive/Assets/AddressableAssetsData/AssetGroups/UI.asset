@@ -25,6 +25,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4260c2860aef69446a2296337cc132e4
+    m_Address: Assets/Prefabs/UI/Popup/UI_Intro.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4a950e283cbdba24287f0265638529d4
     m_Address: Assets/Prefabs/UI/Popup/UI_RoomMonitor.prefab
     m_ReadOnly: 0
@@ -36,12 +41,17 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5414e63584d4bfa47b32793ceb9f663a
-    m_Address: Assets/Prefabs/UI/Popup/UI_HUD.prefab
+    m_Address: Assets/Prefabs/UI/HUD/UI_RoomHUD.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5da234b65a6db434cb59dbb512d24863
     m_Address: Assets/Prefabs/UI/Overlay/UI_Black.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6eb2ee9a3b0f42c488595bce12555a61
+    m_Address: Assets/Prefabs/UI/Scene/UI_Title.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
