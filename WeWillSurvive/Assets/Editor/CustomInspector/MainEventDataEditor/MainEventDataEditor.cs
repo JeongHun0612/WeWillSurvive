@@ -228,6 +228,8 @@ namespace WeWillSurvive
         {
             if (resultsProp == null) return;
 
+            //EditorGUILayout.PropertyField(resultsProp, new GUIContent("결과"));
+
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("결과 목록", EditorStyles.boldLabel, GUILayout.Width(80));
             DrawAddRemoveButtonUI(resultsProp, ref selectedResultIndex, InitializeEventResultProperty);

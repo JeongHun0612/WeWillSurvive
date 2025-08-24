@@ -17,17 +17,15 @@ namespace WeWillSurvive.ItemEffect
         {
             var characters = CharacterManager.GetCharactersInShelter();
 
-            Debug.Log("SpeicalFood Apply : " + characters.Count);
-
             foreach (var character in characters)
             {
                 var hungerStatus = character.Status.GetStatus<HungerStatus>(EStatusType.Hunger);
                 hungerStatus?.RecoverFully();
-                hungerStatus?.UpdateDayCounter(-_statusWorsenBlockDays);
+                hungerStatus?.UpdateWorsenBlockDayCounter(_statusWorsenBlockDays);
 
                 var thirstStatus = character.Status.GetStatus<ThirstStatus>(EStatusType.Thirst);
                 thirstStatus?.RecoverFully();
-                thirstStatus?.UpdateDayCounter(-_statusWorsenBlockDays);
+                thirstStatus?.UpdateWorsenBlockDayCounter(_statusWorsenBlockDays);
             }
         }
     }

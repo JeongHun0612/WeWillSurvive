@@ -24,5 +24,7 @@ namespace WeWillSurvive.Status
         public void ResetStatus();
         public void WorsenStatus(int step = 1);
         public void RecoveryStatus(int step = 1);
+        public void UpdateWorsenBlockDayCounter(int dayCounter);
+        public bool HasWorsenBlock();
     }
 }

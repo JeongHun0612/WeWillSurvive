@@ -22,7 +22,17 @@ MonoBehaviour:
     \uC774\uC6A9\uD574\uC11C \uC644\uBCBD\uD55C \uC758\uB8CC \uB9CC\uB2A5 \uD0A4\uD2B8\uB97C
     \uB9CC\uB4E4 \uC218 \uC788\uB2E4\uACE0 \uD55C\uB2E4. \uB2E5\uD130 K\uB97C \uD55C\uBC88
     \uBBFF\uC5B4\uBCFC\uAE4C?"
-  _conditions: []
+  _conditions:
+  - _conditionType: 200
+    _targetId: MedicKit
+    _parameter: 
+    _value1: 
+    _value2: 
+  - _conditionType: 201
+    _targetId: SpecialMedicKit
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 50
   _choices:
   - _choiceIcon: 203

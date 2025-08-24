@@ -101,10 +101,8 @@ namespace WeWillSurvive.Character
                 if (_explorationDayCounter >= _maxExplorationDays)
                     OnExpeditionComplete();
             }
-            else
-            {
-                Status.OnNewDay();
-            }
+
+            Status.OnNewDay();
         }
 
         public void SetMorale(EMorale morale)

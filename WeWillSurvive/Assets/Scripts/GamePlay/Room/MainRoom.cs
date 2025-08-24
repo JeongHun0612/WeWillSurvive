@@ -1,8 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
-using WeWillSurvive.Core;
-using WeWillSurvive.Item;
 using WeWillSurvive.UI;
 
 namespace WeWillSurvive.Room

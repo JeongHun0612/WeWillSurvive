@@ -55,6 +55,12 @@ namespace WeWillSurvive.GameEvent
         [InspectorName("캐릭터의 탐사 횟수가 특정 값보다 낮을 시")]
         CharacterExpeditionCountLower = 104,
 
+        [InspectorName("캐릭터의 특정 상태(Status) 보호 버프를 적용하고 있을 시")]
+        CharacterHasStatusWorsenBlock = 105,
+
+        [InspectorName("캐릭터의 특정 상태(Status) 보호 버프를 적용하고 있지 않을 시")]
+        CharacterNotHasStatusWorsenBlock = 106,
+
         /// 아이템
         [InspectorName("특정 아이템을 보유하고 있을 시")]
         HasItem = 200,
@@ -132,7 +138,7 @@ namespace WeWillSurvive.GameEvent
         [InspectorName("스테이터스 치유")] RecoveryStatus = 101,
         [InspectorName("캐릭터 사망")] CharacterDaed = 102,
         [InspectorName("캐릭터 이벤트 확률 보정")] CharacterEventRateModifier = 103,
-        
+
 
         [InspectorName("아이템 획득")] AddItem = 200,
         [InspectorName("아이템 삭제")] RemoveItem = 201,
@@ -140,7 +146,13 @@ namespace WeWillSurvive.GameEvent
         [InspectorName("엔딩 분기 진행")] AdvanceEndingProgress = 300,
         [InspectorName("엔딩 완료")] EndingComplete = 301,
 
-        [InspectorName("특정 메인 이벤트 발생 연기")] PostponeMainEvent = 400,
+
+        [InspectorName("특정 메인 이벤트 쿨타임 설정")] SetSpecificMainEventCooldown = 400,
+        [InspectorName("특정 메인 이벤트 쿨타임 추가")] AddDaysToSpecificMainEventCooldown = 401,
+        [InspectorName("다음 캐릭터 이벤트까지 특정 메인 이벤트 발생 연기")] PostponeSpecificMainEventUntilNextCharacterEvent = 402,
+
+        [InspectorName("특정 일수 동안 상태 악화 차단")] BlockSpecificStatusWorsen = 410,
+        [InspectorName("다음 캐릭터 이벤트까지 특정 상태 악화 차단")] BlockSpecificStatusWorsenUntilNextCharacterEvent = 411,
 
     }
     #endregion

@@ -5,6 +5,7 @@ using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
 using WeWillSurvive.Item;
 using WeWillSurvive.MainEvent;
+using WeWillSurvive.Status;
 using WeWillSurvive.Util;
 
 namespace WeWillSurvive.GameEvent
@@ -142,6 +143,46 @@ namespace WeWillSurvive.GameEvent
                 Debug.LogWarning($"Value1 : {condition.Value1} | int 타입으로 파싱 실패");
 
             return character.TotalExploringCount < countLower;
+        }
+    }
+
+    /// <summary>
+    /// 캐릭터의 특정 상태(Status) 보호 버프를 적용하고 있을 시
+    /// </summary>
+    public class CharacterHasStatusWorsenBlockChecker : IEventConditionHandler
+    {
+        public EConditionType HandledConditionType => EConditionType.CharacterHasStatusWorsenBlock;
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public bool IsMet(Condition condition)
+        {
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.TargetId);
+            var statusType = EnumUtil.ParseEnum<EStatusType>(condition.Parameter);
+
+            var character = CharacterManager.GetCharacter(characterType);
+            var status = character.Status.GetStatus<IStatus>(statusType);
+
+            return status.HasWorsenBlock();
+        }
+    }
+
+    /// <summary>
+    /// 캐릭터의 특정 상태(Status) 보호 버프를 적용하고 있지 않을 시
+    /// </summary>
+    public class CharacterNotHasStatusWorsenBlockChecker : IEventConditionHandler
+    {
+        public EConditionType HandledConditionType => EConditionType.CharacterNotHasStatusWorsenBlock;
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public bool IsMet(Condition condition)
+        {
+            ECharacter characterType = EnumUtil.ParseEnum<ECharacter>(condition.TargetId);
+            var statusType = EnumUtil.ParseEnum<EStatusType>(condition.Parameter);
+
+            var character = CharacterManager.GetCharacter(characterType);
+            var status = character.Status.GetStatus<IStatus>(statusType);
+
+            return !status.HasWorsenBlock();
         }
     }
 

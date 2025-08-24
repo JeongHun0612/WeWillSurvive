@@ -21,7 +21,17 @@ MonoBehaviour:
     K\uB294 \uC624\uB798\uB41C \uC758\uB8CC \uC7A5\uBE44\uB97C \uC774\uC6A9\uD558\uBA74
     \uC6B0\uB9AC\uAC00 \uBC14\uB85C \uC4F8 \uC218 \uC788\uB294 \uC758\uB8CC \uD0A4\uD2B8\uB97C
     \uD558\uB098 \uB9CC\uB4E4 \uC218 \uC788\uB2E4\uACE0 \uB9D0\uD55C\uB2E4."
-  _conditions: []
+  _conditions:
+  - _conditionType: 201
+    _targetId: MedicKit
+    _parameter: 
+    _value1: 
+    _value2: 
+  - _conditionType: 201
+    _targetId: SpecialMedicKit
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 50
   _choices:
   - _choiceIcon: 0
@@ -38,7 +48,7 @@ MonoBehaviour:
       _actions:
       - _actionType: 200
         _targetId: MedicKit
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       _isAffectedByStats: 1
       _probability: 1

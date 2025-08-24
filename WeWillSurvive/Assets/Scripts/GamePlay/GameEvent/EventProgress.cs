@@ -50,13 +50,18 @@ namespace WeWillSurvive.GameEvent
 
         public virtual void ResetDayCounter()
         {
-            DayCounter = _eventPool.GetRandomCooldownDay();
+            SetDayCounter(_eventPool.GetRandomCooldownDay());
+        }
+
+        public void SetDayCounter(int dayCounter)
+        {
+            DayCounter = dayCounter;
             IsReady = false;
         }
 
-        public virtual void ResetDayCounter(int dayCounter)
+        public void AddDayCounter(int dayCounter)
         {
-            DayCounter = dayCounter;
+            DayCounter += dayCounter;
             IsReady = false;
         }
 

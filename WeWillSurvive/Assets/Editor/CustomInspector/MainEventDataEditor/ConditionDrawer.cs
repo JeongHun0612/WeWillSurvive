@@ -4,6 +4,7 @@ using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.GameEvent;
 using WeWillSurvive.Item;
+using WeWillSurvive.Status;
 
 namespace WeWillSurvive
 {
@@ -46,6 +47,11 @@ namespace WeWillSurvive
                 case EConditionType.CharacterExpeditionCountLower:
                     PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
                     PropertyUtil.DrawIntField(ref rect, "탐사 횟수", value1Prop);
+                    break;
+                case EConditionType.CharacterHasStatusWorsenBlock:
+                case EConditionType.CharacterNotHasStatusWorsenBlock:
+                    PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "상태", parameterProp);
                     break;
                 case EConditionType.HasItem:
                 case EConditionType.NotHasItem:

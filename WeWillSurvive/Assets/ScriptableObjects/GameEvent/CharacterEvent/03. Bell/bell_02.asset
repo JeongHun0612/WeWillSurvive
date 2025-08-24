@@ -20,7 +20,17 @@ MonoBehaviour:
     \uC644\uBCBD\uD55C \uC218\uB9AC \uD0A4\uD2B8\uB97C \uB9CC\uB4E4 \uC218 \uC788\uC5B4.\"
     \uBCA8\uC5D0\uAC8C \uC774 \uC77C\uC744 \uB9E1\uAE30\uBA74 \uC218\uB9AC \uD0A4\uD2B8\uB97C
     \uC5BB\uC744 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4."
-  _conditions: []
+  _conditions:
+  - _conditionType: 201
+    _targetId: RepairKit
+    _parameter: 
+    _value1: 
+    _value2: 
+  - _conditionType: 201
+    _targetId: SpecialRepairKit
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 50
   _choices:
   - _choiceIcon: 0

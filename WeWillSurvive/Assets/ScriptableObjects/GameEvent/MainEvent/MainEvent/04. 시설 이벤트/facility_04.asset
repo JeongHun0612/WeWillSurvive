@@ -18,8 +18,7 @@ MonoBehaviour:
   _descriptions:
   - "\uAE30\uC9C0 \uB0B4\uBD80 \uC804\uB825 \uACF5\uAE09\uAE30\uC758 \uC77C\uBD80
     \uD68C\uB85C\uAC00 \uBD88\uC548\uC815\uD558\uB2E4. \uC870\uCE58\uD558\uC9C0 \uC54A\uC73C\uBA74
-    \uBB34\uC791\uC704 \uC624\uBE0C\uC81D\uD2B8\uC5D0 \uC601\uD5A5\uC744 \uC904 \uC218
-    \uC788\uB2E4."
+    \uBB34\uC791\uC704 \uC7A5\uBE44\uC5D0 \uC601\uD5A5\uC744 \uC904 \uC218 \uC788\uB2E4."
   _conditions: []
   _choiceSchema: 1
   _choices:
@@ -32,7 +31,31 @@ MonoBehaviour:
       _resultText: "\uC218\uB9AC \uD0A4\uD2B8 \uB355\uBD84\uC5D0 \uD68C\uB85C\uB97C
         \uC548\uC804\uD558\uAC8C \uBCF5\uAD6C\uD588\uB2E4. \uC804\uB825\uC740 \uC548\uC815\uB410\uACE0,
         \uC7A5\uBE44\uB4E4\uB3C4 \uBB38\uC81C\uC5C6\uB2E4."
-      _actions: []
+      _actions:
+      - _actionType: 201
+        _targetId: RepairKit
+        _parameter: 
+        _value: 1
+      _isAffectedByStats: 0
+      _probability: 1
+  - _choiceIcon: 206
+    _requiredAmount: 1
+    _choiceText: 
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultText: "\uC218\uB9AC \uD0A4\uD2B8 \uB355\uBD84\uC5D0 \uD68C\uB85C\uB97C
+        \uC548\uC804\uD558\uAC8C \uBCF5\uAD6C\uD588\uB2E4. \uC804\uB825\uC740 \uC548\uC815\uB410\uACE0,
+        \uC7A5\uBE44\uB4E4\uB3C4 \uBB38\uC81C\uC5C6\uB2E4."
+      _actions:
+      - _actionType: 201
+        _targetId: SpecialRepairKit
+        _parameter: 
+        _value: 1
+      - _actionType: 400
+        _targetId: Facility
+        _parameter: 
+        _value: 3
       _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
@@ -42,42 +65,132 @@ MonoBehaviour:
     - _outComeType: 0
       _conditions:
       - _conditionType: 200
-        _targetId: Gun
+        _targetId: MedicKit
         _parameter: 
-        _value1: 1
+        _value1: 
         _value2: 
-      _resultText: "\uC804\uB825 \uACFC\uBD80\uD558\uB85C \uCD1D\uC774 \uD0C0\uBC84\uB838\uB2E4.
-        \uC800\uC7A5\uC18C\uC5D0 \uC788\uB358 \uC77C\uBD80 \uC7A5\uBE44\uB4E4\uB3C4
-        \uBD88\uC548\uC815\uD574\uC84C\uB2E4."
-      _actions:
-      - _actionType: 201
-        _targetId: Gun
-        _parameter: 
-        _value: 1
+      _resultText: 
+      _actions: []
       _isAffectedByStats: 0
       _probability: 1
     - _outComeType: 0
       _conditions:
       - _conditionType: 200
-        _targetId: Flashlight
+        _targetId: SpecialMedicKit
         _parameter: 
-        _value1: 1
+        _value1: 
         _value2: 
-      _resultText: "\uC804\uB825 \uACFC\uBD80\uD558\uB85C \uC190\uC804\uB4F1\uC774
-        \uD0C0\uBC84\uB838\uB2E4. \uC800\uC7A5\uC18C\uC5D0 \uC788\uB358 \uC77C\uBD80
-        \uC7A5\uBE44\uB4E4\uB3C4 \uBD88\uC548\uC815\uD574\uC84C\uB2E4."
-      _actions:
-      - _actionType: 201
-        _targetId: Flashlight
-        _parameter: 
-        _value: 1
+      _resultText: 
+      _actions: []
       _isAffectedByStats: 0
       _probability: 1
     - _outComeType: 0
-      _conditions: []
-      _resultText: "\uC804\uB825 \uACFC\uBD80\uD558\uB85C\uAC00 \uD0C0\uBC84\uB838\uC9C0\uB9CC
-        \uB2E4\uD589\uD788 \uC800\uC7A5\uC18C\uC5D0 \uC788\uB358 \uC7A5\uBE44\uB4E4\uC740
-        \uBA40\uCA61\uD558\uB2E4."
+      _conditions:
+      - _conditionType: 200
+        _targetId: RepairKit
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: 
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 200
+        _targetId: SpecialRepairKit
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: 
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 200
+        _targetId: CommDevice
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: 
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 200
+        _targetId: NiceSpacesuit
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: 
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 200
+        _targetId: Gun
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: 
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 200
+        _targetId: BoardGame
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: 
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 200
+        _targetId: Ax
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: 
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 200
+        _targetId: Pipe
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: 
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 201
+        _targetId: Flashlight
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: 
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 200
+        _targetId: Map
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultText: 
       _actions: []
       _isAffectedByStats: 0
       _probability: 1
