@@ -4,10 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - wall
-  - burnoff
-  - burnoff2
-  - roomExit
+  - NormalWall
+  - BreakingWall
   layers:
   - Default
   - TransparentFX
