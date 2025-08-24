@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
 using WeWillSurvive.Item;
+using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
@@ -19,7 +20,6 @@ namespace WeWillSurvive
         private Sprite[] _foodSprites;
         private Sprite[] _foodBoxSprites;
 
-        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
         private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
 
         public async override UniTask InitializeAsync()
@@ -38,30 +38,15 @@ namespace WeWillSurvive
             _foodBoxSprites[4] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/foodbox_5.png");
         }
 
-        public override void Initialize()
+        public override void UpdateItemPlacement()
         {
-            base.Initialize();
+            base.UpdateItemPlacement();
 
-            _foodSprites = new Sprite[2];
-            _foodSprites[0] = SpriteManager.Instance.GetSprite(ESpriteAtlas.Item_Atlas, "food1");
-            _foodSprites[1] = SpriteManager.Instance.GetSprite(ESpriteAtlas.Item_Atlas, "food2");
-
-            _foodBoxSprites = new Sprite[5];
-            _foodBoxSprites[0] = SpriteManager.Instance.GetSprite(ESpriteAtlas.Item_Atlas, "foodbox_1");
-            _foodBoxSprites[1] = SpriteManager.Instance.GetSprite(ESpriteAtlas.Item_Atlas, "foodbox_2");
-            _foodBoxSprites[2] = SpriteManager.Instance.GetSprite(ESpriteAtlas.Item_Atlas, "foodbox_3");
-            _foodBoxSprites[3] = SpriteManager.Instance.GetSprite(ESpriteAtlas.Item_Atlas, "foodbox_4");
-            _foodBoxSprites[4] = SpriteManager.Instance.GetSprite(ESpriteAtlas.Item_Atlas, "foodbox_5");
+            ItemObjectActivate(Count);
         }
 
-        public override void UpdateItemPlacement(float count)
+        protected override void ItemObjectActivate(float count)
         {
-            Count = count;
-            ItemObjectAllDeactivate();
-
-            if (_itemObjects == null || _itemObjects.Count == 0)
-                return;
-
             int itemCeilCount = Mathf.CeilToInt(count);
             int itemCount = Mathf.Min(FOODBOX_ACTIVATE_COUNT, itemCeilCount);
 
@@ -86,6 +71,11 @@ namespace WeWillSurvive
             {
                 _itemObjects[SPECIALFOOD_INDEX].SetActive(true);
             }
+        }
+
+        protected override string BuildStatusText()
+        {
+            return $"{EnumUtil.GetInspectorName(_itemType)} : {Count}";
         }
 
         private EFoodSpriteType GetFoodSpriteType(float value)
