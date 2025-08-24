@@ -17,7 +17,7 @@ namespace WeWillSurvive
         [Header("## RationItem (Food, Water, Medicalkit)")]
         [SerializeField] private RationItem _foodItem;
         [SerializeField] private RationItem _waterItem;
-        [SerializeField] private RationItem _medicalKitItem;
+        [SerializeField] private RationItem _medicKitItem;
 
         [Header("## State Panel")]
         [SerializeField] private StatePanel _statePanel;
@@ -26,6 +26,10 @@ namespace WeWillSurvive
         private Sprite _notingSprite;
 
         private CharacterBase _owner;
+
+        public RationItem FoodItem => _foodItem;
+        public RationItem WaterItem => _waterItem;
+        public RationItem MedicKitItem => _medicKitItem;
 
         private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
@@ -37,66 +41,55 @@ namespace WeWillSurvive
 
             _foodItem.Initialize();
             _waterItem.Initialize();
-            _medicalKitItem.Initialize();
+            _medicKitItem.Initialize();
 
             _owner = CharacterManager.GetCharacter(_characterType);
         }
 
         public void RegisterEvent(RationPanel rationPanel)
         {
-            _foodItem.ItemSelectedEvent -= rationPanel.UpdateFoodItemCount;
-            _foodItem.ItemSelectedEvent += rationPanel.UpdateFoodItemCount;
+            _foodItem.ItemSelectedEvent -= rationPanel.OnClickFoodItem;
+            _foodItem.ItemSelectedEvent += rationPanel.OnClickFoodItem;
 
-            _waterItem.ItemSelectedEvent -= rationPanel.UpdateWaterItemCount;
-            _waterItem.ItemSelectedEvent += rationPanel.UpdateWaterItemCount;
+            _waterItem.ItemSelectedEvent -= rationPanel.OnClickWaterItem;
+            _waterItem.ItemSelectedEvent += rationPanel.OnClickWaterItem;
+
+            _medicKitItem.ItemSelectedEvent -= rationPanel.OnClickMedicKitItem;
+            _medicKitItem.ItemSelectedEvent += rationPanel.OnClickMedicKitItem;
         }
 
         public void Refresh()
         {
-            if (_owner.IsInShelter)
-            {
-                EnabledRationCharacter();
-            }
-            else
-            {
-                DisabledRationCharacter();
-            }
+            // RationItem 셋팅
+            _waterItem.Refresh();
+            _foodItem.Refresh();
+            _medicKitItem.Refresh();
 
+            // 캐릭터 이미지 셋팅
+            _characterImage.sprite = (_owner.IsInShelter) ? _normalSprite : _notingSprite;
+
+            // RationItem 셋팅
+            _waterItem.gameObject.SetActive(_owner.IsInShelter);
+            _foodItem.gameObject.SetActive(_owner.IsInShelter);
+
+            bool isInjured = _owner.State.HasState(EState.Injured | EState.Sick);
+            _medicKitItem.gameObject.SetActive(_owner.IsInShelter && isInjured);
+
+            // StatePanel 셋팅
+            _statePanel.SetStateText(_owner.GetFormatStateString());
             _statePanel.HidePanel();
         }
 
-        public void ApplyRationItem()
+        public void ApplyAllRationItem()
         {
-            _foodItem.UsedItem(_owner);
-            _waterItem.UsedItem(_owner);
-            _medicalKitItem.UsedItem(_owner);
+            ApplyFoodItem();
+            ApplyWaterItem();
+            ApplyMedicKitItem();
         }
 
-        private void EnabledRationCharacter()
-        {
-            _characterImage.sprite = _normalSprite;
-
-            // RationItem 초기화
-            _waterItem.Refresh();
-            _foodItem.Refresh();
-            _medicalKitItem.Refresh();
-
-            bool isInjured = _owner.State.HasState(EState.Injured | EState.Sick);
-            _medicalKitItem.gameObject.SetActive(isInjured);
-
-            // StatePanel 초기화
-            _statePanel.SetStateText(_owner.GetFormatStateString());
-        }
-
-        private void DisabledRationCharacter()
-        {
-            _characterImage.sprite = _notingSprite;
-
-            // RationItem 비활성화
-            _waterItem.gameObject.SetActive(false);
-            _foodItem.gameObject.SetActive(false);
-            _medicalKitItem.gameObject.SetActive(false);
-        }
+        public void ApplyFoodItem() => _foodItem.UsedItem(_owner);
+        public void ApplyWaterItem() => _waterItem.UsedItem(_owner);
+        public void ApplyMedicKitItem() => _medicKitItem.UsedItem(_owner);
 
         public void OnPointerClick(PointerEventData eventData)
         {

@@ -51,7 +51,7 @@ namespace WeWillSurvive
                 case EActionType.AddItem:
                 case EActionType.RemoveItem:
                     PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
-                    PropertyUtil.DrawIntField(ref rect, "갯수", valueProp);
+                    PropertyUtil.DrawFloatField(ref rect, "갯수", valueProp);
                     break;
                 case EActionType.AdvanceEndingProgress:
                 case EActionType.EndingComplete:

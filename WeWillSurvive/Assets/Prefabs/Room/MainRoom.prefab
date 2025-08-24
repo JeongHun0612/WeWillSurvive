@@ -160,9 +160,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _roomType: 2
   _background: {fileID: 3408855809231005227}
-  _moveRoomButton: {fileID: 0}
-  _characterUI: {fileID: 0}
-  _lightOff: {fileID: 0}
   _characterUIs:
   - {fileID: 5290699388748603679}
   - {fileID: 8984042315481073519}

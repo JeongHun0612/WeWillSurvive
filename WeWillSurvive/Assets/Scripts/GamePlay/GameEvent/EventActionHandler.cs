@@ -126,8 +126,8 @@ namespace WeWillSurvive.GameEvent
         {
             EItem item = EnumUtil.ParseEnum<EItem>(action.TargetId);
 
-            if (!int.TryParse(action.Value, out var count))
-                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
+            if (!float.TryParse(action.Value, out var count))
+                Debug.LogWarning($"Value : {action.Value} | float 타입으로 파싱 실패");
 
             ItemManager.AddItem(item, count);
             LogManager.AddRewardItemData(new RewardItemData(item, count));
@@ -148,12 +148,13 @@ namespace WeWillSurvive.GameEvent
         {
             EItem item = EnumUtil.ParseEnum<EItem>(action.TargetId);
 
-            if (!int.TryParse(action.Value, out var count))
-                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
+            if (!float.TryParse(action.Value, out var count))
+                Debug.LogWarning($"Value : {action.Value} | float 타입으로 파싱 실패");
 
-            if (ItemManager.TryDecreaseItemCount(item, count))
+            var updateCount = Mathf.Min(ItemManager.GetItemCount(item), count);
+            if (ItemManager.TryDecreaseItemCount(item, updateCount))
             {
-                LogManager.AddRewardItemData(new RewardItemData(item, -count));
+                LogManager.AddRewardItemData(new RewardItemData(item, -updateCount));
             }
         }
     }

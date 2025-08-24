@@ -158,6 +158,11 @@ namespace WeWillSurvive
             _dayCounter = 0;
         }
 
+        public void UpdateDayCounter(int dayCounter)
+        {
+            _dayCounter = dayCounter;
+        }
+
         private void ExecuteWorsen(int targetIndex)
         {
             int currentIndex = GetCurrentLevelIndex();

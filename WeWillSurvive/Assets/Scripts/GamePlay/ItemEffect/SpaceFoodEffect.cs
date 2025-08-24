@@ -1,19 +1,20 @@
-using UnityEngine;
 using WeWillSurvive.Character;
+using WeWillSurvive.Item;
 using WeWillSurvive.Status;
 
 namespace WeWillSurvive.ItemEffect
 {
-    [CreateAssetMenu(fileName = "SpaceFoodEffect", menuName = "Scriptable Objects/ItemEffect/SpaceFoodEffect")]
-    public class SpaceFoodEffect : ScriptableItemEffect
+    public class SpaceFoodEffect : IItemEffect
     {
-        public override void Apply(CharacterBase character)
+        public EItem ItemType => EItem.Food;
+
+        public void Apply(CharacterBase target)
         {
-            if (character == null)
+            if (target == null)
                 return;
 
-            var status = character.Status.GetStatus<HungerStatus>(EStatusType.Hunger);
-            status?.RecoveryStatus(10);
+            var status = target.Status.GetStatus<HungerStatus>(EStatusType.Hunger);
+            status?.RecoverFully();
         }
     }
 }
