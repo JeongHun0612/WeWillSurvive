@@ -75,6 +75,19 @@ namespace WeWillSurvive.GameEvent
             return validEvents[randomIndex];
         }
 
+        public virtual MainEventData GetEventDataById(string eventId)
+        {
+            var eventData = Events.FirstOrDefault(data => data.EventId == eventId);
+
+            if (eventData != null)
+            {
+                EventTriggerCount++;
+                ResetDayCounter();
+            }
+
+            return eventData;
+        }
+
         public List<MainEventData> GetValidEvents()
         {
             if (Events == null || Events.Count == 0)
