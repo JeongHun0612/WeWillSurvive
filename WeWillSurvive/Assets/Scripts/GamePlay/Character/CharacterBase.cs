@@ -99,7 +99,10 @@ namespace WeWillSurvive.Character
 
                 // 탐사 완료
                 if (_explorationDayCounter >= _maxExplorationDays)
+                {
                     OnExpeditionComplete();
+                }
+                return;
             }
 
             Status.OnNewDay();
@@ -126,6 +129,7 @@ namespace WeWillSurvive.Character
             Debug.Log($"[{Name}] is Dead!");
             IsDead = true;
 
+            Status.ResetStatus();
             State.SetState(EState.Dead);
 
             // Dead Log 출력

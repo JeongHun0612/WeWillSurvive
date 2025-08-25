@@ -19,13 +19,17 @@ namespace WeWillSurvive.ItemEffect
 
             foreach (var character in characters)
             {
+                // 모든 배고픔, 목마름 상태 회복
                 var hungerStatus = character.Status.GetStatus<HungerStatus>(EStatusType.Hunger);
                 hungerStatus?.RecoverFully();
-                hungerStatus?.UpdateWorsenBlockDayCounter(_statusWorsenBlockDays);
 
                 var thirstStatus = character.Status.GetStatus<ThirstStatus>(EStatusType.Thirst);
                 thirstStatus?.RecoverFully();
-                thirstStatus?.UpdateWorsenBlockDayCounter(_statusWorsenBlockDays);
+
+
+                // N일동안 배고픔, 목마름 악화 차단 버프 발생
+                BuffManager.Instance.AddBuff(EBuffEffect.BlockHungerWorsen, _statusWorsenBlockDays);
+                BuffManager.Instance.AddBuff(EBuffEffect.BlockThirstWorsen, _statusWorsenBlockDays);
             }
         }
     }

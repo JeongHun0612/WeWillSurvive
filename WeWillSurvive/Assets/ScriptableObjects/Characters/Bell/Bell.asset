@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 3
   _itemType: 102
-  _name: Bell
+  _name: "\uBCA8"
   _baseEventRate: 60
   _normalStateModifier: 10
   SpriteData: {fileID: 11400000, guid: 20510b9a6b864604c9b54a923d6d209f, type: 2}

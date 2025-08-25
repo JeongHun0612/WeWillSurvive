@@ -39,6 +39,7 @@ namespace WeWillSurvive
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(_textRootLayout);
+
             _maxLineCount = TMPTextUtil.CalculateMaxLineCount(_eventText);
 
             // 이벤트 등록
@@ -63,9 +64,17 @@ namespace WeWillSurvive
             // 선택지 업데이트
             UpdateChoiceOptions(_mainEventData);
 
+            // 페이지 수 계산
             gameObject.SetActive(true);
             await UniTask.NextFrame();
-            
+
+            var decription = _mainEventData.GetRandomDescription();
+            if (string.IsNullOrWhiteSpace(decription))
+            {
+                PageCount = 1;
+                return;
+            }
+
             _pageTexts = TMPTextUtil.SplitTextByLines(_eventText, _mainEventData.GetRandomDescription(), _maxLineCount);
             PageCount = _pageTexts.Count;
         }

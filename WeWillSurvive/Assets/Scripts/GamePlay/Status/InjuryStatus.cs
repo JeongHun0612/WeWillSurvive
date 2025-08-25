@@ -5,14 +5,15 @@ namespace WeWillSurvive.Status
 {
     public enum EInjuredLevel
     {
-        Normal, Injured, Sick, Dead
+        Normal, Injured, Sick
     }
 
     public class InjuryStatus : StatusBase<EInjuredLevel>
     {
         public override EStatusType StatusType => EStatusType.Injury;
+        public override EBuffEffect BlockStatusBuffEffect => EBuffEffect.BlockInjuryWorsen;
 
-        protected override bool IsDeadLevel(EInjuredLevel level) => level == EInjuredLevel.Dead;
+        protected override bool IsDeadLevel(EInjuredLevel level) => level == EInjuredLevel.Sick;
 
         public InjuryStatus(CharacterBase owner)
         {
@@ -23,7 +24,6 @@ namespace WeWillSurvive.Status
                 EInjuredLevel.Normal,
                 EInjuredLevel.Injured,
                 EInjuredLevel.Sick,
-                EInjuredLevel.Dead,
             };
 
             LevelStateMap = new()
@@ -43,7 +43,6 @@ namespace WeWillSurvive.Status
                 [EInjuredLevel.Normal] = 0f,
                 [EInjuredLevel.Injured] = -20f,
                 [EInjuredLevel.Sick] = -30f,
-                [EInjuredLevel.Dead] = 0f,
             };
 
             StateTransitionTable = new()

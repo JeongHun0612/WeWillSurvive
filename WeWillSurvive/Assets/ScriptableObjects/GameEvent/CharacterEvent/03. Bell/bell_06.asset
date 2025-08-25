@@ -32,20 +32,22 @@ MonoBehaviour:
     _results:
     - _outComeType: 2
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uBCA8\uC740 \uC5D0\uC5B4\uB85D \uC2DC\uC2A4\uD15C \uC218\uB9AC\uC5D0
         \uC131\uACF5\uD588\uB2E4. \uAE30\uC9C0\uC758 \uC548\uC804\uC131\uC774 \uD06C\uAC8C
         \uD5A5\uC0C1\uB418\uC5C8\uB2E4. \"\uC774\uC81C \uC548\uC2EC\uD574\uB3C4 \uB3FC.\"
         \uC55E\uC73C\uB85C \uC5F4\uD758 \uC815\uB3C4\uB294 \uC2DC\uC124\uC5D0 \uBB38\uC81C\uAC00
         \uC0DD\uAE30\uB294 \uC77C\uC740 \uC5C6\uC744 \uAC83\uC774\uB2E4."
       _actions:
-      - _actionType: 402
-        _targetId: Facility
-        _parameter: 
+      - _actionType: 100
+        _targetId: Lead
+        _parameter: Hunger
         _value: 
       _isAffectedByStats: 1
       _probability: 1
     - _outComeType: 3
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uBCA8\uC740 \uC5D0\uC5B4\uB85D \uC2DC\uC2A4\uD15C \uC218\uB9AC\uC5D0
         \uC2E4\uD328\uD588\uB2E4. \uBD80\uD488\uC774 \uB108\uBB34 \uB0A1\uC544 \uC4F8
         \uC218 \uC5C6\uC5C8\uB2E4. \uC6B0\uB9AC\uB294 \uC5EC\uC804\uD788 \uAE30\uC9C0
@@ -55,6 +57,7 @@ MonoBehaviour:
       _probability: 1
     - _outComeType: 4
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC5D0\uC5B4\uB85D\uC774 \uAC11\uC790\uAE30 \uC624\uC791\uB3D9\uD558\uBA70
         \uACBD\uBCF4\uC74C\uC774 \uC6B8\uB838\uB2E4. \"\uC774\uB807\uAC8C \uB420
         \uC904\uC740 \uBAB0\uB790\uC5B4.\" \uAE30\uC9C0 \uC2DC\uC124\uC5D0 \uBB38\uC81C\uAC00
@@ -73,6 +76,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC9C0\uAE08 \uC5D0\uC5B4\uB85D \uC0C1\uD0DC\uB85C\uB294 \uC218\uB9AC\uAC00
         \uB108\uBB34 \uC704\uD5D8\uD574 \uBCF4\uC5EC.\" \uBCA8\uC740 \uC7A0\uC2DC
         \uBBF8\uB904\uB450\uAE30\uB85C \uD588\uB2E4."
@@ -85,6 +89,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC9C0\uAE08 \uC5D0\uC5B4\uB85D \uC0C1\uD0DC\uB85C\uB294 \uC218\uB9AC\uAC00
         \uB108\uBB34 \uC704\uD5D8\uD574 \uBCF4\uC5EC.\" \uBCA8\uC740 \uC7A0\uC2DC
         \uBBF8\uB904\uB450\uAE30\uB85C \uD588\uB2E4."

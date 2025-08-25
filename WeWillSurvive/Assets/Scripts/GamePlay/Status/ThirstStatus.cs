@@ -5,14 +5,15 @@ namespace WeWillSurvive.Status
 {
     public enum EThirstLevel
     {
-        Normal, Thirsty, Dehydrate, Dead
+        Normal, Thirsty, Dehydrate
     }
 
     public class ThirstStatus : StatusBase<EThirstLevel>
     {
         public override EStatusType StatusType => EStatusType.Thirst;
+        public override EBuffEffect BlockStatusBuffEffect => EBuffEffect.BlockThirstWorsen;
 
-        protected override bool IsDeadLevel(EThirstLevel level) => level == EThirstLevel.Dead;
+        protected override bool IsDeadLevel(EThirstLevel level) => level == EThirstLevel.Dehydrate;
 
         public ThirstStatus(CharacterBase owner)
         {
@@ -23,7 +24,6 @@ namespace WeWillSurvive.Status
                 EThirstLevel.Normal,
                 EThirstLevel.Thirsty,
                 EThirstLevel.Dehydrate,
-                EThirstLevel.Dead,
             };
 
             LevelStateMap = new()

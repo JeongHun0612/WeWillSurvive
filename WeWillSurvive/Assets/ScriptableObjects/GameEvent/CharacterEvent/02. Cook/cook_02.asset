@@ -30,6 +30,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 2
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uCFE1\uC774 \uB9CC\uB4E0 \uC694\uB9AC\uC5D0\uC11C \uB9DB\uC788\uB294
         \uD5A5\uAE30\uAC00 \uD37C\uC84C\uB2E4. \"\uBD10, \uB0B4 \uB9D0\uC774 \uB9DE\uC9C0?
         \uC774\uAC74 \uCD5C\uACE0\uC758 \uC2DD\uB7C9\uC774\uC57C!\" \uBAA8\uB450\uAC00
@@ -37,16 +38,17 @@ MonoBehaviour:
       _actions:
       - _actionType: 201
         _targetId: Food
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       - _actionType: 200
         _targetId: SpecialFood
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       _isAffectedByStats: 1
       _probability: 1
     - _outComeType: 3
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uCFE1\uC774 \uC2E4\uD5D8 \uACB0\uACFC\uBB3C\uC744 \uB4E4\uACE0
         \uB3CC\uC544\uC654\uB2E4. \uC5BC\uAD74\uC740 \uC5B4\uB450\uC6E0\uB2E4. \"\uACB0\uAD6D,
         \uBA39\uC744 \uC218 \uC788\uB294 \uAC8C \uC544\uB2C8\uC5C8\uC5B4.\" \uBAA8\uB450
@@ -60,6 +62,7 @@ MonoBehaviour:
       _probability: 1
     - _outComeType: 4
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC694\uB9AC \uB3C4\uC911 \uC791\uC740 \uD3ED\uBC1C\uC774 \uBC1C\uC0DD\uD588\uB2E4.
         \uCFE1\uC774 \uC5BC\uAD74\uC744 \uCC21\uADF8\uB9AC\uBA70 \uB098\uD0C0\uB0AC\uB2E4.
         \"\uC774 \uC2DD\uBB3C\uC740 \uC704\uD5D8\uD574...\""
@@ -80,6 +83,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uB108\uBB34 \uC704\uD5D8\uD55C \uAC83 \uAC19\uC544.\" \uCFE1\uC740
         \uC7A0\uC2DC \uB9DD\uC124\uC774\uB2E4\uAC00 \uC2DD\uBB3C\uC744 \uB0B4\uB824\uB193\uC558\uB2E4.
         \"\uB2E4\uC74C\uC5D4 \uB354 \uC548\uC804\uD55C \uAC78 \uCC3E\uC544\uBCFC\uAC8C.\""
@@ -92,6 +96,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uB108\uBB34 \uC704\uD5D8\uD55C \uAC83 \uAC19\uC544.\" \uCFE1\uC740
         \uC7A0\uC2DC \uB9DD\uC124\uC774\uB2E4\uAC00 \uC2DD\uBB3C\uC744 \uB0B4\uB824\uB193\uC558\uB2E4.
         \"\uB2E4\uC74C\uC5D4 \uB354 \uC548\uC804\uD55C \uAC78 \uCC3E\uC544\uBCFC\uAC8C.\""

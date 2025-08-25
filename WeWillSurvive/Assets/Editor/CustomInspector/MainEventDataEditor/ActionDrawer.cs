@@ -41,6 +41,12 @@ namespace WeWillSurvive
                     PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
                     PropertyUtil.DrawIntField(ref rect, "단계", valueProp);
                     break;
+                case EActionType.WorsenMaxStatus:
+                case EActionType.RecoveryMaxStatus:
+                    PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
+                    valueProp.stringValue = string.Empty;
+                    break;
                 case EActionType.CharacterEventRateModifier:
                     PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
                     parameterProp.stringValue = string.Empty;
@@ -69,19 +75,14 @@ namespace WeWillSurvive
                     parameterProp.stringValue = string.Empty;
                     PropertyUtil.DrawIntField(ref rect, "일수", valueProp);
                     break;
-                case EActionType.PostponeSpecificMainEventUntilNextCharacterEvent:
-                    PropertyUtil.DrawEnumPopupAsString<EMainEventCategory>(ref rect, "이벤트 타입", targetIdProp);
+                case EActionType.ActivateBuff:
+                    PropertyUtil.DrawEnumPopupAsString<EBuffEffect>(ref rect, "버프 타입", targetIdProp);
                     parameterProp.stringValue = string.Empty;
-                    valueProp.stringValue = string.Empty;
+                    PropertyUtil.DrawIntField(ref rect, "지속 날짜", valueProp);
                     break;
-                case EActionType.BlockSpecificStatusWorsen:
-                    targetIdProp.stringValue = string.Empty;
-                    PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
-                    PropertyUtil.DrawIntField(ref rect, "일수", valueProp);
-                    break;
-                case EActionType.BlockSpecificStatusWorsenUntilNextCharacterEvent:
-                    targetIdProp.stringValue = string.Empty;
-                    PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
+                case EActionType.ActivateBuffUntilNextCharacterEvent:
+                    PropertyUtil.DrawEnumPopupAsString<EBuffEffect>(ref rect, "버프 타입", targetIdProp);
+                    parameterProp.stringValue = string.Empty;
                     valueProp.stringValue = string.Empty;
                     break;
                 default:

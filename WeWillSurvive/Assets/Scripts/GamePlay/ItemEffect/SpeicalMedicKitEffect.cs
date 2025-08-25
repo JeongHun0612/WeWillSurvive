@@ -9,6 +9,7 @@ namespace WeWillSurvive.ItemEffect
     {
         public EItem ItemType => EItem.SpecialMedicKit;
 
+        private readonly int _statusWorsenBlockDays = 3;
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
         public void Apply(CharacterBase target)
@@ -18,6 +19,8 @@ namespace WeWillSurvive.ItemEffect
             {
                 var injuryStatus = character.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
                 injuryStatus?.RecoverFully();
+
+                BuffManager.Instance.AddBuff(EBuffEffect.BlockInjuryWorsen, _statusWorsenBlockDays);
             }
         }
     }

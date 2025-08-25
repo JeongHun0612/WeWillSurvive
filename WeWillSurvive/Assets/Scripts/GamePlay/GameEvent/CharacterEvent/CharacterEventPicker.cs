@@ -80,7 +80,6 @@ namespace WeWillSurvive.CharacterEvent
     public class CharacterEventProgress : EventProgress<ECharacter>
     {
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
-
         public CharacterBase Owner { get; private set; }
 
         public override void ResetState()

@@ -17,13 +17,13 @@ MonoBehaviour:
   - _conditionType: 1001
     _targetId: Lead
     _parameter: 
-    _value1: 3
+    _value1: 0
     _value2: 
   _mainEventDatas:
-  - {fileID: 11400000, guid: 6386b305aa4b47c46b2189154317a405, type: 2}
-  - {fileID: 11400000, guid: f91162c0e7c902e4cafabfa4c1ce4710, type: 2}
-  - {fileID: 11400000, guid: cd363996b78e47a4c99a0397d6d533e6, type: 2}
-  - {fileID: 11400000, guid: bcdf1a454c9644444950c5f0acda27aa, type: 2}
-  - {fileID: 11400000, guid: 0a03769be2b05d344923115dfc30875e, type: 2}
+  - {fileID: 11400000, guid: 4c132fa757f5d9242a673d51d29e6828, type: 2}
+  - {fileID: 11400000, guid: 802fb76fc95ab3d45a2fc5cc0ce81eea, type: 2}
+  - {fileID: 11400000, guid: 8a071fe727602864ba0961980e51ac3a, type: 2}
+  - {fileID: 11400000, guid: b55c3d0162cc1f64aae56e491556c906, type: 2}
+  - {fileID: 11400000, guid: 193b8f1a81587a14d9f2be9745f932d2, type: 2}
   _minDayCounter: 2
   _maxDayCounter: 4

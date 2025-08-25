@@ -171,6 +171,35 @@ namespace WeWillSurvive.GameEvent
             DailyEventChoice = null;
         }
 
+        public void TestApplyEventResult()
+        {
+            if (DailyEventChoice == null)
+            {
+                Debug.Log("처리할 이벤트 선택지가 없습니다.");
+                return;
+            }
+
+            Debug.Log($"[{DailyEventData.EventId}] 이벤트 결과 적용");
+            EventResult result = GetRandomEventResult();
+
+            if (result == null)
+            {
+                Debug.LogWarning("선택한 Choice에 대해 유효한 Result를 찾지 못했습니다. (조건불충족 또는 확률 문제)");
+                return;
+            }
+
+            string finalResultText = result.ResultText;
+
+            // 이벤트 결과 적용
+            foreach (var action in result.Actions)
+            {
+                GameEventUtil.ApplyResultAction(action, ref finalResultText, result.ResultTemplates);
+            }
+
+            // 로그 기록
+            LogResult(finalResultText);
+        }
+
         public virtual void ApplyEventResult()
         {
             if (DailyEventChoice == null)
@@ -188,14 +217,16 @@ namespace WeWillSurvive.GameEvent
                 return;
             }
 
+            string resultText = result.ResultText;
+
             // 이벤트 결과 적용
             foreach (var action in result.Actions)
             {
-                GameEventUtil.ApplyResultAction(action);
+                GameEventUtil.ApplyResultAction(action, ref resultText, result.ResultTemplates);
             }
 
             // 로그 기록
-            LogResult(result.ResultText);
+            LogResult(resultText);
         }
 
         protected virtual EventResult GetRandomEventResult()

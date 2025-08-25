@@ -78,20 +78,19 @@ namespace WeWillSurvive
         private void SpecialItemRefresh()
         {
             // 우주 특별식 셋팅
-            _speicalFoodItem.Refresh();
+            var hasSpecialFood = ItemManager.HasItem(EItem.SpecialFood);
+            if (hasSpecialFood)
+                _speicalFoodItem.Refresh();
 
-            if (!ItemManager.HasItem(EItem.SpecialFood))
-                _speicalFoodItem.gameObject.SetActive(false);
+            _speicalFoodItem.gameObject.SetActive(hasSpecialFood);
 
 
             // 만능 의료 키트 셋팅
-            _specialMedicKit.Refresh();
+            var hasSpecialMedicKit = ItemManager.HasItem(EItem.SpecialMedicKit);
+            if (hasSpecialMedicKit)
+                _specialMedicKit.Refresh();
 
-            bool isInjured = CharacterManager.GetCharactersInShelter()
-                .Any(character => character.State.HasState(EState.Injured | EState.Sick));
-
-            if (!ItemManager.HasItem(EItem.SpecialMedicKit) || !isInjured)
-                _specialMedicKit.gameObject.SetActive(false);
+            _specialMedicKit.gameObject.SetActive(hasSpecialMedicKit);
         }
 
         private void UpdateFoodItemCount()

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 1
   _itemType: 101
-  _name: Cook
+  _name: "\uCFE1"
   _baseEventRate: 60
   _normalStateModifier: 10
   SpriteData: {fileID: 11400000, guid: 076ee52fb73ac6e499159144bf1a30fc, type: 2}

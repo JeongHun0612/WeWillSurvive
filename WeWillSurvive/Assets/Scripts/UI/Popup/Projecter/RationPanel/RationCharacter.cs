@@ -60,23 +60,27 @@ namespace WeWillSurvive
 
         public void Refresh()
         {
-            // RationItem 셋팅
-            _waterItem.Refresh();
-            _foodItem.Refresh();
-            _medicKitItem.Refresh();
+            bool isInsShelter = _owner.IsInShelter;
+
+            if (isInsShelter)
+            {
+                _waterItem.Refresh();
+                _foodItem.Refresh();
+                _medicKitItem.Refresh();
+
+                _statePanel.SetStateText(_owner.GetFormatStateString());
+            }
+
+            _waterItem.gameObject.SetActive(isInsShelter);
+            _foodItem.gameObject.SetActive(isInsShelter);
+
+            // MedicKit은 부상 상태에서만 활성화
+            bool isInjured = _owner.State.HasState(EState.Injured | EState.Sick);
+            _medicKitItem.gameObject.SetActive(isInsShelter && isInjured);
 
             // 캐릭터 이미지 셋팅
-            _characterImage.sprite = (_owner.IsInShelter) ? _normalSprite : _notingSprite;
+            _characterImage.sprite = (isInsShelter) ? _normalSprite : _notingSprite;
 
-            // RationItem 셋팅
-            _waterItem.gameObject.SetActive(_owner.IsInShelter);
-            _foodItem.gameObject.SetActive(_owner.IsInShelter);
-
-            bool isInjured = _owner.State.HasState(EState.Injured | EState.Sick);
-            _medicKitItem.gameObject.SetActive(_owner.IsInShelter && isInjured);
-
-            // StatePanel 셋팅
-            _statePanel.SetStateText(_owner.GetFormatStateString());
             _statePanel.HidePanel();
         }
 

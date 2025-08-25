@@ -4,7 +4,6 @@ using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.GameEvent;
 using WeWillSurvive.Item;
-using WeWillSurvive.Status;
 
 namespace WeWillSurvive
 {
@@ -48,11 +47,6 @@ namespace WeWillSurvive
                     PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
                     PropertyUtil.DrawIntField(ref rect, "탐사 횟수", value1Prop);
                     break;
-                case EConditionType.CharacterHasStatusWorsenBlock:
-                case EConditionType.CharacterNotHasStatusWorsenBlock:
-                    PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
-                    PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "상태", parameterProp);
-                    break;
                 case EConditionType.HasItem:
                 case EConditionType.NotHasItem:
                     PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
@@ -61,6 +55,10 @@ namespace WeWillSurvive
                 case EConditionType.ItemCountLower:
                     PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
                     PropertyUtil.DrawIntField(ref rect, "갯수", value1Prop);
+                    break;
+                case EConditionType.HasBuffEffect:
+                case EConditionType.NotHasBuffEffect:
+                    PropertyUtil.DrawEnumPopupAsString<EBuffEffect>(ref rect, "버프", targetIdProp);
                     break;
                 case EConditionType.AliveCount:
                     PropertyUtil.DrawMinMaxIntFields(ref rect, "최소 인원", value1Prop, "최대 인원", value2Prop, 0, 4);

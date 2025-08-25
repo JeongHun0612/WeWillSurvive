@@ -57,6 +57,7 @@ namespace WeWillSurvive.Core
             Day = 0;
 
             CharacterManager.SettingCharacter();
+            BuffManager.Instance.ResetState();
             GameEventManager.Instance.ResetState();
             FarmingReportManager.Instance.UpdateFarmingReport();
 
@@ -107,6 +108,9 @@ namespace WeWillSurvive.Core
 
             // 플레이어 상태 업데이트
             CharacterManager.UpdateCharacterStatus();
+
+            // 버프 업데이트
+            BuffManager.Instance.OnNewDay();
 
             // 이벤트 업데이트
             GameEventManager.Instance.OnNewDay();

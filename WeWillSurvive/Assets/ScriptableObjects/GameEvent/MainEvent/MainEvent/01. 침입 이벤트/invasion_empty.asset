@@ -24,47 +24,18 @@ MonoBehaviour:
     _choiceText: 
     _results:
     - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
+      _conditions: []
+      _resultTemplates: []
+      _resultText: 
+      _actions:
+      - _actionType: 120
         _targetId: Lead
+        _parameter: Hunger
+        _value: 
+      - _actionType: 201
+        _targetId: Ax
         _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
+        _value: 1
       _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 209
@@ -72,47 +43,18 @@ MonoBehaviour:
     _choiceText: 
     _results:
     - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
+      _conditions: []
+      _resultTemplates: []
+      _resultText: 
+      _actions:
+      - _actionType: 120
         _targetId: Lead
+        _parameter: Hunger
+        _value: 
+      - _actionType: 201
+        _targetId: Gun
         _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
+        _value: 1
       _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 212
@@ -120,47 +62,18 @@ MonoBehaviour:
     _choiceText: 
     _results:
     - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
+      _conditions: []
+      _resultTemplates: []
+      _resultText: 
+      _actions:
+      - _actionType: 120
         _targetId: Lead
+        _parameter: Hunger
+        _value: 
+      - _actionType: 201
+        _targetId: Pipe
         _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
+        _value: 1
       _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
@@ -169,265 +82,31 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions:
-      - _conditionType: 100
-        _targetId: Lead
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 106
-        _targetId: Lead
+      - _conditionType: 301
+        _targetId: BlockInjuryWorsen
         _parameter: Injury
         _value1: 
         _value2: 
-      - _conditionType: 101
-        _targetId: Lead
-        _parameter: 48
-        _value1: 
-        _value2: 
+      _resultTemplates:
+      - "\uB2E4\uCE68 \uC0C1\uD0DC\uB85C \uC545\uD654"
+      - "\uC8FD\uC74C \uC0C1\uD0DC\uB85C \uC545\uD654"
       _resultText: 
       _actions:
-      - _actionType: 102
+      - _actionType: 110
         _targetId: Lead
-        _parameter: 
+        _parameter: Hunger
         _value: 
       _isAffectedByStats: 0
       _probability: 1
     - _outComeType: 0
       _conditions:
-      - _conditionType: 100
-        _targetId: Lead
-        _parameter: 
+      - _conditionType: 300
+        _targetId: BlockInjuryWorsen
+        _parameter: Hunger
         _value1: 
         _value2: 
-      - _conditionType: 106
-        _targetId: Lead
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      - _conditionType: 102
-        _targetId: Lead
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions:
-      - _actionType: 100
-        _targetId: Lead
-        _parameter: Injury
-        _value: 1
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Lead
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 105
-        _targetId: Lead
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 106
-        _targetId: Cook
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      - _conditionType: 101
-        _targetId: Cook
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions:
-      - _actionType: 102
-        _targetId: Cook
-        _parameter: 
-        _value: 
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 106
-        _targetId: Cook
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      - _conditionType: 102
-        _targetId: Cook
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions:
-      - _actionType: 100
-        _targetId: Cook
-        _parameter: Injury
-        _value: 1
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 105
-        _targetId: Cook
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 106
-        _targetId: DrK
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      - _conditionType: 101
-        _targetId: DrK
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions:
-      - _actionType: 102
-        _targetId: DrK
-        _parameter: 
-        _value: 
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 106
-        _targetId: DrK
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      - _conditionType: 102
-        _targetId: DrK
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions:
-      - _actionType: 100
-        _targetId: DrK
-        _parameter: Injury
-        _value: 1
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 105
-        _targetId: DrK
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 106
-        _targetId: Bell
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      - _conditionType: 101
-        _targetId: Bell
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions:
-      - _actionType: 102
-        _targetId: Bell
-        _parameter: 
-        _value: 
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 106
-        _targetId: Bell
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      - _conditionType: 102
-        _targetId: Bell
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: 
-      _actions:
-      - _actionType: 100
-        _targetId: Bell
-        _parameter: Injury
-        _value: 1
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 105
-        _targetId: Bell
-        _parameter: Injury
-        _value1: 
-        _value2: 
-      _resultText: 
+      _resultTemplates: []
+      _resultText: "\uBC84\uD504\uB85C \uB9C9\uC74C"
       _actions: []
       _isAffectedByStats: 0
       _probability: 1

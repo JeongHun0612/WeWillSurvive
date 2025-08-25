@@ -28,20 +28,22 @@ MonoBehaviour:
     _results:
     - _outComeType: 2
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC120\uBCC4 \uAC80\uC0AC\uC640 \uACA9\uB9AC \uB3D9\uC120 \uC124\uC815\uC774
         \uB9E4\uB274\uC5BC\uB300\uB85C \uC644\uB8CC\uB418\uC5C8\uB2E4.\n\uAD50\uCC28
         \uAC10\uC5FC \uAC00\uB2A5\uC131\uC774 \uCC28\uB2E8\uB418\uC5B4, \uC77C\uC815
         \uAE30\uAC04 \uB3D9\uC548 \uBD80\uC0C1 \uC0AC\uACE0\uAC00 \uBC1C\uC0DD\uD558\uC9C0
         \uC54A\uB294\uB2E4."
       _actions:
-      - _actionType: 411
-        _targetId: 
-        _parameter: Injury
+      - _actionType: 501
+        _targetId: BlockInjuryWorsen
+        _parameter: 
         _value: 
       _isAffectedByStats: 1
       _probability: 1
     - _outComeType: 3
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uD45C\uBCF8 \uCC44\uCDE8\uAC00 \uC9C0\uC5F0\uB418\uBA70 \uC77C\uBD80
         \uAD6C\uC5ED \uC801\uC6A9\uC774 \uB204\uB77D\uB418\uC5C8\uB2E4. \uC784\uC2DC
         \uC548\uB0B4\uB9CC \uC720\uC9C0\uD558\uACE0 \uC808\uCC28\uB97C \uC7AC\uC815\uBE44\uD558\uAE30\uB85C
@@ -51,6 +53,7 @@ MonoBehaviour:
       _probability: 1
     - _outComeType: 4
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uAC80\uC0AC \uD0A4\uD2B8 \uD68C\uC218 \uC911 \uC0D8\uD50C \uC6A9\uAE30\uAC00
         \uD30C\uC190\uB418\uC5B4 \uB2E5\uD130 K\uC758 \uC190\uAC00\uB77D\uC774 \uBCA0\uC600\uB2E4.
         \uC751\uAE09 \uCC98\uCE58 \uD6C4 \uC791\uC5C5\uC740 \uC911\uB2E8\uB418\uC5C8\uB2E4."
@@ -67,6 +70,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC0C1\uD669\uC744 \uC8FC\uC2DC\uD558\uAE30\uB85C \uD588\uB2E4.
         \uD300\uC6D0\uB4E4\uC740 \uB9C8\uC2A4\uD06C \uCC29\uC6A9\uACFC \uAC70\uB9AC
         \uC720\uC9C0\uB9CC \uAC15\uD654\uD588\uB2E4."
@@ -79,6 +83,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC0C1\uD669\uC744 \uC8FC\uC2DC\uD558\uAE30\uB85C \uD588\uB2E4.
         \uD300\uC6D0\uB4E4\uC740 \uB9C8\uC2A4\uD06C \uCC29\uC6A9\uACFC \uAC70\uB9AC
         \uC720\uC9C0\uB9CC \uAC15\uD654\uD588\uB2E4."

@@ -193,11 +193,11 @@ namespace WeWillSurvive.GameEvent
         /// 이벤트 결과 액션
         /// </summary>
         /// <param name="action">이벤트 액션</param>
-        public static void ApplyResultAction(EventAction action)
+        public static void ApplyResultAction(EventAction action, ref string finalResultText, IReadOnlyList<string> resultTemplates = null)
         {
             if (_eventActionHandlers.TryGetValue(action.ActionType, out var applicator))
             {
-                applicator.Apply(action);
+                applicator.Apply(action, ref finalResultText, resultTemplates);
             }
             else
             {
