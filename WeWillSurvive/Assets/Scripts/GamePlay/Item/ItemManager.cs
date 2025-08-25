@@ -41,6 +41,12 @@ namespace WeWillSurvive.Item
     public class ItemManager : IService
     {
         private readonly Dictionary<EItem, IItemEffect> _itemEffects = new();
+        private readonly HashSet<EItem> _specialItemTypes = new HashSet<EItem>
+        {
+            EItem.SpecialMedicKit,
+            EItem.SpecialRepairKit
+        };
+
         public Dictionary<EItem, float> Items { get; private set; } = new();
 
         private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
@@ -181,6 +187,37 @@ namespace WeWillSurvive.Item
             return Items
                 .Where(kvp => kvp.Key != EItem.Water && kvp.Key != EItem.Food)
                 .Sum(kvp => kvp.Value);
+        }
+
+        public EItem GetRandomSupportItem()
+        {
+            // 우선순위 1. 물과 식량을 제외한 아이템 리스트 중 랜덤한 아이템
+            var normalSupportItems = Items
+                .Where(kvp => kvp.Key != EItem.Water && kvp.Key != EItem.Food && !_specialItemTypes.Contains(kvp.Key))
+                .Select(kvp => kvp.Key)
+                .ToList();
+
+            if (normalSupportItems.Count > 0)
+            {
+                int randomIndex = UnityEngine.Random.Range(0, normalSupportItems.Count);
+                return normalSupportItems[randomIndex];
+            }
+
+
+            // 우선순위 2. 스페셜 아이템들 중 랜덤한 아이템
+            var specialSupportItems = Items
+                .Where(kvp => _specialItemTypes.Contains(kvp.Key))
+                .Select(kvp => kvp.Key)
+                .ToList();
+
+            if (specialSupportItems.Count > 0)
+            {
+                int randomIndex = UnityEngine.Random.Range(0, specialSupportItems.Count);
+                return specialSupportItems[randomIndex];
+            }
+
+            // 우선순위 3. 모든 아이템이 없을 경우
+            return EItem.None;
         }
 
         private void SetupItemEffects()

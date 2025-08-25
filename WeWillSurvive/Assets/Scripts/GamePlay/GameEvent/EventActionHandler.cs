@@ -29,6 +29,7 @@ namespace WeWillSurvive.GameEvent
 
         [InspectorName("아이템 획득")] AddItem = 200,
         [InspectorName("아이템 삭제")] RemoveItem = 201,
+        [InspectorName("식량, 물을 제외한 랜덤한 아이템 삭제")] RemoveRandomSupportItem = 202,
 
         [InspectorName("엔딩 분기 진행")] AdvanceEndingProgress = 300,
         [InspectorName("엔딩 완료")] EndingComplete = 301,
@@ -284,6 +285,35 @@ namespace WeWillSurvive.GameEvent
             {
                 LogManager.AddRewardItemData(new RewardItemData(item, -updateCount));
             }
+        }
+    }
+
+    /// <summary>
+    /// 식량, 물을 제외한 랜덤한 아이템 삭제
+    /// </summary>
+    public class RemoveRandomSupportItemApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.RemoveRandomSupportItem;
+
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
+
+        public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
+        {
+            EItem targetItem = ItemManager.GetRandomSupportItem();
+
+            //if (targetItem)
+
+            //EItem item = EnumUtil.ParseEnum<EItem>(action.TargetId);
+
+            //if (!float.TryParse(action.Value, out var count))
+            //    Debug.LogWarning($"Value : {action.Value} | float 타입으로 파싱 실패");
+
+            //var updateCount = Mathf.Min(ItemManager.GetItemCount(item), count);
+            //if (ItemManager.TryDecreaseItemCount(item, updateCount))
+            //{
+            //    LogManager.AddRewardItemData(new RewardItemData(item, -updateCount));
+            //}
         }
     }
 
