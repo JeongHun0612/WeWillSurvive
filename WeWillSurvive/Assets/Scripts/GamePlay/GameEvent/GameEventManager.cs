@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Character;
@@ -34,6 +35,7 @@ namespace WeWillSurvive.GameEvent
 
         public MainEventPicker MainEventPicker => _mainEventPicker;
         public EndingEventPicker EndingEventPicker => _endingEventPicker;
+        public CharacterEventPicker CharacterEventPicker => _characterEventPicker;
 
         public async UniTask InitializeAsync()
         {
@@ -110,11 +112,23 @@ namespace WeWillSurvive.GameEvent
     }
 
     [System.Serializable]
+    public class DailyMainEvent : DailyEvent
+    {
+        public DailyMainEvent(MainEventData mainEventData)
+        {
+            DailyEventData = mainEventData;
+        }
+
+        protected override void LogResult(string message)
+        {
+            LogManager.AddMainEventResultLog(message);
+        }
+    }
+
+    [System.Serializable]
     public class DailyCharacterEvent : DailyEvent
     {
         public ECharacter Character { get; set; }
-
-        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
         public DailyCharacterEvent(MainEventData mainEventData, ECharacter character)
         {
@@ -141,26 +155,13 @@ namespace WeWillSurvive.GameEvent
     }
 
     [System.Serializable]
-    public class DailyMainEvent : DailyEvent
-    {
-        public DailyMainEvent(MainEventData mainEventData)
-        {
-            DailyEventData = mainEventData;
-        }
-
-        protected override void LogResult(string message)
-        {
-            LogManager.AddMainEventResultLog(message);
-        }
-    }
-
-    [System.Serializable]
     public abstract class DailyEvent
     {
         public MainEventData DailyEventData { get; protected set; }
         public EventChoice DailyEventChoice { get; set; }
 
         protected LogManager LogManager => ServiceLocator.Get<LogManager>();
+        protected CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
         protected abstract void LogResult(string message);
 

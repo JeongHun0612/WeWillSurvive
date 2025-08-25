@@ -95,9 +95,24 @@ MonoBehaviour:
       _isAffectedByStats: 0
       _probability: 1
     - _outComeType: 0
-      _conditions: []
+      _conditions:
+      - _conditionType: 200
+        _targetId: Lead
+        _parameter: 
+        _value1: 
+        _value2: 
       _resultText: "\uC5B4\uB460 \uC18D \uC0DD\uD65C\uC774 \uC774\uC5B4\uC84C\uC9C0\uB9CC
         \uB2E4\uD589\uD788 \uC544\uBB34\uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0 \uC54A\uC558\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions: []
+      _resultText: "\uBCBD\uC774 \uB5A8\uB9AC\uBA70 \uC870\uBA85\uC774 \uAEBC\uC84C\uB2E4
+        \uCF1C\uC9C0\uAE30\uB97C \uBC18\uBCF5\uD588\uB2E4. \uC120\uBC18\uC774 \uBB34\uB108\uC838
+        \uD1B5\uB85C\uAC00 \uB9C9\uD614\uC9C0\uB9CC \uBC84\uB9AC\uAC70\uB098 \uB354
+        \uB9DD\uAC00\uC9C8 \uC7A5\uBE44\uB3C4 \uCC3D\uACE0\uC5D0 \uB0A8\uC544 \uC788\uC9C0
+        \uC54A\uC558\uB2E4."
       _actions: []
       _isAffectedByStats: 0
       _probability: 1

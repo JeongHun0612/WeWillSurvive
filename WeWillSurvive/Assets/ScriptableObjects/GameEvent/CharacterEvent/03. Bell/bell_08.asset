@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: bell_08
+  m_EditorClassIdentifier: 
+  _eventId: bell_08
+  _title: 
+  _descriptions:
+  - "\uBCA8\uC740 \uAD6C\uC5ED\uB9C8\uB2E4 \uBC14\uB78C \uC138\uAE30\uAC00 \uB4E4\uCB49\uB0A0\uCB49\uD558\uB2E4\uACE0
+    \uB9D0\uD588\uB2E4. \u201C\uD32C \uC18D\uB3C4 \uB9DE\uCD94\uACE0 \uD544\uD130\uB9CC
+    \uC815\uB9AC\uD558\uBA74 \uD55C\uB3D9\uC548 \uACBD\uBCF4\uAC00 \uC5C6\uC744 \uAC70\uC57C.\u201D
+    \uBC14\uB85C \uC791\uC5C5\uC744 \uC9C0\uC2DC\uD560\uAE4C?"
+  _conditions: []
+  _choiceSchema: 50
+  _choices:
+  - _choiceIcon: 0
+    _requiredAmount: 0
+    _choiceText: "\uC218\uD589\uD55C\uB2E4"
+    _results:
+    - _outComeType: 2
+      _conditions: []
+      _resultText: "\uBCA8\uC774 \uD32C \uC18D\uB3C4\uC640 \uD544\uD130\uB97C \uC815\uBE44\uD588\uB2E4.
+        \uACF5\uAE30 \uD750\uB984\uC774 \uC548\uC815\uB418\uC5B4 \uC77C\uC815 \uAE30\uAC04
+        \uB3D9\uC548 \uC2DC\uC124 \uBB38\uC81C\uB294 \uBC1C\uC0DD\uD558\uC9C0 \uC54A\uC744
+        \uAC83\uC73C\uB85C \uBCF4\uC778\uB2E4."
+      _actions:
+      - _actionType: 402
+        _targetId: Facility
+        _parameter: 
+        _value: 
+      _isAffectedByStats: 1
+      _probability: 1
+    - _outComeType: 3
+      _conditions: []
+      _resultText: "\uC13C\uC11C \uAC12\uC774 \uD754\uB4E4\uB824 \uC77C\uBD80 \uAD6C\uC5ED\uB9CC
+        \uAC1C\uC120\uB410\uB2E4. \uC784\uC2DC \uC6B4\uC804\uC73C\uB85C \uC720\uC9C0\uD588\uB2E4."
+      _actions: []
+      _isAffectedByStats: 1
+      _probability: 1
+    - _outComeType: 4
+      _conditions: []
+      _resultText: "\uC815\uBE44 \uC911 \uB36E\uAC1C\uAC00 \uAC11\uC790\uAE30 \uB2EB\uD600
+        \uBCA8\uC774 \uACBD\uBBF8\uD55C \uBD80\uC0C1\uC744 \uC785\uC5C8\uB2E4. \uC751\uAE09
+        \uCC98\uCE58 \uD6C4 \uC791\uC5C5\uC740 \uC911\uB2E8\uB410\uB2E4."
+      _actions:
+      - _actionType: 100
+        _targetId: Bell
+        _parameter: Injury
+        _value: 1
+      _isAffectedByStats: 0
+      _probability: 0.1
+  - _choiceIcon: 1
+    _requiredAmount: 0
+    _choiceText: "\uC218\uD589\uD558\uC9C0 \uC54A\uB294\uB2E4"
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultText: "\uB2E4\uB978 \uC791\uC5C5\uACFC \uACB9\uCCD0 \uBCF4\uB958\uD588\uB2E4.
+        \uD658\uAE30 \uAC15\uB3C4\uB97C \uB0AE\uCD94\uACE0 \uC54C\uB9BC\uB9CC \uC124\uC815\uD588\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+  - _choiceIcon: 500
+    _requiredAmount: 0
+    _choiceText: 
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultText: "\uB2E4\uB978 \uC791\uC5C5\uACFC \uACB9\uCCD0 \uBCF4\uB958\uD588\uB2E4.
+        \uD658\uAE30 \uAC15\uB3C4\uB97C \uB0AE\uCD94\uACE0 \uC54C\uB9BC\uB9CC \uC124\uC815\uD588\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1

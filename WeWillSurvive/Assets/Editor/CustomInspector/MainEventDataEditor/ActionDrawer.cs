@@ -43,23 +43,46 @@ namespace WeWillSurvive
                     break;
                 case EActionType.CharacterEventRateModifier:
                     PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    parameterProp.stringValue = string.Empty;
                     PropertyUtil.DrawFloatField(ref rect, "보정 값", valueProp);
                     break;
                 case EActionType.CharacterDaed:
                     PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    parameterProp.stringValue = string.Empty;
+                    valueProp.stringValue = string.Empty;
                     break;
                 case EActionType.AddItem:
                 case EActionType.RemoveItem:
                     PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
-                    PropertyUtil.DrawIntField(ref rect, "갯수", valueProp);
+                    parameterProp.stringValue = string.Empty;
+                    PropertyUtil.DrawFloatField(ref rect, "갯수", valueProp);
                     break;
                 case EActionType.AdvanceEndingProgress:
                 case EActionType.EndingComplete:
                     PropertyUtil.DrawEnumPopupAsString<EEndingType>(ref rect, "엔딩", targetIdProp);
+                    parameterProp.stringValue = string.Empty;
+                    valueProp.stringValue = string.Empty;
                     break;
-                case EActionType.PostponeMainEvent:
+                case EActionType.SetSpecificMainEventCooldown:
+                case EActionType.AddDaysToSpecificMainEventCooldown:
                     PropertyUtil.DrawEnumPopupAsString<EMainEventCategory>(ref rect, "이벤트 타입", targetIdProp);
-                    PropertyUtil.DrawIntField(ref rect, "연기 날짜", valueProp);
+                    parameterProp.stringValue = string.Empty;
+                    PropertyUtil.DrawIntField(ref rect, "일수", valueProp);
+                    break;
+                case EActionType.PostponeSpecificMainEventUntilNextCharacterEvent:
+                    PropertyUtil.DrawEnumPopupAsString<EMainEventCategory>(ref rect, "이벤트 타입", targetIdProp);
+                    parameterProp.stringValue = string.Empty;
+                    valueProp.stringValue = string.Empty;
+                    break;
+                case EActionType.BlockSpecificStatusWorsen:
+                    targetIdProp.stringValue = string.Empty;
+                    PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
+                    PropertyUtil.DrawIntField(ref rect, "일수", valueProp);
+                    break;
+                case EActionType.BlockSpecificStatusWorsenUntilNextCharacterEvent:
+                    targetIdProp.stringValue = string.Empty;
+                    PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
+                    valueProp.stringValue = string.Empty;
                     break;
                 default:
                     break;

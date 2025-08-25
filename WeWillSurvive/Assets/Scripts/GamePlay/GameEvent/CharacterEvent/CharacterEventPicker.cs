@@ -27,11 +27,13 @@ namespace WeWillSurvive.CharacterEvent
                 return null;
 
             CharacterEventProgress targetProgress;
+            MainEventData selectedEvent;
 
             // 가장 처음은 Lead의 캐릭터 이벤트 발생
             if (_totalCharacterEventCount == 0)
             {
                 targetProgress = GetCharacterEventProgress(ECharacter.Lead);
+                selectedEvent = targetProgress.GetEventDataById("lead_01");
             }
             else
             {
@@ -54,9 +56,9 @@ namespace WeWillSurvive.CharacterEvent
 
                 // 랜덤한 프로그래스
                 targetProgress = minProgresses[Random.Range(0, minProgresses.Count)];
+                selectedEvent = targetProgress.GetValidRandomEvent();
             }
 
-            MainEventData selectedEvent = targetProgress.GetValidRandomEvent();
             _lastSelectedEvent = selectedEvent;
 
             // 상태 업데이트

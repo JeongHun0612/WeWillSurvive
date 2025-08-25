@@ -21,7 +21,17 @@ MonoBehaviour:
     \uC57D\uCD08\uB97C \uC774\uC6A9\uD574 \uC758\uB8CC \uD0A4\uD2B8\uB97C \uB9CC\uB4E4
     \uC218 \uC788\uB2E4\uACE0 \uD55C\uB2E4. \uD55C \uBC88\uCBE4\uC740 \uC2DC\uB3C4\uD574\uBD10\uB3C4
     \uAD1C\uCC2E\uC744 \uAC83 \uAC19\uB2E4."
-  _conditions: []
+  _conditions:
+  - _conditionType: 201
+    _targetId: MedicKit
+    _parameter: 
+    _value1: 
+    _value2: 
+  - _conditionType: 201
+    _targetId: SpecialMedicKit
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 50
   _choices:
   - _choiceIcon: 0

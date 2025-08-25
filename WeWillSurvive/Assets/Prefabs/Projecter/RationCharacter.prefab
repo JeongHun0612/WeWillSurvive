@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 2585874100483141641}
   - component: {fileID: 8726959707893289257}
   m_Layer: 5
-  m_Name: MedicalKit
+  m_Name: MedicKit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,7 +543,7 @@ MonoBehaviour:
   _characterImage: {fileID: 261874445833617080}
   _foodItem: {fileID: 5556408330652092550}
   _waterItem: {fileID: 6501299096892822727}
-  _medicalKitItem: {fileID: 8726959707893289257}
+  _medicKitItem: {fileID: 8726959707893289257}
   _statePanel: {fileID: 4068471570907320328}
 --- !u!1001 &3410173141875857546
 PrefabInstance:

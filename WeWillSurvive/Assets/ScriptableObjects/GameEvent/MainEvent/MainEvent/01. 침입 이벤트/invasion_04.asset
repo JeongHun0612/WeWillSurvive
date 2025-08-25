@@ -241,6 +241,11 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      - _conditionType: 106
+        _targetId: Lead
+        _parameter: Injury
+        _value1: 
+        _value2: 
       - _conditionType: 101
         _targetId: Lead
         _parameter: 48
@@ -264,6 +269,11 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      - _conditionType: 106
+        _targetId: Lead
+        _parameter: Injury
+        _value1: 
+        _value2: 
       - _conditionType: 102
         _targetId: Lead
         _parameter: 48
@@ -285,8 +295,34 @@ MonoBehaviour:
     - _outComeType: 0
       _conditions:
       - _conditionType: 100
+        _targetId: Lead
+        _parameter: 
+        _value1: 
+        _value2: 
+      - _conditionType: 105
+        _targetId: Lead
+        _parameter: Injury
+        _value1: 
+        _value2: 
+      _resultText: "\uACE0\uCCA0 \uB4DC\uB860\uC774 \uD3ED\uBC1C\uD558\uBA70 \uC804\uAE30
+        \uC2A4\uD30C\uD06C\uAC00 \uB300\uC6D0\uB4E4\uC758 \uD53C\uBD80\uC5D0 \uB2FF\uC740
+        \uC21C\uAC04, \uC758\uB8CC \uB9CC\uB2A5 \uD0A4\uD2B8\uAC00 \uD654\uC0C1 \uC644\uD654
+        \uC824\uC744 \uBFCC\uB838\uB2E4. \uD3ED\uBC1C\uC740 \uB9C9\uC9C0 \uBABB\uD588\uC9C0\uB9CC,
+        \uD53C\uBD80 \uC190\uC0C1\uC740 \uBC88\uC9C0\uC9C0 \uC54A\uC544 \uBD80\uC0C1\uC744
+        \uC785\uC9C0\uB294 \uC54A\uC558\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 100
         _targetId: Cook
         _parameter: 
+        _value1: 
+        _value2: 
+      - _conditionType: 106
+        _targetId: Cook
+        _parameter: Injury
         _value1: 
         _value2: 
       - _conditionType: 101
@@ -312,6 +348,11 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      - _conditionType: 106
+        _targetId: Cook
+        _parameter: Injury
+        _value1: 
+        _value2: 
       - _conditionType: 102
         _targetId: Cook
         _parameter: 48
@@ -332,8 +373,34 @@ MonoBehaviour:
     - _outComeType: 0
       _conditions:
       - _conditionType: 100
+        _targetId: Cook
+        _parameter: 
+        _value1: 
+        _value2: 
+      - _conditionType: 105
+        _targetId: Cook
+        _parameter: Injury
+        _value1: 
+        _value2: 
+      _resultText: "\uACE0\uCCA0 \uB4DC\uB860\uC774 \uD3ED\uBC1C\uD558\uBA70 \uC804\uAE30
+        \uC2A4\uD30C\uD06C\uAC00 \uB300\uC6D0\uB4E4\uC758 \uD53C\uBD80\uC5D0 \uB2FF\uC740
+        \uC21C\uAC04, \uC758\uB8CC \uB9CC\uB2A5 \uD0A4\uD2B8\uAC00 \uD654\uC0C1 \uC644\uD654
+        \uC824\uC744 \uBFCC\uB838\uB2E4. \uD3ED\uBC1C\uC740 \uB9C9\uC9C0 \uBABB\uD588\uC9C0\uB9CC,
+        \uD53C\uBD80 \uC190\uC0C1\uC740 \uBC88\uC9C0\uC9C0 \uC54A\uC544 \uBD80\uC0C1\uC744
+        \uC785\uC9C0\uB294 \uC54A\uC558\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 100
         _targetId: DrK
         _parameter: 
+        _value1: 
+        _value2: 
+      - _conditionType: 106
+        _targetId: DrK
+        _parameter: Injury
         _value1: 
         _value2: 
       - _conditionType: 101
@@ -359,6 +426,11 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      - _conditionType: 106
+        _targetId: DrK
+        _parameter: Injury
+        _value1: 
+        _value2: 
       - _conditionType: 102
         _targetId: DrK
         _parameter: 48
@@ -379,8 +451,34 @@ MonoBehaviour:
     - _outComeType: 0
       _conditions:
       - _conditionType: 100
+        _targetId: DrK
+        _parameter: 
+        _value1: 
+        _value2: 
+      - _conditionType: 105
+        _targetId: DrK
+        _parameter: Injury
+        _value1: 
+        _value2: 
+      _resultText: "\uACE0\uCCA0 \uB4DC\uB860\uC774 \uD3ED\uBC1C\uD558\uBA70 \uC804\uAE30
+        \uC2A4\uD30C\uD06C\uAC00 \uB300\uC6D0\uB4E4\uC758 \uD53C\uBD80\uC5D0 \uB2FF\uC740
+        \uC21C\uAC04, \uC758\uB8CC \uB9CC\uB2A5 \uD0A4\uD2B8\uAC00 \uD654\uC0C1 \uC644\uD654
+        \uC824\uC744 \uBFCC\uB838\uB2E4. \uD3ED\uBC1C\uC740 \uB9C9\uC9C0 \uBABB\uD588\uC9C0\uB9CC,
+        \uD53C\uBD80 \uC190\uC0C1\uC740 \uBC88\uC9C0\uC9C0 \uC54A\uC544 \uBD80\uC0C1\uC744
+        \uC785\uC9C0\uB294 \uC54A\uC558\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 100
         _targetId: Bell
         _parameter: 
+        _value1: 
+        _value2: 
+      - _conditionType: 106
+        _targetId: Bell
+        _parameter: Injury
         _value1: 
         _value2: 
       - _conditionType: 101
@@ -406,6 +504,11 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      - _conditionType: 106
+        _targetId: Bell
+        _parameter: Injury
+        _value1: 
+        _value2: 
       - _conditionType: 102
         _targetId: Bell
         _parameter: 48
@@ -421,5 +524,26 @@ MonoBehaviour:
         _targetId: Bell
         _parameter: Injury
         _value: 1
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 100
+        _targetId: Bell
+        _parameter: 
+        _value1: 
+        _value2: 
+      - _conditionType: 105
+        _targetId: Bell
+        _parameter: Injury
+        _value1: 
+        _value2: 
+      _resultText: "\uACE0\uCCA0 \uB4DC\uB860\uC774 \uD3ED\uBC1C\uD558\uBA70 \uC804\uAE30
+        \uC2A4\uD30C\uD06C\uAC00 \uB300\uC6D0\uB4E4\uC758 \uD53C\uBD80\uC5D0 \uB2FF\uC740
+        \uC21C\uAC04, \uC758\uB8CC \uB9CC\uB2A5 \uD0A4\uD2B8\uAC00 \uD654\uC0C1 \uC644\uD654
+        \uC824\uC744 \uBFCC\uB838\uB2E4. \uD3ED\uBC1C\uC740 \uB9C9\uC9C0 \uBABB\uD588\uC9C0\uB9CC,
+        \uD53C\uBD80 \uC190\uC0C1\uC740 \uBC88\uC9C0\uC9C0 \uC54A\uC544 \uBD80\uC0C1\uC744
+        \uC785\uC9C0\uB294 \uC54A\uC558\uB2E4."
+      _actions: []
       _isAffectedByStats: 0
       _probability: 1

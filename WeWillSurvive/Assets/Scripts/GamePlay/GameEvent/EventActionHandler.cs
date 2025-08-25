@@ -126,8 +126,8 @@ namespace WeWillSurvive.GameEvent
         {
             EItem item = EnumUtil.ParseEnum<EItem>(action.TargetId);
 
-            if (!int.TryParse(action.Value, out var count))
-                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
+            if (!float.TryParse(action.Value, out var count))
+                Debug.LogWarning($"Value : {action.Value} | float 타입으로 파싱 실패");
 
             ItemManager.AddItem(item, count);
             LogManager.AddRewardItemData(new RewardItemData(item, count));
@@ -148,12 +148,13 @@ namespace WeWillSurvive.GameEvent
         {
             EItem item = EnumUtil.ParseEnum<EItem>(action.TargetId);
 
-            if (!int.TryParse(action.Value, out var count))
-                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
+            if (!float.TryParse(action.Value, out var count))
+                Debug.LogWarning($"Value : {action.Value} | float 타입으로 파싱 실패");
 
-            if (ItemManager.TryDecreaseItemCount(item, count))
+            var updateCount = Mathf.Min(ItemManager.GetItemCount(item), count);
+            if (ItemManager.TryDecreaseItemCount(item, updateCount))
             {
-                LogManager.AddRewardItemData(new RewardItemData(item, -count));
+                LogManager.AddRewardItemData(new RewardItemData(item, -updateCount));
             }
         }
     }
@@ -187,11 +188,11 @@ namespace WeWillSurvive.GameEvent
     }
 
     /// <summary>
-    /// 특정 이벤트 발생 주기 변경
+    /// 특정 메인 이벤트 쿨타임 설정
     /// </summary>
-    public class PostponeMainEventApplicator : IEventActionHandler
+    public class SetSpecificMainEventCooldownApplicator : IEventActionHandler
     {
-        public EActionType HandledActionType => EActionType.PostponeMainEvent;
+        public EActionType HandledActionType => EActionType.SetSpecificMainEventCooldown;
         public void Apply(EventAction action)
         {
             EMainEventCategory category = EnumUtil.ParseEnum<EMainEventCategory>(action.TargetId);
@@ -200,7 +201,89 @@ namespace WeWillSurvive.GameEvent
                 Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
 
             var targetEventProgress = GameEventManager.Instance.MainEventPicker.GetEventProgress(category);
-            targetEventProgress?.ResetDayCounter(dayCounter);
+
+            targetEventProgress?.SetDayCounter(dayCounter);
+        }
+    }
+
+    /// <summary>
+    /// 특정 메인 이벤트 쿨타임 추가
+    /// </summary>
+    public class AddDaysToSpecificMainEventCooldownApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.AddDaysToSpecificMainEventCooldown;
+        public void Apply(EventAction action)
+        {
+            EMainEventCategory category = EnumUtil.ParseEnum<EMainEventCategory>(action.TargetId);
+
+            if (!int.TryParse(action.Value, out var dayCounter))
+                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
+
+            var targetEventProgress = GameEventManager.Instance.MainEventPicker.GetEventProgress(category);
+
+            targetEventProgress?.AddDayCounter(dayCounter);
+        }
+    }
+
+    /// <summary>
+    /// 다음 캐릭터 이벤트까지 특정 메인 이벤트 발생 연기
+    /// </summary>
+    public class PostponeSpecificMainEventUntilNextCharacterEventApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.PostponeSpecificMainEventUntilNextCharacterEvent;
+        public void Apply(EventAction action)
+        {
+            EMainEventCategory category = EnumUtil.ParseEnum<EMainEventCategory>(action.TargetId);
+
+            var dayCounter = GameEventManager.Instance.CharacterEventPicker.GlobalDayCounter;
+            var targetEventProgress = GameEventManager.Instance.MainEventPicker.GetEventProgress(category);
+            targetEventProgress?.SetDayCounter(dayCounter);
+        }
+    }
+
+    /// <summary>
+    /// 특정 일수 동안 상태 악화 차단
+    /// </summary>
+    public class BlockSpecificStatusWorsenApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.BlockSpecificStatusWorsen;
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public void Apply(EventAction action)
+        {
+            var statusType = EnumUtil.ParseEnum<EStatusType>(action.Parameter);
+
+            if (!int.TryParse(action.Value, out var dayCounter))
+                Debug.LogWarning($"Value : {action.Value} | int 타입으로 파싱 실패");
+
+            var characters = CharacterManager.GetCharactersInShelter();
+            foreach (var character in characters)
+            {
+                var status = character.Status.GetStatus<IStatus>(statusType);
+                status.UpdateWorsenBlockDayCounter(dayCounter);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 다음 캐릭터 이벤트까지 특정 상태 악화 차단
+    /// </summary>
+    public class BlockSpecificStatusWorsenUntilNextCharacterEventApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.BlockSpecificStatusWorsenUntilNextCharacterEvent;
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public void Apply(EventAction action)
+        {
+            var statusType = EnumUtil.ParseEnum<EStatusType>(action.Parameter);
+            var dayCounter = GameEventManager.Instance.CharacterEventPicker.GlobalDayCounter;
+
+            var characters = CharacterManager.GetCharactersInShelter();
+            foreach (var character in characters)
+            {
+                var status = character.Status.GetStatus<IStatus>(statusType);
+                status.UpdateWorsenBlockDayCounter(dayCounter);
+            }
         }
     }
 }

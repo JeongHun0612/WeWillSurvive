@@ -101,10 +101,8 @@ namespace WeWillSurvive.Character
                 if (_explorationDayCounter >= _maxExplorationDays)
                     OnExpeditionComplete();
             }
-            else
-            {
-                Status.OnNewDay();
-            }
+
+            Status.OnNewDay();
         }
 
         public void SetMorale(EMorale morale)
@@ -177,6 +175,10 @@ namespace WeWillSurvive.Character
                 foreach (var rewardItem in rewardData.RewardItems)
                 {
                     EItem item = rewardItem.RewardItem;
+
+                    if (item != EItem.Food && item != EItem.Water && ItemManager.HasItem(item))
+                            continue;
+
                     int amount = rewardItem.GetRandomAmount();
 
                     // 탐사 보상 아이템 추가

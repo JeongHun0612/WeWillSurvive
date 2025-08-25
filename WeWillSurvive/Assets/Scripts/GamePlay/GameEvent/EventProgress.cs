@@ -50,13 +50,18 @@ namespace WeWillSurvive.GameEvent
 
         public virtual void ResetDayCounter()
         {
-            DayCounter = _eventPool.GetRandomCooldownDay();
+            SetDayCounter(_eventPool.GetRandomCooldownDay());
+        }
+
+        public void SetDayCounter(int dayCounter)
+        {
+            DayCounter = dayCounter;
             IsReady = false;
         }
 
-        public virtual void ResetDayCounter(int dayCounter)
+        public void AddDayCounter(int dayCounter)
         {
-            DayCounter = dayCounter;
+            DayCounter += dayCounter;
             IsReady = false;
         }
 
@@ -73,6 +78,19 @@ namespace WeWillSurvive.GameEvent
             // 해당 프로그래스 내에서 랜덤한 이벤트 반환
             int randomIndex = UnityEngine.Random.Range(0, validEvents.Count);
             return validEvents[randomIndex];
+        }
+
+        public virtual MainEventData GetEventDataById(string eventId)
+        {
+            var eventData = Events.FirstOrDefault(data => data.EventId == eventId);
+
+            if (eventData != null)
+            {
+                EventTriggerCount++;
+                ResetDayCounter();
+            }
+
+            return eventData;
         }
 
         public List<MainEventData> GetValidEvents()

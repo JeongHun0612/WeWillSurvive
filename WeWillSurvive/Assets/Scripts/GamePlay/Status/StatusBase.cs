@@ -28,14 +28,28 @@ namespace WeWillSurvive
         protected TLevel _level;
         protected int _dayCounter;
 
+        protected int _worsenBlockDayCounter;
+
         private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         public abstract EStatusType StatusType { get; }
+        public bool IsWorsenBlocked => _worsenBlockDayCounter > 0;
 
         protected abstract bool IsDeadLevel(TLevel level);
 
         public virtual void OnNewDay()
         {
+            // 상태 악화 방어 버프 존재
+            if (IsWorsenBlocked)
+            {
+                _worsenBlockDayCounter = Mathf.Max(0, _worsenBlockDayCounter - 1);
+                LogStateActive(_level);
+                return;
+            }
+
+            if (_owner.IsExploring)
+                return;
+
             if (DaysToNextLevel.TryGetValue(_level, out int daysRequired) && _dayCounter >= daysRequired)
             {
                 WorsenStatus();
@@ -94,6 +108,9 @@ namespace WeWillSurvive
         /// <param name="step">상태 Level 악화 단계</param>
         public virtual void WorsenStatus(int step = 1)
         {
+            if (IsWorsenBlocked)
+                return;
+
             if (step <= 0)
                 step = 1;
 
@@ -157,6 +174,13 @@ namespace WeWillSurvive
             // Counter 초기화
             _dayCounter = 0;
         }
+
+        public virtual void UpdateWorsenBlockDayCounter(int dayCounter)
+        {
+            _worsenBlockDayCounter = dayCounter;
+        }
+
+        public bool HasWorsenBlock() => IsWorsenBlocked;
 
         private void ExecuteWorsen(int targetIndex)
         {

@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using WeWillSurvive.Core;
 using WeWillSurvive.Item;
 using WeWillSurvive.Util;
 
@@ -15,8 +16,10 @@ namespace WeWillSurvive
 
         private ShowStatus _showStatus;
 
-        public EItem ItemType => _itemType;
+        public EItem ItemType { get => _itemType; protected set => _itemType = value; }
         public float Count { get; protected set; }
+
+        protected ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
 
         public async virtual UniTask InitializeAsync()
         {
@@ -24,21 +27,23 @@ namespace WeWillSurvive
             await UniTask.CompletedTask;
         }
 
-        public virtual void Initialize()
+        public virtual void UpdateItemPlacement()
         {
-            _showStatus = gameObject.GetComponent<ShowStatus>();
-        }
-
-        public virtual void UpdateItemPlacement(float count)
-        {
-            Count = count;
-            ItemObjectAllDeactivate();
-
             if (_itemObjects == null || _itemObjects.Count == 0)
                 return;
 
-            _itemObjects[0].SetActive(count != 0.0f);
+            Count = ItemManager.GetItemCount(_itemType);
+            ItemObjectAllDeactivate();
+
+            ItemObjectActivate(Count);
         }
+
+        protected virtual void ItemObjectActivate(float count)
+        {
+            _itemObjects[0].SetActive(count != 0f);
+        }
+
+        protected virtual string BuildStatusText() => EnumUtil.GetInspectorName(_itemType);
 
         protected void ItemObjectAllDeactivate()
         {
@@ -48,15 +53,14 @@ namespace WeWillSurvive
             }
         }
 
+
+
         public void OnPointerClick(PointerEventData eventData)
         {
             if (_showStatus == null)
                 return;
 
-            if (_itemType == EItem.Food || _itemType == EItem.Water)
-                _showStatus.ShowStatusPanel($"{EnumUtil.GetInspectorName(_itemType)} : {Count}");
-            else
-                _showStatus.ShowStatusPanel($"{EnumUtil.GetInspectorName(_itemType)}");
+            _showStatus.ShowStatusPanel(BuildStatusText());
         }
     }
 }

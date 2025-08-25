@@ -1,7 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
@@ -39,7 +40,7 @@ namespace WeWillSurvive.Item
 
     public class ItemManager : IService
     {
-        private readonly Dictionary<EItem, ScriptableItemEffect> _itemEffects = new();
+        private readonly Dictionary<EItem, IItemEffect> _itemEffects = new();
         public Dictionary<EItem, float> Items { get; private set; } = new();
 
         private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
@@ -47,14 +48,7 @@ namespace WeWillSurvive.Item
         public async UniTask InitializeAsync()
         {
             // ItemEffects 초기화
-            var itemEffects = await ResourceManager.LoadAssetsByLabelAsync<ScriptableItemEffect>("ItemEffect");
-            foreach (var itemEffect in itemEffects)
-            {
-                if (!_itemEffects.ContainsKey(itemEffect.ItemType))
-                {
-                    _itemEffects.Add(itemEffect.ItemType, itemEffect);
-                }
-            }
+            SetupItemEffects();
 
             // Item Deubg 전용
 #if UNITY_EDITOR
@@ -114,7 +108,7 @@ namespace WeWillSurvive.Item
                 return;
             }
 
-            if (_itemEffects.TryGetValue(item, out var itemEffect) && target != null)
+            if (_itemEffects.TryGetValue(item, out var itemEffect))
             {
                 itemEffect.Apply(target);
             }
@@ -159,7 +153,7 @@ namespace WeWillSurvive.Item
                 return;
             }
 
-            Items[item] += updateCount;
+            Items[item] = updateCount;
         }
 
         public bool HasItem(EItem item, float count = 1f)
@@ -188,6 +182,23 @@ namespace WeWillSurvive.Item
                 .Where(kvp => kvp.Key != EItem.Water && kvp.Key != EItem.Food)
                 .Sum(kvp => kvp.Value);
         }
+
+        private void SetupItemEffects()
+        {
+            // ItemEffects 초기화
+            var itemEffectTypes = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(t => typeof(IItemEffect).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+
+            foreach (var itemEffectType in itemEffectTypes)
+            {
+                IItemEffect itemEffect = (IItemEffect)Activator.CreateInstance(itemEffectType);
+
+                if (!_itemEffects.ContainsKey(itemEffect.ItemType))
+                {
+                    _itemEffects.Add(itemEffect.ItemType, itemEffect);
+                }
+            }
+        }
     }
 
     [System.Serializable]
@@ -197,12 +208,12 @@ namespace WeWillSurvive.Item
         private EItem _itemType;
 
         [SerializeField]
-        private int _amount;
+        private float _amount;
 
         public EItem ItemType => _itemType;
-        public int Amount => _amount;
+        public float Amount => _amount;
 
-        public RewardItemData(EItem itemType, int amount)
+        public RewardItemData(EItem itemType, float amount)
         {
             _itemType = itemType;
             _amount = amount;
