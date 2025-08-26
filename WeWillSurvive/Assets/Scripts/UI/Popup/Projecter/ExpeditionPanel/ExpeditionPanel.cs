@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
+using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
 
@@ -11,6 +12,7 @@ namespace WeWillSurvive
         [SerializeField] private ExpeditionSelectPanel _selectPanel;
 
         private EventBus EventBus => ServiceLocator.Get<EventBus>();
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
         public async override UniTask InitializeAsync()
         {
@@ -34,8 +36,11 @@ namespace WeWillSurvive
 
             EExpeditionState expeditionState = ExpeditionManager.Instance.CurrentState;
 
-            // 플레이어 중 누군가가 탐사를 나가있는 경우 or 첫째날은 탐사 불가능
-            bool isExpeditionImpossible = expeditionState == EExpeditionState.Exploring || GameManager.Instance.Day == 1;
+            // 탐사 불가능 조건
+            bool isExpeditionImpossible = 
+                expeditionState == EExpeditionState.Exploring ||        // 탐사 중일때
+                CharacterManager.InShelterCharactersCount() <= 1 ||     // 쉘터에 캐릭터가 혼자 남았을 때
+                GameManager.Instance.Day == 1;                          // 첫째날일 때
 
             if (isExpeditionImpossible)
             {

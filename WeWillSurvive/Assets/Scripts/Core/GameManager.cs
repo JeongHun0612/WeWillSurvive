@@ -100,14 +100,14 @@ namespace WeWillSurvive.Core
             if (UIManager.Instance.GetCurrentHUD<UI_RoomHUD>() == null)
                 UIManager.Instance.ShowHUD<UI_RoomHUD>();
 
+            // 플레이어 상태 업데이트
+            CharacterManager.UpdateCharacterStatus();
+
             if (EndingManager.Instance.IsEnding)
             {
                 // TODO 엔딩 컷씬 출력
                 return;
             }
-
-            // 플레이어 상태 업데이트
-            CharacterManager.UpdateCharacterStatus();
 
             // 버프 업데이트
             BuffManager.Instance.OnNewDay();

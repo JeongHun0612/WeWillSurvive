@@ -26,7 +26,9 @@ namespace WeWillSurvive.Character
         public CharacterData Data { get; private set; }                 // 캐릭터 데이터
         public CharacterState State { get; private set; }               // 캐릭터 상태 관리 클래스
         public CharacterStatus Status { get; private set; }             // 캐릭터 스테이터스 관리 클래스
-        public string Name { get; private set; }                        // 캐릭터 이름
+
+        public string Name => Data.Name;
+        public ECharacter Type => Data.Type;
 
         public EMorale Morale { get; private set; }                     // 캐릭터의 사기
         public bool IsExploring { get; private set; }                   // 캐릭터가 탐사를 나갔는지
@@ -65,7 +67,6 @@ namespace WeWillSurvive.Character
             State = new CharacterState();
             Status = new CharacterStatus(this);
 
-            Name = data.Name;
             EventBaseRate = data.BaseEventRate;
 
             ResetData();
