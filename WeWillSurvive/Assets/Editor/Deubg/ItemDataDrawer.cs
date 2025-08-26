@@ -1,4 +1,4 @@
-using UnityEditor;
+ï»¿using UnityEditor;
 using UnityEngine;
 using WeWillSurvive.Item;
 
@@ -7,20 +7,20 @@ namespace WeWillSurvive
     [CustomPropertyDrawer(typeof(ItemData))]
     public class ItemDataDrawer : PropertyDrawer
     {
-        // ÀÎ½ºÆåÅÍ¿¡¼­ ÇÁ·ÎÆÛÆ¼ÀÇ ³ôÀÌ¸¦ °è»êÇÏ´Â ¸Ş¼ÒµåÀÔ´Ï´Ù.
+        // ì¸ìŠ¤í™í„°ì—ì„œ í”„ë¡œí¼í‹°ì˜ ë†’ì´ë¥¼ ê³„ì‚°í•˜ëŠ” ë©”ì†Œë“œì…ë‹ˆë‹¤.
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            // ÇÊ¿äÇÑ ÇÁ·ÎÆÛÆ¼µéÀ» Ã£½À´Ï´Ù.
-            SerializedProperty itemProperty = property.FindPropertyRelative("item");
-            SerializedProperty isActiveProperty = property.FindPropertyRelative("isActive");
+            // í•„ìš”í•œ í”„ë¡œí¼í‹°ë“¤ì„ ì°¾ìŠµë‹ˆë‹¤.
+            SerializedProperty itemProperty = property.FindPropertyRelative("Item");
+            SerializedProperty isActiveProperty = property.FindPropertyRelative("IsActive");
 
-            // EItem enum °ªÀ» °¡Á®¿É´Ï´Ù.
+            // EItem enum ê°’ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
             EItem itemEnum = (EItem)itemProperty.enumValueIndex;
 
-            // ±âº» ³ôÀÌ´Â 'isActive' Ã¼Å©¹Ú½º¸¦ À§ÇÑ ÇÑ ÁÙÀÔ´Ï´Ù.
+            // ê¸°ë³¸ ë†’ì´ëŠ” 'isActive' ì²´í¬ë°•ìŠ¤ë¥¼ ìœ„í•œ í•œ ì¤„ì…ë‹ˆë‹¤.
             float height = EditorGUIUtility.singleLineHeight;
 
-            // ¸¸¾à ¾ÆÀÌÅÛÀÌ Food ¶Ç´Â WaterÀÌ°í, È°¼ºÈ­ »óÅÂ¶ó¸é 'count' ÇÊµå¸¦ À§ÇÑ °ø°£À» Ãß°¡ÇÕ´Ï´Ù.
+            // ë§Œì•½ ì•„ì´í…œì´ Food ë˜ëŠ” Waterì´ê³ , í™œì„±í™” ìƒíƒœë¼ë©´ 'count' í•„ë“œë¥¼ ìœ„í•œ ê³µê°„ì„ ì¶”ê°€í•©ë‹ˆë‹¤.
             if ((itemEnum == EItem.Food || itemEnum == EItem.Water) && isActiveProperty.boolValue)
             {
                 height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
@@ -29,31 +29,31 @@ namespace WeWillSurvive
             return height;
         }
 
-        // ÀÎ½ºÆåÅÍ¿¡¼­ ÇÁ·ÎÆÛÆ¼¸¦ ±×¸®´Â ¸Ş¼ÒµåÀÔ´Ï´Ù.
+        // ì¸ìŠ¤í™í„°ì—ì„œ í”„ë¡œí¼í‹°ë¥¼ ê·¸ë¦¬ëŠ” ë©”ì†Œë“œì…ë‹ˆë‹¤.
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            // ÇÊ¿äÇÑ ÇÁ·ÎÆÛÆ¼µéÀ» Ã£½À´Ï´Ù.
-            SerializedProperty itemProperty = property.FindPropertyRelative("item");
-            SerializedProperty isActiveProperty = property.FindPropertyRelative("isActive");
-            SerializedProperty countProperty = property.FindPropertyRelative("count");
+            // í•„ìš”í•œ í”„ë¡œí¼í‹°ë“¤ì„ ì°¾ìŠµë‹ˆë‹¤.
+            SerializedProperty itemProperty = property.FindPropertyRelative("Item");
+            SerializedProperty isActiveProperty = property.FindPropertyRelative("IsActive");
+            SerializedProperty countProperty = property.FindPropertyRelative("Count");
 
-            // EItem enum °ªÀ» °¡Á®¿É´Ï´Ù.
+            // EItem enum ê°’ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
             EItem itemEnum = (EItem)itemProperty.enumValueIndex;
 
             EditorGUI.BeginProperty(position, label, property);
 
-            // Ã¹ ¹øÂ° ÁÙ¿¡ 'isActive' Ã¼Å©¹Ú½º¸¦ ±×¸³´Ï´Ù.
-            // ·¹ÀÌºíÀº ÇÁ·ÎÆÛÆ¼ÀÇ ÀÌ¸§("Food", "Water" µî)À» »ç¿ëÇÕ´Ï´Ù.
+            // ì²« ë²ˆì§¸ ì¤„ì— 'isActive' ì²´í¬ë°•ìŠ¤ë¥¼ ê·¸ë¦½ë‹ˆë‹¤.
+            // ë ˆì´ë¸”ì€ í”„ë¡œí¼í‹°ì˜ ì´ë¦„("Food", "Water" ë“±)ì„ ì‚¬ìš©í•©ë‹ˆë‹¤.
             Rect lineOneRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
             EditorGUI.PropertyField(lineOneRect, isActiveProperty, label);
 
-            // ¾ÆÀÌÅÛÀÌ Food ¶Ç´Â WaterÀÎ °æ¿ì¿¡¸¸ 'count' ÇÊµå¸¦ ±×¸³´Ï´Ù.
+            // ì•„ì´í…œì´ Food ë˜ëŠ” Waterì¸ ê²½ìš°ì—ë§Œ 'count' í•„ë“œë¥¼ ê·¸ë¦½ë‹ˆë‹¤.
             if (itemEnum == EItem.Food || itemEnum == EItem.Water)
             {
-                // 'isActive'°¡ trueÀÏ ¶§¸¸ 'count' ÇÊµå¸¦ º¸¿©ÁÖ¾î UI¸¦ ±ò²ûÇÏ°Ô À¯ÁöÇÕ´Ï´Ù.
+                // 'isActive'ê°€ trueì¼ ë•Œë§Œ 'count' í•„ë“œë¥¼ ë³´ì—¬ì£¼ì–´ UIë¥¼ ê¹”ë”í•˜ê²Œ ìœ ì§€í•©ë‹ˆë‹¤.
                 if (isActiveProperty.boolValue)
                 {
-                    // µÎ ¹øÂ° ÁÙÀÇ À§Ä¡¸¦ °è»êÇÕ´Ï´Ù.
+                    // ë‘ ë²ˆì§¸ ì¤„ì˜ ìœ„ì¹˜ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
                     Rect lineTwoRect = new Rect(
                         position.x,
                         position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing,
@@ -61,7 +61,7 @@ namespace WeWillSurvive
                         EditorGUIUtility.singleLineHeight
                     );
 
-                    // 'count' ÇÊµå¸¦ µé¿©¾²±âÇÏ¿© °èÃş ±¸Á¶¸¦ ¸íÈ®È÷ º¸¿©Áİ´Ï´Ù.
+                    // 'count' í•„ë“œë¥¼ ë“¤ì—¬ì“°ê¸°í•˜ì—¬ ê³„ì¸µ êµ¬ì¡°ë¥¼ ëª…í™•íˆ ë³´ì—¬ì¤ë‹ˆë‹¤.
                     EditorGUI.indentLevel++;
                     EditorGUI.PropertyField(lineTwoRect, countProperty, new GUIContent("Count"));
                     EditorGUI.indentLevel--;
@@ -69,8 +69,8 @@ namespace WeWillSurvive
             }
             else
             {
-                // Food, Water°¡ ¾Æ´Ñ ¾ÆÀÌÅÛ(¿¹: MedicalKit)ÀÇ °æ¿ì,
-                // 'count' °ªÀ» È°¼ºÈ­ ¿©ºÎ¿¡ µû¶ó 1 ¶Ç´Â 0À¸·Î ÀÚµ¿ ¼³Á¤ÇÕ´Ï´Ù.
+                // Food, Waterê°€ ì•„ë‹Œ ì•„ì´í…œ(ì˜ˆ: MedicalKit)ì˜ ê²½ìš°,
+                // 'count' ê°’ì„ í™œì„±í™” ì—¬ë¶€ì— ë”°ë¼ 1 ë˜ëŠ” 0ìœ¼ë¡œ ìë™ ì„¤ì •í•©ë‹ˆë‹¤.
                 countProperty.floatValue = isActiveProperty.boolValue ? 1f : 0f;
             }
 

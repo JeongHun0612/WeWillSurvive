@@ -56,6 +56,9 @@ namespace WeWillSurvive.Item
             // ItemEffects 초기화
             SetupItemEffects();
 
+            // 리드는 기본적으로 포함
+            AddItem(EItem.Lead);
+
             // Item Deubg 전용
             //#if UNITY_EDITOR
             //            var itemDebugData = await ResourceManager.LoadAssetAsync<ItemDebugData>("ItemDebugData");
@@ -73,7 +76,13 @@ namespace WeWillSurvive.Item
 
         public void Dipose()
         {
-            Items.Clear();
+            // Lead를 제외하고 모든 아이템 제거
+            var keysToRemove = Items.Keys.Where(key => key != EItem.Lead).ToList();
+
+            foreach (var key in keysToRemove)
+            {
+                Items.Remove(key);
+            }
         }
 
         public void AddItem(EItem item, float count = 1f)
