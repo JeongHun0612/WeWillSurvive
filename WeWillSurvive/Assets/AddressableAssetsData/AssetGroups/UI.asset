@@ -30,11 +30,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4a950e283cbdba24287f0265638529d4
-    m_Address: Assets/Prefabs/UI/Popup/UI_RoomMonitor.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 519c5e39ada8678449a67fedf56b18af
     m_Address: Assets/Prefabs/UI/Overlay/UI_Pade.prefab
     m_ReadOnly: 0
@@ -57,6 +52,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 95c2f281fc2abb3498e3a52c733b3889
     m_Address: Assets/Prefabs/UI/UI_Loading.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e457b1cbeebfe743b5e5c3f7f0a4561
+    m_Address: Assets/Prefabs/UI/Popup/UI_InGameSetting.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

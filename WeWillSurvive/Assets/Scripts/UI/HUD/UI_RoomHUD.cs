@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
+using WeWillSurvive.Ending;
 using WeWillSurvive.GameEvent;
 using WeWillSurvive.UI;
 using WeWillSurvive.Util;
@@ -25,9 +26,8 @@ namespace WeWillSurvive
         [SerializeField] private GameObject _buffListPanel;
         [SerializeField] private List<TMP_Text> _buffTextList;
 
-        [Header("MoveButton")]
-        [SerializeField] private Button _leftButton;
-        [SerializeField] private Button _rightButton;
+        [Header("Ending UI")]
+        [SerializeField] private GameObject _titleButton;
 
         private ERoom _currentRoom;
 
@@ -40,9 +40,6 @@ namespace WeWillSurvive
         {
             EventBus.Subscribe<NewDayEvent>(OnNewDayEvent);
             EventBus.Subscribe<MoveRoomCompleteEvent>(OnMoveRoomCompleteEvent);
-
-            _leftButton.onClick.AddListener(() => MoveRoom(_currentRoom - 1));
-            _rightButton.onClick.AddListener(() => MoveRoom(_currentRoom + 1));
 
             _characterIcons = new()
             {
@@ -62,13 +59,6 @@ namespace WeWillSurvive
                 return;
 
             EventBus.Publish(new MoveRoomEvent { TargetRoom = targetRoom });
-        }
-
-        private void UpdateMoveButton()
-        {
-            // 버튼 조건 체크
-            _leftButton.interactable = _currentRoom > 0;
-            _rightButton.interactable = _currentRoom < ERoom.MaxCount - 1;
         }
 
         private void SetRoomMoveButton()
@@ -155,20 +145,40 @@ namespace WeWillSurvive
             }
         }
 
+        public void OnClickSetting()
+        {
+            UIManager.Instance.ShowPopup<UI_InGameSetting>();
+        }
+
+        public void OnClickTitle()
+        {
+            GameManager.Instance.OnMoveTitle();
+        }
+
         private void OnNewDayEvent(NewDayEvent context)
         {
             _currentRoom = ERoom.Main;
-            _dayText.text = $"Day {context.CurrentDay}";
 
-            UpdateMoveButton();
+            var isEnding = EndingManager.Instance.IsEnding;
+
+            if (isEnding)
+            {
+                _dayText.text = (EndingManager.Instance.EndingType == EEndingType.DeathByStarvation) ? "생존 실패" : "생존 성공";
+                _roomMoveButton.SetActive(false);
+                _buffListPanel.SetActive(false);
+                return;
+            }
+
+            _dayText.text = $"Day {context.CurrentDay}";
             SetRoomMoveButton();
             UpdateBuffListText();
+
+            _titleButton.SetActive(isEnding);
         }
 
         private void OnMoveRoomCompleteEvent(MoveRoomCompleteEvent context)
         {
             _currentRoom = context.CurrentRoom;
-            UpdateMoveButton();
             UpdateRoomMoveButton();
             UpdateBuffPanel();
         }
