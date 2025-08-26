@@ -160,6 +160,7 @@ namespace WeWillSurvive
             _currentRoom = ERoom.Main;
 
             var isEnding = EndingManager.Instance.IsEnding;
+            _titleButton.SetActive(isEnding);
 
             if (isEnding)
             {
@@ -172,8 +173,6 @@ namespace WeWillSurvive
             _dayText.text = $"Day {context.CurrentDay}";
             SetRoomMoveButton();
             UpdateBuffListText();
-
-            _titleButton.SetActive(isEnding);
         }
 
         private void OnMoveRoomCompleteEvent(MoveRoomCompleteEvent context)
