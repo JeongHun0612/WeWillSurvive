@@ -176,12 +176,17 @@ namespace WeWillSurvive.Character
 
             foreach (var rewardData in expeditionData.RewardDatas)
             {
+                bool isMessageSend = true;
                 foreach (var rewardItem in rewardData.RewardItems)
                 {
                     EItem item = rewardItem.RewardItem;
 
+                    // 물과 식량을 제외한 아이템은 이미 가지고 있을 시 파밍 X
                     if (item != EItem.Food && item != EItem.Water && ItemManager.HasItem(item))
-                            continue;
+                    {
+                        isMessageSend = false;
+                        continue;
+                    }
 
                     int amount = rewardItem.GetRandomAmount();
 
@@ -191,7 +196,10 @@ namespace WeWillSurvive.Character
                 }
 
                 // 탐사 결과 로그
-                LogManager.AddExpeditionResultLog(rewardData.ExploringMessage);
+                if (isMessageSend)
+                {
+                    LogManager.AddExpeditionResultLog(rewardData.ExploringMessage);
+                }
             }
         }
     }
