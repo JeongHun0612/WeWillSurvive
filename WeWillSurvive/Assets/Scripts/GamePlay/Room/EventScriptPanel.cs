@@ -1,4 +1,4 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,20 +9,21 @@ namespace WeWillSurvive.Room
 {
     public class EventScriptPanel : MonoBehaviour
     {
-        [Header("ÀÌº¥Æ® ½ºÅ©¸³Æ® ÆĞ³Î")]
+        [Header("ì´ë²¤íŠ¸ ìŠ¤í¬ë¦½íŠ¸ íŒ¨ë„")]
         [SerializeField] private RectTransform _panel;
 
-        [Header("ÀÌº¥Æ® ³»¿ë ÅØ½ºÆ®")]
+        [Header("ì´ë²¤íŠ¸ ë‚´ìš© í…ìŠ¤íŠ¸")]
         [SerializeField] private TMP_Text _eventText;
 
-        [Header("ÀÌº¥Æ® È®·ü ÅØ½ºÆ®")]
+        [Header("ì´ë²¤íŠ¸ í™•ë¥  í…ìŠ¤íŠ¸")]
+        [SerializeField] private GameObject _eventRatePanel;
         [SerializeField] private TMP_Text _totalRateText;
         [SerializeField] private TMP_Text _descRateText;
 
-        [Header("ÀÌº¥Æ® ¼±ÅÃÁö ¿É¼Ç")]
+        [Header("ì´ë²¤íŠ¸ ì„ íƒì§€ ì˜µì…˜")]
         [SerializeField] private List<CharacterEventChoiceOption> _choiceOptions = new();
 
-        [Header("Tweening ¿É¼Ç")]
+        [Header("Tweening ì˜µì…˜")]
         [SerializeField] private float _duration = 0.8f;
         [SerializeField] private Ease _easeType = Ease.InOutExpo;
 
@@ -60,15 +61,22 @@ namespace WeWillSurvive.Room
         {
             _selectedChoiceOption = null;
 
-            // ÀÌº¥Æ® ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+            // ì´ë²¤íŠ¸ í…ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸
             _eventText.text = dailyCharacterEvent.DailyEventData.GetRandomDescription();
 
-            // ¼º°ø È®·ü ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
-            var totalRate = owner.EventBaseRate + owner.EventStateModifier + owner.EventSelectionModifier;
-            _totalRateText.text = $"¼º°ø È®·ü : {totalRate}%";
-            _descRateText.text = $"±âº» È®·ü({owner.EventBaseRate})% + Ä³¸¯ÅÍ »óÅÂ({owner.EventStateModifier}%) + ¸®µåÀÌº¥Æ®({owner.EventSelectionModifier}%)";
+            // ì„±ê³µ í™•ë¥  í…ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸
+            if (owner.Type != ECharacter.Lead)
+            {
+                var totalRate = owner.EventBaseRate + owner.EventStateModifier + owner.EventSelectionModifier;
+                _totalRateText.text = $"ì„±ê³µ í™•ë¥  : {totalRate}%";
+                _descRateText.text = $"ê¸°ë³¸ í™•ë¥ ({owner.EventBaseRate})% + ìºë¦­í„° ìƒíƒœ({owner.EventStateModifier}%) + ë¦¬ë“œì´ë²¤íŠ¸({owner.EventSelectionModifier}%)";
+            }
+            else
+            {
+                _eventRatePanel.SetActive(false);
+            }
 
-            // ChoiceOption ¾÷µ¥ÀÌÆ®
+            // ChoiceOption ì—…ë°ì´íŠ¸
             UpdateChoiceOptions(dailyCharacterEvent.DailyEventData);
         }
 

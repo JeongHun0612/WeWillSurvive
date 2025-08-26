@@ -22,6 +22,7 @@ namespace WeWillSurvive
         [SerializeField] private Image _roomMoveButtonCharacterIcon;
 
         [Header("Buff List")]
+        [SerializeField] private GameObject _buffListPanel;
         [SerializeField] private List<TMP_Text> _buffTextList;
 
         [Header("MoveButton")]
@@ -102,6 +103,11 @@ namespace WeWillSurvive
             }
         }
 
+        private void UpdateBuffPanel()
+        {
+            _buffListPanel.SetActive(_currentRoom == ERoom.Main);
+        }
+
         private void UpdateBuffListText()
         {
             var activeBuffs = BuffManager.Instance.GetActiveBuffs();
@@ -119,6 +125,8 @@ namespace WeWillSurvive
                     _buffTextList[i].gameObject.SetActive(false);
                 }
             }
+
+            _buffListPanel.SetActive(true);
         }
 
         private Sprite GetCharacterIcon(ECharacter characterType)
@@ -162,6 +170,7 @@ namespace WeWillSurvive
             _currentRoom = context.CurrentRoom;
             UpdateMoveButton();
             UpdateRoomMoveButton();
+            UpdateBuffPanel();
         }
     }
 }

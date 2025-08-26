@@ -791,6 +791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panel: {fileID: 6727856777152537916}
   _eventText: {fileID: 5699002385093337052}
+  _eventRatePanel: {fileID: 8317114342925347135}
   _totalRateText: {fileID: 5378979992842040341}
   _descRateText: {fileID: 1902999448619142019}
   _choiceOptions:

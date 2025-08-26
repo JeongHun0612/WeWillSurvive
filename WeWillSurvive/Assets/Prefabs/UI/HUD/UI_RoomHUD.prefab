@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3239317192587823697}
   - component: {fileID: 177355909579690943}
   m_Layer: 5
-  m_Name: BuffList
+  m_Name: BuffList Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,6 +479,7 @@ MonoBehaviour:
   _roomMoveButton: {fileID: 5831771467141102038}
   _roomMoveButtonText: {fileID: 9150666054964790676}
   _roomMoveButtonCharacterIcon: {fileID: 7784234430203221359}
+  _buffListPanel: {fileID: 112503274093689815}
   _buffTextList:
   - {fileID: 5841633235520341425}
   - {fileID: 3302618686810624614}
