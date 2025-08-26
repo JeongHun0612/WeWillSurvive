@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: facility_04
   m_EditorClassIdentifier: 
   _eventId: facility_04
-  _title: "\uC804\uB825 \uACF5\uAE09\uAE30 \uACE0\uC7A5 - \uC218\uB9AC \uD0A4\uD2B8
-    \uC0AC\uC6A9 \uC5EC\uBD80"
+  _title: "\uC804\uB825 \uACF5\uAE09\uAE30 \uACE0\uC7A5"
   _descriptions:
   - "\uAE30\uC9C0 \uB0B4\uBD80 \uC804\uB825 \uACF5\uAE09\uAE30\uC758 \uC77C\uBD80
     \uD68C\uB85C\uAC00 \uBD88\uC548\uC815\uD558\uB2E4. \uC870\uCE58\uD558\uC9C0 \uC54A\uC73C\uBA74
     \uBB34\uC791\uC704 \uC7A5\uBE44\uC5D0 \uC601\uD5A5\uC744 \uC904 \uC218 \uC788\uB2E4."
   _conditions: []
   _choiceSchema: 1
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 205
     _requiredAmount: 1
@@ -54,8 +54,8 @@ MonoBehaviour:
         _targetId: SpecialRepairKit
         _parameter: 
         _value: 1
-      - _actionType: 401
-        _targetId: Invasion
+      - _actionType: 500
+        _targetId: BlockFacilityEvent
         _parameter: 
         _value: 3
       _isAffectedByStats: 0
@@ -65,150 +65,20 @@ MonoBehaviour:
     _choiceText: 
     _results:
     - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: MedicKit
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
+      _conditions: []
+      _resultTemplates:
+      - "\uC804\uB825 \uACFC\uBD80\uD558\uB85C {}(\uC774)\uAC00 \uD0C0\uBC84\uB838\uB2E4.
+        \uC800\uC7A5\uC18C\uC5D0 \uC788\uB358 \uC77C\uBD80 \uC7A5\uBE44\uB4E4\uB3C4
+        \uBD88\uC548\uC815\uD574\uC84C\uB2E4.\n"
+      - "\uBD84\uC804\uBC18\uC5D0\uC11C \uD0C0\uB294 \uB0C4\uC0C8\uAC00 \uBC88\uC9C0\uACE0
+        \uCC28\uB2E8\uAE30\uAC00 \uC5F0\uB2EC\uC544 \uB5A8\uC5B4\uC84C\uB2E4. \uBD88\uAF43\uC744
+        \uD53C\uD574 \uAE09\uD788 \uC62E\uAE38 \uC5B4\uB5A0\uD55C \uC7A5\uBE44\uB3C4
+        \uCC3D\uACE0\uC5D0 \uB0A8\uC544 \uC788\uC9C0 \uC54A\uC558\uB2E4."
       _resultText: 
       _actions:
-      - _actionType: 200
+      - _actionType: 202
         _targetId: Lead
-        _parameter: 
+        _parameter: Hunger
         _value: 
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: SpecialMedicKit
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: RepairKit
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: SpecialRepairKit
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: CommDevice
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: NiceSpacesuit
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: Gun
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: BoardGame
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: Ax
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: Pipe
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 201
-        _targetId: Flashlight
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: Map
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: 
-      _actions: []
       _isAffectedByStats: 0
       _probability: 1

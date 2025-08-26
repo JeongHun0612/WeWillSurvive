@@ -14,10 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _category: 0
   _conditions:
-  - _conditionType: 1001
-    _targetId: Lead
+  - _conditionType: 301
+    _targetId: BlockInvasionEvent
     _parameter: 
     _value1: 0
+    _value2: 
+  - _conditionType: 1001
+    _targetId: BlockInvasionEvent
+    _parameter: 
+    _value1: 3
     _value2: 
   _mainEventDatas:
   - {fileID: 11400000, guid: 4c132fa757f5d9242a673d51d29e6828, type: 2}
@@ -27,3 +32,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 193b8f1a81587a14d9f2be9745f932d2, type: 2}
   _minDayCounter: 2
   _maxDayCounter: 4
+  _blockBuffEffect: 12

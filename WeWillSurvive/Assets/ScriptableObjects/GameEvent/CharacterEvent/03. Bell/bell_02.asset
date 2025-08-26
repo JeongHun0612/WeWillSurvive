@@ -32,6 +32,7 @@ MonoBehaviour:
     _value1: 
     _value2: 
   _choiceSchema: 50
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 0
     _requiredAmount: 0
@@ -39,6 +40,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 2
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uBCA8\uC740 \uBD80\uD488\uC744 \uB2A5\uC219\uD558\uAC8C \uC870\uD569\uD574
         \uC218\uB9AC \uD0A4\uD2B8\uB97C \uC644\uC131\uD588\uB2E4. \"\uC88B\uC544!
         \uC774\uAC70\uBA74 \uCDA9\uBD84\uD574.\" \uC6B0\uB9AC\uB294 \uC218\uB9AC
@@ -46,12 +48,13 @@ MonoBehaviour:
       _actions:
       - _actionType: 200
         _targetId: RepairKit
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       _isAffectedByStats: 1
       _probability: 1
     - _outComeType: 3
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uBCA8\uC740 \uC2E4\uB9DD\uD55C \uB4EF \uBD80\uD488\uC744 \uB0B4\uB824\uB193\uC558\uB2E4.
         \"\uBD80\uD488\uC774 \uBD80\uC871\uD588\uB098 \uBD10. \uB2E4\uC74C\uC5D4
         \uC798 \uD560 \uC218 \uC788\uC5B4.\" \uC544\uBB34 \uC77C\uB3C4 \uC5C6\uC774
@@ -61,6 +64,7 @@ MonoBehaviour:
       _probability: 1
     - _outComeType: 4
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC791\uC5C5 \uC911 \uB0A0\uCE74\uB85C\uC6B4 \uBD80\uD488\uC5D0
         \uC190\uC744 \uB2E4\uCCE4\uB2E4. \uBCA8\uC740 \uC190\uC744 \uAC10\uC2F8\uACE0
         \uB3CC\uC544\uC130\uB2E4. \"\uC774\uB7F0, \uBD80\uC8FC\uC758\uD588\uC5B4.\""
@@ -77,6 +81,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uBD80\uD488 \uC0C1\uD0DC\uAC00 \uC88B\uC9C0 \uC54A\uC544,
         \uB2E4\uC74C\uC5D0 \uC2DC\uB3C4\uD560\uAC8C.\" \uBCA8\uC740 \uCC28\uBD84\uD788
         \uBD80\uD488\uC744 \uB2E4\uC2DC \uCC3D\uACE0\uC5D0 \uB123\uC5C8\uB2E4."
@@ -89,6 +94,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uBD80\uD488 \uC0C1\uD0DC\uAC00 \uC88B\uC9C0 \uC54A\uC544,
         \uB2E4\uC74C\uC5D0 \uC2DC\uB3C4\uD560\uAC8C.\" \uBCA8\uC740 \uCC28\uBD84\uD788
         \uBD80\uD488\uC744 \uB2E4\uC2DC \uCC3D\uACE0\uC5D0 \uB123\uC5C8\uB2E4."

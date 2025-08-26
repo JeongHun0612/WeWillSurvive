@@ -17,6 +17,7 @@ namespace WeWillSurvive.GameEvent
         public TEnum Category => _eventPool.Category;
         public IReadOnlyList<Condition> Conditions => _eventPool.Conditions;
         public IReadOnlyList<MainEventData> Events => _eventPool.Events;
+        public EBuffEffect BlockBuffEffect => _eventPool.BlockBuffEffect;
 
         protected EventProgress() { }
 
@@ -36,7 +37,7 @@ namespace WeWillSurvive.GameEvent
 
         public virtual void OnNewDay()
         {
-            if (IsReady)
+            if (IsReady || BuffManager.Instance.HasBuff(BlockBuffEffect))
                 return;
 
             DayCounter--;

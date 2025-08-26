@@ -104,14 +104,6 @@ namespace WeWillSurvive
             gameObject.SetActive(false);
         }
 
-        private void ApplyResultPanels()
-        {
-            //foreach (var pagePanel in _pagePanels)
-            //{
-            //    pagePanel.ApplyResult();
-            //}
-        }
-
         private void ShowCurrentPage(int targetPageIndex)
         {
             if (targetPageIndex < 0 || targetPageIndex > _totalPageCount)

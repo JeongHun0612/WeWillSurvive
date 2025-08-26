@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
@@ -23,13 +24,16 @@ namespace WeWillSurvive.GameEvent
         [InspectorName("캐릭터 사망")] CharacterDaed = 102,
         [InspectorName("캐릭터 이벤트 확률 보정")] CharacterEventRateModifier = 103,
 
+
         [InspectorName("랜덤한 캐릭터 다침 및 사망")] RandomCharacterInjuryWorsen = 110,
+        [InspectorName("정상 캐릭터 중 랜덤한 캐릭터 다침")] InjureRandomHealthyCharacter = 111,
 
         [InspectorName("(결과 텍스트 변경) 랜덤 캐릭터")] ChangeResultTextByRandomCharacter = 120,
 
         [InspectorName("아이템 획득")] AddItem = 200,
         [InspectorName("아이템 삭제")] RemoveItem = 201,
         [InspectorName("식량, 물을 제외한 랜덤한 아이템 삭제")] RemoveRandomSupportItem = 202,
+        [InspectorName("물과 식량 중 더 많이 소지한 아이템 삭제")] RemoveGreaterOfFoodAndWater = 203,
 
         [InspectorName("엔딩 분기 진행")] AdvanceEndingProgress = 300,
         [InspectorName("엔딩 완료")] EndingComplete = 301,
@@ -202,13 +206,6 @@ namespace WeWillSurvive.GameEvent
             var targetCharacter = characters[randomIndex];
 
             var status = targetCharacter.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
-
-            Debug.Log($"Count : {resultTemplates.Count}");
-            foreach (var resultTemplate in resultTemplates)
-            {
-                Debug.Log(resultTemplate);
-            }
-
             if (status.Level == EInjuredLevel.Normal)
             {
                 status.WorsenStatus();
@@ -219,7 +216,36 @@ namespace WeWillSurvive.GameEvent
                 targetCharacter.OnDead();
                 resultText = resultTemplates[1].Replace("{}", targetCharacter.Name);
             }
+        }
+    }
 
+    /// <summary>
+    /// 정상 캐릭터 중 랜덤한 캐릭터 다침
+    /// </summary>
+    public class InjureRandomHealthyCharacterApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.InjureRandomHealthyCharacter;
+
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
+        {
+            var characters = CharacterManager.GetCharactersInShelter();
+
+            var targetCharacters = CharacterManager.GetCharactersInShelter()
+                .Where(character =>
+                {
+                    var status = character.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
+                    return status != null && status.Level == EInjuredLevel.Normal;
+                }).ToList();
+
+            if (targetCharacters.Count == 0)
+                return;
+
+            int randomIndex = UnityEngine.Random.Range(0, targetCharacters.Count);
+            var targetCharacter = targetCharacters[randomIndex];
+            var status = targetCharacter.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
+            status.WorsenStatus();
         }
     }
 
@@ -300,20 +326,62 @@ namespace WeWillSurvive.GameEvent
 
         public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
         {
-            EItem targetItem = ItemManager.GetRandomSupportItem();
+            EItem item = ItemManager.GetRandomSupportItem();
+            if (item == EItem.None)
+            {
+                resultText = resultTemplates[1];
+            }
+            else
+            {
+                resultText = resultTemplates[0].Replace("{}", EnumUtil.GetInspectorName(item));
+            }
 
-            //if (targetItem)
+            var updateCount = Mathf.Min(ItemManager.GetItemCount(item), 1f);
+            if (ItemManager.TryDecreaseItemCount(item, updateCount))
+            {
+                LogManager.AddRewardItemData(new RewardItemData(item, -updateCount));
+            }
+        }
+    }
 
-            //EItem item = EnumUtil.ParseEnum<EItem>(action.TargetId);
+    /// <summary>
+    /// 물과 식량 중 더 많이 소지한 아이템 삭제
+    /// </summary>
+    public class RemoveGreaterOfFoodAndWaterApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.RemoveGreaterOfFoodAndWater;
 
-            //if (!float.TryParse(action.Value, out var count))
-            //    Debug.LogWarning($"Value : {action.Value} | float 타입으로 파싱 실패");
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
-            //var updateCount = Mathf.Min(ItemManager.GetItemCount(item), count);
-            //if (ItemManager.TryDecreaseItemCount(item, updateCount))
-            //{
-            //    LogManager.AddRewardItemData(new RewardItemData(item, -updateCount));
-            //}
+        public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
+        {
+            if (!float.TryParse(action.Value, out var removeCount))
+                Debug.LogWarning($"Value : {action.Value} | float 타입으로 파싱 실패");
+
+            var foodCount = ItemManager.GetItemCount(EItem.Food);
+            var waterCount = ItemManager.GetItemCount(EItem.Water);
+
+            EItem removeItem = EItem.Food;
+            if (foodCount > waterCount)
+            {
+                removeItem = EItem.Food;
+            }
+            else if (foodCount < waterCount)
+            {
+                removeItem = EItem.Water;
+            }
+            else
+            {
+                removeItem = (UnityEngine.Random.value < 0.5f) ? EItem.Food : EItem.Water;
+            }
+
+            resultText = resultText.Replace("{}", EnumUtil.GetInspectorName(removeItem));
+            var updateCount = Mathf.Min(ItemManager.GetItemCount(removeItem), removeCount);
+            if (ItemManager.TryDecreaseItemCount(removeItem, updateCount))
+            {
+                LogManager.AddRewardItemData(new RewardItemData(removeItem, -updateCount));
+            }
         }
     }
 

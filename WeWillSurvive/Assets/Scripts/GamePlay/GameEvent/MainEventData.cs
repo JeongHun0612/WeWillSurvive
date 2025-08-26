@@ -105,6 +105,9 @@ namespace WeWillSurvive.GameEvent
         private EMainEventChoiceSchema _choiceSchema;               // 이벤트 선택지 구조 (YesOrNo, UseItem, ChooseSomeone 등)
 
         [SerializeField]
+        private bool _isChoiceRequired;                             // 선택지를 필수적으로 선택해야하는지
+
+        [SerializeField]
         private List<EventChoice> _choices;                         // 유저가 고를 수 있는 선택지
 
         public string EventId => _eventId;
@@ -112,6 +115,7 @@ namespace WeWillSurvive.GameEvent
         public IReadOnlyList<string> Descriptions => _descriptions;
         public IReadOnlyList<Condition> Conditions => _conditions;
         public EMainEventChoiceSchema ChoiceSchema => _choiceSchema;
+        public bool IsChoiceRequired => _isChoiceRequired;
         public List<EventChoice> Choices { get => _choices; set => _choices = value; }
 
         public string GetRandomDescription()

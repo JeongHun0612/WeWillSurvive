@@ -95,14 +95,8 @@ namespace WeWillSurvive
                 return;
             }
 
-            //OnSelected(!_isSelected);
             ItemSelectedEvent?.Invoke(this);
             Debug.Log($"[{_item}] Count: {ItemManager.GetItemCount(_item)}");
-
-            //_isSelected = !_isSelected;
-            //OnSelected(_isSelected);
-            //ItemSelectedEvent?.Invoke(this);
-            //Debug.Log($"[{_item}] Count: {ItemManager.GetItemCount(_item)}");
         }
     }
 }

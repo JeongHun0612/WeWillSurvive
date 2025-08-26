@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using WeWillSurvive.Core;
@@ -7,12 +7,17 @@ namespace WeWillSurvive
 {
     public enum EBuffEffect
     {
-        [InspectorName("¹è°íÇÄ ¾ÇÈ­ Â÷´Ü")] BlockHungerWorsen = 0,
-        [InspectorName("¸ñ¸¶¸§ ¾ÇÈ­ Â÷´Ü")] BlockThirstWorsen = 1,
-        [InspectorName("ºÎ»ó ¾ÇÈ­ Â÷´Ü")] BlockInjuryWorsen = 2,
-        [InspectorName("°øÆ÷ ¾ÇÈ­ Â÷´Ü")] BlockAnxiousWorsen = 3,
+        [InspectorName("ë°°ê³ í”” ì•…í™” ì°¨ë‹¨")] BlockHungerWorsen = 0,
+        [InspectorName("ëª©ë§ˆë¦„ ì•…í™” ì°¨ë‹¨")] BlockThirstWorsen = 1,
+        [InspectorName("ë¶€ìƒ ì•…í™” ì°¨ë‹¨")] BlockInjuryWorsen = 2,
+        [InspectorName("ê³µí¬ ì•…í™” ì°¨ë‹¨")] BlockAnxiousWorsen = 3,
 
-        [InspectorName("½Ã¼³ ÀÌº¥Æ® ¹ß»ı Â÷´Ü")] BlockFacilityEvent = 10,
+        [InspectorName("ì¡°ì‚¬ ì´ë²¤íŠ¸ ë°œìƒ ì°¨ë‹¨")] BlockExplorationEvent = 10,
+        [InspectorName("ì‹œì„¤ ì´ë²¤íŠ¸ ë°œìƒ ì°¨ë‹¨")] BlockFacilityEvent = 11,
+        [InspectorName("ì¹¨ì… ì´ë²¤íŠ¸ ë°œìƒ ì°¨ë‹¨")] BlockInvasionEvent = 12,
+        [InspectorName("êµí™˜ ì´ë²¤íŠ¸ ë°œìƒ ì°¨ë‹¨")] BlockTradeEvent = 13,
+
+        None = 1000,
     }
 
     public class BuffManager : MonoSingleton<BuffManager>
@@ -32,7 +37,7 @@ namespace WeWillSurvive
             foreach (var buff in _buffs.Values)
                 buff.OnNewDay();
 
-            // ¸¸·áµÈ ¹öÇÁ¸¸ ¹İÈ¯ ÈÄ Á¦°Å
+            // ë§Œë£Œëœ ë²„í”„ë§Œ ë°˜í™˜ í›„ ì œê±°
             var expired = _buffs.Values
                 .Where(buff => buff.Duration <= 0)
                 .Select(buff => buff.Effect)
@@ -40,14 +45,14 @@ namespace WeWillSurvive
 
             foreach (var key in expired)
             {
-                Debug.Log($"[Buff Delete] '{key}' ¹öÇÁ°¡ ¼Ò¸êµÇ¾ú½À´Ï´Ù.");
+                Debug.Log($"[Buff Delete] '{key}' ë²„í”„ê°€ ì†Œë©¸ë˜ì—ˆìŠµë‹ˆë‹¤.");
                 _buffs.Remove(key);
             }
         }
 
         public void AddBuff(Buff newBuff)
         {
-            // ¹öÇÁ°¡ ¹ß»ıÇÏ°í ¹Ù·Î ÇÏ·ç°¡ Áö³ª±â ¶§¹®¿¡ +1 ·Î »ó¼â
+            // ë²„í”„ê°€ ë°œìƒí•˜ê³  ë°”ë¡œ í•˜ë£¨ê°€ ì§€ë‚˜ê¸° ë•Œë¬¸ì— +1 ë¡œ ìƒì‡„
             int targetDuration = newBuff.Duration + 1;
             newBuff.UpdateDruation(targetDuration);
 
@@ -59,7 +64,7 @@ namespace WeWillSurvive
             else
             {
                 _buffs.Add(newBuff.Effect, newBuff);
-                Debug.Log($"[Buff Add] '{newBuff.Effect}' {targetDuration - 1}ÀÏ ºÎ¿©");
+                Debug.Log($"[Buff Add] '{newBuff.Effect}' {targetDuration - 1}ì¼ ë¶€ì—¬");
             }
         }
 

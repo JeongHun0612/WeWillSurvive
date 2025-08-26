@@ -34,6 +34,7 @@ MonoBehaviour:
     _value1: 
     _value2: 
   _choiceSchema: 50
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 203
     _requiredAmount: 1
@@ -41,6 +42,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 2
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uB2E5\uD130 K\uB294 \uB9E4\uB274\uC5BC\uB300\uB85C \uC644\uBCBD\uD55C
         \uC758\uB8CC \uD0A4\uD2B8\uB97C \uC644\uC131\uD588\uB2E4. \"\uC774\uC81C
         \uC704\uAE09 \uC0C1\uD669\uC5D0\uC11C\uB3C4 \uBB38\uC81C\uC5C6\uC744 \uAC70\uC57C.\"
@@ -48,16 +50,17 @@ MonoBehaviour:
       _actions:
       - _actionType: 201
         _targetId: MedicKit
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       - _actionType: 200
         _targetId: SpecialMedicKit
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       _isAffectedByStats: 1
       _probability: 1
     - _outComeType: 3
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uB2E5\uD130 K\uB294 \uACB0\uACFC\uB97C \uD655\uC778\uD558\uACE0
         \uD55C\uC228\uC744 \uC26C\uC5C8\uB2E4. \"\uC774 \uB9E4\uB274\uC5BC\uC740
         \uC880 \uB0A1\uC558\uB098 \uBD10. \uD6A8\uACFC\uAC00 \uC5C6\uC5B4.\" \uC6B0\uB9AC\uB294
@@ -69,6 +72,7 @@ MonoBehaviour:
       _probability: 1
     - _outComeType: 4
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC870\uD569 \uC911 \uC791\uC740 \uD3ED\uBC1C\uC774 \uBC1C\uC0DD\uD588\uB2E4.
         \uB2E5\uD130 K\uAC00 \uC5BC\uAD74\uC744 \uCC21\uADF8\uB838\uB2E4. \"\uC774\uB7F0...
         \uC798\uBABB\uB41C \uC815\uBCF4\uC600\uC5B4.\" \uBE60\uB974\uAC8C \uB300\uD53C\uD55C
@@ -89,6 +93,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC774 \uB9E4\uB274\uC5BC\uC774 \uC2E0\uB8B0\uAC00 \uAC00\uC9C0
         \uC54A\uC544.\" \uB2E5\uD130 K\uB294 \uB9E4\uB274\uC5BC\uC744 \uB36E\uACE0
         \uC870\uC6A9\uD788 \uCE58\uC6E0\uB2E4."
@@ -101,6 +106,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC774 \uB9E4\uB274\uC5BC\uC774 \uC2E0\uB8B0\uAC00 \uAC00\uC9C0
         \uC54A\uC544.\" \uB2E5\uD130 K\uB294 \uB9E4\uB274\uC5BC\uC744 \uB36E\uACE0
         \uC870\uC6A9\uD788 \uCE58\uC6E0\uB2E4."

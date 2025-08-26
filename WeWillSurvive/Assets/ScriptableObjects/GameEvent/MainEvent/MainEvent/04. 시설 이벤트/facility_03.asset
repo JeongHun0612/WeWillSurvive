@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: facility_03
   m_EditorClassIdentifier: 
   _eventId: facility_03
-  _title: "\uC804\uB4F1 \uC774\uC0C1 \u2013 \uC190\uC804\uB4F1 \uC0AC\uC6A9 \uC5EC\uBD80"
+  _title: "\uC804\uB4F1 \uC774\uC0C1"
   _descriptions:
   - "\uAE30\uC9C0 \uB0B4 \uC804\uB4F1\uC774 \uACC4\uC18D \uAE5C\uBE61\uC774\uACE0
     \uC788\uB2E4. \uC804\uB825 \uACC4\uD1B5\uC758 \uBB38\uC81C\uB85C \uBCF4\uC774\uC9C0\uB9CC
@@ -23,6 +23,7 @@ MonoBehaviour:
     \uC704\uD5D8\uC774 \uC788\uB2E4."
   _conditions: []
   _choiceSchema: 1
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 213
     _requiredAmount: 1
@@ -60,64 +61,20 @@ MonoBehaviour:
     _choiceText: 
     _results:
     - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: MedicKit
-        _parameter: 
-        _value1: 1
-        _value2: 
-      _resultTemplates: []
-      _resultText: "\uC5B4\uB460 \uC18D \uC0DD\uD65C\uC774 \uC774\uC5B4\uC84C\uB2E4.
-        \uBC14\uB2E5\uC5D0 \uB193\uC5EC\uC788\uB358 \uC758\uB8CC\uD0A4\uD2B8\uAC00
-        \uBD80\uC11C\uC84C\uACE0, \uBA87\uBA87\uC740 \uC6B0\uC6B8\uD55C \uAE30\uC0C9\uC744
-        \uAC10\uCD94\uC9C0 \uBABB\uD588\uB2E4."
-      _actions:
-      - _actionType: 201
-        _targetId: MedicKit
-        _parameter: 
-        _value: 1
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: RepairKit
-        _parameter: 
-        _value1: 1
-        _value2: 
-      _resultTemplates: []
-      _resultText: "\uC5B4\uB460 \uC18D \uC0DD\uD65C\uC774 \uC774\uC5B4\uC84C\uB2E4.
-        \uBC14\uB2E5\uC5D0 \uB193\uC5EC\uC788\uB358 \uC218\uB9AC\uD0A4\uD2B8\uAC00
-        \uBD80\uC11C\uC84C\uACE0, \uBA87\uBA87\uC740 \uC6B0\uC6B8\uD55C \uAE30\uC0C9\uC744
-        \uAC10\uCD94\uC9C0 \uBABB\uD588\uB2E4."
-      _actions:
-      - _actionType: 201
-        _targetId: RepairKit
-        _parameter: 
-        _value: 1
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 200
-        _targetId: Lead
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: "\uC5B4\uB460 \uC18D \uC0DD\uD65C\uC774 \uC774\uC5B4\uC84C\uC9C0\uB9CC
-        \uB2E4\uD589\uD788 \uC544\uBB34\uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0 \uC54A\uC558\uB2E4."
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
       _conditions: []
-      _resultTemplates: []
-      _resultText: "\uBCBD\uC774 \uB5A8\uB9AC\uBA70 \uC870\uBA85\uC774 \uAEBC\uC84C\uB2E4
-        \uCF1C\uC9C0\uAE30\uB97C \uBC18\uBCF5\uD588\uB2E4. \uC120\uBC18\uC774 \uBB34\uB108\uC838
-        \uD1B5\uB85C\uAC00 \uB9C9\uD614\uC9C0\uB9CC \uBC84\uB9AC\uAC70\uB098 \uB354
-        \uB9DD\uAC00\uC9C8 \uC7A5\uBE44\uB3C4 \uCC3D\uACE0\uC5D0 \uB0A8\uC544 \uC788\uC9C0
-        \uC54A\uC558\uB2E4."
-      _actions: []
+      _resultTemplates:
+      - "\uC5B4\uB460 \uC18D \uC0DD\uD65C\uC774 \uC774\uC5B4\uC84C\uB2E4. \uBC14\uB2E5\uC5D0
+        \uB193\uC5EC\uC788\uB358 {}(\uC774)\uAC00 \uBD80\uC11C\uC84C\uACE0, \uBA87\uBA87\uC740
+        \uC6B0\uC6B8\uD55C \uAE30\uC0C9\uC744 \uAC10\uCD94\uC9C0 \uBABB\uD588\uB2E4."
+      - "\uBCBD\uC774 \uB5A8\uB9AC\uBA70 \uC870\uBA85\uC774 \uAEBC\uC84C\uB2E4 \uCF1C\uC9C0\uAE30\uB97C
+        \uBC18\uBCF5\uD588\uB2E4. \uC120\uBC18\uC774 \uBB34\uB108\uC838 \uD1B5\uB85C\uAC00
+        \uB9C9\uD614\uC9C0\uB9CC \uBC84\uB9AC\uAC70\uB098 \uB354 \uB9DD\uAC00\uC9C8
+        \uC7A5\uBE44\uB3C4 \uCC3D\uACE0\uC5D0 \uB0A8\uC544 \uC788\uC9C0 \uC54A\uC558\uB2E4."
+      _resultText: 
+      _actions:
+      - _actionType: 202
+        _targetId: Lead
+        _parameter: Hunger
+        _value: 
       _isAffectedByStats: 0
       _probability: 1

@@ -22,11 +22,15 @@ MonoBehaviour:
     \uC810\uC810 \uB354 \uB610\uB837\uD574\uC84C\uB2E4. \uBB38\uC744 \uC5F4\uC5B4\uBCFC\uAE4C?"
   _conditions: []
   _choiceSchema: 0
+  _isChoiceRequired: 1
   _choices:
   - _choiceIcon: 0
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates: []
       _resultText: "\uBB38\uC744 \uC5F4\uC790, \uD3C9\uD654\uC801\uC778 \uC678\uACC4
         \uC0DD\uBA85\uCCB4\uB4E4\uC774 \uBAA8\uC2B5\uC744 \uB4DC\uB7EC\uB0C8\uB2E4.
         \uADF8\uB4E4\uC740 \uAD6C\uC870\uC120\uACFC \uD568\uAED8 \uC6B0\uB9AC\uB97C
@@ -36,11 +40,15 @@ MonoBehaviour:
         _targetId: RescueByAliens
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 1
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates: []
       _resultText: "\uC6B0\uB9B0 \uB9DD\uC124\uC600\uACE0, \uBB38\uC740 \uC5F4\uB9AC\uC9C0
         \uC54A\uC558\uB2E4. \uADF8\uB4E4\uC740 \uB5A0\uB0AC\uACE0, \uAE30\uD68C\uB294
         \uC0AC\uB77C\uC84C\uB2E4. \uB2E4\uC2DC \uADF8 \uC18C\uB9AC\uAC00 \uB4E4\uB9B4
@@ -48,4 +56,5 @@ MonoBehaviour:
         \uADF8 \uAE30\uD68C\uB294 \uC27D\uAC8C \uC624\uC9C0 \uC54A\uB294 \uAC83\uC774\uB77C\uB294
         \uAC83\uC744 \uC54C\uACE0 \uC788\uC5C8\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

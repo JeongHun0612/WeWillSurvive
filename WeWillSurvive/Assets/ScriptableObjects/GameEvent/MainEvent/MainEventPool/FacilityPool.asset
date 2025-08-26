@@ -13,12 +13,23 @@ MonoBehaviour:
   m_Name: FacilityPool
   m_EditorClassIdentifier: 
   _category: 3
-  _conditions: []
+  _conditions:
+  - _conditionType: 301
+    _targetId: BlockFacilityEvent
+    _parameter: 
+    _value1: 
+    _value2: 
   _mainEventDatas:
   - {fileID: 11400000, guid: c50c8c5dae0f43b408a2ebc6c6ec2af5, type: 2}
   - {fileID: 11400000, guid: e0c5eb9711d0b0541adadcc68f5e506b, type: 2}
   - {fileID: 11400000, guid: e403479ba91a2fd4db81d2a5b56faec1, type: 2}
   - {fileID: 11400000, guid: 35a8d0b9baed30e4fa79d99ff4d5948f, type: 2}
   - {fileID: 11400000, guid: 4671769103295d342af22e5d2edf048e, type: 2}
+  - {fileID: 11400000, guid: 3c236100ad87d7f49ac51b429cce679e, type: 2}
+  - {fileID: 11400000, guid: c2314fc53a8ce974eb32797a592a4bec, type: 2}
+  - {fileID: 11400000, guid: 59330e0f6f5d4894eb6c2ca9e0788e9e, type: 2}
+  - {fileID: 11400000, guid: 61f8c0019206f454c8094ab134e89c0d, type: 2}
+  - {fileID: 11400000, guid: 4a7ddf6c9e77e5a4dbb6ee8eab1b8626, type: 2}
   _minDayCounter: 2
   _maxDayCounter: 4
+  _blockBuffEffect: 11

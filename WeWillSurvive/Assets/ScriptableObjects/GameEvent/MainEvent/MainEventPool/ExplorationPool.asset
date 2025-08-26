@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: ExplorationPool
   m_EditorClassIdentifier: 
   _category: 1
-  _conditions: []
+  _conditions:
+  - _conditionType: 301
+    _targetId: BlockExplorationEvent
+    _parameter: 
+    _value1: 
+    _value2: 
   _mainEventDatas:
   - {fileID: 11400000, guid: 3c8687cccdf892b49b9bad3f808d2d7e, type: 2}
   - {fileID: 11400000, guid: 8df72e761857a554681b87d0ec6bff62, type: 2}
@@ -22,3 +27,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 012332cb82314b34aba81756a530410a, type: 2}
   _minDayCounter: 2
   _maxDayCounter: 4
+  _blockBuffEffect: 10
