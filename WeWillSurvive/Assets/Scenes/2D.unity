@@ -507,7 +507,10 @@ MonoBehaviour:
   _minGlobalDayCount: 0
   _maxGlobalDayCount: 0
   _eventPools:
+  - {fileID: 11400000, guid: 62d531b64c920ec499b52506dbcf5a9c, type: 2}
+  - {fileID: 11400000, guid: bf429643795976d4e9d8a52043a90f7c, type: 2}
   - {fileID: 11400000, guid: 10a7b23d8b803d3499a0ce5cd0d26467, type: 2}
+  - {fileID: 11400000, guid: c833e7865b475cc4e8ee5ce33c25ffce, type: 2}
   _notingEventPool: {fileID: 11400000, guid: aeb9b63f3917a1b45857c68d799e9d2b, type: 2}
   _firstDayEventPool: {fileID: 11400000, guid: 656be929a7d1afa45ba05e70bb12594d, type: 2}
 --- !u!1 &685447413
@@ -885,6 +888,7 @@ MonoBehaviour:
   - Assets/Prefabs/UI/Popup/UI_Projecter.prefab
   - Assets/Prefabs/UI/Popup/UI_RoomMonitor.prefab
   - Assets/Prefabs/UI/Popup/UI_StatePanel.prefab
+  - Assets/Prefabs/UI/Popup/UI_DebugSetting.prefab
   _overlayPrefabPaths:
   - Assets/Prefabs/UI/Overlay/UI_Pade.prefab
   - Assets/Prefabs/UI/Overlay/UI_Black.prefab
@@ -935,6 +939,10 @@ PrefabInstance:
     - target: {fileID: 2054080995877023545, guid: 95c2f281fc2abb3498e3a52c733b3889, type: 3}
       propertyPath: m_Name
       value: UI_Loading
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054080995877023545, guid: 95c2f281fc2abb3498e3a52c733b3889, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4818029197059347859, guid: 95c2f281fc2abb3498e3a52c733b3889, type: 3}
       propertyPath: m_Pivot.x

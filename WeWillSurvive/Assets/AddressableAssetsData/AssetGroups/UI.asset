@@ -60,6 +60,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad405c9c39b1e8543807d4fd5145dd78
+    m_Address: Assets/Prefabs/UI/Popup/UI_DebugSetting.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b562060cde8dbe543b69f2ad99c66c5f
     m_Address: Assets/Prefabs/UI/Scene/UI_Room.prefab
     m_ReadOnly: 0

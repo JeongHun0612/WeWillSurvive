@@ -35,6 +35,7 @@ namespace WeWillSurvive
             var titleProp = serializedObject.FindProperty("_title");
             var descriptionsProp = serializedObject.FindProperty("_descriptions");
             var triggerConditionsProp = serializedObject.FindProperty("_conditions");
+            var isChoiceRequiredProp = serializedObject.FindProperty("_isChoiceRequired");
             var choiceSchemaProp = serializedObject.FindProperty("_choiceSchema");
 
             MainEventData data = (MainEventData)target;
@@ -52,6 +53,8 @@ namespace WeWillSurvive
             EditorGUILayout.Space(20);
             var currentChoiceSchema = choiceSchemaProp.intValue;
             EditorGUILayout.PropertyField(choiceSchemaProp, new GUIContent("이벤트 타입"));
+            EditorGUILayout.Space(5);
+            EditorGUILayout.PropertyField(isChoiceRequiredProp, new GUIContent("선택이 필수적인가?"));
 
             if (currentChoiceSchema != choiceSchemaProp.intValue || data.Choices == null)
             {

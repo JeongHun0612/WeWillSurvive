@@ -57,16 +57,18 @@ namespace WeWillSurvive.Item
             SetupItemEffects();
 
             // Item Deubg 전용
-#if UNITY_EDITOR
-            var itemDebugData = await ResourceManager.LoadAssetAsync<ItemDebugData>("ItemDebugData");
-            foreach (var itemData in itemDebugData.GetItemDatas())
-            {
-                if (!itemData.isActive)
-                    continue;
+            //#if UNITY_EDITOR
+            //            var itemDebugData = await ResourceManager.LoadAssetAsync<ItemDebugData>("ItemDebugData");
+            //            foreach (var itemData in itemDebugData.GetItemDatas())
+            //            {
+            //                if (!itemData.IsActive)
+            //                    continue;
 
-                AddItem(itemData.item, itemData.count);
-            }
-#endif
+            //                AddItem(itemData.Item, itemData.Count);
+            //            }
+            //#endif
+
+            await UniTask.Yield();
         }
 
         public void Dipose()

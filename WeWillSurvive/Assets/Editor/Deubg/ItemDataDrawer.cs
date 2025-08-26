@@ -4,7 +4,7 @@ using WeWillSurvive.Item;
 
 namespace WeWillSurvive
 {
-    [CustomPropertyDrawer(typeof(ItemDebugData.ItemData))]
+    [CustomPropertyDrawer(typeof(ItemData))]
     public class ItemDataDrawer : PropertyDrawer
     {
         // 인스펙터에서 프로퍼티의 높이를 계산하는 메소드입니다.

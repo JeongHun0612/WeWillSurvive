@@ -63,6 +63,11 @@ namespace WeWillSurvive
                     parameterProp.stringValue = string.Empty;
                     PropertyUtil.DrawFloatField(ref rect, "갯수", valueProp);
                     break;
+                case EActionType.RemoveGreaterOfFoodAndWater:
+                    targetIdProp.stringValue = string.Empty;
+                    parameterProp.stringValue = string.Empty;
+                    PropertyUtil.DrawFloatField(ref rect, "갯수", valueProp);
+                    break;
                 case EActionType.AdvanceEndingProgress:
                 case EActionType.EndingComplete:
                     PropertyUtil.DrawEnumPopupAsString<EEndingType>(ref rect, "엔딩", targetIdProp);
