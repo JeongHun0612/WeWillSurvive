@@ -1,9 +1,10 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
+using WeWillSurvive.Ending;
 
 namespace WeWillSurvive.UI
 {
@@ -24,7 +25,7 @@ namespace WeWillSurvive.UI
                 .AppendCallback(() =>
                 {
                     callback?.Invoke();
-                    _dayText.text = $"Day {GameManager.Instance.Day}";
+                    _dayText.text = (EndingManager.Instance.IsEnding) ? "게임 종료" : $"Day {GameManager.Instance.Day}";
                     _dayText.DOFade(1f, 1f).SetEase(Ease.InCubic);
                 })
                 .AppendInterval(2f)

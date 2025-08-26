@@ -34,6 +34,8 @@ namespace WeWillSurvive.Core
 
         public void OnMoveTitle()
         {
+            ItemManager.Dipose();
+
             UIManager.Instance.CloseAllUIs();
             UIManager.Instance.ShowScene<UI_Title>();
         }
@@ -41,7 +43,6 @@ namespace WeWillSurvive.Core
         public void OnStartParming()
         {
             UIManager.Instance.CloseAllUIs();
-            ItemManager.Dipose();
 
             // TODO 파밍맵 생성
         }
@@ -57,6 +58,7 @@ namespace WeWillSurvive.Core
             Day = 0;
 
             CharacterManager.SettingCharacter();
+            EndingManager.Instance.ResetState();
             BuffManager.Instance.ResetState();
             GameEventManager.Instance.ResetState();
             FarmingReportManager.Instance.UpdateFarmingReport();
@@ -102,12 +104,6 @@ namespace WeWillSurvive.Core
 
             // 플레이어 상태 업데이트
             CharacterManager.UpdateCharacterStatus();
-
-            if (EndingManager.Instance.IsEnding)
-            {
-                // TODO 엔딩 컷씬 출력
-                return;
-            }
 
             // 버프 업데이트
             BuffManager.Instance.OnNewDay();

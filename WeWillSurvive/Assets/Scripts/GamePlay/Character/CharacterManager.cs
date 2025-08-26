@@ -96,6 +96,9 @@ namespace WeWillSurvive.Character
 
         public void UpdateCharacterStatus()
         {
+            if (EndingManager.Instance.IsEnding)
+                return;
+
             foreach (var character in Characters.Values)
             {
                 if (character.IsDead) continue;

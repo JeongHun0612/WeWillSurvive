@@ -18,17 +18,27 @@ namespace WeWillSurvive.Ending
         // 사망 엔딩 (Death Endings)
         [InspectorName("모든 캐릭터 사망")]
         DeathByStarvation,
+
+
+
+        None = 100,
     }
 
     public class EndingManager : MonoSingleton<EndingManager>
     {
         public bool IsEnding { get; private set; }
+        public EEndingType EndingType { get; private set; }
+
+        public void ResetState()
+        {
+            IsEnding = false;
+            EndingType = EEndingType.None;
+        }
 
         public void Ending(EEndingType endingType)
         {
             IsEnding = true;
-            // TODO 게임 엔딩
-            Debug.Log($"Game Ending!! [{endingType}]");
+            EndingType = endingType;
         }
     }
 }

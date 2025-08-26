@@ -74,11 +74,12 @@ namespace WeWillSurvive.Character
 
         public void ResetData()
         {
+            IsExploring = false;
+            IsDead = false;
+
             State.SetState(EState.Normal);
             Status.ResetStatus();
             Morale = EMorale.Normal;
-            IsExploring = false;
-            IsDead = false;
 
             EventStateModifier = Data.NormalStateModifier;
             EventSelectionModifier = 0f;
