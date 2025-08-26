@@ -104,7 +104,7 @@ namespace WeWillSurvive.Character
             }
 
             // 모든 플레이어가 사망 시 데드 엔딩
-            if (AliveCharactersCount() == 0)
+            if (InShelterCharactersCount() == 0)
             {
                 EndingManager.Instance.Ending(EEndingType.DeathByStarvation);
             }
