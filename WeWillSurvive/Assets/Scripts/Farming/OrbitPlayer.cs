@@ -26,6 +26,7 @@ namespace WeWillSurvive
         private Animator animator;
         private Image circleRenderer;
         private Bullet currentBullet;
+        public GameObject visual;
         public GameObject bulletPrefab;
 
         public Color circleColor = Color.white;
@@ -34,7 +35,7 @@ namespace WeWillSurvive
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
+            animator = visual.GetComponent<Animator>();
             circleRenderer = circle.GetComponent<Image>();
 
             circle.localPosition = new Vector3(radius, 0f, 0f);
@@ -91,8 +92,14 @@ namespace WeWillSurvive
             }
 
             animator.SetBool("isPush", (rb.linearVelocity.magnitude > pushThreshold));
-            if (rb.linearVelocity.x < -0.01f) { transform.localRotation = Quaternion.Euler(0f, 180f, 0f); }
-            else if (rb.linearVelocity.x > 0.01f) { transform.localRotation = Quaternion.Euler(0f, 0f, 0f); }
+            if (rb.linearVelocity.x < -0.01f)
+            {
+                visual.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
+            }
+            else if (rb.linearVelocity.x > 0.01f)
+            {
+                visual.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            }
 
         }
     }

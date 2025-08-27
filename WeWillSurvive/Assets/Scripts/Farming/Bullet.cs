@@ -61,7 +61,25 @@ namespace WeWillSurvive
                 if (col.CompareTag("BreakingWall"))
                 {
                     float damage = swellAmount * maxDamage + 0.5f;
-                    //col.GetComponent<BreakingWall>()?.TakeDamage(damage);
+                    col.GetComponent<BreakingWall>()?.TakeDamage(damage);
+                    Die();
+                }
+
+                if (col.CompareTag("NormalWall"))
+                {
+                    Die();
+                }
+            }
+        }
+
+        void OnTriggerStay2D(Collider2D col)
+        {
+            if (!isCharging)
+            {
+                if (col.CompareTag("BreakingWall"))
+                {
+                    float damage = swellAmount * maxDamage + 0.5f;
+                    col.GetComponent<BreakingWall>()?.TakeDamage(damage);
                     Die();
                 }
 
