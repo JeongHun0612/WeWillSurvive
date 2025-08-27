@@ -26,7 +26,9 @@ namespace WeWillSurvive.Character
         public CharacterData Data { get; private set; }                 // 캐릭터 데이터
         public CharacterState State { get; private set; }               // 캐릭터 상태 관리 클래스
         public CharacterStatus Status { get; private set; }             // 캐릭터 스테이터스 관리 클래스
-        public string Name { get; private set; }                        // 캐릭터 이름
+
+        public string Name => Data.Name;
+        public ECharacter Type => Data.Type;
 
         public EMorale Morale { get; private set; }                     // 캐릭터의 사기
         public bool IsExploring { get; private set; }                   // 캐릭터가 탐사를 나갔는지
@@ -65,7 +67,6 @@ namespace WeWillSurvive.Character
             State = new CharacterState();
             Status = new CharacterStatus(this);
 
-            Name = data.Name;
             EventBaseRate = data.BaseEventRate;
 
             ResetData();
@@ -73,11 +74,12 @@ namespace WeWillSurvive.Character
 
         public void ResetData()
         {
+            IsExploring = false;
+            IsDead = false;
+
             State.SetState(EState.Normal);
             Status.ResetStatus();
             Morale = EMorale.Normal;
-            IsExploring = false;
-            IsDead = false;
 
             EventStateModifier = Data.NormalStateModifier;
             EventSelectionModifier = 0f;
@@ -99,12 +101,13 @@ namespace WeWillSurvive.Character
 
                 // 탐사 완료
                 if (_explorationDayCounter >= _maxExplorationDays)
+                {
                     OnExpeditionComplete();
+                }
+                return;
             }
-            else
-            {
-                Status.OnNewDay();
-            }
+
+            Status.OnNewDay();
         }
 
         public void SetMorale(EMorale morale)
@@ -128,6 +131,7 @@ namespace WeWillSurvive.Character
             Debug.Log($"[{Name}] is Dead!");
             IsDead = true;
 
+            Status.ResetStatus();
             State.SetState(EState.Dead);
 
             // Dead Log 출력
@@ -174,9 +178,18 @@ namespace WeWillSurvive.Character
 
             foreach (var rewardData in expeditionData.RewardDatas)
             {
+                bool isMessageSend = true;
                 foreach (var rewardItem in rewardData.RewardItems)
                 {
                     EItem item = rewardItem.RewardItem;
+
+                    // 물과 식량을 제외한 아이템은 이미 가지고 있을 시 파밍 X
+                    if (item != EItem.Food && item != EItem.Water && ItemManager.HasItem(item))
+                    {
+                        isMessageSend = false;
+                        continue;
+                    }
+
                     int amount = rewardItem.GetRandomAmount();
 
                     // 탐사 보상 아이템 추가
@@ -185,7 +198,10 @@ namespace WeWillSurvive.Character
                 }
 
                 // 탐사 결과 로그
-                LogManager.AddExpeditionResultLog(rewardData.ExploringMessage);
+                if (isMessageSend)
+                {
+                    LogManager.AddExpeditionResultLog(rewardData.ExploringMessage);
+                }
             }
         }
     }

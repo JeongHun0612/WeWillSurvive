@@ -1,19 +1,20 @@
-using UnityEngine;
 using WeWillSurvive.Character;
+using WeWillSurvive.Item;
 using WeWillSurvive.ItemEffect;
 using WeWillSurvive.Status;
 
 namespace WeWillSurvive
 {
-    [CreateAssetMenu(fileName = "MedicKitEffect", menuName = "Scriptable Objects/ItemEffect/MedicKitEffect")]
-    public class MedicKitEffect : ScriptableItemEffect
+    public class MedicKitEffect : IItemEffect
     {
-        public override void Apply(CharacterBase character)
+        public EItem ItemType => EItem.MedicKit;
+
+        public void Apply(CharacterBase target)
         {
-            if (character == null)
+            if (target == null)
                 return;
 
-            var status = character.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
+            var status = target.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
             status?.RecoverFully();
         }
     }

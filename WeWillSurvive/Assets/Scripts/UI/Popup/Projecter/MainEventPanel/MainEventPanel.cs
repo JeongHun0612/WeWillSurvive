@@ -1,11 +1,14 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
 using WeWillSurvive.GameEvent;
+using WeWillSurvive.Item;
+using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
@@ -28,6 +31,7 @@ namespace WeWillSurvive
         public Action ChoiceImageSelected;
 
         private EventBus EventBus => ServiceLocator.Get<EventBus>();
+        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
 
         public async override UniTask InitializeAsync()
         {
@@ -39,6 +43,7 @@ namespace WeWillSurvive
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(_textRootLayout);
+
             _maxLineCount = TMPTextUtil.CalculateMaxLineCount(_eventText);
 
             // 이벤트 등록
@@ -63,9 +68,17 @@ namespace WeWillSurvive
             // 선택지 업데이트
             UpdateChoiceOptions(_mainEventData);
 
+            // 페이지 수 계산
             gameObject.SetActive(true);
             await UniTask.NextFrame();
-            
+
+            var decription = _mainEventData.GetRandomDescription();
+            if (string.IsNullOrWhiteSpace(decription))
+            {
+                PageCount = 1;
+                return;
+            }
+
             _pageTexts = TMPTextUtil.SplitTextByLines(_eventText, _mainEventData.GetRandomDescription(), _maxLineCount);
             PageCount = _pageTexts.Count;
         }
@@ -79,9 +92,20 @@ namespace WeWillSurvive
 
         public bool ShouldEnableNextButton()
         {
-            return _mainEventData == null || 
-                (_mainEventData.ChoiceSchema != EMainEventChoiceSchema.YesOrNo && _mainEventData.ChoiceSchema != EMainEventChoiceSchema.Exploration) || 
-                _selectedOption != null;
+            if (_mainEventData == null || !_mainEventData.IsChoiceRequired || _selectedOption != null)
+                return true;
+
+            bool isAnyChoiceAvailable = _mainEventData.Choices.Any(choice =>
+            {
+                if (Enum.TryParse<EItem>($"{choice.ChoiceIcon}", out var item))
+                {
+                    return ItemManager.HasItem(item);
+                }
+
+                return false;
+            });
+
+            return !isAnyChoiceAvailable;
         }
 
         private void UpdateChoiceOptions(MainEventData mainEventData)

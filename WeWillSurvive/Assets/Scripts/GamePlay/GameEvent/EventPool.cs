@@ -12,11 +12,16 @@ namespace WeWillSurvive.GameEvent
         [SerializeField, Min(0)] protected int _minDayCounter;
         [SerializeField, Min(0)] protected int _maxDayCounter;
 
+        [Header("## Buff")]
+        [SerializeField] protected EBuffEffect _blockBuffEffect = EBuffEffect.None;
+
         public TEnum Category => _category;
         public IReadOnlyList<Condition> Conditions => _conditions;
         public IReadOnlyList<MainEventData> Events => _mainEventDatas;
         public int MinDayCounter => _minDayCounter;
         public int MaxDayCounter => _maxDayCounter;
+        public EBuffEffect BlockBuffEffect => _blockBuffEffect;
+
 
         public int GetRandomCooldownDay()
         {

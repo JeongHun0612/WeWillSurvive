@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262a3994380a5042b6cbb460811d680, type: 3}
+  m_Name: facility_06
+  m_EditorClassIdentifier: 
+  _eventId: facility_06
+  _title: "\uBC29\uC0AC\uC120 \uB204\uCD9C \uACBD\uBCF4"
+  _descriptions:
+  - "\uAE30\uC9C0 \uC678\uBCBD \uADFC\uCC98\uC5D0\uC11C \uBBF8\uC138\uD55C \uBC29\uC0AC\uC120\uC774
+    \uAC10\uC9C0\uB410\uB2E4. \uACE0\uAE09 \uC6B0\uC8FC\uBCF5\uC744 \uCC29\uC6A9\uD558\uACE0
+    \uB204\uCD9C \uC9C0\uC810\uC744 \uBD09\uC778\uD558\uB7EC \uAC00\uC9C0 \uC54A\uC73C\uBA74
+    \uC6B0\uC8FC \uC2DD\uB7C9\uACFC \uBB3C\uC774 \uBE60\uB974\uAC8C \uC624\uC5FC\uB420
+    \uC218 \uC788\uB2E4."
+  _conditions: []
+  _choiceSchema: 1
+  _isChoiceRequired: 0
+  _choices:
+  - _choiceIcon: 208
+    _requiredAmount: 1
+    _choiceText: 
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates: []
+      _resultText: "\uACE0\uAE09 \uC6B0\uC8FC\uBCF5\uC744 \uCC29\uC6A9\uD574 \uB204\uCD9C
+        \uC9C0\uC810\uC744 \uBD09\uC778\uD588\uB2E4. \uCC28\uD3D0 \uC218\uCE58\uAC00
+        \uC548\uC815\uB418\uC5C8\uACE0, \uC2DD\uB7C9 \uC624\uC5FC\uC740 \uBC1C\uC0DD\uD558\uC9C0
+        \uC54A\uC558\uB2E4."
+      _actions:
+      - _actionType: 201
+        _targetId: NiceSpacesuit
+        _parameter: 
+        _value: 1
+      _isAffectedByStats: 0
+      _probability: 1
+  - _choiceIcon: 500
+    _requiredAmount: 0
+    _choiceText: 
+    _results:
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates: []
+      _resultText: "\uBD09\uC778 \uC791\uC5C5\uC744 \uC218\uD589\uD558\uC9C0 \uBABB\uD574
+        \uACBD\uBCF4\uAC00 \uACC4\uC18D \uC6B8\uB838\uB2E4. \uC624\uC5FC\uB41C \uD3EC\uC7A5\uC744
+        \uBC14\uB85C \uD3D0\uAE30\uD588\uB2E4. {} \uC77C\uBD80\uB97C \uBC84\uB838\uACE0,
+        \uC800\uC7A5 \uB799\uC744 \uC18C\uB3C5\uD588\uB2E4."
+      _actions:
+      - _actionType: 203
+        _targetId: 
+        _parameter: 
+        _value: 2
+      _isAffectedByStats: 0
+      _probability: 1
+    - _outComeType: 0
+      _conditions:
+      - _conditionType: 201
+        _targetId: Food
+        _parameter: 
+        _value1: 
+        _value2: 
+      - _conditionType: 201
+        _targetId: Water
+        _parameter: 
+        _value1: 
+        _value2: 
+      _resultTemplates: []
+      _resultText: "\uB354 \uC774\uC0C1 \uD3D0\uAE30\uD560 \uC6B0\uC8FC \uC2DD\uB7C9\uB3C4,
+        \uBB3C\uB3C4 \uB0A8\uC9C0 \uC54A\uC558\uB2E4. \uACBD\uBCF4\uB294 \uBA4E\uC5C8\uC9C0\uB9CC
+        \uBE44\uC5B4 \uC788\uB294 \uC120\uBC18\uB9CC \uB0A8\uC558\uB2E4."
+      _actions: []
+      _isAffectedByStats: 0
+      _probability: 1

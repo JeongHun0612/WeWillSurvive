@@ -35,6 +35,7 @@ namespace WeWillSurvive
             var titleProp = serializedObject.FindProperty("_title");
             var descriptionsProp = serializedObject.FindProperty("_descriptions");
             var triggerConditionsProp = serializedObject.FindProperty("_conditions");
+            var isChoiceRequiredProp = serializedObject.FindProperty("_isChoiceRequired");
             var choiceSchemaProp = serializedObject.FindProperty("_choiceSchema");
 
             MainEventData data = (MainEventData)target;
@@ -52,6 +53,8 @@ namespace WeWillSurvive
             EditorGUILayout.Space(20);
             var currentChoiceSchema = choiceSchemaProp.intValue;
             EditorGUILayout.PropertyField(choiceSchemaProp, new GUIContent("이벤트 타입"));
+            EditorGUILayout.Space(5);
+            EditorGUILayout.PropertyField(isChoiceRequiredProp, new GUIContent("선택이 필수적인가?"));
 
             if (currentChoiceSchema != choiceSchemaProp.intValue || data.Choices == null)
             {
@@ -228,6 +231,8 @@ namespace WeWillSurvive
         {
             if (resultsProp == null) return;
 
+            //EditorGUILayout.PropertyField(resultsProp, new GUIContent("결과"));
+
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("결과 목록", EditorStyles.boldLabel, GUILayout.Width(80));
             DrawAddRemoveButtonUI(resultsProp, ref selectedResultIndex, InitializeEventResultProperty);
@@ -268,7 +273,8 @@ namespace WeWillSurvive
 
                 SerializedProperty outComeTypeProp = selectedResult.FindPropertyRelative("_outComeType");
                 SerializedProperty conditionsProp = selectedResult.FindPropertyRelative("_conditions");
-                SerializedProperty textProp = selectedResult.FindPropertyRelative("_resultText");
+                SerializedProperty resultTemplatesProp = selectedResult.FindPropertyRelative("_resultTemplates");
+                SerializedProperty resultTextProp = selectedResult.FindPropertyRelative("_resultText");
                 SerializedProperty actionsProp = selectedResult.FindPropertyRelative("_actions");
                 SerializedProperty isAffectedByStatsProp = selectedResult.FindPropertyRelative("_isAffectedByStats");
                 SerializedProperty probabilityProp = selectedResult.FindPropertyRelative("_probability");
@@ -285,7 +291,9 @@ namespace WeWillSurvive
                 EditorGUILayout.Space(5);
                 EditorGUILayout.PropertyField(conditionsProp, new GUIContent("발생 조건"), true);
                 EditorGUILayout.Space(5);
-                EditorGUILayout.PropertyField(textProp, new GUIContent("결과 텍스트"));
+                EditorGUILayout.PropertyField(resultTemplatesProp, new GUIContent("결과 텍스트 템플릿"));
+                EditorGUILayout.Space(5);
+                EditorGUILayout.PropertyField(resultTextProp, new GUIContent("최종 결과 텍스트"));
                 EditorGUILayout.Space(5);
                 EditorGUILayout.PropertyField(actionsProp, new GUIContent("결과 액션"), true);
                 EditorGUILayout.Space(5);

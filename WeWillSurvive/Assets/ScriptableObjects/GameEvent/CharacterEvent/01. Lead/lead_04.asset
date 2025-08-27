@@ -29,6 +29,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uACF5\uAE30\uAC00 \uBD88\uC548\uC815\uD558\uBA74 \uD65C\uB3D9\uB7C9\uC774
         \uB5A8\uC5B4\uC838. \uCCB4\uB825 \uBCF4\uCDA9\uC774 \uC6B0\uC120\uC774\uC57C.\"\n\uB9AC\uB4DC\uB294
         \uCFE1\uC5D0\uAC8C \uC2DD\uB7C9 \uCC3D\uACE0\uB97C \uC810\uAC80\uC744 \uC9C0\uC2DC\uD588\uACE0,
@@ -37,15 +38,15 @@ MonoBehaviour:
       _actions:
       - _actionType: 103
         _targetId: Cook
-        _parameter: Hunger
+        _parameter: 
         _value: 10
       - _actionType: 103
         _targetId: Bell
-        _parameter: Hunger
+        _parameter: 
         _value: -10
       - _actionType: 103
         _targetId: DrK
-        _parameter: Hunger
+        _parameter: 
         _value: -10
       _isAffectedByStats: 0
       _probability: 1
@@ -55,6 +56,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC774 \uADDC\uCE59\uC801\uC778 \uC9C4\uB3D9\uC740 \uADF8\uB0E5
         \uC18C\uB9AC\uAC00 \uC544\uB2C8\uC57C. \uAD6C\uC870\uBB3C\uC5D0 \uBD80\uB2F4\uC774
         \uC313\uC774\uACE0 \uC788\uB294 \uAC70\uC57C.\"\n\uB9AC\uB4DC\uB294 \uBCA8\uC5D0\uAC8C
@@ -82,6 +84,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uACF5\uAE30 \uBB38\uC81C\uB294 \uD638\uD761\uAE30 \uC9C8\uD658\uC73C\uB85C
         \uC9C1\uACB0\uB3FC. \uC758\uB8CC \uCABD\uC5D0\uC11C \uC900\uBE44\uB97C \uD574\uC57C
         \uD574.\"\n\uB9AC\uB4DC\uB294 \uB2E5\uD130 K\uC5D0\uAC8C \uAC00\uC9C0\uACE0
@@ -108,6 +111,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC9C0\uAE08\uC740 \uB2E8\uC815 \uC9D3\uAE30 \uC774\uB974\uB2E4.
         \uB370\uC774\uD130\uB97C \uB354 \uBAA8\uC73C\uC790.\"\n\uB9AC\uB4DC\uB294
         \uBAA8\uB4E0 \uC13C\uC11C\uC758 \uB85C\uADF8\uB97C \uC8FC\uC2DC\uD558\uBA70
@@ -117,6 +121,7 @@ MonoBehaviour:
       _probability: 0.5
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC21C\uD658 \uC7A5\uCE58\uC758 \uC18C\uB9AC\uB294 \uC7A6\uC544\uB4E4\uC5C8\uC9C0\uB9CC,
         \uC228 \uC26C\uB294 \uACF5\uAE30\uAC00 \uBB34\uAC81\uAC8C \uB290\uAEF4\uC84C\uB2E4.\n\uB9AC\uB4DC\uAC00
         \uACC4\uC18D\uD574\uC11C \uACE0\uBBFC\uD558\uC790, \uD300\uC6D0\uB4E4\uC758

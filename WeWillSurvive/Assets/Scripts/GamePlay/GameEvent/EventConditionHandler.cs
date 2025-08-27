@@ -1,14 +1,64 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
 using WeWillSurvive.Item;
-using WeWillSurvive.MainEvent;
 using WeWillSurvive.Util;
 
 namespace WeWillSurvive.GameEvent
 {
+    #region EConditionType
+    public enum EConditionType
+    {
+        /// 캐릭터
+        [InspectorName("캐릭터가 우주 기지에 있을 시")]
+        CharacterInShelter = 100,
+
+        [InspectorName("캐릭터가 특정 상태(State)를 보유하고 있을 시")]
+        CharacterHasState = 101,
+
+        [InspectorName("캐릭터가 특정 상태(State)를 보유하고 있지 않을 시")]
+        CharacterNotHasState = 102,
+
+        [InspectorName("캐릭터의 탐사 횟수가 특정 값보다 높을 시")]
+        CharacterExpeditionCountUpper = 103,
+
+        [InspectorName("캐릭터의 탐사 횟수가 특정 값보다 낮을 시")]
+        CharacterExpeditionCountLower = 104,
+
+        /// 아이템
+        [InspectorName("특정 아이템을 보유하고 있을 시")]
+        HasItem = 200,
+        [InspectorName("특정 아이템을 보유하고 있지 않을 시")]
+        NotHasItem = 201,
+
+        [InspectorName("아이템 수량이 특정 값 이상일 시")]
+        ItemCountUpper = 202,
+
+        [InspectorName("아이템 수량이 특정 값 이하일 시")]
+        ItemCountLower = 203,
+
+        // 버프
+        [InspectorName("특정 버프가 있을 시")]
+        HasBuffEffect = 300,
+        [InspectorName("특정 버프가 없을 시")]
+        NotHasBuffEffect = 301,
+
+        /// 기타
+        [InspectorName("생존 인원이 특정 값 사이일 때")]
+        [Tooltip("Value1(최소) ~ Value2(최대) 까지의 인원")]
+        AliveCount = 1000,
+
+        [InspectorName("총 탐사 횟수가 특정 값 이상 일시")]
+        TotalExpeditionCountUpper = 1001,
+
+        [InspectorName("특정 날짜 이후부터")]
+        DayCountUpper = 1002,
+    }
+    #endregion
+
     public interface IEventConditionHandler
     {
         EConditionType HandledConditionType { get; }
@@ -210,6 +260,34 @@ namespace WeWillSurvive.GameEvent
                 Debug.LogWarning($"Value1 : {condition.Value1} | int 타입으로 파싱 실패");
 
             return ItemManager.GetItemCount(item) <= itemLower;
+        }
+    }
+
+    /// <summary>
+    /// 특정 버프가 있을 시
+    /// </summary>
+    public class HasBuffEffectChecker : IEventConditionHandler
+    {
+        public EConditionType HandledConditionType => EConditionType.HasBuffEffect;
+
+        public bool IsMet(Condition condition)
+        {
+            EBuffEffect effect = EnumUtil.ParseEnum<EBuffEffect>(condition.TargetId);
+            return BuffManager.Instance.HasBuff(effect);
+        }
+    }
+
+    /// <summary>
+    /// 특정 버프가 없을 시
+    /// </summary>
+    public class NotHasBuffEffectChecker : IEventConditionHandler
+    {
+        public EConditionType HandledConditionType => EConditionType.NotHasBuffEffect;
+
+        public bool IsMet(Condition condition)
+        {
+            EBuffEffect effect = EnumUtil.ParseEnum<EBuffEffect>(condition.TargetId);
+            return !BuffManager.Instance.HasBuff(effect);
         }
     }
 

@@ -37,49 +37,6 @@ namespace WeWillSurvive.GameEvent
         Noting = 100,
     }
 
-    public enum EConditionType
-    {
-        /// 캐릭터
-        [InspectorName("캐릭터가 우주 기지에 있을 시")]
-        CharacterInShelter = 100,
-
-        [InspectorName("캐릭터가 특정 상태(State)를 보유하고 있을 시")]
-        CharacterHasState = 101,
-
-        [InspectorName("캐릭터가 특정 상태(State)를 보유하고 있지 않을 시")]
-        CharacterNotHasState = 102,
-
-        [InspectorName("캐릭터의 탐사 횟수가 특정 값보다 높을 시")]
-        CharacterExpeditionCountUpper = 103,
-
-        [InspectorName("캐릭터의 탐사 횟수가 특정 값보다 낮을 시")]
-        CharacterExpeditionCountLower = 104,
-
-        /// 아이템
-        [InspectorName("특정 아이템을 보유하고 있을 시")]
-        HasItem = 200,
-        [InspectorName("특정 아이템을 보유하고 있지 않을 시")]
-        NotHasItem = 201,
-
-        [InspectorName("아이템 수량이 특정 값 이상일 시")]
-        ItemCountUpper = 202,
-
-        [InspectorName("아이템 수량이 특정 값 이하일 시")]
-        ItemCountLower = 203,
-
-
-        /// 기타
-        [InspectorName("생존 인원이 특정 값 사이일 때")]
-        [Tooltip("Value1(최소) ~ Value2(최대) 까지의 인원")]
-        AliveCount = 1000,
-
-        [InspectorName("총 탐사 횟수가 특정 값 이상 일시")]
-        TotalExpeditionCountUpper = 1001,
-
-        [InspectorName("특정 날짜 이후부터")]
-        DayCountUpper = 1002,
-    }
-
     public enum EChoiceIcon
     {
         // O, X 아이콘
@@ -126,23 +83,6 @@ namespace WeWillSurvive.GameEvent
         [InspectorName("대실패")] CriticalFailure = 4,
     }
 
-    public enum EActionType
-    {
-        [InspectorName("스테이터스 악화")] WorsenStatus = 100,
-        [InspectorName("스테이터스 치유")] RecoveryStatus = 101,
-        [InspectorName("캐릭터 사망")] CharacterDaed = 102,
-        [InspectorName("캐릭터 이벤트 확률 보정")] CharacterEventRateModifier = 103,
-        
-
-        [InspectorName("아이템 획득")] AddItem = 200,
-        [InspectorName("아이템 삭제")] RemoveItem = 201,
-
-        [InspectorName("엔딩 분기 진행")] AdvanceEndingProgress = 300,
-        [InspectorName("엔딩 완료")] EndingComplete = 301,
-
-        [InspectorName("특정 메인 이벤트 발생 연기")] PostponeMainEvent = 400,
-
-    }
     #endregion
 
     [CreateAssetMenu(fileName = "MainEventData", menuName = "Scriptable Objects/MainEventData")]
@@ -165,14 +105,17 @@ namespace WeWillSurvive.GameEvent
         private EMainEventChoiceSchema _choiceSchema;               // 이벤트 선택지 구조 (YesOrNo, UseItem, ChooseSomeone 등)
 
         [SerializeField]
-        private List<EventChoice> _choices;                         // 유저가 고를 수 있는 선택지
+        private bool _isChoiceRequired;                             // 선택지를 필수적으로 선택해야하는지
 
+        [SerializeField]
+        private List<EventChoice> _choices;                         // 유저가 고를 수 있는 선택지
 
         public string EventId => _eventId;
         public string Title => _title;
         public IReadOnlyList<string> Descriptions => _descriptions;
         public IReadOnlyList<Condition> Conditions => _conditions;
         public EMainEventChoiceSchema ChoiceSchema => _choiceSchema;
+        public bool IsChoiceRequired => _isChoiceRequired;
         public List<EventChoice> Choices { get => _choices; set => _choices = value; }
 
         public string GetRandomDescription()
@@ -277,6 +220,10 @@ namespace WeWillSurvive.GameEvent
 
         [SerializeField]
         [TextArea(3, 10)]
+        private List<string> _resultTemplates;    // 결과 텍스트 템플릿
+
+        [SerializeField]
+        [TextArea(3, 10)]
         private string _resultText;               // 결과 텍스트
 
         [SerializeField]
@@ -291,6 +238,7 @@ namespace WeWillSurvive.GameEvent
 
         public EOutcomeType OutcomeType => _outComeType;
         public IReadOnlyList<Condition> Conditions => _conditions;
+        public IReadOnlyList<string> ResultTemplates => _resultTemplates;
         public string ResultText => _resultText;
         public IReadOnlyList<EventAction> Actions => _actions;
         public bool IsAffectedByStats => _isAffectedByStats;

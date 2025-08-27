@@ -19,6 +19,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9f7ca121a3eae7b45a91a6360d7689d5, type: 2}
   - {fileID: 11400000, guid: 8f81be4000a14aa4fb88b75308a14c87, type: 2}
   - {fileID: 11400000, guid: fd271bb030ca84f46a0dca9bd3a60ca4, type: 2}
+  - {fileID: 11400000, guid: db184d014495d78498c5435da57b934e, type: 2}
   - {fileID: 11400000, guid: 1c67904ff603ebe46909ee4464a4128f, type: 2}
+  - {fileID: 11400000, guid: 8f6b583718926054282d00d97f34a2a4, type: 2}
+  - {fileID: 11400000, guid: 0fdaaeeec047c614cbe3633809583d81, type: 2}
   _minDayCounter: 5
   _maxDayCounter: 7

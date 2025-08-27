@@ -19,6 +19,7 @@ MonoBehaviour:
     \uC54A\uB2E4. \uC548\uC744 \uC870\uC0AC\uD574\uBCF4\uC790."
   _conditions: []
   _choiceSchema: 5
+  _isChoiceRequired: 1
   _choices:
   - _choiceIcon: 213
     _requiredAmount: 1
@@ -31,6 +32,7 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      _resultTemplates: []
       _resultText: "\uC548\uCABD \uAE4A\uC219\uD55C \uACF3\uC5D0\uC11C \uBC00\uBD09\uB41C
         \uC758\uB8CC \uD0A4\uD2B8\uB97C \uBC1C\uACAC\uD588\uB2E4. \uC190\uC804\uB4F1\uB3C4
         \uBB38\uC81C \uC5C6\uC774 \uC791\uB3D9 \uC911\uC774\uB2E4."
@@ -48,6 +50,7 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      _resultTemplates: []
       _resultText: "\uC870\uBA85\uD310\uC5D0 \uBD80\uB52A\uD78C \uCDA9\uACA9\uC73C\uB85C
         \uC190\uC804\uB4F1\uC774 \uC644\uC804\uD788 \uAEBC\uC838\uBC84\uB838\uB2E4.
         \uC774\uB300\uB85C\uB294 \uC548\uC744 \uB354 \uC870\uC0AC\uD560 \uC218 \uC5C6\uB2E4."
@@ -65,6 +68,7 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      _resultTemplates: []
       _resultText: "\uC0AC\uBB3C\uD568 \uAD6C\uC11D \uC544\uB798\uC5D0\uC11C \uC791\uC740
         \uBB3C\uBCD1 \uD558\uB098\uB97C \uC8FC\uC6E0\uB2E4. \uC190\uC804\uB4F1\uB3C4
         \uBB38\uC81C \uC5C6\uC774 \uC791\uB3D9 \uC911\uC774\uB2E4."
@@ -82,6 +86,7 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      _resultTemplates: []
       _resultText: "\uC870\uBA85\uD310\uC5D0 \uBD80\uB52A\uD78C \uCDA9\uACA9\uC73C\uB85C
         \uC190\uC804\uB4F1\uC774 \uC644\uC804\uD788 \uAEBC\uC838\uBC84\uB838\uB2E4.
         \uC774\uB300\uB85C\uB294 \uC548\uC744 \uB354 \uC870\uC0AC\uD560 \uC218 \uC5C6\uB2E4."
@@ -103,6 +108,7 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      _resultTemplates: []
       _resultText: "\uC190\uC73C\uB85C \uCC9C\uCC9C\uD788 \uC548\uC744 \uB4A4\uC838
         \uC218\uB9AC \uD0A4\uD2B8 \uD558\uB098\uB97C \uC190\uC5D0 \uB123\uC5C8\uB2E4.
         \uC55E\uC73C\uB85C\uC758 \uD65C\uB3D9\uC5D0 \uB3C4\uC6C0\uC774 \uB420 \uB4EF\uD558\uB2E4."
@@ -120,6 +126,7 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      _resultTemplates: []
       _resultText: "\uC0AC\uBB3C\uD568 \uC548\uCABD\uC740 \uD145 \uBE44\uC5B4 \uC788\uC5C8\uB2E4.
         \uC2DC\uAC04\uB9CC \uB0AD\uBE44\uD588\uB2E4."
       _actions: []
@@ -132,6 +139,7 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      _resultTemplates: []
       _resultText: "\uBA3C\uC9C0 \uC313\uC778 \uC11C\uB78D \uC18D\uC5D0\uC11C \uC544\uC9C1
         \uBA40\uCA61\uD55C \uC6B0\uC8FC \uC2DD\uB7C9\uC744 \uCC3E\uC544\uB0C8\uB2E4."
       _actions:
@@ -148,6 +156,7 @@ MonoBehaviour:
         _parameter: 
         _value1: 
         _value2: 
+      _resultTemplates: []
       _resultText: "\uC0AC\uBB3C\uD568 \uC548\uCABD\uC740 \uD145 \uBE44\uC5B4 \uC788\uC5C8\uB2E4.
         \uC2DC\uAC04\uB9CC \uB0AD\uBE44\uD588\uB2E4."
       _actions: []

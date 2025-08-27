@@ -14,16 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _category: 0
   _conditions:
+  - _conditionType: 301
+    _targetId: BlockInvasionEvent
+    _parameter: 
+    _value1: 0
+    _value2: 
   - _conditionType: 1001
-    _targetId: Lead
+    _targetId: BlockInvasionEvent
     _parameter: 
     _value1: 3
     _value2: 
   _mainEventDatas:
-  - {fileID: 11400000, guid: 6386b305aa4b47c46b2189154317a405, type: 2}
-  - {fileID: 11400000, guid: 91036c8f9eae8c1428139bca21ed5661, type: 2}
-  - {fileID: 11400000, guid: 9daa73b9ab37c654999fca792647d12b, type: 2}
-  - {fileID: 11400000, guid: 2748e5780c768784aa7ecbeb48c9a075, type: 2}
-  - {fileID: 11400000, guid: 7842562b50dcce543a15cbd550712bb2, type: 2}
+  - {fileID: 11400000, guid: 4c132fa757f5d9242a673d51d29e6828, type: 2}
+  - {fileID: 11400000, guid: 802fb76fc95ab3d45a2fc5cc0ce81eea, type: 2}
+  - {fileID: 11400000, guid: 8a071fe727602864ba0961980e51ac3a, type: 2}
+  - {fileID: 11400000, guid: b55c3d0162cc1f64aae56e491556c906, type: 2}
+  - {fileID: 11400000, guid: 193b8f1a81587a14d9f2be9745f932d2, type: 2}
   _minDayCounter: 2
   _maxDayCounter: 4
+  _blockBuffEffect: 12

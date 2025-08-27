@@ -56,6 +56,10 @@ namespace WeWillSurvive
                     PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
                     PropertyUtil.DrawIntField(ref rect, "갯수", value1Prop);
                     break;
+                case EConditionType.HasBuffEffect:
+                case EConditionType.NotHasBuffEffect:
+                    PropertyUtil.DrawEnumPopupAsString<EBuffEffect>(ref rect, "버프", targetIdProp);
+                    break;
                 case EConditionType.AliveCount:
                     PropertyUtil.DrawMinMaxIntFields(ref rect, "최소 인원", value1Prop, "최대 인원", value2Prop, 0, 4);
                     break;

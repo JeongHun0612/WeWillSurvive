@@ -30,6 +30,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 2
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC7A5\uBE44\uAC00 \uC131\uACF5\uC801\uC73C\uB85C \uC791\uB3D9\uD588\uB2E4.
         \uCFE1\uC740 \uAE30\uC05C \uD45C\uC815\uC73C\uB85C \uC644\uC131\uB41C \uC2DD\uB7C9\uC744
         \uBCF4\uC5EC\uC92C\uB2E4. \"\uC774\uAC70\uC57C\uB9D0\uB85C \uBBF8\uB798\uC758
@@ -37,16 +38,17 @@ MonoBehaviour:
       _actions:
       - _actionType: 201
         _targetId: Food
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       - _actionType: 200
         _targetId: SpecialFood
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       _isAffectedByStats: 1
       _probability: 1
     - _outComeType: 3
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC7A5\uBE44\uAC00 \uC81C\uB300\uB85C \uC791\uB3D9\uD558\uC9C0
         \uC54A\uC558\uB2E4. \uCFE1\uC740 \uC5B4\uAE68\uB97C \uC73C\uC4F1\uD558\uBA70
         \uB9D0\uD588\uB2E4. \"\uC544\uC9C1 \uC870\uC815\uC774 \uD544\uC694\uD55C\uAC00
@@ -60,6 +62,7 @@ MonoBehaviour:
       _probability: 1
     - _outComeType: 4
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uAC11\uC791\uC2A4\uB7EC\uC6B4 \uC7A5\uBE44 \uACE0\uC7A5\uC73C\uB85C
         \uBD88\uAF43\uC774 \uD280\uC5C8\uB2E4. \uCFE1\uC740 \uC190\uC744 \uAC10\uC2F8\uACE0
         \uBB3C\uB7EC\uB0AC\uB2E4. \"\uC880 \uB354 \uC548\uC804\uD558\uAC8C \uD560
@@ -81,6 +84,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC7A5\uBE44\uAC00 \uBD88\uC548\uC815\uD574 \uBCF4\uC774\uB2C8\uAE4C
         \uB2E4\uC74C\uC5D0 \uD558\uC790.\" \uCFE1\uC740 \uC7A5\uBE44\uB97C \uC870\uC6A9\uD788
         \uB36E\uC5C8\uB2E4."
@@ -93,6 +97,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC7A5\uBE44\uAC00 \uBD88\uC548\uC815\uD574 \uBCF4\uC774\uB2C8\uAE4C
         \uB2E4\uC74C\uC5D0 \uD558\uC790.\" \uCFE1\uC740 \uC7A5\uBE44\uB97C \uC870\uC6A9\uD788
         \uB36E\uC5C8\uB2E4."

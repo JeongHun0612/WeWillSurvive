@@ -28,16 +28,31 @@ namespace WeWillSurvive
         protected TLevel _level;
         protected int _dayCounter;
 
+        public TLevel Level => _level;
+
         private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         public abstract EStatusType StatusType { get; }
-
+        public abstract EBuffEffect BlockStatusBuffEffect { get; }
         protected abstract bool IsDeadLevel(TLevel level);
 
         public virtual void OnNewDay()
         {
+            // 상태 악화 방어 버프 존재
+            if (BuffManager.Instance.HasBuff(BlockStatusBuffEffect))
+            {
+                Debug.Log($"[{_owner.Name}]'{BlockStatusBuffEffect}' 버프 지속 중");
+                return;
+            }
+
             if (DaysToNextLevel.TryGetValue(_level, out int daysRequired) && _dayCounter >= daysRequired)
             {
+                if (IsDeadLevel(_level))
+                {
+                    _owner.OnDead();
+                    return;
+                }
+
                 WorsenStatus();
             }
 
@@ -94,6 +109,9 @@ namespace WeWillSurvive
         /// <param name="step">상태 Level 악화 단계</param>
         public virtual void WorsenStatus(int step = 1)
         {
+            if (BuffManager.Instance.HasBuff(BlockStatusBuffEffect))
+                return;
+
             if (step <= 0)
                 step = 1;
 
@@ -103,6 +121,14 @@ namespace WeWillSurvive
 
             int targetIndex = Mathf.Min(currentIndex + step, OrderedLevels.Length - 1);
             ExecuteWorsen(targetIndex);
+        }
+
+        /// <summary>
+        /// 상태 최대로 악화
+        /// </summary>
+        public virtual void WorsenFully()
+        {
+            ExecuteWorsen(OrderedLevels.Length - 1);
         }
 
         /// <summary>
@@ -140,13 +166,6 @@ namespace WeWillSurvive
 
             // 새로운 Level로 갱신
             _level = newLevel;
-
-            // DeadLevel이면 Character 사망
-            if (IsDeadLevel(_level))
-            {
-                _owner.OnDead();
-                return;
-            }
 
             // 변경된 Level에 해당 State 추가
             if (LevelStateMap.TryGetValue(_level, out var newState))

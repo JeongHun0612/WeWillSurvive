@@ -9,36 +9,28 @@ namespace WeWillSurvive
     [CreateAssetMenu(fileName = "ItemDebugData", menuName = "Scriptable Objects/Debug/ItemDebugData")]
     public class ItemDebugData : ScriptableObject
     {
-        [System.Serializable]
-        public class ItemData
-        {
-            public EItem item;
-            public bool isActive;
-            public float count;
-        }
-
         [Header("캐릭터 여부")]
-        public ItemData Lead = new ItemData() { item = EItem.Lead, isActive = false };
-        public ItemData Cook = new ItemData() { item = EItem.Cook, isActive = false };
-        public ItemData Bell = new ItemData() { item = EItem.Bell, isActive = false };
-        public ItemData DrK = new ItemData() { item = EItem.DrK, isActive = false };
+        public ItemData Lead = new ItemData(EItem.Lead);
+        public ItemData Cook = new ItemData(EItem.Cook);
+        public ItemData Bell = new ItemData(EItem.Bell);
+        public ItemData DrK = new ItemData(EItem.DrK);
 
         [Header("아이템 여부")]
-        public ItemData Food = new ItemData() { item = EItem.Food, isActive = false, count = 1f};
-        public ItemData Water = new ItemData() { item = EItem.Water, isActive = false, count = 1f};
-        public ItemData SpecialFood = new ItemData() { item = EItem.SpecialFood, isActive = false, count = 1f};
-        public ItemData MedicKit = new ItemData() { item = EItem.MedicKit, isActive = false, count = 1f};
-        public ItemData SpecialMedicKit = new ItemData() { item = EItem.SpecialMedicKit, isActive = false, count = 1f};
-        public ItemData RepairKit = new ItemData() { item = EItem.RepairKit, isActive = false, count = 1f};
-        public ItemData SpecialRepairKit = new ItemData() { item = EItem.SpecialRepairKit, isActive = false, count = 1f};
-        public ItemData CommDevice = new ItemData() { item = EItem.CommDevice, isActive = false, count = 1f};
-        public ItemData NiceSpacesuit = new ItemData() { item = EItem.NiceSpacesuit, isActive = false, count = 1f};
-        public ItemData Gun = new ItemData() { item = EItem.Gun, isActive = false, count = 1f};
-        public ItemData BoardGame = new ItemData() { item = EItem.BoardGame, isActive = false, count = 1f};
-        public ItemData Ax = new ItemData() { item = EItem.Ax, isActive = false, count = 1f};
-        public ItemData Pipe = new ItemData() { item = EItem.Pipe, isActive = false, count = 1f};
-        public ItemData Flashlight = new ItemData() { item = EItem.Flashlight, isActive = false, count = 1f};
-        public ItemData Map = new ItemData() { item = EItem.Map, isActive = false, count = 1f};
+        public ItemData Food = new ItemData(EItem.Food);
+        public ItemData Water = new ItemData(EItem.Water);
+        public ItemData SpecialFood = new ItemData(EItem.SpecialFood);
+        public ItemData MedicKit = new ItemData(EItem.MedicKit);
+        public ItemData SpecialMedicKit = new ItemData(EItem.SpecialMedicKit);
+        public ItemData RepairKit = new ItemData(EItem.RepairKit);
+        public ItemData SpecialRepairKit = new ItemData(EItem.SpecialRepairKit);
+        public ItemData CommDevice = new ItemData(EItem.CommDevice);
+        public ItemData NiceSpacesuit = new ItemData(EItem.NiceSpacesuit);
+        public ItemData Gun = new ItemData(EItem.Gun);
+        public ItemData BoardGame = new ItemData(EItem.BoardGame);
+        public ItemData Ax = new ItemData(EItem.Ax);
+        public ItemData Pipe = new ItemData(EItem.Pipe);
+        public ItemData Flashlight = new ItemData(EItem.Flashlight);
+        public ItemData Map = new ItemData(EItem.Map);
 
         public List<ItemData> GetItemDatas()
         {

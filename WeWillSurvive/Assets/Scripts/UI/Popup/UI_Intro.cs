@@ -9,7 +9,6 @@ namespace WeWillSurvive
     public class UI_Intro : UI_Popup
     {
         [Header("##Cut Scene")]
-        [SerializeField] private Image _fadeOverlay;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Image[] _cutScenes;
 

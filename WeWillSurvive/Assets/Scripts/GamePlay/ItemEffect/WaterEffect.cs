@@ -1,19 +1,20 @@
-using UnityEngine;
 using WeWillSurvive.Character;
+using WeWillSurvive.Item;
 using WeWillSurvive.Status;
 
 namespace WeWillSurvive.ItemEffect
 {
-    [CreateAssetMenu(fileName = "WaterEffect", menuName = "Scriptable Objects/ItemEffect/WaterEffect")]
-    public class WaterEffect : ScriptableItemEffect
+    public class WaterEffect : IItemEffect
     {
-        public override void Apply(CharacterBase character)
+        public EItem ItemType => EItem.Water;
+
+        public void Apply(CharacterBase target)
         {
-            if (character == null)
+            if (target == null)
                 return;
 
-            var status = character.Status.GetStatus<ThirstStatus>(EStatusType.Thirst);
-            status?.RecoveryStatus(10);
+            var status = target.Status.GetStatus<ThirstStatus>(EStatusType.Thirst);
+            status?.RecoverFully();
         }
     }
 }

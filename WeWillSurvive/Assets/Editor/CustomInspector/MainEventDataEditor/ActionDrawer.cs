@@ -41,25 +41,54 @@ namespace WeWillSurvive
                     PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
                     PropertyUtil.DrawIntField(ref rect, "단계", valueProp);
                     break;
+                case EActionType.WorsenMaxStatus:
+                case EActionType.RecoveryMaxStatus:
+                    PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
+                    valueProp.stringValue = string.Empty;
+                    break;
                 case EActionType.CharacterEventRateModifier:
                     PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    parameterProp.stringValue = string.Empty;
                     PropertyUtil.DrawFloatField(ref rect, "보정 값", valueProp);
                     break;
                 case EActionType.CharacterDaed:
                     PropertyUtil.DrawEnumPopupAsString<ECharacter>(ref rect, "캐릭터", targetIdProp);
+                    parameterProp.stringValue = string.Empty;
+                    valueProp.stringValue = string.Empty;
                     break;
                 case EActionType.AddItem:
                 case EActionType.RemoveItem:
                     PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);
-                    PropertyUtil.DrawIntField(ref rect, "갯수", valueProp);
+                    parameterProp.stringValue = string.Empty;
+                    PropertyUtil.DrawFloatField(ref rect, "갯수", valueProp);
+                    break;
+                case EActionType.RemoveGreaterOfFoodAndWater:
+                    targetIdProp.stringValue = string.Empty;
+                    parameterProp.stringValue = string.Empty;
+                    PropertyUtil.DrawFloatField(ref rect, "갯수", valueProp);
                     break;
                 case EActionType.AdvanceEndingProgress:
                 case EActionType.EndingComplete:
                     PropertyUtil.DrawEnumPopupAsString<EEndingType>(ref rect, "엔딩", targetIdProp);
+                    parameterProp.stringValue = string.Empty;
+                    valueProp.stringValue = string.Empty;
                     break;
-                case EActionType.PostponeMainEvent:
+                case EActionType.SetSpecificMainEventCooldown:
+                case EActionType.AddDaysToSpecificMainEventCooldown:
                     PropertyUtil.DrawEnumPopupAsString<EMainEventCategory>(ref rect, "이벤트 타입", targetIdProp);
-                    PropertyUtil.DrawIntField(ref rect, "연기 날짜", valueProp);
+                    parameterProp.stringValue = string.Empty;
+                    PropertyUtil.DrawIntField(ref rect, "일수", valueProp);
+                    break;
+                case EActionType.ActivateBuff:
+                    PropertyUtil.DrawEnumPopupAsString<EBuffEffect>(ref rect, "버프 타입", targetIdProp);
+                    parameterProp.stringValue = string.Empty;
+                    PropertyUtil.DrawIntField(ref rect, "지속 날짜", valueProp);
+                    break;
+                case EActionType.ActivateBuffUntilNextCharacterEvent:
+                    PropertyUtil.DrawEnumPopupAsString<EBuffEffect>(ref rect, "버프 타입", targetIdProp);
+                    parameterProp.stringValue = string.Empty;
+                    valueProp.stringValue = string.Empty;
                     break;
                 default:
                     break;

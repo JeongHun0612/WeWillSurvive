@@ -36,6 +36,7 @@ namespace WeWillSurvive.GameEvent
         protected Dictionary<TEnum, TEventProgress> _eventProgresses = new();
 
         public EGameEventType EventType => _eventType;
+        public int GlobalDayCounter => _globalDayCounter;
 
         public virtual void Initialize()
         {

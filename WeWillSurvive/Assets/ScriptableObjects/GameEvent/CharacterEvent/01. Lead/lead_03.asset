@@ -30,6 +30,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uBC14\uAE65\uC774 \uBD88\uC548\uC815\uD560\uC218\uB85D \uB0B4\uBD80\uC5D0\uC11C
         \uBC84\uD2F8 \uD798\uC774 \uD544\uC694\uD574. \uBA39\uC744 \uAC8C \uC788\uC5B4\uC57C
         \uBC84\uD2F0\uB294 \uAC70\uC57C.\"\n\uB9AC\uB4DC\uB294 \uC800\uC7A5\uACE0\uB85C
@@ -39,15 +40,15 @@ MonoBehaviour:
       _actions:
       - _actionType: 103
         _targetId: Cook
-        _parameter: Hunger
+        _parameter: 
         _value: 10
       - _actionType: 103
         _targetId: Bell
-        _parameter: Hunger
+        _parameter: 
         _value: -10
       - _actionType: 103
         _targetId: DrK
-        _parameter: Hunger
+        _parameter: 
         _value: -10
       _isAffectedByStats: 0
       _probability: 1
@@ -57,6 +58,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC774 \uADDC\uCE59\uC801\uC778 \uC9C4\uB3D9\uC740 \uADF8\uB0E5
         \uC18C\uB9AC\uAC00 \uC544\uB2C8\uC57C. \uAD6C\uC870\uBB3C\uC5D0 \uBD80\uB2F4\uC774
         \uC313\uC774\uACE0 \uC788\uB294 \uAC70\uC57C.\"\n\uB9AC\uB4DC\uB294 \uBCA8\uC5D0\uAC8C
@@ -84,6 +86,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uB9CC\uC57D \uC800\uAC8C \uC678\uBD80 \uCDA9\uACA9\uC774\uB77C\uBA74,
         \uD30C\uD3B8\uC774 \uD280\uC5B4 \uC778\uBA85 \uD53C\uD574\uB85C \uC774\uC5B4\uC9C8
         \uC218 \uC788\uC5B4.\"\n\uB9AC\uB4DC\uB294 \uB2E5\uD130 K\uC5D0\uAC8C \uC758\uB8CC
@@ -110,6 +113,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC6D0\uC778\uC744 \uD30C\uC545\uD558\uC9C0 \uBABB\uD55C \uCC44
         \uC6C0\uC9C1\uC774\uB294 \uAC74 \uC704\uD5D8\uD574. \uC880 \uB354 \uC0C1\uD669\uC744
         \uC9C0\uCF1C\uBCF4\uC790.\"\n\uB9AC\uB4DC\uB294 \uC678\uBD80 \uAC10\uC9C0
@@ -120,6 +124,7 @@ MonoBehaviour:
       _probability: 0.5
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC9C4\uB3D9\uC740 \uC810\uC810 \uC7A6\uC544\uB4E4\uC5C8\uC9C0\uB9CC,
         \uBD88\uC548\uAC10\uC740 \uC0AC\uB77C\uC9C0\uC9C0 \uC54A\uC558\uB2E4.\n\uB9AC\uB4DC\uC758
         \uC8FC\uC800\uAC00 \uAE38\uC5B4\uC9C0\uC790, \uD300\uC6D0\uB4E4\uC740 \uBB34\uC5B8\uC758

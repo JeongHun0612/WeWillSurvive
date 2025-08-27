@@ -30,79 +30,26 @@ MonoBehaviour:
     _choiceText: 
     _results:
     - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
+      _conditions: []
+      _resultTemplates: []
+      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
+        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
+        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
+        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
+        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
+        {}(\uC774)\uAC00 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
+        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
+        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
+        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
+      _actions:
+      - _actionType: 120
         _targetId: Lead
+        _parameter: Hunger
+        _value: 
+      - _actionType: 201
+        _targetId: Ax
         _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        \uB9AC\uB4DC\uAC00 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        \uCFE1\uC774 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        \uBCA8\uC774 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        DrK\uAC00 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
+        _value: 1
       _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 209
@@ -110,79 +57,26 @@ MonoBehaviour:
     _choiceText: 
     _results:
     - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
+      _conditions: []
+      _resultTemplates: []
+      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
+        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
+        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
+        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
+        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
+        {}(\uC774)\uAC00 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
+        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
+        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
+        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
+      _actions:
+      - _actionType: 120
         _targetId: Lead
+        _parameter: Hunger
+        _value: 
+      - _actionType: 201
+        _targetId: Gun
         _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        \uB9AC\uB4DC\uAC00 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        \uCFE1\uC774 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        \uBCA8\uC774 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        DrK\uAC00 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
+        _value: 1
       _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 212
@@ -190,79 +84,26 @@ MonoBehaviour:
     _choiceText: 
     _results:
     - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
+      _conditions: []
+      _resultTemplates: []
+      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
+        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
+        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
+        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
+        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
+        {}(\uC774)\uAC00 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
+        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
+        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
+        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
+      _actions:
+      - _actionType: 120
         _targetId: Lead
+        _parameter: Hunger
+        _value: 
+      - _actionType: 201
+        _targetId: Pipe
         _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        \uB9AC\uB4DC\uAC00 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        \uCFE1\uC774 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        \uBCA8\uC774 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultText: "\uAE30\uC9C0 \uB0B4\uBD80\uB85C \uD37C\uC9C0\uB294 \uC548\uAC1C\uB294
-        \uAC10\uAC01\uC744 \uB9C8\uBE44\uC2DC\uCF30\uACE0, \uB300\uC6D0\uB4E4\uC740
-        \uC11C\uB85C\uC758 \uC704\uCE58\uB3C4 \uC81C\uB300\uB85C \uD30C\uC545\uD558\uAE30
-        \uC5B4\uB824\uC6E0\uB2E4. \uB2E4\uD589\uD788 \uBB34\uAE30\uB97C \uC774\uC6A9\uD574
-        \uC548\uAC1C\uB97C \uC77C\uBD80 \uAC77\uC5B4\uB0C8\uACE0, \uADF8 \uC911\uC2EC\uC5D0\uC11C
-        DrK\uAC00 \uBE44\uC0C1 \uBC29\uC5B4 \uBC84\uD2BC\uC744 \uB20C\uB800\uB2E4.
-        \uACF5\uAE30 \uD544\uD130\uAC00 \uCD5C\uB300 \uCD9C\uB825\uC744 \uBFDC\uC5B4\uB0B4\uBA70
-        \uC548\uAC1C\uB294 \uBE60\uB974\uAC8C \uC0AC\uB77C\uC84C\uB2E4. \uCE68\uC785\uC790\uB294
-        \uB354 \uC774\uC0C1 \uC5C6\uC5C8\uB2E4."
-      _actions: []
+        _value: 1
       _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
@@ -271,189 +112,42 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions:
-      - _conditionType: 100
-        _targetId: Lead
-        _parameter: 
+      - _conditionType: 301
+        _targetId: BlockInjuryWorsen
+        _parameter: Injury
         _value1: 
         _value2: 
-      - _conditionType: 101
-        _targetId: Lead
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: "\uBC29\uC548\uC740 \uC548\uAC1C\uB85C \uAC00\uB4DD \uCC3C\uACE0,
-        \uADF8 \uC548\uC5D0 \uC788\uB358 \uB9AC\uB4DC\uB294 \uAD6C\uC870\uB418\uC9C0
-        \uBABB\uD588\uB2E4. \uC548\uAC1C\uAC00 \uAC77\uD788\uACE0 \uB098\uC11C\uC57C
-        \uADF8\uC758 \uD754\uC801\uC774 \uBC1C\uACAC\uB410\uB2E4\u2026"
-      _actions:
-      - _actionType: 102
-        _targetId: Lead
-        _parameter: 
-        _value: 
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Lead
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 102
-        _targetId: Lead
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: "\uC548\uAC1C\uAC00 \uAC00\uB4DD \uCC2C \uAD6C\uC5ED\uC5D0\uC11C
-        \uC228\uC744 \uCC38\uB358 \uB9AC\uB4DC\uAC00 \uAC11\uC790\uAE30 \uC4F0\uB7EC\uC84C\uB2E4.
-        \uB9C8\uC2A4\uD06C\uAC00 \uBC97\uACA8\uC9C4 \uAC83\uC774\uB2E4. \uADF8\uB294
+      _resultTemplates:
+      - "\uC548\uAC1C\uAC00 \uAC00\uB4DD \uCC2C \uAD6C\uC5ED\uC5D0\uC11C \uC228\uC744
+        \uCC38\uB358 {}(\uC774)\uAC00 \uAC11\uC790\uAE30 \uC4F0\uB7EC\uC84C\uB2E4.
+        \uB9C8\uC2A4\uD06C\uAC00 \uBC97\uACA8\uC9C4 \uAC83\uC774\uB2E4. {}(\uC740)\uB294
         \uC77C\uB2E8 \uAD6C\uC870\uB410\uC9C0\uB9CC \uD638\uD761\uC774 \uBD88\uC548\uC815\uD558\uACE0
         \uC758\uC2DD\uC774 \uD63C\uBBF8\uD558\uB2E4."
-      _actions:
-      - _actionType: 100
-        _targetId: Lead
-        _parameter: Injury
-        _value: 1
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 101
-        _targetId: Cook
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: "\uBC29\uC548\uC740 \uC548\uAC1C\uB85C \uAC00\uB4DD \uCC3C\uACE0,
-        \uADF8 \uC548\uC5D0 \uC788\uB358 \uCFE1\uC740 \uAD6C\uC870\uB418\uC9C0 \uBABB\uD588\uB2E4.
-        \uC548\uAC1C\uAC00 \uAC77\uD788\uACE0 \uB098\uC11C\uC57C \uADF8\uC758 \uD754\uC801\uC774
+      - "\uBC29\uC548\uC740 \uC548\uAC1C\uB85C \uAC00\uB4DD \uCC3C\uACE0, \uADF8
+        \uC548\uC5D0 \uC788\uB358 {}(\uC740)\uB294 \uAD6C\uC870\uB418\uC9C0 \uBABB\uD588\uB2E4.
+        \uC548\uAC1C\uAC00 \uAC77\uD788\uACE0 \uB098\uC11C\uC57C {}\uC758 \uD754\uC801\uC774
         \uBC1C\uACAC\uB410\uB2E4\u2026"
+      _resultText: 
       _actions:
-      - _actionType: 102
-        _targetId: Cook
-        _parameter: 
+      - _actionType: 110
+        _targetId: Lead
+        _parameter: Hunger
         _value: 
       _isAffectedByStats: 0
       _probability: 1
     - _outComeType: 0
       _conditions:
-      - _conditionType: 100
-        _targetId: Cook
-        _parameter: 
+      - _conditionType: 300
+        _targetId: BlockInjuryWorsen
+        _parameter: Hunger
         _value1: 
         _value2: 
-      - _conditionType: 102
-        _targetId: Cook
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: "\uC548\uAC1C\uAC00 \uAC00\uB4DD \uCC2C \uAD6C\uC5ED\uC5D0\uC11C
-        \uC228\uC744 \uCC38\uB358 \uCFE1\uC774 \uAC11\uC790\uAE30 \uC4F0\uB7EC\uC84C\uB2E4.
-        \uB9C8\uC2A4\uD06C\uAC00 \uBC97\uACA8\uC9C4 \uAC83\uC774\uB2E4. \uADF8\uB294
-        \uC77C\uB2E8 \uAD6C\uC870\uB410\uC9C0\uB9CC \uD638\uD761\uC774 \uBD88\uC548\uC815\uD558\uACE0
-        \uC758\uC2DD\uC774 \uD63C\uBBF8\uD558\uB2E4."
-      _actions:
-      - _actionType: 100
-        _targetId: Cook
-        _parameter: Injury
-        _value: 1
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 101
-        _targetId: DrK
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: "\uBC29\uC548\uC740 \uC548\uAC1C\uB85C \uAC00\uB4DD \uCC3C\uACE0,
-        \uADF8 \uC548\uC5D0 \uC788\uB358 DrK\uB294 \uAD6C\uC870\uB418\uC9C0 \uBABB\uD588\uB2E4.
-        \uC548\uAC1C\uAC00 \uAC77\uD788\uACE0 \uB098\uC11C\uC57C \uADF8\uB140\uC758
-        \uD754\uC801\uC774 \uBC1C\uACAC\uB410\uB2E4\u2026"
-      _actions:
-      - _actionType: 102
-        _targetId: DrK
-        _parameter: 
-        _value: 
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: DrK
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 102
-        _targetId: DrK
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: "\uC548\uAC1C\uAC00 \uAC00\uB4DD \uCC2C \uAD6C\uC5ED\uC5D0\uC11C
-        \uC228\uC744 \uCC38\uB358 DrK\uAC00 \uAC11\uC790\uAE30 \uC4F0\uB7EC\uC84C\uB2E4.
-        \uB9C8\uC2A4\uD06C\uAC00 \uBC97\uACA8\uC9C4 \uAC83\uC774\uB2E4. \uADF8\uB140\uB294
-        \uC77C\uB2E8 \uAD6C\uC870\uB410\uC9C0\uB9CC \uD638\uD761\uC774 \uBD88\uC548\uC815\uD558\uACE0
-        \uC758\uC2DD\uC774 \uD63C\uBBF8\uD558\uB2E4."
-      _actions:
-      - _actionType: 100
-        _targetId: DrK
-        _parameter: Injury
-        _value: 1
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 101
-        _targetId: Bell
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: "\uBC29\uC548\uC740 \uC548\uAC1C\uB85C \uAC00\uB4DD \uCC3C\uACE0,
-        \uADF8 \uC548\uC5D0 \uC788\uB358 \uBCA8\uC740 \uAD6C\uC870\uB418\uC9C0 \uBABB\uD588\uB2E4.
-        \uC548\uAC1C\uAC00 \uAC77\uD788\uACE0 \uB098\uC11C\uC57C \uADF8\uB140\uC758
-        \uD754\uC801\uC774 \uBC1C\uACAC\uB410\uB2E4\u2026"
-      _actions:
-      - _actionType: 102
-        _targetId: Bell
-        _parameter: 
-        _value: 
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 100
-        _targetId: Bell
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 102
-        _targetId: Bell
-        _parameter: 48
-        _value1: 
-        _value2: 
-      _resultText: "\uC548\uAC1C\uAC00 \uAC00\uB4DD \uCC2C \uAD6C\uC5ED\uC5D0\uC11C
-        \uC228\uC744 \uCC38\uB358 \uBCA8\uC774 \uAC11\uC790\uAE30 \uC4F0\uB7EC\uC84C\uB2E4.
-        \uB9C8\uC2A4\uD06C\uAC00 \uBC97\uACA8\uC9C4 \uAC83\uC774\uB2E4. \uADF8\uB140\uB294
-        \uC77C\uB2E8 \uAD6C\uC870\uB410\uC9C0\uB9CC \uD638\uD761\uC774 \uBD88\uC548\uC815\uD558\uACE0
-        \uC758\uC2DD\uC774 \uD63C\uBBF8\uD558\uB2E4."
-      _actions:
-      - _actionType: 100
-        _targetId: Bell
-        _parameter: Injury
-        _value: 1
+      _resultTemplates: []
+      _resultText: "\uB300\uC6D0\uB4E4\uC758 \uD638\uD761\uAE30\uB85C \uC548\uAC1C\uAC00
+        \uCE68\uD22C\uD558\uAE30 \uC9C1\uC804\uC5D0, \uC758\uB8CC \uB9CC\uB2A5 \uD0A4\uD2B8\uC758
+        \uBA78\uADE0 \uC2A4\uD504\uB808\uC774\uAC00 \uBD84\uC0AC\uB418\uC5B4 \uACF5\uAE30\uCE35\uC744
+        \uC53B\uC5B4\uB0C8\uB2E4. \uC790\uADF9 \uBC18\uC751\uC774 \uAC00\uB77C\uC549\uACE0
+        \uC774\uC0C1 \uC9D5\uD6C4\uB294 \uC5C6\uC5C8\uB2E4."
+      _actions: []
       _isAffectedByStats: 0
       _probability: 1

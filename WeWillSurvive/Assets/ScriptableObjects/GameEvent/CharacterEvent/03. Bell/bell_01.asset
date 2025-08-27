@@ -21,8 +21,19 @@ MonoBehaviour:
     \uC774 \uC804\uB825\uC73C\uB85C \uC218\uB9AC \uD0A4\uD2B8\uB97C \uD558\uB098
     \uB9CC\uB4E4\uC5B4\uB0BC \uC218 \uC788\uB2E4\uACE0 \uD55C\uB2E4. \uD55C\uBC88
     \uB9E1\uACA8\uBCFC\uAE4C?"
-  _conditions: []
+  _conditions:
+  - _conditionType: 201
+    _targetId: RepairKit
+    _parameter: 
+    _value1: 
+    _value2: 
+  - _conditionType: 201
+    _targetId: SpecialRepairKit
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 50
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 0
     _requiredAmount: 0
@@ -30,6 +41,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 2
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uBCA8\uC740 \uBC1C\uC804\uAE30\uB97C \uC190\uBCF4\uBA70 \uB9CC\uC871\uC2A4\uB7EC\uC6B4
         \uBBF8\uC18C\uB97C \uC9C0\uC5C8\uB2E4. \"\uB355\uBD84\uC5D0 \uCDA9\uBD84\uD55C
         \uC804\uB825\uC744 \uC5BB\uC5C8\uC5B4!\" \uBC1C\uC804\uAE30\uAC00 \uAC00\uB3D9\uB418\uC5B4
@@ -39,12 +51,13 @@ MonoBehaviour:
       _actions:
       - _actionType: 200
         _targetId: RepairKit
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       _isAffectedByStats: 1
       _probability: 1
     - _outComeType: 3
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uBCA8\uC740 \uACB0\uAD6D \uBC1C\uC804\uAE30 \uC218\uB9AC\uC5D0
         \uC2E4\uD328\uD588\uB2E4. \"\uBD80\uD488\uC774 \uB354 \uD544\uC694\uD574...
         \uC774\uB300\uB85C\uB294 \uC548\uB3FC.\" \uACB0\uAD6D \uC218\uB9AC \uD0A4\uD2B8\uB3C4
@@ -54,6 +67,7 @@ MonoBehaviour:
       _probability: 1
     - _outComeType: 4
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uAC11\uC791\uC2A4\uB7EC\uC6B4 \uC804\uB958 \uBC29\uCD9C\uC5D0
         \uBCA8\uC774 \uC4F0\uB7EC\uC84C\uB2E4. \"\uC544, \uC774\uB7F0... \uC804\uAE30
         \uCDA9\uACA9\uC774\uC57C.\""
@@ -70,6 +84,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC9C0\uAE08\uC740 \uBC1C\uC804\uAE30 \uC0C1\uD0DC\uAC00 \uB098\uC058\uC9C0
         \uC54A\uC544.\" \uBCA8\uC740 \uBC1C\uC804\uAE30\uC5D0\uC11C \uC190\uC744
         \uB5BC\uACE0 \uB2E4\uB978 \uC77C\uC744 \uCC3E\uC544 \uB098\uC130\uB2E4."
@@ -82,6 +97,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC9C0\uAE08\uC740 \uBC1C\uC804\uAE30 \uC0C1\uD0DC\uAC00 \uB098\uC058\uC9C0
         \uC54A\uC544.\" \uBCA8\uC740 \uBC1C\uC804\uAE30\uC5D0\uC11C \uC190\uC744
         \uB5BC\uACE0 \uB2E4\uB978 \uC77C\uC744 \uCC3E\uC544 \uB098\uC130\uB2E4."

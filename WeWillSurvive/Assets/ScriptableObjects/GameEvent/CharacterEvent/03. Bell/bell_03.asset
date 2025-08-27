@@ -22,7 +22,17 @@ MonoBehaviour:
     \uAE30\uC874\uC5D0 \uAC00\uC9C0\uACE0 \uC788\uB294 \uC218\uB9AC \uD0A4\uD2B8\uB97C
     \uB354 \uC88B\uC740 \uD0A4\uD2B8\uB85C \uAC1C\uC870\uD560 \uC218 \uC788\uB2E4\uACE0
     \uB9D0\uD55C\uB2E4."
-  _conditions: []
+  _conditions:
+  - _conditionType: 200
+    _targetId: RepairKit
+    _parameter: 
+    _value1: 
+    _value2: 
+  - _conditionType: 201
+    _targetId: SpecialRepairKit
+    _parameter: 
+    _value1: 
+    _value2: 
   _choiceSchema: 50
   _choices:
   - _choiceIcon: 205
@@ -41,11 +51,11 @@ MonoBehaviour:
       _actions:
       - _actionType: 201
         _targetId: RepairKit
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       - _actionType: 200
         _targetId: SpecialRepairKit
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       _isAffectedByStats: 1
       _probability: 1

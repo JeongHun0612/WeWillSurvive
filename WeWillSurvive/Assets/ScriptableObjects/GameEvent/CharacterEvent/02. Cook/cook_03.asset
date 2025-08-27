@@ -31,6 +31,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 2
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uB808\uC2DC\uD53C\uB300\uB85C \uC644\uBCBD\uD788 \uC694\uB9AC\uAC00
         \uC644\uC131\uB418\uC5C8\uB2E4. \uCFE1\uC740 \uC790\uB791\uC2A4\uB7EC\uC6B4
         \uBBF8\uC18C\uB85C \uB9D0\uD588\uB2E4. \"\uBD10! \uB0B4\uAC00 \uB9D0\uD588\uC9C0?
@@ -39,16 +40,17 @@ MonoBehaviour:
       _actions:
       - _actionType: 201
         _targetId: Food
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       - _actionType: 200
         _targetId: SpecialFood
-        _parameter: Hunger
+        _parameter: 
         _value: 1
       _isAffectedByStats: 1
       _probability: 1
     - _outComeType: 3
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uCFE1\uC740 \uC5B4\uAE68\uB97C \uCD95 \uB298\uC5B4\uB728\uB9AC\uBA70
         \uB3CC\uC544\uC654\uB2E4. \"\uC774\uC0C1\uD574, \uCC45\uB300\uB85C \uD588\uB294\uB370
         \uBB54\uAC00 \uB193\uCE5C \uAC83 \uAC19\uC544.\" \uC2DD\uB7C9\uB9CC \uB0AD\uBE44\uD588\uB2E4."
@@ -61,6 +63,7 @@ MonoBehaviour:
       _probability: 1
     - _outComeType: 4
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uAC11\uC790\uAE30 '\uD391!'\uD558\uB294 \uC18C\uB9AC\uC640 \uD568\uAED8
         \uBD88\uAF43\uC774 \uD280\uC5C8\uB2E4. \uCFE1\uC774 \uB180\uB77C\uC11C \uC18C\uB9AC\uCCE4\uB2E4.
         \"\uC774 \uB808\uC2DC\uD53C, \uC798\uBABB\uB41C \uAC70\uC600\uB098 \uBD10!\"
@@ -84,6 +87,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC774 \uB808\uC2DC\uD53C\uB294 \uC704\uD5D8\uD574 \uBCF4\uC774\uB2C8\uAE4C
         \uB2E4\uC74C\uC5D0 \uC2DC\uB3C4\uD558\uC790.\" \uCFE1\uC740 \uACE0\uAC1C\uB97C
         \uB044\uB355\uC774\uBA70 \uB808\uC2DC\uD53C \uCC45\uC744 \uB36E\uC5C8\uB2E4."
@@ -96,6 +100,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC774 \uB808\uC2DC\uD53C\uB294 \uC704\uD5D8\uD574 \uBCF4\uC774\uB2C8\uAE4C
         \uB2E4\uC74C\uC5D0 \uC2DC\uB3C4\uD558\uC790.\" \uCFE1\uC740 \uACE0\uAC1C\uB97C
         \uB044\uB355\uC774\uBA70 \uB808\uC2DC\uD53C \uCC45\uC744 \uB36E\uC5C8\uB2E4."

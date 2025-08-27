@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 2
   _itemType: 103
-  _name: DrK
+  _name: "\uB2E5\uD130K"
   _baseEventRate: 60
   _normalStateModifier: 10
   SpriteData: {fileID: 11400000, guid: e9acf406589859d46ae58a6ee01d5262, type: 2}

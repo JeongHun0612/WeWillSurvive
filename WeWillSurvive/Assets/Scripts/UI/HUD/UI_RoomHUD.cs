@@ -1,10 +1,11 @@
-using Cysharp.Threading.Tasks;
+Ôªøusing Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
+using WeWillSurvive.Ending;
 using WeWillSurvive.GameEvent;
 using WeWillSurvive.UI;
 using WeWillSurvive.Util;
@@ -21,9 +22,12 @@ namespace WeWillSurvive
         [SerializeField] private TMP_Text _roomMoveButtonText;
         [SerializeField] private Image _roomMoveButtonCharacterIcon;
 
-        [Header("MoveButton")]
-        [SerializeField] private Button _leftButton;
-        [SerializeField] private Button _rightButton;
+        [Header("Buff List")]
+        [SerializeField] private GameObject _buffListPanel;
+        [SerializeField] private List<TMP_Text> _buffTextList;
+
+        [Header("Ending UI")]
+        [SerializeField] private GameObject _titleButton;
 
         private ERoom _currentRoom;
 
@@ -36,9 +40,6 @@ namespace WeWillSurvive
         {
             EventBus.Subscribe<NewDayEvent>(OnNewDayEvent);
             EventBus.Subscribe<MoveRoomCompleteEvent>(OnMoveRoomCompleteEvent);
-
-            _leftButton.onClick.AddListener(() => MoveRoom(_currentRoom - 1));
-            _rightButton.onClick.AddListener(() => MoveRoom(_currentRoom + 1));
 
             _characterIcons = new()
             {
@@ -53,18 +54,11 @@ namespace WeWillSurvive
 
         private void MoveRoom(ERoom targetRoom)
         {
-            // targetRoom¿Ã π¸¿ß∏¶ π˛æÓ≥™∏È
+            // targetRoomÏù¥ Î≤îÏúÑÎ•º Î≤óÏñ¥ÎÇòÎ©¥
             if (targetRoom < 0 || targetRoom >= ERoom.MaxCount)
                 return;
 
             EventBus.Publish(new MoveRoomEvent { TargetRoom = targetRoom });
-        }
-
-        private void UpdateMoveButton()
-        {
-            // πˆ∆∞ ¡∂∞« √º≈©
-            _leftButton.interactable = _currentRoom > 0;
-            _rightButton.interactable = _currentRoom < ERoom.MaxCount - 1;
         }
 
         private void SetRoomMoveButton()
@@ -78,7 +72,7 @@ namespace WeWillSurvive
             {
                 _roomMoveButton.SetActive(true);
 
-                // πﬂª˝«— ƒ≥∏Ø≈Õ ¿Ã∫•∆Æø° ∏¬¥¬ ƒ≥∏Ø≈Õ æ∆¿Ãƒ‹ «“¥Á
+                // Î∞úÏÉùÌïú Ï∫êÎ¶≠ÌÑ∞ Ïù¥Î≤§Ìä∏Ïóê ÎßûÎäî Ï∫êÎ¶≠ÌÑ∞ ÏïÑÏù¥ÏΩò Ìï†Îãπ
                 _roomMoveButtonCharacterIcon.sprite = GetCharacterIcon(dailyCharcterEvent.Character);
 
                 UpdateRoomMoveButton();
@@ -89,21 +83,47 @@ namespace WeWillSurvive
         {
             if (_currentRoom == ERoom.Main)
             {
-                _roomMoveButtonText.text = "¿Ã∫•∆Æ ºˆ«‡";
+                _roomMoveButtonText.text = "Ïù¥Î≤§Ìä∏ ÏàòÌñâ";
                 _roomMoveButtonCharacterIcon.gameObject.SetActive(true);
             }
             else
             {
-                _roomMoveButtonText.text = "µπæ∆∞°±‚";
+                _roomMoveButtonText.text = "ÎèåÏïÑÍ∞ÄÍ∏∞";
                 _roomMoveButtonCharacterIcon.gameObject.SetActive(false);
             }
+        }
+
+        private void UpdateBuffPanel()
+        {
+            _buffListPanel.SetActive(_currentRoom == ERoom.Main);
+        }
+
+        private void UpdateBuffListText()
+        {
+            var activeBuffs = BuffManager.Instance.GetActiveBuffs();
+
+            for (int i = 0; i < _buffTextList.Count; i++)
+            {
+                if (i < activeBuffs.Count)
+                {
+                    var buff = activeBuffs[i];
+                    _buffTextList[i].text = $"{EnumUtil.GetInspectorName(buff.Effect)} [ÎÇ®ÏùÄ ÏùºÏàò : {buff.Duration}]";
+                    _buffTextList[i].gameObject.SetActive(true);
+                }
+                else
+                {
+                    _buffTextList[i].gameObject.SetActive(false);
+                }
+            }
+
+            _buffListPanel.SetActive(true);
         }
 
         private Sprite GetCharacterIcon(ECharacter characterType)
         {
             if (!_characterIcons.TryGetValue(characterType, out var icon))
             {
-                Debug.LogWarning($"{characterType} ≈∏¿‘ø° ∏¬¥¬ ƒ≥∏Ø≈Õ æ∆¿Ãƒ‹¿ª √£¿ª ºˆ æ¯Ω¿¥œ¥Ÿ.");
+                Debug.LogWarning($"{characterType} ÌÉÄÏûÖÏóê ÎßûÎäî Ï∫êÎ¶≠ÌÑ∞ ÏïÑÏù¥ÏΩòÏùÑ Ï∞æÏùÑ Ïàò ÏóÜÏäµÎãàÎã§.");
                 return null;
             }
 
@@ -125,20 +145,41 @@ namespace WeWillSurvive
             }
         }
 
+        public void OnClickSetting()
+        {
+            UIManager.Instance.ShowPopup<UI_InGameSetting>();
+        }
+
+        public void OnClickTitle()
+        {
+            GameManager.Instance.OnMoveTitle();
+        }
+
         private void OnNewDayEvent(NewDayEvent context)
         {
             _currentRoom = ERoom.Main;
-            _dayText.text = $"Day {context.CurrentDay}";
 
-            UpdateMoveButton();
+            var isEnding = EndingManager.Instance.IsEnding;
+            _titleButton.SetActive(isEnding);
+
+            if (isEnding)
+            {
+                _dayText.text = (EndingManager.Instance.EndingType == EEndingType.DeathByStarvation) ? "ÏÉùÏ°¥ Ïã§Ìå®" : "ÏÉùÏ°¥ ÏÑ±Í≥µ";
+                _roomMoveButton.SetActive(false);
+                _buffListPanel.SetActive(false);
+                return;
+            }
+
+            _dayText.text = $"Day {context.CurrentDay}";
             SetRoomMoveButton();
+            UpdateBuffListText();
         }
 
         private void OnMoveRoomCompleteEvent(MoveRoomCompleteEvent context)
         {
             _currentRoom = context.CurrentRoom;
-            UpdateMoveButton();
             UpdateRoomMoveButton();
+            UpdateBuffPanel();
         }
     }
 }

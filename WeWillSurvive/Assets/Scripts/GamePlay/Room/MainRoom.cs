@@ -1,8 +1,6 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
-using WeWillSurvive.Core;
-using WeWillSurvive.Item;
 using WeWillSurvive.UI;
 
 namespace WeWillSurvive.Room
@@ -14,8 +12,6 @@ namespace WeWillSurvive.Room
 
         [Header("Item Placements")]
         [SerializeField] private List<ItemPlacement> _itemPlacements;
-
-        private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
 
         public async override UniTask InitializeAsync()
         {
@@ -36,17 +32,16 @@ namespace WeWillSurvive.Room
 
         public override void UpdateRoom()
         {
-            // Ä³¸¯ÅÍ »óÅÂ ¾÷µ¥ÀÌÆ®
+            // ìºë¦­í„° ìƒíƒœ ì—…ë°ì´íŠ¸
             foreach (var characterUI in _characterUIs)
             {
                 characterUI.UpdateCharacterImage(ERoomType.MainRoom);
             }
 
-            // ¾ÆÀÌÅÛ ¾÷µ¥ÀÌÆ®
+            // ì•„ì´í…œ ì—…ë°ì´íŠ¸
             foreach (var itemPlacement in _itemPlacements)
             {
-                float itemCount = ItemManager.GetItemCount(itemPlacement.ItemType);
-                itemPlacement.UpdateItemPlacement(itemCount);
+                itemPlacement.UpdateItemPlacement();
             }
         }
 

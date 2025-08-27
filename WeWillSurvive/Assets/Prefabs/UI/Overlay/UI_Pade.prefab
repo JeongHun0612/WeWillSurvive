@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2190987251308566549
 RectTransform:
   m_ObjectHideFlags: 0
@@ -116,8 +116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9cbb20c5fc70c45afd4e24e1584323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RememberInHistory: 0
-  SortingOffset: 10
   _padeImage: {fileID: 8372447803562092931}
   _dayText: {fileID: 3070115654418934551}
 --- !u!1 &7331534668399051773
@@ -263,7 +261,7 @@ MonoBehaviour:
   m_text: 1 Day
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 85a260642dc5956419bbe36861852b63, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 4412569170182131874, guid: 85a260642dc5956419bbe36861852b63, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -328,6 +326,6 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}

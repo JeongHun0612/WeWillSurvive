@@ -6,14 +6,15 @@ namespace WeWillSurvive.Status
 {
     public enum EAnxiousLevel
     {
-        Normal, Anxious, Panic, Dead
+        Normal, Anxious, Panic
     }
 
     public class AnxiousStatus : StatusBase<EAnxiousLevel>
     {
         public override EStatusType StatusType => EStatusType.Anxious;
+        public override EBuffEffect BlockStatusBuffEffect => EBuffEffect.BlockAnxiousWorsen;
 
-        protected override bool IsDeadLevel(EAnxiousLevel level) => level == EAnxiousLevel.Dead;
+        protected override bool IsDeadLevel(EAnxiousLevel level) => level == EAnxiousLevel.Panic;
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
@@ -26,7 +27,6 @@ namespace WeWillSurvive.Status
                 EAnxiousLevel.Normal,
                 EAnxiousLevel.Anxious,
                 EAnxiousLevel.Panic,
-                EAnxiousLevel.Dead,
             };
 
             LevelStateMap = new()
@@ -46,7 +46,6 @@ namespace WeWillSurvive.Status
                 [EAnxiousLevel.Normal] = 0f,
                 [EAnxiousLevel.Anxious] = -20f,
                 [EAnxiousLevel.Panic] = -30f,
-                [EAnxiousLevel.Dead] = 0f,
             };
 
             StateTransitionTable = new()

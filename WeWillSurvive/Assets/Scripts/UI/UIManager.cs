@@ -253,23 +253,6 @@ namespace WeWillSurvive.UI
             _loadingUI.Hide();
 
             Debug.Log($"UI_Loading loaded and initialized");
-
-            //Type uiType = _loadingUI.GetType();
-
-            //if (!_overlayCache.ContainsKey(uiType))
-            //{
-            //    _overlayCache.Add(uiType, _loadingUI);
-            //    _loadingUI.CanvasInitialize();
-            //    _loadingUI.Initialize();
-            //    _loadingUI.Hide();
-
-            //    Debug.Log($"UI_Loading loaded and initialized: {uiType.Name}");
-            //}
-            //else
-            //{
-            //    Debug.LogWarning($"Duplicate UI_Loading type: {uiType.Name}");
-            //    Destroy(_loadingUI.gameObject);
-            //}
         }
     }
 }

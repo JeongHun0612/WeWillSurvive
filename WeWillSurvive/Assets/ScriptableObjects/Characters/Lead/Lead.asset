@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 0
   _itemType: 100
-  _name: Lead
+  _name: "\uB9AC\uB4DC"
   _baseEventRate: 60
   _normalStateModifier: 10
   SpriteData: {fileID: 11400000, guid: df51c9b3b5b77da40b8913c9e5844ceb, type: 2}

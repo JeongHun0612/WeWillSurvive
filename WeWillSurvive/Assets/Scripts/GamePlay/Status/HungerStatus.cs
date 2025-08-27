@@ -6,14 +6,15 @@ namespace WeWillSurvive.Status
 {
     public enum EHungerLevel
     {
-        Normal, Hungry, Starve, Dead
+        Normal, Hungry, Starve
     }
 
     public class HungerStatus : StatusBase<EHungerLevel>
     {
         public override EStatusType StatusType => EStatusType.Hunger;
+        public override EBuffEffect BlockStatusBuffEffect => EBuffEffect.BlockHungerWorsen;
 
-        protected override bool IsDeadLevel(EHungerLevel level) => level == EHungerLevel.Dead;
+        protected override bool IsDeadLevel(EHungerLevel level) => level == EHungerLevel.Starve;
 
         public HungerStatus(CharacterBase owner)
         {
@@ -24,7 +25,6 @@ namespace WeWillSurvive.Status
                 EHungerLevel.Normal,
                 EHungerLevel.Hungry,
                 EHungerLevel.Starve,
-                EHungerLevel.Dead,
             };
 
             LevelStateMap = new()
@@ -68,8 +68,15 @@ namespace WeWillSurvive.Status
                 },
             };
 
-
             UpdateLevel(EHungerLevel.Normal);
+        }
+
+        public override void OnNewDay()
+        {
+            if (BuffManager.Instance.HasBuff(EBuffEffect.BlockAnxiousWorsen))
+                return;
+
+            base.OnNewDay();
         }
     }
 }

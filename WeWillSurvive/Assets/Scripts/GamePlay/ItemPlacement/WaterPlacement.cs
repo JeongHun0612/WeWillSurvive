@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
 using WeWillSurvive.Item;
+using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
@@ -26,24 +27,15 @@ namespace WeWillSurvive
             _waterSprites[2] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Items/Item_Normal/water3.png");
         }
 
-        public override void Initialize()
+        public override void UpdateItemPlacement()
         {
-            base.Initialize();
+            base.UpdateItemPlacement();
 
-            _waterSprites = new Sprite[3];
-            _waterSprites[0] = SpriteManager.Instance.GetSprite(ESpriteAtlas.Item_Atlas, "water1");
-            _waterSprites[1] = SpriteManager.Instance.GetSprite(ESpriteAtlas.Item_Atlas, "water2");
-            _waterSprites[2] = SpriteManager.Instance.GetSprite(ESpriteAtlas.Item_Atlas, "water3");
+            ItemObjectActivate(Count);
         }
 
-        public override void UpdateItemPlacement(float count)
+        protected override void ItemObjectActivate(float count)
         {
-            Count = count;
-            ItemObjectAllDeactivate();
-
-            if (_itemObjects == null || _itemObjects.Count == 0)
-                return;
-
             int itemCount = Mathf.Min(_itemObjects.Count, Mathf.CeilToInt(count));
 
             for (int i = 0; i < itemCount; i++)
@@ -57,6 +49,11 @@ namespace WeWillSurvive
             {
                 _itemObjects[0].GetComponent<Image>().sprite = _waterSprites[(int)waterSpriteType];
             }
+        }
+
+        protected override string BuildStatusText()
+        {
+            return $"{EnumUtil.GetInspectorName(_itemType)} : {Count}";
         }
 
         private EWaterSpriteType GetWaterSpriteType(float value)

@@ -22,11 +22,15 @@ MonoBehaviour:
     \uC810\uC810 \uB354 \uB610\uB837\uD574\uC84C\uB2E4. \uBB38\uC744 \uC5F4\uC5B4\uBCFC\uAE4C?"
   _conditions: []
   _choiceSchema: 0
+  _isChoiceRequired: 1
   _choices:
   - _choiceIcon: 0
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates: []
       _resultText: "\uC6B0\uB9AC\uB294 \uC6A9\uAE30\uB97C \uB0B4\uC5B4 \uBB38\uC744
         \uC5F4\uC5C8\uB2E4. \uB2E4\uB978 \uD0D0\uC0AC\uB300\uC758 \uAD6C\uC870\uB300\uAC00
         \uC11C \uC788\uC5C8\uB2E4. \uC548\uB3C4\uC640 \uD658\uD76C\uAC00 \uB4A4\uC11E\uC778
@@ -37,15 +41,20 @@ MonoBehaviour:
         _targetId: RescueByOtherSurvivors
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 1
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates: []
       _resultText: "\uC6B0\uB9B0 \uBB38\uC744 \uC5F4\uC9C0 \uC54A\uC558\uB2E4. \uADF8\uB4E4\uC740
         \uB5A0\uB0AC\uACE0, \uB2E4\uC2DC \uC815\uC801\uB9CC\uC774 \uAE30\uC9C0\uB97C
         \uBA54\uC6E0\uB2E4. \uB2E4\uC74C \uB450\uB4DC\uB9BC\uC744 \uAE30\uB2E4\uB9AC\uBA70,
         \uC6B0\uB9AC\uB294 \uBD88\uC548\uD55C \uD558\uB8E8\uD558\uB8E8\uB97C \uBC84\uD168\uC57C
         \uD55C\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

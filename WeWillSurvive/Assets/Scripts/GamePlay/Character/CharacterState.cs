@@ -72,8 +72,6 @@ namespace WeWillSurvive.Character
 
         public void SetState(EState state)
         {
-            if (CurrentState == EState.Dead) return;
-
             CurrentState = state;
         }
 

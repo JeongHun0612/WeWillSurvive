@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: TradePool
   m_EditorClassIdentifier: 
   _category: 2
-  _conditions: []
+  _conditions:
+  - _conditionType: 301
+    _targetId: BlockTradeEvent
+    _parameter: 
+    _value1: 
+    _value2: 
   _mainEventDatas:
   - {fileID: 11400000, guid: 8d9c03a143643774f88b00f6b97d482e, type: 2}
   - {fileID: 11400000, guid: 9153087e7ccd66a41a7da01656e447c0, type: 2}
@@ -27,3 +32,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4306636abd4393342bba5d4eb992889b, type: 2}
   _minDayCounter: 2
   _maxDayCounter: 4
+  _blockBuffEffect: 13

@@ -29,6 +29,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uAE30\uC555 \uBB38\uC81C\uB294 \uC7A5\uAE30\uC801\uC73C\uB85C
         \uCCB4\uB825\uC5D0 \uBD80\uB2F4\uC774 \uB3FC. \uC5D0\uB108\uC9C0 \uBCF4\uCDA9\uC774
         \uD544\uC694\uD574.\"\n\uB9AC\uB4DC\uB294 \uCFE1\uC5D0\uAC8C \uC2DD\uB7C9\uC744
@@ -37,15 +38,15 @@ MonoBehaviour:
       _actions:
       - _actionType: 103
         _targetId: Cook
-        _parameter: Hunger
+        _parameter: 
         _value: 10
       - _actionType: 103
         _targetId: Bell
-        _parameter: Hunger
+        _parameter: 
         _value: -10
       - _actionType: 103
         _targetId: DrK
-        _parameter: Hunger
+        _parameter: 
         _value: -10
       _isAffectedByStats: 0
       _probability: 1
@@ -55,6 +56,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uAE30\uC555 \uC7A5\uCE58\uB294 \uACE0\uC7A5 \uB098\uBA74 \uCE58\uBA85\uC801\uC774\uC57C.
         \uC989\uC2DC \uC810\uAC80\uD574\uC57C \uD574.\"\n\uB9AC\uB4DC\uB294 \uBCA8\uC744
         \uBD88\uB7EC \uC7A5\uCE58 \uC8FC\uBCC0\uC744 \uCCA0\uC800\uD788 \uD655\uC778\uD558\uB3C4\uB85D
@@ -80,6 +82,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC555\uB825 \uBCC0\uD654\uB294 \uB450\uD1B5, \uD638\uD761
         \uACE4\uB780\uC744 \uC720\uBC1C\uD574. \uC758\uB8CC \uC900\uBE44\uB97C \uD574\uC57C
         \uD574.\"\n\uB9AC\uB4DC\uB294 \uB2E5\uD130 K\uC5D0\uAC8C \uC758\uB8CC \uC7A5\uBE44\uB97C
@@ -106,6 +109,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\"\uC544\uC9C1 \uC0C1\uD669\uC774 \uD655\uC815\uB418\uC9C0 \uC54A\uC558\uB2E4.
         \uAE30\uB2E4\uB9AC\uC790.\"\n\uB9AC\uB4DC\uB294 \uCC9C\uCC9C\uD788 \uBAA8\uB2C8\uD130\uB97C
         \uC751\uC2DC\uD558\uBA70 \uD310\uB2E8\uC744 \uBBF8\uB918\uB2E4."
@@ -114,6 +118,7 @@ MonoBehaviour:
       _probability: 0.5
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uAE30\uC555\uC774 \uB2E4\uC2DC \uC548\uC815\uB418\uC5C8\uC9C0\uB9CC,
         \uC7A5\uC2DC\uAC04\uC758 \uBD88\uC548\uC815\uC774 \uB0A8\uAE34 \uD53C\uB85C\uAC00
         \uCEF8\uB2E4.\n\uD300\uC6D0 \uC911 \uBA87 \uBA85\uC740 \uCEE8\uB514\uC158\uC744
