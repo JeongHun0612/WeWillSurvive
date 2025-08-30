@@ -43,8 +43,12 @@ namespace WeWillSurvive.Core
         public void OnStartParming()
         {
             UIManager.Instance.CloseAllUIs();
+            // TODO 파밍 인트로 삽입
+            //await UIManager.Instance.ShowPopup<UI_Intro>().PlayScene();
 
-            // TODO 파밍맵 생성
+            //turn off current main camera
+            //turn on FarmingSet - farming set will do a start sequence as it awakes and then add items as they collect them.
+
         }
 
         public async void OnStartSurvive()

@@ -12,9 +12,14 @@ namespace WeWillSurvive
 
         public void OnClickGameStart()
         {
+            //Testing farming connection
+            //GameManager.Instance.OnStartParming();
+
+            /**/
+
             GameManager.Instance.OnStartSurvive();
 
-            // Debug µ¥ÀÌÅÍ ÇÒ´ç
+            // Debug ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
             var itemDatas = DataManager.LoadDataList<ItemData>();
             foreach (var itemData in itemDatas)
             {
@@ -23,15 +28,16 @@ namespace WeWillSurvive
 
                 ItemManager.AddItem(itemData.Item, itemData.Count);
             }
+            /**/
         }
 
         public void OnClickGameQuit()
         {
 #if UNITY_EDITOR
-            // À¯´ÏÆ¼ ¿¡µðÅÍ¿¡¼­ ½ÇÇà ÁßÀÏ ¶§´Â ÇÃ·¹ÀÌ ¸ðµå¸¦ Á¾·á
+            // ï¿½ï¿½ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½
             UnityEditor.EditorApplication.isPlaying = false;
 #else
-            // ºôµåµÈ °ÔÀÓ¿¡¼­´Â ¾îÇÃ¸®ÄÉÀÌ¼Ç Á¾·á
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
             Application.Quit();
 #endif
         }
