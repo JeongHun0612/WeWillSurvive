@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Item;
-using WeWillSurvive.Log;
 
 namespace WeWillSurvive
 {
@@ -47,28 +46,11 @@ namespace WeWillSurvive
         private string _exploringMessage;
 
         [Tooltip("획득 아이템 타입")]
-        [SerializeField] 
-        private List<ExpeditionRewardItem> _rewardItems = new();
+        [SerializeField]
+        private ExpeditionRewardItem _rewardItem;
 
-        public List<ExpeditionRewardItem> RewardItems => _rewardItems;
         public string ExploringMessage => _exploringMessage;
-
-        public List<RewardItemData> GetRewardItemDatas()
-        {
-            var results = new List<RewardItemData>();
-
-            foreach (var rewardItem in _rewardItems)
-            {
-                int amount = rewardItem.GetRandomAmount();
-
-                if (amount <= 0)
-                    continue;
-
-                results.Add(new RewardItemData(rewardItem.RewardItem, amount));
-            }
-
-            return results;
-        }
+        public ExpeditionRewardItem RewardItem => _rewardItem;
     }
 
     [System.Serializable]
@@ -76,7 +58,7 @@ namespace WeWillSurvive
     {
         [Tooltip("획득 아이템 타입")]
         [SerializeField]
-        private EItem _rewardItem;
+        private EItem _item;
 
         [Tooltip("획득 아이템 최소 개수")]
         [SerializeField]
@@ -86,34 +68,13 @@ namespace WeWillSurvive
         [SerializeField]
         private int _maxAmount;
 
-        public EItem RewardItem => _rewardItem;
+        public EItem Item => _item;
         public int MinAmount => _minAmount;
         public int MaxAmount => _maxAmount;
 
         public int GetRandomAmount()
         {
-            return Random.Range(_minAmount, _maxAmount + 1);
-        }
-    }
-
-    [System.Serializable]
-    public class ExpeditionRewardItemResult
-    {
-        [Tooltip("획득 아이템 타입")]
-        [SerializeField]
-        private EItem _rewardItem;
-
-        [Tooltip("획득 아이템 개수")]
-        [SerializeField]
-        private int _amount;
-
-        public EItem RewardItem => _rewardItem;
-        public int Amount => _amount;
-
-        public ExpeditionRewardItemResult(EItem itemType, int amount)
-        {
-            _rewardItem = itemType;
-            _amount = amount;
+            return Mathf.Max(1, Random.Range(_minAmount, _maxAmount + 1));
         }
     }
 }

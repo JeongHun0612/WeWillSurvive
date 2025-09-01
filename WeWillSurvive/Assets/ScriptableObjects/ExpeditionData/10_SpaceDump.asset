@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c892834911cfea46ab15527a7a17674, type: 3}
-  m_Name: SpaceDump_01
+  m_Name: 10_SpaceDump
   m_EditorClassIdentifier: 
   _explorationLocation: 9
   _rewardDatas:
@@ -20,20 +20,23 @@ MonoBehaviour:
       \uBCF4\uC774\uC9C0\uB9CC, \uC8FC\uC758\uB97C \uAE30\uC6B8\uC5EC \uC798 \uB4A4\uC838\uBCF8\uB2E4\uBA74
       \uB73B\uBC16\uC758 \uC720\uC6A9\uD55C \uBB3C\uAC74\uB4E4\uC744 \uBC1C\uACAC\uD560
       \uC218 \uC788\uC744\uC9C0\uB3C4 \uBAA8\uB978\uB2E4."
-    _rewardItems: []
+    _rewardItem:
+      _item: 500
+      _minAmount: 0
+      _maxAmount: 0
   - _exploringMessage: "\uCCA0\uC81C \uAD6C\uC870\uBB3C \uC544\uB798\uC5D0\uC11C
       \uBB54\uAC00 \uBC18\uC9DD\uC774\uB294 \uAC78 \uBC1C\uACAC\uD588\uB2E4. \uAC00\uAE4C\uC774
       \uB2E4\uAC00\uAC00 \uBCF4\uB2C8, \uC624\uB798\uC804\uC5D0 \uB204\uAD70\uAC00
       \uB450\uACE0 \uAC04 \uB3C4\uB07C\uC600\uB2E4. \uC0C1\uD0DC\uB294 \uB098\uC058\uC9C0
       \uC54A\uB2E4. \uB204\uAD70\uAC00\uC758 \uC0DD\uC874 \uD754\uC801\uC77C\uAE4C?"
-    _rewardItems:
-    - _rewardItem: 11
-      _minAmount: 1
-      _maxAmount: 1
+    _rewardItem:
+      _item: 11
+      _minAmount: 0
+      _maxAmount: 0
   - _exploringMessage: "\uC0AC\uC6A9 \uD754\uC801 \uC5C6\uB294 \uBCF4\uAE09\uC0C1\uC790\uC5D0\uC11C
       \uC6B0\uC8FC \uC2DD\uB7C9\uC744 \uBC1C\uACAC\uD588\uB2E4. \uC2E0\uC120\uB3C4\uAC00
       \uC720\uC9C0\uB418\uACE0 \uC788\uC5C8\uB2E4."
-    _rewardItems:
-    - _rewardItem: 0
+    _rewardItem:
+      _item: 0
       _minAmount: 1
       _maxAmount: 2

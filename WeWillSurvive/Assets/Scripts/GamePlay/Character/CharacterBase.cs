@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Core;
 using WeWillSurvive.Expedition;
@@ -42,7 +41,7 @@ namespace WeWillSurvive.Character
         // 계산된 캐릭터 이벤트 성공 확률 반환
         public float EventSuccessRate
         {
-            get 
+            get
             {
                 float calculatedRate = EventBaseRate + EventStateModifier + EventSelectionModifier;
                 return Mathf.Clamp(calculatedRate, 0f, 100f);
@@ -178,30 +177,23 @@ namespace WeWillSurvive.Character
 
             foreach (var rewardData in expeditionData.RewardDatas)
             {
-                bool isMessageSend = true;
-                foreach (var rewardItem in rewardData.RewardItems)
+                var rewardItem = rewardData.RewardItem;
+                EItem item = rewardItem.Item;
+
+                // 물과 식량을 제외한 아이템은 이미 가지고 있을 시 파밍 X
+                if (item != EItem.Food && item != EItem.Water && ItemManager.HasItem(item))
+                    continue;
+
+                if (item != EItem.None)
                 {
-                    EItem item = rewardItem.RewardItem;
-
-                    // 물과 식량을 제외한 아이템은 이미 가지고 있을 시 파밍 X
-                    if (item != EItem.Food && item != EItem.Water && ItemManager.HasItem(item))
-                    {
-                        isMessageSend = false;
-                        continue;
-                    }
-
-                    int amount = rewardItem.GetRandomAmount();
-
                     // 탐사 보상 아이템 추가
+                    int amount = rewardItem.GetRandomAmount();
                     ItemManager.AddItem(item, amount);
                     LogManager.AddRewardItemData(new RewardItemData(item, amount));
                 }
 
                 // 탐사 결과 로그
-                if (isMessageSend)
-                {
-                    LogManager.AddExpeditionResultLog(rewardData.ExploringMessage);
-                }
+                LogManager.AddExpeditionResultLog(rewardData.ExploringMessage);
             }
         }
     }
