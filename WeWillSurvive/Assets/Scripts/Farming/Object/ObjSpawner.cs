@@ -22,8 +22,7 @@ namespace WeWillSurvive
 
         public float collisionRadius = 0.5f;
         public LayerMask obstacleLayer;
-
-        private float fix = 0.009259259f;
+        public Transform mapParent;
 
         void Start()
         {
@@ -37,8 +36,8 @@ namespace WeWillSurvive
         void SpawnWalls()
         {
             int wallIndex = Random.Range(0, wallPrefabs.Length);
-            GameObject wall = Instantiate(wallPrefabs[wallIndex]);
-            wall.transform.position = GetRandomPosition();
+            GameObject wall = Instantiate(wallPrefabs[wallIndex], Vector3.zero, Quaternion.identity, mapParent);
+            wall.transform.localPosition = Vector3.zero;
         }
 
         void SpawnCrew()
