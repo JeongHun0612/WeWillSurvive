@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8302378451041653203}
   - component: {fileID: 6376201362616138287}
   - component: {fileID: 2281644077145076124}
+  - component: {fileID: 2559842168226448616}
   m_Layer: 0
   m_Name: TestBulletParticle 1
   m_TagString: Untagged
@@ -4891,3 +4892,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2559842168226448616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2759696077678493668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd6a41a1abcd6342949496df42ea770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
