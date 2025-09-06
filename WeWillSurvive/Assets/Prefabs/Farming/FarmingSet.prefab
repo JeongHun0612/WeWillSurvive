@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2130369055980612342}
   - component: {fileID: 1321306969711624917}
   - component: {fileID: 2403665397150917878}
+  - component: {fileID: 7519817407885986178}
   m_Layer: 6
-  m_Name: Exit_placeholder
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,6 +77,52 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!61 &7519817407885986178
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59273247962328530}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 115, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 350, y: 900}
+  m_EdgeRadius: 0
 --- !u!1 &142433627471750330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,7 +1283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.48266995, g: 0.6679245, b: 0.6201169, a: 1}
+  m_Color: {r: 0.3954076, g: 0.5471698, b: 0.508422, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -1984,9 +2031,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefabs:
-  - {fileID: 4300217054570963516, guid: cab9c438c43fe2047991f8bce9a061d4, type: 3}
-  - {fileID: 4005106597513942699, guid: c71125730b090ba4e981eac7386e5e06, type: 3}
-  - {fileID: 9011606714110564415, guid: 4689326e6c61ea94d86e8f72a8d8c36c, type: 3}
+  - {fileID: 968405299973026252, guid: 5ee3a089291875643bbf86b022507a52, type: 3}
+  - {fileID: 2025939577938048918, guid: 94fc0181021418d49bea8987d72b6a9c, type: 3}
+  - {fileID: 680323122004440040, guid: 4416cabfe3ceb70459fd2b5b7d27d6d3, type: 3}
+  - {fileID: 2674094088387966548, guid: ca2b0d187ab270a4b8c58b916d120d1b, type: 3}
+  - {fileID: 8541779933537662036, guid: 99ad013028379e54a8d9bde04053ccc3, type: 3}
   crewPrefabs:
   - {fileID: 6122654382095947808, guid: 65c551c5f1bbf334bbc7623b779260ee, type: 3}
   - {fileID: 8657272154887076219, guid: 16edcab067b2c67499a9186fe41a94c4, type: 3}
