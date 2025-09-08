@@ -180,34 +180,40 @@ namespace WeWillSurvive
         private void ExecuteWorsen(int targetIndex)
         {
             int currentIndex = GetCurrentLevelIndex();
-            if (currentIndex == -1 || targetIndex <= currentIndex)
+            if (currentIndex == -1)
                 return;
 
             // Level 갱신
             UpdateLevel(OrderedLevels[targetIndex]);
 
-            // State에 따른 EventStateModifier 갱신
-            var modifier = GetEventModifier(_level);
-            modifier = Mathf.Min(modifier, _owner.EventStateModifier);
-            _owner.EventStateModifier = modifier;
+            if (targetIndex > currentIndex)
+            {
+                // State에 따른 EventStateModifier 갱신
+                var modifier = GetEventModifier(_level);
+                modifier = Mathf.Min(modifier, _owner.EventStateModifier);
+                _owner.EventStateModifier = modifier;
+            }
         }
 
         private void ExecuteRecovery(int targetIndex)
         {
             int currentIndex = GetCurrentLevelIndex();
-            if (currentIndex == -1 || targetIndex >= currentIndex)
+            if (currentIndex == -1)
                 return;
-
-            // 상태 회복 Log 추가
-            LogStateResolved(_level);
 
             // Level 갱신
             UpdateLevel(OrderedLevels[targetIndex]);
 
-            // State에 따른 EventStateModifier 갱신
-            var modifier = GetEventModifier(_level);
-            modifier = Mathf.Max(modifier, _owner.EventStateModifier);
-            _owner.EventStateModifier = modifier;
+            if (targetIndex < currentIndex)
+            {
+                // 상태 회복 Log 추가
+                LogStateResolved(_level);
+
+                // State에 따른 EventStateModifier 갱신
+                var modifier = GetEventModifier(_level);
+                modifier = Mathf.Max(modifier, _owner.EventStateModifier);
+                _owner.EventStateModifier = modifier;
+            }
         }
 
         private float GetEventModifier(TLevel level)
