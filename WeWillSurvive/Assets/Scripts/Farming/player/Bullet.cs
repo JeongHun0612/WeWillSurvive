@@ -5,9 +5,8 @@ namespace WeWillSurvive
     public class Bullet : MonoBehaviour
     {
         public float bulletSpeed = 0.5f;
-        public float shrinkDelay = 0.5f;
-        private float shrinkTimer = 0f;
-        public float shrinkSpeed = 0.5f;
+        public float liveTime = 5f;
+        private float liveTimer = 0f;
         public float maxSize = 1f;
         public float minSize = 0.1f;
         public float maxDamage = 10f;
@@ -29,14 +28,10 @@ namespace WeWillSurvive
         {
             if (!isCharging)
             {
-                shrinkTimer += Time.deltaTime;
-                if (shrinkTimer >= shrinkDelay)
+                liveTimer += Time.deltaTime;
+                if (liveTimer >= liveTime)
                 {
-                    Vector3 newScale = transform.localScale - originalScale * shrinkSpeed * Time.deltaTime;
-                    newScale = Vector3.Max(newScale, originalScale * minSize);
-                    transform.localScale = newScale;
-
-                    if (newScale.x <= originalScale.x * minSize) Die();
+                    Die();
                 }
             }
         }

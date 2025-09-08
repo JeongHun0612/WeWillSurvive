@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 100
-  shrinkDelay: 1
-  shrinkSpeed: 0.08
+  shrinkDelay: 0
+  shrinkSpeed: 0
   maxSize: 1
   minSize: 0.2
   maxDamage: 10
