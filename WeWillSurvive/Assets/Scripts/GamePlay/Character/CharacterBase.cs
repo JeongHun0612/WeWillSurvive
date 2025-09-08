@@ -103,10 +103,11 @@ namespace WeWillSurvive.Character
                 {
                     OnExpeditionComplete();
                 }
-                return;
             }
-
-            Status.OnNewDay();
+            else
+            {
+                Status.OnNewDay();
+            }
         }
 
         public void SetMorale(EMorale morale)
@@ -189,7 +190,7 @@ namespace WeWillSurvive.Character
                     // 탐사 보상 아이템 추가
                     int amount = rewardItem.GetRandomAmount();
                     ItemManager.AddItem(item, amount);
-                    LogManager.AddRewardItemData(new RewardItemData(item, amount));
+                    LogManager.AddResultItemData(new ResultItemData(item, amount));
                 }
 
                 // 탐사 결과 로그

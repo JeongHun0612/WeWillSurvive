@@ -147,6 +147,7 @@ namespace WeWillSurvive
 
         public void OnClickSetting()
         {
+            UIManager.Instance.CloseAllPopups();
             UIManager.Instance.ShowPopup<UI_InGameSetting>();
         }
 

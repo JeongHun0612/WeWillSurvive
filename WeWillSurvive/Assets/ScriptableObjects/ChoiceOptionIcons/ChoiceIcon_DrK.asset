@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ChoiceIcon_DrK
   m_EditorClassIdentifier: 
   ChoiceIcon: 103
+  ChoiceType: 1
   NormalSprite: {fileID: 21300000, guid: 54222a96d4a4a024ab411fc42440d5d9, type: 3}
   DisabledSprite: {fileID: 21300000, guid: 4ae0bc090ce85a34aaa60778f494e902, type: 3}

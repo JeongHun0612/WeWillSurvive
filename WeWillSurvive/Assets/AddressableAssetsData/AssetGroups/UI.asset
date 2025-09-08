@@ -15,11 +15,6 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 66fe4bcea3ce838468c230e3b9d48fe7
   m_SerializeEntries:
-  - m_GUID: 1daadf42996e4944ba1ed1596b413564
-    m_Address: Assets/Prefabs/UI/Popup/UI_Projecter.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3058f23e8b4cbda4c82938f0ea39894b
     m_Address: Assets/Prefabs/UI/Popup/UI_StatePanel.prefab
     m_ReadOnly: 0
@@ -37,6 +32,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5414e63584d4bfa47b32793ceb9f663a
     m_Address: Assets/Prefabs/UI/HUD/UI_RoomHUD.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57b706c9fe9e8014ca67659bd259e2f7
+    m_Address: Assets/Prefabs/UI/Popup/UI_Projecter.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

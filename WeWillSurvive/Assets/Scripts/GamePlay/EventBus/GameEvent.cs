@@ -1,4 +1,6 @@
 
+using WeWillSurvive.Item;
+
 namespace WeWillSurvive
 {
     public struct EndDayEvent
@@ -19,5 +21,24 @@ namespace WeWillSurvive
     public struct MoveRoomCompleteEvent
     {
         public ERoom CurrentRoom;
+    }
+
+    public struct ItemSelectedEvent
+    {
+        public EItem Item;
+        public bool IsSelected;
+    }
+
+    public struct ChoiceOptionSelectedEvent
+    {
+        public EItem Item;
+        public bool IsSelected;
+        public float RequiredAmount;
+    }
+    public struct RationItemSelectedEvent
+    {
+        public EItem Item;
+        public bool IsSelected;
+        public float RemainCount;
     }
 }

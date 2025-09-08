@@ -22,19 +22,30 @@ namespace WeWillSurvive
 
         public event Action<RationItem> ItemSelectedEvent;
 
-        public bool IsSelected => _isSelected;
+        public EItem Item => _item;
         public float UsageAmount => _usageAmount;
+        public bool IsSelected => _isSelected;
 
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
 
         public void Initialize()
         {
             _itemImage = gameObject.GetComponent<Image>();
-
             _itemButton = gameObject.GetComponent<Button>();
-            _itemButton.onClick.AddListener(OnClickRationItem);
 
             Refresh();
+        }
+
+        public void RegisterEvent(Action<RationItem> callback)
+        {
+            if (_itemButton == null)
+            {
+                Debug.LogWarning($"[{name}] Button Component is null");
+                return;
+            }
+
+            _itemButton.onClick.RemoveAllListeners();
+            _itemButton.onClick.AddListener(() => callback?.Invoke(this));
         }
 
         public void Refresh()
@@ -47,56 +58,24 @@ namespace WeWillSurvive
         {
             if (_isSelected)
             {
-                ItemManager.UsedItem(_item, 0f, target);
+                ItemManager.UsedItem(_item, _usageAmount, target);
                 _isSelected = false;
             }
         }
 
-        public void OnSelected(bool isSelected, bool affectInventory = true)
+        public void OnSelected(bool isSelected)
         {
             if (_isSelected == isSelected)
                 return;
 
-            if (affectInventory)
-            {
-                // 사용량 증감
-                float itemCount = ItemManager.GetItemCount(_item);
-                float updateItemCount = isSelected
-                    ? itemCount - _usageAmount
-                    : itemCount + _usageAmount;
+            UpdateSprite(isSelected);
 
-                ItemManager.UpdateItemCount(_item, updateItemCount);
-            }
-
-            // Sprite 갱신
-            _itemImage.sprite = isSelected ? _selectedSprite : _normalSprite;
-
-            // 상태 갱신
             _isSelected = isSelected;
         }
 
-        public void SetItemState(bool isSelected)
+        public void UpdateSprite(bool isSelected)
         {
-            if (_isSelected == isSelected)
-                return;
-
-            float updateItemCount = ItemManager.GetItemCount(_item)
-                        + (isSelected ? -_usageAmount : _usageAmount);
-
-            ItemManager.UpdateItemCount(_item, updateItemCount);
-        }
-
-        public void OnClickRationItem()
-        {
-            var itemCount = ItemManager.GetItemCount(_item);
-            if (!_isSelected && itemCount < _usageAmount)
-            {
-                Debug.LogWarning($"아이템 수량이 부족합니다. {itemCount}");
-                return;
-            }
-
-            ItemSelectedEvent?.Invoke(this);
-            Debug.Log($"[{_item}] Count: {ItemManager.GetItemCount(_item)}");
+            _itemImage.sprite = isSelected ? _selectedSprite : _normalSprite;
         }
     }
 }
