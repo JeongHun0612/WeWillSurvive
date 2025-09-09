@@ -134,11 +134,15 @@ namespace WeWillSurvive.Character
             Status.ResetStatus();
             State.SetState(EState.Dead);
 
-            // Dead Log 출력
-            string stateMessage = Data.StateMessageData.GetStateActiveMessage(EState.Dead);
-
             LogManager.ClearCharacterStatusLog(Data.Type);
-            LogManager.AddCharacterStatusLog(Data.Type, stateMessage);
+
+            // 파밍 단계에서 사망은 로그 출력 X
+            if (GameManager.Instance.Day > 1)
+            {
+                // Dead Log 출력
+                string stateMessage = Data.StateMessageData.GetStateActiveMessage(EState.Dead);
+                LogManager.AddCharacterStatusLog(Data.Type, stateMessage);
+            }
         }
 
         public void OnExploring()
