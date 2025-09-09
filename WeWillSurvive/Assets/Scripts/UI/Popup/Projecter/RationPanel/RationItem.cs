@@ -20,8 +20,6 @@ namespace WeWillSurvive
 
         private bool _isSelected;
 
-        public event Action<RationItem> ItemSelectedEvent;
-
         public EItem Item => _item;
         public float UsageAmount => _usageAmount;
         public bool IsSelected => _isSelected;

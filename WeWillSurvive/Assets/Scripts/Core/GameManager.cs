@@ -61,6 +61,8 @@ namespace WeWillSurvive.Core
 
             Day = 0;
 
+            LogManager.ClearAllLogs();
+
             CharacterManager.SettingCharacter();
             EndingManager.Instance.ResetState();
             BuffManager.Instance.ResetState();

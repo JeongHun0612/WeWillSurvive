@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
+using WeWillSurvive.Ending;
 using WeWillSurvive.UI;
 
 namespace WeWillSurvive
@@ -196,6 +197,12 @@ namespace WeWillSurvive
 
         public void OnClickNextDay()
         {
+            if (EndingManager.Instance.IsEnding)
+            {
+                UIManager.Instance.ShowOverlay<UI_Pade>().StartEndingPade(() => GameManager.Instance.OnMoveTitle());
+                return;
+            }
+
             GameManager.Instance.OnEndDay();
         }
 

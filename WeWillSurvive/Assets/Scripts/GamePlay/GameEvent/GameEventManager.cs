@@ -68,6 +68,10 @@ namespace WeWillSurvive.GameEvent
         {
             // 오늘 발생한 이벤트에 대한 결과 처리
             _dailyMainEvent?.ApplyEventResult();
+
+            if (EndingManager.Instance.IsEnding)
+                return;
+
             _dailyCharacterEvent?.ApplyEventResult();
         }
 

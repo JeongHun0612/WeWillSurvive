@@ -16,6 +16,8 @@ namespace WeWillSurvive.UI
         public void StartPadeSequence(Action callback = null)
         {
             _padeImage.color = Color.clear;
+
+            _dayText.gameObject.SetActive(true);
             _dayText.alpha = 0f;
 
             Sequence fadeSequence = DOTween.Sequence();
@@ -31,6 +33,21 @@ namespace WeWillSurvive.UI
                 .AppendInterval(2f)
                 .Append(_padeImage.DOFade(0f, 1f).SetEase(Ease.OutCubic))
                 .Join(_dayText.DOFade(0f, 1f).SetEase(Ease.OutCubic))
+                .OnComplete(() => UIManager.Instance.CloseCurrentOverlay());
+        }
+
+        public void StartEndingPade(Action callback)
+        {
+            _padeImage.color = Color.clear;
+            _dayText.gameObject.SetActive(false);
+
+            Sequence fadeSequence = DOTween.Sequence();
+
+            fadeSequence
+                .Append(_padeImage.DOFade(1f, 1f).SetEase(Ease.InCubic))
+                .AppendCallback(() => callback?.Invoke())
+                .AppendInterval(1f)
+                .Append(_padeImage.DOFade(0f, 1f).SetEase(Ease.OutCubic))
                 .OnComplete(() => UIManager.Instance.CloseCurrentOverlay());
         }
     }

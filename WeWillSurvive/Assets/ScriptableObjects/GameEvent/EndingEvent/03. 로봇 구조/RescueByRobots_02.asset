@@ -23,6 +23,7 @@ MonoBehaviour:
     \uBAA8\uB978\uB2E4."
   _conditions: []
   _choiceSchema: 1
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 201
     _requiredAmount: 1
@@ -30,6 +31,9 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates:
+      - "{}\uC77C\uCC28\uC5D0 \uB85C\uBD07\uC758 \uC5F0\uB8CC\uB97C \uC6B0\uC8FC
+        \uD2B9\uBCC4\uC2DD\uC73C\uB85C \uBCF4\uAC15\uD574 \uAC00\uB3D9\uC5D0 \uC131\uACF5\uD588\uB2E4."
       _resultText: "\uC6B0\uC8FC \uD2B9\uBCC4\uC2DD\uC744 \uC7A5\uCC29\uD558\uC790
         \uB85C\uBD07\uC758 \uB208\uC774 \uBC1D\uAC8C \uCF1C\uC84C\uB2E4. \uAE30\uACC4\uC74C\uACFC
         \uD568\uAED8 \uC2A4\uC2A4\uB85C\uB97C \u2018\uC2A4\uD0C0\uB9E5\u2019\uC774\uB77C
@@ -58,6 +62,7 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
+      _resultTemplates: []
       _resultText: "\uC6B0\uB9AC\uB294 \uC6B0\uC8FC \uD2B9\uBCC4\uC2DD\uC774 \uC5C6\uC5C8\uB2E4.
         \uB85C\uBD07\uC740 \uC5EC\uC804\uD788 \uC6C0\uC9C1\uC774\uC9C0 \uC54A\uC558\uACE0,
         \uADF8 \uC874\uC7AC\uB294 \uC7A0\uC2DC\uC758 \uAE30\uB300\uC5D0 \uBD88\uACFC\uD588\uB2E4.
