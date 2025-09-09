@@ -22,21 +22,21 @@ MonoBehaviour:
       \uC788\uB2E4. \uC704\uD5D8\uC744 \uAC10\uC218\uD558\uACE0 \uB3C4\uC804\uD560
       \uAC00\uCE58\uAC00 \uCDA9\uBD84\uD55C \uACF3\uC774\uB2E4."
     _rewardItem:
-      _item: 500
+      _item: 0
       _minAmount: 0
       _maxAmount: 0
   - _exploringMessage: "\uC9C4\uACF5 \uBCF4\uAD00\uB41C \uC720\uB9AC \uCF00\uC774\uC2A4
       \uC18D\uC5D0\uC11C \uC644\uBCBD\uD55C \uC0C1\uD0DC\uC758 \uACE0\uAE09 \uC6B0\uC8FC\uBCF5\uC744
       \uAEBC\uB0C8\uB2E4."
     _rewardItem:
-      _item: 8
+      _item: 18
       _minAmount: 0
       _maxAmount: 0
   - _exploringMessage: "\uBC14\uB2E5\uC5D0 \uD769\uC5B4\uC9C4 \uBB3C\uBCD1\uB4E4
       \uC911 \uBA40\uCA61\uD55C \uAC83\uB4E4\uC744 \uACE8\uB77C\uB0C8\uB2E4. \uB0B4\uBD80\uC758
       \uBB3C \uC0C1\uD0DC\uB294 \uAE68\uB057\uD588\uB2E4."
     _rewardItem:
-      _item: 2
+      _item: 12
       _minAmount: 1
       _maxAmount: 3
   - _exploringMessage: "\uC2DC\uD5D8\uC7A5 \uBCF5\uB3C4\uB97C \uAC77\uB358 \uC911,
@@ -46,13 +46,13 @@ MonoBehaviour:
       \uAC08\uB824 \uC788\uC5C8\uB2E4. \uC950\uACE0 \uB2E4\uB2C8\uBA74 \uB204\uAC00
       \uB364\uBE44\uAE34 \uC5B4\uB835\uACA0\uB2E4."
     _rewardItem:
-      _item: 12
+      _item: 22
       _minAmount: 0
       _maxAmount: 0
   - _exploringMessage: "\uBC18\uCBE4 \uC5F4\uB9B0 \uBCF4\uAE09\uD568 \uC548\uC5D0\uC11C
       \uC870\uC6A9\uD788 \uAE30\uB2E4\uB9AC\uB358 \uC6B0\uC8FC \uC2DD\uB7C9\uC744
       \uAEBC\uB0C8\uB2E4. \uC0C1\uD0DC\uB294 \uB9E4\uC6B0 \uC591\uD638\uD588\uB2E4."
     _rewardItem:
-      _item: 0
+      _item: 10
       _minAmount: 1
       _maxAmount: 2
