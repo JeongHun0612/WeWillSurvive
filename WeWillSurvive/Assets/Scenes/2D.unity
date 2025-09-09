@@ -1205,7 +1205,7 @@ GameObject:
   - component: {fileID: 1763924378}
   - component: {fileID: 1763924379}
   m_Layer: 0
-  m_Name: ParmingReportManager
+  m_Name: FarmingReportManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1238,20 +1238,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfd9d26281049348b18fc4cfff34672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _farmingReportList:
-  - {fileID: 11400000, guid: 986f48854aa8d5b40888e8d287295628, type: 2}
-  - {fileID: 11400000, guid: 07397a5770b21d34d8a55793900badc4, type: 2}
-  - {fileID: 11400000, guid: 4b347bfc4b5d6554aa7154bfcc63d100, type: 2}
-  - {fileID: 11400000, guid: 44ae08bcb84ee41419f8d8ab2f635e82, type: 2}
-  - {fileID: 11400000, guid: 9e62ae5bce0427b48a3ebe07782914cb, type: 2}
-  - {fileID: 11400000, guid: 4494e00dd4db1bb478132e7f1e4d5003, type: 2}
-  - {fileID: 11400000, guid: c2de3242fc8174b4986f6fdcc8d03dc3, type: 2}
-  - {fileID: 11400000, guid: 46fa84a4debc8164a98379835434c3d0, type: 2}
-  - {fileID: 11400000, guid: 87ac1f40f2421a54b9dc93fecb4a493d, type: 2}
-  - {fileID: 11400000, guid: abcba8d3d88642f4e874eaa75f036345, type: 2}
-  - {fileID: 11400000, guid: 99342b66315817e499b94429140a2cd3, type: 2}
-  - {fileID: 11400000, guid: c425556c5b544d546a96ba08f6a71295, type: 2}
-  - {fileID: 11400000, guid: 37892deb7494027448235ec4a438e529, type: 2}
+  _farmingReportDatas:
+  - {fileID: 11400000, guid: 2b35032c8000dc140966f09e24625070, type: 2}
+  - {fileID: 11400000, guid: 0260b03b182f7344d9ed95d289d2f16c, type: 2}
+  - {fileID: 11400000, guid: 0f508843b395e3344aceecca5e596f35, type: 2}
+  - {fileID: 11400000, guid: 177f0adfd3f63714bab6a542d4fda24a, type: 2}
 --- !u!1 &1822493764
 GameObject:
   m_ObjectHideFlags: 0
