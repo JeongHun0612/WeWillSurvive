@@ -29,7 +29,17 @@ namespace WeWillSurvive.FarmingReport
         {
             base.Awake();
 
-            InitializeFarmingReports();
+            if (_farmingReportDicts == null)
+                _farmingReportDicts = new();
+
+            _farmingReportDicts.Clear();
+            foreach (var data in _farmingReportDatas)
+            {
+                if (!_farmingReportDicts.ContainsKey(data.Type))
+                {
+                    _farmingReportDicts.Add(data.Type, data);
+                }
+            }
         }
 
         public void UpdateFarmingReport()
@@ -49,21 +59,6 @@ namespace WeWillSurvive.FarmingReport
             // 다른 도구에 따른 결과 텍스트
             int supportsCount = (int)ItemManager.GetSupportItemsCount();
             LogReportByValue(EParmingReportType.SupportsSupply, supportsCount);
-        }
-
-        private void InitializeFarmingReports()
-        {
-            if (_farmingReportDicts == null)
-                _farmingReportDicts = new();
-
-            _farmingReportDicts.Clear();
-            foreach (var data in _farmingReportDatas)
-            {
-                if (!_farmingReportDicts.ContainsKey(data.Type))
-                {
-                    _farmingReportDicts.Add(data.Type, data);
-                }
-            }
         }
 
         private void LogReportByValue(EParmingReportType type, int value)
