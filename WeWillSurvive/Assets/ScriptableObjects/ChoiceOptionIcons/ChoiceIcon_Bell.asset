@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ChoiceIcon_Bell
   m_EditorClassIdentifier: 
   ChoiceIcon: 102
+  ChoiceType: 1
   NormalSprite: {fileID: 21300000, guid: eee80fb380e7dfa46976429db7e4ed79, type: 3}
   DisabledSprite: {fileID: 21300000, guid: cc738b1cc8339474f8197b4a4990a0ef, type: 3}

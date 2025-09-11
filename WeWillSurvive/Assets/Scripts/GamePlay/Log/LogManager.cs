@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace WeWillSurvive.Log
             [ECharacter.DrK] = new(),
         };
 
-        private List<RewardItemData> _rewardItemDatas = new();
+        private List<ResultItemData> _ResultItemDatas = new();
 
         public async UniTask InitializeAsync()
         {
@@ -44,12 +45,12 @@ namespace WeWillSurvive.Log
             }
         }
 
-        public void AddRewardItemData(RewardItemData rewardItemData)
+        public void AddResultItemData(ResultItemData ResultItemData)
         {
-            if (_rewardItemDatas == null)
-                _rewardItemDatas = new();
+            if (_ResultItemDatas == null)
+                _ResultItemDatas = new();
 
-            _rewardItemDatas.Add(rewardItemData);
+            _ResultItemDatas.Add(ResultItemData);
         }
 
         public void ClearCharacterStatusLog(ECharacter character)
@@ -99,7 +100,7 @@ namespace WeWillSurvive.Log
                 statusLog?.Clear();
             }
 
-            _rewardItemDatas?.Clear();
+            _ResultItemDatas?.Clear();
         }
 
         private void AddFormattedLog(List<string> logList, string message)
@@ -107,10 +108,10 @@ namespace WeWillSurvive.Log
             string logText = message;
 
             // 보상 아이템 데이터가 있으면 로그에 추가
-            if (_rewardItemDatas != null && _rewardItemDatas.Count > 0)
+            if (_ResultItemDatas != null && _ResultItemDatas.Count > 0)
             {
-                logText += "\n" + GetRewardItemLogText(_rewardItemDatas);
-                _rewardItemDatas.Clear();
+                logText += "\n" + GetResultItemLogText(_ResultItemDatas);
+                _ResultItemDatas.Clear();
             }
 
             AddLogToList(logList, logText);
@@ -124,17 +125,19 @@ namespace WeWillSurvive.Log
             target.Add(message);
         }
 
-        private string GetRewardItemLogText(List<RewardItemData> rewardItemDatas)
+        private string GetResultItemLogText(List<ResultItemData> ResultItemDatas)
         {
-            if (rewardItemDatas == null || !rewardItemDatas.Any())
+            if (ResultItemDatas == null || !ResultItemDatas.Any())
                 return string.Empty;
 
-            var itemLogStrings = rewardItemDatas
+            var inv = CultureInfo.InvariantCulture;
+
+            var itemLogStrings = ResultItemDatas
                 .Where(entry => entry.Amount != 0) // Amount가 0이 아닌 항목만 필터링
                 .Select(entry =>
                 {
                     // ToString("+#;-#")는 양수일 때 '+', 음수일 때 '-'를 자동으로 붙여줍니다.
-                    string formattedAmount = entry.Amount.ToString("+#;-#");
+                    string formattedAmount = entry.Amount.ToString("+0.##;-0.##", inv);
                     return $"<sprite name={entry.ItemType}> {formattedAmount}";
                 });
 

@@ -33,11 +33,11 @@ namespace WeWillSurvive.Ending
             return new DailyMainEvent(selectedEvent);
         }
 
-        public bool AdvanceEndingProgress(EEndingType endingType)
+        public bool AdvanceEndingProgress(EEndingType endingType, string logText)
         {
             if (_eventProgresses.TryGetValue(endingType, out EndingEventProgress progress))
             {
-                progress.CompleteEvent();
+                progress.CompleteEvent(logText);
                 return true;
             }
             else
@@ -54,23 +54,25 @@ namespace WeWillSurvive.Ending
     {
         public int CurrentEventIndex { get; private set; }
 
+        private string[] _resultLogs;
+
         public override void ResetState()
         {
             base.ResetState();
 
             CurrentEventIndex = 0;
+            _resultLogs = new string[Events.Count];
         }
 
-        public void CompleteEvent()
+        public void CompleteEvent(string logText)
         {
+            _resultLogs[CurrentEventIndex] = logText;
+
+            if (CurrentEventIndex >= Events.Count - 1)
+                return;
+
             CurrentEventIndex = Mathf.Min(CurrentEventIndex + 1, Events.Count - 1);
-
             Debug.Log($"엔딩 [{Category}]의 진행도가 [{CurrentEventIndex + 1}/{Events.Count}]로 업데이트되었습니다.");
-
-            if (CurrentEventIndex == Events.Count - 1)
-            {
-                // TODO Ending 완료
-            }
         }
 
         public MainEventData GetDailyEvent()
@@ -80,6 +82,14 @@ namespace WeWillSurvive.Ending
 
             // 현재 엔딩 index에 맞는 이벤트를 반환
             return Events[CurrentEventIndex];
+        }
+
+        public string GetResultLogText()
+        {
+            if (_resultLogs == null || _resultLogs.Length == 0)
+                return string.Empty;
+
+            return string.Join("\n\n", _resultLogs);
         }
     }
 }

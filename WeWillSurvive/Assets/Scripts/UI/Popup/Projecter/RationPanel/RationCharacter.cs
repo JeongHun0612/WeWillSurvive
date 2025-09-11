@@ -46,16 +46,11 @@ namespace WeWillSurvive
             _owner = CharacterManager.GetCharacter(_characterType);
         }
 
-        public void RegisterEvent(RationPanel rationPanel)
+        public void RationItemsRegisterEvent(RationPanel rationPanel)
         {
-            _foodItem.ItemSelectedEvent -= rationPanel.OnClickFoodItem;
-            _foodItem.ItemSelectedEvent += rationPanel.OnClickFoodItem;
-
-            _waterItem.ItemSelectedEvent -= rationPanel.OnClickWaterItem;
-            _waterItem.ItemSelectedEvent += rationPanel.OnClickWaterItem;
-
-            _medicKitItem.ItemSelectedEvent -= rationPanel.OnClickMedicKitItem;
-            _medicKitItem.ItemSelectedEvent += rationPanel.OnClickMedicKitItem;
+            _foodItem.RegisterEvent(rationPanel.OnClickFoodItem);
+            _waterItem.RegisterEvent(rationPanel.OnClickWaterItem);
+            _medicKitItem.RegisterEvent(rationPanel.OnClickMedicKitItem);
         }
 
         public void Refresh()

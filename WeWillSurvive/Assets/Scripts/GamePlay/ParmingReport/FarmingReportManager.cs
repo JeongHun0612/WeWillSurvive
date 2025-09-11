@@ -4,7 +4,6 @@ using WeWillSurvive.Character;
 using WeWillSurvive.Core;
 using WeWillSurvive.Item;
 using WeWillSurvive.Log;
-using WeWillSurvive.MainEvent;
 
 namespace WeWillSurvive.FarmingReport
 {
@@ -18,9 +17,9 @@ namespace WeWillSurvive.FarmingReport
 
     public class FarmingReportManager : MonoSceneSingleton<FarmingReportManager>
     {
-        [SerializeField] private List<FarmingReportSO> _farmingReportList;
+        [SerializeField] private List<FarmingReportData> _farmingReportDatas;
 
-        private Dictionary<EParmingReportType, List<FarmingReportSO>> _farmingReportDicts = new();
+        private Dictionary<EParmingReportType, FarmingReportData> _farmingReportDicts = new();
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
@@ -30,7 +29,17 @@ namespace WeWillSurvive.FarmingReport
         {
             base.Awake();
 
-            InitializeFarmingReports();
+            if (_farmingReportDicts == null)
+                _farmingReportDicts = new();
+
+            _farmingReportDicts.Clear();
+            foreach (var data in _farmingReportDatas)
+            {
+                if (!_farmingReportDicts.ContainsKey(data.Type))
+                {
+                    _farmingReportDicts.Add(data.Type, data);
+                }
+            }
         }
 
         public void UpdateFarmingReport()
@@ -52,44 +61,18 @@ namespace WeWillSurvive.FarmingReport
             LogReportByValue(EParmingReportType.SupportsSupply, supportsCount);
         }
 
-        private void InitializeFarmingReports()
-        {
-            if (_farmingReportDicts == null)
-                _farmingReportDicts = new();
-
-            _farmingReportDicts.Clear();
-
-            foreach (EParmingReportType type in System.Enum.GetValues(typeof(EParmingReportType)))
-            {
-                _farmingReportDicts[type] = new();
-            }
-
-            foreach (var report in _farmingReportList)
-            {
-                _farmingReportDicts[report.Type].Add(report);
-            }
-        }
-
         private void LogReportByValue(EParmingReportType type, int value)
         {
-            var reports = GetFarmingReportList(type);
-            if (reports == null) return;
-
-            foreach (var report in reports)
-            {
-                if (report.IsMatch(value))
-                {
-                    LogManager.AddMainEventResultLog(report.ReportText);
-                    break;
-                }
-            }
+            var data = GetFarmingReportData(type);
+            var reportText = data.GetFarmingReportText(value);
+            LogManager.AddMainEventResultLog(reportText);
         }
 
-        private List<FarmingReportSO> GetFarmingReportList(EParmingReportType type)
+        private FarmingReportData GetFarmingReportData(EParmingReportType type)
         {
-            if (_farmingReportDicts.TryGetValue(type, out var parmingReportList))
+            if (_farmingReportDicts.TryGetValue(type, out var farmingReportData))
             {
-                return parmingReportList;
+                return farmingReportData;
             }
 
             return null;

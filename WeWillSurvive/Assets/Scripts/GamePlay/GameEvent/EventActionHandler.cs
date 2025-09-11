@@ -285,7 +285,7 @@ namespace WeWillSurvive.GameEvent
                 Debug.LogWarning($"Value : {action.Value} | float 타입으로 파싱 실패");
 
             ItemManager.AddItem(item, count);
-            LogManager.AddRewardItemData(new RewardItemData(item, count));
+            LogManager.AddResultItemData(new ResultItemData(item, count));
         }
     }
 
@@ -309,7 +309,7 @@ namespace WeWillSurvive.GameEvent
             var updateCount = Mathf.Min(ItemManager.GetItemCount(item), count);
             if (ItemManager.TryDecreaseItemCount(item, updateCount))
             {
-                LogManager.AddRewardItemData(new RewardItemData(item, -updateCount));
+                LogManager.AddResultItemData(new ResultItemData(item, -updateCount));
             }
         }
     }
@@ -339,7 +339,7 @@ namespace WeWillSurvive.GameEvent
             var updateCount = Mathf.Min(ItemManager.GetItemCount(item), 1f);
             if (ItemManager.TryDecreaseItemCount(item, updateCount))
             {
-                LogManager.AddRewardItemData(new RewardItemData(item, -updateCount));
+                LogManager.AddResultItemData(new ResultItemData(item, -updateCount));
             }
         }
     }
@@ -380,7 +380,7 @@ namespace WeWillSurvive.GameEvent
             var updateCount = Mathf.Min(ItemManager.GetItemCount(removeItem), removeCount);
             if (ItemManager.TryDecreaseItemCount(removeItem, updateCount))
             {
-                LogManager.AddRewardItemData(new RewardItemData(removeItem, -updateCount));
+                LogManager.AddResultItemData(new ResultItemData(removeItem, -updateCount));
             }
         }
     }
@@ -395,7 +395,14 @@ namespace WeWillSurvive.GameEvent
         public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
         {
             EEndingType endingType = EnumUtil.ParseEnum<EEndingType>(action.TargetId);
-            GameEventManager.Instance.EndingEventPicker.AdvanceEndingProgress(endingType);
+
+            string logText;
+            if (resultTemplates == null || resultTemplates.Count == 0)
+                logText = $"{GameManager.Instance.Day}일차";
+            else
+                logText = resultTemplates[0].Replace("{}", GameManager.Instance.Day.ToString());
+
+            GameEventManager.Instance.EndingEventPicker.AdvanceEndingProgress(endingType, logText);
         }
     }
 
@@ -409,6 +416,10 @@ namespace WeWillSurvive.GameEvent
         public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
         {
             EEndingType endingType = EnumUtil.ParseEnum<EEndingType>(action.TargetId);
+
+            var eventProgress = GameEventManager.Instance.EndingEventPicker.GetEventProgress(endingType);
+            resultText = resultText + "\n\n" + eventProgress.GetResultLogText();
+
             EndingManager.Instance.Ending(endingType);
         }
     }

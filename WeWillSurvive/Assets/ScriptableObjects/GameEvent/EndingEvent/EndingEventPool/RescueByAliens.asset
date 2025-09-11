@@ -22,3 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a4b7e76e3a6d7cb48a23246f87c5f973, type: 2}
   _minDayCounter: 4
   _maxDayCounter: 5
+  _blockBuffEffect: 1000

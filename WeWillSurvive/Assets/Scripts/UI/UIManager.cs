@@ -152,7 +152,6 @@ namespace WeWillSurvive.UI
             CloseCurrentScene();
             CloseCurrentHUD();
             CloseAllPopups();
-            CloseCurrentOverlay();
         }
 
         public T GetCurrentScene<T>() where T : UI_Scene => _currentScene as T;

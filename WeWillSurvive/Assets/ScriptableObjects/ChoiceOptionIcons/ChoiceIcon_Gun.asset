@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ChoiceIcon_Gun
   m_EditorClassIdentifier: 
   ChoiceIcon: 209
+  ChoiceType: 2
   NormalSprite: {fileID: 21300000, guid: 97681a93cc38b57489e44554242d2fb1, type: 3}
   DisabledSprite: {fileID: 21300000, guid: 9afe82a529b3fd84d9585b58dad77cde, type: 3}

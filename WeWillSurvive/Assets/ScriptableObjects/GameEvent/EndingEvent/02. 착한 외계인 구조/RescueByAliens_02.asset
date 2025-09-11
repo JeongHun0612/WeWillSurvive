@@ -23,11 +23,18 @@ MonoBehaviour:
     \uB204\uAD6C\uB97C \uBCF4\uB0BC\uAE4C?"
   _conditions: []
   _choiceSchema: 2
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 100
-    _amount: 1
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates:
+      - "{}\uC77C\uCC28\uC5D0 \uB9AC\uB4DC\uAC00 \uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC73C\uB85C
+        \uB098\uAC00 \uCC29\uD55C \uC678\uACC4\uC778\uACFC\uC758 \uCCAB \uC811\uCD09\uC5D0
+        \uC131\uACF5\uD588\uB2E4."
       _resultText: "\uD30C\uACAC\uB41C \uB300\uC6D0\uC740 \uBB34\uC0AC\uD788 \uB3CC\uC544\uC654\uACE0,
         \uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC5D0\uB294 \uCC29\uD55C \uC678\uACC4\uC778\uB4E4\uC774
         \uC788\uC5C8\uB2E4! \uC5B8\uC5B4\uB294 \uB2E4\uB974\uC9C0\uB9CC, \uC758\uB3C4\uB294
@@ -40,11 +47,18 @@ MonoBehaviour:
         _targetId: RescueByAliens
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 101
-    _amount: 1
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates:
+      - "{}\uC77C\uCC28\uC5D0 \uCFE1\uC774 \uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC73C\uB85C
+        \uB098\uAC00 \uCC29\uD55C \uC678\uACC4\uC778\uACFC\uC758 \uCCAB \uC811\uCD09\uC5D0
+        \uC131\uACF5\uD588\uB2E4."
       _resultText: "\uD30C\uACAC\uB41C \uB300\uC6D0\uC740 \uBB34\uC0AC\uD788 \uB3CC\uC544\uC654\uACE0,
         \uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC5D0\uB294 \uCC29\uD55C \uC678\uACC4\uC778\uB4E4\uC774
         \uC788\uC5C8\uB2E4! \uC5B8\uC5B4\uB294 \uB2E4\uB974\uC9C0\uB9CC, \uC758\uB3C4\uB294
@@ -57,11 +71,18 @@ MonoBehaviour:
         _targetId: RescueByAliens
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 102
-    _amount: 1
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates:
+      - "{}\uC77C\uCC28\uC5D0 \uBCA8\uC774 \uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC73C\uB85C
+        \uB098\uAC00 \uCC29\uD55C \uC678\uACC4\uC778\uACFC\uC758 \uCCAB \uC811\uCD09\uC5D0
+        \uC131\uACF5\uD588\uB2E4."
       _resultText: "\uD30C\uACAC\uB41C \uB300\uC6D0\uC740 \uBB34\uC0AC\uD788 \uB3CC\uC544\uC654\uACE0,
         \uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC5D0\uB294 \uCC29\uD55C \uC678\uACC4\uC778\uB4E4\uC774
         \uC788\uC5C8\uB2E4! \uC5B8\uC5B4\uB294 \uB2E4\uB974\uC9C0\uB9CC, \uC758\uB3C4\uB294
@@ -74,11 +95,18 @@ MonoBehaviour:
         _targetId: RescueByAliens
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 103
-    _amount: 1
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates:
+      - "{}\uC77C\uCC28\uC5D0 DrK\uAC00 \uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC73C\uB85C
+        \uB098\uAC00 \uCC29\uD55C \uC678\uACC4\uC778\uACFC\uC758 \uCCAB \uC811\uCD09\uC5D0
+        \uC131\uACF5\uD588\uB2E4."
       _resultText: "\uD30C\uACAC\uB41C \uB300\uC6D0\uC740 \uBB34\uC0AC\uD788 \uB3CC\uC544\uC654\uACE0,
         \uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC5D0\uB294 \uCC29\uD55C \uC678\uACC4\uC778\uB4E4\uC774
         \uC788\uC5C8\uB2E4! \uC5B8\uC5B4\uB294 \uB2E4\uB974\uC9C0\uB9CC, \uC758\uB3C4\uB294
@@ -91,11 +119,15 @@ MonoBehaviour:
         _targetId: RescueByAliens
         _parameter: 
         _value: 
+      _isAffectedByStats: 0
       _probability: 1
   - _choiceIcon: 500
-    _amount: 0
+    _requiredAmount: 0
+    _choiceText: 
     _results:
-    - _conditions: []
+    - _outComeType: 0
+      _conditions: []
+      _resultTemplates: []
       _resultText: "\uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC774 \uC65C \uBBF8\uD0D0\uC0AC
         \uC9C0\uC5ED\uC77C\uAE4C. \uC6B0\uB9AC\uB294 \uBBF8\uD0D0\uC0AC \uC9C0\uC5ED\uC740
         \uB108\uBB34 \uC704\uD5D8\uD558\uB2E4\uACE0 \uC0DD\uAC01\uD574\uC11C \uC9C1\uC811
@@ -105,4 +137,5 @@ MonoBehaviour:
         \uC11C\uB85C\uC758 \uC5BC\uAD74\uC744 \uBC14\uB77C\uBCFC \uC218\uBC16\uC5D0
         \uC5C6\uC5C8\uB2E4."
       _actions: []
+      _isAffectedByStats: 0
       _probability: 1

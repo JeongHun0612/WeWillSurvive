@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ChoiceIcon_Cook
   m_EditorClassIdentifier: 
   ChoiceIcon: 101
+  ChoiceType: 1
   NormalSprite: {fileID: 21300000, guid: 6d37924ff4e3f6842a7db4a321600d5e, type: 3}
   DisabledSprite: {fileID: 21300000, guid: 6d253caca49485c408c6314cb60f270f, type: 3}

@@ -12,21 +12,23 @@ namespace WeWillSurvive.Item
 {
     public enum EItem
     {
-        [InspectorName("우주식량")] Food,
-        [InspectorName("특별우주식량")] SpecialFood,
-        [InspectorName("물")] Water,
-        [InspectorName("의료키트")] MedicKit,
-        [InspectorName("특별의료키트")] SpecialMedicKit,
-        [InspectorName("수리키트")] RepairKit,
-        [InspectorName("특별수리키트")] SpecialRepairKit,
-        [InspectorName("예비통신장비")] CommDevice,
-        [InspectorName("고급우주복")] NiceSpacesuit,
-        [InspectorName("총")] Gun,
-        [InspectorName("보드게임")] BoardGame,
-        [InspectorName("도끼")] Ax,
-        [InspectorName("쇠파이프")] Pipe,
-        [InspectorName("손전등")] Flashlight,
-        [InspectorName("행성탐사지도")] Map,
+        None = 0,
+
+        [InspectorName("우주식량")] Food = 10,
+        [InspectorName("특별우주식량")] SpecialFood = 11,
+        [InspectorName("물")] Water = 12,
+        [InspectorName("의료키트")] MedicKit = 13,
+        [InspectorName("특별의료키트")] SpecialMedicKit = 14,
+        [InspectorName("수리키트")] RepairKit = 15,
+        [InspectorName("특별수리키트")] SpecialRepairKit = 16,
+        [InspectorName("예비통신장비")] CommDevice = 17,
+        [InspectorName("고급우주복")] NiceSpacesuit = 18,
+        [InspectorName("총")] Gun = 19,
+        [InspectorName("보드게임")] BoardGame = 20,
+        [InspectorName("도끼")] Ax = 21,
+        [InspectorName("쇠파이프")] Pipe = 22,
+        [InspectorName("손전등")] Flashlight = 23,
+        [InspectorName("행성탐사지도")] Map = 24,
 
         // Character
         Lead = 100,
@@ -34,8 +36,6 @@ namespace WeWillSurvive.Item
         Bell,
         DrK,
         Starmac,
-
-        None = 500,
     }
 
     public class ItemManager : IService
@@ -183,6 +183,15 @@ namespace WeWillSurvive.Item
             return false;
         }
 
+        public bool IsRationItem(EItem item)
+        {
+            if (item == EItem.Food || item == EItem.Water || item == EItem.SpecialFood ||
+                item == EItem.MedicKit || item == EItem.SpecialMedicKit)
+                return true;
+
+            return false;
+        }
+
         public float GetItemCount(EItem item)
         {
             if (Items.TryGetValue(item, out float count))
@@ -250,7 +259,7 @@ namespace WeWillSurvive.Item
     }
 
     [System.Serializable]
-    public class RewardItemData
+    public class ResultItemData
     {
         [SerializeField]
         private EItem _itemType;
@@ -261,7 +270,7 @@ namespace WeWillSurvive.Item
         public EItem ItemType => _itemType;
         public float Amount => _amount;
 
-        public RewardItemData(EItem itemType, float amount)
+        public ResultItemData(EItem itemType, float amount)
         {
             _itemType = itemType;
             _amount = amount;

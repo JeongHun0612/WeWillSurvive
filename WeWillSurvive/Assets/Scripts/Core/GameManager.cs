@@ -13,6 +13,7 @@ namespace WeWillSurvive.Core
     public class GameManager : MonoSingleton<GameManager>
     {
         public int Day;
+        public bool IsFarmingSuccess;
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
@@ -34,6 +35,8 @@ namespace WeWillSurvive.Core
             UIManager.Instance.LoadingUI.Hide();
 
             OnMoveTitle();
+
+            IsFarmingSuccess = true;
         }
 
         public void OnMoveTitle()
@@ -70,6 +73,8 @@ namespace WeWillSurvive.Core
             await UIManager.Instance.ShowPopup<UI_Intro>().PlayScene();
 
             Day = 0;
+
+            LogManager.ClearAllLogs();
 
             CharacterManager.SettingCharacter();
             EndingManager.Instance.ResetState();

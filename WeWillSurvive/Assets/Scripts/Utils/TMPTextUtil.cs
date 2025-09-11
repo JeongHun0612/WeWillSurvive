@@ -11,7 +11,7 @@ namespace WeWillSurvive
     {
         public static List<string> SplitTextByLines(TMP_Text tmpText, string text, int maxLineCount)
         {
-            tmpText.text = text;
+            tmpText.text = text ?? string.Empty;
             tmpText.ForceMeshUpdate();
 
             TMP_TextInfo textInfo = tmpText.textInfo;

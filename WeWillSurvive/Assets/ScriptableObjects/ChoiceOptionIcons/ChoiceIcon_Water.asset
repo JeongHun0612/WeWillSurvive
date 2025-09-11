@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ChoiceIcon_Water
   m_EditorClassIdentifier: 
   ChoiceIcon: 202
+  ChoiceType: 2
   NormalSprite: {fileID: 21300000, guid: 0164b554526199d47863fdfe439a5f51, type: 3}
   DisabledSprite: {fileID: 21300000, guid: 407bb82b3fe6ec541baeb4d51beb2066, type: 3}

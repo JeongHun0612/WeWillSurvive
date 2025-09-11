@@ -2,6 +2,7 @@
 using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Core;
+using WeWillSurvive.Ending;
 using WeWillSurvive.Expedition;
 
 namespace WeWillSurvive
@@ -37,11 +38,7 @@ namespace WeWillSurvive
             EExpeditionState expeditionState = ExpeditionManager.Instance.CurrentState;
 
             // 탐사 불가능 조건
-            bool isExpeditionImpossible = 
-                expeditionState == EExpeditionState.Exploring ||        // 탐사 중일때
-                CharacterManager.InShelterCharactersCount() <= 1 ||     // 쉘터에 캐릭터가 혼자 남았을 때
-                GameManager.Instance.Day == 1;                          // 첫째날일 때
-
+            bool isExpeditionImpossible = IsExpeditionImpossible(expeditionState);
             if (isExpeditionImpossible)
             {
                 PageCount = 0;
@@ -69,6 +66,14 @@ namespace WeWillSurvive
         public override void ShowPage(int localIndex)
         {
             base.ShowPage(localIndex);
+        }
+
+        private bool IsExpeditionImpossible(EExpeditionState expeditionState)
+        {
+            return expeditionState == EExpeditionState.Exploring ||        // 탐사 중일 때
+                   CharacterManager.InShelterCharactersCount() <= 1 ||     // 쉘터에 캐릭터가 혼자 남았을 때
+                   GameManager.Instance.Day == 1 ||                        // 첫째날일 때
+                   EndingManager.Instance.IsEnding;                        // 엔딩 시
         }
 
         private void OnEndDayEvent(EndDayEvent context)

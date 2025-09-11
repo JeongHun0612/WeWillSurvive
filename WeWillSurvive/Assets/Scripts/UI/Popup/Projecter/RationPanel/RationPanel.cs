@@ -1,11 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using WeWillSurvive.Character;
 using WeWillSurvive.Core;
+using WeWillSurvive.Ending;
 using WeWillSurvive.Item;
 
 namespace WeWillSurvive
@@ -24,12 +25,13 @@ namespace WeWillSurvive
         [SerializeField] private List<RationCharacter> _rationCharacters;
 
         [Header("## Special Item")]
-        [SerializeField] private RationItem _speicalFoodItem;
+        [SerializeField] private RationItem _specialFoodItem;
         [SerializeField] private RationItem _specialMedicKit;
+
+        private Dictionary<EItem, float> _dailyItemCounts = new();
 
         private EventBus EventBus => ServiceLocator.Get<EventBus>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
-        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
         public async override UniTask InitializeAsync()
         {
@@ -39,17 +41,28 @@ namespace WeWillSurvive
             foreach (var rationCharacter in _rationCharacters)
             {
                 await rationCharacter.InitializeAsync();
-                rationCharacter.RegisterEvent(this);
+                rationCharacter.RationItemsRegisterEvent(this);
             }
 
-            _speicalFoodItem.Initialize();
-            _speicalFoodItem.ItemSelectedEvent += OnClickSpecialFoodItem;
+            _specialFoodItem.Initialize();
+            _specialFoodItem.RegisterEvent(OnClickSpecialFoodItem);
 
             _specialMedicKit.Initialize();
-            _specialMedicKit.ItemSelectedEvent += OnClickSpecialMedicKitItem;
+            _specialMedicKit.RegisterEvent(OnClickSpecialMedicKitItem);
+
+            _dailyItemCounts = new()
+            {
+                [EItem.Food] = 0f,
+                [EItem.Water] = 0f,
+                [EItem.MedicKit] = 0f,
+                [EItem.SpecialFood] = 0f,
+                [EItem.SpecialMedicKit] = 0f,
+            };
 
             // 이벤트 등록
             EventBus.Subscribe<EndDayEvent>(OnEndDayEvent);
+            EventBus.Subscribe<ChoiceOptionSelectedEvent>(OnChoiceOptionSelectedEvent);
+            //EventBus.Subscribe<RationItemSelectedEvent>(OnRationItemSelectedEvent);
 
             await UniTask.CompletedTask;
         }
@@ -58,16 +71,20 @@ namespace WeWillSurvive
         {
             await base.RefreshPageAsync(startPageIndex);
 
+            PageCount = (EndingManager.Instance.IsEnding) ? 0 : 1;
+
             foreach (var rationCharacter in _rationCharacters)
             {
                 rationCharacter.Refresh();
             }
 
-            SpecialItemRefresh();
+            // 금일 아이템 갯수 저장
+            SetDailyItemCount();
 
-            // ItemCount 업데이트
-            UpdateFoodItemCount();
-            UpdateWaterItemCount();
+            // RationItem Panel 업데이트
+            UpdateSpecialItemPanel();
+            UpdateFoodPanel();
+            UpdateWaterPanel();
         }
 
         public override void ShowPage(int localIndex)
@@ -75,37 +92,156 @@ namespace WeWillSurvive
             base.ShowPage(localIndex);
         }
 
-        private void SpecialItemRefresh()
+        public void OnClickFoodItem(RationItem rationItem)
+        {
+            if (_specialFoodItem.IsSelected)
+                OnClickSpecialFoodItem();
+
+            var foodItemCount = GetDailyItemCount(EItem.Food);
+            HandleBasicItemToggle(rationItem, foodItemCount, UpdateFoodPanel);
+        }
+
+        public void OnClickWaterItem(RationItem rationItem)
+        {
+            if (_specialFoodItem.IsSelected)
+                OnClickSpecialFoodItem();
+
+            var waterItemCount = GetDailyItemCount(EItem.Water);
+            HandleBasicItemToggle(rationItem, waterItemCount, UpdateWaterPanel);
+        }
+
+        public void OnClickMedicKitItem(RationItem rationItem)
+        {
+            if (_specialMedicKit.IsSelected)
+                OnClickSpecialMedicKitItem();
+
+            var medicKitItemCount = GetDailyItemCount(EItem.MedicKit);
+            HandleBasicItemToggle(rationItem, medicKitItemCount);
+        }
+
+        public void OnClickSpecialFoodItem(RationItem rationItem = null)
+        {
+            if (rationItem == null)
+                rationItem = _specialFoodItem;
+
+            HandleSpecialItemToggle(
+                rationItem,
+                updateUI: () => { UpdateFoodPanel(); UpdateWaterPanel(); },
+                rc => rc.FoodItem,
+                rc => rc.WaterItem
+            );
+        }
+
+        public void OnClickSpecialMedicKitItem(RationItem rationItem = null)
+        {
+            if (rationItem == null)
+                rationItem = _specialMedicKit;
+
+            HandleSpecialItemToggle(
+                rationItem,
+                updateUI: null,
+                rc => rc.MedicKitItem
+            );
+        }
+
+        private void SetDailyItemCount()
+        {
+            _dailyItemCounts = _dailyItemCounts.ToDictionary(pair => pair.Key, pair => ItemManager.GetItemCount(pair.Key));
+        }
+
+        private void HandleBasicItemToggle(RationItem rationItem, float itemCount, Action updateUI = null)
+        {
+            EItem item = rationItem.Item;
+            float usageAmount = rationItem.UsageAmount;
+            bool targetSelected = !rationItem.IsSelected;
+
+            if (!rationItem.IsSelected && itemCount < usageAmount)
+            {
+                Debug.LogWarning($"[{rationItem.Item}] 아이템 수량이 부족합니다. 남은 갯수 : {itemCount}");
+                return;
+            }
+
+            UpdateDailyItemCount(item, (targetSelected ? -usageAmount : +usageAmount));
+
+            rationItem.OnSelected(targetSelected);
+
+            EventBus.Publish(new RationItemSelectedEvent
+            {
+                Item = item,
+                IsSelected = targetSelected,
+                RemainCount = GetDailyItemCount(item),
+            });
+
+            updateUI?.Invoke();
+        }
+
+        private void HandleSpecialItemToggle(RationItem rationItem, Action updateUI, params Func<RationCharacter, RationItem>[] picks)
+        {
+            bool targetSelected = !rationItem.IsSelected;
+
+            foreach (var rationCharacter in _rationCharacters)
+            {
+                foreach (var pick in picks)
+                {
+                    if (pick == null)
+                        continue;
+
+                    var item = pick(rationCharacter);
+                    if (item == null) continue;
+
+                    if (item.IsSelected)
+                    {
+                        UpdateDailyItemCount(item.Item, item.UsageAmount);
+                        item.OnSelected(false);
+                    }
+
+                    item.UpdateSprite(targetSelected);
+                }
+            }
+
+            UpdateDailyItemCount(rationItem.Item, rationItem.UsageAmount);
+            rationItem.OnSelected(targetSelected);
+
+            EventBus.Publish(new RationItemSelectedEvent
+            {
+                Item = rationItem.Item,
+                IsSelected = targetSelected,
+                RemainCount = GetDailyItemCount(rationItem.Item),
+            });
+
+            updateUI?.Invoke();
+        }
+
+        private void UpdateSpecialItemPanel()
         {
             // 우주 특별식 셋팅
-            var hasSpecialFood = ItemManager.HasItem(EItem.SpecialFood);
+            var hasSpecialFood = GetDailyItemCount(EItem.SpecialFood) != 0f;
             if (hasSpecialFood)
-                _speicalFoodItem.Refresh();
+                _specialFoodItem.Refresh();
 
-            _speicalFoodItem.gameObject.SetActive(hasSpecialFood);
-
+            _specialFoodItem.gameObject.SetActive(hasSpecialFood);
 
             // 만능 의료 키트 셋팅
-            var hasSpecialMedicKit = ItemManager.HasItem(EItem.SpecialMedicKit);
+            var hasSpecialMedicKit = GetDailyItemCount(EItem.SpecialMedicKit) != 0f;
             if (hasSpecialMedicKit)
                 _specialMedicKit.Refresh();
 
             _specialMedicKit.gameObject.SetActive(hasSpecialMedicKit);
         }
 
-        private void UpdateFoodItemCount()
+        private void UpdateFoodPanel()
         {
-            float itemCount = ItemManager.GetItemCount(EItem.Food);
-            UpdateItemCount(_foodImages, _foodOverflowText, itemCount);
+            float foodItemCount = GetDailyItemCount(EItem.Food);
+            UpdateRationItemPanel(_foodImages, _foodOverflowText, foodItemCount);
         }
 
-        private void UpdateWaterItemCount()
+        private void UpdateWaterPanel()
         {
-            float itemCount = ItemManager.GetItemCount(EItem.Water);
-            UpdateItemCount(_waterImages, _waterOverflowText, itemCount);
+            float waterItemCount = GetDailyItemCount(EItem.Water);
+            UpdateRationItemPanel(_waterImages, _waterOverflowText, waterItemCount);
         }
 
-        private void UpdateItemCount(Image[] targetImages, TMP_Text overflowText, float itemCount)
+        private void UpdateRationItemPanel(Image[] targetImages, TMP_Text overflowText, float itemCount)
         {
             int targetItemCount = targetImages.Length;
 
@@ -127,93 +263,34 @@ namespace WeWillSurvive
             }
         }
 
-        private void UpdateRationItemPanel(RationItem rationItem)
+        private void UpdateDailyItemCount(EItem item, float usageAmount)
         {
-            if (_speicalFoodItem.IsSelected)
+            if (_dailyItemCounts.ContainsKey(item))
             {
-                _speicalFoodItem.OnSelected(false);
-
-                foreach (var rationCharacter in _rationCharacters)
-                {
-                    rationCharacter.FoodItem.OnSelected(false, false);
-                    rationCharacter.WaterItem.OnSelected(false, false);
-                }
+                var itemCount = _dailyItemCounts[item];
+                itemCount += usageAmount;
+                _dailyItemCounts[item] = itemCount;
             }
-
-            rationItem?.OnSelected(!rationItem.IsSelected);
-
-            UpdateFoodItemCount();
-            UpdateWaterItemCount();
         }
 
-        public void OnClickFoodItem(RationItem rationItem) => UpdateRationItemPanel(rationItem);
-        public void OnClickWaterItem(RationItem rationItem) => UpdateRationItemPanel(rationItem);
-        public void OnClickMedicKitItem(RationItem rationItem)
+        private float GetDailyItemCount(EItem item)
         {
-            if (_specialMedicKit.IsSelected)
+            if (_dailyItemCounts.TryGetValue(item, out float itemCount))
             {
-                _specialMedicKit.OnSelected(false);
-
-                foreach (var rationCharacter in _rationCharacters)
-                {
-                    rationCharacter.MedicKitItem.OnSelected(false, false);
-                }
+                return itemCount;
             }
 
-            rationItem?.OnSelected(!rationItem.IsSelected);
-        }
-
-        public void OnClickSpecialFoodItem(RationItem rationItem)
-        {
-            var targetSelected = !rationItem.IsSelected;
-
-            foreach (var rationCharacter in _rationCharacters)
-            {
-                if (targetSelected)
-                {
-                    rationCharacter.FoodItem.OnSelected(false);
-                    rationCharacter.WaterItem.OnSelected(false);
-                }
-
-                rationCharacter.FoodItem.OnSelected(targetSelected, false);
-                rationCharacter.WaterItem.OnSelected(targetSelected, false);
-            }
-
-            if (rationItem != null)
-                rationItem.OnSelected(targetSelected);
-
-            var foodCount = ItemManager.GetItemCount(EItem.Food);
-            var waterCount = ItemManager.GetItemCount(EItem.Water);
-
-            UpdateItemCount(_foodImages, _foodOverflowText, foodCount);
-            UpdateItemCount(_waterImages, _waterOverflowText, waterCount);
-        }
-
-        public void OnClickSpecialMedicKitItem(RationItem rationItem)
-        {
-            var targetSelected = !rationItem.IsSelected;
-
-            foreach (var rationCharacter in _rationCharacters)
-            {
-                if (targetSelected)
-                    rationCharacter.MedicKitItem.OnSelected(false);
-
-                rationCharacter.MedicKitItem.OnSelected(targetSelected, false);
-            }
-
-            if (rationItem != null)
-                rationItem.OnSelected(targetSelected);
+            return 0f;
         }
 
         private void OnEndDayEvent(EndDayEvent context)
         {
-            bool useSpecialFood = _speicalFoodItem.IsSelected;
+            bool useSpecialFood = _specialFoodItem.IsSelected;
             bool useSpecialMedicKit = _specialMedicKit.IsSelected;
-
 
             // 우주 특별식을 사용한 경우
             if (useSpecialFood)
-                _speicalFoodItem.UsedItem();
+                _specialFoodItem.UsedItem();
 
             // 만능의료키트를 사용한 경우
             if (useSpecialMedicKit)
@@ -232,6 +309,17 @@ namespace WeWillSurvive
                     rationCharacter.ApplyMedicKitItem();
                 }
             }
+        }
+
+        private void OnChoiceOptionSelectedEvent(ChoiceOptionSelectedEvent context)
+        {
+            var requiredAmount = (context.IsSelected ? -context.RequiredAmount : +context.RequiredAmount);
+            UpdateDailyItemCount(context.Item, requiredAmount);
+
+            if (context.Item == EItem.Food)
+                UpdateFoodPanel();
+            else if (context.Item == EItem.Water)
+                UpdateWaterPanel();
         }
     }
 }

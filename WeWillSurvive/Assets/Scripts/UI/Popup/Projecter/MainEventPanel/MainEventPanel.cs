@@ -6,9 +6,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WeWillSurvive.Core;
+using WeWillSurvive.Ending;
 using WeWillSurvive.GameEvent;
 using WeWillSurvive.Item;
-using WeWillSurvive.Util;
 
 namespace WeWillSurvive
 {
@@ -48,7 +48,8 @@ namespace WeWillSurvive
 
             // 이벤트 등록
             EventBus.Subscribe<EndDayEvent>(OnEndDayEvent);
-            
+            EventBus.Subscribe<RationItemSelectedEvent>(OnRationItemSelectedEvent);
+
             await UniTask.CompletedTask;
         }
 
@@ -59,7 +60,7 @@ namespace WeWillSurvive
             _mainEventData = GameEventManager.Instance.DailyMainEvent.DailyEventData;
             _selectedOption = null;
 
-            if (_mainEventData == null)
+            if (_mainEventData == null || EndingManager.Instance.IsEnding)
             {
                 PageCount = 0;
                 return;
@@ -111,7 +112,7 @@ namespace WeWillSurvive
         private void UpdateChoiceOptions(MainEventData mainEventData)
         {
             foreach (var choiceOption in _choiceOptions)
-                choiceOption.Disabeld();
+                choiceOption.ResetState();
 
             int index = 0;
             foreach (var choice in mainEventData.Choices)
@@ -150,6 +151,21 @@ namespace WeWillSurvive
 
             // 이벤트 결과 임시 저장
             GameEventManager.Instance.SelectedMainEventChoice(eventChoice);
+        }
+
+        private void OnRationItemSelectedEvent(RationItemSelectedEvent context)
+        {
+            foreach (var choiceOption in _choiceOptions)
+            {
+                if (choiceOption.EventChoice == null)
+                    continue;
+
+                if (Enum.TryParse($"{choiceOption.EventChoice.ChoiceIcon}", out EItem item) && item == context.Item)
+                {
+                    choiceOption.UpdateRemainItemCount(context.RemainCount);
+                    choiceOption.UpdateAvailable();
+                }
+            }
         }
     }
 }

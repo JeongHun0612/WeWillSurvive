@@ -6,6 +6,7 @@ using UnityEngine;
 using WeWillSurvive.Core;
 using WeWillSurvive.Ending;
 using WeWillSurvive.Item;
+using WeWillSurvive.Status;
 
 namespace WeWillSurvive.Character
 {
@@ -69,11 +70,15 @@ namespace WeWillSurvive.Character
                 if (!ItemManager.HasItem(character.Data.ItemType))
                 {
                     character.OnDead();
+                    continue;
                 }
-                else
+
+                if (character.Type == ECharacter.Lead && !GameManager.Instance.IsFarmingSuccess)
                 {
-                    ItemManager.RemoveItem(character.Data.ItemType);
+                    character.Status.GetStatus<InjuryStatus>().WorsenStatus();
                 }
+
+                ItemManager.RemoveItem(character.Data.ItemType);
             }
 
             // Character 사기 설정 (남은 인원수에 따라 사기 결정)

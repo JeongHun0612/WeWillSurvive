@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4909b25a7233f48ae331a76754568c, type: 3}
+  m_Name: FoodSupply
+  m_EditorClassIdentifier: 
+  _type: 1
+  _farmingReports:
+  - _reportText: "\uC2DD\uB7C9 \uCC3D\uACE0\uC5D0 \uAF64 \uAD1C\uCC2E\uC740 \uC591\uC774
+      \uB4E4\uC5B4\uCC3C\uB2E4. \uD55C\uB3D9\uC548\uC740 \uAD76\uC9C0 \uC54A\uC544\uB3C4
+      \uB420 \uAC83\uC774\uB2E4."
+    _value: 3
+  - _reportText: "\uC2DD\uB7C9 \uBD09\uC9C0\uB97C \uC138\uC5B4\uBCF4\uB294 \uB9AC\uB4DC\uC758
+      \uC190\uB05D\uC774 \uC57D\uAC04 \uB5A8\uB838\uB2E4. \"\uC774 \uC815\uB3C4\uBA74...
+      \uD55C \uC0AC\uB78C\uB2F9 \uD55C \uB07C \uC815\uB3C4\uB294 \uB418\uACA0\uC9C0.\"
+      \uC0B4\uC544\uB0A8\uAE30 \uC704\uD55C \uC22B\uC790\uB180\uC74C\uC774 \uC2DC\uC791\uB410\uB2E4."
+    _value: 1
+  - _reportText: "\uCC3D\uACE0 \uBB38\uC744 \uC5F4\uC5C8\uC744 \uB54C, \uC544\uBB34\uAC83\uB3C4
+      \uC5C6\uC5C8\uB2E4. \uC815\uC801\uC774 \uD750\uB974\uACE0, \uB204\uAD70\uAC00\uC758
+      \uC704\uC7A5\uC774 \uC6C0\uCC14\uD558\uBA70 \uC18C\uB9AC\uB97C \uB0C8\uB2E4.
+      \uC6B0\uB9AC\uC758 \uC0DD\uC874\uC740 \uC774\uC81C, \uD655\uB960\uC774 \uC544\uB2CC
+      \uAE30\uC801\uC758 \uC601\uC5ED\uC73C\uB85C \uB118\uC5B4\uAC14\uB2E4."
+    _value: 0
