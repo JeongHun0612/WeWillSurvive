@@ -14,6 +14,7 @@ namespace WeWillSurvive
         [SerializeField] private UICanvas uiCanvas;
         [SerializeField] private OrbitPlayer player;
         [SerializeField] private Blackout blackout;
+        [SerializeField] private float turnOut = 1f;
         [SerializeField] private float bias = 1f;
         [SerializeField] private float startui = 6f;
         [SerializeField] private float slide = 2f;
@@ -40,7 +41,8 @@ namespace WeWillSurvive
 
         private IEnumerator StartSeq()
         {
-            yield return new WaitForSeconds(1f);
+            blackout.TurnOut(turnOut);
+            yield return new WaitForSeconds(turnOut + 1f);
             CameraEffects.Instance.NudgeLeft(slide, bias + startui);
             yield return new WaitForSeconds(slide);
             uiCanvas.StartSequence(bias, startui, countdown, slide);
@@ -86,7 +88,7 @@ namespace WeWillSurvive
             if (debugTest) { Debug.Log("The game has ended"); }
             else
             {
-                //if(!success){}
+                GameManager.Instance.IsFarmingSuccess = success;
                 GameManager.Instance.OnStartSurvive();
             }
         }

@@ -8,6 +8,12 @@ namespace WeWillSurvive
         public CanvasGroup Red;
         public CanvasGroup Black;
         public GameObject texts;
+
+        public void TurnOut(float turnOut)
+        {
+            StartCoroutine(BlackFade(turnOut, false));
+        }
+
         public void BlackOut(float blackOut)
         {
             StartCoroutine(BlackFade(blackOut));
@@ -18,7 +24,7 @@ namespace WeWillSurvive
             StartCoroutine(FailFade(redOut, textTime));
         }
 
-        private IEnumerator BlackFade(float blackOut)
+        private IEnumerator BlackFade(float blackOut, bool dark = true)
         {
             float duration = blackOut;
             float time = 0f;
@@ -26,7 +32,7 @@ namespace WeWillSurvive
             while (time < duration)
             {
                 time += Time.deltaTime;
-                Black.alpha = Mathf.Lerp(0f, 1f, time / duration);
+                Black.alpha = dark ? Mathf.Lerp(0f, 1f, time / duration) : Mathf.Lerp(1f, 0f, time / duration);
                 yield return null;
             }
         }
