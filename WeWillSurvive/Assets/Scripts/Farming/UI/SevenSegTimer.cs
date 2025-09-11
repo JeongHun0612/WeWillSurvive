@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace WeWillSurvive
 {
@@ -13,14 +14,40 @@ namespace WeWillSurvive
         public float starttime = 100f;
         public float lowTimeThreshold = 10f;
         public bool isFlowing = false;
+        public float sirentime = 1f;
 
         float timeRemaining;
         bool colonVisible = true;
 
         void Start()
         {
+            starttime = FarmingSet.Instance.TimerTime();
             timeRemaining = starttime;
             UpdateDisplay();
+        }
+
+        public void StartSequence(float times)
+        {
+            sirentime = times;
+            StartCoroutine(StartSiren());
+        }
+
+        private IEnumerator StartSiren()
+        {
+            //make sound oneshot
+            yield return new WaitForSeconds(sirentime);
+            //make sound oneshot
+            yield return new WaitForSeconds(sirentime);
+            //make sound oneshot
+            yield return new WaitForSeconds(sirentime);
+            //make final sound oneshot
+            yield return new WaitForSeconds(sirentime);
+            isFlowing = true;
+        }
+
+        public void Halt()
+        {
+            isFlowing = false;
         }
 
         void Update()
@@ -28,7 +55,12 @@ namespace WeWillSurvive
             if (isFlowing)
             {
                 timeRemaining -= Time.deltaTime;
-                if (timeRemaining < 0) timeRemaining = 0;
+                if (timeRemaining <= 0)
+                {
+                    timeRemaining = 0;
+                    isFlowing = false;
+                    FarmingSet.Instance.EndSeq(false);
+                }
                 UpdateDisplay();
             }
         }

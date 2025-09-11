@@ -2,12 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using WeWillSurvive.Core;
+using WeWillSurvive.Item;
 
 namespace WeWillSurvive
 {
     public class damagable : MonoBehaviour
     {
-        [SerializeField] private string itemName;
+        [SerializeField] private EItem item;
         private bool canCollect = true;
 
         private void Start()
@@ -19,10 +21,13 @@ namespace WeWillSurvive
             if (canCollect && other.CompareTag("Player"))
             {
                 Debug.Log($"item has been collected");
-                var player = other.gameObject.GetComponent<PlayerMovement>();
-                if (player != null)
+                var itemManager = ServiceLocator.Get<ItemManager>();
+                if (itemManager != null)
                 {
-                    player.record(itemName);
+                    itemManager.AddItem(item);
+                    if (item == EItem.Bell) { CrewUI.Instance.FoundCrew(0); }
+                    else if (item == EItem.Cook) { CrewUI.Instance.FoundCrew(1); }
+                    else if (item == EItem.DrK) { CrewUI.Instance.FoundCrew(2); }
                 }
                 Destroy(gameObject);
             }

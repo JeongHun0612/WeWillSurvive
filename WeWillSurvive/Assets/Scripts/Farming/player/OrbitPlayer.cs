@@ -32,6 +32,8 @@ namespace WeWillSurvive
         public Color circleColor = Color.white;
         public Color endColor = Color.red;
 
+        public bool isStart = false;
+
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -41,66 +43,88 @@ namespace WeWillSurvive
             circle.localPosition = new Vector3(radius, 0f, 0f);
             currentRotationSpeed = rotationSpeed;
             targetRotationSpeed = rotationSpeed;
+            circle.gameObject.SetActive(false);
         }
 
         void Update()
         {
-            if (targetRotationSpeed < currentRotationSpeed)
-                currentRotationSpeed = Mathf.Lerp(currentRotationSpeed, targetRotationSpeed, Time.deltaTime * stopSmoothness);
-            else
-                currentRotationSpeed = Mathf.Lerp(currentRotationSpeed, targetRotationSpeed, Time.deltaTime * startSmoothness);
-
-            circle.RotateAround(transform.position, Vector3.forward, currentRotationSpeed * Time.deltaTime);
-
-            if (!isCharging && Input.GetMouseButtonDown(0))
+            if (isStart)
             {
-                isCharging = true;
-                chargeTime = 0f;
-                targetRotationSpeed = 0f;
+                if (targetRotationSpeed < currentRotationSpeed)
+                    currentRotationSpeed = Mathf.Lerp(currentRotationSpeed, targetRotationSpeed, Time.deltaTime * stopSmoothness);
+                else
+                    currentRotationSpeed = Mathf.Lerp(currentRotationSpeed, targetRotationSpeed, Time.deltaTime * startSmoothness);
 
-                GameObject bulletObj = Instantiate(bulletPrefab, circle.position, Quaternion.identity, circle);
-                currentBullet = bulletObj.GetComponent<Bullet>();
+                circle.RotateAround(transform.position, Vector3.forward, currentRotationSpeed * Time.deltaTime);
+
+                if (!isCharging && Input.GetMouseButtonDown(0))
+                {
+                    isCharging = true;
+                    chargeTime = 0f;
+                    targetRotationSpeed = 0f;
+
+                    GameObject bulletObj = Instantiate(bulletPrefab, circle.position, Quaternion.identity, circle);
+                    currentBullet = bulletObj.GetComponent<Bullet>();
+                }
+                else if (currentBullet != null && isCharging && Input.GetMouseButton(0))
+                {
+                    chargeTime += Time.deltaTime;
+                    float clampedRatio = Mathf.Clamp01(chargeTime / maxChargeTime);
+                    circle.localScale = Vector3.one * (1f + (clampedRatio / 100f));
+                    circleRenderer.color = Color.Lerp(circleColor, endColor, clampedRatio);
+
+                    float clampedTime = Mathf.Min(chargeTime, maxChargeTime);
+                    currentBullet.Swell(clampedTime / maxChargeTime);
+                }
+                else if (currentBullet != null && isCharging && Input.GetMouseButtonUp(0))
+                {
+                    isCharging = false;
+                    targetRotationSpeed = rotationSpeed;
+
+                    float clampedTime = Mathf.Min(chargeTime, maxChargeTime);
+                    float chargeRatio = clampedTime / maxChargeTime;
+
+                    Vector2 pushDir = (transform.position - circle.position).normalized;
+                    rb.AddForce(pushDir * (chargeRatio * maxForce), ForceMode2D.Impulse);
+
+                    circle.localScale = Vector3.one;
+                    circleRenderer.color = circleColor;
+                    chargeTime = 0f;
+
+                    currentBullet.gameObject.transform.SetParent(transform.parent, worldPositionStays: true);
+                    currentBullet.Shoot(-pushDir);
+                    currentBullet = null;
+                }
+
+                animator.SetBool("isPush", (rb.linearVelocity.magnitude > pushThreshold));
+                if (rb.linearVelocity.x < -0.01f)
+                {
+                    visual.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
+                }
+                else if (rb.linearVelocity.x > 0.01f)
+                {
+                    visual.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                }
             }
-            else if (currentBullet != null && isCharging && Input.GetMouseButton(0))
-            {
-                chargeTime += Time.deltaTime;
-                float clampedRatio = Mathf.Clamp01(chargeTime / maxChargeTime);
-                circle.localScale = Vector3.one * (1f + (clampedRatio / 100f));
-                circleRenderer.color = Color.Lerp(circleColor, endColor, clampedRatio);
-
-                float clampedTime = Mathf.Min(chargeTime, maxChargeTime);
-                currentBullet.Swell(clampedTime / maxChargeTime);
-            }
-            else if (currentBullet != null && isCharging && Input.GetMouseButtonUp(0))
-            {
-                isCharging = false;
-                targetRotationSpeed = rotationSpeed;
-
-                float clampedTime = Mathf.Min(chargeTime, maxChargeTime);
-                float chargeRatio = clampedTime / maxChargeTime;
-
-                Vector2 pushDir = (transform.position - circle.position).normalized;
-                rb.AddForce(pushDir * (chargeRatio * maxForce), ForceMode2D.Impulse);
-
-                circle.localScale = Vector3.one;
-                circleRenderer.color = circleColor;
-                chargeTime = 0f;
-
-                currentBullet.gameObject.transform.SetParent(transform.parent, worldPositionStays: true);
-                currentBullet.Shoot(-pushDir);
-                currentBullet = null;
-            }
-
-            animator.SetBool("isPush", (rb.linearVelocity.magnitude > pushThreshold));
-            if (rb.linearVelocity.x < -0.01f)
-            {
-                visual.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-            }
-            else if (rb.linearVelocity.x > 0.01f)
-            {
-                visual.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-            }
-
         }
+
+        public void StartPlayer()
+        {
+            circle.gameObject.SetActive(true);
+            isStart = true;
+        }
+
+        public void EndPlayer()
+        {
+            circle.gameObject.SetActive(false);
+            var trigger = GetComponent<TriggerHoldUI>();
+            if (trigger != null)
+            {
+                trigger.HideUI();
+                trigger.enabled = false;
+            }
+            isStart = false;
+        }
+
     }
 }

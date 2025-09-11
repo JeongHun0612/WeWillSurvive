@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NormalWall
   - BreakingWall
+  - Exit
   layers:
   - Default
   - TransparentFX

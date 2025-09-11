@@ -90,12 +90,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec10c089f0e7c094a9dfb0ce9940f81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 100
-  shrinkDelay: 0
-  shrinkSpeed: 0
+  bulletSpeed: 150
+  liveTime: 5
   maxSize: 1
   minSize: 0.2
-  maxDamage: 10
+  maxDamage: 100
   hitEffectPrefab: {fileID: 2759696077678493668, guid: 0d01c30fa57a7ee4d9cf49b76275e067, type: 3}
   isCharging: 1
 --- !u!58 &2951049110094424143

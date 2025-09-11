@@ -159,6 +159,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 812054583539294628, guid: b008f5f714eeb80478a2767e89f10b95, type: 3}
+      propertyPath: item
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 812054583539294628, guid: b008f5f714eeb80478a2767e89f10b95, type: 3}
       propertyPath: itemName
       value: Bell
       objectReference: {fileID: 0}
