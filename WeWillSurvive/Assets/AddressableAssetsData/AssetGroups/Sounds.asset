@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Sounds
+  m_EditorClassIdentifier: 
+  m_GroupName: Sounds
+  m_GUID: e02b42577eb579e499d42a43ae1fce7c
+  m_SerializeEntries:
+  - m_GUID: 1023efd96da8f5441a62322e375900c6
+    m_Address: Assets/Sound Assets/SFX_Test_3.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74e6b33bba513cd42b91b340d4b70b42
+    m_Address: Assets/Sound Assets/SFX_Test_1.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9aa93c762b5b7aa4cab063f56aa0f7cf
+    m_Address: Assets/Sound Assets/BGM_Test_1.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BGM
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dedc8975a98d1aa419cf967a0c7205ab
+    m_Address: Assets/Sound Assets/BGM_Test_2.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BGM
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e2e8a847382190a42808780eff936ae0
+    m_Address: Assets/Sound Assets/SFX_Test_2.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f7b3b476672664a47ab9721e6106ada6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 86ee86310832c74478653743989a4b2b, type: 2}
+    - {fileID: 11400000, guid: a5fcf08c0ff42e84890561c2c85b55c2, type: 2}

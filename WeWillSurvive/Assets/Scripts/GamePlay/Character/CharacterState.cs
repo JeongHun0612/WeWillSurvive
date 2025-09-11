@@ -10,51 +10,39 @@ namespace WeWillSurvive.Character
     public enum EState
     {
         [InspectorName("정상")]
-        [Description("정상")]
         Normal = 0,
 
         [InspectorName("허기짐")]
-        [Description("허기짐")]
         Hungry = 1 << 0,
 
         [InspectorName("영양 결핍")]
-        [Description("영양 결핍")]
         Starve = 1 << 1,
 
         [InspectorName("갈증")]
-        [Description("갈증")]
         Thirsty = 1 << 2,
 
         [InspectorName("수분 고갈")]
-        [Description("수분 고갈")]
         Dehydrate = 1 << 3,
 
         [InspectorName("다침")]
-        [Description("다침")]
         Injured = 1 << 4,
 
         [InspectorName("병듦")]
-        [Description("병듦")]
         Sick = 1 << 5,
 
         [InspectorName("불안함")]
-        [Description("불안함")]
         Anxious = 1 << 6,
 
         [InspectorName("공포")]
-        [Description("공포")]
         Panic = 1 << 7,
 
         [InspectorName("미침")]
-        [Description("미침")]
         Mad = 1 << 8,
 
         [InspectorName("탐사")]
-        [Description("탐사")]
         Exploring = 1 << 9,
 
         [InspectorName("사망")]
-        [Description("사망")]
         Dead = 1 << 10,
     }
 
@@ -98,7 +86,7 @@ namespace WeWillSurvive.Character
         public string FormatStateString()
         {
             if (CurrentState == EState.Normal)
-                return EnumUtil.GetDescription(EState.Normal);
+                return EnumUtil.GetInspectorName(EState.Normal);
 
             var descriptions = new List<string>();
 
@@ -108,7 +96,7 @@ namespace WeWillSurvive.Character
 
                 if (CurrentState.HasFlag(state))
                 {
-                    descriptions.Add(EnumUtil.GetDescription(state));
+                    descriptions.Add(EnumUtil.GetInspectorName(state));
                 }
             }
 

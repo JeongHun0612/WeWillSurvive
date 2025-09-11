@@ -26,6 +26,7 @@ namespace WeWillSurvive.Core
 
             await ServiceLocator.AutoRegisterServices();
             await UIManager.Instance.InitializeAsync();
+            await SoundManager.Instance.InitializeAsync();
             await GameEventManager.Instance.InitializeAsync();
 
             UIManager.Instance.LoadingUI.Hide();
@@ -38,6 +39,8 @@ namespace WeWillSurvive.Core
         public void OnMoveTitle()
         {
             ItemManager.Dipose();
+
+            SoundManager.Instance.PlayBGM(EBGM.BGM_Test_1);
 
             UIManager.Instance.CloseAllUIs();
             UIManager.Instance.ShowScene<UI_Title>();
@@ -57,6 +60,8 @@ namespace WeWillSurvive.Core
 
         public async void OnStartSurvive()
         {
+            SoundManager.Instance.PlayBGM(EBGM.BGM_Test_2);
+
             UIManager.Instance.CloseAllUIs();
 
             // TODO 파밍씬 오브젝트 Dipose

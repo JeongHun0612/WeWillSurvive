@@ -19,7 +19,7 @@ namespace WeWillSurvive
 
             GameManager.Instance.OnStartSurvive();
 
-            // Debug ������ �Ҵ�
+            // Debug 데이터 할당
             var itemDatas = DataManager.LoadDataList<ItemData>();
             foreach (var itemData in itemDatas)
             {
@@ -33,17 +33,21 @@ namespace WeWillSurvive
 
         public void OnClickGameQuit()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Test_1);
+
 #if UNITY_EDITOR
-            // ����Ƽ �����Ϳ��� ���� ���� ���� �÷��� ��带 ����
+            // 유니티 에디터에서 실행 중일 때는 플레이 모드를 종료
             UnityEditor.EditorApplication.isPlaying = false;
 #else
-            // ����� ���ӿ����� ���ø����̼� ����
+            // 빌드된 게임에서는 어플리케이션 종료
             Application.Quit();
 #endif
         }
 
         public void OnClickItemSetting()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Test_2);
+
             UIManager.Instance.ShowPopup<UI_DebugSetting>();
         }
     }

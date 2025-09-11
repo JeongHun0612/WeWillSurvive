@@ -53,8 +53,6 @@ namespace WeWillSurvive
             }
         }
 
-
-
         public void OnPointerClick(PointerEventData eventData)
         {
             if (_showStatus == null)

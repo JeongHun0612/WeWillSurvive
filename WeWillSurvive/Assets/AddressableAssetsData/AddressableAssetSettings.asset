@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 81d2f0beb4717ca459907aab63efa538
   m_currentHash:
     serializedVersion: 2
-    Hash: 36ef956f5ea48d6fd5b802a92cf172ec
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -68,6 +68,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00f4e811bbc1cd24fa78744335b9114f, type: 2}
   - {fileID: 11400000, guid: d6beafb584452f5409bad2f2484b29ed, type: 2}
   - {fileID: 11400000, guid: 2745393858384154c8f9ba1d2a885156, type: 2}
+  - {fileID: 11400000, guid: 58af97c422685804aaafe9e9c1ec9d23, type: 2}
   - {fileID: 11400000, guid: 6914015d27615314b8e65f14fc942767, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
@@ -110,6 +111,8 @@ MonoBehaviour:
     - default
     - ItemEffect
     - ChoiceIconData
+    - BGM
+    - SFX
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: dbd850d2bc74e79468c17110fb7a2d29, type: 2}

@@ -31,6 +31,8 @@ namespace WeWillSurvive
 
         public void OnClickSave()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Test_3);
+
             foreach (var itemToggle in _itemToggles)
             {
                 var itemData = _itemDatas.FirstOrDefault(itemData => itemData.Item == itemToggle.Item);
@@ -51,6 +53,8 @@ namespace WeWillSurvive
 
         public void OnClickExit()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Test_2);
+
             UIManager.Instance.CloseCurrentPopup();
         }
     }

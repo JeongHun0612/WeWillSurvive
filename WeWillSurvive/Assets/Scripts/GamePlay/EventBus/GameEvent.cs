@@ -23,12 +23,6 @@ namespace WeWillSurvive
         public ERoom CurrentRoom;
     }
 
-    public struct ItemSelectedEvent
-    {
-        public EItem Item;
-        public bool IsSelected;
-    }
-
     public struct ChoiceOptionSelectedEvent
     {
         public EItem Item;

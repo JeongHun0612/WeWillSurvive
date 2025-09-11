@@ -1,3 +1,4 @@
+using UnityEngine;
 using WeWillSurvive.Character;
 using WeWillSurvive.Item;
 using WeWillSurvive.Status;
