@@ -13,9 +13,9 @@ namespace WeWillSurvive
         public void OnClickGameStart()
         {
             //Testing farming connection
-            //GameManager.Instance.OnStartParming();
+            GameManager.Instance.OnStartParming();
 
-            /**/
+            /*
 
             GameManager.Instance.OnStartSurvive();
 
@@ -28,7 +28,7 @@ namespace WeWillSurvive
 
                 ItemManager.AddItem(itemData.Item, itemData.Count);
             }
-            /**/
+            */
         }
 
         public void OnClickGameQuit()

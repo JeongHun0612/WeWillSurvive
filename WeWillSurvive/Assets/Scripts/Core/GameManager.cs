@@ -19,6 +19,10 @@ namespace WeWillSurvive.Core
         private LogManager LogManager => ServiceLocator.Get<LogManager>();
         private EventBus EventBus => ServiceLocator.Get<EventBus>();
 
+        [SerializeField] private GameObject FarmingPrefab;
+        private GameObject FarmingObject;
+        private GameObject mainCamera;
+
         private async void Start()
         {
             UIManager.Instance.LoadingUI.Show();
@@ -43,11 +47,13 @@ namespace WeWillSurvive.Core
         public void OnStartParming()
         {
             UIManager.Instance.CloseAllUIs();
-            // TODO 파밍 인트로 삽입
             //await UIManager.Instance.ShowPopup<UI_Intro>().PlayScene();
 
-            //turn off current main camera
-            //turn on FarmingSet - farming set will do a start sequence as it awakes and then add items as they collect them.
+            ///
+            mainCamera = Camera.main.gameObject;
+            mainCamera.SetActive(false);
+            FarmingObject = Instantiate(FarmingPrefab);
+            ///
 
         }
 
@@ -55,7 +61,11 @@ namespace WeWillSurvive.Core
         {
             UIManager.Instance.CloseAllUIs();
 
-            // TODO 파밍씬 오브젝트 Dipose
+            ///
+            mainCamera.SetActive(true);
+            Destroy(FarmingObject);
+            FarmingObject = null;
+            ///
 
             await UIManager.Instance.ShowPopup<UI_Intro>().PlayScene();
 

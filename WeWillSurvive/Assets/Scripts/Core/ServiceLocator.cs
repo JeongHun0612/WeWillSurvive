@@ -46,7 +46,7 @@ namespace WeWillSurvive.Core
                         }
                     }
 
-                    await((IService)serviceInstance).InitializeAsync();
+                    await ((IService)serviceInstance).InitializeAsync();
 
                     Debug.Log($"Auto-registered service: {serviceType.Name}");
                 }
@@ -77,10 +77,10 @@ namespace WeWillSurvive.Core
         }
 
         /// <summary>
-        /// ¼­ºñ½º °¡Á®¿À±â
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <typeparam name="TInterface">¼­ºñ½º ÀÎÅÍÆäÀÌ½º Å¸ÀÔ</typeparam>
-        /// <returns>µî·ÏµÈ ¼­ºñ½º ÀÎ½ºÅÏ½º ¶Ç´Â ±âº»°ª</returns>
+        /// <typeparam name="TInterface">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ Å¸ï¿½ï¿½</typeparam>
+        /// <returns>ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½Ç´ï¿½ ï¿½âº»ï¿½ï¿½</returns>
         public static TInterface Get<TInterface>()
         {
             Type interfaceType = typeof(TInterface);
@@ -90,25 +90,25 @@ namespace WeWillSurvive.Core
                 return (TInterface)service;
             }
 
-            Debug.LogError($"Service {interfaceType.Name} not found!");
+            Debug.Log($"Service {interfaceType.Name} not found!");
             return default;
         }
 
         /// <summary>
-        /// ¼­ºñ½º Á¸Àç ¿©ºÎ È®ÀÎ
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
         /// </summary>
-        /// <typeparam name="TInterface">¼­ºñ½º ÀÎÅÍÆäÀÌ½º Å¸ÀÔ</typeparam>
-        /// <returns>¼­ºñ½º Á¸Àç ¿©ºÎ</returns>
+        /// <typeparam name="TInterface">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ Å¸ï¿½ï¿½</typeparam>
+        /// <returns>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</returns>
         public static bool HasService<TInterface>()
         {
             return _services.ContainsKey(typeof(TInterface));
         }
 
         /// <summary>
-        /// ¼­ºñ½º Á¦°Å
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <typeparam name="TInterface">¼­ºñ½º ÀÎÅÍÆäÀÌ½º Å¸ÀÔ</typeparam>
-        /// <returns>Á¦°Å ¼º°ø ¿©ºÎ</returns>
+        /// <typeparam name="TInterface">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ Å¸ï¿½ï¿½</typeparam>
+        /// <returns>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</returns>
         public static bool Unregister<TInterface>()
         {
             Type interfaceType = typeof(TInterface);

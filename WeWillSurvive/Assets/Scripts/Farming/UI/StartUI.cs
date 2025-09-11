@@ -5,48 +5,43 @@ namespace WeWillSurvive
 {
     public class StartUI : MonoBehaviour
     {
-        [SerializeField] private GameObject move;
-        [SerializeField] private GameObject collect;
-        [SerializeField] private GameObject returns;
+        [SerializeField] private GameObject one;
+        [SerializeField] private GameObject two;
 
+        [SerializeField] private float TotalTime = 6f;
         [SerializeField] private float fadeTime = 0.2f;
         private CanvasGroup canvasGroup;
 
         void Awake()
         {
-            move.SetActive(true);
-            collect.SetActive(true);
-            returns.SetActive(false);
-
             canvasGroup = GetComponent<CanvasGroup>();
             if (canvasGroup == null)
                 canvasGroup = gameObject.AddComponent<CanvasGroup>();
             canvasGroup.alpha = 0f;
-
-            StartSequence(6f);
-            move.SetActive(false);
-            collect.SetActive(false);
-            returns.SetActive(false);
         }
 
-        public void StartSequence(float totalTime)
+        public void StartSequence(float times)
         {
-            StartCoroutine(Sequence(totalTime));
+            TotalTime = times;
+            StartCoroutine(Sequence(TotalTime));
         }
 
         private IEnumerator Sequence(float totalTime)
         {
+            one.SetActive(true);
+            two.SetActive(false);
             fadeTime = Mathf.Min(fadeTime, totalTime * 0.25f);
             float stayTime = (totalTime - (4f * fadeTime)) * 0.5f;
             yield return Fade(1f, fadeTime);
             yield return new WaitForSeconds(stayTime);
             yield return Fade(0f, fadeTime);
-            move.SetActive(false);
-            collect.SetActive(false);
-            returns.SetActive(true);
+            one.SetActive(false);
+            two.SetActive(true);
             yield return Fade(1f, fadeTime);
             yield return new WaitForSeconds(stayTime);
             yield return Fade(0f, fadeTime);
+            one.SetActive(false);
+            two.SetActive(false);
         }
         private IEnumerator Fade(float target, float duration)
         {

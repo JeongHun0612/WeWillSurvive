@@ -74,7 +74,7 @@ namespace WeWillSurvive
             for (int i = 0; i < count; i++)
             {
                 Vector2 pos = GetValidPositionCollider(GetRandomPosition());
-                GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
+                GameObject prefab = prefabs[i];
                 Instantiate(prefab, pos, Quaternion.identity, transform);
             }
         }
