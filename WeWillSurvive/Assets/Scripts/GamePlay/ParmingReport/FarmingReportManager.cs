@@ -19,6 +19,10 @@ namespace WeWillSurvive.FarmingReport
     {
         [SerializeField] private List<FarmingReportData> _farmingReportDatas;
 
+        [SerializeField]
+        [TextArea(3, 5)]
+        private string _farmingFailReportText;
+
         private Dictionary<EParmingReportType, FarmingReportData> _farmingReportDicts = new();
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
@@ -47,6 +51,10 @@ namespace WeWillSurvive.FarmingReport
             // 크루 인원에 따른 결과 텍스트
             int crewCount = CharacterManager.AliveCharactersCount();
             LogReportByValue(EParmingReportType.ReturnCrew, crewCount);
+
+            // 파밍 후 탈출 성공 여부 텍스트
+            if (!GameManager.Instance.IsFarmingSuccess)
+                LogManager.AddMainEventResultLog(_farmingFailReportText);
 
             // 식량에 따른 결과 텍스트
             int foodCount = (int)ItemManager.GetItemCount(EItem.Food);
