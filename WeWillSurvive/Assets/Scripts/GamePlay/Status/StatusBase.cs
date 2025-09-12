@@ -36,6 +36,8 @@ namespace WeWillSurvive
         public abstract EBuffEffect BlockStatusBuffEffect { get; }
         protected abstract bool IsDeadLevel(TLevel level);
 
+        public int GetCurrentLevel() => (int)(object)_level;
+
         public virtual void OnNewDay()
         {
             // 상태 악화 방어 버프 존재
@@ -122,7 +124,7 @@ namespace WeWillSurvive
                 step = 1;
 
             int currentIndex = GetCurrentLevelIndex();
-            if (currentIndex == -1)
+            if (currentIndex == -1 || currentIndex == OrderedLevels.Length - 1)
                 return;
 
             int targetIndex = Mathf.Min(currentIndex + step, OrderedLevels.Length - 1);
@@ -147,7 +149,7 @@ namespace WeWillSurvive
                 step = 1;
 
             int currentIndex = GetCurrentLevelIndex();
-            if (currentIndex == -1)
+            if (currentIndex == -1 || currentIndex == 0)
                 return;
 
             int targetIndex = Mathf.Max(currentIndex - step, 0);

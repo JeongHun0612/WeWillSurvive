@@ -47,35 +47,20 @@ MonoBehaviour:
     _results:
     - _outComeType: 0
       _conditions: []
-      _resultTemplates: []
-      _resultText: "\uC555\uCD95\uAE30 \uC18C\uC74C\uC774 \uCEE4\uC9C0\uACE0 \uC624\uC5FC\uC218\uAC00
+      _resultTemplates:
+      - "\uC555\uCD95\uAE30 \uC18C\uC74C\uC774 \uCEE4\uC9C0\uACE0 \uC624\uC5FC\uC218\uAC00
         \uC800\uC7A5 \uB799 \uD558\uB2E8\uAE4C\uC9C0 \uBC88\uC84C\uB2E4. \uACB0\uAD6D
         \uC6B0\uC8FC \uAE30\uC9C0 \uB0B4\uBD80\uAE4C\uC9C0 \uC624\uC5FC\uC218\uAC00
         \uD3B4\uC84C\uACE0, \uC624\uC5FC\uC218\uC5D0 \uC816\uC740 \uD3EC\uC7A5\uD488\uC740
         \uD3D0\uAE30\uD574\uC57C \uD588\uB2E4."
+      - "\uBE44\uCD95\uD488\uC774 \uC774\uBBF8 \u20180\u2019\uC774\uB77C \uBC84\uB9B4
+        \uAC83\uB3C4 \uC5C6\uC5C8\uB2E4. \uC545\uCDE8\uB9CC \uB0A8\uC544 \uC791\uC5C5
+        \uC758\uC695\uB9CC \uAEBE\uC77C \uBFD0\uC774\uC5C8\uB2E4."
+      _resultText: 
       _actions:
       - _actionType: 203
         _targetId: 
         _parameter: 
         _value: 2
-      _isAffectedByStats: 0
-      _probability: 1
-    - _outComeType: 0
-      _conditions:
-      - _conditionType: 201
-        _targetId: Food
-        _parameter: 
-        _value1: 
-        _value2: 
-      - _conditionType: 201
-        _targetId: Water
-        _parameter: 
-        _value1: 
-        _value2: 
-      _resultTemplates: []
-      _resultText: "\uBE44\uCD95\uD488\uC774 \uC774\uBBF8 \u20180\u2019\uC774\uB77C
-        \uBC84\uB9B4 \uAC83\uB3C4 \uC5C6\uC5C8\uB2E4. \uC545\uCDE8\uB9CC \uB0A8\uC544
-        \uC791\uC5C5 \uC758\uC695\uB9CC \uAEBE\uC77C \uBFD0\uC774\uC5C8\uB2E4."
-      _actions: []
       _isAffectedByStats: 0
       _probability: 1

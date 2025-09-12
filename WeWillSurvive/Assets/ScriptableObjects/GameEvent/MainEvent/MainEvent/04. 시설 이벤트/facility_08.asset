@@ -77,16 +77,3 @@ MonoBehaviour:
         _value: 
       _isAffectedByStats: 0
       _probability: 1
-    - _outComeType: 0
-      _conditions: []
-      _resultTemplates:
-      - "\uBB38\uC740 \uADF8\uB300\uB85C \uC7A0\uACBC\uB2E4. \uC0C1\uBD80 \uC120\uBC18\uC5D0\uC11C
-        \uB5A8\uC5B4\uC9C4 \uC9D0\uC774 \uBC14\uB2E5\uC744 \uB36E\uC5C8\uB2E4. \uB099\uD558
-        \uCDA9\uACA9\uC73C\uB85C \uC7A5\uBE44 \uD558\uB098\uAC00 \uBC15\uC0B4 \uB0AC\uB2E4."
-      - "\uB5A8\uC5B4\uC9C4 \uBC15\uC2A4\uB294 \uBE44\uC5B4 \uC788\uC5C8\uB2E4. \uC783\uC744
-        \uC7A5\uBE44\uB3C4 \uC5C6\uC5B4\uC11C, \uB354 \uC815\uB9AC\uD560 \uAC83\uB3C4
-        \uC5C6\uC5C8\uB2E4. \uB9C9\uD78C \uD1B5\uB85C\uB9CC \uB0A8\uC558\uB2E4."
-      _resultText: 
-      _actions: []
-      _isAffectedByStats: 0
-      _probability: 1

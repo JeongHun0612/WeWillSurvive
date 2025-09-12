@@ -23,6 +23,7 @@ MonoBehaviour:
     \uD560\uAE4C."
   _conditions: []
   _choiceSchema: 50
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 200
     _requiredAmount: 0
@@ -68,15 +69,15 @@ MonoBehaviour:
       _actions:
       - _actionType: 103
         _targetId: Cook
-        _parameter: Hunger
+        _parameter: 
         _value: -10
       - _actionType: 103
         _targetId: Bell
-        _parameter: Hunger
+        _parameter: 
         _value: 10
       - _actionType: 103
         _targetId: DrK
-        _parameter: Hunger
+        _parameter: 
         _value: -10
       _isAffectedByStats: 0
       _probability: 1
@@ -95,15 +96,15 @@ MonoBehaviour:
       _actions:
       - _actionType: 103
         _targetId: Cook
-        _parameter: Hunger
+        _parameter: 
         _value: -10
       - _actionType: 103
         _targetId: Bell
-        _parameter: Hunger
+        _parameter: 
         _value: -10
       - _actionType: 103
         _targetId: DrK
-        _parameter: Hunger
+        _parameter: 
         _value: 10
       _isAffectedByStats: 0
       _probability: 1

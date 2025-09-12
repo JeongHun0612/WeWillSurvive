@@ -26,5 +26,6 @@ namespace WeWillSurvive.Status
         public void WorsenFully();
         public void RecoveryStatus(int step = 1);
         public void RecoverFully();
+        public int GetCurrentLevel();
     }
 }

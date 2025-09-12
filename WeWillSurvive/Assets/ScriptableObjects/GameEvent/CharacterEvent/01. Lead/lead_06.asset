@@ -22,6 +22,7 @@ MonoBehaviour:
     \uACB0\uACFC\uB97C \uBC14\uAFBC\uB2E4."
   _conditions: []
   _choiceSchema: 50
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 200
     _requiredAmount: 0

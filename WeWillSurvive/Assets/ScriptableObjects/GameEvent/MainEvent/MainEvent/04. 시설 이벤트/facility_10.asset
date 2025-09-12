@@ -65,45 +65,36 @@ MonoBehaviour:
     _choiceText: 
     _results:
     - _outComeType: 0
-      _conditions: []
-      _resultTemplates: []
-      _resultText: "\uACBD\uBCF4\uAC00 \uAC04\uD5D0\uC801\uC73C\uB85C \uC6B8\uB838\uACE0,
-        \uC77C\uBD80 \uC778\uC6D0\uC774 \uB450\uD1B5\uC744 \uD638\uC18C\uD588\uB2E4.
-        \uAC00\uC2B5 \uBC0F \uD658\uAE30 \uBCF4\uC815\uC73C\uB85C \uBB3C 2\uAC1C\uB97C
-        \uC18C\uBAA8\uD588\uB2E4."
-      _actions:
-      - _actionType: 201
+      _conditions:
+      - _conditionType: 202
         _targetId: Water
         _parameter: 
-        _value: 2
-      - _actionType: 111
+        _value1: 2
+        _value2: 
+      _resultTemplates: []
+      _resultText: "\uACBD\uBCF4\uAC00 \uAC04\uD5D0\uC801\uC73C\uB85C \uC6B8\uB838\uACE0,
+        \uC784\uC2DC\uB85C \uBB3C\uC744 \uC774\uC6A9\uD558\uC5EC \uC0B0\uC18C \uBBF9\uC11C\uB97C
+        \uC218\uB9AC\uD588\uB2E4. \uAC00\uC2B5 \uBC0F \uD658\uAE30 \uBCF4\uC815\uC73C\uB85C
+        \uBB3C 2\uAC1C\uB97C \uC18C\uBAA8\uD588\uB2E4."
+      _actions:
+      - _actionType: 201
         _targetId: Water
         _parameter: 
         _value: 2
       _isAffectedByStats: 0
       _probability: 1
     - _outComeType: 0
-      _conditions:
-      - _conditionType: 201
-        _targetId: Water
-        _parameter: 
-        _value1: 
-        _value2: 
+      _conditions: []
       _resultTemplates:
-      - "\uBB38\uC740 \uADF8\uB300\uB85C \uC7A0\uACBC\uB2E4. \uC0C1\uBD80 \uC120\uBC18\uC5D0\uC11C
-        \uB5A8\uC5B4\uC9C4 \uC9D0\uC774 \uBC14\uB2E5\uC744 \uB36E\uC5C8\uB2E4. \uB099\uD558
-        \uCDA9\uACA9\uC73C\uB85C \uC7A5\uBE44 \uD558\uB098\uAC00 \uBC15\uC0B4 \uB0AC\uB2E4."
-      - "\uB5A8\uC5B4\uC9C4 \uBC15\uC2A4\uB294 \uBE44\uC5B4 \uC788\uC5C8\uB2E4. \uC783\uC744
-        \uC7A5\uBE44\uB3C4 \uC5C6\uC5B4\uC11C, \uB354 \uC815\uB9AC\uD560 \uAC83\uB3C4
-        \uC5C6\uC5C8\uB2E4. \uB9C9\uD78C \uD1B5\uB85C\uB9CC \uB0A8\uC558\uB2E4."
-      _resultText: "\uC0B0\uC18C \uBBF9\uC11C \uBCF4\uCDA9\uC5D0 \uC0AC\uC6A9\uD560
-        \uBB3C\uC790\uAC00 \uC5C6\uC5B4\uC11C \uB354 \uC190\uBCFC \uC218 \uC5C6\uC5C8\uB2E4.
-        \uB9C8\uB978 \uACF5\uAE30\uB9CC \uB3CC\uACE0, \uBAA8\uB450 \uC785\uC220\uC774
-        \uAC08\uB77C\uC84C\uB2E4."
+      - "\uC0B0\uC18C \uBBF9\uC11C \uBCF4\uCDA9\uC5D0 \uC0AC\uC6A9\uD560 \uBB3C\uC774
+        \uB354 \uC774\uC0C1 \uC5C6\uC5B4\uC11C \uACB0\uAD6D \uC190\uBCFC \uC218 \uC5C6\uC5C8\uB2E4.
+        \uB0AE\uC740 \uC0B0\uC18C \uB18D\uB3C4\uB85C \uC778\uD574 {}(\uC774)\uAC00
+        \uB450\uD1B5\uC744 \uD638\uC18C\uD558\uACE0 \uC788\uB2E4."
+      _resultText: 
       _actions:
       - _actionType: 111
-        _targetId: Lead
-        _parameter: Hunger
+        _targetId: 
+        _parameter: Injury
         _value: 
       _isAffectedByStats: 0
       _probability: 1

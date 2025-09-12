@@ -24,11 +24,8 @@ namespace WeWillSurvive.GameEvent
         [InspectorName("캐릭터 사망")] CharacterDaed = 102,
         [InspectorName("캐릭터 이벤트 확률 보정")] CharacterEventRateModifier = 103,
 
-
-        [InspectorName("랜덤한 캐릭터 다침 및 사망")] RandomCharacterInjuryWorsen = 110,
-        [InspectorName("정상 캐릭터 중 랜덤한 캐릭터 다침")] InjureRandomHealthyCharacter = 111,
-
-        [InspectorName("(결과 텍스트 변경) 랜덤 캐릭터")] ChangeResultTextByRandomCharacter = 120,
+        [InspectorName("랜덤한 캐릭터 상태 악화 (완전 랜덤)")] WorsenRandomCharacterStatus = 110,
+        [InspectorName("랜덤한 캐릭터 상태 악화 (정상 우선)")] WorsenPrioritizedCharacterStatus = 111,
 
         [InspectorName("아이템 획득")] AddItem = 200,
         [InspectorName("아이템 삭제")] RemoveItem = 201,
@@ -43,6 +40,9 @@ namespace WeWillSurvive.GameEvent
 
         [InspectorName("특정 버프 발생")] ActivateBuff = 500,
         [InspectorName("다음 캐릭터 이벤트까지 특정 버프 발생")] ActivateBuffUntilNextCharacterEvent = 501,
+
+        [InspectorName("침입 이벤트 방어 성공")] InvasionDefenseSuccess = 600,
+        [InspectorName("침입 이벤트 방어 실패")] InvasionDefenseFailure = 601,
     }
 
     public interface IEventActionHandler
@@ -190,81 +190,68 @@ namespace WeWillSurvive.GameEvent
         }
     }
 
+
     /// <summary>
-    /// 랜덤한 캐릭터 다침 및 사망
+    /// 랜덤한 캐릭터 상태 악화 (완전 랜덤)
     /// </summary>
-    public class RandomCharacterInjuryWorsenApplicator : IEventActionHandler
+    public class WorsenRandomCharacterStatusApplicator : IEventActionHandler
     {
-        public EActionType HandledActionType => EActionType.RandomCharacterInjuryWorsen;
+        public EActionType HandledActionType => EActionType.WorsenRandomCharacterStatus;
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
         public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
         {
+            var statusType = EnumUtil.ParseEnum<EStatusType>(action.Parameter);
+
             var characters = CharacterManager.GetCharactersInShelter();
             int randomIndex = UnityEngine.Random.Range(0, characters.Count);
             var targetCharacter = characters[randomIndex];
 
-            var status = targetCharacter.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
-            if (status.Level == EInjuredLevel.Normal)
+            var status = targetCharacter.Status.GetStatus<IStatus>(statusType);
+            status.WorsenStatus();
+            
+            if (resultTemplates != null && resultTemplates.Count > 0)
             {
-                status.WorsenStatus();
                 resultText = resultTemplates[0].Replace("{}", targetCharacter.Name);
-            }
-            else if (status.Level == EInjuredLevel.Injured || status.Level == EInjuredLevel.Sick)
-            {
-                string deadMessage = string.Format(resultTemplates[2], GameManager.Instance.Day, targetCharacter.Name);
-                targetCharacter.OnDead(deadMessage);
-                resultText = resultTemplates[1].Replace("{}", targetCharacter.Name);
             }
         }
     }
 
     /// <summary>
-    /// 정상 캐릭터 중 랜덤한 캐릭터 다침
+    /// 랜덤한 캐릭터 상태 악화 (정상 우선)
     /// </summary>
-    public class InjureRandomHealthyCharacterApplicator : IEventActionHandler
+    public class WorsenPrioritizedCharacterStatusApplicator : IEventActionHandler
     {
-        public EActionType HandledActionType => EActionType.InjureRandomHealthyCharacter;
+        public EActionType HandledActionType => EActionType.WorsenPrioritizedCharacterStatus;
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
 
         public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
         {
-            var characters = CharacterManager.GetCharactersInShelter();
+            var statusType = EnumUtil.ParseEnum<EStatusType>(action.Parameter);
 
             var targetCharacters = CharacterManager.GetCharactersInShelter()
-                .Where(character =>
+                .Select(character => new
                 {
-                    var status = character.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
-                    return status != null && status.Level == EInjuredLevel.Normal;
-                }).ToList();
-
-            if (targetCharacters.Count == 0)
-                return;
+                    Character = character,
+                    Level = character.Status.GetStatus<IStatus>(statusType).GetCurrentLevel()
+                })
+                .GroupBy(x => x.Level)
+                .OrderBy(g => g.Key)
+                .First()
+                .Select(x => x.Character)
+                .ToList();
 
             int randomIndex = UnityEngine.Random.Range(0, targetCharacters.Count);
             var targetCharacter = targetCharacters[randomIndex];
-            var status = targetCharacter.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
+            var status = targetCharacter.Status.GetStatus<IStatus>(statusType);
             status.WorsenStatus();
-        }
-    }
 
-    /// <summary>
-    /// (결과 텍스트 변경) 랜덤 캐릭터
-    /// </summary>
-    public class ChangeResultTextByRandomCharacterApplicator : IEventActionHandler
-    {
-        public EActionType HandledActionType => EActionType.ChangeResultTextByRandomCharacter;
-
-        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
-
-        public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
-        {
-            var characters = CharacterManager.GetCharactersInShelter();
-            int randomIndex = UnityEngine.Random.Range(0, characters.Count);
-            var targetCharacter = characters[randomIndex];
-            resultText = resultText.Replace("{}", targetCharacter.Name);
+            if (resultTemplates != null && resultTemplates.Count > 0)
+            {
+                resultText = resultTemplates[0].Replace("{}", targetCharacter.Name);
+            }
         }
     }
 
@@ -331,12 +318,10 @@ namespace WeWillSurvive.GameEvent
             if (item == EItem.None)
             {
                 resultText = resultTemplates[1];
-            }
-            else
-            {
-                resultText = resultTemplates[0].Replace("{}", EnumUtil.GetInspectorName(item));
+                return;
             }
 
+            resultText = resultTemplates[0].Replace("{}", EnumUtil.GetInspectorName(item));
             var updateCount = Mathf.Min(ItemManager.GetItemCount(item), 1f);
             if (ItemManager.TryDecreaseItemCount(item, updateCount))
             {
@@ -363,21 +348,17 @@ namespace WeWillSurvive.GameEvent
             var foodCount = ItemManager.GetItemCount(EItem.Food);
             var waterCount = ItemManager.GetItemCount(EItem.Water);
 
-            EItem removeItem = EItem.Food;
-            if (foodCount > waterCount)
+            if (foodCount == 0f && waterCount == 0f)
             {
-                removeItem = EItem.Food;
-            }
-            else if (foodCount < waterCount)
-            {
-                removeItem = EItem.Water;
-            }
-            else
-            {
-                removeItem = (UnityEngine.Random.value < 0.5f) ? EItem.Food : EItem.Water;
+                resultText = resultTemplates[1];
+                return;
             }
 
-            resultText = resultText.Replace("{}", EnumUtil.GetInspectorName(removeItem));
+            EItem removeItem = (foodCount == waterCount)
+                ? (UnityEngine.Random.value < 0.5f ? EItem.Food : EItem.Water)
+                : (foodCount > waterCount ? EItem.Food : EItem.Water);
+
+            resultText = resultTemplates[0].Replace("{}", EnumUtil.GetInspectorName(removeItem));
             var updateCount = Mathf.Min(ItemManager.GetItemCount(removeItem), removeCount);
             if (ItemManager.TryDecreaseItemCount(removeItem, updateCount))
             {
@@ -492,6 +473,54 @@ namespace WeWillSurvive.GameEvent
             var duration = GameEventManager.Instance.CharacterEventPicker.GlobalDayCounter;
 
             BuffManager.Instance.AddBuff(effect, duration);
+        }
+    }
+
+    /// <summary>
+    /// 침입 이벤트 방어 성공
+    /// </summary>
+    public class InvasionDefenseSuccessApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.InvasionDefenseSuccess;
+
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
+        {
+            var characters = CharacterManager.GetCharactersInShelter();
+            int randomIndex = UnityEngine.Random.Range(0, characters.Count);
+            var targetCharacter = characters[randomIndex];
+            resultText = resultText.Replace("{}", targetCharacter.Name);
+        }
+    }
+
+    /// <summary>
+    /// 침입 이벤트 방어 실패
+    /// </summary>
+    public class InvasionDefenseFailureApplicator : IEventActionHandler
+    {
+        public EActionType HandledActionType => EActionType.InvasionDefenseFailure;
+
+        private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
+
+        public void Apply(EventAction action, ref string resultText, IReadOnlyList<string> resultTemplates = null)
+        {
+            var characters = CharacterManager.GetCharactersInShelter();
+            int randomIndex = UnityEngine.Random.Range(0, characters.Count);
+            var targetCharacter = characters[randomIndex];
+
+            var status = targetCharacter.Status.GetStatus<InjuryStatus>(EStatusType.Injury);
+            if (status.Level == EInjuredLevel.Normal)
+            {
+                status.WorsenStatus();
+                resultText = resultTemplates[0].Replace("{}", targetCharacter.Name);
+            }
+            else if (status.Level == EInjuredLevel.Injured || status.Level == EInjuredLevel.Sick)
+            {
+                string deadMessage = string.Format(resultTemplates[2], GameManager.Instance.Day, targetCharacter.Name);
+                targetCharacter.OnDead(deadMessage);
+                resultText = resultTemplates[1].Replace("{}", targetCharacter.Name);
+            }
         }
     }
 }

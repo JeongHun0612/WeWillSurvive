@@ -18,6 +18,7 @@ MonoBehaviour:
   - 
   _conditions: []
   _choiceSchema: 4
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 211
     _requiredAmount: 1
@@ -28,7 +29,7 @@ MonoBehaviour:
       _resultTemplates: []
       _resultText: 
       _actions:
-      - _actionType: 120
+      - _actionType: 600
         _targetId: Lead
         _parameter: Hunger
         _value: 
@@ -47,7 +48,7 @@ MonoBehaviour:
       _resultTemplates: []
       _resultText: 
       _actions:
-      - _actionType: 120
+      - _actionType: 600
         _targetId: Lead
         _parameter: Hunger
         _value: 
@@ -66,7 +67,7 @@ MonoBehaviour:
       _resultTemplates: []
       _resultText: 
       _actions:
-      - _actionType: 120
+      - _actionType: 600
         _targetId: Lead
         _parameter: Hunger
         _value: 
@@ -92,7 +93,7 @@ MonoBehaviour:
       - "\uC8FD\uC74C \uC0C1\uD0DC\uB85C \uC545\uD654"
       _resultText: 
       _actions:
-      - _actionType: 110
+      - _actionType: 601
         _targetId: Lead
         _parameter: Hunger
         _value: 

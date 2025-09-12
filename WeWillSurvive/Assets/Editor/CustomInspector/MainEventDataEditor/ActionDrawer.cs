@@ -57,6 +57,12 @@ namespace WeWillSurvive
                     parameterProp.stringValue = string.Empty;
                     valueProp.stringValue = string.Empty;
                     break;
+                case EActionType.WorsenRandomCharacterStatus:
+                case EActionType.WorsenPrioritizedCharacterStatus:
+                    targetIdProp.stringValue = string.Empty;
+                    PropertyUtil.DrawEnumPopupAsString<EStatusType>(ref rect, "Status", parameterProp);
+                    valueProp.stringValue = string.Empty;
+                    break;
                 case EActionType.AddItem:
                 case EActionType.RemoveItem:
                     PropertyUtil.DrawEnumPopupAsString<EItem>(ref rect, "아이템", targetIdProp);

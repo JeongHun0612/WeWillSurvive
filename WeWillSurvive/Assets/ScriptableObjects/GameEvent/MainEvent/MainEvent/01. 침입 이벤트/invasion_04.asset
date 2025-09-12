@@ -41,7 +41,7 @@ MonoBehaviour:
         \uC0AC\uC774\uBCF4\uADF8\uB294 \uD68C\uB85C\uAC00 \uB04A\uAE30\uBA70 \uC4F0\uB7EC\uC84C\uB2E4.
         \uB2E4\uD589\uD788 \uC6B0\uB9AC\uB294 \uAE30\uC9C0\uB97C \uC9C0\uCF1C\uB0C8\uB2E4."
       _actions:
-      - _actionType: 120
+      - _actionType: 600
         _targetId: Lead
         _parameter: Hunger
         _value: 
@@ -65,7 +65,7 @@ MonoBehaviour:
         \uC0AC\uC774\uBCF4\uADF8\uB294 \uD68C\uB85C\uAC00 \uB04A\uAE30\uBA70 \uC4F0\uB7EC\uC84C\uB2E4.
         \uB2E4\uD589\uD788 \uC6B0\uB9AC\uB294 \uAE30\uC9C0\uB97C \uC9C0\uCF1C\uB0C8\uB2E4."
       _actions:
-      - _actionType: 120
+      - _actionType: 600
         _targetId: Lead
         _parameter: Hunger
         _value: 
@@ -89,7 +89,7 @@ MonoBehaviour:
         \uC0AC\uC774\uBCF4\uADF8\uB294 \uD68C\uB85C\uAC00 \uB04A\uAE30\uBA70 \uC4F0\uB7EC\uC84C\uB2E4.
         \uB2E4\uD589\uD788 \uC6B0\uB9AC\uB294 \uAE30\uC9C0\uB97C \uC9C0\uCF1C\uB0C8\uB2E4."
       _actions:
-      - _actionType: 120
+      - _actionType: 600
         _targetId: Lead
         _parameter: Hunger
         _value: 
@@ -126,7 +126,7 @@ MonoBehaviour:
         \uC6B0\uB9AC\uB294 {1}(\uC744)\uB97C \uC783\uC5C8\uB2E4."
       _resultText: 
       _actions:
-      - _actionType: 110
+      - _actionType: 601
         _targetId: Lead
         _parameter: Hunger
         _value: 
