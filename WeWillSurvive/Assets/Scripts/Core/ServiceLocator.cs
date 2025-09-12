@@ -77,10 +77,10 @@ namespace WeWillSurvive.Core
         }
 
         /// <summary>
-        /// ���� ��������
+        /// 서비스 가져오기
         /// </summary>
-        /// <typeparam name="TInterface">���� �������̽� Ÿ��</typeparam>
-        /// <returns>��ϵ� ���� �ν��Ͻ� �Ǵ� �⺻��</returns>
+        /// <typeparam name="TInterface">서비스 인터페이스 타입</typeparam>
+        /// <returns>등록된 서비스 인스턴스 또는 기본값</returns>
         public static TInterface Get<TInterface>()
         {
             Type interfaceType = typeof(TInterface);
@@ -95,20 +95,20 @@ namespace WeWillSurvive.Core
         }
 
         /// <summary>
-        /// ���� ���� ���� Ȯ��
+        /// 서비스 존재 여부 확인
         /// </summary>
-        /// <typeparam name="TInterface">���� �������̽� Ÿ��</typeparam>
-        /// <returns>���� ���� ����</returns>
+        /// <typeparam name="TInterface">서비스 인터페이스 타입</typeparam>
+        /// <returns>서비스 존재 여부</returns>
         public static bool HasService<TInterface>()
         {
             return _services.ContainsKey(typeof(TInterface));
         }
 
         /// <summary>
-        /// ���� ����
+        /// 서비스 제거
         /// </summary>
-        /// <typeparam name="TInterface">���� �������̽� Ÿ��</typeparam>
-        /// <returns>���� ���� ����</returns>
+        /// <typeparam name="TInterface">서비스 인터페이스 타입</typeparam>
+        /// <returns>제거 성공 여부</returns>
         public static bool Unregister<TInterface>()
         {
             Type interfaceType = typeof(TInterface);
