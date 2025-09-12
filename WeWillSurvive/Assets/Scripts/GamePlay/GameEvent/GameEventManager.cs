@@ -112,6 +112,12 @@ namespace WeWillSurvive.GameEvent
                 return;
 
             _dailyCharacterEvent.DailyEventChoice = choice;
+
+            // 캐릭터 이벤트를 수행한다는 선택지를 선택했으면 이벤트 수행 횟수 증가
+            if (choice.ChoiceIcon != EChoiceIcon.Noting && choice.ChoiceIcon != EChoiceIcon.No)
+            {
+                _characterEventPicker.TotalCompleteCount++;
+            }
         }
     }
 

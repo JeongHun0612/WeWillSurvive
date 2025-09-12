@@ -29,10 +29,21 @@ namespace WeWillSurvive.Status
 #if UNITY_EDITOR
             if (_owner.Data.StatusDebugData != null)
             {
-                GetStatus<HungerStatus>().UpdateLevel(_owner.Data.StatusDebugData.Hunger);
-                GetStatus<ThirstStatus>().UpdateLevel(_owner.Data.StatusDebugData.Thirst);
-                GetStatus<InjuryStatus>().UpdateLevel(_owner.Data.StatusDebugData.Injury);
-                GetStatus<AnxiousStatus>().UpdateLevel(_owner.Data.StatusDebugData.Anxiety);
+                int hungerLevel = (int)_owner.Data.StatusDebugData.Hunger;
+                if (hungerLevel > 0)
+                    GetStatus<HungerStatus>().WorsenStatus(hungerLevel);
+
+                int thirstLevel = (int)_owner.Data.StatusDebugData.Thirst;
+                if (thirstLevel > 0)
+                    GetStatus<ThirstStatus>().WorsenStatus(thirstLevel);
+
+                int injuryLevel = (int)_owner.Data.StatusDebugData.Injury;
+                if (injuryLevel > 0)
+                    GetStatus<InjuryStatus>().WorsenStatus(injuryLevel);
+
+                int anxietyLevel = (int)_owner.Data.StatusDebugData.Anxiety;
+                if (anxietyLevel > 0)
+                    GetStatus<AnxiousStatus>().WorsenStatus(anxietyLevel);
             }
 #endif
         }

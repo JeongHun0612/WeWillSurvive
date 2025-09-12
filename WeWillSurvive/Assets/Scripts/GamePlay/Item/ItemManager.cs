@@ -49,7 +49,11 @@ namespace WeWillSurvive.Item
 
         public Dictionary<EItem, float> Items { get; private set; } = new();
 
-        private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
+        private float _usedFoodCount;
+        private float _usedWaterCount;
+
+        public float UsedFoodCount => _usedFoodCount;
+        public float UsedWaterCount => _usedWaterCount;
 
         public async UniTask InitializeAsync()
         {
@@ -83,6 +87,9 @@ namespace WeWillSurvive.Item
             {
                 Items.Remove(key);
             }
+
+            _usedFoodCount = 0f;
+            _usedWaterCount = 0f;
         }
 
         public void AddItem(EItem item, float count = 1f)
@@ -137,7 +144,17 @@ namespace WeWillSurvive.Item
         {
             if (Items.TryGetValue(item, out var remain))
             {
-                var newRemain = Mathf.Max(0f, remain - amountToDecrease);
+                amountToDecrease = Mathf.Min(remain, amountToDecrease);
+
+                if (item == EItem.Food)
+                    _usedFoodCount += amountToDecrease;
+
+                if (item == EItem.Water)
+                    _usedWaterCount += amountToDecrease;
+
+                Debug.Log($"소모한 식량 : {_usedFoodCount} | 소모한 물 : {_usedWaterCount}");
+
+                var newRemain = remain - amountToDecrease;
                 Items[item] = newRemain;
                 Debug.Log($"[아이템 수량 변경] {item} | Total : {newRemain}개");
 

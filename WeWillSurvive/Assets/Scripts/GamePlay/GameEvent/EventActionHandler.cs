@@ -213,7 +213,8 @@ namespace WeWillSurvive.GameEvent
             }
             else if (status.Level == EInjuredLevel.Injured || status.Level == EInjuredLevel.Sick)
             {
-                targetCharacter.OnDead();
+                string deadMessage = string.Format(resultTemplates[2], GameManager.Instance.Day, targetCharacter.Name);
+                targetCharacter.OnDead(deadMessage);
                 resultText = resultTemplates[1].Replace("{}", targetCharacter.Name);
             }
         }

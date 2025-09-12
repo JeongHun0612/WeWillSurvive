@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Character;
+using WeWillSurvive.Core;
+using WeWillSurvive.Status;
 
 namespace WeWillSurvive
 {
@@ -31,8 +33,14 @@ namespace WeWillSurvive
         [SerializeField] private string _panicResolvedMessage;
         [SerializeField] private string _madResolvedMessage;
 
+        [Header("## 사망 시 메시지")]
+        [SerializeField] private List<string> _hungerWorsenDeadMessages;
+        [SerializeField] private List<string> _thirstyWorsenDeadMessages;
+        [SerializeField] private List<string> _injuredWorsenDeadMessages;
+
         private Dictionary<EState, string> _stateActiveMessageDict = new();
         private Dictionary<EState, string> _stateResolvedMessageDict = new();
+        private Dictionary<EStatusType, List<string>> _statusWorsenDeadMessageDict = new();
 
         public void Initialize()
         {
@@ -62,7 +70,14 @@ namespace WeWillSurvive
                 [EState.Panic] = _panicResolvedMessage,
                 [EState.Mad] = _madResolvedMessage,
             };
-        }
+
+            _statusWorsenDeadMessageDict = new()
+            {
+                [EStatusType.Hunger] = _hungerWorsenDeadMessages,
+                [EStatusType.Thirst] = _thirstyWorsenDeadMessages,
+                [EStatusType.Injury] = _injuredWorsenDeadMessages,
+            };
+        } 
 
         public string GetStateActiveMessage(EState state)
         {
@@ -84,6 +99,19 @@ namespace WeWillSurvive
             }
 
             return message;
+        }
+
+        public string GetStatusWorsenDeadMessage(EStatusType type)
+        {
+            if (!_statusWorsenDeadMessageDict.TryGetValue(type, out var messages))
+            {
+                Debug.LogError($"[{type}] StatusWorsenDeadMessage not found.");
+                return string.Empty;
+            }
+
+            int randomIndex = Random.Range(0, messages.Count);
+            string deadMessage = messages[randomIndex].Replace("{}", GameManager.Instance.Day.ToString()); ;
+            return deadMessage;
         }
     }
 }

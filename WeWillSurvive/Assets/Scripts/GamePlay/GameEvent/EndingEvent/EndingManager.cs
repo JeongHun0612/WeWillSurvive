@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using WeWillSurvive.Core;
+using WeWillSurvive.Log;
 
 namespace WeWillSurvive.Ending
 {

@@ -9,12 +9,16 @@ namespace WeWillSurvive.CharacterEvent
     public class CharacterEventPicker : GameEventPickerBase<ECharacter, CharacterEventProgress>
     {
         private int _totalCharacterEventCount;              // 캐릭터 이벤트 총 발생 횟수
+        private int _totalCompleteCount;                    // 캐릭터 이벤트를 수행한 총 횟수
+
+        public int TotalCompleteCount { get => _totalCompleteCount; set => _totalCompleteCount = value; }
 
         public override void ResetState()
         {
             base.ResetState();
 
             _totalCharacterEventCount = 0;
+            _totalCompleteCount = 0;
         }
 
         public DailyCharacterEvent GetDailyCharacterEvent()

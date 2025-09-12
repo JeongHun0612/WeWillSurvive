@@ -6,6 +6,7 @@ using UnityEngine;
 using WeWillSurvive.Core;
 using WeWillSurvive.Ending;
 using WeWillSurvive.Item;
+using WeWillSurvive.Log;
 using WeWillSurvive.Status;
 
 namespace WeWillSurvive.Character
@@ -33,6 +34,7 @@ namespace WeWillSurvive.Character
 
         private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         public async UniTask InitializeAsync()
         {
@@ -114,6 +116,7 @@ namespace WeWillSurvive.Character
             // 모든 플레이어가 사망 시 데드 엔딩
             if (InShelterCharactersCount() == 0)
             {
+                LogManager.ClearAllLogs();
                 EndingManager.Instance.Ending(EEndingType.DeathByStarvation);
             }
         }

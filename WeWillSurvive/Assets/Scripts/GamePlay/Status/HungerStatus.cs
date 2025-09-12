@@ -15,7 +15,7 @@ namespace WeWillSurvive.Status
         public override EBuffEffect BlockStatusBuffEffect => EBuffEffect.BlockHungerWorsen;
 
         protected override bool IsDeadLevel(EHungerLevel level) => level == EHungerLevel.Starve;
-
+     
         public HungerStatus(CharacterBase owner)
         {
             _owner = owner;

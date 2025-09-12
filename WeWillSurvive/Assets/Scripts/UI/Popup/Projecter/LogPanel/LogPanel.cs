@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using WeWillSurvive.Core;
+using WeWillSurvive.Ending;
 using WeWillSurvive.Log;
 
 namespace WeWillSurvive
@@ -30,6 +31,11 @@ namespace WeWillSurvive
             await base.RefreshPageAsync(startPageIndex);
 
             string logMessage = LogManager.GetLogMessage();
+
+            if (EndingManager.Instance.IsEnding)
+            {
+                logMessage += "\n\n" + LogManager.GetCharacterDeadMessage();
+            }
 
             gameObject.SetActive(true);
             await UniTask.NextFrame();

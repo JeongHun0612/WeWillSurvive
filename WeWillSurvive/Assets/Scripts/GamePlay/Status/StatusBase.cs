@@ -49,7 +49,8 @@ namespace WeWillSurvive
             {
                 if (IsDeadLevel(_level))
                 {
-                    _owner.OnDead();
+                    string deadMessage =_owner.Data.StateMessageData.GetStatusWorsenDeadMessage(StatusType);
+                    _owner.OnDead(deadMessage);
                     return;
                 }
 
@@ -57,6 +58,11 @@ namespace WeWillSurvive
             }
 
             _dayCounter++;
+
+            // State에 따른 EventStateModifier 갱신
+            var modifier = GetEventModifier(_level);
+            if (_owner.EventStateModifier > modifier)
+                _owner.EventStateModifier = modifier;
 
             // Log 추가
             LogStateActive(_level);
@@ -185,14 +191,6 @@ namespace WeWillSurvive
 
             // Level 갱신
             UpdateLevel(OrderedLevels[targetIndex]);
-
-            if (targetIndex > currentIndex)
-            {
-                // State에 따른 EventStateModifier 갱신
-                var modifier = GetEventModifier(_level);
-                modifier = Mathf.Min(modifier, _owner.EventStateModifier);
-                _owner.EventStateModifier = modifier;
-            }
         }
 
         private void ExecuteRecovery(int targetIndex)
@@ -208,11 +206,6 @@ namespace WeWillSurvive
             {
                 // 상태 회복 Log 추가
                 LogStateResolved(_level);
-
-                // State에 따른 EventStateModifier 갱신
-                var modifier = GetEventModifier(_level);
-                modifier = Mathf.Max(modifier, _owner.EventStateModifier);
-                _owner.EventStateModifier = modifier;
             }
         }
 
@@ -268,7 +261,8 @@ namespace WeWillSurvive
                     RecoveryStatus();
                     break;
                 case EStateTransitionType.Death:
-                    _owner.OnDead();
+                    string deadMessage = _owner.Data.StateMessageData.GetStatusWorsenDeadMessage(StatusType);
+                    _owner.OnDead(deadMessage);
                     break;
                 default:
                     break;

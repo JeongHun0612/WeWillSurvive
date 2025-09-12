@@ -42,9 +42,10 @@ namespace WeWillSurvive.Core
 
         public void OnMoveTitle()
         {
-            ItemManager.Dipose();
-
             SoundManager.Instance.PlayBGM(EBGM.BGM_Test_1);
+
+            ItemManager.Dipose();
+            LogManager.Dipose();
 
             UIManager.Instance.CloseAllUIs();
             UIManager.Instance.ShowScene<UI_Title>();
@@ -70,7 +71,9 @@ namespace WeWillSurvive.Core
             UIManager.Instance.CloseAllUIs();
 
             ///
-            mainCamera.SetActive(true);
+            if (mainCamera != null)
+                mainCamera.SetActive(true);
+
             Destroy(FarmingObject);
             FarmingObject = null;
             ///

@@ -13,6 +13,10 @@ namespace WeWillSurvive
 {
     public class RationPanel : PagePanel
     {
+        [Header("## Panel")]
+        [SerializeField] private GameObject _rationPanel;
+        [SerializeField] private RationEndingPanel _rationEndingPanel;
+
         [Header("## Food")]
         [SerializeField] private Image[] _foodImages;
         [SerializeField] private TMP_Text _foodOverflowText;
@@ -27,6 +31,7 @@ namespace WeWillSurvive
         [Header("## Special Item")]
         [SerializeField] private RationItem _specialFoodItem;
         [SerializeField] private RationItem _specialMedicKit;
+
 
         private Dictionary<EItem, float> _dailyItemCounts = new();
 
@@ -62,7 +67,6 @@ namespace WeWillSurvive
             // 이벤트 등록
             EventBus.Subscribe<EndDayEvent>(OnEndDayEvent);
             EventBus.Subscribe<ChoiceOptionSelectedEvent>(OnChoiceOptionSelectedEvent);
-            //EventBus.Subscribe<RationItemSelectedEvent>(OnRationItemSelectedEvent);
 
             await UniTask.CompletedTask;
         }
@@ -71,7 +75,18 @@ namespace WeWillSurvive
         {
             await base.RefreshPageAsync(startPageIndex);
 
-            PageCount = (EndingManager.Instance.IsEnding) ? 0 : 1;
+            PageCount = 1;
+
+            if (EndingManager.Instance.IsEnding)
+            {
+                _rationEndingPanel.UpdatePanel();
+                _rationPanel.SetActive(false);
+                _rationEndingPanel.gameObject.SetActive(true);
+                return;
+            }
+
+            _rationPanel.SetActive(true);
+            _rationEndingPanel.gameObject.SetActive(false);
 
             foreach (var rationCharacter in _rationCharacters)
             {

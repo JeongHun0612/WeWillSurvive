@@ -25,6 +25,7 @@ MonoBehaviour:
     \uBC29\uC5B4 \uC900\uBE44\uAC00 \uD544\uC694\uD558\uB2E4."
   _conditions: []
   _choiceSchema: 4
+  _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 211
     _requiredAmount: 1
@@ -123,6 +124,9 @@ MonoBehaviour:
         \uACB0\uAD6D \uC790\uD574\uC5D0 \uAC00\uAE4C\uC6B4 \uD63C\uB780 \uC18D\uC5D0\uC11C
         \uBAA9\uC228\uC744 \uC783\uC5C8\uB2E4. \uC870\uC885\uC774 \uD480\uB9B0 \uD6C4\uC5D0\uB3C4
         {}(\uC740)\uB294 \uC77C\uC5B4\uB098\uC9C0 \uC54A\uC558\uB2E4."
+      - "{0}\uC77C\uCC28\uC5D0 \uC815\uC2E0 \uC870\uC791\uD615 \uC678\uACC4 \uCE68\uC785\uC790\uC758
+        \uC9C0\uBC30 \uC8FC\uD30C\uC218\uB97C \uCC28\uB2E8\uD558\uC9C0 \uBABB\uD588\uACE0,
+        \uC6B0\uB9AC\uB294 {1}(\uC744)\uB97C \uC783\uC5C8\uB2E4."
       _resultText: 
       _actions:
       - _actionType: 110

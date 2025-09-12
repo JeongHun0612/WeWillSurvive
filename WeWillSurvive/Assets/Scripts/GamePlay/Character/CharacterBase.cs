@@ -106,6 +106,7 @@ namespace WeWillSurvive.Character
             }
             else
             {
+                EventStateModifier = Data.NormalStateModifier;
                 Status.OnNewDay();
             }
         }
@@ -124,7 +125,7 @@ namespace WeWillSurvive.Character
             return $"{styledName}\n{stateText}";
         }
 
-        public void OnDead()
+        public void OnDead(string deadMessage = null)
         {
             if (IsDead) return;
 
@@ -142,6 +143,12 @@ namespace WeWillSurvive.Character
                 // Dead Log 출력
                 string stateMessage = Data.StateMessageData.GetStateActiveMessage(EState.Dead);
                 LogManager.AddCharacterStatusLog(Data.Type, stateMessage);
+            }
+
+            // 사망 로그 저장
+            if (deadMessage != null)
+            {
+                LogManager.AddCharacterDeadLog(Data.Type, deadMessage);
             }
         }
 

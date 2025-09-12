@@ -219,11 +219,11 @@ namespace WeWillSurvive.GameEvent
         private List<Condition> _conditions;      // 해당 결과가 발생할 조건
 
         [SerializeField]
-        [TextArea(3, 10)]
+        [TextArea(5, 10)]
         private List<string> _resultTemplates;    // 결과 텍스트 템플릿
 
         [SerializeField]
-        [TextArea(3, 10)]
+        [TextArea(5, 10)]
         private string _resultText;               // 결과 텍스트
 
         [SerializeField]

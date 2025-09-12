@@ -23,6 +23,8 @@ namespace WeWillSurvive.Log
             [ECharacter.DrK] = new(),
         };
 
+        private Dictionary<ECharacter, string> _characterDeadLogs = new();
+
         private List<ResultItemData> _ResultItemDatas = new();
 
         public async UniTask InitializeAsync()
@@ -43,6 +45,11 @@ namespace WeWillSurvive.Log
             {
                 Debug.LogWarning($"[AddCharacterStatusLog] : {character} 타입의 로그 리스트가 존재하지 않습니다.");
             }
+        }
+
+        public void AddCharacterDeadLog(ECharacter character, string message)
+        {
+            _characterDeadLogs.Add(character, message);
         }
 
         public void AddResultItemData(ResultItemData ResultItemData)
@@ -89,6 +96,16 @@ namespace WeWillSurvive.Log
             return sb.ToString().TrimEnd();
         }
 
+        public string GetCharacterDeadMessage()
+        {
+            if (_characterDeadLogs.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            return string.Join("\n\n", _characterDeadLogs.Values);
+        }
+
         public void ClearAllLogs()
         {
             _mainEventResultLogs?.Clear();
@@ -101,6 +118,12 @@ namespace WeWillSurvive.Log
             }
 
             _ResultItemDatas?.Clear();
+        }
+
+        public void Dipose()
+        {
+            ClearAllLogs();
+            _characterDeadLogs.Clear();
         }
 
         private void AddFormattedLog(List<string> logList, string message)
