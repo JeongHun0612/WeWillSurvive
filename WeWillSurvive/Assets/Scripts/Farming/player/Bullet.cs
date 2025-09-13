@@ -1,4 +1,5 @@
 using UnityEngine;
+using WeWillSurvive.Core;
 
 namespace WeWillSurvive
 {
@@ -22,6 +23,8 @@ namespace WeWillSurvive
             rb = GetComponent<Rigidbody2D>();
             rb.bodyType = RigidbodyType2D.Kinematic;
             originalScale = transform.localScale;
+
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(10));
         }
 
         void Update()
@@ -48,6 +51,8 @@ namespace WeWillSurvive
             isCharging = false;
             rb.bodyType = RigidbodyType2D.Dynamic;
             rb.AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
+
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(11));
         }
 
         void OnTriggerEnter2D(Collider2D col)

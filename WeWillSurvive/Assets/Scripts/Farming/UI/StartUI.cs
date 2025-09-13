@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using WeWillSurvive.Core;
 
 namespace WeWillSurvive
 {
@@ -47,6 +48,8 @@ namespace WeWillSurvive
         {
             float start = canvasGroup.alpha;
             float time = 0f;
+
+            if (target == 1f) { SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(21)); }
 
             while (time < duration)
             {

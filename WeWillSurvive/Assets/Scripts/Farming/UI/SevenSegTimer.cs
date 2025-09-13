@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using WeWillSurvive.Core;
 
 namespace WeWillSurvive
 {
@@ -34,13 +35,13 @@ namespace WeWillSurvive
 
         private IEnumerator StartSiren()
         {
-            //make sound oneshot
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(22));
             yield return new WaitForSeconds(sirentime);
-            //make sound oneshot
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(22));
             yield return new WaitForSeconds(sirentime);
-            //make sound oneshot
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(22));
             yield return new WaitForSeconds(sirentime);
-            //make final sound oneshot
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(23));
             yield return new WaitForSeconds(sirentime);
             isFlowing = true;
         }
@@ -82,6 +83,11 @@ namespace WeWillSurvive
                     topDot.SetActive(colonVisible);
                     bottomDot.SetActive(colonVisible);
                 }
+
+                if (timeRemaining - lowTimeThreshold == 5f)
+                {
+                    SoundManager.Instance.FadeOutBGM(5f);
+                }
             }
             else
             {
@@ -92,7 +98,7 @@ namespace WeWillSurvive
                 int tenths = (centisec / 10) % 10;
                 int hundredths = centisec % 10;
                 min1.SetDigit(tens);
-                min2.SetDigit(ones);
+                min2.SetDigit(ones, false);
                 sec1.SetDigit(tenths);
                 sec2.SetDigit(hundredths);
                 topDot.SetActive(false);

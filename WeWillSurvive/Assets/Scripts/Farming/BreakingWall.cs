@@ -1,4 +1,5 @@
 using UnityEngine;
+using WeWillSurvive.Core;
 
 namespace WeWillSurvive
 {
@@ -20,7 +21,8 @@ namespace WeWillSurvive
 
         private void OnHitEffect()
         {
-            // TODO: cracks sprite 보여준다거나 하는 효과 넣기
+            string soundName = FarmSoundMaster.Instance.GetMusic(13);
+            SoundManager.Instance.PlaySFX(soundName);
         }
 
         private void BreakWall()

@@ -19,12 +19,10 @@ namespace WeWillSurvive.Core
         private const string _bgmLabel = "BGM";
         private const string _sfxLabel = "SFX";
 
-        [Header("BGM Setting")]
         [Range(0f, 1f)]
         [SerializeField] private float _bgmVolume = 1f;
         private AudioSource _bgmPlayer;
 
-        [Header("SFX Setting")]
         [Range(0f, 1f)]
         [SerializeField] private float _sfxVolume = 1f;
         [SerializeField] private int _channelCount = 5;
@@ -36,12 +34,8 @@ namespace WeWillSurvive.Core
 
         private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
 
-
         public async UniTask InitializeAsync()
         {
-            // TODO 사운드 데이터
-
-            // BGM Initialize
             GameObject bgmObject = new GameObject("BGM");
             bgmObject.transform.parent = transform;
             _bgmPlayer = bgmObject.AddComponent<AudioSource>();
@@ -49,7 +43,6 @@ namespace WeWillSurvive.Core
             _bgmPlayer.loop = true;
             _bgmPlayer.volume = _bgmVolume;
 
-            // SFX Initialize
             GameObject sfxObject = new GameObject("sfxPlayer");
             sfxObject.transform.parent = transform;
             _sfxPlayers = new AudioSource[_channelCount];
@@ -66,7 +59,7 @@ namespace WeWillSurvive.Core
             await LoadAllClipAsync(_sfxLabel, _sfxClips);
         }
 
-        public void PlayBGM(string clipName)
+        public async UniTask PlayBGM(string clipName, float fadeInTime = 0f)
         {
             if (_bgmClips.TryGetValue(clipName, out AudioClip clip))
             {
@@ -74,57 +67,52 @@ namespace WeWillSurvive.Core
                     _bgmPlayer.Stop();
 
                 _bgmPlayer.clip = clip;
+
+                if (fadeInTime > 0f)
+                {
+                    _bgmPlayer.volume = 0f;
+                    _bgmPlayer.Play();
+                    await FadeVolumeAsync(_bgmPlayer, _bgmVolume, fadeInTime);
+                }
+                else
+                {
+                    _bgmPlayer.volume = _bgmVolume;
+                    _bgmPlayer.Play();
+                }
+            }
+        }
+
+        public async UniTask PlayBGM(EBGM bgm, float fadeInTime = 0f)
+        {
+            await PlayBGM(bgm.ToString(), fadeInTime);
+        }
+
+        public async UniTask PlayBGM(float fadeInTime = 0f)
+        {
+            if (_bgmPlayer.isPlaying || _bgmPlayer.clip == null) return;
+            if (fadeInTime > 0f)
+            {
+                _bgmPlayer.volume = 0f;
                 _bgmPlayer.Play();
+                await FadeVolumeAsync(_bgmPlayer, _bgmVolume, fadeInTime);
             }
             else
             {
-                Debug.LogWarning($"[BGM Clip] - '{clipName}' is not found.");
+                _bgmPlayer.volume = _bgmVolume;
+                _bgmPlayer.Play();
             }
-        }
-
-        public void PlayBGM(EBGM bgm)
-        {
-            var clipName = bgm.ToString();
-            PlayBGM(clipName);
-        }
-
-        public void PlayBGM()
-        {
-            if (_bgmPlayer.isPlaying)
-            {
-                Debug.LogWarning("현재 BGM이 플레이중입니다.");
-                return;
-            }
-
-            if (_bgmPlayer.clip == null)
-            {
-                Debug.LogWarning("BGM 플레이어에 클립이 존재하지 않습니다.");
-                return;
-            }
-
-            _bgmPlayer.Play();
         }
 
         public void StopBGM()
         {
-            if (_bgmPlayer.isPlaying)
+            if (_bgmPlayer != null && _bgmPlayer.isPlaying)
                 _bgmPlayer.Stop();
         }
 
-
-        public void PlaySFX(ESFX sfx)
-        {
-            var clipName = sfx.ToString();
-            PlaySFX(clipName);
-        }
-
-        public void PlaySFX(string clipName)
+        public async UniTask PlaySFX(string clipName, float fadeInTime = 0f, float indiVolume = 1f)
         {
             if (!_sfxClips.TryGetValue(clipName, out AudioClip clip))
-            {
-                Debug.LogWarning($"[SFX Clip] - '{clipName}' is not found.");
                 return;
-            }
 
             for (int index = 0; index < _sfxPlayers.Length; index++)
             {
@@ -133,33 +121,50 @@ namespace WeWillSurvive.Core
                     continue;
 
                 _channelIndex = loopindex;
-                _sfxPlayers[loopindex].PlayOneShot(clip);
+                float targetVolume = Mathf.Clamp01(_sfxVolume * indiVolume);
+
+                _sfxPlayers[loopindex].clip = clip;
+                if (fadeInTime > 0f)
+                {
+                    _sfxPlayers[loopindex].volume = 0f;
+                    _sfxPlayers[loopindex].Play();
+                    await FadeVolumeAsync(_sfxPlayers[loopindex], targetVolume, fadeInTime);
+                }
+                else
+                {
+                    _sfxPlayers[loopindex].PlayOneShot(clip, targetVolume);
+                }
                 break;
+            }
+        }
+
+        public async UniTask PlaySFX(ESFX sfx, float fadeInTime = 0f, float indiVolume = 1f)
+        {
+            await PlaySFX(sfx.ToString(), fadeInTime, indiVolume);
+        }
+
+        public void StopSFX(string target)
+        {
+            for (int i = 0; i < _sfxPlayers.Length; i++)
+            {
+                if (!_sfxPlayers[i].isPlaying || _sfxPlayers[i].clip == null) continue;
+                if (_sfxPlayers[i].clip.name != target) continue;
+                _sfxPlayers[i].Stop();
+                _sfxPlayers[i].clip = null;
             }
         }
 
         public void StopSFX(ESFX sfx)
         {
-            for (int i = 0; i < _sfxPlayers.Length; i++)
-            {
-                if (!_sfxPlayers[i].isPlaying)
-                    continue;
-
-                if (_sfxPlayers[i].clip.name == sfx.ToString())
-                {
-                    _sfxPlayers[i].Stop();
-                    _sfxPlayers[i].clip = null;
-                }
-            }
+            string target = sfx.ToString();
+            StopSFX(target);
         }
 
         public void StopAllSFX()
         {
             for (int i = 0; i < _sfxPlayers.Length; i++)
             {
-                if (!_sfxPlayers[i].isPlaying)
-                    continue;
-
+                if (!_sfxPlayers[i].isPlaying) continue;
                 _sfxPlayers[i].Stop();
                 _sfxPlayers[i].clip = null;
             }
@@ -168,13 +173,78 @@ namespace WeWillSurvive.Core
         private async UniTask LoadAllClipAsync(string label, Dictionary<string, AudioClip> targetDict)
         {
             var audioClips = await ResourceManager.LoadAssetsByLabelAsync<AudioClip>(label);
-
             foreach (var audioClip in audioClips)
             {
                 if (!targetDict.ContainsKey(audioClip.name))
-                {
                     targetDict.Add(audioClip.name, audioClip);
-                }
+            }
+        }
+
+        private async UniTask FadeVolumeAsync(AudioSource source, float targetVolume, float duration)
+        {
+            float startVolume = source.volume;
+            float time = 0f;
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+                source.volume = Mathf.Lerp(startVolume, targetVolume, time / duration);
+                await UniTask.Yield();
+            }
+            source.volume = targetVolume;
+        }
+
+        public async UniTask FadeOutBGM(float duration)
+        {
+            if (_bgmPlayer == null || !_bgmPlayer.isPlaying) return;
+            await FadeVolumeAsync(_bgmPlayer, 0f, duration);
+            _bgmPlayer.Stop();
+        }
+        public async UniTask FadeOutSFX(string target, float duration)
+        {
+            for (int i = 0; i < _sfxPlayers.Length; i++)
+            {
+                var player = _sfxPlayers[i];
+                if (!player.isPlaying || player.clip == null) continue;
+                if (player.clip.name != target) continue;
+                await FadeVolumeAsync(player, 0f, duration);
+                player.Stop();
+                player.clip = null;
+            }
+        }
+
+        public async UniTask FadeOutSFX(ESFX sfx, float duration)
+        {
+            string target = sfx.ToString();
+            FadeOutSFX(target, duration);
+        }
+
+        public async UniTask FadeOutAllSFX(float duration)
+        {
+            for (int i = 0; i < _sfxPlayers.Length; i++)
+            {
+                var player = _sfxPlayers[i];
+                if (!player.isPlaying || player.clip == null) continue;
+                await FadeVolumeAsync(player, 0f, duration);
+                player.Stop();
+                player.clip = null;
+            }
+        }
+
+        public void SetBGMVolume(float volume)
+        {
+            _bgmVolume = Mathf.Clamp01(volume);
+            if (_bgmPlayer != null)
+                _bgmPlayer.volume = _bgmVolume;
+        }
+
+        public void SetSFXVolume(float volume)
+        {
+            float origin = _sfxVolume;
+            _sfxVolume = Mathf.Clamp01(volume);
+            if (_sfxPlayers != null)
+            {
+                foreach (var sfx in _sfxPlayers)
+                    sfx.volume *= _sfxVolume / origin;
             }
         }
     }

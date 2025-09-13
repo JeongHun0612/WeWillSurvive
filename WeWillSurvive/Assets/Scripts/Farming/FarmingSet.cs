@@ -1,5 +1,6 @@
-using UnityEngine;
+using Cysharp.Threading.Tasks;
 using System.Collections;
+using UnityEngine;
 using WeWillSurvive.Core;
 using WeWillSurvive.Item;
 using WeWillSurvive.UI;
@@ -31,6 +32,7 @@ namespace WeWillSurvive
                 return;
             }
             Instance = this;
+            SoundManager.Instance.StopBGM();
             StartCoroutine(StartSeq());
         }
 
@@ -42,6 +44,9 @@ namespace WeWillSurvive
         private IEnumerator StartSeq()
         {
             blackout.TurnOut(turnOut);
+            yield return new WaitForSeconds(1f);
+            string soundName = FarmSoundMaster.Instance.GetMusic(0);
+            SoundManager.Instance.PlayBGM(soundName, turnOut + 3f);
             yield return new WaitForSeconds(turnOut + 1f);
             CameraEffects.Instance.NudgeLeft(slide, bias + startui);
             yield return new WaitForSeconds(slide);
@@ -70,7 +75,9 @@ namespace WeWillSurvive
             uiCanvas.EndSequence(bias, endslide);
             yield return new WaitForSeconds(bias + endslide);
             blackout.BlackOut(blackTime);
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(31));
             yield return new WaitForSeconds(blackTime);
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(32));
             BacktoYou(true);
         }
 

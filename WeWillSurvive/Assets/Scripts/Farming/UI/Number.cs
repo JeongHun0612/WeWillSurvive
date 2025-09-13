@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using WeWillSurvive.Core;
 
 namespace WeWillSurvive
 {
@@ -22,7 +23,7 @@ namespace WeWillSurvive
             { true,  true,  true,  true,  false, true,  true  }, // 9
         };
 
-        public void SetDigit(int value)
+        public void SetDigit(int value, bool NoSound = true)
         {
             if (value < 0 || value > 9 || currentNum == value) return;
             for (int i = 0; i < segments.Count; i++)
@@ -31,6 +32,7 @@ namespace WeWillSurvive
                 segments[i].SetActive(shouldBeOn);
             }
             currentNum = value;
+            if (!NoSound) { SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(16)); }
         }
     }
 }

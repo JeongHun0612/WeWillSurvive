@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using WeWillSurvive.Core;
 
 namespace WeWillSurvive
 {
@@ -42,6 +43,7 @@ namespace WeWillSurvive
             float duration = redOut;
             float time = 0f;
 
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(33), duration);
             CameraEffects.Instance.ZoomOutShake(duration);
             while (time < duration)
             {
@@ -50,10 +52,11 @@ namespace WeWillSurvive
                 yield return null;
             }
 
-
+            SoundManager.Instance.StopAllSFX();
             Black.alpha = 1f;
             yield return new WaitForSeconds(1f);
 
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(34));
             texts.SetActive(true);
             yield return new WaitForSeconds(textTime);
             texts.SetActive(false);

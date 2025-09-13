@@ -25,9 +25,22 @@ namespace WeWillSurvive
                 if (itemManager != null)
                 {
                     itemManager.AddItem(item);
-                    if (item == EItem.Bell) { CrewUI.Instance.FoundCrew(0); }
-                    else if (item == EItem.Cook) { CrewUI.Instance.FoundCrew(1); }
-                    else if (item == EItem.DrK) { CrewUI.Instance.FoundCrew(2); }
+                    if (item == EItem.Bell)
+                    {
+                        CrewUI.Instance.FoundCrew(0);
+                        SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(15));
+                    }
+                    else if (item == EItem.Cook)
+                    {
+                        CrewUI.Instance.FoundCrew(1);
+                        SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(15));
+                    }
+                    else if (item == EItem.DrK)
+                    {
+                        CrewUI.Instance.FoundCrew(2);
+                        SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(15));
+                    }
+                    else { SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(14)); }
                 }
                 Destroy(gameObject);
             }

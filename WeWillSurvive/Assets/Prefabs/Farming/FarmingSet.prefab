@@ -928,6 +928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2568598312881813659}
   - component: {fileID: 2218784022061844055}
+  - component: {fileID: 6612628410127427872}
   m_Layer: 0
   m_Name: FarmingSet
   m_TagString: Untagged
@@ -968,7 +969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugTest: 0
-  timerTime: 200
+  timerTime: 150
   uiCanvas: {fileID: 433269560670519189}
   player: {fileID: 6127532075915354190}
   blackout: {fileID: 1645167534649923699}
@@ -979,8 +980,50 @@ MonoBehaviour:
   countdown: 1
   endslide: 0.25
   blackTime: 0.5
-  redTime: 10
+  redTime: 8
   textTime: 3
+--- !u!114 &6612628410127427872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867388266185100641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b22b1a73e8a974daee1202b88b8625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainBGM:
+    StringName: BGM_Test_1
+  chargeSFX:
+    StringName: SFX_Pistol1
+  shootSFX:
+    StringName: SFX_Pistol1
+  bulletdeleteSFX:
+    StringName: SFX_breakbullet
+  wallbreakSFX:
+    StringName: SFX_breakwall
+  itemSFX:
+    StringName: SFX_Pistol1
+  crewSFX:
+    StringName: SFX_crew
+  emergencyBeepSFX:
+    StringName: SFX_Pistol1
+  startuiSFX:
+    StringName: SFX_startUI
+  alarmSFX:
+    StringName: SFX_Pistol1
+  alarmFinalSFX:
+    StringName: SFX_Pistol1
+  exitsuccessSFX:
+    StringName: SFX_startUI
+  shipshootSFX:
+    StringName: SFX_startUI
+  collapseSFX:
+    StringName: SFX_AlienAtmosphere
+  hurtTextSFX:
+    StringName: SFX_Pistol1
 --- !u!1 &911234330957690433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,7 +1501,7 @@ MonoBehaviour:
   PivotOffset: {x: 0, y: 0, z: 0}
   AmplitudeGain: 0
   FrequencyGain: 0
-  m_NoiseOffsets: {x: 0, y: 0, z: 0}
+  m_NoiseOffsets: {x: 119.81357, y: 58.23459, z: -76.246124}
 --- !u!1 &1329422816632471151
 GameObject:
   m_ObjectHideFlags: 0
@@ -4182,8 +4225,8 @@ MonoBehaviour:
   rotationSpeed: 180
   stopSmoothness: 6
   startSmoothness: 3
-  maxChargeTime: 1.5
-  maxForce: 600
+  maxChargeTime: 1
+  maxForce: 675
   pushThreshold: 300
   visual: {fileID: 4835989094765660131}
   bulletPrefab: {fileID: 5406063968801056942, guid: 1b23bebae9326e44dad36331aa1daa6d, type: 3}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using WeWillSurvive.Core;
 
 namespace WeWillSurvive
 {
@@ -7,6 +8,8 @@ namespace WeWillSurvive
     {
         void Start()
         {
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(12));
+
             var ps = GetComponent<ParticleSystem>();
             if (!ps.main.loop)
             {
