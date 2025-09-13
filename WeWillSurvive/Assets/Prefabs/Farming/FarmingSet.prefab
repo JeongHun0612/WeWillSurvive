@@ -995,35 +995,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainBGM:
-    StringName: BGM_Test_1
+    StringName: BGM_main
   chargeSFX:
-    StringName: SFX_Pistol1
+    StringName: SFX_charge
   shootSFX:
-    StringName: SFX_Pistol1
-  bulletdeleteSFX:
     StringName: SFX_breakbullet
+  bulletdeleteSFX:
+    StringName: ' '
   wallbreakSFX:
     StringName: SFX_breakwall
   itemSFX:
-    StringName: SFX_Pistol1
+    StringName: SFX_breakbullet
   crewSFX:
     StringName: SFX_crew
   emergencyBeepSFX:
-    StringName: SFX_Pistol1
+    StringName: SFX_HurtText
   startuiSFX:
-    StringName: SFX_startUI
+    StringName: SFX_StartUI
   alarmSFX:
-    StringName: SFX_Pistol1
+    StringName: SFX_HurtText
   alarmFinalSFX:
-    StringName: SFX_Pistol1
+    StringName: SFX_HurtText
   exitsuccessSFX:
-    StringName: SFX_startUI
+    StringName: SFX_EscapeSuccess
   shipshootSFX:
-    StringName: SFX_startUI
+    StringName: SFX_ShipBlast
   collapseSFX:
-    StringName: SFX_AlienAtmosphere
+    StringName: SFX_Red
   hurtTextSFX:
-    StringName: SFX_Pistol1
+    StringName: SFX_HurtText
 --- !u!1 &911234330957690433
 GameObject:
   m_ObjectHideFlags: 0

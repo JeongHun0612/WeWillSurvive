@@ -111,7 +111,7 @@ namespace WeWillSurvive.Core
 
         public async UniTask PlaySFX(string clipName, float fadeInTime = 0f, float indiVolume = 1f)
         {
-            if (!_sfxClips.TryGetValue(clipName, out AudioClip clip))
+            if (clipName == " " || !_sfxClips.TryGetValue(clipName, out AudioClip clip))
                 return;
 
             for (int index = 0; index < _sfxPlayers.Length; index++)

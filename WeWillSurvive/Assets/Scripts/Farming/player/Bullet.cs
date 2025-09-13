@@ -24,7 +24,7 @@ namespace WeWillSurvive
             rb.bodyType = RigidbodyType2D.Kinematic;
             originalScale = transform.localScale;
 
-            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(10));
+            SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(10), 1f);
         }
 
         void Update()
@@ -51,7 +51,7 @@ namespace WeWillSurvive
             isCharging = false;
             rb.bodyType = RigidbodyType2D.Dynamic;
             rb.AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
-
+            SoundManager.Instance.StopSFX(FarmSoundMaster.Instance.GetMusic(10));
             SoundManager.Instance.PlaySFX(FarmSoundMaster.Instance.GetMusic(11));
         }
 

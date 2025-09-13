@@ -19,6 +19,7 @@ namespace WeWillSurvive
 
         float timeRemaining;
         bool colonVisible = true;
+        bool faded = false;
 
         void Start()
         {
@@ -84,8 +85,9 @@ namespace WeWillSurvive
                     bottomDot.SetActive(colonVisible);
                 }
 
-                if (timeRemaining - lowTimeThreshold == 5f)
+                if (timeRemaining - lowTimeThreshold <= 5f && !faded)
                 {
+                    faded = true;
                     SoundManager.Instance.FadeOutBGM(5f);
                 }
             }
