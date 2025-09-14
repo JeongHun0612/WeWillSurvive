@@ -15,32 +15,92 @@ MonoBehaviour:
   m_GroupName: Sounds
   m_GUID: e02b42577eb579e499d42a43ae1fce7c
   m_SerializeEntries:
-  - m_GUID: 1023efd96da8f5441a62322e375900c6
-    m_Address: Assets/Sound Assets/SFX_Test_3.wav
+  - m_GUID: 0776e50b4a6925f4eb80c31c2e18e74c
+    m_Address: Assets/Sound Assets/SFX_Red.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - SFX
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 74e6b33bba513cd42b91b340d4b70b42
-    m_Address: Assets/Sound Assets/SFX_Test_1.mp3
+  - m_GUID: 09b6fbb0f8351c4428ddb1f7079e26ff
+    m_Address: Assets/Sound Assets/BGM_Main.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BGM
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1479c7b9ec2101f4385c2d0eccf8adbc
+    m_Address: Assets/Sound Assets/BGM_Title.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BGM
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 165f70b4d392b4536b355cf849b6d70f
+    m_Address: Assets/Sound Assets/SFX_HurtText.wav
     m_ReadOnly: 0
     m_SerializedLabels:
     - SFX
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9aa93c762b5b7aa4cab063f56aa0f7cf
-    m_Address: Assets/Sound Assets/BGM_Test_1.mp3
+  - m_GUID: 1d4eb77193aafe0459900abcabb33432
+    m_Address: Assets/Sound Assets/SFX_Click_1.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3843d7895bcdb9d40a949bc25fec1604
+    m_Address: Assets/Sound Assets/SFX_EscapeSuccess.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3897169455ca90c45a60fec4f6646f9d
+    m_Address: Assets/Sound Assets/SFX_Crew.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 419336aa8912ae0468e104596863a0a1
+    m_Address: Assets/Sound Assets/SFX_Breakbullet.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64baa1f44691afc42a584e482cd9a27d
+    m_Address: Assets/Sound Assets/SFX_Breakwall.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8327bacc90a16a441903a18e8fe175b1
+    m_Address: Assets/Sound Assets/SFX_ShipBlast.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f210174e356a7e41888826dd0479e14
+    m_Address: Assets/Sound Assets/SFX_StartUI.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1e7fb47d5b745d48aad43bd2063af41
+    m_Address: Assets/Sound Assets/BGM_Farming.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - BGM
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dedc8975a98d1aa419cf967a0c7205ab
-    m_Address: Assets/Sound Assets/BGM_Test_2.wav
+  - m_GUID: d6939cb5beaa1ed42a439e1130b6c112
+    m_Address: Assets/Sound Assets/SFX_Charge.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
-    - BGM
+    - SFX
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e2e8a847382190a42808780eff936ae0
-    m_Address: Assets/Sound Assets/SFX_Test_2.wav
+  - m_GUID: e07a959a7784c5441950a2bb54680674
+    m_Address: Assets/Sound Assets/SFX_Click_2.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: febbfb83d716c7e4d9507db5a922b34c
+    m_Address: Assets/Sound Assets/SFX_Item.wav
     m_ReadOnly: 0
     m_SerializedLabels:
     - SFX

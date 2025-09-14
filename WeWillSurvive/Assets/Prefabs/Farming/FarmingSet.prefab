@@ -995,19 +995,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainBGM:
-    StringName: BGM_main
+    StringName: BGM_Farming
   chargeSFX:
-    StringName: SFX_charge
+    StringName: SFX_Charge
   shootSFX:
-    StringName: SFX_breakbullet
+    StringName: SFX_Breakbullet
   bulletdeleteSFX:
     StringName: ' '
   wallbreakSFX:
-    StringName: SFX_breakwall
+    StringName: SFX_Breakwall
   itemSFX:
-    StringName: SFX_breakbullet
+    StringName: SFX_Item
   crewSFX:
-    StringName: SFX_crew
+    StringName: SFX_Crew
   emergencyBeepSFX:
     StringName: SFX_HurtText
   startuiSFX:
