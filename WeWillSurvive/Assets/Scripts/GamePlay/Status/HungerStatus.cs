@@ -57,14 +57,14 @@ namespace WeWillSurvive.Status
 
                 [EHungerLevel.Hungry] = new()
                 {
-                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.8f },
-                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.7f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.3f },
                 },
 
                 [EHungerLevel.Starve] = new()
                 {
-                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.8f },
-                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.7f },
+                    new StateTransition { TransitionType = EStateTransitionType.Death, Probability = 0.3f },
                 },
             };
 

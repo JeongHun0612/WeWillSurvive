@@ -53,8 +53,8 @@ namespace WeWillSurvive.Status
                 },
                 [EInjuredLevel.Injured] = new()
                 {
-                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.6f },
-                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.2f },
+                    new StateTransition { TransitionType = EStateTransitionType.Stay, Probability = 0.4f },
+                    new StateTransition { TransitionType = EStateTransitionType.Worsen, Probability = 0.4f },
                     new StateTransition { TransitionType = EStateTransitionType.Death, Probability = 0.2f },
                 },
             };
