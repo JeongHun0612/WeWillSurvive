@@ -37,8 +37,6 @@ namespace WeWillSurvive.Core
             UIManager.Instance.LoadingUI.Hide();
 
             OnMoveTitle();
-
-            IsFarmingSuccess = true;
         }
 
         public void OnMoveTitle()
