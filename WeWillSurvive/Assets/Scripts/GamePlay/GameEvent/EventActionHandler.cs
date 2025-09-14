@@ -273,6 +273,10 @@ namespace WeWillSurvive.GameEvent
                 Debug.LogWarning($"Value : {action.Value} | float 타입으로 파싱 실패");
 
             ItemManager.AddItem(item, count);
+
+            if (item == EItem.Starmac)
+                return;
+
             LogManager.AddResultItemData(new ResultItemData(item, count));
         }
     }
