@@ -24,6 +24,13 @@ MonoBehaviour:
       _item: 0
       _minAmount: 0
       _maxAmount: 0
+  - _exploringMessage: "\uBCF4\uAD00\uB41C \uBB38\uC11C\uB4E4 \uB4A4\uCABD\uC5D0\uC11C
+      \uC2DD\uB7C9 \uD329\uC744 \uBC1C\uACAC\uD588\uB2E4. \uBA3C\uC9C0\uAC00 \uC313\uC5EC\uC788\uC9C0\uB9CC
+      \uB0B4\uBD80 \uC0C1\uD0DC\uB294 \uC591\uD638\uD588\uB2E4."
+    _rewardItem:
+      _item: 10
+      _minAmount: 1
+      _maxAmount: 2
   - _exploringMessage: "\uAD6C\uC11D\uC5D0\uC11C \uBA3C\uC9C0\uB97C \uB4A4\uC9D1\uC5B4\uC4F4
       \uC218\uB9AC \uD0A4\uD2B8\uB97C \uCC3E\uC544\uB0C8\uB2E4. \uB0B4\uBD80\uB294
       \uAE68\uB057\uD588\uB2E4."
