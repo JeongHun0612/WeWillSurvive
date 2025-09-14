@@ -969,7 +969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugTest: 0
-  timerTime: 150
+  timerTime: 120
   uiCanvas: {fileID: 433269560670519189}
   player: {fileID: 6127532075915354190}
   blackout: {fileID: 1645167534649923699}
