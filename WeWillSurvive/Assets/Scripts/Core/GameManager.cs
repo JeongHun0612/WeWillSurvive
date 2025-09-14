@@ -7,6 +7,7 @@ using WeWillSurvive.Log;
 using WeWillSurvive.GameEvent;
 using WeWillSurvive.Ending;
 using WeWillSurvive.Item;
+using Cysharp.Threading.Tasks;
 
 namespace WeWillSurvive.Core
 {
@@ -42,7 +43,7 @@ namespace WeWillSurvive.Core
 
         public void OnMoveTitle()
         {
-            SoundManager.Instance.PlayBGM(EBGM.BGM_Test_1);
+            SoundManager.Instance.PlayBGM(EBGM.BGM_Title);
 
             ItemManager.Dipose();
             LogManager.Dipose();
@@ -66,7 +67,7 @@ namespace WeWillSurvive.Core
 
         public async void OnStartSurvive()
         {
-            SoundManager.Instance.PlayBGM(EBGM.BGM_Test_2);
+            SoundManager.Instance.PlayBGM(EBGM.BGM_Main);
 
             UIManager.Instance.CloseAllUIs();
 

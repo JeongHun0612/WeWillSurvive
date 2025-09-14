@@ -6,12 +6,12 @@ namespace WeWillSurvive.Core
 {
     public enum EBGM
     {
-        BGM_Test_1, BGM_Test_2
+        BGM_Title, BGM_Farming, BGM_Main
     }
 
     public enum ESFX
     {
-        SFX_Test_1, SFX_Test_2, SFX_Test_3
+        SFX_Click_1, SFX_Click_2
     }
 
     public class SoundManager : MonoSingleton<SoundManager>
@@ -43,7 +43,7 @@ namespace WeWillSurvive.Core
             _bgmPlayer.loop = true;
             _bgmPlayer.volume = _bgmVolume;
 
-            GameObject sfxObject = new GameObject("sfxPlayer");
+            GameObject sfxObject = new GameObject("SFX");
             sfxObject.transform.parent = transform;
             _sfxPlayers = new AudioSource[_channelCount];
 
@@ -80,6 +80,11 @@ namespace WeWillSurvive.Core
                     _bgmPlayer.Play();
                 }
             }
+        }
+
+        public void PlayBGM(EBGM bgm)
+        {
+            PlayBGM(bgm.ToString()).Forget();
         }
 
         public async UniTask PlayBGM(EBGM bgm, float fadeInTime = 0f)
@@ -136,6 +141,11 @@ namespace WeWillSurvive.Core
                 }
                 break;
             }
+        }
+
+        public void PlaySFX(ESFX sfx)
+        {
+            PlaySFX(sfx.ToString()).Forget();
         }
 
         public async UniTask PlaySFX(ESFX sfx, float fadeInTime = 0f, float indiVolume = 1f)

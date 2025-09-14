@@ -95,6 +95,8 @@ namespace WeWillSurvive
             if (!_owner.IsInShelter)
                 return;
 
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_1);
+
             _statePanel.ShowPanel();
         }
 

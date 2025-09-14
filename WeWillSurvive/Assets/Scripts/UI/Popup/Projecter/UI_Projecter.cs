@@ -180,10 +180,21 @@ namespace WeWillSurvive
             return _pagePanels.FirstOrDefault(panel => panel.PanelType == panelType);
         }
 
-        public void OnClickPrevPage() => ShowCurrentPage(_currentPageIndex - 1);
-        public void OnClickNextPage() => ShowCurrentPage(_currentPageIndex + 1);
+        public void OnClickPrevPage()
+        {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_1);
+            ShowCurrentPage(_currentPageIndex - 1);
+        }
+        public void OnClickNextPage()
+        {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_1);
+            ShowCurrentPage(_currentPageIndex + 1);
+        }
+
         public void OnClickMovePanel(EPanelType panelType)
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_1);
+
             foreach (var pagePanel in _pagePanels)
             {
                 if (pagePanel.PanelType == panelType)
@@ -197,6 +208,8 @@ namespace WeWillSurvive
 
         public void OnClickNextDay()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_1);
+
             if (EndingManager.Instance.IsEnding)
             {
                 UIManager.Instance.ShowOverlay<UI_Pade>().StartEndingPade(() => GameManager.Instance.OnMoveTitle());

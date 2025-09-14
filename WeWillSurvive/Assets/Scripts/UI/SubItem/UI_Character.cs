@@ -54,6 +54,8 @@ namespace WeWillSurvive
             if (_showStatus == null)
                 return;
 
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
+
             _showStatus.ShowStatusPanel(Owner.GetFormatStateString());
         }
     }

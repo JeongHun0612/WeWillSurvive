@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
+using WeWillSurvive.Core;
 using WeWillSurvive.UI;
 
 namespace WeWillSurvive.Room
@@ -47,6 +48,8 @@ namespace WeWillSurvive.Room
 
         public void OnClickProjecter()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
+
             UIManager.Instance.ClosePopups(remain: 1);
             UIManager.Instance.ShowPopup<UI_Projecter>();
         }

@@ -50,6 +50,8 @@ namespace WeWillSurvive
 
         public void OnClickExpeditionReady()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_1);
+
             _isReady = !_isReady;
 
             if (_isReady)

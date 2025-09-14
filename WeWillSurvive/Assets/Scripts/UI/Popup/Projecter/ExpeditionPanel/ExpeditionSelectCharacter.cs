@@ -41,7 +41,11 @@ namespace WeWillSurvive
 
         public void RegisterClickEvent(Action<ExpeditionSelectCharacter> callback)
         {
-            _button.onClick.AddListener(() => callback?.Invoke(this));
+            _button.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlaySFX(ESFX.SFX_Click_1);
+                callback?.Invoke(this);
+            });
         }
 
         public void UpdateSelectCharacter()

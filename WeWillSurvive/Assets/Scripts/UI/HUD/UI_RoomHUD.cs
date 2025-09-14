@@ -132,6 +132,8 @@ namespace WeWillSurvive
 
         public void OnClickRoomMove()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
+
             if (_currentRoom == ERoom.Main)
             {
                 var characterEventCategory = GameEventManager.Instance.DailyCharacterEvent.Character;
@@ -147,12 +149,16 @@ namespace WeWillSurvive
 
         public void OnClickSetting()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
+
             UIManager.Instance.CloseAllPopups();
             UIManager.Instance.ShowPopup<UI_InGameSetting>();
         }
 
         public void OnClickTitle()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
+
             GameManager.Instance.OnMoveTitle();
         }
 

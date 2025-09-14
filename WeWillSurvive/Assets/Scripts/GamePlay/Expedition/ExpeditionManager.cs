@@ -24,7 +24,10 @@ namespace WeWillSurvive.Expedition
         private EExpeditionState _currentState;
         private ExpeditionData _lastExpeditionData;
 
-        public int TotalExpeditionCount = 0;
+        [SerializeField]
+        private int _totalExpeditionCount = 0;
+
+        public int TotalExpeditionCount => _totalExpeditionCount;
         public EExpeditionState CurrentState => _currentState;
 
         protected override void Awake()
@@ -39,7 +42,7 @@ namespace WeWillSurvive.Expedition
             _currentState = EExpeditionState.Normal;
             _lastExpeditionData = null;
 
-            TotalExpeditionCount = 0;
+            _totalExpeditionCount = 0;
         }
 
         public void UpdateExpeditionState(EExpeditionState state)
@@ -52,7 +55,7 @@ namespace WeWillSurvive.Expedition
             UpdateExpeditionState(EExpeditionState.Exploring);
             target.OnExploring();
 
-            TotalExpeditionCount++;
+            _totalExpeditionCount++;
         }
 
         public void CompleteExpedition()

@@ -12,28 +12,30 @@ namespace WeWillSurvive
 
         public void OnClickGameStart()
         {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
+
+
             //Testing farming connection
             GameManager.Instance.OnStartParming();
 
-            /*
 
-            GameManager.Instance.OnStartSurvive();
 
-            // Debug 데이터 할당
-            var itemDatas = DataManager.LoadDataList<ItemData>();
-            foreach (var itemData in itemDatas)
-            {
-                if (!itemData.IsActive)
-                    continue;
+            //GameManager.Instance.OnStartSurvive();
 
-                ItemManager.AddItem(itemData.Item, itemData.Count);
-            }
-            */
+            //// Debug 데이터 할당
+            //var itemDatas = DataManager.LoadDataList<ItemData>();
+            //foreach (var itemData in itemDatas)
+            //{
+            //    if (!itemData.IsActive)
+            //        continue;
+
+            //    ItemManager.AddItem(itemData.Item, itemData.Count);
+            //}
         }
 
         public void OnClickGameQuit()
         {
-            SoundManager.Instance.PlaySFX(ESFX.SFX_Test_1);
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
 
 #if UNITY_EDITOR
             // 유니티 에디터에서 실행 중일 때는 플레이 모드를 종료
@@ -46,7 +48,7 @@ namespace WeWillSurvive
 
         public void OnClickItemSetting()
         {
-            SoundManager.Instance.PlaySFX(ESFX.SFX_Test_2);
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
 
             UIManager.Instance.ShowPopup<UI_DebugSetting>();
         }

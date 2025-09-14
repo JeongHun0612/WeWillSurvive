@@ -43,7 +43,11 @@ namespace WeWillSurvive
             }
 
             _itemButton.onClick.RemoveAllListeners();
-            _itemButton.onClick.AddListener(() => callback?.Invoke(this));
+            _itemButton.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlaySFX(ESFX.SFX_Click_1);
+                callback?.Invoke(this);
+            });
         }
 
         public void Refresh()

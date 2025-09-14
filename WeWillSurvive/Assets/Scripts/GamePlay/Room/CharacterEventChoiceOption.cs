@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WeWillSurvive.Core;
 using WeWillSurvive.GameEvent;
 using WeWillSurvive.Util;
 
@@ -28,7 +29,13 @@ namespace WeWillSurvive
         public void Initialize(Action<CharacterEventChoiceOption> callback)
         {
             if (_button != null)
-                _button.onClick.AddListener(() => callback(this));
+            {
+                _button.onClick.AddListener(() =>
+                {
+                    SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
+                    callback(this);
+                });
+            }
         }
 
         public void Disabeld()
