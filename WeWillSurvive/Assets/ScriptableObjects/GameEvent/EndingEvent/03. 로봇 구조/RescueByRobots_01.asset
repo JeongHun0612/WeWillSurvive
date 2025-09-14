@@ -26,7 +26,7 @@ MonoBehaviour:
   _isChoiceRequired: 0
   _choices:
   - _choiceIcon: 213
-    _requiredAmount: 0
+    _requiredAmount: 1
     _choiceText: 
     _results:
     - _outComeType: 0

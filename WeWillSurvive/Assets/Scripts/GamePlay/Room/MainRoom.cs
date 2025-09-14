@@ -50,7 +50,7 @@ namespace WeWillSurvive.Room
         {
             SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
 
-            UIManager.Instance.ClosePopups(remain: 1);
+            UIManager.Instance.CloseAllPopups();
             UIManager.Instance.ShowPopup<UI_Projecter>();
         }
     }

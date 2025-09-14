@@ -125,7 +125,7 @@ namespace WeWillSurvive
                 var character = CharacterManager.GetCharacter(characterType);
                 return (character != null && character.IsInShelter);
             }
-            else if (Enum.TryParse<EItem>($"{_eventChoice.ChoiceIcon}", out var item) && ItemManager.IsRationItem(item))
+            else if (Enum.TryParse<EItem>($"{_eventChoice.ChoiceIcon}", out var item))
             {
                 return _eventChoice.RequiredAmount == 0 || _remainItemCount >= _eventChoice.RequiredAmount;
             }

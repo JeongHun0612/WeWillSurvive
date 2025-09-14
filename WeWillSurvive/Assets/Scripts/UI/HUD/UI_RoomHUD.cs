@@ -133,6 +133,7 @@ namespace WeWillSurvive
         public void OnClickRoomMove()
         {
             SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
+            UIManager.Instance.CloseAllPopups();
 
             if (_currentRoom == ERoom.Main)
             {
