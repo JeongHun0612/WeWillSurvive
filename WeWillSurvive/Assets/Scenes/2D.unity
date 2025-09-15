@@ -276,6 +276,54 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &158919448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 158919449}
+  - component: {fileID: 158919450}
+  m_Layer: 0
+  m_Name: EndingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &158919449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158919448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1616773905}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &158919450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158919448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4e7bc1d1544484d854bc78b02296ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deadEndingScriptMessage: "{}\uC77C\uCC28\uC5D0 \uBAA8\uB4E0 \uC2E0\uD638\uAC00
+    \uC0AC\uB77C\uC84C\uB2E4. \uC6B0\uC8FC \uAE30\uC9C0\uC758 \uAE30\uB85D\uC740
+    \uC5EC\uAE30\uC5D0\uC11C \uBA48\uCDC4\uACE0, \uC6B0\uB9AC\uB294 \uC0DD\uC874\uD558\uC9C0
+    \uBABB\uD588\uB2E4."
 --- !u!1 &230808730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,6 +1244,7 @@ Transform:
   - {fileID: 1763924378}
   - {fileID: 824903880}
   - {fileID: 334607791}
+  - {fileID: 158919449}
   - {fileID: 230808731}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1251,6 +1300,9 @@ MonoBehaviour:
   _farmingFailReportText: "\uB9AC\uB4DC\uB294 \uC6B0\uC8FC\uC120\uC5D0\uC11C \uC815\uD574\uC9C4
     \uC2DC\uAC04 \uC548\uC5D0 \uD0C8\uCD9C\uD558\uC9C0 \uBABB\uD588\uACE0, \uAE34\uAE09
     \uD0C8\uCD9C\uD558\uB294 \uACFC\uC815\uC5D0\uC11C \uBD80\uC0C1\uC744 \uC785\uC5C8\uB2E4."
+  _farmingFailDeadLogMessage: "\uB9AC\uB4DC\uB294 \uD30C\uAD34\uB418\uB294 \uC6B0\uC8FC\uC120\uC5D0\uC11C
+    {}\uC758 \uAD6C\uCD9C\uC5D0 \uC2E4\uD328\uD588\uACE0, \uC6B0\uC8FC \uAE30\uC9C0\uB85C
+    \uD568\uAED8 \uC624\uC9C0 \uBABB\uD588\uB2E4."
 --- !u!1 &1822493764
 GameObject:
   m_ObjectHideFlags: 0

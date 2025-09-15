@@ -263,7 +263,7 @@ namespace WeWillSurvive
                     RecoveryStatus();
                     break;
                 case EStateTransitionType.Death:
-                    string deadMessage = _owner.Data.StateMessageData.GetStatusWorsenDeadMessage(StatusType);
+                    var deadMessage = _owner.Data.ExpeditionMessageData.GetExpeditionDeadLogMessage();
                     _owner.OnDead(deadMessage);
                     break;
                 default:

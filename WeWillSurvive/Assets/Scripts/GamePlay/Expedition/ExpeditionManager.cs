@@ -21,11 +21,13 @@ namespace WeWillSurvive.Expedition
         [SerializeField]
         private List<ExpeditionData> _expeditionDatas;
 
+        [SerializeField]
         private EExpeditionState _currentState;
-        private ExpeditionData _lastExpeditionData;
 
         [SerializeField]
         private int _totalExpeditionCount = 0;
+
+        private ExpeditionData _lastExpeditionData;
 
         public int TotalExpeditionCount => _totalExpeditionCount;
         public EExpeditionState CurrentState => _currentState;

@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using WeWillSurvive.Core;
 using WeWillSurvive.Ending;
+using WeWillSurvive.FarmingReport;
 using WeWillSurvive.Item;
 using WeWillSurvive.Log;
 using WeWillSurvive.Status;
@@ -71,7 +72,8 @@ namespace WeWillSurvive.Character
 
                 if (!ItemManager.HasItem(character.Data.ItemType))
                 {
-                    character.OnDead();
+                    var deadMessage = FarmingReportManager.Instance.FarmingFailDeadLogMessage.Replace("{}", character.Name);
+                    character.OnDead(deadMessage);
                     continue;
                 }
 

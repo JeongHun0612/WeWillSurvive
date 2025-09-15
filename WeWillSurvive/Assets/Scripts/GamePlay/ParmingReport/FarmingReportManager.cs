@@ -23,7 +23,13 @@ namespace WeWillSurvive.FarmingReport
         [TextArea(3, 5)]
         private string _farmingFailReportText;
 
+        [SerializeField]
+        [TextArea(3, 5)]
+        private string _farmingFailDeadLogMessage;
+
         private Dictionary<EParmingReportType, FarmingReportData> _farmingReportDicts = new();
+
+        public string FarmingFailDeadLogMessage => _farmingFailDeadLogMessage;
 
         private CharacterManager CharacterManager => ServiceLocator.Get<CharacterManager>();
         private ItemManager ItemManager => ServiceLocator.Get<ItemManager>();

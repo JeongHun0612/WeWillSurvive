@@ -138,7 +138,7 @@ namespace WeWillSurvive.Character
             LogManager.ClearCharacterStatusLog(Data.Type);
 
             // 파밍 단계에서 사망은 로그 출력 X
-            if (GameManager.Instance.Day > 1)
+            if (GameManager.Instance.Day > 1 && !IsExploring)
             {
                 // Dead Log 출력
                 string stateMessage = Data.StateMessageData.GetStateActiveMessage(EState.Dead);

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using WeWillSurvive.Character;
+using WeWillSurvive.Core;
 
 namespace WeWillSurvive
 {
@@ -29,6 +30,9 @@ namespace WeWillSurvive
         [Header("## 탐사 사망 스크립트")]
         [SerializeField] private List<string> _expeditionDeadMessages;
 
+        [Header("## 탐사 사망 로그 스크립트")]
+        [SerializeField] private List<string> _expeditionDeadLogMessages;
+
         public string GetExpeditionReadyMessage(CharacterState state)
         {
             // 탐사를 나갈 수 없는 경우
@@ -52,8 +56,18 @@ namespace WeWillSurvive
             return GetRandomMessage(_expeditionDeadMessages);
         }
 
+        public string GetExpeditionDeadLogMessage()
+        {
+            var randomMessage = GetRandomMessage(_expeditionDeadLogMessages);
+            var deadMessage = randomMessage.Replace("{}", GameManager.Instance.Day.ToString());
+            return deadMessage;
+        }
+
         private string GetRandomMessage(List<string> messages)
         {
+            if (messages == null || messages.Count == 0)
+                return string.Empty;
+
             int randomIndex = Random.Range(0, messages.Count);
 
             return messages[randomIndex];

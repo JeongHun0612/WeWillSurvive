@@ -27,8 +27,14 @@ namespace WeWillSurvive.Ending
 
     public class EndingManager : MonoSingleton<EndingManager>
     {
+        [SerializeField]
+        [TextArea(3, 5)]
+        private string _deadEndingScriptMessage;
+
         public bool IsEnding { get; private set; }
         public EEndingType EndingType { get; private set; }
+
+        private LogManager LogManager => ServiceLocator.Get<LogManager>();
 
         public void ResetState()
         {
@@ -40,6 +46,11 @@ namespace WeWillSurvive.Ending
         {
             IsEnding = true;
             EndingType = endingType;
+
+            if (endingType == EEndingType.DeathByStarvation)
+            {
+                LogManager.AddMainEventResultLog(_deadEndingScriptMessage.Replace("{}", GameManager.Instance.Day.ToString()));
+            }
         }
     }
 }

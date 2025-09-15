@@ -36,6 +36,9 @@ namespace WeWillSurvive.Item
         Bell,
         DrK,
         Starmac,
+
+        // 기타
+        Hand = 200,
     }
 
     public class ItemManager : IService
@@ -79,6 +82,7 @@ namespace WeWillSurvive.Item
         {
             Items.Clear();
             AddItem(EItem.Lead);
+            AddItem(EItem.Hand);
 
             _usedFoodCount = 0f;
             _usedWaterCount = 0f;

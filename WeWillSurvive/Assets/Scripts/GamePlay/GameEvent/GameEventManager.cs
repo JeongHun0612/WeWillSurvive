@@ -87,6 +87,9 @@ namespace WeWillSurvive.GameEvent
             _dailyMainEvent = null;
             _dailyCharacterEvent = null;
 
+            if (EndingManager.Instance.IsEnding)
+                return;
+
             // 1) 주 이벤트(Ending/Main) 중 발생하는 이벤트 선택
             _dailyMainEvent = _endingEventPicker.GetDailyMainEvent();
             if (_dailyMainEvent == null)
