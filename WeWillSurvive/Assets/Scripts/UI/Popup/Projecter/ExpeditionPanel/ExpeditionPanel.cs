@@ -83,6 +83,7 @@ namespace WeWillSurvive
             if (expeditionState == EExpeditionState.Normal && _readyPanel.IsReady)
             {
                 ExpeditionManager.Instance.UpdateExpeditionState(EExpeditionState.Ready);
+                _readyPanel.IsReady = false;
             }
             else if (expeditionState == EExpeditionState.Ready)
             {

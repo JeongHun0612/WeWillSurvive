@@ -19,7 +19,7 @@ namespace WeWillSurvive
 
         private bool _isReady;
 
-        public bool IsReady => _isReady;
+        public bool IsReady { get => _isReady; set => _isReady = value; }
 
         private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
 

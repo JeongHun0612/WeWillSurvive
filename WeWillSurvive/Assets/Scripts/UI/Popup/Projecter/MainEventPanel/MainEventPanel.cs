@@ -57,8 +57,8 @@ namespace WeWillSurvive
         {
             await base.RefreshPageAsync(startPageIndex);
 
-            _mainEventData = GameEventManager.Instance.DailyMainEvent.DailyEventData;
             _selectedOption = null;
+            _mainEventData = GameEventManager.Instance.DailyMainEvent?.DailyEventData;
 
             if (_mainEventData == null || EndingManager.Instance.IsEnding)
             {
