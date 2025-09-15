@@ -16,7 +16,7 @@ namespace WeWillSurvive
         private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
-            originalPosition = useLocalPosition ? rectTransform.localPosition : rectTransform.position;
+            originalPosition = useLocalPosition ? rectTransform.anchoredPosition : rectTransform.position;
         }
 
         public void Slide(float moveTime, bool slidein = true)
@@ -40,7 +40,7 @@ namespace WeWillSurvive
 
                 Vector3 newPos = slidein ? Vector3.Lerp(start, end, t) : Vector3.Lerp(end, start, t);
                 if (useLocalPosition)
-                    rectTransform.localPosition = newPos;
+                    rectTransform.anchoredPosition = newPos;
                 else
                     rectTransform.position = newPos;
 
@@ -48,7 +48,7 @@ namespace WeWillSurvive
             }
 
             if (useLocalPosition)
-                rectTransform.localPosition = slidein ? end : start;
+                rectTransform.anchoredPosition = slidein ? end : start;
             else
                 rectTransform.position = slidein ? end : start;
 
