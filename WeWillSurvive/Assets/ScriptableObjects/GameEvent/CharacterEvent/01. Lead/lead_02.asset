@@ -24,7 +24,7 @@ MonoBehaviour:
   _choiceSchema: 50
   _isChoiceRequired: 0
   _choices:
-  - _choiceIcon: 200
+  - _choiceIcon: 101
     _requiredAmount: 0
     _choiceText: "(\uC2DD\uB7C9 \uBCF4\uAE09)"
     _results:
@@ -50,7 +50,7 @@ MonoBehaviour:
         _value: -10
       _isAffectedByStats: 0
       _probability: 1
-  - _choiceIcon: 205
+  - _choiceIcon: 102
     _requiredAmount: 0
     _choiceText: "(\uC7A5\uBE44 \uACE0\uC7A5 \uB300\uBE44)"
     _results:
@@ -77,7 +77,7 @@ MonoBehaviour:
         _value: -10
       _isAffectedByStats: 0
       _probability: 1
-  - _choiceIcon: 203
+  - _choiceIcon: 103
     _requiredAmount: 0
     _choiceText: "(\uC758\uB8CC \uC0AC\uACE0 \uB300\uBE44)"
     _results:
