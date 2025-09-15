@@ -623,7 +623,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09e507c431eb0aa43ae4d8191025a5b5, type: 2}
   - {fileID: 11400000, guid: 209da0d58b34346469cf3fc8db62dd87, type: 2}
   - {fileID: 11400000, guid: 552a3b7a3e84a5c4db5ab3f5240d5251, type: 2}
-  TotalExpeditionCount: 0
+  _totalExpeditionCount: 0
 --- !u!1 &838413417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,6 +1248,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0260b03b182f7344d9ed95d289d2f16c, type: 2}
   - {fileID: 11400000, guid: 0f508843b395e3344aceecca5e596f35, type: 2}
   - {fileID: 11400000, guid: 177f0adfd3f63714bab6a542d4fda24a, type: 2}
+  _farmingFailReportText: "\uB9AC\uB4DC\uB294 \uC6B0\uC8FC\uC120\uC5D0\uC11C \uC815\uD574\uC9C4
+    \uC2DC\uAC04 \uC548\uC5D0 \uD0C8\uCD9C\uD558\uC9C0 \uBABB\uD588\uACE0, \uAE34\uAE09
+    \uD0C8\uCD9C\uD558\uB294 \uACFC\uC815\uC5D0\uC11C \uBD80\uC0C1\uC744 \uC785\uC5C8\uB2E4."
 --- !u!1 &1822493764
 GameObject:
   m_ObjectHideFlags: 0
