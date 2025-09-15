@@ -201,14 +201,14 @@ namespace WeWillSurvive
             if (currentIndex == -1)
                 return;
 
-            // Level 갱신
-            UpdateLevel(OrderedLevels[targetIndex]);
-
             if (targetIndex < currentIndex)
             {
                 // 상태 회복 Log 추가
                 LogStateResolved(_level);
             }
+
+            // Level 갱신
+            UpdateLevel(OrderedLevels[targetIndex]);
         }
 
         private float GetEventModifier(TLevel level)
