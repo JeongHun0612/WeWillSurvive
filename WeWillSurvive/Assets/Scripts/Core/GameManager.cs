@@ -8,6 +8,7 @@ using WeWillSurvive.GameEvent;
 using WeWillSurvive.Ending;
 using WeWillSurvive.Item;
 using Cysharp.Threading.Tasks;
+using WeWillSurvive.Expedition;
 
 namespace WeWillSurvive.Core
 {
@@ -82,11 +83,12 @@ namespace WeWillSurvive.Core
             Day = 0;
 
             LogManager.ClearAllLogs();
-
-            CharacterManager.SettingCharacter();
             EndingManager.Instance.ResetState();
+            ExpeditionManager.Instance.ResetState();
             BuffManager.Instance.ResetState();
             GameEventManager.Instance.ResetState();
+
+            CharacterManager.SettingCharacter();
             FarmingReportManager.Instance.UpdateFarmingReport();
 
             StartNextDay();
