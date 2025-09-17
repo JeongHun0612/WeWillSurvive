@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using WeWillSurvive.Core;
+using WeWillSurvive.UI;
 
 namespace WeWillSurvive
 {
@@ -45,6 +46,16 @@ namespace WeWillSurvive
             timerUI.GetComponent<SlideIn>().Slide(endslide, false);
             mapUI.GetComponent<SlideIn>().Slide(endslide, false);
             crewUI.GetComponent<SlideIn>().Slide(endslide, false);
+        }
+
+        public void OnClickSetting()
+        {
+            SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
+
+            UIManager.Instance.CloseAllPopups();
+            UIManager.Instance.ShowPopup<UI_InGameSetting>();
+
+            Time.timeScale = 0f;
         }
     }
 }

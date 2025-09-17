@@ -6,6 +6,11 @@ namespace WeWillSurvive
 {
     public class UI_InGameSetting : UI_Popup
     {
+        public override void OnHide()
+        {
+            Time.timeScale = 1f;
+        }
+
         public void OnClickTitle()
         {
             SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);

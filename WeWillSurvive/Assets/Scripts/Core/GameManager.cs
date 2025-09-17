@@ -46,6 +46,7 @@ namespace WeWillSurvive.Core
 
             ItemManager.Dipose();
             LogManager.Dipose();
+            FarmingObjectDipose();
 
             UIManager.Instance.CloseAllUIs();
             UIManager.Instance.ShowScene<UI_Title>();
@@ -54,7 +55,6 @@ namespace WeWillSurvive.Core
         public void OnStartParming()
         {
             UIManager.Instance.CloseAllUIs();
-            //await UIManager.Instance.ShowPopup<UI_Intro>().PlayScene();
 
             ///
             mainCamera = Camera.main.gameObject;
@@ -70,13 +70,7 @@ namespace WeWillSurvive.Core
 
             UIManager.Instance.CloseAllUIs();
 
-            ///
-            if (mainCamera != null)
-                mainCamera.SetActive(true);
-
-            Destroy(FarmingObject);
-            FarmingObject = null;
-            ///
+            FarmingObjectDipose();
 
             await UIManager.Instance.ShowPopup<UI_Intro>().PlayScene();
 
@@ -141,6 +135,21 @@ namespace WeWillSurvive.Core
 
             // 하루가 시작 시 발생하는 이벤트
             EventBus.Publish(new NewDayEvent() { CurrentDay = Day });
+        }
+
+        private void FarmingObjectDipose()
+        {
+            if (mainCamera != null)
+            {
+                mainCamera.SetActive(true);
+                mainCamera = null;
+            }
+
+            if (FarmingObject != null)
+            {
+                Destroy(FarmingObject);
+                FarmingObject = null;
+            }
         }
     }
 }
