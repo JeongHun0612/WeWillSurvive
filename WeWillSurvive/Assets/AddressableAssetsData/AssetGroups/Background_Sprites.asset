@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: Background_Sprites
   m_GUID: fb5de8874e6084c4aba9eca3f6e524da
   m_SerializeEntries:
-  - m_GUID: 36ac6b9fe8a36ad4294754e0e0fc7935
+  - m_GUID: 0d2403bb96aa9f04d96707526d079fdb
     m_Address: Assets/Sprites/Background/Projecter.png
     m_ReadOnly: 0
     m_SerializedLabels: []

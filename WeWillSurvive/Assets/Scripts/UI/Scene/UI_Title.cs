@@ -16,21 +16,21 @@ namespace WeWillSurvive
 
 
             //Testing farming connection
-            GameManager.Instance.OnStartParming();
+            //GameManager.Instance.OnStartParming();
 
 
 
-            //GameManager.Instance.OnStartSurvive();
+            GameManager.Instance.OnStartSurvive();
 
-            //// Debug 데이터 할당
-            //var itemDatas = DataManager.LoadDataList<ItemData>();
-            //foreach (var itemData in itemDatas)
-            //{
-            //    if (!itemData.IsActive)
-            //        continue;
+            // Debug 데이터 할당
+            var itemDatas = DataManager.LoadDataList<ItemData>();
+            foreach (var itemData in itemDatas)
+            {
+                if (!itemData.IsActive)
+                    continue;
 
-            //    ItemManager.AddItem(itemData.Item, itemData.Count);
-            //}
+                ItemManager.AddItem(itemData.Item, itemData.Count);
+            }
         }
 
         public void OnClickGameQuit()
