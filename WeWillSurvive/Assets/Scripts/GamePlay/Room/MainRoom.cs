@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using WeWillSurvive.Core;
 using WeWillSurvive.UI;
 
@@ -13,6 +14,12 @@ namespace WeWillSurvive.Room
 
         [Header("Item Placements")]
         [SerializeField] private List<ItemPlacement> _itemPlacements;
+
+        [SerializeField] private Image _projecter;
+
+        private Sprite[] _projecterSprites;
+
+        private ResourceManager ResourceManager => ServiceLocator.Get<ResourceManager>();
 
         public async override UniTask InitializeAsync()
         {
@@ -27,6 +34,12 @@ namespace WeWillSurvive.Room
             {
                 await itemPlacement.InitializeAsync();
             }
+
+            _projecterSprites = new Sprite[2];
+            _projecterSprites[0] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Background/Projecter.png");
+            _projecterSprites[1] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Background/Projecter_update.png");
+
+            _projecter.sprite = _projecterSprites[1];
 
             await UniTask.CompletedTask;
         }
@@ -48,6 +61,9 @@ namespace WeWillSurvive.Room
 
         public void OnClickProjecter()
         {
+            if (_projecter.sprite == _projecterSprites[1])
+                _projecter.sprite = _projecterSprites[0];
+
             SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
 
             UIManager.Instance.CloseAllPopups();

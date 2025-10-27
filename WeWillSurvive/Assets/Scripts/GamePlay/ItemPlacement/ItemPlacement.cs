@@ -33,9 +33,11 @@ namespace WeWillSurvive
                 return;
 
             Count = ItemManager.GetItemCount(_itemType);
-            ItemObjectAllDeactivate();
 
+            ItemObjectAllDeactivate();
             ItemObjectActivate(Count);
+
+            gameObject.SetActive(Count > 0f);
         }
 
         protected virtual void ItemObjectActivate(float count)

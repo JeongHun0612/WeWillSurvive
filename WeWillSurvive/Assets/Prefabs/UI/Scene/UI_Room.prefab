@@ -395,6 +395,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2843367984564439392, guid: 2d0a03cb5e963964a83ac9283cf55e64, type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843367984564439392, guid: 2d0a03cb5e963964a83ac9283cf55e64, type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b3f888115e86c18448035b2b27cdb2e5, type: 3}
     - target: {fileID: 3216804061826847592, guid: 2d0a03cb5e963964a83ac9283cf55e64, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -443,6 +451,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3664449496861040736, guid: 2d0a03cb5e963964a83ac9283cf55e64, type: 3}
+      propertyPath: _projecter
+      value: 
+      objectReference: {fileID: 6925145472428354943}
+    - target: {fileID: 5388402280992214620, guid: 2d0a03cb5e963964a83ac9283cf55e64, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5726083575202240846, guid: 2d0a03cb5e963964a83ac9283cf55e64, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -467,6 +483,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6426361227567222984, guid: 2d0a03cb5e963964a83ac9283cf55e64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 36ac6b9fe8a36ad4294754e0e0fc7935, type: 3}
     - target: {fileID: 6952778466173187610, guid: 2d0a03cb5e963964a83ac9283cf55e64, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -640,6 +660,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7592413787350587299, guid: 2d0a03cb5e963964a83ac9283cf55e64, type: 3}
   m_PrefabInstance: {fileID: 4121930971929116087}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6925145472428354943 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6426361227567222984, guid: 2d0a03cb5e963964a83ac9283cf55e64, type: 3}
+  m_PrefabInstance: {fileID: 4121930971929116087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5695527226535162309
 PrefabInstance:
   m_ObjectHideFlags: 0
