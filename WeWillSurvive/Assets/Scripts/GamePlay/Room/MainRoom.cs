@@ -9,6 +9,13 @@ namespace WeWillSurvive.Room
 {
     public class MainRoom : RoomBase
     {
+        private enum EProjecterType
+        {
+            Default = 0,
+            Highlighted = 1,
+        }
+
+
         [Header("## Characters")]
         [SerializeField] private List<UI_Character> _characterUIs;
 
@@ -36,10 +43,8 @@ namespace WeWillSurvive.Room
             }
 
             _projecterSprites = new Sprite[2];
-            _projecterSprites[0] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Background/Projecter.png");
-            _projecterSprites[1] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Background/Projecter_update.png");
-
-            _projecter.sprite = _projecterSprites[1];
+            _projecterSprites[(int)EProjecterType.Default] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Background/Projecter.png");
+            _projecterSprites[(int)EProjecterType.Highlighted] = await ResourceManager.LoadAssetAsync<Sprite>("Assets/Sprites/Background/Projecter_update.png");
 
             await UniTask.CompletedTask;
         }
@@ -57,12 +62,14 @@ namespace WeWillSurvive.Room
             {
                 itemPlacement.UpdateItemPlacement();
             }
+
+            _projecter.sprite = _projecterSprites[(int)EProjecterType.Highlighted];
         }
 
         public void OnClickProjecter()
         {
-            if (_projecter.sprite == _projecterSprites[1])
-                _projecter.sprite = _projecterSprites[0];
+            if (_projecter.sprite == _projecterSprites[(int)EProjecterType.Highlighted])
+                _projecter.sprite = _projecterSprites[(int)EProjecterType.Default];
 
             SoundManager.Instance.PlaySFX(ESFX.SFX_Click_2);
 
